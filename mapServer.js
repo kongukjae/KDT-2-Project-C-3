@@ -1,5 +1,6 @@
 import http from "http";
 import fs from "fs";
+import mysql from "mysql";
 import htmlBox from "./htmlBox.js";
 
 const server = http.createServer(function(request, response){
@@ -24,6 +25,22 @@ const server = http.createServer(function(request, response){
         response.end();
       });
     }
+
+    let coo = [36.35, 127.385];
+  let conn = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '0000',
+    database: 'map_DB'
+  });
+
+  conn.connect();
+  conn.query(`insert into map_tables(latitude, longitude) values("${coo[0]}", "${coo[1]}")`,
+  function(err, rows){
+    if(err) throw err;
+    else console.log(rows);
+  });
+  conn.end();
 
 });
 
