@@ -25,8 +25,9 @@ const server = http.createServer(function(request, response){
         response.end();
       });
     }
+});
 
-    let coo = [36.35, 127.385];
+  let coo = [36.35, 127.385];
   let conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -35,14 +36,19 @@ const server = http.createServer(function(request, response){
   });
 
   conn.connect();
-  conn.query(`insert into map_tables(latitude, longitude) values("${coo[0]}", "${coo[1]}")`,
-  function(err, rows){
+  conn.query(`insert into map_tables(latitude, longitude) values(${coo[0]}, ${coo[1]})`,
+  function(err){
     if(err) throw err;
-    else console.log(rows);
+    else console.log("정상");
+  });
+  conn.query('select * from map_tables', (error, rows) => {
+    if (error) throw error;
+    else{
+      console.log(rows);
+    }
   });
   conn.end();
 
-});
 
   // 서버 포트 설정
   server.listen(2080, function(error) {
