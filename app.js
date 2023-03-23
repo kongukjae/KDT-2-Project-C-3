@@ -35,6 +35,7 @@ const server = http.createServer(function(request, response) {
     response.write(htmlBox(innerbody.login));
     response.end();
   } else if(request.url === '/loginPage.js'){
+    // loginPage.js 파일 read
     fs.readFile('./loginPage.js', function(err, data) {
       response.statusCode = 200;
       response.setHeader('Content-Type', 'text/html');
@@ -42,6 +43,7 @@ const server = http.createServer(function(request, response) {
       response.end();
     })
   } else if(request.method === 'GET' && request.url.startsWith('/resource/MainLogo')) {
+    // MainLogo.png 파일 read
     fs.readFile(`./resource/MainLogo.png`, function(err, data) {
       response.writeHead(200);
       console.log(data);
@@ -49,6 +51,7 @@ const server = http.createServer(function(request, response) {
       response.end();
     })
   } else if(request.method === 'GET' && request.url.startsWith('/resource/MainDog')) {
+    // MainDogImg.png 파일 read
     fs.readFile(`./resource/MainDogImg.jpg`, function(err, data) {
       response.writeHead(200);
       console.log(data);
