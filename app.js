@@ -65,7 +65,7 @@ const server = http.createServer(function(request, response) {
     if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
     });
 
-// MySQL과 연동
+// MySQL과 연동 , UserLoginData DB에 접속
 const connection = mysql.createConnection({
   host  : 'localhost',
   user  : 'root',
@@ -73,11 +73,14 @@ const connection = mysql.createConnection({
   database : 'UserLoginData'
 });
 
+// connection 시작
 connection.connect();
-
+// DB에 접근 , LoginData table에 접속
 connection.query('SELECT * from LoginData', (error, rows, fields) => {
   if (error) throw error;
-  console.Console.log('User info: ', rows);
+  console.log('User info: ', rows);
+  // 테이블 내부 데이터에 접근 실험
+  console.dir(rows[0].userID); //'testid01'
 });
-
+// connection 끝
 connection.end();
