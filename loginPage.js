@@ -57,7 +57,7 @@ formLoginPageWrapper.style.height = '154px';
 rootLoginPage.appendChild(formLoginPageWrapper);
 
 formLoginPageWrapper.innerHTML += `
-<form>
+<form action="/login" method="post">
   <input type="text" name="user_id"></input>
   <input type="text" name="user_pw"></input>
   <div>
@@ -101,15 +101,17 @@ formLoginPageWrapper.children[0].children[2].style.alignItems = 'center';
 
 // 로그인 input=submit 버튼
 formLoginPageWrapper.children[0].children[2].children[0].style.border = '1px solid #999';
+formLoginPageWrapper.children[0].children[2].children[0].style.borderRadius = '15px';
 formLoginPageWrapper.children[0].children[2].children[0].style.width = '180px';
 formLoginPageWrapper.children[0].children[2].children[0].style.height = '52px';
 formLoginPageWrapper.children[0].children[2].children[0].style.cursor = 'pointer';
+formLoginPageWrapper.children[0].children[2].children[0].style.fontSize = '20px';
 
 
 
 // 회원가입 a태그 버튼
 formLoginPageWrapper.children[0].children[2].children[1].style.border = '1px solid #999';
-formLoginPageWrapper.children[0].children[2].children[1].style.borderRadius = '3px';
+formLoginPageWrapper.children[0].children[2].children[1].style.borderRadius = '15px';
 formLoginPageWrapper.children[0].children[2].children[1].style.backgroundColor = '#d9d9d9';
 formLoginPageWrapper.children[0].children[2].children[1].style.color = '#222';
 formLoginPageWrapper.children[0].children[2].children[1].style.textDecoration = 'none';
@@ -118,4 +120,5 @@ formLoginPageWrapper.children[0].children[2].children[1].style.height = '52px';
 formLoginPageWrapper.children[0].children[2].children[1].style.display = 'flex';
 formLoginPageWrapper.children[0].children[2].children[1].style.justifyContent = 'center';
 formLoginPageWrapper.children[0].children[2].children[1].style.alignItems = 'center';
+formLoginPageWrapper.children[0].children[2].children[1].style.fontSize = '20px';
 formLoginPageWrapper.children[0].children[2].children[1].style.cursor = 'pointer';
