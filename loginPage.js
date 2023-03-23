@@ -1,3 +1,5 @@
+// root 생성
+
 // root 식별 및 스타일 설정
 const rootLoginPage = document.getElementById('root');
 rootLoginPage.style.width = '500px';
@@ -26,7 +28,7 @@ rootLoginPage.appendChild(logoLoginPageWaper);
 
 const logoLoginPage = tagCreate('img', '');
 logoLoginPage.style.width = '100%';
-logoLoginPage.src = './resource/Main_Logo.png';
+logoLoginPage.src = './resource/MainLogo.png';
 logoLoginPageWaper.appendChild(logoLoginPage);
 
 
@@ -46,7 +48,7 @@ rootLoginPage.appendChild(imgLoginPageWrapper);
 
 const imgLoginPage = tagCreate('img', '');
 imgLoginPage.style.height = '100%';
-imgLoginPage.src = './resource/Login_Dog.jpg';
+imgLoginPage.src = './resource/MainDogImg.jpg';
 imgLoginPage.alt = '로그인 페이지 이미지';
 imgLoginPageWrapper.appendChild(imgLoginPage);
 
@@ -66,7 +68,6 @@ formLoginPageWrapper.innerHTML += `
   </div>
 </form>
 `;
-console.dir(formLoginPageWrapper.children[0]);
 
 // form 태그
 formLoginPageWrapper.children[0].style.display = 'flex';
@@ -82,7 +83,6 @@ formLoginPageWrapper.children[0].children[0].style.paddingLeft = '25px';
 formLoginPageWrapper.children[0].children[0].style.fontSize = '20px';
 formLoginPageWrapper.children[0].children[0].setAttribute('placeholder', ' 아이디를 입력하세요');
 
-console.dir(formLoginPageWrapper.children[0].children[0]);
 
 // PW input
 formLoginPageWrapper.children[0].children[1].style.marginBottom = '80px';
