@@ -1,5 +1,6 @@
 import http from 'http';
 import fs from 'fs';
+import mysql from 'mysql';
 
 // html 구조
 function htmlBox(data) {
@@ -24,8 +25,6 @@ function htmlBox(data) {
 const innerbody = {
   login: `<script src="./loginPage.js"></script>`
 }
-
-console.log(htmlBox(innerbody.login));
 
 const server = http.createServer(function(request, response) {
   // 최초접속
@@ -65,3 +64,20 @@ const server = http.createServer(function(request, response) {
   server.listen(2082, function(error) {
     if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
     });
+
+// MySQL과 연동
+const connection = mysql.createConnection({
+  host  : 'localhost',
+  user  : 'root',
+  password  : '0000',
+  database : 'UserLoginData'
+});
+
+connection.connect();
+
+connection.query('SELECT * from LoginData', (error, rows, fields) => {
+  if (error) throw error;
+  console.Console.log('User info: ', rows);
+});
+
+connection.end();
