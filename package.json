@@ -1,0 +1,12 @@
+{
+  "name": "kdt-2-project-c-3",
+  "version": "1.0.0",
+  "description": "팀장 : 류은이  \r 팀원 : 김종윤, 김지섭, 김형진, 노수민",
+  "main": "htmlBox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC"
+}
