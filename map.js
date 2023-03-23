@@ -18,7 +18,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
   addMarker(latlng);
   wrap.push(latlng.getLat(), latlng.getLng())
   result.push(wrap);
-  console.log(result);
 });
 
 
@@ -39,4 +38,7 @@ function addMarker(position) {
   // 생성된 마커를 배열에 추가합니다
   markers.push(marker);
 }
+
+console.log(result);
+
 
