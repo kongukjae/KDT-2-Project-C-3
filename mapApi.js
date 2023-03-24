@@ -1,5 +1,5 @@
-const http = require("http");
-const qs = require("querystring");
+import http from "http";
+import qs from "querystring";
 const server = http.createServer(function (request, response) {
   // 최초접속
   if (request.method === "GET" && request.url === "/") {
