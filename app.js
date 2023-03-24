@@ -170,6 +170,13 @@ const server = http.createServer(function(request, response) {
       response.end();
     })
   }
+  if(request.method === 'GET' && request.url.startsWith('/favicon')){
+    fs.readFile(`./graphic/dogpaw.png`, function(err, data){
+      response.writeHead(200);
+      response.write(data);
+      response.end();
+    })
+  }
   if(request.method === 'GET' && request.url.startsWith('/dupCheck')){
     let checkID = request.url.split("=")[1]
     let connection = mysql.createConnection(mysqlInfo);
