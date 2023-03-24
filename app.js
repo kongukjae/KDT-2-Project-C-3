@@ -28,6 +28,7 @@ const innerbody = {
 
 const server = http.createServer(function(request, response) {
   // 최초접속
+  let body = '';
   if(request.method === 'GET' && request.url === '/') {
     response.statusCode = 200;
     response.setHeader('Content-Type', 'text/html');
@@ -44,19 +45,91 @@ const server = http.createServer(function(request, response) {
   } else if(request.method === 'GET' && request.url.startsWith('/resource/MainLogo')) {
     // MainLogo.png 파일 read
     fs.readFile(`./resource/MainLogo.png`, function(err, data) {
-      response.writeHead(200);
-      console.log(data);
+      response.statusCode = 200;
+      response.setHeader('Content-Type', 'text/html');
       response.write(data);
       response.end();
     })
   } else if(request.method === 'GET' && request.url.startsWith('/resource/MainDog')) {
     // MainDogImg.png 파일 read
     fs.readFile(`./resource/MainDogImg.jpg`, function(err, data) {
-      response.writeHead(200);
-      console.log(data);
+      response.statusCode = 200;
+      response.setHeader('Content-Type', 'text/html');
       response.write(data);
       response.end();
     })
+  }
+  if(request.method === 'POST' && request.url.startsWith('/login')) {
+    console.log('/login 페이지 진입');
+    request.on('data', function(data) {
+      body = body + data;
+      console.log(body);
+    });
+    request.on('end', function() {
+      let idSplit = body.split('&')[0];
+      let pwSplit = body.split('&')[1];
+      let userLoginId = idSplit.split('=')[1];
+      let userLoginPw = pwSplit.split('=')[1];
+      console.log(userLoginId);
+      console.log(userLoginPw);
+
+      // MySQL과 연동 , UserLoginData DB에 접속
+      const connection = mysql.createConnection({
+        host  : 'localhost',
+        user  : 'root',
+        password  : '0000',
+        database : 'UserLoginData'
+      });
+      
+      // connection 시작
+      connection.connect();
+
+      // where절 사용을 위한 userLoginId 변수 배열화
+      let sqlValId = [userLoginId];
+      // where절 사용을 위한 query 변수화
+      // let sql = 'SELECT userID, userPW from LoginData where userID = ?';
+      let sql = 'SELECT userID, userPW from LoginData where userID = ?';
+
+      connection.query(sql, sqlValId, (error, data, fields) => {
+        if (error) throw error;
+        console.log('User info: ', data);
+        // 테이블 내부 데이터에 접근 실험
+        console.dir(data[0].userID); //'testid01'
+        let dataId = data[0].userID;
+        let dataPw = data[0].userPW;
+        if(userLoginId === dataId) {
+          if(userLoginPw === dataPw) {
+            console.log('로그인 성공');
+            connection.end();
+            response.writeHead(200);
+            response.write('login success');
+            response.end();
+          } else {
+            console.log('비밀번호 확인');
+            connection.end();
+            response.writeHead(200);
+            response.write('incorrect PW');
+            response.end();
+          }
+        }
+        // try {} catch {
+        //   console.log('존재하지 않는 회원입니다');
+        //   connection.end();
+        //   response.writeHead(200);
+        //   response.write('Not members');
+        //   response.end();
+        // }
+      });
+      // connection 끝
+      // connection.end();
+
+      // response.writeHead(200);
+      // response.write('success');
+      // response.end();
+    })
+    // response.writeHead(200);
+    // response.write('success');
+    // response.end();
   }
 })
 
@@ -64,23 +137,3 @@ const server = http.createServer(function(request, response) {
   server.listen(2082, function(error) {
     if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
     });
-
-// MySQL과 연동 , UserLoginData DB에 접속
-const connection = mysql.createConnection({
-  host  : 'localhost',
-  user  : 'root',
-  password  : '0000',
-  database : 'UserLoginData'
-});
-
-// connection 시작
-connection.connect();
-// DB에 접근 , LoginData table에 접속
-connection.query('SELECT * from LoginData', (error, rows, fields) => {
-  if (error) throw error;
-  console.log('User info: ', rows);
-  // 테이블 내부 데이터에 접근 실험
-  console.dir(rows[0].userID); //'testid01'
-});
-// connection 끝
-connection.end();
