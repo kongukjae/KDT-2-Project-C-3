@@ -74,7 +74,7 @@ function resultWindow(){
 
   })
   rootChild[1].addEventListener("click",()=>{
-    window.location = 'http://localhost:2080/signUp';
+    window.location = 'http://localhost:2080/';
   })
  
 
