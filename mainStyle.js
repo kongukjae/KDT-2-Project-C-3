@@ -35,9 +35,17 @@ function main(){
     width : "100%",
     height : "126px",
     position : "relative",
-    backgroundColor : "#F7786B"
+    backgroundColor : "#F7786B",
+    display : "flex",
+    justifyContent: "center",
+    alignItems : "center"
 
   })
+  const logoLoginPage = tagCreate('img', '');
+  logoLoginPage.style.width = '28%';
+  logoLoginPage.src = './resource/MainLogo.png';
+  rootChild[0].appendChild(logoLoginPage);
+
   styleCreate(rootChild[1],{
     width : "100%",
     height : "83px",
@@ -46,7 +54,7 @@ function main(){
     justifyContent : "center",
     alignItems : "center",
     backgroundColor : "#F3EDE8",
-    fontSize : "25px",
+    fontSize : "20px",
     fontWeight : "700"
 
   })
@@ -59,7 +67,10 @@ function main(){
   styleCreate(rootChild[3],{
     width : "100%",
     height : "260px",
-    position : "relative"
+    position : "relative",
+    overflow : "hidden",
+    transition : "all ease 0.6s"
+
   })
   styleCreate(rootChild[4],{
     width : "100%",
@@ -89,7 +100,12 @@ function main(){
       borderRadius : "5px",
       cursor : "pointer",
       boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-      transition : "scale ease 0.3s"
+      transition : "scale ease 0.3s",
+      display : "flex",
+      justifyContent: "center",
+      alignItems : "center",
+      fontSize : "13px",
+      fontWeight : "500"
     })
     child.onmouseover = ()=>{
       child.style.scale = "1.1"
@@ -100,19 +116,44 @@ function main(){
     }
     menuChild.push(child);
   }
+  menuChild[0].innerText = "댕댕마켓";
+  menuChild[1].innerText = "댕자랑";
+  menuChild[2].innerText = "댕맵";
+  menuChild[3].innerText = "댕톡";
+  menuChild[4].innerText = "댕프랜드";
+
+  let slideCover = tagCreate("div",{});
+  rootChild[3].appendChild(slideCover);
+  styleCreate(slideCover,{
+    width : "100%",
+    height : "100%",
+    position : "relative",
+    overflow : "hidden"
+  })
+   
 
   let slideChild = [];
   let slideColor = ["#245953","#408E91","#E49393", "#D8D8D8","#867070"];
-  let slidePosition = [-1,-1,0,1,1];
+  let slidePosition = [-1,0,1,1,1];
   for(let i = 0;i<5;i++){
     let child = tagCreate("div",{});
-    rootChild[3].appendChild(child);
+    slideCover.appendChild(child);
     styleCreate(child,{
       width : "500px",
       height : "260px",
       backgroundColor : slideColor[i],
-      position : "absolute"
+      position : "absolute",
+      color : "white",
+      fontSize : "30px",
+      fontWeight : "500",
+      display : "flex",
+      justifyContent : "center",
+      alignItems : "center",
+      transition : "0.6s ease"
+
+
     })
+    child.innerText = "이번주 인기 게시글 " + i;
     slideChild.push(child);
   }
   function setSlidePosition(childArr){
@@ -120,14 +161,132 @@ function main(){
       childArr[i].style.left = `${slidePosition[i] * 100}%`
     }
   }
-  setSlidePosition(rootChild[3].children)
-  function rightMove(){
-    rootChild[3].appendChild(rootChild[3].firstChild);
-    setSlidePosition(slideChild)
+  setSlidePosition(slideCover.children)
+  
+  let leftButton = tagCreate("div",{id : "leftButton"});
+  styleCreate(leftButton,{
+    position : "absolute",
+    width : "40px",
+    height : "40px",
+    backgroundColor : "black",
+    opacity : "0.3",
+    borderRadius : "50%",
+    top : "41%",
+    left : "10px",
+    cursor : "pointer",
+    display : "flex",
+    justifyContent :"center",
+    alignItems :"center",
+    fontSize : "30px",
+    color : "gray",
+    zIndex : "1"
+  })
+  rootChild[3].appendChild(leftButton);
+  leftButton.textContent = "<";
+  let rightButton = tagCreate("div",{id : "rightButton"});
+  styleCreate(rightButton,{
+    position : "absolute",
+    width : "40px",
+    height : "40px",
+    backgroundColor : "black",
+    opacity : "0.3",
+    borderRadius : "50%",
+    top : "41%",
+    right : "10px",
+    cursor : "pointer",
+    display : "flex",
+    justifyContent :"center",
+    alignItems :"center",
+    fontSize : "30px",
+    color : "gray",
+    zIndex : "1"
+  })
+  rootChild[3].appendChild(rightButton);
+  rightButton.textContent = ">";
+  
+  let dotsWrap = tagCreate("div",{id : "dotsWrap"});
+  rootChild[3].appendChild(dotsWrap)
+  styleCreate(dotsWrap,{
+    position : "absolute",
+    left : "50%",
+    transform : "translateX(-50%)",
+    bottom : "10px",
+    display : "flex",
+    gap : "10px",
+    zIndex : "1"
+    
+  })
+
+
+  for(let slide = 0; slide<5;slide++){
+    let dot = document.createElement("div");
+    dot.style.width = "9px";
+    dot.style.height = "9px";
+    dot.style.borderRadius = "9px";
+    dot.style.backgroundColor = "black";
+    dot.style.opacity = "0.4";
+    dot.style.cursor = "pointer";
+    dot.style.transition = "all ease 0.6s"
+    
+    dotsWrap.appendChild(dot);
   }
-  rightMove();
+  let dot = dotsWrap.children;
+  
+  function dotwide(nth){
+    for(let indexWidth = 0; indexWidth<dot.length; indexWidth++){
+      if(nth === indexWidth){
+        dot[indexWidth].style.width = "70px"
+      }else{
+        dot[indexWidth].style.width = "9px"
+      }
+    }
+  };
+  dotwide(0)
+  let dotCnt = 0;
+  
+  function rightMove(){
+    slideCover.appendChild(slideCover.firstChild);
+    setSlidePosition(slideCover.children);
+    dotCnt ++;
+    dotCnt %= 5;
+    dotwide(dotCnt);
+  };
+  function leftMove(){
+    slideCover.appendChild(slideCover.firstChild);
+    setSlidePosition(slideCover.children);
+    if(dotCnt===0){
+      dotCnt = 4;
+    }else{
+      dotCnt --;
+    };
+    dotwide(dotCnt);
+  };
 
+  setInterval(() => {
+    rightMove();
+    
+  }, 5000);
 
+  leftButton.addEventListener("click",()=>{
+    leftMove();
+  });
+  rightButton.addEventListener("click",()=>{
+    rightMove();
+  });
+  for(let i = 0; i < dotsWrap.children.length;i++){
+    dotsWrap.children[i].addEventListener("click", ()=>{
+      let gap = Math.abs(i - dotCnt);
+      if(i>dotCnt){
+        for(let i = 0;i<gap;i++){
+          rightMove();
+        }
+      }else{
+        for(let i = 0;i<gap;i++){
+          leftMove();
+        }
+      }
+    })
+  }
 
 
 
