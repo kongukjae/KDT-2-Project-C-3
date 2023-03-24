@@ -1,18 +1,18 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
   center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
-  level: 3, // 지도의 확대 레벨
+  level: 7, // 지도의 확대 레벨
   mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
 };
 // 지도를 생성한다
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
 //  이미지 링크 생성을 해서 넣으니까 되었다.
-let imageSrc = 'https://i.ibb.co/nrCwxNc/pngfind-10.png', // 마커이미지의 주소입니다    
+let imageSrc = 'https://i.ibb.co/zR5p1G9/dogpaw.png', // 마커이미지의 주소입니다    
 imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
 // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다.
 imageOption = {offset: new kakao.maps.Point(15, 15)}; // 마커이미지의 옵션입니다.
-  
+
 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
 markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
