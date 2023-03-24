@@ -87,17 +87,25 @@ const server = http.createServer(function(request, response) {
       // where절 사용을 위한 userLoginId 변수 배열화
       let sqlValId = [userLoginId];
       // where절 사용을 위한 query 변수화
-      // let sql = 'SELECT userID, userPW from LoginData where userID = ?';
-      let sql = 'SELECT userID, userPW from LoginData where userID = ?';
+      let sql = 'SELECT ifnull(max(userID), 0) userID, userPW from LoginData where userID = ?';
+      // ifnull(컬럼명, 출력값) -> 만약 데이터가 null일 경우 출력값을 대신 출력
+      // ifnull(max(userID), 0) -> max(userID) : userID 중에 가장 높은 값을 출력 -> userID에 존재하지 않는 값이 들어온 경우 가장 높은 값이 없다 -> null 출력 -> ifnull에 의해 0 출력 
 
       connection.query(sql, sqlValId, (error, data, fields) => {
+        console.log('연결 시작');
         if (error) throw error;
         console.log('User info: ', data);
         // 테이블 내부 데이터에 접근 실험
         console.dir(data[0].userID); //'testid01'
         let dataId = data[0].userID;
         let dataPw = data[0].userPW;
-        if(userLoginId === dataId) {
+        if (data[0].userID === '0') {
+          console.log('가입되지 않은 회원입니다');
+          connection.end();
+          response.writeHead(200);
+          response.write('Not members');
+          response.end();
+        } else if(userLoginId === dataId) {
           if(userLoginPw === dataPw) {
             console.log('로그인 성공');
             connection.end();
@@ -112,12 +120,7 @@ const server = http.createServer(function(request, response) {
             response.end();
           }
         }
-        // try {} catch {
         //   console.log('존재하지 않는 회원입니다');
-        //   connection.end();
-        //   response.writeHead(200);
-        //   response.write('Not members');
-        //   response.end();
         // }
       });
       // connection 끝
