@@ -14,9 +14,9 @@ let result = [];
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
   // 클릭한 위치에 마커를 표시합니다
   let latlng = mouseEvent.latLng;
-  let wrap = [];
   addMarker(latlng);
-  wrap.push(latlng.getLat(), latlng.getLng())
+  let wrap = [];
+  wrap.push(latlng.getLat(), latlng.getLng());
   result.push(wrap);
 });
 
@@ -38,7 +38,6 @@ function addMarker(position) {
   // 생성된 마커를 배열에 추가합니다
   markers.push(marker);
 }
-
 console.log(result);
 
 
