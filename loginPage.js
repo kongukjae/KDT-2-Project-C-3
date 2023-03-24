@@ -8,8 +8,8 @@ rootLoginPage.style.display = 'flex';
 rootLoginPage.style.flexDirection = 'column';
 rootLoginPage.style.justifyContent = 'top';
 rootLoginPage.style.alignItems = 'center';
-rootLoginPage.style.backgroundColor = '#F7786B'
-
+rootLoginPage.style.backgroundColor = '#F7786B';
+rootLoginPage.style.margin = "auto";
 //tag maker
 function tagCreate(tType,props){
   let element = document.createElement(tType);

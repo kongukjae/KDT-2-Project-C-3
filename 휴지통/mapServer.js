@@ -1,11 +1,11 @@
 import http from "http";
 import fs from "fs";
 import mysql from "mysql";
-import htmlBox from "./htmlBox.js";
+import htmlBox from "../htmlBox.js";
 
 const server = http.createServer(function(request, response){
   // 최초접속
-  if(request.method === 'GET' && request.url === '/'){
+  if(request.method === 'GET' && request.url === '/main'){
     //const b = request.url.split("/")
     //console.dir(b)
     response.writeHead(200, {'Content-Type': 'text/html'});

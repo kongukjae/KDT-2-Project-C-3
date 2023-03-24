@@ -1,38 +1,21 @@
 import http from 'http';
 import fs from 'fs';
 import mysql from 'mysql';
-
-// html 구조
-function htmlBox(data) {
-  return `
-  <!DOCTYPE html>
-  <html lang="ko">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
-  <body>
-    <div id='root'></div>
-    ${data}
-  </body>
-  </html>
-  `
-}
-
-// data 안에 들어갈 내용물
-const innerbody = {
-  login: `<script src="./loginPage.js"></script>`
+import htmlBox from "./htmlBox.js";
+const mysqlInfo = {
+  host     : 'localhost',
+  user     : 'root',
+  password : '0000',
+  database : 'signup'
 }
 
 const server = http.createServer(function(request, response) {
-  // 최초접속
+  //로그인
   let body = '';
   if(request.method === 'GET' && request.url === '/') {
     response.statusCode = 200;
     response.setHeader('Content-Type', 'text/html');
-    response.write(htmlBox(innerbody.login));
+    response.write(htmlBox.htmlFunc(htmlBox.loginBody));
     response.end();
   } else if(request.url === '/loginPage.js'){
     // loginPage.js 파일 read
@@ -59,6 +42,7 @@ const server = http.createServer(function(request, response) {
       response.end();
     })
   }
+
   if(request.method === 'POST' && request.url.startsWith('/login')) {
     console.log('/login 페이지 진입');
     request.on('data', function(data) {
@@ -134,9 +118,99 @@ const server = http.createServer(function(request, response) {
     // response.write('success');
     // response.end();
   }
-})
 
-  // 서버 포트 설정
-  server.listen(2082, function(error) {
-    if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
+  //메인
+  if(request.method === 'GET' && request.url === '/main'){
+    //const b = request.url.split("/")
+    //console.dir(b)
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.end(htmlBox.htmlFunc(htmlBox.mapBody));
+  }
+  else if(request.url.split('/')[1] === 'mainStyle.js'){
+      fs.readFile(`./mainStyle.js`, function (err, data) {
+        response.writeHead(200);
+        response.write(data);
+        response.end();
+      });
+    }
+  else if(request.url.split('/')[1] === 'map.js'){
+    fs.readFile(`./map.js`, function (err, data) {
+        response.writeHead(200);
+        response.write(data);
+        response.end();
+      });
+    }
+ 
+
+
+  //회원가입
+  if(request.method === 'GET' && request.url === '/signUp') {
+    response.writeHead(200);
+    response.write(htmlBox.htmlFunc(htmlBox.signupPage))
+    response.end();
+  }
+  if(request.method === 'GET' && request.url.startsWith('/signupstyle')){
+    fs.readFile(`./signup.js`, function(err, data){
+      response.writeHead(200);
+      response.write(data);
+      response.end();
+    })
+  }
+  if(request.method === 'GET' && request.url.startsWith('/signupResultStyle')){
+    fs.readFile(`./signupResult.js`, function(err, data){
+      response.writeHead(200);
+      response.write(data);
+      response.end();
+    })
+  }
+  if(request.method === 'GET' && request.url.startsWith('/dupCheck')){
+    let checkID = request.url.split("=")[1]
+    let connection = mysql.createConnection(mysqlInfo);
+    connection.connect();
+    connection.query(`SELECT * FROM userInfo WHERE id = "${checkID}"`, (error, rows, fields) => {
+      if (error) throw error;
+      else{
+        response.writeHead(200);
+        response.end(String(rows));
+      }
     });
+  }
+
+  if(request.method === 'POST' && request.url.startsWith('/signUpResult')){
+    let body = '';
+    request.on('data', function (data) {
+      body = body + data;
+    });
+    request.on('end', function () {
+      let bodycarrier = body.split("&");
+      let bodySplit = [];
+      for(let i = 0;i<bodycarrier.length;i++){
+        bodySplit.push(bodycarrier[i].split("="))
+      };
+      let connection = mysql.createConnection(mysqlInfo);
+      connection.connect();
+      connection.query(`INSERT INTO userInfo(id,PW,question,answer,dogName,dogGender) values("${bodySplit[0][1]}","${bodySplit[1][1]}",${Number(bodySplit[2][1])},"${decodeURIComponent(bodySplit[3][1])}","${decodeURIComponent(bodySplit[4][1])}",${Number(bodySplit[5][1])})`, (error) => {
+        if (error) throw error;
+        console.log("정상작동");
+      });
+
+      connection.query('SELECT * FROM userInfo', (error, rows, fields) => {
+        if (error) throw error;
+        else{
+          console.log(rows);
+        }
+      });
+
+      connection.end();
+      
+      response.writeHead(200);
+      response.write(htmlBox.htmlFunc(htmlBox.signUpResult))
+      response.end();
+      }
+    );
+    }
+  })
+  // 서버 포트 설정
+  server.listen(2080, function(error) {
+    if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
+  });
