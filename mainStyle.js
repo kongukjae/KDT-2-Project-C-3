@@ -85,7 +85,8 @@ function main(){
     backgroundColor : "#F7786B",
     display : "flex",
     justifyContent: "space-around",
-    alignItems : "center"
+    alignItems : "center",
+    zIndex : "2"
   })
   rootChild[2].id = "map"
 
@@ -252,7 +253,7 @@ function main(){
     dotwide(dotCnt);
   };
   function leftMove(){
-    slideCover.appendChild(slideCover.firstChild);
+    slideCover.prepend(slideCover.lastChild);
     setSlidePosition(slideCover.children);
     if(dotCnt===0){
       dotCnt = 4;
