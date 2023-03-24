@@ -109,7 +109,7 @@ const server = http.createServer(function(request, response) {
             } else { // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 하지 않을 경우
               console.log('비밀번호가 틀렸습니다');
               connection.end();
-              const msg = htmlBox(`<script>alert('비밀번호 확인')</script>`);
+              const msg = htmlBox(`<script>window.alert('비밀번호 확인')</script>`);
               const back = htmlBox(`<script>window.location = 'http://localhost:2082'</script>`);
               response.writeHead(200);
               response.write(msg);
@@ -120,7 +120,7 @@ const server = http.createServer(function(request, response) {
         } else {
           console.log('가입되지 않은 회원입니다');
           connection.end();
-          const msg = htmlBox(`<script>alert('가입되지 않은 회원입니다')</script>`);
+          const msg = htmlBox(`<script>window.alert('가입되지 않은 회원입니다')</script>`);
           const back = htmlBox(`<script>window.location = 'http://localhost:2082'</script>`);
           response.writeHead(200);
           response.write(msg);
