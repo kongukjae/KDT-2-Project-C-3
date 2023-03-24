@@ -10,17 +10,28 @@ const server = http.createServer(function (request, response) {
     //console.dir(b)
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
-  } else if (request.url.split("/")[1] === "mainStyle.js") {
+  } 
+  else if (request.url.split("/")[1] === "mainStyle.js") {
     fs.readFile(`./mainStyle.js`, function (err, data) {
       response.writeHead(200);
       response.write(data);
       response.end();
     });
-  } else if (request.url.split("/")[1] === "map.js") {
+  } 
+  else if (request.url.split("/")[1] === "map.js") {
     fs.readFile(`./map.js`, function (err, data) {
       response.writeHead(200);
       response.write(data);
       response.end();
+    });
+  }
+  else if(request.method === "POST" && request.url === "/postcheck") {
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+    });
+    request.on("end", function () {
+      console.log(body);
     });
   }
 });
@@ -34,20 +45,3 @@ server.listen(2080, function (error) {
   }
 });
 
-const conn = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "0320",
-  database: "map",
-});
-conn.connect();
-
-let sql = 'select * from data';
-
-conn.query(sql, function(err, rows, fields) {
-  if(err) {
-    console.log(err);
-  }
-  console.log(rows);
-})
-conn.end();

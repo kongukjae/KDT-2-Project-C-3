@@ -18,11 +18,23 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
   let wrap = [];
   wrap.push(latlng.getLat(), latlng.getLng());
   result.push(wrap);
+
+  const xhr = new XMLHttpRequest(); //XMLHttpRequest 객체 생성
+  xhr.open("POST", "https://localhost:2080/postcheck"); //HTTP Method, URL 정의
+  xhr.setRequestHeader("content-type", "application/json; charset=UTF-8"); //헤더 값 중 content-type 정의
+  xhr.send(result); // 요청 전송
+  xhr.onload = () => {
+    if (xhr.status === 201) {
+      // POST 요청이 정상적으로 성공이 되면 201
+      const res = JSON.parse(xhr.response); // 응답 데이터를 JSON.parse 함수로 JSON 객체로 변경
+      console.log(res); //
+    } 
+    else {
+      // 에러 발생
+      console.error(xhr.status, xhr.statusText); //응답 상태와 응답 메시지를 출력
+    }
+  };
 });
-
-
-// 마커 하나를 지도위에 표시합니다 
-// addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position) {
@@ -39,5 +51,3 @@ function addMarker(position) {
   markers.push(marker);
 }
 console.log(result);
-
-
