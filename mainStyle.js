@@ -93,6 +93,8 @@ function main(){
     menuChild.push(child);
   }
 
+  menuChild[2].id = "mapBtn";
+
   let slideChild = [];
   let slideColor = ["#245953","#408E91","#E49393", "#D8D8D8","#867070"];
   let slidePosition = [-1,-1,0,1,1];
