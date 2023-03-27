@@ -5,8 +5,8 @@
 프로젝트 명 : 멍타
 프로젝트 소개
 <div>
-  ![loginPage](https://user-images.githubusercontent.com/117888227/227817898-a9a53503-9931-4b02-bd13-4b594eed3315.png)
-  ![singupPage](https://user-images.githubusercontent.com/117888227/227817906-d499a4b7-d7ae-4ed0-982c-594fcd1a5e8f.png)
+  <img height = '50%' src = 'https://user-images.githubusercontent.com/117888227/227817898-a9a53503-9931-4b02-bd13-4b594eed3315.png'>
+  <img height = '50%' src = 'https://user-images.githubusercontent.com/117888227/227817906-d499a4b7-d7ae-4ed0-982c-594fcd1a5e8f.png'>
 </div>
 
 - 반려견 산책 기록 어플
