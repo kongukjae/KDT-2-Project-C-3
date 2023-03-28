@@ -2,6 +2,8 @@ import http from 'http';
 import fs from 'fs';
 import mysql from 'mysql';
 import htmlBox from "./htmlBox.js";
+// import mapMerker from "./mapMerker.js";
+// import markerJson from "./markerJson.json" assert { type: "json" };
 
 //본인의 MySQL정보를 입력하고 database 연결할 것
 /* 필요한 테이블 이름 : [
@@ -142,20 +144,24 @@ const server = http.createServer(function(request, response) {
     }
   else if(request.url.split('/')[1] === 'map.js'){
     fs.readFile(`./map.js`, function (err, data) {
+      // let mk = new kakao.maps.LatLng(markerJson['0'][0],markerJson['0'][1]);
         response.writeHead(200);
         response.write(data);
+        // mapMerker.addMarker(mk);
         response.end();
       });
   }
   else if(request.method === 'POST' && request.url.startsWith('/menuMap')){
     let body = "";
     let cooData;
+    
+
     request.on('data', function(chunk){
       //서버로 보내지는 데이터 받는 중
       body += chunk})
     request.on("end", function(){
       //데이터 다 받은 뒤 DB에 입력
-      console.log(body);
+      //console.log(body);
       cooData = JSON.parse(body);
 
       response.writeHead(200, {'Content-Type': 'text/html'});
@@ -174,18 +180,58 @@ const server = http.createServer(function(request, response) {
         conn.query(`insert into map_tables(latitude, longitude) values(${cooData[key][0]}, ${cooData[key][1]})`,
         function(err){
           if(err) throw err;
-          else console.log("정상");
+          else console.log("정상적으로 DB에 저장");
         });
-        conn.query('select * from map_tables', (error, rows) => {
-          if (error) throw error;
-          else{
-            console.log(rows);
-          }
-        });
+        
         conn.end();
       }
     });
     
+  }
+  else if(request.method === 'GET' && request.url.startsWith('/loadMap')){
+    let cnt1;
+    let markerArr = {};
+
+    let conn = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '0000',
+      database: 'map_db'
+    });
+    conn.connect();
+    conn.query(`select count(*) as cnt from map_tables`,
+      function(err, data){
+        if(err) throw err;
+        else{
+          cnt1 = data[0].cnt; 
+          console.log("테이블 개수: " + cnt1);
+        }
+    })
+    conn.query(`select * from map_tables`,
+      function(err, rows){
+        if(err) throw err;
+        else{
+          //console.log(rows);
+          //console.log(rows.lenght);
+          for(let i = 0; i < cnt1; i++){
+            let arr = [];
+            arr.push(rows[i].latitude, rows[i].longitude);
+            markerArr[i] = arr;
+
+          }
+          console.log(markerArr);
+
+          response.writeHead(200);
+          // fs.writeFile("./markerJson.json", JSON.stringify(markerArr), function(err){
+          //   if(err) throw err;
+          //   else console.log("정상적으로 json파일 작성")
+          // })
+          response.write(JSON.stringify(markerArr));
+          response.end();
+        }
+    });
+    conn.end();
+
   }
 
 
