@@ -1,3 +1,5 @@
+// import mysql from 'mysql';
+
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
   center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
@@ -31,7 +33,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
   wrap.push(latlng.getLat(), latlng.getLng())
   result.push(wrap);
   console.log("result: " + result);
-  resultObject[cnt] = wrap;
+  resultObject[0] = wrap;
   console.log(resultObject);
   cnt++;
   console.log("cnt = " + cnt);
@@ -41,7 +43,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
   // httpRequest.send(`re1=${result[0]}`);
   httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
 });
-
 
 // 마커 하나를 지도위에 표시합니다 
 // addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
@@ -61,13 +62,13 @@ function addMarker(position) {
   
   // 생성된 마커를 배열에 추가합니다
   markers.push(marker);
+}
 
-  // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-  function setMarkers(map) {
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }            
-  }
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setMarkers(map) {
+  for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+  }            
 }
 
 
@@ -78,6 +79,31 @@ mapBtn.addEventListener('click',function(){
   // httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
   // // httpRequest.send(`re1=${result[0]}`);
   // httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
-
-
 })
+
+// import mysql from 'mysql';
+
+// const mysqlInfo = {
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : '0000',
+//   database : 'map_test'
+// }
+
+// let connection = mysql.createConnection(mysqlInfo);
+// connection.connect();
+// connection.query(`SELECT * from map_tables`, (error, data, fields) => {
+//   console.log(data);
+// })
+
+
+kakao.maps.event.addListener(map, 'load', function() {
+  const httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET', `http://localhost:2080/menuDB`);
+  httpRequest.send();
+  httpRequest.addEventListener('load', function() {
+    console.log("실험중");
+    let res = httpRequest.response;
+    console.log(res);
+  })
+});

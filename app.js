@@ -21,7 +21,7 @@ const mysqlInfo = {
   host     : 'localhost',
   user     : 'root',
   password : '0000',
-  database : 'map_db'
+  database : 'map_test'
 }
 
 const server = http.createServer(function(request, response) {
@@ -130,6 +130,7 @@ const server = http.createServer(function(request, response) {
   if(request.method === 'GET' && request.url === '/main'){
     //const b = request.url.split("/")
     //console.dir(b)
+    console.log('cnt');
     response.writeHead(200, {'Content-Type': 'text/html'});
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   }
@@ -163,12 +164,12 @@ const server = http.createServer(function(request, response) {
       
       for(const key in cooData){
         console.log(cooData[key]);
-        
+        console.log('cnt');
         let conn = mysql.createConnection({
           host: 'localhost',
           user: 'root',
           password: '0000',
-          database: 'map_db'
+          database: 'map_test'
         });
         conn.connect();
         conn.query(`insert into map_tables(latitude, longitude) values(${cooData[key][0]}, ${cooData[key][1]})`,
@@ -185,7 +186,21 @@ const server = http.createServer(function(request, response) {
         conn.end();
       }
     });
-    
+  }
+  else if(request.method === 'GET' && request.url.startsWith('/menuDB')){ //로딩시 진입 하도록
+    let conn = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '0000',
+      database: 'map_test'
+    });
+    conn.connect();
+    conn.query(`SELECT * FROM map_tables`, (error, data, fields) => {
+      console.log(data);
+      response.writeHead(200);
+      response.end(string(data));
+    })
+    conn.end();
   }
 
 
