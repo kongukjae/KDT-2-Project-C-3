@@ -141,7 +141,7 @@ const server = http.createServer(function(request, response) {
     //const b = request.url.split("/")
     //console.dir(b)
     response.writeHead(200, {'Content-Type': 'text/html'});
-    //response.write("<script> alert(document.cookie)</script>")
+    response.write("<script> alert(document.cookie)</script>")
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   }
   else if(request.url.split('/')[1] === 'mainStyle.js'){
@@ -178,7 +178,7 @@ const server = http.createServer(function(request, response) {
         
         let conn = mysql.createConnection(mysqlInfo);
         conn.connect();
-        conn.query(`insert into map_tables(latitude, longitude) values(${cooData[key][0]}, ${cooData[key][1]})`,
+        conn.query(`insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, ${cooData[key][2]})`,
         function(err){
           if(err) throw err;
           else console.log("정상적으로 DB에 저장");
