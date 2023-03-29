@@ -78,7 +78,8 @@ function addMarker(position) {
 function loadMarker(callback){
   let res;
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost:2080/loadMap`);
+  const cookieId = document.cookie.split("=")[1];
+  xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send(); 
   xhr.addEventListener('load', function(){
@@ -91,5 +92,4 @@ function loadMarker(callback){
       
       console.log("정상적으로 지도에 표시됨");
     });
-  
 }

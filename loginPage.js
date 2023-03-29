@@ -90,10 +90,10 @@ rootLoginPage.appendChild(formLoginPageWrapper);
 
 formLoginPageWrapper.innerHTML += `
 <form action="/login" method="post">
-  <input type="text" name="user_id" autofocus></input>
-  <input type="text" name="user_pw"></input>
+  <input id = "loginId" type="text" name="user_id" autofocus></input>
+  <input id = "loginPw" type="text" name="user_pw"></input>
   <div>
-    <input type="submit" value="로그인">
+    <input id = "login" type="submit" value="로그인">
     <a href='/signUp'>회원가입</a>
   </div>
 </form>
@@ -131,6 +131,16 @@ for(let i = 0; i < inputIdStyleArr.length; i++) {
 }
 formLoginPageWrapper.children[0].children[0].setAttribute('placeholder', ' 아이디를 입력하세요');
 
+// const loginPw = document.getElementById('loginPw');
+// const loginId = document.getElementById('loginId');
+
+// loginPw.addEventListener('click', function(){
+//   let idCookieVal = loginId.value;
+//   // let idCookieVal = "12345";
+//   console.log("쿠키zzz: " + idCookieVal);
+//   document.cookie = "id=" + idCookieVal;
+//   console.log("쿠키: " + document.cookie);
+// })
 
 // PW input 스타일
 const inputPwStyleObj = {

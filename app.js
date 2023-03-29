@@ -32,6 +32,7 @@ const mysqlInfo = {
 }
 
 const server = http.createServer(function(request, response) {
+  
   //로그인
   let body = '';
   if(request.method === 'GET' && request.url === '/') {
@@ -105,6 +106,8 @@ const server = http.createServer(function(request, response) {
               console.log('로그인 성공');
               connection.end();
               response.writeHead(200);
+              const idCookie = "id=" + dataId;
+              response.write(`<script>document.cookie = ${idCookie}</script>`);
               response.write("<script>window.location='/main'</script>"); // 이후 병합시 main 페이지로 연결
               response.end();
             } else { // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 하지 않을 경우
@@ -133,11 +136,12 @@ const server = http.createServer(function(request, response) {
   })}
   
 
-  //메인
+  //메인화면
   if(request.method === 'GET' && request.url === '/main'){
     //const b = request.url.split("/")
     //console.dir(b)
     response.writeHead(200, {'Content-Type': 'text/html'});
+    //response.write("<script> alert(document.cookie)</script>")
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   }
   else if(request.url.split('/')[1] === 'mainStyle.js'){
@@ -149,10 +153,8 @@ const server = http.createServer(function(request, response) {
     }
   else if(request.url.split('/')[1] === 'map.js'){
     fs.readFile(`./map.js`, function (err, data) {
-      // let mk = new kakao.maps.LatLng(markerJson['0'][0],markerJson['0'][1]);
         response.writeHead(200);
         response.write(data);
-        // mapMerker.addMarker(mk);
         response.end();
       });
   }
@@ -160,7 +162,6 @@ const server = http.createServer(function(request, response) {
     let body = "";
     let cooData;
     
-
     request.on('data', function(chunk){
       //서버로 보내지는 데이터 받는 중
       body += chunk})
@@ -173,7 +174,7 @@ const server = http.createServer(function(request, response) {
       response.end();
       
       for(const key in cooData){
-        console.log(cooData[key]);
+        //console.log(cooData[key]);
         
         let conn = mysql.createConnection(mysqlInfo);
         conn.connect();
@@ -182,7 +183,6 @@ const server = http.createServer(function(request, response) {
           if(err) throw err;
           else console.log("정상적으로 DB에 저장");
         });
-        
         conn.end();
       }
     });
@@ -192,6 +192,7 @@ const server = http.createServer(function(request, response) {
     let cnt1;
     let markerArr = {};
 
+    console.log("url: " + request.url);
     let conn = mysql.createConnection(mysqlInfo);
     conn.connect();
     conn.query(`select count(*) as cnt from map_tables`,
@@ -199,7 +200,7 @@ const server = http.createServer(function(request, response) {
         if(err) throw err;
         else{
           cnt1 = data[0].cnt; 
-          console.log("테이블 개수: " + cnt1);
+          //console.log("테이블 개수: " + cnt1);
         }
     })
     conn.query(`select * from map_tables`,
@@ -212,15 +213,9 @@ const server = http.createServer(function(request, response) {
             let arr = [];
             arr.push(rows[i].latitude, rows[i].longitude);
             markerArr[i] = arr;
-
           }
           //console.log(markerArr);
-
           response.writeHead(200);
-          // fs.writeFile("./markerJson.json", JSON.stringify(markerArr), function(err){
-          //   if(err) throw err;
-          //   else console.log("정상적으로 json파일 작성")
-          // })
           response.write(JSON.stringify(markerArr));
           response.end();
         }
@@ -304,6 +299,7 @@ const server = http.createServer(function(request, response) {
     );
     }
   })
+
   // 서버 포트 설정
   server.listen(2080, function(error) {
     if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
