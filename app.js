@@ -214,7 +214,7 @@ const server = http.createServer(function(request, response) {
             markerArr[i] = arr;
 
           }
-          console.log(markerArr);
+          //console.log(markerArr);
 
           response.writeHead(200);
           // fs.writeFile("./markerJson.json", JSON.stringify(markerArr), function(err){

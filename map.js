@@ -89,7 +89,7 @@ function loadMarker(callback){
       callback(new kakao.maps.LatLng(parseFloat(res[key][0]), parseFloat(res[key][1])));
     }
       
-      console.log("결과: " + res);
+      console.log("정상적으로 지도에 표시됨");
     });
   
 }
