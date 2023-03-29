@@ -2,10 +2,13 @@ import http from 'http';
 import fs from 'fs';
 import mysql from 'mysql';
 import htmlBox from "./htmlBox.js";
+// import mapMerker from "./mapMerker.js";
+// import markerJson from "./markerJson.json" assert { type: "json" };
 
-//본인의 MySQL정보를 입력하고 database 연결할 것
+//db 연동이 되어있으니 아래 테이블을 따로 만들 필요 없음
+// 집에서 수정하려면 만들어야함
 /* 필요한 테이블 이름 : [
-  userinfo(
+  CREATE TABLE userinfo(
     id varchar(20),
     PW varchar(20),
     question int,
@@ -14,14 +17,18 @@ import htmlBox from "./htmlBox.js";
     dogGender int,
 
     primary key(id)
+  );
+  CREATE TABLE map_tables(
+    latitude decimal(17,14),
+    longitude decimal(17,14)
   )
 ]*/
-//위 테이블을 만들고 실행할 것
+
 const mysqlInfo = {
-  host     : 'localhost',
-  user     : 'root',
+  host     : '192.168.0.93',
+  user     : 'guest',
   password : '0000',
-  database : 'map_db'
+  database : 'mungta'
 }
 
 const server = http.createServer(function(request, response) {
@@ -142,20 +149,24 @@ const server = http.createServer(function(request, response) {
     }
   else if(request.url.split('/')[1] === 'map.js'){
     fs.readFile(`./map.js`, function (err, data) {
+      // let mk = new kakao.maps.LatLng(markerJson['0'][0],markerJson['0'][1]);
         response.writeHead(200);
         response.write(data);
+        // mapMerker.addMarker(mk);
         response.end();
       });
   }
   else if(request.method === 'POST' && request.url.startsWith('/menuMap')){
     let body = "";
     let cooData;
+    
+
     request.on('data', function(chunk){
       //서버로 보내지는 데이터 받는 중
       body += chunk})
     request.on("end", function(){
       //데이터 다 받은 뒤 DB에 입력
-      console.log(body);
+      //console.log(body);
       cooData = JSON.parse(body);
 
       response.writeHead(200, {'Content-Type': 'text/html'});
@@ -164,28 +175,58 @@ const server = http.createServer(function(request, response) {
       for(const key in cooData){
         console.log(cooData[key]);
         
-        let conn = mysql.createConnection({
-          host: 'localhost',
-          user: 'root',
-          password: '0000',
-          database: 'map_db'
-        });
+        let conn = mysql.createConnection(mysqlInfo);
         conn.connect();
         conn.query(`insert into map_tables(latitude, longitude) values(${cooData[key][0]}, ${cooData[key][1]})`,
         function(err){
           if(err) throw err;
-          else console.log("정상");
+          else console.log("정상적으로 DB에 저장");
         });
-        conn.query('select * from map_tables', (error, rows) => {
-          if (error) throw error;
-          else{
-            console.log(rows);
-          }
-        });
+        
         conn.end();
       }
     });
     
+  }
+  else if(request.method === 'GET' && request.url.startsWith('/loadMap')){
+    let cnt1;
+    let markerArr = {};
+
+    let conn = mysql.createConnection(mysqlInfo);
+    conn.connect();
+    conn.query(`select count(*) as cnt from map_tables`,
+      function(err, data){
+        if(err) throw err;
+        else{
+          cnt1 = data[0].cnt; 
+          console.log("테이블 개수: " + cnt1);
+        }
+    })
+    conn.query(`select * from map_tables`,
+      function(err, rows){
+        if(err) throw err;
+        else{
+          //console.log(rows);
+          //console.log(rows.lenght);
+          for(let i = 0; i < cnt1; i++){
+            let arr = [];
+            arr.push(rows[i].latitude, rows[i].longitude);
+            markerArr[i] = arr;
+
+          }
+          console.log(markerArr);
+
+          response.writeHead(200);
+          // fs.writeFile("./markerJson.json", JSON.stringify(markerArr), function(err){
+          //   if(err) throw err;
+          //   else console.log("정상적으로 json파일 작성")
+          // })
+          response.write(JSON.stringify(markerArr));
+          response.end();
+        }
+    });
+    conn.end();
+
   }
 
 

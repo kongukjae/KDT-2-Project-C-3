@@ -1,3 +1,4 @@
+
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
   center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
@@ -20,7 +21,7 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 let markers = [];
 // let latlng = mouseEvent.latLng;
-let result = [];
+//let result = [];
 let resultObject = {};
 let cnt = 0;
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
@@ -29,12 +30,13 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
   let wrap = [];
   addMarker(latlng);
   wrap.push(latlng.getLat(), latlng.getLng())
-  result.push(wrap);
-  console.log("result: " + result);
-  resultObject[cnt] = wrap;
-  console.log(resultObject);
-  cnt++;
-  console.log("cnt = " + cnt);
+  //result.push(wrap);
+  //console.log("result: " + result);
+  // resultObject[cnt] = wrap;
+  resultObject[0] = wrap;
+  //console.log(resultObject);
+  //cnt++;
+  //console.log("cnt = " + cnt);
 
   const httpRequest = new XMLHttpRequest();
   httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
@@ -43,8 +45,11 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 });
 
 
+loadMarker(addMarker);
+
+
 // 마커 하나를 지도위에 표시합니다 
-// addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
+//addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position) {
@@ -70,14 +75,21 @@ function addMarker(position) {
   }
 }
 
-
-const mapBtn = document.getElementById('mapBtn');
-
-mapBtn.addEventListener('click',function(){
-  // const httpRequest = new XMLHttpRequest();
-  // httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
-  // // httpRequest.send(`re1=${result[0]}`);
-  // httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
-
-
-})
+function loadMarker(callback){
+  let res;
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `http://localhost:2080/loadMap`);
+  // httpRequest.send(`re1=${result[0]}`);
+  xhr.send(); 
+  xhr.addEventListener('load', function(){
+    res = JSON.parse(xhr.response);
+    //res = xhr.response;
+    for(const key in res){
+      //console.log(typeof(parseFloat(res['0'][0])))
+      callback(new kakao.maps.LatLng(parseFloat(res[key][0]), parseFloat(res[key][1])));
+    }
+      
+      console.log("결과: " + res);
+    });
+  
+}
