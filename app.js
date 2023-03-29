@@ -5,9 +5,10 @@ import htmlBox from "./htmlBox.js";
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
-//본인의 MySQL정보를 입력하고 database 연결할 것
+//db 연동이 되어있으니 아래 테이블을 따로 만들 필요 없음
+// 집에서 수정하려면 만들어야함
 /* 필요한 테이블 이름 : [
-  userinfo(
+  CREATE TABLE userinfo(
     id varchar(20),
     PW varchar(20),
     question int,
@@ -16,14 +17,18 @@ import htmlBox from "./htmlBox.js";
     dogGender int,
 
     primary key(id)
+  );
+  CREATE TABLE map_tables(
+    latitude decimal(17,14),
+    longitude decimal(17,14)
   )
 ]*/
-//위 테이블을 만들고 실행할 것
+
 const mysqlInfo = {
-  host     : 'localhost',
-  user     : 'root',
+  host     : '192.168.0.93',
+  user     : 'guest',
   password : '0000',
-  database : 'map_db'
+  database : 'mungta'
 }
 
 const server = http.createServer(function(request, response) {
@@ -170,12 +175,7 @@ const server = http.createServer(function(request, response) {
       for(const key in cooData){
         console.log(cooData[key]);
         
-        let conn = mysql.createConnection({
-          host: 'localhost',
-          user: 'root',
-          password: '0000',
-          database: 'map_db'
-        });
+        let conn = mysql.createConnection(mysqlInfo);
         conn.connect();
         conn.query(`insert into map_tables(latitude, longitude) values(${cooData[key][0]}, ${cooData[key][1]})`,
         function(err){
@@ -192,12 +192,7 @@ const server = http.createServer(function(request, response) {
     let cnt1;
     let markerArr = {};
 
-    let conn = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '0000',
-      database: 'map_db'
-    });
+    let conn = mysql.createConnection(mysqlInfo);
     conn.connect();
     conn.query(`select count(*) as cnt from map_tables`,
       function(err, data){
