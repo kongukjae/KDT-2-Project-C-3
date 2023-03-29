@@ -20,10 +20,10 @@ import htmlBox from "./htmlBox.js";
 ]*/
 //위 테이블을 만들고 실행할 것
 const mysqlInfo = {
-  host     : 'localhost',
-  user     : 'root',
+  host     : '192.168.0.93',
+  user     : 'guest',
   password : '0000',
-  database : 'map_db'
+  database : 'mungta'
 }
 
 const server = http.createServer(function(request, response) {
@@ -170,12 +170,7 @@ const server = http.createServer(function(request, response) {
       for(const key in cooData){
         console.log(cooData[key]);
         
-        let conn = mysql.createConnection({
-          host: 'localhost',
-          user: 'root',
-          password: '0000',
-          database: 'map_db'
-        });
+        let conn = mysql.createConnection(mysqlInfo);
         conn.connect();
         conn.query(`insert into map_tables(latitude, longitude) values(${cooData[key][0]}, ${cooData[key][1]})`,
         function(err){
@@ -192,12 +187,7 @@ const server = http.createServer(function(request, response) {
     let cnt1;
     let markerArr = {};
 
-    let conn = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '0000',
-      database: 'map_db'
-    });
+    let conn = mysql.createConnection(mysqlInfo);
     conn.connect();
     conn.query(`select count(*) as cnt from map_tables`,
       function(err, data){
@@ -219,7 +209,7 @@ const server = http.createServer(function(request, response) {
             markerArr[i] = arr;
 
           }
-          console.log(markerArr);
+          //console.log(markerArr);
 
           response.writeHead(200);
           // fs.writeFile("./markerJson.json", JSON.stringify(markerArr), function(err){
