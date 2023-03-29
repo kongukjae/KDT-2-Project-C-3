@@ -189,13 +189,15 @@ const server = http.createServer(function(request, response) {
     
   }
   else if(request.method === 'GET' && request.url.startsWith('/loadMap')){
+    let targetId = request.url.split("=")[1];
+    console.log("loadmap id is " + targetId);
     let cnt1;
     let markerArr = {};
 
     console.log("url: " + request.url);
     let conn = mysql.createConnection(mysqlInfo);
     conn.connect();
-    conn.query(`select count(*) as cnt from map_tables`,
+    conn.query(`select count(*) as cnt from map_tables where id=${targetId}`,
       function(err, data){
         if(err) throw err;
         else{
@@ -203,7 +205,7 @@ const server = http.createServer(function(request, response) {
           //console.log("테이블 개수: " + cnt1);
         }
     })
-    conn.query(`select * from map_tables`,
+    conn.query(`select * from map_tables where id=${targetId}`,
       function(err, rows){
         if(err) throw err;
         else{
