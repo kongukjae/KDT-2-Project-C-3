@@ -107,7 +107,8 @@ const server = http.createServer(function(request, response) {
               connection.end();
               response.writeHead(200);
               const idCookie = "id=" + dataId;
-              response.write(`<script>document.cookie = ${idCookie}</script>`);
+              console.log(idCookie);
+              response.write(`<script>document.cookie ="${idCookie}"</script>`);
               response.write("<script>window.location='/main'</script>"); // 이후 병합시 main 페이지로 연결
               response.end();
             } else { // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 하지 않을 경우
@@ -141,7 +142,6 @@ const server = http.createServer(function(request, response) {
     //const b = request.url.split("/")
     //console.dir(b)
     response.writeHead(200, {'Content-Type': 'text/html'});
-    response.write("<script> alert(document.cookie)</script>")
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   }
   else if(request.url.split('/')[1] === 'mainStyle.js'){
@@ -178,7 +178,7 @@ const server = http.createServer(function(request, response) {
         
         let conn = mysql.createConnection(mysqlInfo);
         conn.connect();
-        conn.query(`insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, ${cooData[key][2]})`,
+        conn.query(`insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, '${cooData[key][2]}')`,
         function(err){
           if(err) throw err;
           else console.log("정상적으로 DB에 저장");
@@ -197,7 +197,7 @@ const server = http.createServer(function(request, response) {
     console.log("url: " + request.url);
     let conn = mysql.createConnection(mysqlInfo);
     conn.connect();
-    conn.query(`select count(*) as cnt from map_tables where id=${targetId}`,
+    conn.query(`select count(*) as cnt from map_tables where id='${targetId}'`,
       function(err, data){
         if(err) throw err;
         else{
@@ -205,7 +205,7 @@ const server = http.createServer(function(request, response) {
           //console.log("테이블 개수: " + cnt1);
         }
     })
-    conn.query(`select * from map_tables where id=${targetId}`,
+    conn.query(`select * from map_tables where id='${targetId}'`,
       function(err, rows){
         if(err) throw err;
         else{
