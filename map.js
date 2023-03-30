@@ -24,12 +24,13 @@ let markers = [];
 //let result = [];
 let resultObject = {};
 let cnt = 0;
+const cookieId = document.cookie.split("=")[1];
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
   // 클릭한 위치에 마커를 표시합니다
   let latlng = mouseEvent.latLng;
   let wrap = [];
   addMarker(latlng);
-  wrap.push(latlng.getLat(), latlng.getLng())
+  wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
   //result.push(wrap);
   //console.log("result: " + result);
   // resultObject[cnt] = wrap;
