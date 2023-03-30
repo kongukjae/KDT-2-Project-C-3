@@ -11,7 +11,8 @@ const rootLoginPageStyleObj = {
   flexDirection : 'column',
   justifyContent : 'top',
   alignItems : 'center',
-  backgroundColor : '#F7786B'
+  backgroundColor : '#F7786B',
+  margin : 'auto'
 };
 let rootLoginPageArr = [];
 for(let key in rootLoginPageStyleObj) {
