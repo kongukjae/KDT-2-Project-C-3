@@ -2,6 +2,7 @@ import http from 'http';
 import fs from 'fs';
 import mysql from 'mysql';
 import htmlBox from "./htmlBox.js";
+import ValueCheck from './ValueCheck.js';
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
@@ -268,6 +269,7 @@ const server = http.createServer(function(request, response) {
   }
 
   if(request.method === 'POST' && request.url.startsWith('/signUpResult')){
+    
     let body = '';
     request.on('data', function (data) {
       body = body + data;
@@ -278,9 +280,11 @@ const server = http.createServer(function(request, response) {
       for(let i = 0;i<bodycarrier.length;i++){
         bodySplit.push(bodycarrier[i].split("="))
       };
+      let userInfoCheck = new ValueCheck(bodySplit[0][1],bodySplit[1][1],bodySplit[2][1],decodeURIComponent(bodySplit[3][1]),decodeURIComponent(bodySplit[4][1]),bodySplit[5][1])
+      console.log(userInfoCheck)
       let connection = mysql.createConnection(mysqlInfo);
       connection.connect();
-      connection.query(`INSERT INTO userInfo(id,PW,question,answer,dogName,dogGender) values("${bodySplit[0][1]}","${bodySplit[1][1]}",${Number(bodySplit[2][1])},"${decodeURIComponent(bodySplit[3][1])}","${decodeURIComponent(bodySplit[4][1])}",${Number(bodySplit[5][1])})`, (error) => {
+      connection.query(`INSERT INTO userInfo(id,PW,question,answer,dogName,dogGender) values("${userInfoCheck._id}","${userInfoCheck._pw}",${userInfoCheck.qe},"${userInfoCheck._as}","${userInfoCheck._dogName}",${userInfoCheck.dogGender})`, (error) => {
         if (error) throw error;
         console.log("정상작동");
       });
