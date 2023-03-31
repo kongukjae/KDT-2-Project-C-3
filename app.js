@@ -304,6 +304,18 @@ const server = http.createServer(function(request, response) {
       }
     );
     }
+    if(request.method === 'GET' && request.url === '/map') {
+      response.writeHead(200);
+      response.write(htmlBox.htmlFunc(htmlBox.dangMap))
+      response.end();
+    }
+    else if(request.method === 'GET' && request.url.startsWith('/dangMap')){
+      fs.readFile(`./dangMap.js`, function(err, data){
+        response.writeHead(200);
+        response.write(data);
+        response.end();
+      })
+    }
   })
 
   // 서버 포트 설정
