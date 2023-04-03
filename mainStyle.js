@@ -120,8 +120,13 @@ function main(){
   menuChild[0].innerText = "댕댕마켓";
   menuChild[1].innerText = "댕자랑";
   menuChild[2].innerText = "댕맵";
+
   menuChild[3].innerText = "댕톡";
   menuChild[4].innerText = "댕프랜드";
+  menuChild[2].addEventListener("click",()=>{
+    window.location = "http://localhost:2080/map"
+  })
+
 
   let slideCover = tagCreate("div",{});
   rootChild[3].appendChild(slideCover);
