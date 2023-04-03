@@ -95,5 +95,5 @@ export default class ValueCheck{
     return checkerStr && checkerNum && checkerSpc;
   }
 }
-let a = new ValueCheck('aaaa1111','asdzx443aaa','1','gdiswls','doggy','1');
-console.log(a);
+// let a = new ValueCheck('aaaa1111','asdzx443aaa','1','gdiswls','doggy','1');
+// console.log(a);

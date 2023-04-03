@@ -27,7 +27,8 @@ function map(){
     margin : "auto",
     display : "flex",
     flexDirection : "column",
-    position : "relative"
+    position : "relative",
+    overflow : "hidden"
   })
 
 
@@ -47,10 +48,17 @@ function map(){
   rootChild[0].id = "map"
   styleCreate(rootChild[1],{
     width : "100%",
-    height : "15vh",
+    height : "300px",
     position : "relative",
-    backgroundColor : "lightgray"
+    backgroundColor : "lightgray",
+    display : "flex",
+    justifyContent : "center",
+    position : "absolute",
+    zIndex : "1",
+    bottom : "-155px"
   })
+
+  rootChild[1].id = "slide"
   styleCreate(rootChild[2],{
     width : "500px",
     height : "90px",
