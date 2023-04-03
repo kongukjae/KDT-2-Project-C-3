@@ -159,28 +159,24 @@ function addMarker(position) {
   // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
   // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
   // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update
-  kakao.maps.event.addListener(marker, 'dragstart', function() {
+  kakao.maps.event.addListener(marker, 'dragstart', function() { // 드래그가 시작되는 시점에 동작
+    // 마커의 현재 좌표를 저장
     let latlng = marker.getPosition();
     dragStartLat = latlng.getLat();
     dragStartLng = latlng.getLng();
   });
 
-  kakao.maps.event.addListener(marker, 'dragend', function() {
+  kakao.maps.event.addListener(marker, 'dragend', function() { // 드래그가 끝나는 시점에 동작
+    // 드래그가 끝난 지점의 좌표를 불러옴
     let latlng = marker.getPosition();
-    console.log("업데이트 할 좌표 값");
-    console.dir(latlng);
-    console.dir(latlng.getLat());
-    console.dir(latlng.getLng());
-    console.log("이전 좌표값");
-    console.log(dragStartLat);
-    console.log(dragStartLng);
-    console.log("이전 좌표값");
     let wrap = [];
+    // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
     wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
     resultObject[0] = wrap;
-    
+
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+    // 저장한 배열을 JSON 형식으로 바꿔서 서버로 전송
     httpRequest.send(JSON.stringify(resultObject));
   });
 }
