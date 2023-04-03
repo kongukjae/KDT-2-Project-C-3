@@ -86,6 +86,8 @@ const cookieId = document.cookie.split("=")[1];
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
   // 클릭한 위치에 마커를 표시합니다
   let latlng = mouseEvent.latLng;
+  console.log("latlng 확인");
+  console.dir(latlng);
   let wrap = [];
   addMarker(latlng);
   wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
@@ -119,19 +121,55 @@ function addMarker(position) {
     position: position, // 마커를 표시할 위치
     image: markerImage
   });
+  console.log("marker 찍을 때 좌표");
+  console.dir(marker.n);
 
   // 마커가 지도 위에 표시되도록 설정합니다
   marker.setMap(map);
+  // 마커를 드래그 가능하도록 설정
+  marker.setDraggable(true);
   
   // 생성된 마커를 배열에 추가합니다
-  markers.push(marker);
+  // markers.push(marker);
 
   // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-  function setMarkers(map) {
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }            
-  }
+  // function setMarkers(map) {
+    // for (let i = 0; i < markers.length; i++) {
+        // markers[i].setMap(map);
+    // }            
+  // }
+  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+  const iwContent = '<div style="padding:5px;">HTML 이용해서 오버레이 구현</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+  iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+  
+  // 인포윈도우를 생성합니다
+  let infowindow = new kakao.maps.InfoWindow({
+  content : iwContent,
+  removable : iwRemoveable
+  });
+  
+  // 마커에 클릭이벤트를 등록합니다
+  kakao.maps.event.addListener(marker, 'click', function() {
+    // 마커 위에 인포윈도우를 표시합니다
+    infowindow.open(map, marker);  
+  });
+
+  let dragX;
+  let dragY;
+  // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
+  // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
+  // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update
+  kakao.maps.event.addListener(marker, 'dragstart', function() {
+    
+  });
+
+  kakao.maps.event.addListener(marker, 'dragend', function() {
+    let latlng = marker.getPosition();
+    console.log("업데이트 할 좌표 값");
+    console.dir(latlng);
+    console.dir(latlng.getLat());
+    console.dir(latlng.getLng());
+  });
 }
 
 function loadMarker(callback){
