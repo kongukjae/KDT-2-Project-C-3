@@ -154,13 +154,15 @@ function addMarker(position) {
     infowindow.open(map, marker);  
   });
 
-  let dragX;
-  let dragY;
+  let dragLat;
+  let dragLng;
   // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
   // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
   // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update
   kakao.maps.event.addListener(marker, 'dragstart', function() {
-    
+    let latlng = marker.getPosition();
+    dragStartLat = latlng.getLat();
+    dragStartLng = latlng.getLng();
   });
 
   kakao.maps.event.addListener(marker, 'dragend', function() {
@@ -169,6 +171,17 @@ function addMarker(position) {
     console.dir(latlng);
     console.dir(latlng.getLat());
     console.dir(latlng.getLng());
+    console.log("이전 좌표값");
+    console.log(dragStartLat);
+    console.log(dragStartLng);
+    console.log("이전 좌표값");
+    let wrap = [];
+    wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
+    resultObject[0] = wrap;
+    
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+    httpRequest.send(JSON.stringify(resultObject));
   });
 }
 
