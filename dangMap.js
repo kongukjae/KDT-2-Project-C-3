@@ -150,6 +150,82 @@ frMarker(frAddMarker);
         markers[i].setMap(map);
     }            
   }
+
+  /* 오버레이 구현중
+  kakao.maps.event.addListener(marker, 'click', function() {
+    console.log("오버레이 실행");
+
+    let content = `
+  <div class="wrap" style="position: absolute;left: 0;bottom: 10px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;"> 
+    <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
+      <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
+        강아지 이름
+        <button class="close" title="닫기" style="position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px; cursor: pointer;">X</button>
+      </div>
+      <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
+        <div class="img">
+          <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
+        </div> 
+        <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
+          <p class="ellipsis">xx분 전</p>
+          <button>프로필 보기</button>
+          <button>팔로우</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  const closeBtn = document.querySelector('close');
+  console.dir(closeBtn);
+
+  let overlay = new kakao.maps.CustomOverlay({
+    content: content,
+    // map: map,
+    position: marker.getPosition()       
+  });
+
+  overlay.setMap(map);
+
+  function closeOverlay() {
+    overlay.setMap(null);     
+  }
+
+  // kakao.maps.event.addListener(map, 'click', function() {
+  //   content = ``;
+  // })
+
+  // root.child[0].addEventListener('click', function() {
+  //   content = ``;
+  // });
+
+  }); */
+
+  let dragStartLat;
+  let dragStartLng;
+  // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
+  // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
+  // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update
+  kakao.maps.event.addListener(marker, 'dragstart', function() { // 드래그가 시작되는 시점에 동작
+    // 마커의 현재 좌표를 저장
+    let latlng = marker.getPosition();
+    dragStartLat = latlng.getLat();
+    dragStartLng = latlng.getLng();
+  });
+
+  kakao.maps.event.addListener(marker, 'dragend', function() { // 드래그가 끝나는 시점에 동작
+    // 드래그가 끝난 지점의 좌표를 불러옴
+    let latlng = marker.getPosition();
+    let wrap = [];
+    // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
+    wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
+    // 배열을 객체에 담음
+    resultObject[0] = wrap;
+
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+    // 객체를 JSON 형식으로 바꿔서 서버로 전송
+    httpRequest.send(JSON.stringify(resultObject));
+  });
+
 }
 
 function frAddMarker(position) {
