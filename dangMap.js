@@ -121,8 +121,8 @@ function addMarker(position) {
     position: position, // 마커를 표시할 위치
     image: markerImage
   });
-  console.log("marker 찍을 때 좌표");
-  console.dir(marker.n);
+  // console.log("marker 찍을 때 좌표");
+  // console.dir(marker.n);
 
   // 마커가 지도 위에 표시되도록 설정합니다
   marker.setMap(map);
@@ -138,24 +138,62 @@ function addMarker(position) {
         // markers[i].setMap(map);
     // }            
   // }
-  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-  const iwContent = '<div style="padding:5px;">HTML 이용해서 오버레이 구현</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-  iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-  
-  // 인포윈도우를 생성합니다
-  let infowindow = new kakao.maps.InfoWindow({
-  content : iwContent,
-  removable : iwRemoveable
-  });
-  
-  // 마커에 클릭이벤트를 등록합니다
+
+  // 마커를 클릭했을 때 커스텀 오버레이를 생성
+  // 1. 커스텀 오버레이는 마커가 이동될 경우 같이 이동해야 함 = 마커와 좌표가 같아야한다
+  // 2. 닫기 버튼이 있어서 닫기 버튼 클릭시 창이 닫혀야 한다 or 다른 위치를 찍었을 경우 닫혀야 한다
+  // 3. HTML과 CSS를 이용해 편집이 가능해야 함
+
+
   kakao.maps.event.addListener(marker, 'click', function() {
-    // 마커 위에 인포윈도우를 표시합니다
-    infowindow.open(map, marker);  
+    console.log("오버레이 실행");
+
+    let content = `
+  <div class="wrap" style="position: absolute;left: 0;bottom: 10px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;"> 
+    <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
+      <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
+        강아지 이름
+        <button class="close" title="닫기" style="position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px; cursor: pointer;">X</button>
+      </div>
+      <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
+        <div class="img">
+          <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
+        </div> 
+        <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
+          <p class="ellipsis">xx분 전</p>
+          <button>프로필 보기</button>
+          <button>팔로우</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  const closeBtn = document.querySelector('close');
+  console.dir(closeBtn);
+
+  let overlay = new kakao.maps.CustomOverlay({
+    content: content,
+    // map: map,
+    position: marker.getPosition()       
   });
 
-  let dragLat;
-  let dragLng;
+  overlay.setMap(map);
+
+  function closeOverlay() {
+    overlay.setMap(null);     
+  }
+
+  // kakao.maps.event.addListener(map, 'click', function() {
+  //   content = ``;
+  // })
+
+  // root.child[0].addEventListener('click', function() {
+  //   content = ``;
+  // });
+
+  });
+
+  let dragStartLat;
+  let dragStartLng;
   // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
   // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
   // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update

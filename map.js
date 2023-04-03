@@ -1,3 +1,6 @@
+function closeOverlay() {
+  overlay.setMap(null);     
+}
 
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
@@ -74,6 +77,10 @@ function addMarker(position) {
         markers[i].setMap(map);
     }            
   }
+}
+
+function closeOverlay() {
+  overlay.setMap(null);
 }
 
 function loadMarker(callback){
