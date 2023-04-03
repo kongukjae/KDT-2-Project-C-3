@@ -267,9 +267,8 @@ const server = http.createServer(function(request, response) {
       }
     });
   }
-
+  
   if(request.method === 'POST' && request.url.startsWith('/signUpResult')){
-    
     let body = '';
     request.on('data', function (data) {
       body = body + data;
@@ -316,8 +315,73 @@ const server = http.createServer(function(request, response) {
         response.end();
       })
     }
-  })
+    if(request.method === 'GET' && request.url.startsWith('/mypage?')) {
+      let target = request.url.split("=")[1]
+      let connection = mysql.createConnection(mysqlInfo);
+      connection.connect();
+      connection.query(`SELECT * FROM userinfo where id='${target}'`, (error, rows, fields) => {
+        if (error) throw error;
+        else{
+          response.writeHead(200);
+          response.write(`<script>
+            const targetIdFromServer = '${target}';
+            const dogNameFromServer = '${rows[0].dogName}';
+            const dogGenderFromServer = '${rows[0].dogGender}';
+          </script>`)
+          response.write(htmlBox.htmlFunc(htmlBox.mypage))
+          response.end();
+        }
+      });
+      connection.end();
+    }
+    else if(request.method === 'GET' && request.url.startsWith('/mypageStyle')){
+      fs.readFile(`./mypageStyle.js`, function(err, data){
+        response.writeHead(200);
+        response.write(data);
+        response.end();
+      })
+    }
+    if(request.method === 'GET' && request.url.startsWith('/followRequest')) {
+      let target = request.url.split("?")[1]
+      let targetArr = target.split("&")
+      let connection = mysql.createConnection(mysqlInfo);
+      connection.connect();
+      connection.query(`INSERT INTO fr_list_testbyJin VALUES('${targetArr[0].split("=")[1]}','${targetArr[1].split("=")[1]}')`, (error, rows, fields) => {
+        if (error) throw error;
+        else{
+          response.writeHead(200);
+          response.end();
+        }
+      });
+      connection.end();
+    }
+    if(request.method === 'POST' && request.url.startsWith('/uploadImage')){
+      let body = '';
+      request.on('data', function (data) {
+        body = body + data;
+      });
+      request.on('end', function () {
+        console.log("image uploading")
+        response.writeHead(200);
+        response.end();
+        let requestDataSet = body.split("&")
+        console.log(requestDataSet)
 
+        // let connection = mysql.createConnection(mysqlInfo);
+        // connection.connect();
+        // connection.query(`INSERT INTO userImage VALUES('${targetArr[0].split("=")[1]}','${body}')`, (error, rows, fields) => {
+        // if (error) throw error;
+        // else{
+ 
+        // }
+        // });
+        // connection.end();
+        console.log("이미지 저장 완료")
+
+      })}
+
+    })
+    
   // 서버 포트 설정
   server.listen(2080, function(error) {
     if(error) { console.error('서버 안돌아감') } else { console.log('서버 돌아감'); }
