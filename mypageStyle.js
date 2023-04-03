@@ -431,9 +431,10 @@ function myPage(){
       console.log(imageFormData.get("attachedImage"))
       fetch('http://localhost:2080/uploadImage', {
         method: 'POST',
-        body: JSON.stringify({
-          id : cookieId,
-          image : imageFormData})
+        body: imageFormData
+        // JSON.stringify({
+        //   id : cookieId,
+        //   image : })
       }).then(res => res)
       .then(result => console.log("done"))
 
