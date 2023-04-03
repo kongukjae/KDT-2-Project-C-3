@@ -172,11 +172,12 @@ function addMarker(position) {
     let wrap = [];
     // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
     wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
+    // 배열을 객체에 담음
     resultObject[0] = wrap;
 
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
-    // 저장한 배열을 JSON 형식으로 바꿔서 서버로 전송
+    // 객체를 JSON 형식으로 바꿔서 서버로 전송
     httpRequest.send(JSON.stringify(resultObject));
   });
 }
