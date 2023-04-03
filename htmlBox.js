@@ -36,8 +36,9 @@ const html = {
   dangMap : `
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
 
-  <script src="./dangMap.js"></script>
+  <script src="/dangMap.js"></script>
   <script src="map/dangMapSlide"></script>`
-
+,
+  mypage : `<script src="/mypageStyle.js"></script>`
 }
 export default html;
