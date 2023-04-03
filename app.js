@@ -192,7 +192,7 @@ const server = http.createServer(function(request, response) {
   else if(request.method === 'GET' && request.url.startsWith('/loadMap')){
     let targetId = request.url.split("=")[1];
     console.log("loadmap id is " + targetId);
-    let cnt1;
+    let tableCnt;
     let markerArr = {};
 
     console.log("url: " + request.url);
@@ -202,8 +202,8 @@ const server = http.createServer(function(request, response) {
       function(err, data){
         if(err) throw err;
         else{
-          cnt1 = data[0].cnt; 
-          //console.log("테이블 개수: " + cnt1);
+          tableCnt = data[0].cnt; 
+          //console.log("테이블 개수: " + tableCnt);
         }
     })
     conn.query(`select * from map_tables where id='${targetId}'`,
@@ -212,7 +212,7 @@ const server = http.createServer(function(request, response) {
         else{
           //console.log(rows);
           //console.log(rows.lenght);
-          for(let i = 0; i < cnt1; i++){
+          for(let i = 0; i < tableCnt; i++){
             let arr = [];
             arr.push(rows[i].latitude, rows[i].longitude);
             markerArr[i] = arr;
@@ -303,20 +303,29 @@ const server = http.createServer(function(request, response) {
       response.end();
       }
     );
-    }
-    if(request.method === 'GET' && request.url === '/map') {
+  }
+
+  //댕맵
+  if(request.method === 'GET' && request.url === '/map') {
+    response.writeHead(200);
+    response.write(htmlBox.htmlFunc(htmlBox.dangMap))
+    response.end();
+  }
+  else if(request.method === 'GET' && request.url.startsWith('/dangMap')){
+    fs.readFile(`./dangMap.js`, function(err, data){
       response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.dangMap))
+      response.write(data);
       response.end();
-    }
-    else if(request.method === 'GET' && request.url.startsWith('/dangMap')){
-      fs.readFile(`./dangMap.js`, function(err, data){
-        response.writeHead(200);
-        response.write(data);
-        response.end();
-      })
-    }
-  })
+    })
+  }
+  else if(request.url.split('/')[2] === 'dangMapSlide'){
+    fs.readFile(`./dangMapSlide.js`, function(err, data){
+      response.writeHead(200);
+      response.write(data);
+      response.end();
+    })
+  }
+})
 
   // 서버 포트 설정
   server.listen(2080, function(error) {

@@ -21,7 +21,8 @@ function map(){
     margin : "auto",
     display : "flex",
     flexDirection : "column",
-    position : "relative"
+    position : "relative",
+    overflow : "hidden"
   })
 
 
@@ -45,6 +46,7 @@ function map(){
     position : "relative",
     backgroundColor : "lightgray"
   })
+
   styleCreate(rootChild[2],{
     width : "500px",
     height : "90px",
