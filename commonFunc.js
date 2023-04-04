@@ -20,23 +20,16 @@ const pageStyle = {
     blue: "#2353FF",
     gray : "gray",
     black : "black",
-<<<<<<< HEAD
-    white : "white"
-=======
     white: "white"
->>>>>>> a26fbd6ca273db04591b839ae4e11665058446f9
   },
   width: {
     widthP100: "100%",
     width500: "500px",
     width450: "450px",
     width300: "300px",
-<<<<<<< HEAD
     width80: "80px",
-=======
-    width200: "450px",
+    width200: "200px",
     width90: "90px",
->>>>>>> a26fbd6ca273db04591b839ae4e11665058446f9
     width40: "40px",
     width25: "25px",
     width9: "9px",
@@ -202,11 +195,7 @@ const targetStyle = {
     cursor: "pointer",
     transition: pageStyle.transitionSet.normal
   },
-<<<<<<< HEAD
   // loginPage
-=======
-    // loginPage
->>>>>>> a26fbd6ca273db04591b839ae4e11665058446f9
 
   // dangMap
   menuMapRoot: {
@@ -235,7 +224,6 @@ const targetStyle = {
     bottom : "-155px"
   },
 
-<<<<<<< HEAD
   //댕맵 검색창
   menuMapSearchBarWrap: {
     width : pageStyle.width.width300,
@@ -316,8 +304,7 @@ const targetStyle = {
     borderRadius : "10px",
     boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
 
-  }
-=======
+  },
     // signUp
     signUpMain: {
       width : pageStyle.width.width500,
@@ -414,6 +401,5 @@ const targetStyle = {
       boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
     }
 
->>>>>>> a26fbd6ca273db04591b839ae4e11665058446f9
 }
 console.log(targetStyle.topMenu);
