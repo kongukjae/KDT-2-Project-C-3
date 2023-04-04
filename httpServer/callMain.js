@@ -1,59 +1,30 @@
 import htmlBox from "../htmlBox.js";
-import fs from "fs";
 import mysql from "mysql";
-export default function test(request, response) {
+import cmServer from "./commonServer.js";
 
+
+export default function callMain(request, response) {
   const mysqlInfo = {
     host: "192.168.0.93",
     user: "guest",
     password: "0000",
     database: "mungta",
-  };
-  console.log("함수 실행 중")
-  // console.log(res)
-  function fileDirectory(request) {
-    fs.readFile(`../${request}`, function (err, data) {
-      response.writeHead(200);
-      response.write(data);
-      response.end();
-    });
   }
+
   let splitURL = request.url.split("/")[1];
   if (splitURL === "commonFunc.js") {
-    fileDirectory(splitURL);
-  } else if (splitURL === "mainStyle.js") {
-    fileDirectory(splitURL);
-  } else if (splitURL === "map.js") {
-    fileDirectory(splitURL);
+    cmServer.fileDirectory(splitURL, response);
+  } 
+  else if (splitURL === "mainStyle.js") {
+    cmServer.fileDirectory(splitURL, response);
+  } 
+  else if (splitURL === "map.js") {
+    cmServer.fileDirectory(splitURL, response);
   }
 
-  // fileDirectory("commonFunc.js")
-  // if (request.url.split("/")[1] === "commonFunc.js") {
-  //   console.log(request.url)
-  //   fs.readFile(`../commonFunc.js`, function (err, data) {
-  //     response.writeHead(200);
-  //     response.write(data);
-  //     response.end();
-  //   });
-
   if (request.url === "/main") {
-    //const b = request.url.split("/")
-    //console.dir(b)
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
-    // } else if (request.url.split("/")[1] === "mainStyle.js") {
-    //   fs.readFile(`../mainStyle.js`, function (err, data) {
-    //     response.writeHead(200);
-    //     response.write(data);
-    //     response.end();
-    //   });
-    // } else if (request.url.split("/")[1] === "map.js") {
-    //   fs.readFile(`../map.js`, function (err, data) {
-    //     response.writeHead(200);
-    //     response.write(data);
-    //     response.end();
-    //   });
-    // } 
   }
   else if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
