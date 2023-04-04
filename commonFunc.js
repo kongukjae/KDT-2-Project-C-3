@@ -20,10 +20,18 @@ const pageStyle = {
     blue: "#2353FF",
     gray : "gray",
     black : "black",
-    white: "white"
+    white: "white",
+    whiteTypeA : "#F8F8F8",
+    whiteTypeB : "#E6E6E6",
+    whiteTypeC : "#F9F9F9",
+    whiteTypeD : "#F3EDE8",
+
   },
   width: {
     widthP100: "100%",
+    widthP90: "90%",
+    widthP60: "60%",
+    widthP40: "40%",
     width500: "500px",
     width450: "450px",
     width300: "300px",
@@ -33,26 +41,29 @@ const pageStyle = {
     width40: "40px",
     width25: "25px",
     width9: "9px",
-
   },
   height: {
     height100vh: "100vh",
     height85vh: "85vh",
     heightP100: "100%",
     height2000: "2000px",
+    height1700: "1700px",
     height1000: "1000px",
     height690: "690px",
     height500: "500px",
+    height450: "450px",
     height300: "300px",
     height260: "260px",
     height140: "140px",
+    height130: "130px",
     height126: "126px",
     height90: "90px",
     height70: "70px",
     height83: "83px",
-    height70: "70px",
+    height80: "80px",
     height40: "40px",
     height30: "30px",
+    height24: "24px",
     height9: "9px",
     height3: "3px",
   },
@@ -68,6 +79,7 @@ const pageStyle = {
     alignItems: "center"
   },
   fontSizeSet : {
+    smaller : "12px",
     small : "16px",
     medium : "20px",
     mediumLarge : "30px",
@@ -403,3 +415,130 @@ const targetStyle = {
 
 }
 console.log(targetStyle.topMenu);
+
+const mypageStyle = {
+  mypageRoot : {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height1700,
+    margin : "auto",
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.beige,
+    ...pageStyle.flexRowCenter
+  },
+  mypageTopMenu : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height126,
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.peach,
+    ...pageStyle.flexRowCenter
+
+  },
+  mypageTitle : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height80,
+    position : "relative",
+    marginTop : "30px",
+    ...pageStyle.flexRowCenter,
+    fontSize : pageStyle.fontSizeSet.mediumLarge,
+    fontWeight : pageStyle.fontWeightSet.bold
+  },
+  mypageImageStyle : {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height300,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : "50%",
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    marginTop : "20px",
+    fontSize : pageStyle.fontSizeSet.medium,
+    fontWeight : pageStyle.fontWeightSet.bold,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  mypageButtonWrap : {
+    width : pageStyle.width.widthP60,
+    height : pageStyle.height.height30,
+    marginTop : "40px",
+    position : "relative",
+    borderRadius : "10px",
+    display : "flex",
+    flexDirection : "row",
+    justifyContent : "space-around",
+    alignItems : "center",
+    backgroundColor : pageStyle.colorTheme.lightGray
+  },
+  mypageButton : {
+    width : pageStyle.width.widthP40,
+    height : "70%",
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    cursor : "pointer",
+    borderRadius : "5px",
+    ...pageStyle.flexRowCenter
+  },
+  mypageUserinfoBox :{
+    width : pageStyle.width.widthP90,
+    height : pageStyle.height.height300,
+    marginTop : "40px",
+    position : "relative",
+    borderRadius : "10px",
+    ...pageStyle.flexRowCenter,
+    flexDirection : "column",
+    gap : "10px",
+    backgroundColor : pageStyle.colorTheme.whiteTypeB
+  },
+  mypageUserinfoBoxInnerStyle : {
+    width : pageStyle.width.widthP90,
+    height : pageStyle.height.height24,
+    borderRadius : "5px",
+    paddingLeft : "10px",
+    paddingRight : "10px",
+  },
+  mypageUserinfoBoxSelfIntroduce : {
+    height : pageStyle.height.height130,
+    backgroundColor : pageStyle.colorTheme.whiteTypeC
+  },
+  mypageCalender : {
+    width : pageStyle.width.widthP90,
+    height : pageStyle.height.height450,
+    backgroundColor : pageStyle.colorTheme.whiteTypeB,
+    marginTop : "40px",
+    position : "relative",
+    borderRadius : "10px",
+    ...pageStyle.flexRowCenter
+  },
+  mypageUploadModal : {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height140,
+    padding : "10px",
+    borderRadius : "10px",
+    flexDirection : "column",
+    ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.whiteTypeD,
+    boxShadow : pageStyle.Shadow.ShadowTypeA,
+    position : "absolute",
+    top : "550px",
+    left: "50%",
+    gap : "10px",
+    marginLeft: "-150px",
+  },
+  mypageUploadModalButtonWrap : {
+    display : "flex",
+    gap : "10px"
+  },
+  mypageUploadModalButtonStyle : {
+    border : "0px",
+    width : pageStyle.width.width90,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    fontSize : pageStyle.fontSizeSet.smaller,
+    color : pageStyle.colorTheme.whiteTypeA,
+    borderRadius : "10px",
+    cursor : "pointer",
+    flexDirection : "column",
+    ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.Shadow.ShadowTypeA
+  }
+
+}
