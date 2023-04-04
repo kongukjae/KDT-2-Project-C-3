@@ -140,6 +140,8 @@ frMarker(frAddMarker);
 
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
+    // 마커가 드래그 가능하도록 설정
+    marker.setDraggable(true); 
     
     // 생성된 마커를 배열에 추가합니다
     markers.push(marker);
@@ -209,11 +211,15 @@ frMarker(frAddMarker);
     let latlng = marker.getPosition();
     dragStartLat = latlng.getLat();
     dragStartLng = latlng.getLng();
+    console.log('이동 전 lat ' + dragStartLat);
+    console.log('이동 전 lng ' + dragStartLng);
   });
 
   kakao.maps.event.addListener(marker, 'dragend', function() { // 드래그가 끝나는 시점에 동작
     // 드래그가 끝난 지점의 좌표를 불러옴
     let latlng = marker.getPosition();
+    console.log('이동 후 lat ' + latlng.getLat())
+    console.log('이동 후 lng ' + latlng.getLng())
     let wrap = [];
     // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
     wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
