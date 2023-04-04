@@ -34,9 +34,13 @@ const pageStyle = {
     widthP40: "40%",
     width500: "500px",
     width450: "450px",
+    width390: "390px",
     width300: "300px",
-    width80: "80px",
+    width250: "250px",
     width200: "200px",
+    width180: "180px",
+    width150: "150px",
+    width80: "80px",
     width90: "90px",
     width40: "40px",
     width25: "25px",
@@ -54,13 +58,17 @@ const pageStyle = {
     height450: "450px",
     height300: "300px",
     height260: "260px",
+    height154: "154px",
+    height150: "150px",
     height140: "140px",
     height130: "130px",
     height126: "126px",
+    height100: "100px",
     height90: "90px",
     height70: "70px",
     height83: "83px",
     height80: "80px",
+    height52: "52px",
     height40: "40px",
     height30: "30px",
     height24: "24px",
@@ -77,6 +85,33 @@ const pageStyle = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
+  },
+  flexRowBetweenCenter: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent : 'space-between',
+    alignItems : 'center',
+  },
+  flexColumnTopCenter: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "top",
+    alignItems: "center",
+  },
+  marginTop: {
+    marginTop156: "156px",
+    marginTop110: "110px",
+    marginTop60: "60px"
+  },
+  marginBottom: {
+    marginBottom80: "80px",
+    marginBottom50: "50px",
+  },
+  borderRadius: {
+    borderRadiusP50: "50%",
+    borderRadius52: "52px",
+    borderRadius15: "15px",
+    borderRadius9: "9px",
   },
   fontSizeSet : {
     smaller : "12px",
@@ -423,7 +458,9 @@ const mypageStyle = {
     margin : "auto",
     position : "relative",
     backgroundColor : pageStyle.colorTheme.beige,
-    ...pageStyle.flexRowCenter
+    display : "flex",
+    flexDirection : "column",
+    alignItems : "center"
   },
   mypageTopMenu : {
     width : pageStyle.width.widthP100,
@@ -482,8 +519,7 @@ const mypageStyle = {
     marginTop : "40px",
     position : "relative",
     borderRadius : "10px",
-    ...pageStyle.flexRowCenter,
-    flexDirection : "column",
+    ...pageStyle.flexColCenter,
     gap : "10px",
     backgroundColor : pageStyle.colorTheme.whiteTypeB
   },
@@ -512,10 +548,9 @@ const mypageStyle = {
     height : pageStyle.height.height140,
     padding : "10px",
     borderRadius : "10px",
-    flexDirection : "column",
-    ...pageStyle.flexRowCenter,
+    ...pageStyle.flexColCenter,
     backgroundColor : pageStyle.colorTheme.whiteTypeD,
-    boxShadow : pageStyle.Shadow.ShadowTypeA,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
     position : "absolute",
     top : "550px",
     left: "50%",
@@ -535,10 +570,86 @@ const mypageStyle = {
     color : pageStyle.colorTheme.whiteTypeA,
     borderRadius : "10px",
     cursor : "pointer",
-    flexDirection : "column",
-    ...pageStyle.flexRowCenter,
+    ...pageStyle.flexColCenter,
     backgroundColor : pageStyle.colorTheme.peach,
-    boxShadow : pageStyle.Shadow.ShadowTypeA
-  }
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+  },
+};
 
-}
+const loginPageStyle = {
+  loginPageRoot: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height100vh,
+    ...pageStyle.flexColumnTopCenter,
+    backgroundColor: pageStyle.colorTheme.peach,
+    margin: "auto",
+  },
+  loginPageLogoWrap: {
+    width : pageStyle.width.width250,
+    height : pageStyle.height.height100,
+    marginTop : pageStyle.marginTop.marginTop156,
+  },
+  loginPageLogo:{
+    width : pageStyle.width.widthP100,
+  },
+  loginPageImgWarp: {
+    width : pageStyle.width.width150,
+    height : pageStyle.height.height150,
+    marginTop : pageStyle.marginTop.marginTop60,
+    borderRadius : pageStyle.borderRadius.borderRadiusP50,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    ...pageStyle.flexRowCenter,
+    overflow : 'hidden',
+  },
+  loginPageImg: {
+    height: pageStyle.height.heightP100,
+  },
+  loginPageFormWrap: {
+    width : pageStyle.width.width390,
+    height : pageStyle.height.height154,
+  },
+  loginPageForm: {
+    display : 'flex',
+    flexDirection : 'column',
+    marginTop : pageStyle.marginTop.marginTop110,
+  },
+  loginPageFormId: {
+    marginBottom : pageStyle.marginBottom.marginBottom50,
+    height : pageStyle.height.height52,
+    borderRadius : pageStyle.borderRadius.borderRadius52,
+    border : 'none',
+    paddingLeft : '25px',
+    fontSize : pageStyle.fontSizeSet.medium,
+  },
+  loginPageFormPw: {
+    marginBottom : pageStyle.marginBottom.marginBottom80,
+    height : pageStyle.height.height52,
+    borderRadius : pageStyle.borderRadius.borderRadius52,
+    border : 'none',
+    paddingLeft : '25px',
+    fontSize : pageStyle.fontSizeSet.medium,
+  },
+  loginPageFormBtnWrap: {
+    ...pageStyle.flexRowBetweenCenter
+  },
+  loginPageFormBtnLogin: {
+    border : '1px solid #999',
+    borderRadius : pageStyle.borderRadius.borderRadius15,
+    width : pageStyle.width.width180,
+    height : pageStyle.height.height52,
+    cursor : 'pointer',
+    fontSize : pageStyle.fontSizeSet.medium,
+  },
+  loginPageFormBtnSignup: {
+    border : '1px solid #999',
+    borderRadius : pageStyle.borderRadius.borderRadius15,
+    backgroundColor : '#D9D9D9',
+    color : pageStyle.colorTheme.black,
+    textDecoration : 'none',
+    width : pageStyle.width.width180,
+    height : pageStyle.height.height52,
+    ...pageStyle.flexRowCenter,
+    fontSize : pageStyle.fontSizeSet.medium,
+    cursor : 'pointer',
+  }
+};
