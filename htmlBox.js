@@ -34,10 +34,11 @@ const html = {
   loginBody : `<div id='root'></div>
   <script src="./loginPage.js"></script>`,
   signupPage : '<script src="./signupstyle.js"></script>',
-  signUpResult : '<script src="./signupResultStyle.js"></script>',
+  signUpResult : `<script src="/commonFunc.js"></script>
+  <script src="./signupResultStyle.js"></script>`,
   dangMap : `
+  <script src="/commonFunc.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
-
   <script src="/dangMap.js"></script>
   <script src="map/dangMapSlide"></script>`
 ,

@@ -21,15 +21,7 @@ function getRandom(min, max) {
 function map(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
-  styleCreate(root,{
-    width : "500px",
-    height : "100vh",
-    margin : "auto",
-    display : "flex",
-    flexDirection : "column",
-    position : "relative",
-    overflow : "hidden"
-  })
+  styleCreate(root,targetStyle.menuMapRoot)
 
 
   let rootChild = [];
@@ -39,37 +31,12 @@ function map(){
     rootChild.push(child);
   }
 
-  styleCreate(rootChild[0],{
-    width : "100%",
-    height : "85vh",
-    position : "relative",
-
-  })
+  styleCreate(rootChild[0],targetStyle.menuMap)
   rootChild[0].id = "map"
-  styleCreate(rootChild[1],{
-    width : "100%",
-    height : "300px",
-    position : "relative",
-    backgroundColor : "lightgray",
-    display : "flex",
-    justifyContent : "center",
-    position : "absolute",
-    zIndex : "1",
-    bottom : "-155px"
-  })
+  styleCreate(rootChild[1],targetStyle.menuMapSlide)
 
   rootChild[1].id = "slide"
-  styleCreate(rootChild[2],{
-    width : "500px",
-    height : "90px",
-    position : "fixed",
-    bottom : "0px",
-    backgroundColor : "#F7786B",
-    display : "flex",
-    justifyContent: "space-around",
-    alignItems : "center",
-    zIndex : "2"
-  })
+  styleCreate(rootChild[2],targetStyle.bottomMenu)
 
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
@@ -312,46 +279,14 @@ function frAddMarker(position) {
 
   // 검색창
   let searchBarWrap = tagCreate("div");
-  styleCreate(searchBarWrap, {
-    width : "300px",
-    height : "40px",
-    top : "45px",
-    left: "50%",
-    position : "absolute",
-    marginLeft: "-150px",
-    zIndex : "3",
-    display : "flex",
-    alignItems : "center"
-  })
+  styleCreate(searchBarWrap, targetStyle.menuMapSearchBarWrap)
   root.appendChild(searchBarWrap)
   let searchBar = tagCreate("input",{type : "text"});
   searchBarWrap.appendChild(searchBar);
-  styleCreate(searchBar, {
-    width : "100%",
-    height : "100%",
-    border : "1px lightgray solid",
-    paddingLeft : "20px",
-    paddingright : "50px",
-    borderRadius : "20px",
-    backgroundColor : "white",
-    position : "absolute"
-  })
+  styleCreate(searchBar, targetStyle.menuMapSearchBar)
   let searchButton = tagCreate("div",{innerText : "search"});
   searchBarWrap.appendChild(searchButton);
-  styleCreate(searchButton, {
-    width : "80px",
-    height : "30px",
-    borderRadius : "15px",
-    backgroundColor : "#F7786B",
-    position : "relative",
-    left : "210px",
-    color : "white",
-    cursor : "pointer",
-    display : "flex",
-    alignItems : "center",
-    justifyContent : "center",
-    paddingBottom : "3px"
-  })
+  styleCreate(searchButton, targetStyle.menuMapSearchButton)
   let infowindow = new kakao.maps.InfoWindow({zIndex:1});
   let ps = new kakao.maps.services.Places(); 
 

@@ -19,29 +19,47 @@ const pageStyle = {
     lightGray: "#E6E6E6",
     blue: "#2353FF",
     gray : "gray",
-    black : "black"
+    black : "black",
+    white : "white"
   },
   width: {
     widthP100: "100%",
     width500: "500px",
+    width450: "450px",
+    width300: "300px",
+    width80: "80px",
     width40: "40px",
+    width25: "25px",
     width9: "9px",
 
   },
   height: {
+    height100vh: "100vh",
+    height85vh: "85vh",
     heightP100: "100%",
     height2000: "2000px",
+    height1000: "1000px",
     height690: "690px",
     height500: "500px",
+    height300: "300px",
     height260: "260px",
     height126: "126px",
     height90: "90px",
     height83: "83px",
+    height70: "70px",
     height40: "40px",
+    height30: "30px",
     height9: "9px",
+    height3: "3px",
   },
   flexRowCenter : {
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  flexColCenter : {
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -168,10 +186,116 @@ const targetStyle = {
     opacity: "0.4",
     cursor: "pointer",
     transition: pageStyle.transitionSet.normal
-    // loginPage
+  },
+  // loginPage
 
-    // dangMap
+  // dangMap
+  menuMapRoot: {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height100vh,
+    margin : "auto",
+    display : "flex",
+    flexDirection : "column",
+    position : "relative",
+    overflow : "hidden"
+  },
+  menuMap: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height85vh,
+    position : "relative",
+  },
+  menuMapSlide: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height300,
+    position : "relative",
+    backgroundColor : "lightgray",
+    display : "flex",
+    justifyContent : "center",
+    position : "absolute",
+    zIndex : "1",
+    bottom : "-155px"
+  },
 
-    // 
-}}
+  //댕맵 검색창
+  menuMapSearchBarWrap: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height40,
+    top : "45px",
+    left: "50%",
+    position : "absolute",
+    marginLeft: "-150px",
+    zIndex : "3",
+    display : "flex",
+    alignItems : "center"
+  },
+  menuMapSearchBar : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.heightP100,
+    border : `1px ${pageStyle.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : pageStyle.colorTheme.white,
+    position : "absolute"
+  },
+  menuMapSearchButton: {
+    width : pageStyle.width.width80,
+    height : pageStyle.height.height30,
+    borderRadius : "15px",
+    backgroundColor : pageStyle.colorTheme.peach,
+    position : "relative",
+    left : "210px",
+    color : pageStyle.colorTheme.white,
+    cursor : "pointer",
+    ...pageStyle.flexRowCenter,
+    paddingBottom : "3px"
+  },
+
+  //댕맵 하단 슬라이드 바 작대기
+  menuMapSlideBar: {
+    width : pageStyle.width.width25,
+    height : pageStyle.height.height3,
+    backgroundColor : pageStyle.colorTheme.gray,
+    marginTop : "5px",
+  },
+
+  //회원가입 결과창
+  signupResultRoot: {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height1000,
+    margin : "auto",
+    ...pageStyle.flexColCenter,
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.beige,
+  },
+  signupResultWrap: {
+    width : pageStyle.width.width450,
+    padding : pageStyle.height.height30,
+    borderRadius : "10px",
+    display : "flex",
+    flexDirection : "column",
+    backgroundColor : pageStyle.colorTheme.peach,
+    gap : "10px",
+    boxShadow : "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.22)",
+    color : pageStyle.colorTheme.white,
+    // fontSize : "23px",
+    fontSize : pageStyle.fontSizeSet.medium,
+    fontWeight : pageStyle.fontWeightSet.bold
+  },
+  signupResultMent: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height70,
+    position : "relative",
+    ...pageStyle.flexRowCenter
+  },
+  signupResultBackBtn: {
+    color : pageStyle.colorTheme.black,
+    fontSize : pageStyle.fontSizeSet.medium,
+    cursor : "pointer",
+    backgroundColor : pageStyle.colorTheme.white,
+    borderRadius : "10px",
+    boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
+
+  }
+}
 console.log(targetStyle.topMenu);
