@@ -476,22 +476,40 @@ const server = http.createServer(function (request, response) {
     });
     request.on('end', function () {
       console.log("image uploading")
-      response.writeHead(200);
-      response.end();
-      let requestDataSet = body.split("&")
-      console.log(requestDataSet)
+      let result = body.split("\r")
+      console.log(result[3].slice(1));
+      console.log(result[7].slice(1));
+      let connection = mysql.createConnection(mysqlInfo);
+      connection.connect();
+      connection.query(`INSERT INTO userimage VALUES('${result[3].slice(1)}','${result[7].slice(1)}')`, (error, rows, fields) => {
+      if (error) throw error;
+      else{
+        response.writeHead(200);
+        response.end();
+        }
+      });
+      connection.end();
 
-      // let connection = mysql.createConnection(mysqlInfo);
-      // connection.connect();
-      // connection.query(`INSERT INTO userImage VALUES('${targetArr[0].split("=")[1]}','${body}')`, (error, rows, fields) => {
-      // if (error) throw error;
-      // else{
+      console.log("이미지 저장 완료");
 
-      // }
-      // });
-      // connection.end();
-      console.log("이미지 저장 완료")
-
+    })}
+    if(request.method === 'POST' && request.url.startsWith('/loadUserImage')){
+      let body = '';
+      request.on('data', function (data) {
+        body = body + data;
+      });
+      request.on('end', function () {
+        console.log("이미지 요청 받는 중")
+        let connection = mysql.createConnection(mysqlInfo);
+        connection.connect();
+        connection.query(`SELECT image FROM userimage WHERE id='${body.split("=")[1]}'`, (error, rows, fields) => {
+        if (error) throw error;
+        else{
+          response.writeHead(200);
+          response.end(rows[0].image);
+        }
+      });
+      connection.end();
     })}
 });
 

@@ -64,6 +64,7 @@ function yourPage(){
     fontWeight : "700"
   })
   rootChild[1].innerText = `${targetIdFromServer}님의 페이지`;
+  
   styleCreate(rootChild[2],{
     width : "300px",
     height : "300px",
@@ -75,8 +76,22 @@ function yourPage(){
     alignItems : "center",
     marginTop : "20px",
     fontSize : "20px",
-    fontWeight : "700"
+    fontWeight : "700",
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   })
+ 
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://localhost:2080/loadUserImage`);
+  xhr.send(`id=${targetIdFromServer}`); 
+  xhr.addEventListener('load', function(){
+      let imageFromServer = xhr.response;
+      rootChild[2].style.backgroundImage = `url(${imageFromServer})`
+      console.log("이미지 가져오기 완료");
+  });
+
+
   styleCreate(rootChild[3],{
     width : "60%",
     height : "30px",
@@ -272,6 +287,7 @@ function myPage(){
     fontWeight : "700"
   })
   rootChild[1].innerText = `마이 페이지`;
+
   styleCreate(rootChild[2],{
     width : "300px",
     height : "300px",
@@ -283,8 +299,19 @@ function myPage(){
     alignItems : "center",
     marginTop : "20px",
     fontSize : "20px",
-    fontWeight : "700"
+    fontWeight : "700",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   })
+  const cookieId = document.cookie.split("=")[1]
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://localhost:2080/loadUserImage`);
+  xhr.send(`id=${cookieId}`); 
+  xhr.addEventListener('load', function(){
+      let imageFromServer = xhr.response;
+      rootChild[2].style.backgroundImage = `url(${imageFromServer})`
+      console.log("이미지 가져오기 완료");
+  });
   styleCreate(rootChild[3],{
     width : "60%",
     height : "30px",
@@ -421,23 +448,24 @@ function myPage(){
       backgroundColor : "#F7786B",
       boxShadow : "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.22)",
     })
-    const cookieId = document.cookie.split("=")[1]
+ 
     buttonWrap.appendChild(submitbutton);
     submitbutton.innerText = "업로드";
     let myImage = document.getElementById("myImage");
     let imageFormData = new FormData();
-    submitbutton.addEventListener("click",()=>{
-      imageFormData.append("attachedImage", myImage.files[0]);
+    let reader = new FileReader();
+    reader.addEventListener("load",()=>{
+      imageFormData.append("id", cookieId);
+      imageFormData.append("attachedImage", reader.result);
       console.log(imageFormData.get("attachedImage"))
       fetch('http://localhost:2080/uploadImage', {
         method: 'POST',
         body: imageFormData
-        // JSON.stringify({
-        //   id : cookieId,
-        //   image : })
       }).then(res => res)
       .then(result => console.log("done"))
-
+    })
+    submitbutton.addEventListener("click",()=>{
+      reader.readAsDataURL(myImage.files[0])
     });
 
     let okaybutton = tagCreate("div",{})
