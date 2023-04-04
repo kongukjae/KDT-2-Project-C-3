@@ -165,6 +165,12 @@ const server = http.createServer(function (request, response) {
     //console.dir(b)
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
+  }else if (request.url.split("/")[1] === "commonFunc.js") {
+    fs.readFile(`./commonFunc.js`, function (err, data) {
+      response.writeHead(200);
+      response.write(data);
+      response.end();
+    });
   } else if (request.url.split("/")[1] === "mainStyle.js") {
     fs.readFile(`./mainStyle.js`, function (err, data) {
       response.writeHead(200);

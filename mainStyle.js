@@ -1,29 +1,7 @@
-function tagCreate(tType,props){
-  let element = document.createElement(tType);
-  for(let i in props){
-    element[i] = props[i];
-  }
-  return element;
-};
-
-function styleCreate(obj,styleOb){
-  for(i in styleOb){
-    obj.style[i] = styleOb[i];
-  }
-}
-
 function main(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
-  styleCreate(root,{
-    width : "500px",
-    height : "2000px",
-    margin : "auto",
-    display : "flex",
-    flexDirection : "column",
-    position : "relative"
-  })
-
+  styleCreate(root,targetStyle.mainRoot)
   let rootChild = [];
   for(let i = 0;i<6;i++){
     let child = tagCreate("div",{});
@@ -31,63 +9,22 @@ function main(){
     rootChild.push(child);
   }
 
-  styleCreate(rootChild[0],{
-    width : "100%",
-    height : "126px",
-    position : "relative",
-    backgroundColor : "#F7786B",
-    display : "flex",
-    justifyContent: "center",
-    alignItems : "center"
-
-  })
+  //상단메뉴바 commonFunc로 이동
+  styleCreate(rootChild[0],targetStyle.topMenu)
   const logoLoginPage = tagCreate('img', '');
   logoLoginPage.style.width = '28%';
   logoLoginPage.src = './resource/MainLogo.png';
   rootChild[0].appendChild(logoLoginPage);
 
-  styleCreate(rootChild[1],{
-    width : "100%",
-    height : "83px",
-    position : "relative",
-    display : "flex",
-    justifyContent : "center",
-    alignItems : "center",
-    backgroundColor : "#F3EDE8",
-    fontSize : "20px",
-    fontWeight : "700"
-
-  })
+  //날씨 메뉴 commonFunc로 이동
+  styleCreate(rootChild[1],targetStyle.mainWeatherBanner)
   rootChild[1].innerText = "날씨 정보를 불러오는 중입니다...";
-  styleCreate(rootChild[2],{
-    width : "100%",
-    height : "500px",
-    position : "relative"
-  })
-  styleCreate(rootChild[3],{
-    width : "100%",
-    height : "260px",
-    position : "relative",
-    overflow : "hidden",
-    transition : "all ease 0.6s"
+  styleCreate(rootChild[2],targetStyle.mainMap)
+  styleCreate(rootChild[3],targetStyle.mainSlideWrap)
+  styleCreate(rootChild[4],targetStyle.mainFindingDogs)
 
-  })
-  styleCreate(rootChild[4],{
-    width : "100%",
-    height : "690px",
-    position : "relative"
-  })
-  styleCreate(rootChild[5],{
-    width : "500px",
-    height : "90px",
-    position : "fixed",
-    bottom : "0px",
-    backgroundColor : "#F7786B",
-    display : "flex",
-    justifyContent: "space-around",
-    alignItems : "center",
-    zIndex : "2"
-  })
+  // 하단 메뉴바 common.js
+  styleCreate(rootChild[5],targetStyle.bottomMenu)
   rootChild[2].id = "map"
 
   let menuChild = [];
@@ -126,16 +63,11 @@ function main(){
   menuChild[2].addEventListener("click",()=>{
     window.location = "http://localhost:2080/map"
   })
-
+// 하단바 끝
 
   let slideCover = tagCreate("div",{});
   rootChild[3].appendChild(slideCover);
-  styleCreate(slideCover,{
-    width : "100%",
-    height : "100%",
-    position : "relative",
-    overflow : "hidden"
-  })
+  styleCreate(slideCover,targetStyle.mainSlideCover)
    
 
   menuChild[2].id = "mapBtn";
@@ -172,70 +104,22 @@ function main(){
   setSlidePosition(slideCover.children)
   
   let leftButton = tagCreate("div",{id : "leftButton"});
-  styleCreate(leftButton,{
-    position : "absolute",
-    width : "40px",
-    height : "40px",
-    backgroundColor : "black",
-    opacity : "0.3",
-    borderRadius : "50%",
-    top : "41%",
-    left : "10px",
-    cursor : "pointer",
-    display : "flex",
-    justifyContent :"center",
-    alignItems :"center",
-    fontSize : "30px",
-    color : "gray",
-    zIndex : "1"
-  })
+  styleCreate(leftButton,targetStyle.mainSlideLeftBtn)
   rootChild[3].appendChild(leftButton);
   leftButton.textContent = "<";
   let rightButton = tagCreate("div",{id : "rightButton"});
-  styleCreate(rightButton,{
-    position : "absolute",
-    width : "40px",
-    height : "40px",
-    backgroundColor : "black",
-    opacity : "0.3",
-    borderRadius : "50%",
-    top : "41%",
-    right : "10px",
-    cursor : "pointer",
-    display : "flex",
-    justifyContent :"center",
-    alignItems :"center",
-    fontSize : "30px",
-    color : "gray",
-    zIndex : "1"
-  })
+  styleCreate(rightButton,targetStyle.mainSlideRightBtn)
   rootChild[3].appendChild(rightButton);
   rightButton.textContent = ">";
   
   let dotsWrap = tagCreate("div",{id : "dotsWrap"});
   rootChild[3].appendChild(dotsWrap)
-  styleCreate(dotsWrap,{
-    position : "absolute",
-    left : "50%",
-    transform : "translateX(-50%)",
-    bottom : "10px",
-    display : "flex",
-    gap : "10px",
-    zIndex : "1"
-    
-  })
+  styleCreate(dotsWrap,targetStyle.mainSlideDotWrap)
 
 
   for(let slide = 0; slide<5;slide++){
     let dot = document.createElement("div");
-    dot.style.width = "9px";
-    dot.style.height = "9px";
-    dot.style.borderRadius = "9px";
-    dot.style.backgroundColor = "black";
-    dot.style.opacity = "0.4";
-    dot.style.cursor = "pointer";
-    dot.style.transition = "all ease 0.6s"
-    
+    styleCreate(dot,targetStyle.mainSlideDot)
     dotsWrap.appendChild(dot);
   }
   let dot = dotsWrap.children;
