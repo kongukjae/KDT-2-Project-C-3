@@ -499,7 +499,7 @@ const server = http.createServer(function (request, response) {
       console.log("이미지 저장 완료");
 
     })}
-    if(request.method === 'POST' && request.url.startsWith('/loadUserImage')){
+    if(request.method === 'POST' && request.url.startsWith('/sendUserImage')){
       let body = '';
       request.on('data', function (data) {
         body = body + data;
@@ -509,7 +509,15 @@ const server = http.createServer(function (request, response) {
         let connection = mysql.createConnection(mysqlInfo);
         connection.connect();
         connection.query(`SELECT image FROM userimage WHERE id='${body.split("=")[1]}'`, (error, rows, fields) => {
-        if (error) throw error;
+        if (error){
+          connection.query(`SELECT image FROM userimage WHERE id='noimage'`, (error, rows, fields) => {
+            if (error) throw error;
+            else{
+              response.writeHead(200);
+              response.end(rows[0].image);
+            }
+          })
+        }
         else{
           response.writeHead(200);
           response.end(rows[0].image);

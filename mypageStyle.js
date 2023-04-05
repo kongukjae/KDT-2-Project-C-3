@@ -37,7 +37,7 @@ function yourPage(){
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
  
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/loadUserImage`);
+  xhr.open('POST', `http://localhost:2080/sendUserImage`);
   xhr.send(`id=${targetIdFromServer}`); 
   xhr.addEventListener('load', function(){
       let imageFromServer = xhr.response;
@@ -152,7 +152,7 @@ function myPage(){
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
   const cookieId = document.cookie.split("=")[1]
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/loadUserImage`);
+  xhr.open('POST', `http://localhost:2080/sendUserImage`);
   xhr.send(`id=${cookieId}`); 
   xhr.addEventListener('load', function(){
       let imageFromServer = xhr.response;
