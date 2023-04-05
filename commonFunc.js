@@ -20,6 +20,7 @@ const pageStyle = {
     blue: "#2353FF",
     gray : "gray",
     black : "black",
+    white: "white",
     whiteTypeA : "#F8F8F8",
     whiteTypeB : "#E6E6E6",
     whiteTypeC : "#F9F9F9",
@@ -32,35 +33,85 @@ const pageStyle = {
     widthP60: "60%",
     widthP40: "40%",
     width500: "500px",
-    width300 : "300px",
-    width90 : "90px",
+    width450: "450px",
+    width390: "390px",
+    width300: "300px",
+    width250: "250px",
+    width200: "200px",
+    width180: "180px",
+    width150: "150px",
+    width80: "80px",
+    width90: "90px",
     width40: "40px",
+    width25: "25px",
     width9: "9px",
   },
   height: {
+    height100vh: "100vh",
+    height85vh: "85vh",
     heightP100: "100%",
     height2000: "2000px",
     height1700: "1700px",
+    height1000: "1000px",
     height690: "690px",
     height500: "500px",
     height450: "450px",
     height300: "300px",
     height260: "260px",
-    height140 : "140px",
+    height154: "154px",
+    height150: "150px",
+    height140: "140px",
     height130: "130px",
     height126: "126px",
+    height100: "100px",
     height90: "90px",
+    height70: "70px",
     height83: "83px",
     height80: "80px",
+    height52: "52px",
     height40: "40px",
     height30: "30px",
     height24: "24px",
     height9: "9px",
+    height3: "3px",
   },
   flexRowCenter : {
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
+  },
+  flexColCenter : {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  flexRowBetweenCenter: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent : 'space-between',
+    alignItems : 'center',
+  },
+  flexColumnTopCenter: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "top",
+    alignItems: "center",
+  },
+  marginTop: {
+    marginTop156: "156px",
+    marginTop110: "110px",
+    marginTop60: "60px"
+  },
+  marginBottom: {
+    marginBottom80: "80px",
+    marginBottom50: "50px",
+  },
+  borderRadius: {
+    borderRadiusP50: "50%",
+    borderRadius52: "52px",
+    borderRadius15: "15px",
+    borderRadius9: "9px",
   },
   fontSizeSet : {
     smaller : "12px",
@@ -78,8 +129,9 @@ const pageStyle = {
     bold : "700"
 
   },
-  Shadow : {
-    ShadowTypeA : "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.22)"
+  defaultBoxShadow: {
+    ConBoxSdw: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+    defBoxSdw: "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.22)"
   }
 }
 const targetStyle = {
@@ -189,12 +241,214 @@ const targetStyle = {
     opacity: "0.4",
     cursor: "pointer",
     transition: pageStyle.transitionSet.normal
-    // loginPage
+  },
+  // loginPage
 
-    // dangMap
+  // dangMap
+  menuMapRoot: {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height100vh,
+    margin : "auto",
+    display : "flex",
+    flexDirection : "column",
+    position : "relative",
+    overflow : "hidden"
+  },
+  menuMap: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height85vh,
+    position : "relative",
+  },
+  menuMapSlide: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height300,
+    position : "relative",
+    backgroundColor : "lightgray",
+    display : "flex",
+    justifyContent : "center",
+    position : "absolute",
+    zIndex : "1",
+    bottom : "-155px"
+  },
 
-    // 
-}}
+  //댕맵 검색창
+  menuMapSearchBarWrap: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height40,
+    top : "45px",
+    left: "50%",
+    position : "absolute",
+    marginLeft: "-150px",
+    zIndex : "3",
+    display : "flex",
+    alignItems : "center"
+  },
+  menuMapSearchBar : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.heightP100,
+    border : `1px ${pageStyle.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : pageStyle.colorTheme.white,
+    position : "absolute"
+  },
+  menuMapSearchButton: {
+    width : pageStyle.width.width80,
+    height : pageStyle.height.height30,
+    borderRadius : "15px",
+    backgroundColor : pageStyle.colorTheme.peach,
+    position : "relative",
+    left : "210px",
+    color : pageStyle.colorTheme.white,
+    cursor : "pointer",
+    ...pageStyle.flexRowCenter,
+    paddingBottom : "3px"
+  },
+
+  //댕맵 하단 슬라이드 바 작대기
+  menuMapSlideBar: {
+    width : pageStyle.width.width25,
+    height : pageStyle.height.height3,
+    backgroundColor : pageStyle.colorTheme.gray,
+    marginTop : "5px",
+  },
+
+  //회원가입 결과창
+  signupResultRoot: {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height1000,
+    margin : "auto",
+    ...pageStyle.flexColCenter,
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.beige,
+  },
+  signupResultWrap: {
+    width : pageStyle.width.width450,
+    padding : pageStyle.height.height30,
+    borderRadius : "10px",
+    display : "flex",
+    flexDirection : "column",
+    backgroundColor : pageStyle.colorTheme.peach,
+    gap : "10px",
+    boxShadow : "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.22)",
+    color : pageStyle.colorTheme.white,
+    // fontSize : "23px",
+    fontSize : pageStyle.fontSizeSet.medium,
+    fontWeight : pageStyle.fontWeightSet.bold
+  },
+  signupResultMent: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height70,
+    position : "relative",
+    ...pageStyle.flexRowCenter
+  },
+  signupResultBackBtn: {
+    color : pageStyle.colorTheme.black,
+    fontSize : pageStyle.fontSizeSet.medium,
+    cursor : "pointer",
+    backgroundColor : pageStyle.colorTheme.white,
+    borderRadius : "10px",
+    boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
+
+  },
+    // signUp
+    signUpMain: {
+      width : pageStyle.width.width500,
+        height : pageStyle.height.height1000,
+        margin : "auto",
+        flexDirection : "column",
+        position : "relative",
+        backgroundColor : pageStyle.colorTheme.beige,
+        ...pageStyle.flexRowCenter,
+    },
+    signUpContainer: {
+      width : pageStyle.width.width450,
+      padding : "30px",
+      borderRadius : "10px",
+      display : "flex",
+      position: "relative",
+      flexDirection : "column",
+      backgroundColor : pageStyle.colorTheme.peach,
+      gap : "10px",
+      boxShadow : pageStyle.defaultBoxShadow.ConBoxSdw
+    },
+    signUpListBox: {
+      width : pageStyle.width.widthP100,
+      height : pageStyle.height.height70,
+      position : "relative",
+      ...pageStyle.flexRowCenter,
+    },
+    signUpTitle: {
+      color : pageStyle.colorTheme.white,
+      fontSize : pageStyle.fontSizeSet.large,
+      fontWeight : pageStyle.fontWeightSet.bold
+    },
+    signUpListWithoutID: {
+      width : pageStyle.width.width300,
+      height : pageStyle.height.height40,
+      cursor : "pointer",
+      borderRadius : "10px",
+      padding : "5px",
+      paddingLeft : "20px",
+      paddingRight : "20px",
+      border : "0px",
+      boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    },
+    signUpListID: {
+      width : pageStyle.width.width200,
+      height : pageStyle.height.height40,
+      cursor : "pointer",
+      borderRadius : "10px",
+      padding : "5px",
+      paddingLeft : "20px",
+      paddingRight : "20px",
+      border : "0px",
+      boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    },
+    signUpDupCheck: {
+      width : pageStyle.width.width90,
+      height : pageStyle.height.height40,
+      marginLeft : "10px",
+      fontSize : pageStyle.fontSizeSet.small,
+      cursor : "pointer",
+      ...pageStyle.flexRowCenter,
+      borderRadius : "10px",
+      padding : "5px",
+      border : "0px",
+      backgroundColor : pageStyle.colorTheme.white,
+      boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    },
+    signUpDupCheckModal: {
+      width : pageStyle.width.width300,
+      height : pageStyle.height.height140,
+      padding : "10px",
+      borderRadius : "10px",
+      flexDirection : "column",
+    ...pageStyle.flexRowCenter,
+      backgroundColor : pageStyle.colorTheme.beige,
+      boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+      position : "absolute",
+      top : "17%",
+      left: "50%",
+      gap : "30px",
+      marginLeft: "-150px",
+    },
+    signUpOKBtn: {
+      width : pageStyle.width.width90,
+      height : pageStyle.height.height30,
+      padding : "10px",
+      fontSize : pageStyle.fontSizeSet.small,
+      color : pageStyle.colorTheme.white,
+      borderRadius : "10px",
+      cursor : "pointer",
+      ...pageStyle.flexRowCenter,
+      alignItems : "center",
+      backgroundColor : pageStyle.colorTheme.peach,
+      boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    }
+
+}
 console.log(targetStyle.topMenu);
 
 const mypageStyle = {
@@ -204,7 +458,9 @@ const mypageStyle = {
     margin : "auto",
     position : "relative",
     backgroundColor : pageStyle.colorTheme.beige,
-    ...pageStyle.flexRowCenter
+    display : "flex",
+    flexDirection : "column",
+    alignItems : "center"
   },
   mypageTopMenu : {
     width : pageStyle.width.widthP100,
@@ -263,8 +519,7 @@ const mypageStyle = {
     marginTop : "40px",
     position : "relative",
     borderRadius : "10px",
-    ...pageStyle.flexRowCenter,
-    flexDirection : "column",
+    ...pageStyle.flexColCenter,
     gap : "10px",
     backgroundColor : pageStyle.colorTheme.whiteTypeB
   },
@@ -293,10 +548,9 @@ const mypageStyle = {
     height : pageStyle.height.height140,
     padding : "10px",
     borderRadius : "10px",
-    flexDirection : "column",
-    ...pageStyle.flexRowCenter,
+    ...pageStyle.flexColCenter,
     backgroundColor : pageStyle.colorTheme.whiteTypeD,
-    boxShadow : pageStyle.Shadow.ShadowTypeA,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
     position : "absolute",
     top : "550px",
     left: "50%",
@@ -316,10 +570,86 @@ const mypageStyle = {
     color : pageStyle.colorTheme.whiteTypeA,
     borderRadius : "10px",
     cursor : "pointer",
-    flexDirection : "column",
-    ...pageStyle.flexRowCenter,
+    ...pageStyle.flexColCenter,
     backgroundColor : pageStyle.colorTheme.peach,
-    boxShadow : pageStyle.Shadow.ShadowTypeA
-  }
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+  },
+};
 
-}
+const loginPageStyle = {
+  loginPageRoot: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height100vh,
+    ...pageStyle.flexColumnTopCenter,
+    backgroundColor: pageStyle.colorTheme.peach,
+    margin: "auto",
+  },
+  loginPageLogoWrap: {
+    width : pageStyle.width.width250,
+    height : pageStyle.height.height100,
+    marginTop : pageStyle.marginTop.marginTop156,
+  },
+  loginPageLogo:{
+    width : pageStyle.width.widthP100,
+  },
+  loginPageImgWarp: {
+    width : pageStyle.width.width150,
+    height : pageStyle.height.height150,
+    marginTop : pageStyle.marginTop.marginTop60,
+    borderRadius : pageStyle.borderRadius.borderRadiusP50,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    ...pageStyle.flexRowCenter,
+    overflow : 'hidden',
+  },
+  loginPageImg: {
+    height: pageStyle.height.heightP100,
+  },
+  loginPageFormWrap: {
+    width : pageStyle.width.width390,
+    height : pageStyle.height.height154,
+  },
+  loginPageForm: {
+    display : 'flex',
+    flexDirection : 'column',
+    marginTop : pageStyle.marginTop.marginTop110,
+  },
+  loginPageFormId: {
+    marginBottom : pageStyle.marginBottom.marginBottom50,
+    height : pageStyle.height.height52,
+    borderRadius : pageStyle.borderRadius.borderRadius52,
+    border : 'none',
+    paddingLeft : '25px',
+    fontSize : pageStyle.fontSizeSet.medium,
+  },
+  loginPageFormPw: {
+    marginBottom : pageStyle.marginBottom.marginBottom80,
+    height : pageStyle.height.height52,
+    borderRadius : pageStyle.borderRadius.borderRadius52,
+    border : 'none',
+    paddingLeft : '25px',
+    fontSize : pageStyle.fontSizeSet.medium,
+  },
+  loginPageFormBtnWrap: {
+    ...pageStyle.flexRowBetweenCenter
+  },
+  loginPageFormBtnLogin: {
+    border : '1px solid #999',
+    borderRadius : pageStyle.borderRadius.borderRadius15,
+    width : pageStyle.width.width180,
+    height : pageStyle.height.height52,
+    cursor : 'pointer',
+    fontSize : pageStyle.fontSizeSet.medium,
+  },
+  loginPageFormBtnSignup: {
+    border : '1px solid #999',
+    borderRadius : pageStyle.borderRadius.borderRadius15,
+    backgroundColor : '#D9D9D9',
+    color : pageStyle.colorTheme.black,
+    textDecoration : 'none',
+    width : pageStyle.width.width180,
+    height : pageStyle.height.height52,
+    ...pageStyle.flexRowCenter,
+    fontSize : pageStyle.fontSizeSet.medium,
+    cursor : 'pointer',
+  }
+};

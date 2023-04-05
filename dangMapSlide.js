@@ -1,15 +1,8 @@
-function styleCreate(target, width, height, bgColor, margintop){
-  target.style.width = width;
-  target.style.height = height;
-  target.style.backgroundColor = bgColor;
-  target.style.marginTop = margintop;
-}
-
 const slide = document.getElementById('slide');
 
 const element = document.createElement('div');
 slide.appendChild(element);
-styleCreate(slide.children[0], "25px", "3px", "gray", "5px");
+styleCreate(slide.children[0],targetStyle.menuMapSlideBar);
 
 
 let sw = true;
