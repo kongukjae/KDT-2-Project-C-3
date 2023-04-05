@@ -12,6 +12,7 @@ import callPostImage from "./callPostImage.js";
 import callPostLogin from "./callPostLogin.js";
 import callPostDangMap from "./callPostDangMap.js";
 
+import callLoginGet from "./callLoginGet.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -44,43 +45,12 @@ const mysqlInfo = {
 
 const server = http.createServer(function (request, response) {
   //로그인
+  let body = "";
   if (request.method === "GET") {
-    if (request.url === "/") {
-      response.statusCode = 200;
-      response.setHeader("Content-Type", "text/html");
-      response.write(htmlBox.htmlFunc(htmlBox.loginBody));
-      response.end();
-    } else if (request.url === "/loginPage.js") {
-      // loginPage.js 파일 read
-      fs.readFile("../loginPage.js", function (err, data) {
-        response.statusCode = 200;
-        response.setHeader("Content-Type", "text/html");
-        response.write(data);
-        response.end();
-      });
-    } else if (request.url.startsWith("/resource/MainLogo")) {
-      // MainLogo.png 파일 read
-      fs.readFile(`../resource/MainLogo.png`, function (err, data) {
-        response.statusCode = 200;
-        response.setHeader("Content-Type", "text/html");
-        response.write(data);
-        response.end();
-      });
-    } else if (
-      request.url.startsWith("/resource/MainDog")
-    ) {
-      // MainDogImg.png 파일 read
-      fs.readFile(`../resource/MainDogImg.jpg`, function (err, data) {
-        response.statusCode = 200;
-        response.setHeader("Content-Type", "text/html");
-        response.write(data);
-        response.end();
-      });
-    }
-
+    callLoginGet(request, response);
 
     //메인화면
-    callMain(request, response)
+    callMain(request, response);
 
     //회원가입
     let splitURLbyJin = request.url.split("/")[1];
@@ -215,8 +185,6 @@ const server = http.createServer(function (request, response) {
 
     //업로드, 유저 이미지
     callPostImage(request, response);
-
-
     // if (request.url.startsWith('/loadUserImage')) {
     //   let body = '';
     //   request.on('data', function (data) {
@@ -242,12 +210,7 @@ const server = http.createServer(function (request, response) {
     callPostLogin(request, response);
     if (request.url.startsWith("/signUpResult")) {
       signupResult(request, response)
-
     }
-
-
-
-
   }
 });
 
