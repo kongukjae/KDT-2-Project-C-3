@@ -27,7 +27,9 @@ export default function callPostImage(request, response) {
       console.log("이미지 저장 완료");
 
     })}
-    if(request.url.startsWith('/loadUserImage')){
+    if(request.url.startsWith('/sendUserImage'))
+    {
+      
       let body = '';
       request.on('data', function (data) {
         body = body + data;
