@@ -14,7 +14,7 @@ const cmServer = {
       response.write(data);
       response.end();
     });
-  }
+  },
 }
 
 export default cmServer;
