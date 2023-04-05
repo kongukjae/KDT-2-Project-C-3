@@ -5,6 +5,10 @@ import htmlBox from "../htmlBox.js";
 import ValueCheck from "../ValueCheck.js";
 import { parse } from "path";
 import callMain from "./callMain.js";
+import callPostImage from "./callPostImage.js";
+import callPostLogin from "./callPostLogin.js";
+import callPostDangMap from "./callPostDangMap.js";
+
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -37,7 +41,6 @@ const mysqlInfo = {
 
 const server = http.createServer(function (request, response) {
   //로그인
-  let body = "";
   if(request.method === "GET"){
     if (request.url === "/") {
       response.statusCode = 200;
@@ -186,6 +189,7 @@ const server = http.createServer(function (request, response) {
       })
     }
     
+    //마이페이지
     if(request.url.startsWith('/mypage?')) {
       let target = request.url.split("=")[1]
       let connection = mysql.createConnection(mysqlInfo);
@@ -229,166 +233,17 @@ const server = http.createServer(function (request, response) {
 
 // post request
   if(request.method === 'POST'){
-    if(request.url.startsWith('/uploadImage')){
-      let body = '';
-      request.on('data', function (data) {
-        body = body + data;
-      });
-      request.on('end', function () {
-        console.log("image uploading")
-        let result = body.split("\r")
-        console.log(result[3].slice(1));
-        console.log(result[7].slice(1));
-        let connection = mysql.createConnection(mysqlInfo);
-        connection.connect();
-        connection.query(`INSERT INTO userimage VALUES('${result[3].slice(1)}','${result[7].slice(1)}')`, (error, rows, fields) => {
-        if (error) throw error;
-        else{
-          response.writeHead(200);
-          response.end();
-          }
-        });
-        connection.end();
+    
+    //업로드, 유저 이미지
+    callPostImage(request, response);
 
-        console.log("이미지 저장 완료");
+    //입력된 로그인 ID,PW 확인 
+    callPostLogin(request, response);  
 
-      })}
-      if(request.url.startsWith('/loadUserImage')){
-        let body = '';
-        request.on('data', function (data) {
-          body = body + data;
-        });
-        request.on('end', function () {
-          console.log("이미지 요청 받는 중")
-          let connection = mysql.createConnection(mysqlInfo);
-          connection.connect();
-          connection.query(`SELECT image FROM userimage WHERE id='${body.split("=")[1]}'`, (error, rows, fields) => {
-          if (error) throw error;
-          else{
-            response.writeHead(200);
-            response.end(rows[0].image);
-          }
-        });
-        connection.end();
-      })}
+    //댕맵 - 지도에 발자국 표시, 발자국 드래그
+    callPostDangMap(request, response);
 
-      if (request.url.startsWith("/login")) {
-        console.log("/login 페이지 진입");
-        request.on("data", function (data) {
-          body = body + data;
-          console.log(body);
-        });
-        request.on("end", function () {
-          let idSplit = body.split("&")[0];
-          let pwSplit = body.split("&")[1];
-          let userLoginId = idSplit.split("=")[1];
-          let userLoginPw = pwSplit.split("=")[1];
-          console.log(userLoginId);
-          console.log(userLoginPw);
-    
-          // MySQL과 연동 , UserLoginData DB에 접속
-          let connection = mysql.createConnection(mysqlInfo);
-    
-          // connection 시작
-          connection.connect();
-    
-          // where절 사용을 위한 userLoginId 변수 배열화
-          // let sqlValId = [userLoginId];
-          // where절 사용을 위한 query 변수화
-          // let sql = 'SELECT ifnull(max(userID), 0) userID, userPW from LoginData where userID = ?';
-          // ifnull(컬럼명, 출력값) -> 만약 데이터가 null일 경우 출력값을 대신 출력
-          // ifnull(max(userID), 0) -> max(userID) : userID 중에 가장 높은 값을 출력 -> userID에 존재하지 않는 값이 들어온 경우 가장 높은 값이 없다 -> null 출력 -> ifnull에 의해 0 출력
-    
-          // DB에 접근 후 데이터 조회
-    
-          connection.query(
-            `SELECT id, PW from userinfo where id = '${userLoginId}'`,
-            (error, data, fields) => {
-              if (error) throw error;
-              console.log("실행");
-              console.log(data);
-              if (data.length > 0) {
-                let dataId = data[0].id; //DB에 저장된 ID값
-                let dataPw = data[0].PW; //DB에 저장된 PW값
-                if (userLoginId === dataId) {
-                  // 입력된 ID가 DB에 있을 경우
-                  if (userLoginPw === dataPw) {
-                    // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 할 경우
-                    console.log("로그인 성공");
-                    connection.end();
-                    response.writeHead(200);
-                    const idCookie = "id=" + dataId;
-                    console.log(idCookie);
-                    response.write(
-                      `<script>document.cookie ="${idCookie}"</script>`
-                    );
-                    response.write("<script>window.location='/main'</script>"); // 이후 병합시 main 페이지로 연결
-                    response.end();
-                  } else {
-                    // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 하지 않을 경우
-                    console.log("비밀번호가 틀렸습니다");
-                    connection.end();
-                    const msg = htmlBox.htmlFunc(
-                      `<script>window.alert('비밀번호가 틀렸습니다')</script>`
-                    );
-                    const back = htmlBox.htmlFunc(
-                      `<script>window.location = 'http://localhost:2080'</script>`
-                    );
-                    response.writeHead(200);
-                    response.write(msg);
-                    response.write(back);
-                    response.end();
-                  }
-                }
-              } else {
-                console.log("가입되지 않은 회원입니다");
-                connection.end();
-                const msg = htmlBox.htmlFunc(
-                  `<script>window.alert('가입되지 않은 회원입니다')</script>`
-                );
-                const back = htmlBox.htmlFunc(
-                  `<script>window.location = 'http://localhost:2080'</script>`
-                );
-                response.writeHead(200);
-                response.write(msg);
-                response.write(back);
-                response.end();
-              }
-            }
-          );
-        });
-      }if (request.url.startsWith("/menuMap")) {
-        let body = "";
-        let cooData;
-    
-        request.on("data", function (chunk) {
-          //서버로 보내지는 데이터 받는 중
-          body += chunk;
-        });
-        request.on("end", function () {
-          //데이터 다 받은 뒤 DB에 입력
-          //console.log(body);
-          cooData = JSON.parse(body);
-    
-          response.writeHead(200, { "Content-Type": "text/html" });
-          response.end();
-    
-          for (const key in cooData) {
-            //console.log(cooData[key]);
-    
-            let conn = mysql.createConnection(mysqlInfo);
-            conn.connect();
-            conn.query(
-              `insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, '${cooData[key][2]}')`,
-              function (err) {
-                if (err) throw err;
-                else console.log("정상적으로 DB에 저장");
-              }
-            );
-            conn.end();
-          }
-        });
-      }if (request.url.startsWith("/signUpResult")) {
+      if (request.url.startsWith("/signUpResult")) {
         let body = "";
         request.on("data", function (data) {
           body = body + data;
@@ -431,33 +286,8 @@ const server = http.createServer(function (request, response) {
           response.write(htmlBox.htmlFunc(htmlBox.signUpResult));
           response.end();
         });
-      }if(request.url.startsWith('/dragMarker')) { // 댕맵에서 마커 드래그가 끝났을 때
-        let body = "";
-        let dragData;
-      
-        request.on('data', function(data){
-          body += data;
-        })
-        request.on("end", function(){ // 전송된 데이터를 다 받은 후
-          dragData = JSON.parse(body);
-          console.log("아래는 dragData 입니다")
-          console.log(dragData);
-      
-          response.writeHead(200, {'Content-Type': 'text/html'});
-          response.end();
-          for(const key in dragData){
-            let conn = mysql.createConnection(mysqlInfo);
-            conn.connect();
-            // DB에 있는 데이터를 업데이트 / id가 a고 위도가 b고 경도가 c인 데이터의 위도를 d, 경도를 e로 업데이트
-            conn.query(`UPDATE map_tables SET latitude = '${dragData[key][0]}', longitude = '${dragData[key][1]}' WHERE id = '${dragData[key][2]}' and latitude = '${dragData[key][3]}' and longitude = '${dragData[key][4]}'`,
-            function(err){
-              if(err) throw err;
-              else console.log("정상적으로 DB 업데이트");
-            });
-            conn.end();
-          }
-        })
       }
+      
   
 
   }
