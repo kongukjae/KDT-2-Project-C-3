@@ -4,12 +4,12 @@ import cmServer from "./commonServer.js";
 
 
 export default function callMain(request, response) {
-  const mysqlInfo = {
-    host: "192.168.0.93",
-    user: "guest",
-    password: "0000",
-    database: "mungta",
-  }
+  // const mysqlInfo = {
+  //   host: "192.168.0.93",
+  //   user: "guest",
+  //   password: "0000",
+  //   database: "mungta",
+  // }
 
   let splitURL = request.url.split("/")[1];
   if (splitURL === "commonFunc.js") {
@@ -33,7 +33,7 @@ export default function callMain(request, response) {
     let markerArr = {};
 
     console.log("url: " + request.url);
-    let conn = mysql.createConnection(mysqlInfo);
+    let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(`select count(*) as cnt from map_tables where id='${targetId}'`,
       function (err, data) {
