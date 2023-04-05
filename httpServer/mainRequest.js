@@ -5,6 +5,8 @@ import htmlBox from "../htmlBox.js";
 import ValueCheck from "../ValueCheck.js";
 import { parse } from "path";
 import callMain from "./callMain.js";
+import dangMapServer from "./dangMapServer.js";
+import myPage from "./myPage.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -124,108 +126,11 @@ const server = http.createServer(function (request, response) {
 
     
     //댕맵
-    if (request.url === "/map") {
-      response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.dangMap));
-      response.end();
-    } else if (request.url.startsWith("/dangMap")) {
-      fs.readFile(`../dangMap.js`, function (err, data) {
-        response.writeHead(200);
-        response.write(data);
-        response.end();
-      });
-      // console.log("url == " + request.url);
-    }
-    else if (request.url.startsWith("/frFootprint")) {
-      console.log("url == " + request.url);
-      let checkID = request.url.split("=")[1];
-      let connection = mysql.createConnection(mysqlInfo);
-      let count;
-      let fMarkerArr = {};
-      connection.connect();
-      console.log("url ==" + request.url);
-
-      connection.query(
-        `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = "${checkID}"`,
-        function (err, data) {
-          if (err) throw err;
-          else {
-            count = data[0].count;
-            console.log("친구 발자국 수: " + count);
-            // response.writeHead(200);
-            // response.end(JSON.stringify(data));
-            // console.log(JSON.stringify(data));
-          }
-        }
-      );
-
-      connection.query(
-        `select latitude, longitude, id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = "${checkID}"`,
-        (err, rows) => {
-          if (err) throw err;
-          else {
-            for (let i = 0; i < count; i++) {
-              let fArr = [];
-              fArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
-              fMarkerArr[i] = fArr;
-            }
-            response.writeHead(200);
-            response.write(JSON.stringify(fMarkerArr));
-            response.end();
-            console.log(JSON.stringify(fMarkerArr));
-          }
-        }
-      );
-      connection.end();
-    }
-    else if(request.url.split('/')[2] === 'dangMapSlide'){
-      fs.readFile(`../dangMapSlide.js`, function(err, data){
-        response.writeHead(200);
-        response.write(data);
-        response.end();
-      })
-    }
+    dangMapServer(request, response);
     
-    if(request.url.startsWith('/mypage?')) {
-      let target = request.url.split("=")[1]
-      let connection = mysql.createConnection(mysqlInfo);
-      connection.connect();
-      connection.query(`SELECT * FROM userinfo where id='${target}'`, (error, rows, fields) => {
-        if (error) throw error;
-        else{
-          response.writeHead(200);
-          response.write(`<script>
-            const targetIdFromServer = '${target}';
-            const dogNameFromServer = '${rows[0].dogName}';
-            const dogGenderFromServer = '${rows[0].dogGender}';
-          </script>`)
-          response.write(htmlBox.htmlFunc(htmlBox.mypage))
-          response.end();
-        }
-      });
-      connection.end();
-    }
-    else if(request.url.startsWith('/mypageStyle')){
-      fs.readFile(`../mypageStyle.js`, function(err, data){
-        response.writeHead(200);
-        response.write(data);
-        response.end();
-      })
-    }
-    if(request.url.startsWith('/followRequest')) {
-      let target = request.url.split("?")[1]
-      let targetArr = target.split("&")
-      let connection = mysql.createConnection(mysqlInfo);
-      connection.connect();
-      connection.query(`INSERT INTO fr_list_testbyJin VALUES('${targetArr[0].split("=")[1]}','${targetArr[1].split("=")[1]}')`, (error, rows, fields) => {
-        if (error) throw error;
-        else{
-          response.writeHead(200);
-          response.end();
-        }
-      });
-      connection.end();
-  }}
+    //마이페이지
+    myPage(request, response);
+  }
 
 // post request
   if(request.method === 'POST'){
