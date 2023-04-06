@@ -16,6 +16,7 @@ import callLoginGet from "./callLoginGet.js";
 import dangMapServer from "./dangMapServer.js";
 import myPage from "./myPage.js";
 
+
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
@@ -53,7 +54,6 @@ const server = http.createServer(function (request, response) {
 
     //메인화면
     callMain(request, response);
-
     //회원가입
     let splitURLbyJin = request.url.split("/")[1];
     if (splitURLbyJin === "signUp") {

@@ -27,7 +27,9 @@ export default function callPostDangMap(request, response) {
           `insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, '${cooData[key][2]}')`,
           function (err) {
             if (err) throw err;
-            else console.log("정상적으로 DB에 저장");
+            else {
+              console.log(cooData[key][0], cooData[key][1])
+              console.log("정상적으로 DB에 저장")};
           }
         );
         conn.end();
