@@ -1,6 +1,8 @@
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
 
+
+
 export default function callPostImage(request, response) {
   if(request.url.startsWith('/uploadImage')){
     let body = '';
@@ -36,14 +38,17 @@ export default function callPostImage(request, response) {
       });
       request.on('end', function () {
         console.log("이미지 요청 받는 중")
-
         let connection = mysql.createConnection(cmServer.mysqlInfo);
         connection.connect();
         connection.query(`SELECT image FROM userimage WHERE id='${body.split("=")[1]}'`, (error, rows, fields) => {
         if (error) throw error;
         else{
           response.writeHead(200);
-          response.end(rows[0].image);
+          if(rows.length === 0){
+            response.end(`https://i.ibb.co/8gB9yVS/img-546302.png`);
+          }else{
+            response.end(rows[0].image);
+          }
         }
       });
       connection.end();
