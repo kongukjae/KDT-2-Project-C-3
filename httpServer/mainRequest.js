@@ -20,6 +20,10 @@ import myPage from "./myPage.js";
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
+//jwt를 구현하기 위해선 다음 두 모듈 필요
+//npm install rand-token
+//npm install jsonwebtoken
+
 //db 연동이 되어있으니 아래 테이블을 따로 만들 필요 없음
 // 집에서 수정하려면 만들어야함
 /* 필요한 테이블 이름 : [
