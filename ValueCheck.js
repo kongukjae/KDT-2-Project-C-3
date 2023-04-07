@@ -17,13 +17,13 @@ export default class ValueCheck{
     
   }
 
-  set pw(val){
-    let pwcheckerFlag = this.pwChecker(val);
-    if(pwcheckerFlag){
+  // set pw(val){
+  //   let pwcheckerFlag = this.pwChecker(val);
+  //   if(pwcheckerFlag){
 
-      this._pw = val;
-    }
-  }
+  //     this._pw = val;
+  //   }
+  // }
   set as(val){
     let asFlag = this.nonUseChecker(val);
     if(asFlag){
