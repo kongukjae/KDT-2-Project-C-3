@@ -36,7 +36,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select latitude, longitude, id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = "${checkID}"`,
+      `select latitude, longitude, id, addData from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = "${checkID}"`,
       (err, rows) => {
         if (err) throw err;
         else {
