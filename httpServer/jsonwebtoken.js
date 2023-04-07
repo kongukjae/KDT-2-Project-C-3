@@ -45,8 +45,8 @@ function jwtCheck(value){
 // const accessToken = jwt.sign( {name: "asdasd123"},'mungTaDDukSang', { expiresIn: 60 * 60});
 let token = jwtCreate({id:"asdasd123"});
 
-console.log(token);
+console.log(token.token);
 // console.log(jwt.verify(token.token,jwtinfo.secretKey))
-console.log(jwtCheck(token.token))
+console.log(jwtCheck(token.token).id)
 
 // console.log(accessToken);

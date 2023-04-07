@@ -65,13 +65,13 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
   //let result = [];
   let resultObject = {};
   let cnt = 0;
-  const cookieId = document.cookie.split("=")[1];
+  const targetjwt = document.cookie.split("=")[1];
   kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
     // 클릭한 위치에 마커를 표시합니다
     let latlng = mouseEvent.latLng;
     let wrap = [];
     addMarker(latlng);
-    wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
+    wrap.push(latlng.getLat(), latlng.getLng(), targetjwt)
     //result.push(wrap);
     //console.log("result: " + result);
     // resultObject[cnt] = wrap;
@@ -189,7 +189,7 @@ frMarker(frAddMarker);
     console.log('이동 후 lng ' + latlng.getLng())
     let wrap = [];
     // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
-    wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
+    wrap.push(latlng.getLat(), latlng.getLng(), targetjwt, dragStartLat, dragStartLng);
     // 배열을 객체에 담음
     resultObject[0] = wrap;
 
@@ -227,8 +227,8 @@ function frAddMarker(position) {
   function loadMarker(callback){
     let res;
     const xhr = new XMLHttpRequest();
-    const cookieId = document.cookie.split("=")[1];
-    xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
+    const targetjwt = document.cookie.split("=")[1];
+    xhr.open("GET", `http://localhost:2080/loadMap?jwt=${targetjwt}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send(); 
     xhr.addEventListener('load', function(){
@@ -246,8 +246,8 @@ function frAddMarker(position) {
   function frMarker(callback){
     let res2;
     const xhr = new XMLHttpRequest();
-    const cookieId = document.cookie.split("=")[1];
-    xhr.open("GET", `http://localhost:2080/frFootprint?id=${cookieId}`);
+    const targetjwt = document.cookie.split("=")[1];
+    xhr.open("GET", `http://localhost:2080/frFootprint?jwt=${targetjwt}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send(); 
     xhr.addEventListener('load', function(){
@@ -266,9 +266,11 @@ function frAddMarker(position) {
       for(const key in res2){
         //console.log(typeof(parseFloat(res['0'][0])))
         callback(new kakao.maps.LatLng(parseFloat(res2[key][0]), parseFloat(res2[key][1])));
-        if(res2[key][2] !== cookieId) {
-          imageSrc = "#abbbbb";
-        }
+        
+        // 어떤 기능인지 모르겠음 jwt를 위해서는 다른 방식 사용 필요 아이디 검증은 보안상 서버에서 이뤄져야 함
+        // if(res2[key][2] !== cookieId) {
+        //   imageSrc = "#abbbbb";
+        // }
       }
         
       console.log("정상적");

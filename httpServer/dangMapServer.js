@@ -1,6 +1,8 @@
 import htmlBox from "../htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
+import * as jsonwebtoken from "./jsonwebtoken.js"
+
 
 export default function dangMap(request, response) {
   let splitURL = request.url.split("/")[1];
@@ -15,7 +17,8 @@ export default function dangMap(request, response) {
   }
   else if (request.url.startsWith("/frFootprint")) {
     console.log("url == " + request.url);
-    let checkID = request.url.split("=")[1];
+    let checkJWT = request.url.split("=")[1];
+    let checkID = jsonwebtoken.jwtCheck(checkJWT).id;
     let connection = mysql.createConnection(cmServer.mysqlInfo);
     let count;
     let fMarkerArr = {};

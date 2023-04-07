@@ -1,7 +1,7 @@
 import htmlBox from "../htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
-
+import * as jsonwebtoken from "./jsonwebtoken.js"
 
 export default function callMain(request, response) {
   // const mysqlInfo = {
@@ -27,7 +27,8 @@ export default function callMain(request, response) {
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   }
   else if (request.url.startsWith("/loadMap")) {
-    let targetId = request.url.split("=")[1];
+    let targetjwt = request.url.split("=")[1];
+    let targetId = jsonwebtoken.jwtCheck(targetjwt).id
     console.log("loadmap id is " + targetId);
     let tableCnt;
     let markerArr = {};

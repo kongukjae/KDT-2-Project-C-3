@@ -2,6 +2,7 @@ import htmlBox from "../htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
 import crypto from "crypto";
+import * as jsonwebtoken from "./jsonwebtoken.js"
 
 export default function callPostLogin(request, response) {
   let body = "";
@@ -50,11 +51,11 @@ export default function callPostLogin(request, response) {
                 console.log("로그인 성공");
                 connection.end();
                 response.writeHead(200);
-
-                const idCookie = "id=" + dataId;
-                console.log(idCookie);
+                let jwtid = jsonwebtoken.jwtCreate({id:dataId})
+                const jwtCookie = "jwt=" + jwtid;
+                console.log(jwtCookie);
                 response.write(
-                  `<script>document.cookie ="${idCookie}"</script>`
+                  `<script>document.cookie ="${jwtCookie}"</script>`
                 );
                 response.write("<script>window.location='/main'</script>"); // 이후 병합시 main 페이지로 연결
                 response.end();

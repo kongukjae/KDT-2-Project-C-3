@@ -97,7 +97,7 @@ function loadMarker(callback){
   let res;
   const xhr = new XMLHttpRequest();
   const cookieId = document.cookie.split("=")[1];
-  xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
+  xhr.open("GET", `http://localhost:2080/loadMap?jwt=${cookieId}`);
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send(); 
   xhr.addEventListener('load', function(){
