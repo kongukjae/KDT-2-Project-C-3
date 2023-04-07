@@ -1,4 +1,5 @@
 import mysql from "mysql";
+import crypto from "crypto";
 
 export default function loginDB(body) {
   let idSplit = body.split("&")[0];
@@ -7,7 +8,7 @@ export default function loginDB(body) {
   let userLoginPw = pwSplit.split("=")[1];
   console.log(userLoginId);
   console.log(userLoginPw);
-
+  
   // MySQL과 연동 , UserLoginData DB에 접속
   let conn = mysql.createConnection(cmServer.mysqlInfo);
 
@@ -24,7 +25,9 @@ export default function loginDB(body) {
         let dataPw = data[0].PW; //DB에 저장된 PW값
         if (userLoginId === dataId) {
           // 입력된 ID가 DB에 있을 경우
-          if (userLoginPw === dataPw) {
+          const hashPassword = crypto.createHash('sha512').update(userLoginPw).digest('hex');
+          console.log("암호화된 비밀번호 :" + hashPassword)
+          if (hashPassword === dataPw) {
             // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 할 경우
             console.log("로그인 성공");
             conn.end();
