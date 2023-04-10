@@ -27,6 +27,7 @@ const html = {
   },
   mapBody: `
   <script src="/commonFunc.js"></script> 
+  <script src="/commonMap.js"></script> 
   <script src="/mainStyle.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac"></script>
   <script src="/map.js"></script>`,

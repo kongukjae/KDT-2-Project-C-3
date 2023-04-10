@@ -13,11 +13,6 @@ function styleCreate(obj,styleOb){
   }
 }
 
-function getRandom(min, max) {
-  
-  return Math.random() * (max - min) + min;
-}
-
 function map(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
@@ -57,7 +52,7 @@ imageOption = {offset: new kakao.maps.Point(15, 15)}; // 마커이미지의 옵�
 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 let frMarkerImage = new kakao.maps.MarkerImage(frImageSrc, imageSize, imageOption);
-markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
+// markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
 
   // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
   let markers = [];
@@ -176,20 +171,20 @@ frMarker(frAddMarker);
   kakao.maps.event.addListener(marker, 'dragstart', function() { // 드래그가 시작되는 시점에 동작
     // 마커의 현재 좌표를 저장
     let latlng = marker.getPosition();
-    dragStartLat = latlng.getLat();
-    dragStartLng = latlng.getLng();
-    console.log('이동 전 lat ' + dragStartLat);
-    console.log('이동 전 lng ' + dragStartLng);
+    dragStartLat = latlng.getLat().toFixed(13);
+    dragStartLng = latlng.getLng().toFixed(13);
+    console.log('이동 전 lat 2 =' + dragStartLat);
+    console.log('이동 전 lng 2 =' + dragStartLng);
   });
 
   kakao.maps.event.addListener(marker, 'dragend', function() { // 드래그가 끝나는 시점에 동작
     // 드래그가 끝난 지점의 좌표를 불러옴
     let latlng = marker.getPosition();
-    console.log('이동 후 lat ' + latlng.getLat())
-    console.log('이동 후 lng ' + latlng.getLng())
+    console.log('이동 후 lat ' + latlng.getLat().toFixed(17))
+    console.log('이동 후 lng ' + latlng.getLng().toFixed(17))
     let wrap = [];
     // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
-    wrap.push(latlng.getLat(), latlng.getLng(), cookieId, dragStartLat, dragStartLng);
+    wrap.push(latlng.getLat().toFixed(13), latlng.getLng().toFixed(13), cookieId, dragStartLat, dragStartLng);
     // 배열을 객체에 담음
     resultObject[0] = wrap;
 
