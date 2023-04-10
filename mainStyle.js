@@ -10,11 +10,10 @@ function main(){
   }
 
   //상단메뉴바 commonFunc로 이동
-  styleCreate(rootChild[0],targetStyle.topMenu)
-  const logoLoginPage = tagCreate('img', '');
-  logoLoginPage.style.width = '28%';
-  logoLoginPage.src = './resource/MainLogo.png';
-  rootChild[0].appendChild(logoLoginPage);
+  rootChild[2].id = "map"
+  topMenu(rootChild);
+
+
 
   //날씨 메뉴 commonFunc로 이동
   styleCreate(rootChild[1],targetStyle.mainWeatherBanner)
@@ -24,46 +23,9 @@ function main(){
   styleCreate(rootChild[4],targetStyle.mainFindingDogs)
 
   // 하단 메뉴바 common.js
-  styleCreate(rootChild[5],targetStyle.bottomMenu)
-  rootChild[2].id = "map"
-
   let menuChild = [];
-  for(let i = 0;i<5;i++){
-    let child = tagCreate("div",{});
-    rootChild[5].appendChild(child);
-    styleCreate(child,{
-      width : "59px",
-      height : "59px",
-      backgroundColor : "#FDFDFD",
-      borderRadius : "5px",
-      cursor : "pointer",
-      boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-      transition : "scale ease 0.3s",
-      display : "flex",
-      justifyContent: "center",
-      alignItems : "center",
-      fontSize : "13px",
-      fontWeight : "500"
-    })
-    child.onmouseover = ()=>{
-      child.style.scale = "1.1"
-    }
-    child.onmouseout = ()=>{
-      child.style.scale = "1"
+  btmMeun(rootChild[5], menuChild);
 
-    }
-    menuChild.push(child);
-  }
-  menuChild[0].innerText = "댕댕마켓";
-  menuChild[1].innerText = "댕자랑";
-  menuChild[2].innerText = "댕맵";
-
-  menuChild[3].innerText = "댕톡";
-  menuChild[4].innerText = "댕프랜드";
-  menuChild[2].addEventListener("click",()=>{
-    window.location = "http://localhost:2080/map"
-  })
-// 하단바 끝
 
   let slideCover = tagCreate("div",{});
   rootChild[3].appendChild(slideCover);

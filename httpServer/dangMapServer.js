@@ -10,6 +10,12 @@ export default function dangMap(request, response) {
     response.write(htmlBox.htmlFunc(htmlBox.dangMap));
     response.end();
   }
+  else if (splitURL === "topMenu.js") {
+    cmServer.fileDirectory(splitURL, response);
+  }
+  else if (splitURL === "bottomMenu.js") {
+    cmServer.fileDirectory(splitURL, response);
+  } 
   else if(splitURL === "dangMap.js") {
     cmServer.fileDirectory(splitURL, response);
   }

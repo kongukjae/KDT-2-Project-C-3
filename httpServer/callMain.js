@@ -14,6 +14,12 @@ export default function callMain(request, response) {
   let splitURL = request.url.split("/")[1];
   if (splitURL === "commonFunc.js") {
     cmServer.fileDirectory(splitURL, response);
+  }
+  else if (splitURL === "topMenu.js") {
+    cmServer.fileDirectory(splitURL, response);
+  }
+  else if (splitURL === "bottomMenu.js") {
+    cmServer.fileDirectory(splitURL, response);
   } 
   else if (splitURL === "mainStyle.js") {
     cmServer.fileDirectory(splitURL, response);
