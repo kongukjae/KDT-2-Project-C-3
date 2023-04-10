@@ -1,9 +1,9 @@
-import htmlBox from "../htmlBox.js";
+import htmlBox from "../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
 
 export default function dangMap(request, response) {
-  let splitURL = request.url.split("/")[1];
+  let splitURL = request.url.split("/")[2];
 
   if (request.url.startsWith("/mypage?")) {
     let target = request.url.split("=")[1];
@@ -27,7 +27,7 @@ export default function dangMap(request, response) {
     );
     connection.end();
   } else if (splitURL === "mypageStyle.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`friends/${splitURL}`, response);
   }
   if (request.url.startsWith("/followRequest")) {
     let target = request.url.split("?")[1];

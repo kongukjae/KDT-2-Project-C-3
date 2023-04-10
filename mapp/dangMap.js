@@ -1,18 +1,4 @@
 
-function tagCreate(tType,props){
-  let element = document.createElement(tType);
-  for(let i in props){
-    element[i] = props[i];
-  }
-  return element;
-};
-
-function styleCreate(obj,styleOb){
-  for(i in styleOb){
-    obj.style[i] = styleOb[i];
-  }
-}
-
 function getRandom(min, max) {
   
   return Math.random() * (max - min) + min;
@@ -41,11 +27,31 @@ function map(){
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
   center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
-  level: 7, // 지도의 확대 레벨
+  level: 5, // 지도의 확대 레벨
   mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
 };
+
+mapContainer.addEventListener('wheel', function(e) { // 지도 위에서 휠 이벤트가 발생했을 때
+  e.preventDefault();
+  console.log(e.deltaY) // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
+  let mapLevel = map.getLevel(); // 지도의 현재 확대 레벨을 가져옴
+  console.log(mapLevel);
+
+  if(e.deltaY > 0) { // 휠을 내릴 때 => 지도를 축소 할 때
+    if(mapLevel >= 6) { // 지도의 확대 레벨이 6보다 크거나 같으면
+      map.setLevel(6); // 확대/축소 제한
+    } else{ // 지도의 확대 레벨이 6보다 작으면 확대/축소 제한 없음
+      map.setLevel(mapLevel + 1);
+    }
+  } else { // 휠을 올릴 때 => 지도를 확대 할 때
+    map.setLevel(mapLevel - 1); // 확대/축소 제한 없음
+  }
+})
+console.log(mapOption.level);
+
 // 지도를 생성한다
 let map = new kakao.maps.Map(mapContainer, mapOption);
+map.setZoomable(false);
 
 //  이미지 링크 생성을 해서 넣으니까 되었다.
 let imageSrc = 'https://i.ibb.co/zR5p1G9/dogpaw.png'; // 마커이미지의 주소입니다
@@ -341,38 +347,8 @@ function frAddMarker(position) {
   })
 
   // 하단 메뉴
-  let menuChild = [];
-  for(let i = 0;i<5;i++){
-    let child = tagCreate("div",{});
-    rootChild[2].appendChild(child);
-    styleCreate(child,{
-      width : "59px",
-      height : "59px",
-      backgroundColor : "#FDFDFD",
-      borderRadius : "5px",
-      cursor : "pointer",
-      boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-      transition : "scale ease 0.3s",
-      display : "flex",
-      justifyContent: "center",
-      alignItems : "center",
-      fontSize : "13px",
-      fontWeight : "500"
-    })
-    child.onmouseover = ()=>{
-      child.style.scale = "1.1"
-    }
-    child.onmouseout = ()=>{
-      child.style.scale = "1"
-
-    }
-    menuChild.push(child);
-  }
-  menuChild[0].innerText = "댕댕마켓";
-  menuChild[1].innerText = "댕자랑";
-  menuChild[2].innerText = "댕맵";
-  menuChild[3].innerText = "댕톡";
-  menuChild[4].innerText = "댕프랜드";
+  let menuChild2 = [];
+  btmMeun(rootChild[2], menuChild2);
 
 }
 

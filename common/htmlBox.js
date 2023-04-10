@@ -26,26 +26,36 @@ const html = {
     </html>`
   },
   mapBody: `
-  <script src="/commonFunc.js"></script> 
-  <script src="/mainStyle.js"></script>
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/main/weather.js"></script>
+  <script src="/main/mainStyle.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac"></script>
-  <script src="/map.js"></script>`,
+  <script src="/mapp/map.js"></script>`,
 
   loginBody : `
-  <script src="/commonFunc.js"></script>
+  <script src="/common/commonFunc.js"></script>
   <div id='root'></div>
-  <script src="./loginPage.js"></script>`,
-  signupPage : `<script src="/commonFunc.js"></script><script src="./signupstyle.js"></script>`,
-  signUpResult : `<script src="/commonFunc.js"></script>
-  <script src="./signupResultStyle.js"></script>`,
+  <script src="init_user/loginPage.js"></script>`,
+  signupPage : `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/init_user/signupstyle.js"></script>`,
+  signUpResult : `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/init_user/signupResultStyle.js"></script>`,
   dangMap : `
-  <script src="/commonFunc.js"></script>
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
-  <script src="/dangMap.js"></script>
-  <script src="map/dangMapSlide"></script>`
+  <script src="/mapp/dangMap.js"></script>
+  <script src="/mapp/dangMapSlide.js"></script>`
 ,
   mypage : `
-  <script src="/commonFunc.js"></script>
-  <script src="/mypageStyle.js"></script>`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/mypageStyle.js"></script>`
 }
 export default html;
