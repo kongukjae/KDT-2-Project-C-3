@@ -1,9 +1,9 @@
-import htmlBox from "../htmlBox.js";
+import htmlBox from "../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
 
 export default function dangMap(request, response) {
-  let splitURL = request.url.split("/")[1];
+  let splitURL = request.url.split("/")[2];
 
   if (request.url === "/map") {
     response.writeHead(200);
@@ -11,13 +11,13 @@ export default function dangMap(request, response) {
     response.end();
   }
   else if (splitURL === "topMenu.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`common/${splitURL}`, response);
   }
   else if (splitURL === "bottomMenu.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`common/${splitURL}`, response);
   } 
   else if(splitURL === "dangMap.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`map/${splitURL}`, response);
   }
   else if (request.url.startsWith("/frFootprint")) {
     console.log("url == " + request.url);
@@ -61,6 +61,6 @@ export default function dangMap(request, response) {
     connection.end();
   }
   else if(request.url.split('/')[2] === 'dangMapSlide'){
-    cmServer.fileDirectory("dangMapSlide.js", response);
+    cmServer.fileDirectory("map/dangMapSlide.js", response);
   }
 }

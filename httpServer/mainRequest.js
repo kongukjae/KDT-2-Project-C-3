@@ -1,8 +1,8 @@
 import http from "http";
 import fs from "fs";
 import mysql from "mysql";
-import htmlBox from "../htmlBox.js";
-import ValueCheck from "../ValueCheck.js";
+import htmlBox from "../common/htmlBox.js";
+// import ValueCheck from "../ValueCheck.js";
 import { parse } from "path";
 import callMain from "./callMain.js";
 import cmServer from "./commonServer.js";
@@ -59,17 +59,17 @@ const server = http.createServer(function (request, response) {
     //메인화면
     callMain(request, response);
     //회원가입
-    let splitURLbyJin = request.url.split("/")[1];
+    let splitURLbyJin = request.url.split("/")[2];
     if (splitURLbyJin === "signUp") {
       response.writeHead(200);
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
       response.end();
     }
     if (splitURLbyJin === "signupstyle.js") {
-      cmServer.fileDirectory(`signup.js`, response);
+      cmServer.fileDirectory(`init_user/signup.js`, response);
     }
     if (splitURLbyJin === "signupResultStyle.js") {
-      cmServer.fileDirectory(`signupResult.js`, response);
+      cmServer.fileDirectory(`init_user/signupResult.js`, response);
     }
     if (splitURLbyJin === "favicon") {
       cmServer.fileDirectory(`graphic/dogpaw.png`, response);
