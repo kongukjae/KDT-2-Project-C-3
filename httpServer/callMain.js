@@ -15,6 +15,9 @@ export default function callMain(request, response) {
   if (splitURL === "commonFunc.js") {
     cmServer.fileDirectory(splitURL, response);
   } 
+  if (splitURL === "commonMap.js") {
+    cmServer.fileDirectory(splitURL, response);
+  } 
   else if (splitURL === "mainStyle.js") {
     cmServer.fileDirectory(splitURL, response);
   } 

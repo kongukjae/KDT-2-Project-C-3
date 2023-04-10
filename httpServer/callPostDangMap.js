@@ -24,7 +24,7 @@ export default function callPostDangMap(request, response) {
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(
-          `insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, '${cooData[key][2]}')`,
+          `insert into map_tables(latitude, longitude, id) values(${cooData[key][0].toFixed(13)}, ${cooData[key][1].toFixed(13)}, '${cooData[key][2]}')`,
           function (err) {
             if (err) throw err;
             else console.log("정상적으로 DB에 저장");
@@ -54,6 +54,11 @@ export default function callPostDangMap(request, response) {
         // DB에 있는 데이터를 업데이트 / id가 a고 위도가 b고 경도가 c인 데이터의 위도를 d, 경도를 e로 업데이트
         conn.query(`UPDATE map_tables SET latitude = '${dragData[key][0]}', longitude = '${dragData[key][1]}' WHERE id = '${dragData[key][2]}' and latitude = '${dragData[key][3]}' and longitude = '${dragData[key][4]}'`,
         function(err){
+          console.log('data 1 = ' + dragData[key][0])
+          console.log('data 2 = ' + dragData[key][1])
+          console.log('data 3 = ' + dragData[key][2])
+          console.log('data 4 = ' + dragData[key][3])
+          console.log('data 5 = ' + dragData[key][4])
           if(err) throw err;
           else console.log("정상적으로 DB 업데이트");
         });
