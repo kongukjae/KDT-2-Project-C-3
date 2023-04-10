@@ -17,7 +17,7 @@ export default function dangMap(request, response) {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   } 
   else if(splitURL === "dangMap.js") {
-    cmServer.fileDirectory(`map/${splitURL}`, response);
+    cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
   else if (request.url.startsWith("/frFootprint")) {
     console.log("url == " + request.url);
@@ -60,7 +60,7 @@ export default function dangMap(request, response) {
     );
     connection.end();
   }
-  else if(request.url.split('/')[2] === 'dangMapSlide'){
-    cmServer.fileDirectory("map/dangMapSlide.js", response);
+  else if(splitURL === "dangMapSlide.js"){
+    cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
 }

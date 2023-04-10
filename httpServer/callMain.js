@@ -28,7 +28,7 @@ export default function callMain(request, response) {
     cmServer.fileDirectory(`main/${splitURL}`, response);
   } 
   else if (splitURL === "map.js") {
-    cmServer.fileDirectory(`map/${splitURL}`, response);
+    cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
 
   if (request.url === "/main") {
