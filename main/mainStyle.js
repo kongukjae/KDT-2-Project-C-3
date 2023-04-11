@@ -168,9 +168,10 @@ myPageBtn.addEventListener("click", () => {
 });
 
 logoutBtn.addEventListener("click", () => {
-  alert("로그아웃 페이지");
-});
 
+  document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  window.location = "/";
+});
 
 
 
