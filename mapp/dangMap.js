@@ -76,6 +76,7 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
     // 클릭한 위치에 마커를 표시합니다
     let latlng = mouseEvent.latLng;
     let wrap = [];
+
     addMarker(latlng);
     wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
     //result.push(wrap);
@@ -91,7 +92,6 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
   // httpRequest.send(`re1=${result[0]}`);
   httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
 });
-
 
 
 loadMarker(addMarker);
