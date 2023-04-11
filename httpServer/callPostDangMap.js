@@ -19,16 +19,16 @@ export default function callPostDangMap(request, response) {
       response.end();
 
       for (const key in cooData) {
-        //console.log(cooData[key]);
+        console.log(cooData[key]);
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(
-          `insert into map_tables(latitude, longitude, id) values(${cooData[key][0]}, ${cooData[key][1]}, '${cooData[key][2]}')`,
+          `insert into map_tables(latitude, longitude, id, addData) values(${cooData[key][0]}, ${cooData[key][1]}, '${cooData[key][2]}', now())`,
           function (err) {
             if (err) throw err;
             else {
-              console.log(cooData[key][0], cooData[key][1])
+              // console.log(cooData[key][0], cooData[key][1], cooData[key][2], cooData[key][3]);
               console.log("정상적으로 DB에 저장")};
           }
         );
