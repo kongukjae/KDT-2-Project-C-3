@@ -36,6 +36,7 @@ const pageStyle = {
     width450: "450px",
     width390: "390px",
     width300: "300px",
+    width288: "288px",
     width250: "250px",
     width200: "200px",
     width180: "180px",
@@ -56,11 +57,13 @@ const pageStyle = {
     height690: "690px",
     height500: "500px",
     height450: "450px",
+    height308: "308px",
     height300: "300px",
     height260: "260px",
     height154: "154px",
     height150: "150px",
     height140: "140px",
+    height132: "132px",
     height130: "130px",
     height126: "126px",
     height100: "100px",
@@ -106,6 +109,9 @@ const pageStyle = {
   marginBottom: {
     marginBottom80: "80px",
     marginBottom50: "50px",
+  },
+  marginLeft:{
+    marginLeft_144: "-144px",
   },
   borderRadius: {
     borderRadiusP50: "50%",
@@ -259,16 +265,44 @@ const targetStyle = {
     height : pageStyle.height.height85vh,
     position : "relative",
   },
+  // 댕맵 하단 슬라이드 바
   menuMapSlide: {
     width : pageStyle.width.widthP100,
-    height : pageStyle.height.height300,
+    height : pageStyle.height.height308,
     position : "relative",
     backgroundColor : "lightgray",
     display : "flex",
-    justifyContent : "center",
+    justifyContent : "flex-start",
     position : "absolute",
     zIndex : "1",
     bottom : "-155px"
+  },
+
+  menuMapSlideBar: {
+    width : pageStyle.width.width25,
+    height : pageStyle.height.height3,
+    backgroundColor : pageStyle.colorTheme.gray,
+    position: "absolute",
+    top : "8px",
+    left : "50%",
+    transform: "translateX(-50%)",
+  },
+  menuMapSlideWrap: {
+    // width: pageStyle.width.widthP100,
+    // height: pageStyle.height.heightP100,
+    marginTop: "18px",
+    // marginLeft: "0",
+    padding: "0px 10px 10px 10px",
+    display: "grid",
+    gridAutoFlow: "column",
+    gridTemplateColumns: "repeat(16, 160px)",
+    gridTemplateRows: "repeat(2, 140px)",
+  },
+  menuMapSlideItems: {
+    border: "1px solid black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   //댕맵 검색창
@@ -304,14 +338,6 @@ const targetStyle = {
     cursor : "pointer",
     ...pageStyle.flexRowCenter,
     paddingBottom : "3px"
-  },
-
-  //댕맵 하단 슬라이드 바 작대기
-  menuMapSlideBar: {
-    width : pageStyle.width.width25,
-    height : pageStyle.height.height3,
-    backgroundColor : pageStyle.colorTheme.gray,
-    marginTop : "5px",
   },
 
   //회원가입 결과창
@@ -449,6 +475,47 @@ const targetStyle = {
       alignItems : "center",
       backgroundColor : pageStyle.colorTheme.peach,
       boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    },
+    // 댕맵 오버레이
+    dangMapOverlayWrap: {
+      position: "absolute",
+      left: "0",
+      bottom: "10px",
+      width: pageStyle.width.width288,
+      height: pageStyle.height.height132,
+      marginLeft: pageStyle.marginLeft.marginLeft_144,
+      textAlign: "left",
+      overflow: "hidden",
+      fontSize: pageStyle.fontSizeSet.smaller,
+    },
+    dangMapOverlayInfo: {
+      width: "286px",
+      height: "120px",
+      borderRadius: "5px",
+      borderBottom: "2px solid #ccc",
+      borderRight: "1px solid #ccc",
+      overflow: "hidden",
+      backgroundColor: "#fff",
+    },
+    dangMapOverlayTitle: {
+      padding: "5px 0 0 10px",
+      height: "30px",
+      backgroundColor: "#eee",
+      borderBottom: "1px solid #ddd",
+      fontSize: "18px",
+      fontWeight: "bold",
+    },
+    dangMapOverlayBody: {
+      border: "0",
+      boxShadow: "0px 1px 2px #888",
+      position: "relative",
+      overflow: "hidden",
+      display: "flex",
+    },
+    dangMapOverlayDesc: {
+      position: "relative",
+      margin: "13px 0 0 90px",
+      height: "75px",
     },
     findUserInfoRoot: {
       width : pageStyle.width.width500,

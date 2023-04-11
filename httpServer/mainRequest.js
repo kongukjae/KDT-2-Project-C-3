@@ -52,8 +52,6 @@ const mysqlInfo = {
 
 const server = http.createServer(function (request, response) {
   //로그인
-  console.log(request.url)
-
   let body = "";
   if (request.method === "GET") {
     callLoginGet(request, response);
@@ -61,20 +59,19 @@ const server = http.createServer(function (request, response) {
     //메인화면
     callMain(request, response);
     //회원가입
-    if (request.url === "/signUp") {
-      console.log("check")
+    let splitURLbyJin = request.url.split("/")[2];
+    if (splitURLbyJin === "signUp") {
       response.writeHead(200);
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
       response.end();
     }
-    if (request.url === "/init_user/signupstyle.js") {
-      console.log("확인")
+    if (splitURLbyJin === "signupstyle.js") {
       cmServer.fileDirectory(`init_user/signup.js`, response);
     }
-    if (request.url === "/init_user/signupResultStyle.js") {
+    if (splitURLbyJin === "signupResultStyle.js") {
       cmServer.fileDirectory(`init_user/signupResult.js`, response);
     }
-    if (request.url === "/favicon") {
+    if (splitURLbyJin === "favicon") {
       cmServer.fileDirectory(`graphic/dogpaw.png`, response);
     }
     if (request.url.startsWith("/dupCheck")) {

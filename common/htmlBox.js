@@ -20,7 +20,7 @@ const html = {
         }
       </style>
     </head>
-    <body>
+    <body onselectstart="return false">
       ${data}
     </body>
     </html>`

@@ -42,14 +42,15 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select latitude, longitude, id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = "${checkID}"`,
+      `select latitude, longitude, id, addData from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = "${checkID}"`,
       (err, rows) => {
         if (err) throw err;
         else {
           for (let i = 0; i < count; i++) {
             let fArr = [];
-            fArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
+            fArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
             fMarkerArr[i] = fArr;
+            // console.log(rows);
           }
           response.writeHead(200);
           response.write(JSON.stringify(fMarkerArr));
