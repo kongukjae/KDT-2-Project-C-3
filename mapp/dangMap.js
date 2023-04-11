@@ -56,13 +56,6 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
     // 클릭한 위치에 마커를 표시합니다
     let latlng = mouseEvent.latLng;
     let wrap = [];
-      
-    let now = new Date();
-    let timeArray = [now.getFullYear(), now.getMonth()+1, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds()];
-    wrap.push(timeArray);
-
-
-
 
     addMarker(latlng);
     wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
