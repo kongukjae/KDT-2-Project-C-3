@@ -45,23 +45,11 @@ function main(){
   styleCreate(dupCheck,targetStyle.signUpDupCheck)
   rootChild[1].appendChild(dupCheck);
   dupCheck.innerText = "중복확인";
-  function dupCheckResultModalWindowNoDup(){
+  
+  function dupCheckResultModalWindow(value){
     let dupCheckResultModal =  tagCreate("div",{});
     styleCreate(dupCheckResultModal,targetStyle.signUpDupCheckModal)
-    dupCheckResultModal.innerText = "중복된 아이디가 없습니다";
-    wrap.appendChild(dupCheckResultModal);
-    let okaybutton = tagCreate("div",{})
-    styleCreate(okaybutton,targetStyle.signUpOKBtn)
-    dupCheckResultModal.appendChild(okaybutton);
-    okaybutton.innerText = "닫기";
-    okaybutton.addEventListener("click",()=>{
-      dupCheckResultModal.remove();
-    })
-  }
-  function dupCheckResultModalWindowYesDup(){
-    let dupCheckResultModal =  tagCreate("div",{});
-    styleCreate(dupCheckResultModal,targetStyle.signUpDupCheckModal)
-    dupCheckResultModal.innerText = "중복된 아이디가 있어 사용할 수 없습니다";
+    dupCheckResultModal.innerText = value
     wrap.appendChild(dupCheckResultModal);
     let okaybutton = tagCreate("div",{})
     styleCreate(okaybutton,targetStyle.signUpOKBtn)
@@ -80,9 +68,9 @@ function main(){
       xhr.addEventListener("load",()=>{
         let resultFromServer = xhr.response;
         if(resultFromServer.length === 0){
-          dupCheckResultModalWindowNoDup();
+          dupCheckResultModalWindow("중복된 아이디가 없습니다");
         }else{
-          dupCheckResultModalWindowYesDup();
+          dupCheckResultModalWindow("중복된 아이디가 있어 사용할 수 없습니다");
         };
       })
   })
