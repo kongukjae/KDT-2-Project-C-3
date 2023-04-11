@@ -57,6 +57,7 @@ const pageStyle = {
     height690: "690px",
     height500: "500px",
     height450: "450px",
+    height308: "308px",
     height300: "300px",
     height260: "260px",
     height154: "154px",
@@ -264,16 +265,44 @@ const targetStyle = {
     height : pageStyle.height.height85vh,
     position : "relative",
   },
+  // 댕맵 하단 슬라이드 바
   menuMapSlide: {
     width : pageStyle.width.widthP100,
-    height : pageStyle.height.height300,
+    height : pageStyle.height.height308,
     position : "relative",
     backgroundColor : "lightgray",
     display : "flex",
-    justifyContent : "center",
+    justifyContent : "flex-start",
     position : "absolute",
     zIndex : "1",
     bottom : "-155px"
+  },
+
+  menuMapSlideBar: {
+    width : pageStyle.width.width25,
+    height : pageStyle.height.height3,
+    backgroundColor : pageStyle.colorTheme.gray,
+    position: "absolute",
+    top : "8px",
+    left : "50%",
+    transform: "translateX(-50%)",
+  },
+  menuMapSlideWrap: {
+    // width: pageStyle.width.widthP100,
+    // height: pageStyle.height.heightP100,
+    marginTop: "18px",
+    // marginLeft: "0",
+    padding: "0px 10px 10px 10px",
+    display: "grid",
+    gridAutoFlow: "column",
+    gridTemplateColumns: "repeat(16, 160px)",
+    gridTemplateRows: "repeat(2, 140px)",
+  },
+  menuMapSlideItems: {
+    border: "1px solid black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   //댕맵 검색창
@@ -309,15 +338,6 @@ const targetStyle = {
     cursor : "pointer",
     ...pageStyle.flexRowCenter,
     paddingBottom : "3px"
-  },
-
-  //댕맵 하단 슬라이드 바 작대기
-  menuMapSlideBar: {
-    width : pageStyle.width.width25,
-    height : pageStyle.height.height3,
-    backgroundColor : pageStyle.colorTheme.gray,
-    position: "absolute",
-    top : "5px",
   },
 
   //회원가입 결과창
