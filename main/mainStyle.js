@@ -4,7 +4,7 @@ function main(){
   styleCreate(root,targetStyle.mainRoot)
   let rootChild = [];
   for(let i = 0;i<6;i++){
-    let child = tagCreate("div",{});
+    let child = tagCreate("div",{id:i});
     root.appendChild(child);
     rootChild.push(child);
   }
@@ -12,6 +12,122 @@ function main(){
   //상단메뉴바 commonFunc로 이동
   rootChild[2].id = "map"
   topMenu(rootChild);
+ 
+ 
+// ----햄버거 버튼 구역입니다.----
+
+
+styleCreate(root, {
+  overflow: "hidden",
+});
+
+
+  let hamburger = tagCreate("div",{});
+ rootChild[0].appendChild(hamburger);
+  styleCreate(hamburger,{
+    width: "30px",
+  height: "22.5px",
+  position: "absolute",
+  top: "50px",
+  left: "15px",
+  cursor: "pointer"
+  })
+ 
+// 햄버거 바 생성
+let bar1 = tagCreate("div", {});
+let bar2 = tagCreate("div", {});
+let bar3 = tagCreate("div", {});
+hamburger.appendChild(bar1);
+hamburger.appendChild(bar2);
+hamburger.appendChild(bar3);
+styleCreate(bar1, {
+  width: "100%",
+  height: "4.5px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  position: "absolute",
+  top: "0px",
+  left: "0px",
+});
+styleCreate(bar2, {
+  width: "100%",
+  height: "4.5px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  position: "absolute",
+  top: "9px",
+  left: "0px",
+});
+styleCreate(bar3, {
+  width: "100%",
+  height: "4.5px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  position: "absolute",
+  top: "18px",
+  left: "0px",
+});
+
+let menuSlide = tagCreate("div", {});
+root.appendChild(menuSlide);
+styleCreate(menuSlide, {
+  width: "300px",
+  height: "100%",
+  backgroundColor: "#F7786B",
+  position: "absolute",
+  left: "-600px",
+  top: "0",
+  transition: "left 0.6s ease",
+  zIndex: 1
+});
+
+bar1.addEventListener("click", () => {
+  menuSlide.style.left = "0";
+});
+bar2.addEventListener("click", () => {
+  menuSlide.style.left = "0";
+});
+bar3.addEventListener("click", () => {
+  menuSlide.style.left = "0";
+});
+
+let closeButton = tagCreate("div", {});
+menuSlide.appendChild(closeButton);
+styleCreate(closeButton, {
+  width: "30px",
+  height: "30px",
+  backgroundColor: pageStyle.colorTheme.peach,
+  borderRadius: "50%",
+  position: "absolute",
+  top: "20px",
+  right: "15px",
+  cursor: "pointer",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+ 
+});
+
+closeButton.innerHTML = "&#x2716;"; // X 모양 아이콘
+
+closeButton.addEventListener("click", () => {
+  menuSlide.style.left = "-600px";
+});
+
+ rootChild[1].addEventListener("click",() =>{
+  menuSlide.style.left = "-600px";
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
