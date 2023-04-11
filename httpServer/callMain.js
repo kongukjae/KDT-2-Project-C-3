@@ -63,7 +63,7 @@ export default function callMain(request, response) {
 
           for (let i = 0; i < tableCnt; i++) {
             let arr = [];
-            arr.push(rows[i].latitude, rows[i].longitude);
+            arr.push(rows[i].latitude, rows[i].longitude, rows[i].addData);
             markerArr[i] = arr;
           }
           //console.log(markerArr);
