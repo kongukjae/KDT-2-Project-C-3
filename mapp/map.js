@@ -68,7 +68,8 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 
 loadMarker(addMarker);
-frMarker(frAddMarker);
+// frMarker(frAddMarker);
+otMarker(otAddMarker);
 
 
 // 마커 하나를 지도위에 표시합니다 
@@ -121,6 +122,29 @@ function frAddMarker(position) {
   }
 }
 
+function otAddMarker(position) {
+  
+  // 마커를 생성합니다
+  let marker = new kakao.maps.Marker({
+    map: map, // 마커를 표시할 지도
+    position: position, // 마커를 표시할 위치
+    image: frMarkerImage
+  });
+
+  // 마커가 지도 위에 표시되도록 설정합니다
+  marker.setMap(map);
+  
+  // 생성된 마커를 배열에 추가합니다
+  markers.push(marker);
+
+  // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+  function setMarkers(map) {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }            
+  }
+}
+
 function loadMarker(callback){
   let res;
   const xhr = new XMLHttpRequest();
@@ -130,12 +154,12 @@ function loadMarker(callback){
   xhr.send(); 
   xhr.addEventListener('load', function(){
     res = JSON.parse(xhr.response);
-    //res = xhr.response;
+    // res = xhr.response;
     for(const key in res){
-      //console.log(typeof(parseFloat(res['0'][0])))
+      // console.log(res);
       callback(new kakao.maps.LatLng(parseFloat(res[key][0]), parseFloat(res[key][1])));
     }
-      console.log(res['0']);
+      console.log(res);
       console.log("정상적으로 지도에 표시됨");
     });
 }
@@ -172,3 +196,27 @@ function frMarker(callback){
   });
   
   }
+
+  function otMarker(callback){
+    let res3;
+    const xhr = new XMLHttpRequest();
+    const cookieId = document.cookie.split("=")[1];
+    xhr.open("GET", `http://localhost:2080/otFootprint?id=${cookieId}`);
+    // httpRequest.send(`re1=${result[0]}`);
+    xhr.send(); 
+    xhr.addEventListener('load', function(){
+      res3 = JSON.parse(xhr.response); // 응답
+      let frResult = {};
+      console.log(res3);
+      for(const key in res3){
+        //console.log(typeof(parseFloat(res['0'][0])))
+        callback(new kakao.maps.LatLng(parseFloat(res3[key][0]), parseFloat(res3[key][1])));
+        if(res3[key][2] !== cookieId) {
+          imageSrc = "#abbbbb";
+        }
+      }
+        
+      console.log("정상적임");
+    });
+    
+    }
