@@ -651,5 +651,18 @@ const loginPageStyle = {
     ...pageStyle.flexRowCenter,
     fontSize : pageStyle.fontSizeSet.medium,
     cursor : 'pointer',
+  },
+  loginPageFormBtnFindUserInfo: {
+    marginTop : "10px",
+    border : '1px solid #999',
+    borderRadius : pageStyle.borderRadius.borderRadius15,
+    backgroundColor : '#D9D9D9',
+    color : pageStyle.colorTheme.black,
+    textDecoration : 'none',
+    width : pageStyle.width.width390,
+    height : pageStyle.height.height24,
+    ...pageStyle.flexRowCenter,
+    fontSize : pageStyle.fontSizeSet.smaller,
+    cursor : 'pointer',
   }
 };
