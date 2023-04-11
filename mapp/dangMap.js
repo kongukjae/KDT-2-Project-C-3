@@ -95,7 +95,7 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
 
 
 loadMarker(addMarker);
-frMarker(frAddMarker);
+// frMarker(frAddMarker);
 
 
   // 마커 하나를 지도위에 표시합니다 
@@ -103,16 +103,27 @@ frMarker(frAddMarker);
 
   // 마커를 생성하고 지도위에 표시하는 함수입니다
   function addMarker(position) {
+    // 오버레이 창 열림/닫힘 체크 변수
+    let overlayChecker;
     
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
-      map: map, // 마커를 표시할 지도
+      // map: map, // 마커를 표시할 지도
       position: position, // 마커를 표시할 위치
       image: markerImage
     });
+    kakao.maps.event.addListener(map, 'click', function() {
+      console.log(markers);
+      marker.setMap(map);
+    })
+
 
     // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
+    if(overlayChecker === false) {
+      marker.setMap(map);
+      console.log(overlayChecker)
+      console.log("마커 찍힘")
+    }
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true); 
     
@@ -126,53 +137,53 @@ frMarker(frAddMarker);
     }            
   }
 
-  /* 오버레이 구현중
-  kakao.maps.event.addListener(marker, 'click', function() {
-    console.log("오버레이 실행");
-
-    let content = `
+  // 오버레이 내부 구성 요소들
+  const content = document.createElement('div');
+  const info = document.createElement('div');
+  info.innerHTML = `
   <div class="wrap" style="position: absolute;left: 0;bottom: 10px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;"> 
-    <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
-      <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
-        강아지 이름
-        <button class="close" title="닫기" style="position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px; cursor: pointer;">X</button>
-      </div>
-      <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
-        <div class="img">
-          <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
-        </div> 
-        <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
-          <p class="ellipsis">xx분 전</p>
-          <button>프로필 보기</button>
-          <button>팔로우</button>
-        </div>
+  <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
+    <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
+      강아지 이름
+    </div>
+    <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
+      <div class="img">
+        <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
+      </div> 
+      <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
+        <p class="ellipsis">xx분 전</p>
+        <button>프로필 보기</button>
+        <button>팔로우</button>
       </div>
     </div>
-  </div>`;
-  const closeBtn = document.querySelector('close');
-  console.dir(closeBtn);
+  </div>
+  </div>
+  `;
+  content.appendChild(info);
+  
+  // 오버레이 창 닫기 버튼
+  const closeBtn = document.createElement('button');
+  closeBtn.innerText = 'X';
+  content.appendChild(closeBtn);
 
-  let overlay = new kakao.maps.CustomOverlay({
-    content: content,
-    // map: map,
-    position: marker.getPosition()       
-  });
-
-  overlay.setMap(map);
-
-  function closeOverlay() {
-    overlay.setMap(null);     
+  // 닫기 버튼 클릭 시 열려있는 오버레이 창 닫힘
+  closeBtn.onclick = function() {
+    customOverlay.setMap(null);
+    overlayChecker = false;
   }
 
-  // kakao.maps.event.addListener(map, 'click', function() {
-  //   content = ``;
-  // })
+  const customOverlay = new kakao.maps.CustomOverlay({
+    position: position,
+    content: content,
+    xAnchor: 0.3,
+    yAnchor: 0.91
+});
 
-  // root.child[0].addEventListener('click', function() {
-  //   content = ``;
-  // });
-
-  }); */
+// 마커 위에 오버레이를 표시
+  kakao.maps.event.addListener(marker, 'click', function() {
+    customOverlay.setMap(map);
+    overlayChecker = true;
+  });
 
   let dragStartLat;
   let dragStartLng;
@@ -207,28 +218,28 @@ frMarker(frAddMarker);
 
 }
 
-function frAddMarker(position) {
+// function frAddMarker(position) {
   
-  // 마커를 생성합니다
-  let marker = new kakao.maps.Marker({
-    map: map, // 마커를 표시할 지도
-    position: position, // 마커를 표시할 위치
-    image: frMarkerImage
-  });
+//   // 마커를 생성합니다
+//   let marker = new kakao.maps.Marker({
+//     map: map, // 마커를 표시할 지도
+//     position: position, // 마커를 표시할 위치
+//     image: frMarkerImage
+//   });
 
-  // 마커가 지도 위에 표시되도록 설정합니다
-  marker.setMap(map);
+//   // 마커가 지도 위에 표시되도록 설정합니다
+//   marker.setMap(map);
   
-  // 생성된 마커를 배열에 추가합니다
-  markers.push(marker);
+//   // 생성된 마커를 배열에 추가합니다
+//   markers.push(marker);
 
-  // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-  function setMarkers(map) {
-    for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-    }            
-  }
-}
+//   // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+//   function setMarkers(map) {
+//     for (let i = 0; i < markers.length; i++) {
+//         markers[i].setMap(map);
+//     }            
+//   }
+// }
 
   function loadMarker(callback){
     let res;
@@ -249,38 +260,38 @@ function frAddMarker(position) {
       });
     }
 
-  function frMarker(callback){
-    let res2;
-    const xhr = new XMLHttpRequest();
-    const cookieId = document.cookie.split("=")[1];
-    xhr.open("GET", `http://localhost:2080/frFootprint?id=${cookieId}`);
-    // httpRequest.send(`re1=${result[0]}`);
-    xhr.send(); 
-    xhr.addEventListener('load', function(){
-      res2 = JSON.parse(xhr.response); // 응답
-      let frResult = {};
-      console.log(res2);
-      // for(let i of res2){
-      //   let frWrap = [];
-      //   frWrap.push(i.latitude, i.longitude)
-      //   console.log(frWrap);
-      //   callback(new kakao.maps.LatLng(parseFloat(frWrap[i][0]), parseFloat(frWrap[i][1])));
-      //   frResult[0] = frWrap;
-      //   console.log(frResult);
-      // }
-      // //res = xhr.response;
-      for(const key in res2){
-        //console.log(typeof(parseFloat(res['0'][0])))
-        callback(new kakao.maps.LatLng(parseFloat(res2[key][0]), parseFloat(res2[key][1])));
-        if(res2[key][2] !== cookieId) {
-          imageSrc = "#abbbbb";
-        }
-      }
+  // function frMarker(callback){
+  //   let res2;
+  //   const xhr = new XMLHttpRequest();
+  //   const cookieId = document.cookie.split("=")[1];
+  //   xhr.open("GET", `http://localhost:2080/frFootprint?id=${cookieId}`);
+  //   // httpRequest.send(`re1=${result[0]}`);
+  //   xhr.send(); 
+  //   xhr.addEventListener('load', function(){
+  //     res2 = JSON.parse(xhr.response); // 응답
+  //     let frResult = {};
+  //     console.log(res2);
+  //     // for(let i of res2){
+  //     //   let frWrap = [];
+  //     //   frWrap.push(i.latitude, i.longitude)
+  //     //   console.log(frWrap);
+  //     //   callback(new kakao.maps.LatLng(parseFloat(frWrap[i][0]), parseFloat(frWrap[i][1])));
+  //     //   frResult[0] = frWrap;
+  //     //   console.log(frResult);
+  //     // }
+  //     // //res = xhr.response;
+  //     for(const key in res2){
+  //       //console.log(typeof(parseFloat(res['0'][0])))
+  //       callback(new kakao.maps.LatLng(parseFloat(res2[key][0]), parseFloat(res2[key][1])));
+  //       if(res2[key][2] !== cookieId) {
+  //         imageSrc = "#abbbbb";
+  //       }
+  //     }
         
-      console.log("정상적");
-    });
+  //     console.log("정상적");
+  //   });
     
-    }
+  //   }
 
 
   // 검색창
