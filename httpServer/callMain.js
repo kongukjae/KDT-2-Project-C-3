@@ -1,4 +1,4 @@
-import htmlBox from "../htmlBox.js";
+import htmlBox from "../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
 
@@ -11,15 +11,24 @@ export default function callMain(request, response) {
   //   database: "mungta",
   // }
 
-  let splitURL = request.url.split("/")[1];
+  let splitURL = request.url.split("/")[2];
   if (splitURL === "commonFunc.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`common/${splitURL}`, response);
+  }
+  else if (splitURL === "topMenu.js") {
+    cmServer.fileDirectory(`common/${splitURL}`, response);
+  }
+  else if (splitURL === "bottomMenu.js") {
+    cmServer.fileDirectory(`common/${splitURL}`, response);
+  } 
+  else if (splitURL === "weather.js") {
+    cmServer.fileDirectory(`main/${splitURL}`, response);
   } 
   else if (splitURL === "mainStyle.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`main/${splitURL}`, response);
   } 
   else if (splitURL === "map.js") {
-    cmServer.fileDirectory(splitURL, response);
+    cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
 
   if (request.url === "/main") {

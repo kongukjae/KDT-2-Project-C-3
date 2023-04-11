@@ -1,6 +1,7 @@
-import htmlBox from "../htmlBox.js";
+import htmlBox from "../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
+import crypto from "crypto";
 
 export default function callPostLogin(request, response) {
   let body = "";
@@ -17,7 +18,7 @@ export default function callPostLogin(request, response) {
       let userLoginPw = pwSplit.split("=")[1];
       console.log(userLoginId);
       console.log(userLoginPw);
-
+      const hashPassword = crypto.createHash('sha512').update(userLoginPw).digest('hex');
       // MySQL과 연동 , UserLoginData DB에 접속
       let connection = mysql.createConnection(cmServer.mysqlInfo);
 
@@ -32,7 +33,7 @@ export default function callPostLogin(request, response) {
       // ifnull(max(userID), 0) -> max(userID) : userID 중에 가장 높은 값을 출력 -> userID에 존재하지 않는 값이 들어온 경우 가장 높은 값이 없다 -> null 출력 -> ifnull에 의해 0 출력
 
       // DB에 접근 후 데이터 조회
-
+      
       connection.query(
         `SELECT id, PW from userinfo where id = '${userLoginId}'`,
         (error, data, fields) => {
@@ -44,7 +45,7 @@ export default function callPostLogin(request, response) {
             let dataPw = data[0].PW; //DB에 저장된 PW값
             if (userLoginId === dataId) {
               // 입력된 ID가 DB에 있을 경우
-              if (userLoginPw === dataPw) {
+              if (hashPassword === dataPw) {
                 // 입력된 ID에 대해 입력된 PW값과 DB에서 조회된 PW값이 일치 할 경우
                 console.log("로그인 성공");
                 connection.end();

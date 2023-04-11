@@ -2,9 +2,26 @@
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div
 mapOption = {
   center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
-  level: 7, // 지도의 확대 레벨
+  level: 5, // 지도의 확대 레벨
   mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
 };
+
+mapContainer.addEventListener('wheel', function(e) { // 지도 위에서 휠 이벤트가 발생했을 때
+  console.log(e.deltaY) // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
+  let mapLevel = map.getLevel(); // 지도의 현재 확대 레벨을 가져옴
+  console.log(mapLevel);
+
+  if(e.deltaY > 0) { // 휠을 내릴 때 => 지도를 축소 할 때
+    if(mapLevel >= 6) { // 지도의 확대 레벨이 6보다 크거나 같으면
+      map.setZoomable(false); // 확대/축소 제한
+    } else{ // 지도의 확대 레벨이 6보다 작으면 확대/축소 제한 없음
+      map.setZoomable(true);
+    }
+  } else { // 휠을 올릴 때 => 지도를 확대 할 때
+    map.setZoomable(true); // 확대/축소 제한 없음
+  }
+})
+console.log(mapOption.level);
 // 지도를 생성한다
 let map = new kakao.maps.Map(mapContainer, mapOption);
 
