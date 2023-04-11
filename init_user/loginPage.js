@@ -35,6 +35,7 @@ formLoginPageWrapper.innerHTML += `
     <input id = "login" type="submit" value="로그인">
     <a href='/signUp'>회원가입</a>
   </div>
+  <a id = "findUserInfo" href='/findUserInfo'>아이디 / 비밀번호 찾기</a>
 </form>
 `;
 // form 태그 스타일
@@ -56,3 +57,7 @@ styleCreate(formLoginPageWrapper.children[0].children[2].children[0], loginPageS
 
 // 회원가입 a태그 버튼 스타일
 styleCreate(formLoginPageWrapper.children[0].children[2].children[1], loginPageStyle.loginPageFormBtnSignup);
+
+// 아이디 비밀번호 찾기 구현 후 리펙토링 예정
+let findUserInfo = document.getElementById("findUserInfo");
+styleCreate(findUserInfo, loginPageStyle.loginPageFormBtnFindUserInfo);

@@ -8,7 +8,7 @@ function main(){
   let rootChild = [];
   for(let i = 0;i<8;i++){
     let child = tagCreate("div",{});
-    styleCreate(child,targetStyle.signUpListBox)
+    styleCreate(child,targetStyle.signUpListBox);
     wrap.appendChild(child);
     rootChild.push(child);
   }
