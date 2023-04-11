@@ -36,6 +36,7 @@ const pageStyle = {
     width450: "450px",
     width390: "390px",
     width300: "300px",
+    width288: "288px",
     width250: "250px",
     width200: "200px",
     width180: "180px",
@@ -61,6 +62,7 @@ const pageStyle = {
     height154: "154px",
     height150: "150px",
     height140: "140px",
+    height132: "132px",
     height130: "130px",
     height126: "126px",
     height100: "100px",
@@ -106,6 +108,9 @@ const pageStyle = {
   marginBottom: {
     marginBottom80: "80px",
     marginBottom50: "50px",
+  },
+  marginLeft:{
+    marginLeft_144: "-144px",
   },
   borderRadius: {
     borderRadiusP50: "50%",
@@ -446,6 +451,46 @@ const targetStyle = {
       alignItems : "center",
       backgroundColor : pageStyle.colorTheme.peach,
       boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    },
+    // 댕맵 오버레이
+    dangMapOverlayWrap: {
+      position: "absolute",
+      left: "0",
+      bottom: "10px",
+      width: pageStyle.width.width288,
+      height: pageStyle.height.height132,
+      marginLeft: pageStyle.marginLeft.marginLeft_144,
+      textAlign: "left",
+      overflow: "hidden",
+      fontSize: pageStyle.fontSizeSet.smaller,
+    },
+    dangMapOverlayInfo: {
+      width: "286px",
+      height: "120px",
+      borderRadius: "5px",
+      borderBottom: "2px solid #ccc",
+      borderRight: "1px solid #ccc",
+      overflow: "hidden",
+      backgroundColor: "#fff",
+    },
+    dangMapOverlayTitle: {
+      padding: "5px 0 0 10px",
+      height: "30px",
+      backgroundColor: "#eee",
+      borderBottom: "1px solid #ddd",
+      fontSize: "18px",
+      fontWeight: "bold",
+    },
+    dangMapOverlayBody: {
+      border: "0",
+      boxShadow: "0px 1px 2px #888",
+      position: "relative",
+      overflow: "hidden",
+    },
+    dangMapOverlayDesc: {
+      position: "relative",
+      margin: "13px 0 0 90px",
+      height: "75px",
     }
 
 }

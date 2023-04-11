@@ -72,25 +72,31 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
   let resultObject = {};
   let cnt = 0;
   const cookieId = document.cookie.split("=")[1];
-  kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-    // 클릭한 위치에 마커를 표시합니다
-    let latlng = mouseEvent.latLng;
-    let wrap = [];
-    addMarker(latlng);
-    wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
-    //result.push(wrap);
-    //console.log("result: " + result);
-    // resultObject[cnt] = wrap;
-    resultObject[0] = wrap;
-    //console.log(resultObject);
-    //cnt++;
-    //console.log("cnt = " + cnt);
 
-  const httpRequest = new XMLHttpRequest();
-  httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
-  // httpRequest.send(`re1=${result[0]}`);
-  httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
-});
+  // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
+  kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    console.log("클릭 시 : " + overlayChecker)
+    // 오버레이 창이 비활성화 되있을 경우에 동작
+    if(overlayChecker === false) {
+      // 클릭한 위치에 마커를 표시합니다
+      let latlng = mouseEvent.latLng;
+      let wrap = [];
+      addMarker(latlng);
+      wrap.push(latlng.getLat(), latlng.getLng(), cookieId)
+      //result.push(wrap);
+      //console.log("result: " + result);
+      // resultObject[cnt] = wrap;
+      resultObject[0] = wrap;
+      //console.log(resultObject);
+      //cnt++;
+      //console.log("cnt = " + cnt);
+
+      const httpRequest = new XMLHttpRequest();
+      httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+      // httpRequest.send(`re1=${result[0]}`);
+      httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
+    }
+  });
 
 
 
@@ -100,35 +106,39 @@ loadMarker(addMarker);
 
   // 마커 하나를 지도위에 표시합니다 
   //addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
-
+  
   // 마커를 생성하고 지도위에 표시하는 함수입니다
   function addMarker(position) {
+
     // 오버레이 창 열림/닫힘 체크 변수
-    let overlayChecker;
+    overlayChecker = false;
     
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
-      // map: map, // 마커를 표시할 지도
+      map: map, // 마커를 표시할 지도
       position: position, // 마커를 표시할 위치
       image: markerImage
     });
-    kakao.maps.event.addListener(map, 'click', function() {
-      console.log(markers);
-      marker.setMap(map);
-    })
 
+    // if(overlayChecker === false) {
+    //   kakao.maps.event.addListener(map, 'click', function() {
+    //     // marker.setMap(map);
+    //     setMarkers(map);
+    //     console.log("마커 추가")
+    //   })
+    // }
+    
+    // marker.setMap(map);
 
+    
     // 마커가 지도 위에 표시되도록 설정합니다
-    if(overlayChecker === false) {
-      marker.setMap(map);
-      console.log(overlayChecker)
-      console.log("마커 찍힘")
-    }
+    marker.setMap(map);
+
+    // 생성된 마커를 배열에 추가
+    markers.push(marker);
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true); 
     
-    // 생성된 마커를 배열에 추가합니다
-    markers.push(marker);
 
   // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
   function setMarkers(map) {
@@ -138,31 +148,67 @@ loadMarker(addMarker);
   }
 
   // 오버레이 내부 구성 요소들
+  // `<div class="wrap" style="position: absolute;left: 0;bottom: 10px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;"> 
+  // <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
+  //   <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
+  //     강아지 이름
+  //   </div>
+  //   <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
+  //     <div class="img">
+  //       <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
+  //     </div> 
+  //     <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
+  //       <p class="ellipsis">xx분 전</p>
+  //       <button>프로필 보기</button>
+  //       <button>팔로우</button>
+  //     </div>
+  //   </div>
+  // </div>
+  // </div>`
   const content = document.createElement('div');
-  const info = document.createElement('div');
-  info.innerHTML = `
-  <div class="wrap" style="position: absolute;left: 0;bottom: 10px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;"> 
-  <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
-    <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
-      강아지 이름
-    </div>
-    <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
-      <div class="img">
-        <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
-      </div> 
-      <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
-        <p class="ellipsis">xx분 전</p>
-        <button>프로필 보기</button>
-        <button>팔로우</button>
-      </div>
-    </div>
-  </div>
-  </div>
-  `;
-  content.appendChild(info);
+  styleCreate(content, targetStyle.dangMapOverlayWrap);
+
+  const overlayInfo = document.createElement('div');
+  styleCreate(overlayInfo, targetStyle.dangMapOverlayInfo);
+  content.appendChild(overlayInfo);
+
+  const overlayTitle = document.createElement('div');
+  styleCreate(overlayTitle, targetStyle.dangMapOverlayTitle);
+  overlayTitle.innerHTML = `멍뭉이`
+  overlayInfo.appendChild(overlayTitle);
+
+  const overlayBody = document.createElement('div');
+  styleCreate(overlayBody, targetStyle.dangMapOverlayBody);
+  overlayInfo.appendChild(overlayBody);
+
+  const overlayImg = document.createElement('div');
+  overlayImg.innerHTML = `<img src="" alt="강아지 사진" width="70" height="70" border-radius="35">`
+  overlayBody.appendChild(overlayImg);
+
+  const overlayDesc = document.createElement('div');
+  styleCreate(overlayDesc, targetStyle.dangMapOverlayDesc);
+  overlayBody.appendChild(overlayDesc);
+
+  const overlayEllipsis = document.createElement('p');
+  overlayEllipsis.innerHTML = `xx분 전`;
+  overlayDesc.appendChild(overlayEllipsis);
+
+  const overlayBtnWrap = document.createElement('div');
+  overlayDesc.appendChild(overlayBtnWrap);
+
+  const overlayProfileBtn = document.createElement('button');
+  overlayProfileBtn.innerText = "프로필 보기";
+  overlayBtnWrap.appendChild(overlayProfileBtn);
+
+  const overlayfollowBtn = document.createElement('button');
+  overlayfollowBtn.innerText = "팔로우";
+  overlayBtnWrap.appendChild(overlayfollowBtn);
   
   // 오버레이 창 닫기 버튼
   const closeBtn = document.createElement('button');
+  closeBtn.style.position = "absolute";
+  closeBtn.style.top = "5px";
+  closeBtn.style.right = "5px";
   closeBtn.innerText = 'X';
   content.appendChild(closeBtn);
 
