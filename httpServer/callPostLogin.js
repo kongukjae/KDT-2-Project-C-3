@@ -2,6 +2,7 @@ import htmlBox from "../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "./commonServer.js";
 import crypto from "crypto";
+import * as JWT from "./jsonwebtoken.js";
 
 export default function callPostLogin(request, response) {
   let body = "";
@@ -94,5 +95,63 @@ export default function callPostLogin(request, response) {
         }
       );
     });
-  }
+  }else if(request.url === "/findUserInfoCheck"){
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+    });
+    request.on("end", function () {
+      let result = body.split(`\n`)
+      let userinfo = {id : result[3].slice(0,-1),
+        question : result[7].slice(0,-1),
+        answer : result[11].slice(0,-1)};
+      console.log(userinfo)
+      let connection = mysql.createConnection(cmServer.mysqlInfo);
+      connection.connect();
+      connection.query(`SELECT question, answer from userinfo where id = '${userinfo.id}'`,
+      (error, data, fields) => {
+        if (error) throw error;
+        else{
+          response.writeHead(200);
+          if(data.length === 0){
+            response.write(JSON.stringify({err:"noData"}))
+          }
+          else if(parseInt(userinfo.question) === data[0].question && userinfo.answer === data[0].answer){
+            console.log("정보 일치");
+            response.write(JSON.stringify(JWT.jwtCreate({id:userinfo.id})))
+            // response.write()
+
+          }else{
+            console.log("정보 불일치");      
+            response.write(JSON.stringify({err:"noData"}))
+          }
+          response.end(); 
+        }
+        
+      }
+      )      
+      
+    })
+  }else if(request.url === "/updatepassword"){
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+    });
+    request.on("end", function () {
+      console.log(body);
+      let targetId = JWT.jwtCheck(JSON.parse(body).token).id;
+      let targetPW = JSON.parse(body).newpassword
+      const hashedTargetPassword = crypto.createHash('sha512').update(targetPW).digest('hex');
+      let connection = mysql.createConnection(cmServer.mysqlInfo);
+      connection.connect();
+      connection.query(`UPDATE userinfo SET PW = '${hashedTargetPassword}' WHERE id = '${targetId}'`,(error, data, fields) =>{
+        if(error) throw error;
+        else{
+          console.log("비밀번호 변경 완료");
+          response.writeHead(200);
+          response.end();
+        }})
+      })
+    }
+  
 }
