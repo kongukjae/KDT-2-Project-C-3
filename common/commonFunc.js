@@ -395,15 +395,18 @@ const targetStyle = {
       display : "flex",
       position: "relative",
       flexDirection : "column",
+      justifyContent : "center",
+      alignItems : "center",
       backgroundColor : pageStyle.colorTheme.peach,
-      gap : "10px",
+      gap : "2px",
       boxShadow : pageStyle.defaultBoxShadow.ConBoxSdw
     },
     signUpListBox: {
-      width : pageStyle.width.widthP100,
+      width : pageStyle.width.width300,
       height : pageStyle.height.height70,
       position : "relative",
       ...pageStyle.flexRowCenter,
+      flexWrap : "wrap"
     },
     signUpTitle: {
       color : pageStyle.colorTheme.white,
@@ -513,7 +516,59 @@ const targetStyle = {
       position: "relative",
       margin: "13px 0 0 90px",
       height: "75px",
-    }
+    },
+    findUserInfoRoot: {
+      width : pageStyle.width.width500,
+      height : pageStyle.height.height1000,
+      margin : "auto",
+      ...pageStyle.flexColCenter,
+      position : "relative",
+      backgroundColor : pageStyle.colorTheme.beige,
+    },
+    findUserInfoWrap: {
+      width : pageStyle.width.width450,
+      height : pageStyle.height.height500,
+      padding : pageStyle.height.height30,
+      borderRadius : "10px",
+      display : "flex",
+      flexDirection : "column",
+      backgroundColor : pageStyle.colorTheme.peach,
+      gap : "10px",
+      boxShadow : "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.22)",
+      color : pageStyle.colorTheme.white,
+      // fontSize : "23px",
+      fontSize : pageStyle.fontSizeSet.medium,
+      fontWeight : pageStyle.fontWeightSet.bold
+    },
+    findUserInfoInput: {
+      width : "100%",
+      height : "50px",
+      border : "0px",
+      paddingLeft : "14px",
+      color : pageStyle.colorTheme.black,
+      fontSize : pageStyle.fontSizeSet.smaller,
+      backgroundColor : pageStyle.colorTheme.white,
+      borderRadius : "10px",
+      boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
+  
+    },
+    findUserInfoUpdatePWModal: {
+      width : pageStyle.width.width390,
+      height : pageStyle.height.height450,
+      padding : "10px",
+      borderRadius : "10px",
+      flexDirection : "column",
+    ...pageStyle.flexRowCenter,
+      backgroundColor : pageStyle.colorTheme.beige,
+      color : pageStyle.colorTheme.black,
+      boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+      position : "absolute",
+      top : "50%",
+      left: "50%",
+      gap : "30px",
+      marginTop: "-225px",
+      marginLeft: "-195px",
+    },
 
 }
 console.log(targetStyle.topMenu);

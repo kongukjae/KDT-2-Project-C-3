@@ -25,5 +25,7 @@ export default function callLoginGet(request, response) {
     response.setHeader("Content-Type", "text/html");
     response.write(htmlBox.htmlFunc(htmlBox.findUserInfo));
     response.end();
+  }else if(request.url === "/init_user/findUserInfo.js"){
+    cmServer.fileDirectory("init_user/findUserInfo.js",response);
   }
 }
