@@ -103,7 +103,6 @@ markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 �
 loadMarker(addMarker);
 // frMarker(frAddMarker);
 
-
   // 마커 하나를 지도위에 표시합니다 
   //addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
   
@@ -148,23 +147,6 @@ loadMarker(addMarker);
   }
 
   // 오버레이 내부 구성 요소들
-  // `<div class="wrap" style="position: absolute;left: 0;bottom: 10px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;"> 
-  // <div class="info" style="width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">
-  //   <div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">
-  //     강아지 이름
-  //   </div>
-  //   <div class="body" style="border: 0;box-shadow: 0px 1px 2px #888; position: relative;overflow: hidden;">
-  //     <div class="img">
-  //       <img src="" alt="강아지 사진" width="70" height="70" border-radius="35">
-  //     </div> 
-  //     <div class="desc" stlye="position: relative;margin: 13px 0 0 90px;height: 75px;">
-  //       <p class="ellipsis">xx분 전</p>
-  //       <button>프로필 보기</button>
-  //       <button>팔로우</button>
-  //     </div>
-  //   </div>
-  // </div>
-  // </div>`
   const content = document.createElement('div');
   styleCreate(content, targetStyle.dangMapOverlayWrap);
 
@@ -225,9 +207,10 @@ loadMarker(addMarker);
     yAnchor: 0.91
 });
 
-// 마커 위에 오버레이를 표시
+// 마커 클릭 시 오버레이를 표시
   kakao.maps.event.addListener(marker, 'click', function() {
     customOverlay.setMap(map);
+    // 오버레이가 열려있는지 닫혀있는지 확인하는 변수
     overlayChecker = true;
   });
 
