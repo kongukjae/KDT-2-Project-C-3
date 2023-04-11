@@ -316,7 +316,8 @@ const targetStyle = {
     width : pageStyle.width.width25,
     height : pageStyle.height.height3,
     backgroundColor : pageStyle.colorTheme.gray,
-    marginTop : "5px",
+    position: "absolute",
+    top : "5px",
   },
 
   //회원가입 결과창
