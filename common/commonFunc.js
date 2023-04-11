@@ -486,6 +486,7 @@ const targetStyle = {
       boxShadow: "0px 1px 2px #888",
       position: "relative",
       overflow: "hidden",
+      display: "flex",
     },
     dangMapOverlayDesc: {
       position: "relative",

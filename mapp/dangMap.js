@@ -164,7 +164,7 @@ loadMarker(addMarker);
   overlayInfo.appendChild(overlayBody);
 
   const overlayImg = document.createElement('div');
-  overlayImg.innerHTML = `<img src="" alt="강아지 사진" width="70" height="70" border-radius="35">`
+  overlayImg.innerHTML = `<img src="../resource/MainDogImg.jpg" alt="강아지 사진" width="70" height="70" border-radius="35">`
   overlayBody.appendChild(overlayImg);
 
   const overlayDesc = document.createElement('div');
