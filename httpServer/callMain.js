@@ -69,7 +69,6 @@ export default function callMain(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
-          console.log(markerMyArr);
         }
       }
     );
@@ -112,7 +111,6 @@ export default function callMain(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerOtArr));
           response.end();
-          console.log(markerOtArr);
         }
       }
     );
