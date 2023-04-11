@@ -56,6 +56,10 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script src="/friends/mypageStyle.js"></script>`
+  <script src="/friends/mypageStyle.js"></script>`,
+  findUserInfo : `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/init_user/findUserInfo.js"></script>
+  `
 }
 export default html;

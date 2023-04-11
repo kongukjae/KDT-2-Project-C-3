@@ -12,5 +12,6 @@
   "dependencies": {
     "mysql": "^2.18.1"
   },
-  "types": "module"
+  "types": "module",
+  "keywords": []
 }
