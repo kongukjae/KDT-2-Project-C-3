@@ -369,15 +369,18 @@ const targetStyle = {
       display : "flex",
       position: "relative",
       flexDirection : "column",
+      justifyContent : "center",
+      alignItems : "center",
       backgroundColor : pageStyle.colorTheme.peach,
-      gap : "10px",
+      gap : "2px",
       boxShadow : pageStyle.defaultBoxShadow.ConBoxSdw
     },
     signUpListBox: {
-      width : pageStyle.width.widthP100,
+      width : pageStyle.width.width300,
       height : pageStyle.height.height70,
       position : "relative",
       ...pageStyle.flexRowCenter,
+      flexWrap : "wrap"
     },
     signUpTitle: {
       color : pageStyle.colorTheme.white,
