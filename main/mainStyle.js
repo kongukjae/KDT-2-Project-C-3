@@ -164,8 +164,29 @@ styleCreate(logoutBtn, {
 logoutBtn.innerText = "로그아웃";
 
 myPageBtn.addEventListener("click", () => {
-  alert("마이 페이지");
+  // 1. 토큰이 유효한지 검사한다.
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+// 2. 폼데이터에 JWT와 targetID 값을 추가한다.
+  const formData = new FormData();
+  formData.append("jwt", token);
+  formData.append("targetId", "mine");
+
+// 3. XMLhttpRequest 방식 사용해서 POST 방식으로 요청한다.
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/mypage");
+  xhr.send(formData);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      console.log(xhr.response);
+    }
+  };
 });
+
+
 
 logoutBtn.addEventListener("click", () => {
 
