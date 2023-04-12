@@ -88,6 +88,29 @@ console.dir(slide.children[1]);
 // let b = a.split("p")[0];
 // console.log(b);
 
+
+//슬라이드 메뉴 - 팔로우 검색 창
+const search = tagCreate("div", {});
+slide.appendChild(search);
+styleCreate(slide.children[2], targetStyle.menuMapSlideSearch)
+
+//팔로우 검색창 - 검색 bar
+slide.children[2].appendChild(tagCreate("input", { type: "text" }));
+styleCreate(slide.children[2].children[0], targetStyle.menuMapSlideSearchBar);
+
+//팔로우 검색창 - 검색 button
+slide.children[2].appendChild(tagCreate("div", { innerText: "search" }));
+styleCreate(slide.children[2].children[1], targetStyle.menuMapSlideSearchButton);
+
+slide.children[2].children[1].addEventListener("click", () => {
+  //console.log("검색: " + slide.children[2].children[1].values)
+});
+slide.children[2].children[0].addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+
+  }
+});
+
 // 슬라이드 스와이프 시 옆으로 이동
 // 마우스 다운한 지점과 마우스 이동한 곳의 좌표값을 비교하여 음수인지 양수인지로 어느 방향으로 이동했는지 판별
 // 한계값을 설정하고 그 이하일 경우에는 이동한 값 만큼 marginLeft 또는 marginRight를 이용하여 실시간 슬라이드 구현

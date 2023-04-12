@@ -272,6 +272,7 @@ const targetStyle = {
     position : "relative",
     backgroundColor : "lightgray",
     display : "flex",
+    flexDirection : "column",
     justifyContent : "flex-start",
     position : "absolute",
     zIndex : "1",
@@ -296,13 +297,46 @@ const targetStyle = {
     display: "grid",
     gridAutoFlow: "column",
     gridTemplateColumns: "repeat(16, 160px)",
-    gridTemplateRows: "repeat(2, 140px)",
+    gridTemplateRows: "repeat(2, 110px)",
   },
   menuMapSlideItems: {
     border: "1px solid black",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  //댕맵 슬라이드 메뉴의 팔로우 검색창
+  menuMapSlideSearch: {
+    width : pageStyle.width.width390,
+    height : pageStyle.height.height40,
+    top : "10px",
+    left: "50%",
+    position : "relative",
+    marginLeft: "-195px",
+    display : "flex",
+    alignItems : "center",
+  },
+  menuMapSlideSearchBar : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.heightP100,
+    border : `1px ${pageStyle.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : pageStyle.colorTheme.white,
+    position : "absolute"
+  },
+  menuMapSlideSearchButton: {
+    width : pageStyle.width.width80,
+    height : pageStyle.height.height30,
+    borderRadius : "15px",
+    backgroundColor : pageStyle.colorTheme.peach,
+    position : "relative",
+    left: "300px",
+    color : pageStyle.colorTheme.white,
+    cursor : "pointer",
+    ...pageStyle.flexRowCenter,
+    paddingBottom : "3px"
   },
 
   //댕맵 검색창
