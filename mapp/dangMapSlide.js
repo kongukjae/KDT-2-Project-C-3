@@ -165,12 +165,15 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 
 makeControlBtns();
 // 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
+// 버튼들을 토글시키기 위한 변수
+let controlToggle = false;
+
 function makeControlBtns() {
   let controlbtnsWrap = tagCreate("div", {});
   // 버튼들의 wrap의 스타일 값
   styleCreate(controlbtnsWrap, {
     position: "absolute",
-    top: "-180px",
+    top: "-160px",
     left: "0",
     width: "60px",
     height: "160px",
@@ -180,17 +183,17 @@ function makeControlBtns() {
     alignItems: "center",
     flexDirection: "column",
   });
-  // 버튼들을 토글시키기 위한 변수
-  let controlToggle = false;
 
   // 내 프로필 클릭 시 버튼's 생성 / 삭제
   slide.children[1].children[0].addEventListener("click", () => {
     if (controlToggle) {
-      slide.children[1].children[0].removeChild(controlbtnsWrap);
+      slide.removeChild(controlbtnsWrap);
       controlToggle = false;
     } else {
-      slide.children[1].children[0].appendChild(controlbtnsWrap);
+      slide.appendChild(controlbtnsWrap);
       controlToggle = true;
+      console.dir(slide.children[2].children[1]);
+      testFunc();
     }
   });
 
@@ -214,3 +217,22 @@ function makeControlBtns() {
     controlbtnsWrap.appendChild(controlbtns);
   }
 }
+
+function testFunc(){
+  console.log("test함수 진입함");
+  console.log("controlToggle: " + controlToggle);
+  if(controlToggle) {
+    console.log("조건문 진입")
+    slide.children[2].children[2].addEventListener('click', () => {
+      // 목표 : 내 발자국만 남기고 다른 사람들의 발자국 비활성화
+      // 1. 토큰을 통해 로그인한 ID를 식별
+      // 2-1. ID를 통해 내 발자국만 지도에 출력
+      //      -> dangMap.js의 loadMarker 함수를 실행시켜 내 발자국만 나오도록 핸들링
+      // 2-2. 페이지를 새로 load하면서 서버에서 전달하는 변수를 통해 내것 이외의 발자국을 출력하는 함수를 비활성화
+      //      -> 버튼 클릭시 서버에 요청을 보내고 서버가 요청을 받으면 string으로 문자열을 전달, 전달받은 문자열을 통해
+      //         dangMap.js에서(지금은 map.js에만 적용되어 있음) 친구 발자국과 타인 발자국을 출력하는 함수에 조건문을 걸어서 핸들링
+      console.log(markers);
+    })
+  }
+}
+

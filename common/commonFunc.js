@@ -303,7 +303,6 @@ const targetStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "relative",
   },
 
   //댕맵 검색창

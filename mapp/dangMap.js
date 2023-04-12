@@ -2,6 +2,8 @@ function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+let markers = [];
+
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
@@ -76,7 +78,7 @@ function map() {
   markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
 
   // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-  let markers = [];
+  // let markers = [];
   // let latlng = mouseEvent.latLng;
   //let result = [];
   let resultObject = {};
@@ -135,11 +137,11 @@ function map() {
     marker.setDraggable(true);
 
     // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-    function setMarkers(map) {
-      for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-      }
-    }
+    // function setMarkers(map) {
+    //   for (let i = 0; i < markers.length; i++) {
+    //     markers[i].setMap(map);
+    //   }
+    // }
 
     // 오버레이 내부 구성 요소들
     const content = document.createElement("div");
@@ -401,6 +403,21 @@ function map() {
   // 하단 메뉴
   let menuChild2 = [];
   btmMeun(rootChild[2], menuChild2);
+
+  
+  console.dir(rootChild[2]);
+  console.dir(rootChild[2].children[3]);
+  rootChild[2].children[3].addEventListener('click', function(){
+    console.log(markers);
+    setMarkers(null);
+  })
+
+  function setMarkers(map) {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
 }
+
 
 map();
