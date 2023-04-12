@@ -18,32 +18,32 @@ export default function(request, response){
       let userId = searchVal[1].split("=")[1]; //유저ID
       console.log("검색 값: " + keyword)
 
-      let count
+      let count; //검색 결과 개수
+      let searchRes = []; //검색된 결과값 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
-        conn.connect();
-        conn.query(
-          `select count(*) as count from fr_list where user_id = '${userId}'`,
-          function (err, data) {
-            if (err) throw err;
-            else {
-              count = data[0].count;
-              console.log("친구 수: " + count);
-            }
-          }
-        );
-        // conn.query( `select fr_id from fr_list where user_id = '${userId}' like '%${keyword}%'`
-          conn.query( `select fr_id from fr_list where fr_id like '%${keyword}%'`, function(err, rows){
+      conn.connect();
+      conn.query(
+        `select count(*) as count from fr_list where user_id='${userId}' and fr_id like '%${keyword}%'`,
+        function (err, data) {
           if (err) throw err;
-            else {
-              console.log("결과 값: " + rows);
-              for (const key in rows) {
-                console.log("결과 값: " + rows[key]);
-              }
-            }
+          else {
+            count = data[0].count;
+            //console.log("검색 수: " + count);
+          }
         }
+      );
+      conn.query( `select fr_id from fr_list where user_id='${userId}' and fr_id like '%${keyword}%'`,
+      function(err, result){
+        if (err) throw err;
+        else {
+          for (let i = 0; i < count; i++) {
+            searchRes[i] = result[i].fr_id;
+            //console.log("결과 값: " + searchRes[i]);
+          }
 
-        )
-        conn.end();
+        }
+      });
+      conn.end();
 
       response.writeHead(200, { "Content-Type": "plain" });
       response.end();
