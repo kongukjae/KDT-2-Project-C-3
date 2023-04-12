@@ -156,7 +156,9 @@ function myPage(){
   }
   rootChild[3].children[0].innerText = "사진 업로드";
   rootChild[3].children[1].innerText = "개인정보 수정";
-  
+
+
+
   styleCreate(rootChild[4],mypageStyle.mypageUserinfoBox)
   for(let i = 0; i < 5;i++){
     let infoTag = tagCreate("div");
