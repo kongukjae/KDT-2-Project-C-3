@@ -213,3 +213,12 @@ export default function dangMap(request, response) {
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
 }
+
+// select * from map_tables left join (
+//   select id 
+//   from map_tables 
+//   join fr_list on fr_list.fr_id = map_tables.id 
+//   where user_id = 'aaa1234'
+// ) as mt
+// on map_tables.id = mt.id 
+// where mt.id is null and (map_tables.id not in ('aaa1234'));
