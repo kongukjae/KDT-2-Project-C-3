@@ -48,13 +48,24 @@ function main(){
     justifyContent : "center",
     alignItems : "center",
   })
+  let dupCheckFlag = false;
+  let idFlag = false;
+  let pwFlag = false;
+  let questionFlag = false;
+  let answerFlag = false;
+  let dogNameFlag = false;
+  let dogGenderFlag = false;
+
   rootChild[7].children[0].addEventListener("click",()=>{
-    // if(){
-    //   postForm.submit();
-    // }
-    // else{
-    //   alert()
-    // }
+    if(!dupCheckFlag){
+      alert("아이디 중복 확인을 해주세요")
+    }
+    else if(idFlag && pwFlag && questionFlag && answerFlag && dogNameFlag && dogGenderFlag){
+      postForm.submit();
+    }
+    else{
+      alert("유효하지 않은 입력입니다. 입력 조건을 확인해주세요")
+    }
   })
   rootChild[0].innerText = "회원가입";
   let dupCheck =  tagCreate("div",{});
@@ -62,7 +73,7 @@ function main(){
   rootChild[1].appendChild(dupCheck);
   dupCheck.innerText = "중복확인";
   for(let i = 1; i < 7; i++){
-    let validity = tagCreate("div", {innerText : "입력값이 유효하지 않습니다"})
+    let validity = tagCreate("div", {innerText : "❌입력값이 유효하지 않습니다"})
     styleCreate(validity,{
       width : "300px",
       height : "20px",
@@ -96,6 +107,7 @@ function main(){
       xhr.addEventListener("load",()=>{
         let resultFromServer = xhr.response;
         if(resultFromServer.length === 0){
+          dupCheckFlag = true;
           dupCheckResultModalWindow("중복된 아이디가 없습니다");
         }else{
           dupCheckResultModalWindow("중복된 아이디가 있어 사용할 수 없습니다");
@@ -114,7 +126,7 @@ function main(){
     let validityText = "";
     if(value.length < asciiObject.length.min || value.length > asciiObject.length.max){
       validityFlag = false;
-      validityText = `길이는 ${asciiObject.length.min}이상 ${asciiObject.length.max}이하`;
+      validityText = `❌길이는 ${asciiObject.length.min}이상 ${asciiObject.length.max}이하`;
       return [validityFlag, validityText];
     }
     let specialCheck = true;
@@ -126,22 +138,22 @@ function main(){
       };
     }
     if(!specialCheck){
-      validityText = "숫자, 영문 이외의 값은 사용하실 수 없습니다";
+      validityText = "❌숫자, 영문 이외의 값은 사용하실 수 없습니다";
       return [false, validityText];
     }else if(validityFlag){
-      validityText = "유효한 값입니다";
+      validityText = "✅유효한 값입니다";
       return [true, validityText];
     }else{
-      validityText = "error type1";
+      validityText = "❌error type1";
       return [false, validityText]
     }
   }
   function pwChecker(value){
     let validityFlag = true;
-    let validityText = "유효한 값입니다";
+    let validityText = "✅유효한 값입니다";
     if(value.length < asciiObject.length.min || value.length > asciiObject.length.max){
       validityFlag = false;
-      validityText = `길이는 ${asciiObject.length.min}이상 ${asciiObject.length.max}이하`;
+      validityText = `❌길이는 ${asciiObject.length.min}이상 ${asciiObject.length.max}이하`;
       return [validityFlag, validityText];
     }
     let checkerSpc = true; //특수기호
@@ -163,11 +175,11 @@ function main(){
       }
     }
     if(!checkerNum){
-      validityText = "적어도 한개의 숫자가 필요합니다."
+      validityText = "❌적어도 한개의 숫자가 필요합니다."
     }else if(!checkerStr){
-      validityText = "적어도 한개의 영문이 필요합니다."
+      validityText = "❌적어도 한개의 영문이 필요합니다."
     }else if(!checkerSpc){
-      validityText = "특수문자는 사용하실 수 없습니다."
+      validityText = "❌특수문자는 사용하실 수 없습니다."
     }
     return [checkerNum&&checkerStr&&checkerSpc, validityText]
 
@@ -178,7 +190,7 @@ function main(){
     let noUse = [';','?','*','/','<','>',]
     if(value.length < 1 || value.length > 20){
       validityFlag = false;
-      validityText = `길이는 ${1}이상 ${20}이하`;
+      validityText = `❌길이는 ${1}이상 ${20}이하`;
       return [validityFlag, validityText];
     }
     else{
@@ -186,12 +198,12 @@ function main(){
         let target = value[i];
         if(noUse.includes(target)){
           validityFlag = false;
-          validityText = ";, ?, *, /, <, > 는 사용하실 수 없습니다.";
+          validityText = "❌;, ?, *, /, <, > 는 사용하실 수 없습니다.";
           return [validityFlag, validityText];
         };
       }
     }
-    validityText = "유효한 값입니다";
+    validityText = "✅유효한 값입니다";
     return [validityFlag, validityText];
 
   }
@@ -199,10 +211,10 @@ function main(){
     let validityFlag = true;
     let validityText = "";
     if(value === "none"){
-      validityText = "선택지를 골라주세요";
+      validityText = "❌선택지를 골라주세요";
       validityFlag = false;
     }else{
-      validityText = "유효한 값입니다";
+      validityText = "✅유효한 값입니다";
       validityFlag = true;
     };
     return [validityFlag, validityText];
@@ -211,29 +223,36 @@ function main(){
 
   rootChild[1].children[0].addEventListener("keyup", (event) => {
     console.log(rootChild[1].children[0].value);
+    dupCheckFlag = false;
     let idCheckerResult = idChecker(rootChild[1].children[0].value);
+    idFlag = idCheckerResult[0]
     rootChild[1].lastChild.innerText = idCheckerResult[1]
   });
   rootChild[2].children[0].addEventListener("keyup", (event) => {
     console.log(rootChild[2].children[0].value);
-    let idCheckerResult = pwChecker(rootChild[2].children[0].value);
-    rootChild[2].lastChild.innerText = idCheckerResult[1]
+    let pwCheckerResult = pwChecker(rootChild[2].children[0].value);
+    pwFlag = pwCheckerResult[0]
+    rootChild[2].lastChild.innerText = pwCheckerResult[1]
   });
   rootChild[3].children[0].addEventListener("click", (event) => {
-    let idCheckerResult = selectorChecker(rootChild[3].children[0].value);
-    rootChild[3].lastChild.innerText = idCheckerResult[1]
+    let questionCheckerResult = selectorChecker(rootChild[3].children[0].value);
+    questionFlag = questionCheckerResult[0]
+    rootChild[3].lastChild.innerText = questionCheckerResult[1]
   });
   rootChild[4].children[0].addEventListener("keyup", (event) => {
-    let idCheckerResult = lengthCheck(rootChild[4].children[0].value);
-    rootChild[4].lastChild.innerText = idCheckerResult[1]
+    let answerCheckerResult = lengthCheck(rootChild[4].children[0].value);
+    answerFlag = answerCheckerResult[0]
+    rootChild[4].lastChild.innerText = answerCheckerResult[1]
   });
   rootChild[5].children[0].addEventListener("keyup", (event) => {
-    let idCheckerResult = lengthCheck(rootChild[5].children[0].value);
-    rootChild[5].lastChild.innerText = idCheckerResult[1]
+    let dogNameCheckerResult = lengthCheck(rootChild[5].children[0].value);
+    dogNameFlag = dogNameCheckerResult[0]
+    rootChild[5].lastChild.innerText = dogNameCheckerResult[1]
   });
   rootChild[6].children[0].addEventListener("click", (event) => {
-    let idCheckerResult = selectorChecker(rootChild[6].children[0].value);
-    rootChild[6].lastChild.innerText = idCheckerResult[1]
+    let dogGenderCheckerResult = selectorChecker(rootChild[6].children[0].value);
+    dogGenderFlag = dogGenderCheckerResult[0]
+    rootChild[6].lastChild.innerText = dogGenderCheckerResult[1]
   });
   
 }
