@@ -51,11 +51,14 @@ export default function callPostLogin(request, response) {
                 console.log("로그인 성공");
                 connection.end();
                 response.writeHead(200);
-
+                let newjwt = JWT.jwtCreate({id:dataId}).token
                 const idCookie = "id=" + dataId;
                 console.log(idCookie);
                 response.write(
                   `<script>document.cookie ="${idCookie}"</script>`
+                );
+                response.write(
+                  `<script>document.cookie ="jwt=${newjwt}"</script>`
                 );
                 response.write("<script>window.location='/main'</script>"); // 이후 병합시 main 페이지로 연결
                 response.end();
