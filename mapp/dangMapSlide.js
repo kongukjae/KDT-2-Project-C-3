@@ -119,9 +119,6 @@ slide.children[2].children[1].addEventListener('click', function(){
     res = JSON.parse(xhr.response);
     console.dir(res[0])
 
-    // const searchResult = tagCreate("div", {});
-    // slide.appendChild(searchResult);
-    // styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
     
     for(const key in res){
       console.log("찾은값: "+ res[key])
