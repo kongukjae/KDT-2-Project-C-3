@@ -82,11 +82,6 @@ for (let i = 0; i < 31; i++) {
   slideWrap.appendChild(slideElement);
 }
 console.dir(slide.children[1]);
-// console.log(slide.children[1].style.marginLeft);
-// let a = slide.children[1].style.marginLeft;
-// console.log(a);
-// let b = a.split("p")[0];
-// console.log(b);
 
 // 슬라이드 스와이프 시 옆으로 이동
 // 마우스 다운한 지점과 마우스 이동한 곳의 좌표값을 비교하여 음수인지 양수인지로 어느 방향으로 이동했는지 판별
@@ -94,11 +89,11 @@ console.dir(slide.children[1]);
 slide.children[1].addEventListener("mousedown", function (e) {
   let mDown = true;
   let startX = e.clientX;
+  let widthValue = slideWidthValueCalculate(slide.children[1]);
 
-  let a = slide.children[1].style.marginLeft;
-  console.log(a);
-  let b = Number(a.split("p")[0]);
-  console.log("b : " + b);
+  let marginLeftValue = slide.children[1].style.marginLeft;
+  let marginLeftNumValue = Number(marginLeftValue.split("p")[0]);
+  let marginLeftCalcValue;
   
   console.log("다운시 값 : " + slide.children[1].style.marginLeft)
   
@@ -111,25 +106,63 @@ slide.children[1].addEventListener("mousedown", function (e) {
       console.log("deltaX : " + deltaX);
       console.log("startX : " + startX + " clientX : " + event.clientX);
       if(deltaX > 0) {
-        if (slide.children[1].style.marginLeft > 0) {
-          console.log("+마진값 > 0 : " + slide.children[1].style.marginLeft);
-          // slide.children[1].style.marginLeft = 0;
+        if (marginLeftNumValue > 0) {
+          slide.children[1].style.marginLeft = 0;
+          changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
-          slide.children[1].style.marginLeft = `-${deltaX}px`;
-          console.log("+마진값 < 0 : " + slide.children[1].style.marginLeft);
+          marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
+          slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
         }
       } 
       else {
-        if (slide.children[1].style.marginLeft < 0) {
-          // slide.children[1].style.marginLeft = 0;
+        if (marginLeftNumValue > 0) {
+          slide.children[1].style.marginLeft = 0;
+          changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
-          slide.children[1].style.marginLeft = `-${deltaX}px`;
-          console.log("-마진값 : " + slide.children[1].style.marginLeft);
+          marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
+          slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
         }
       }
     }
   });
   slide.children[1].addEventListener("mouseup", function () {
+    // console.log(c)
     mDown = false;
+    changeSliderValueMarginLeft(slide.children[1], marginLeftCalcValue);
+    // console.log("마우스 업");
+    // console.log("b값 : " + b);
+    // console.log("마진값 : " + a);
+    // console.log("c: " + c);
   });
 });
+
+// 슬라이드 가능 넓이를 계산하기 위한 함수
+// 동적으로 만들어진 slideWrap의 넓이 - 화면 넓이(현재: 500)
+function slideWidthValueCalculate(target) {
+  let value = target.clientWidth - 500;
+  return value;
+}
+
+// 계산된 값을 marginLeft 값으로 적용시키는 함수
+function changeSliderValueMarginLeft(target, value) {
+  target.style.marginLeft = `${value}px`;
+}
+
+// 마우스 다운 된 위치와 마우스 포인터가 움직인 위치를 통해 이동값을 실시간으로 계산하는 함수
+function calculateMoveSlideValue(before, after, maxWidth) {
+  let value = before - after;
+  if(value > 0) {
+    // 슬라이더가 왼쪽 끝일 경우 더이상 이동되지 않도록 0값으로 변경
+    value = 0;
+  } else if(value < -maxWidth) {
+    // 슬라이더가 오른쪽 끝일 경우 더이상 오른쪽으로 이동하지 않도록 값을 고정 / 이후 동적으로 넓ㅇ
+    value = -maxWidth;
+  }
+  console.log("value : " + value);
+  return value;
+}
+
+// slide.children[1].children[0] => 내 프로필 위치
+slide.children[1].children[0].addEventListener('click', function(){
+
+})
