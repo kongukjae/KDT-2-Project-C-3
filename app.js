@@ -1,20 +1,20 @@
 import http from "http";
 import fs from "fs";
 import mysql from "mysql";
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "./common/htmlBox.js";
 // import ValueCheck from "../ValueCheck.js";
 import { parse } from "path";
-import callMain from "./callMain.js";
-import cmServer from "./commonServer.js";
-import signupResult from "./signupResultRoute.js";
-import dupCheck from "./dupCheckRoute.js";
-import callPostImage from "./callPostImage.js";
-import callPostLogin from "./callPostLogin.js";
-import callPostDangMap from "./callPostDangMap.js";
+import callMain from "./httpServer/callMain.js";
+import cmServer from "./httpServer/commonServer.js";
+import signupResult from "./httpServer/signupResultRoute.js";
+import dupCheck from "./httpServer/dupCheckRoute.js";
+import callPostImage from "./httpServer/callPostImage.js";
+import callPostLogin from "./httpServer/callPostLogin.js";
+import callPostDangMap from "./httpServer/callPostDangMap.js";
 
-import callLoginGet from "./callLoginGet.js";
-import dangMapServer from "./dangMapServer.js";
-import myPage from "./myPage.js";
+import callLoginGet from "./httpServer/callLoginGet.js";
+import dangMapServer from "./httpServer/dangMapServer.js";
+import myPage from "./httpServer/myPage.js";
 
 
 // import mapMerker from "./mapMerker.js";

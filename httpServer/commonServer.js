@@ -10,7 +10,7 @@ const cmServer = {
   },
   fileDirectory: function(request, response) {
     console.log('bbbbbb: ' + `../${request}`)
-    fs.readFile(`../${request}`, function (err, data) {
+    fs.readFile(`./${request}`, function (err, data) {
       response.writeHead(200);
       response.write(data);
       response.end();
