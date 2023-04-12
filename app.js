@@ -14,7 +14,7 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
-import myPage from "./httpServer/myPage.js";
+import myPagePost from "./httpServer/myPagePost.js";
 
 
 // import mapMerker from "./mapMerker.js";
@@ -76,6 +76,10 @@ const server = http.createServer(function (request, response) {
     }
     if (request.url.startsWith("/dupCheck")) {
       dupCheck(request, response);
+    }else if (request.url === "/friends/mypageStyle.js") {
+      cmServer.fileDirectory(`friends/mypageStyle.js`, response);
+    }else if (request.url === "/friends/yourpageStyle.js") {
+      cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
     }
     if (request.url.startsWith("/myMarker")) {
       myMarker(request, response)
@@ -85,13 +89,13 @@ const server = http.createServer(function (request, response) {
     //댕맵
     dangMapServer(request, response);
 
-    //마이페이지
-    myPage(request, response);
+
   }
 
   // post request
   if (request.method === 'POST') {
-
+    //마이페이지
+    myPagePost(request, response);
     //업로드, 유저 이미지
     callPostImage(request, response);
 

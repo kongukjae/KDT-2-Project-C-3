@@ -12,22 +12,34 @@ export default function callPostImage(request, response) {
     request.on('end', function () {
       console.log("image uploading")
       let result = body.split("\r")
-      console.log(result[3].slice(1));
-      console.log(result[7].slice(1));
-
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
-      connection.query(`INSERT INTO userimage VALUES('${result[3].slice(1)}','${result[7].slice(1)}')`, (error, rows, fields) => {
+      connection.query(`SELECT * FROM userimage WHERE id ='${result[3].slice(1).split(";")[0]}'`, (error, rows, fields) => {
       if (error) throw error;
       else{
-        response.writeHead(200);
-        response.end();
+        if(rows.length === 0){
+          console.log("이전 이미지 없음")
+          connection.query(`INSERT INTO userimage VALUES('${result[3].slice(1).split(";")[0]}','${result[7].slice(1)}')`, (error, rows, fields) => {
+              if (error) throw error;
+              else{
+                response.writeHead(200);
+                response.end();
+                }
+              });
+              connection.end();
+        }else{
+          connection.query(`UPDATE userimage SET image='${result[7].slice(1)}' WHERE id='${result[3].slice(1).split(";")[0]}'`, (error, rows, fields) => {
+              if (error) throw error;
+              else{
+                console.log("이미지 변경")
+                response.writeHead(200);
+                response.end();
+                }
+              });
+              connection.end();
+        }
         }
       });
-      connection.end();
-
-      console.log("이미지 저장 완료");
-
     })}
     if(request.url.startsWith('/sendUserImage'))
     {
@@ -40,7 +52,7 @@ export default function callPostImage(request, response) {
         console.log("이미지 요청 받는 중")
         let connection = mysql.createConnection(cmServer.mysqlInfo);
         connection.connect();
-        connection.query(`SELECT image FROM userimage WHERE id='${body.split("=")[1]}'`, (error, rows, fields) => {
+        connection.query(`SELECT image FROM userimage WHERE id='${body.split("=")[1].split(";")[0]}'`, (error, rows, fields) => {
         if (error) throw error;
         else{
           response.writeHead(200);
