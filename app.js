@@ -77,7 +77,9 @@ const server = http.createServer(function (request, response) {
     if (request.url.startsWith("/dupCheck")) {
       dupCheck(request, response);
     }else if (request.url === "/friends/mypageStyle.js") {
-      cmServer.fileDirectory(`friends/${splitURL}`, response);
+      cmServer.fileDirectory(`friends/mypageStyle.js`, response);
+    }else if (request.url === "/friends/yourpageStyle.js") {
+      cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
     }
 
     //댕맵
