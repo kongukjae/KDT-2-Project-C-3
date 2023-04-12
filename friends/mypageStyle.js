@@ -208,14 +208,41 @@ function myPage(){
     let imageFormData = new FormData();
     let reader = new FileReader();
     reader.addEventListener("load",()=>{
-      imageFormData.append("id", cookieId);
-      imageFormData.append("attachedImage", reader.result);
-      console.log(imageFormData.get("attachedImage"))
-      fetch('http://localhost:2080/uploadImage', {
-        method: 'POST',
-        body: imageFormData
-      }).then(res => res)
-      .then(result => console.log("done"))
+
+      let img = new Image();
+      img.src = reader.result;
+      img.onload = function(){
+        const MAX_WIDTH = 100;
+        const MAX_HEIGHT = 100;
+        let targetWidth = img.width;
+        let targetHeight = img.height;
+        if (targetWidth  > targetHeight) {
+          if (targetWidth  > MAX_WIDTH) {
+              targetHeight *= MAX_WIDTH / targetWidth ;
+              targetWidth  = MAX_WIDTH;
+          }
+        } else {
+          if (targetHeight > MAX_HEIGHT) {
+              targetWidth  *= MAX_HEIGHT / targetHeight;
+              targetHeight = MAX_HEIGHT;
+          }
+        }
+        let imageCanvas = document.createElement("canvas");
+        imageCanvas.setAttribute("width", `${targetWidth}px`);
+        imageCanvas.setAttribute("height", `${targetHeight}px`);
+        let context = imageCanvas.getContext("2d");
+        context.drawImage(img,0,0,targetWidth,targetHeight);
+        let dataURL = imageCanvas.toDataURL("image/png",0.5);
+        console.log(dataURL);
+        imageFormData.append("id", cookieId);
+        imageFormData.append("attachedImage", dataURL);
+        rootChild[2].style.backgroundImage = `url(${dataURL})`
+        fetch('http://localhost:2080/uploadImage', {
+          method: 'POST',
+          body: imageFormData
+        }).then(res => res)
+        .then(result => console.log("done"))
+      }
     })
     submitbutton.addEventListener("click",()=>{
       reader.readAsDataURL(myImage.files[0])
@@ -275,7 +302,7 @@ function myPage(){
 }
 
 
-if(document.cookie.split("=")[1] === targetIdFromServer){
+if(document.cookie.split("=")[1].split(";")[0] === targetIdFromServer){
   myPage()
 }else{
   yourPage()
