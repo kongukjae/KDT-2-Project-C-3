@@ -95,8 +95,6 @@ slide.children[1].addEventListener("mousedown", function (e) {
   let marginLeftNumValue = Number(marginLeftValue.split("p")[0]);
   let marginLeftCalcValue;
   
-  console.log("다운시 값 : " + slide.children[1].style.marginLeft)
-  
   // console.log("startPoint : " + startPoint);
   console.log("startX : " + startX);
   slide.children[1].addEventListener("mousemove", function (event) {
@@ -158,10 +156,55 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 }
 
 // slide.children[1].children[0] => 내 프로필 위치
-slide.children[1].children[0].addEventListener('click', function(){
-  let res;
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost:2080/myMarker`);
-  xhr.send();
-})
+// slide.children[1].children[0].addEventListener('click', function(){
+//   let res;
+//   const xhr = new XMLHttpRequest();
+//   xhr.open("GET", `http://localhost:2080/myMarker`);
+//   xhr.send();
+// })
 
+// 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
+makeControlBtns();
+function makeControlBtns() {
+  let controlbtnsWrap = tagCreate("div", {});
+  styleCreate(controlbtnsWrap, {
+    position: "absolute",
+    top: "-180px",
+    left: "0",
+    width: "60px",
+    height: "160px",
+    border: "1px solid black",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexDirection: "column",
+  });
+  let controlToggle = false;
+  slide.children[1].children[0].addEventListener("click", () => {
+    if (controlToggle) {
+      slide.children[1].children[0].removeChild(controlbtnsWrap);
+      controlToggle = false;
+    } else {
+      slide.children[1].children[0].appendChild(controlbtnsWrap);
+      controlToggle = true;
+    }
+  });
+
+  for (let i = 0; i < 3; i++) {
+    let controlbtns = tagCreate("button", {});
+    if (i === 1) {
+      controlbtns.innerText = "추가";
+    } else if (i === 2) {
+      controlbtns.innerText = "수정";
+    } else {
+      controlbtns.innerText = "삭제";
+    }
+    styleCreate(controlbtns, {
+      width: "50px",
+      height: "50px",
+      borderRadius: "50%",
+      cursor: "pointer",
+    });
+    controlbtnsWrap.appendChild(controlbtns);
+  }
+}
