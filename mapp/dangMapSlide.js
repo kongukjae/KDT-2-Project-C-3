@@ -163,10 +163,11 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 //   xhr.send();
 // })
 
-// 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
 makeControlBtns();
+// 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
 function makeControlBtns() {
   let controlbtnsWrap = tagCreate("div", {});
+  // 버튼들의 wrap의 스타일 값
   styleCreate(controlbtnsWrap, {
     position: "absolute",
     top: "-180px",
@@ -179,7 +180,10 @@ function makeControlBtns() {
     alignItems: "center",
     flexDirection: "column",
   });
+  // 버튼들을 토글시키기 위한 변수
   let controlToggle = false;
+
+  // 내 프로필 클릭 시 버튼's 생성 / 삭제
   slide.children[1].children[0].addEventListener("click", () => {
     if (controlToggle) {
       slide.children[1].children[0].removeChild(controlbtnsWrap);
@@ -190,6 +194,7 @@ function makeControlBtns() {
     }
   });
 
+  // 3개의 버튼을 만들기 위한 반복문
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
     if (i === 1) {
@@ -199,6 +204,7 @@ function makeControlBtns() {
     } else {
       controlbtns.innerText = "삭제";
     }
+    // 버튼들의 스타일 값
     styleCreate(controlbtns, {
       width: "50px",
       height: "50px",
