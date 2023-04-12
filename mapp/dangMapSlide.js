@@ -148,7 +148,7 @@ function calculateMoveSlideValue(before, after, maxWidth) {
     // 슬라이더가 왼쪽 끝일 경우 더이상 이동되지 않도록 0값으로 변경
     value = 0;
   } else if(value < -maxWidth) {
-    // 슬라이더가 오른쪽 끝일 경우 더이상 오른쪽으로 이동하지 않도록 값을 고정 / 이후 동적으로 넓ㅇ
+    // 슬라이더가 오른쪽 끝일 경우 더이상 오른쪽으로 이동하지 않도록 값을 고정 / 이후 동적으로 넓이
     value = -maxWidth;
   }
   console.log("value : " + value);
