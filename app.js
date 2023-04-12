@@ -58,8 +58,8 @@ const server = http.createServer(function (request, response) {
 
     //메인화면
     callMain(request, response);
-    //회원가입
     
+    //회원가입
     if (request.url === "/signUp") {
       response.writeHead(200);
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
