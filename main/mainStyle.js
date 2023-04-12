@@ -169,21 +169,35 @@ myPageBtn.addEventListener("click", () => {
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-// 2. 폼데이터에 JWT와 targetID 값을 추가한다.
-  const formData = new FormData();
-  formData.append("jwt", token);
-  formData.append("targetId", "mine");
+  let mypageForm = document.createElement('form');
 
-// 3. XMLhttpRequest 방식 사용해서 POST 방식으로 요청한다.
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/mypage");
-  xhr.send(formData);
+  mypageForm.method = "POST"
+  mypageForm.action = "/mypage";
+  let params = {jwt:token, targetId:"mine"}
+  for(let key in params){
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type","hidden");
+    hiddenField.setAttribute("name",key);
+    hiddenField.setAttribute("value",params[key]);
+    mypageForm.appendChild(hiddenField);
+  }
+  document.body.appendChild(mypageForm);
+  mypageForm.submit();
+// // 2. 폼데이터에 JWT와 targetID 값을 추가한다.
+//   const formData = new FormData();
+//   formData.append("jwt", token);
+//   formData.append("targetId", "mine");
 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      console.log(xhr.response);
-    }
-  };
+// // 3. XMLhttpRequest 방식 사용해서 POST 방식으로 요청한다.
+//   const xhr = new XMLHttpRequest();
+//   xhr.open("POST", "/mypage");
+//   xhr.send(formData);
+
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+//       console.log(xhr.response);
+//     }
+//   };
 });
 
 
