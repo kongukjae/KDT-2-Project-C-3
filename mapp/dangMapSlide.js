@@ -126,13 +126,8 @@ slide.children[1].addEventListener("mousedown", function (e) {
     }
   });
   slide.children[1].addEventListener("mouseup", function () {
-    // console.log(c)
     mDown = false;
     changeSliderValueMarginLeft(slide.children[1], marginLeftCalcValue);
-    // console.log("마우스 업");
-    // console.log("b값 : " + b);
-    // console.log("마진값 : " + a);
-    // console.log("c: " + c);
   });
 });
 
