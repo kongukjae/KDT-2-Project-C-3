@@ -305,6 +305,7 @@ const targetStyle = {
     justifyContent: "center",
     alignItems: "center",
   },
+
   //댕맵 슬라이드 메뉴의 팔로우 검색창
   menuMapSlideSearch: {
     width : pageStyle.width.width390,
@@ -345,7 +346,7 @@ const targetStyle = {
     top : "10px",
     left: "50%",
     position : "relative",
-    marginLeft: "-195px",
+    // marginLeft: "-195px",
     display : "flex",
     alignItems : "center",
   },

@@ -3,7 +3,16 @@ import mysql from "mysql";
 import cmServer from "./commonServer.js";
 
 export default function(request, response){
+  
   if (request.url.startsWith("/followSearch")) {
+    let splitURL = request.url.split("/")[2];
+    if (splitURL === "commonFunc.js") {
+      cmServer.fileDirectory(`common/${splitURL}`, response);
+    }
+    if (splitURL === "dangMapSlideSearchBar.js") {
+      cmServer.fileDirectory(`mapp/${splitURL}`, response);
+    }
+
     let body = "";
 
     request.on("data", function (chunk) {
@@ -41,7 +50,10 @@ export default function(request, response){
           }
           
           response.writeHead(200, { "Content-Type": "text/html" });
-          response.write(JSON.stringify(searchRes));
+          // response.write(JSON.stringify(searchRes));
+          response.write(`
+            <script src="/common/commonFunc.js"></script>
+            <script src="/mapp/dangMapSlideSearchBar.js"></script>`);
           response.end();
         }
       });

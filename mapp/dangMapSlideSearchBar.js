@@ -1,6 +1,6 @@
 
+const slide = document.getElementById("slide");
 
-
-const searchResult = tagCreate("div", {});
-    slide.appendChild(searchResult);
-    styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
+let searchResult = tagCreate("div", {});
+slide.appendChild(searchResult);
+styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
