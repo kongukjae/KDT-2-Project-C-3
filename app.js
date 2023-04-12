@@ -15,6 +15,7 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 import myPage from "./httpServer/myPage.js";
+import followSearch from "./httpServer/callPostFollowSearch.js";
 
 
 // import mapMerker from "./mapMerker.js";
@@ -93,10 +94,14 @@ const server = http.createServer(function (request, response) {
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
     callPostDangMap(request, response);
+
+    //로그인
     callPostLogin(request, response);
     if (request.url.startsWith("/signUpResult")) {
       signupResult(request, response)
     }
+
+    followSearch(request, response);
   }
 }
 );

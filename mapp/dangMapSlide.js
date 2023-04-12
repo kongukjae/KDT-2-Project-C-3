@@ -81,7 +81,7 @@ for (let i = 0; i < 31; i++) {
   slideElement.innerText = `test${i}`;
   slideWrap.appendChild(slideElement);
 }
-console.dir(slide.children[1]);
+//console.dir(slide.children[1]);
 // console.log(slide.children[1].style.marginLeft);
 // let a = slide.children[1].style.marginLeft;
 // console.log(a);
@@ -95,21 +95,35 @@ slide.appendChild(search);
 styleCreate(slide.children[2], targetStyle.menuMapSlideSearch)
 
 //팔로우 검색창 - 검색 bar
-slide.children[2].appendChild(tagCreate("input", { type: "text" }));
+slide.children[2].appendChild(tagCreate("input", {name: "followSearch", type: "text" }));
 styleCreate(slide.children[2].children[0], targetStyle.menuMapSlideSearchBar);
 
 //팔로우 검색창 - 검색 button
-slide.children[2].appendChild(tagCreate("div", { innerText: "search" }));
+slide.children[2].appendChild(tagCreate("div", {innerText: "search"}));
 styleCreate(slide.children[2].children[1], targetStyle.menuMapSlideSearchButton);
 
-slide.children[2].children[1].addEventListener("click", () => {
-  //console.log("검색: " + slide.children[2].children[1].values)
-});
-slide.children[2].children[0].addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
+//const followSearch = document.getElementById('followSearch');
+slide.children[2].children[1].addEventListener('click', function(){
+  let res;
+  let findVal = slide.children[2].children[0].value;
+  
+  const cookieId = document.cookie.split("=")[1];
+  //console.log("쿠키: " + cookieId)
 
-  }
-});
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", `http://localhost:2080/followSearch`, true);
+  // httpRequest.send(`re1=${result[0]}`);
+  xhr.send(`searchValue=${findVal}&id=${cookieId}`); 
+
+  // xhr.addEventListener('load', function(){
+  //   res = JSON.parse(xhr.response);
+  //   // res = xhr.response;
+  //   console.log("찾은 값: "+res)
+  // });
+
+
+})
+
 
 // 슬라이드 스와이프 시 옆으로 이동
 // 마우스 다운한 지점과 마우스 이동한 곳의 좌표값을 비교하여 음수인지 양수인지로 어느 방향으로 이동했는지 판별

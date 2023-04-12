@@ -55,7 +55,7 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(fMarkerArr));
           response.end();
-          console.log(JSON.stringify(fMarkerArr));
+          //console.log(JSON.stringify(fMarkerArr));
         }
       }
     );
