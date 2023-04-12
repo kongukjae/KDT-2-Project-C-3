@@ -115,11 +115,19 @@ slide.children[2].children[1].addEventListener('click', function(){
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send(`searchValue=${findVal}&id=${cookieId}`); 
 
-  // xhr.addEventListener('load', function(){
-  //   res = JSON.parse(xhr.response);
-  //   // res = xhr.response;
-  //   console.log("찾은 값: "+res)
-  // });
+  xhr.addEventListener('load', function(){
+    res = JSON.parse(xhr.response);
+    console.dir(res[0])
+
+    // const searchResult = tagCreate("div", {});
+    // slide.appendChild(searchResult);
+    // styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
+    
+    for(const key in res){
+      console.log("찾은값: "+ res[key])
+
+    }
+  });
 
 
 })

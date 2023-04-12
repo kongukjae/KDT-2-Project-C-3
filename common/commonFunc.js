@@ -338,6 +338,17 @@ const targetStyle = {
     ...pageStyle.flexRowCenter,
     paddingBottom : "3px"
   },
+  menuMapSlideSearchResult: {
+    width : pageStyle.width.width390,
+    height : pageStyle.height.height150,
+    border: "1px solid black",
+    top : "10px",
+    left: "50%",
+    position : "relative",
+    marginLeft: "-195px",
+    display : "flex",
+    alignItems : "center",
+  },
 
   //댕맵 검색창
   menuMapSearchBarWrap: {

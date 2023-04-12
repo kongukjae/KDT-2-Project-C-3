@@ -19,7 +19,7 @@ export default function(request, response){
       console.log("검색 값: " + keyword)
 
       let count; //검색 결과 개수
-      let searchRes = []; //검색된 결과값 
+      let searchRes = {}; //검색된 결과값 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
@@ -38,15 +38,15 @@ export default function(request, response){
         else {
           for (let i = 0; i < count; i++) {
             searchRes[i] = result[i].fr_id;
-            //console.log("결과 값: " + searchRes[i]);
           }
-
+          
+          response.writeHead(200, { "Content-Type": "text/html" });
+          response.write(JSON.stringify(searchRes));
+          response.end();
         }
       });
       conn.end();
-
-      response.writeHead(200, { "Content-Type": "plain" });
-      response.end();
+      
 
     });
   }
