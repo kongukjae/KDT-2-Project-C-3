@@ -159,5 +159,9 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 
 // slide.children[1].children[0] => 내 프로필 위치
 slide.children[1].children[0].addEventListener('click', function(){
-
+  let res;
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `http://localhost:2080/myMarker`);
+  xhr.send();
 })
+

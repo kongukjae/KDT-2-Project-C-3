@@ -77,6 +77,10 @@ const server = http.createServer(function (request, response) {
     if (request.url.startsWith("/dupCheck")) {
       dupCheck(request, response);
     }
+    if (request.url.startsWith("/myMarker")) {
+      myMarker(request, response)
+    }
+
 
     //댕맵
     dangMapServer(request, response);
