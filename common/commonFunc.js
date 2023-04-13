@@ -34,6 +34,7 @@ const pageStyle = {
     widthP40: "40%",
     width500: "500px",
     width450: "450px",
+    width400: "400px",
     width390: "390px",
     width300: "300px",
     width288: "288px",
@@ -57,6 +58,8 @@ const pageStyle = {
     height690: "690px",
     height500: "500px",
     height450: "450px",
+    height400: "400px",
+    height350: "350px",
     height308: "308px",
     height300: "300px",
     height260: "260px",
@@ -269,7 +272,6 @@ const targetStyle = {
   menuMapSlide: {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height308,
-    position : "relative",
     backgroundColor : "lightgray",
     display : "flex",
     flexDirection : "column",
@@ -340,15 +342,27 @@ const targetStyle = {
     paddingBottom : "3px"
   },
   menuMapSlideSearchResult: {
-    width : pageStyle.width.width390,
-    height : pageStyle.height.height150,
-    border: "1px solid black",
-    top : "10px",
-    left: "50%",
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height40,
+    top : "5%",
+    left: "10%",
     position : "relative",
+    // position : "absolute",
     // marginLeft: "-195px",
     display : "flex",
     alignItems : "center",
+  },
+  menuMapSlideSearchResultList:{
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height40,
+    cursor : "pointer",
+    borderRadius : "15px",
+    padding : "5px",
+    paddingLeft : "20px",
+    paddingRight : "20px",
+    border : "0px",
+    fontSize : pageStyle.fontSizeSet.small,
+    // textAlign : "center"
   },
 
   //댕맵 검색창

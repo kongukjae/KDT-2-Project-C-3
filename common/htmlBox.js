@@ -60,6 +60,9 @@ const html = {
   findUserInfo : `
   <script src="/common/commonFunc.js"></script>
   <script src="/init_user/findUserInfo.js"></script>
-  `
+  `,
+  followSearch:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/mapp/dangMapSlideSearchBar.js"></script>`
 }
 export default html;

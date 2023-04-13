@@ -4,14 +4,18 @@ import cmServer from "./commonServer.js";
 
 export default function(request, response){
   
+  // let splitURL = request.url.split("/")[2];
+  // console.log(request.url);
+  // if (splitURL === "commonFunc.js") {
+  //   // splitURL = "commonFunc.js";
+  //   cmServer.fileDirectory(`common/${splitURL}`, response);
+  // }
+  // if (splitURL === "dangMapSlideSearchBar.js") {
+  //   // splitURL = "dangMapSlideSearchBar.js";
+  //   cmServer.fileDirectory(`mapp/${splitURL}`, response);
+  // }
   if (request.url.startsWith("/followSearch")) {
-    let splitURL = request.url.split("/")[2];
-    if (splitURL === "commonFunc.js") {
-      cmServer.fileDirectory(`common/${splitURL}`, response);
-    }
-    if (splitURL === "dangMapSlideSearchBar.js") {
-      cmServer.fileDirectory(`mapp/${splitURL}`, response);
-    }
+    
 
     let body = "";
 
@@ -48,12 +52,10 @@ export default function(request, response){
           for (let i = 0; i < count; i++) {
             searchRes[i] = result[i].fr_id;
           }
-          
           response.writeHead(200, { "Content-Type": "text/html" });
-          // response.write(JSON.stringify(searchRes));
-          response.write(`
-            <script src="/common/commonFunc.js"></script>
-            <script src="/mapp/dangMapSlideSearchBar.js"></script>`);
+          response.write(JSON.stringify(searchRes));
+          // response.write(htmlBox.htmlFunc(htmlBox.followSearch));
+    
           response.end();
         }
       });
