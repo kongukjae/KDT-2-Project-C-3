@@ -76,7 +76,7 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
 
 loadMarker(addMarker);
 // frMarker(frAddMarker);
-otMarker(otAddMarker);
+wholeMarker(wholeAddMarker);
 
 // 마커 하나를 지도위에 표시합니다
 //addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
@@ -104,7 +104,7 @@ function addMarker(position) {
   }
 }
 
-function frAddMarker(position) {
+function wholeAddMarker(position) {
   // 마커를 생성합니다
   let marker = new kakao.maps.Marker({
     map: map, // 마커를 표시할 지도
@@ -126,7 +126,7 @@ function frAddMarker(position) {
   }
 }
 
-function otAddMarker(position) {
+function wholeAddMarker(position) {
   // 마커를 생성합니다
   let marker = new kakao.maps.Marker({
     map: map, // 마커를 표시할 지도
@@ -169,63 +169,25 @@ function loadMarker(callback) {
   });
 }
 
-function frMarker(callback) {
-  let res2;
+function wholeMarker(callback) {
+  let wres;
   const xhr = new XMLHttpRequest();
   const cookieId = document.cookie.split("=")[1].split(";")[0];
-  xhr.open("GET", `http://localhost:2080/frFootprint?id=${cookieId}`);
+  xhr.open("GET", `http://localhost:2080/wholeFootprint?id=${cookieId}`);
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send();
   xhr.addEventListener("load", function () {
-    res2 = JSON.parse(xhr.response); // 응답
-    let frResult = {};
-    console.log(res2);
-    // for(let i of res2){
-    //   let frWrap = [];
-    //   frWrap.push(i.latitude, i.longitude)
-    //   console.log(frWrap);
-    //   callback(new kakao.maps.LatLng(parseFloat(frWrap[i][0]), parseFloat(frWrap[i][1])));
-    //   frResult[0] = frWrap;
-    //   console.log(frResult);
-    // }
-    // //res = xhr.response;
-    for (const key in res2) {
+    wres = JSON.parse(xhr.response); // 응답
+    console.log(wres);
+    for (const key in wres) {
       //console.log(typeof(parseFloat(res['0'][0])))
       callback(
         new kakao.maps.LatLng(
-          parseFloat(res2[key][0]),
-          parseFloat(res2[key][1])
+          parseFloat(wres[key][0]),
+          parseFloat(wres[key][1])
         )
       );
-      if (res2[key][2] !== cookieId) {
-        imageSrc = "#abbbbb";
-      }
-    }
-
-    console.log("정상적");
-  });
-}
-
-function otMarker(callback) {
-  let res3;
-  const xhr = new XMLHttpRequest();
-  const cookieId = document.cookie.split("=")[1].split(";")[0];
-  xhr.open("GET", `http://localhost:2080/otFootprint?id=${cookieId}`);
-  // httpRequest.send(`re1=${result[0]}`);
-  xhr.send();
-  xhr.addEventListener("load", function () {
-    res3 = JSON.parse(xhr.response); // 응답
-    let frResult = {};
-    console.log(res3);
-    for (const key in res3) {
-      //console.log(typeof(parseFloat(res['0'][0])))
-      callback(
-        new kakao.maps.LatLng(
-          parseFloat(res3[key][0]),
-          parseFloat(res3[key][1])
-        )
-      );
-      if (res3[key][2] !== cookieId) {
+      if (wres[key][2] !== cookieId) {
         imageSrc = "#abbbbb";
       }
     }
