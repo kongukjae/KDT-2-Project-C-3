@@ -10,6 +10,9 @@ export default function dangMap(request, response) {
     response.write(htmlBox.htmlFunc(htmlBox.dangMap));
     response.end();
   }
+  else if (splitURL === "commonFunc.js") {
+    cmServer.fileDirectory(`common/${splitURL}`, response);
+  }
   else if (splitURL === "topMenu.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   }

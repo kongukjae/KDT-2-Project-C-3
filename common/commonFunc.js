@@ -538,47 +538,7 @@ const targetStyle = {
       backgroundColor : pageStyle.colorTheme.peach,
       boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
     },
-    // 댕맵 오버레이
-    dangMapOverlayWrap: {
-      position: "absolute",
-      left: "0",
-      bottom: "10px",
-      width: pageStyle.width.width288,
-      height: pageStyle.height.height132,
-      marginLeft: pageStyle.marginLeft.marginLeft_144,
-      textAlign: "left",
-      overflow: "hidden",
-      fontSize: pageStyle.fontSizeSet.smaller,
-    },
-    dangMapOverlayInfo: {
-      width: "286px",
-      height: "120px",
-      borderRadius: "5px",
-      borderBottom: "2px solid #ccc",
-      borderRight: "1px solid #ccc",
-      overflow: "hidden",
-      backgroundColor: "#fff",
-    },
-    dangMapOverlayTitle: {
-      padding: "5px 0 0 10px",
-      height: "30px",
-      backgroundColor: "#eee",
-      borderBottom: "1px solid #ddd",
-      fontSize: "18px",
-      fontWeight: "bold",
-    },
-    dangMapOverlayBody: {
-      border: "0",
-      boxShadow: "0px 1px 2px #888",
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-    },
-    dangMapOverlayDesc: {
-      position: "relative",
-      margin: "13px 0 0 90px",
-      height: "75px",
-    },
+    
     findUserInfoRoot: {
       width : pageStyle.width.width500,
       height : pageStyle.height.height1000,
@@ -633,7 +593,7 @@ const targetStyle = {
     },
 
 }
-console.log(targetStyle.topMenu);
+//console.log(targetStyle.topMenu);
 
 const mypageStyle = {
   mypageRoot : {
@@ -850,3 +810,71 @@ const loginPageStyle = {
     cursor : 'pointer',
   }
 };
+
+// 댕맵 오버레이 창
+const dangMapOverlay = {
+  wrap: {
+    position: "absolute",
+    left: "0",
+    bottom: "10px",
+    width: pageStyle.width.width250,
+    height: pageStyle.height.height132,
+    marginLeft: pageStyle.marginLeft.marginLeft_144,
+    textAlign: "left",
+    overflow: "hidden",
+    fontSize: pageStyle.fontSizeSet.smaller,
+  },
+  info: {
+    width: pageStyle.width.widthP100,
+    height: "120px",
+    borderRadius: "5px",
+    // border: `1px solid ${pageStyle.colorTheme.peach}`,
+    overflow: "hidden",
+    backgroundColor: pageStyle.colorTheme.whiteTypeC,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+  },
+  title: {
+    padding: "5px 0 5px 10px",
+    height: "30px",
+    backgroundColor: pageStyle.colorTheme.peach,
+    fontSize: pageStyle.fontSizeSet.small,
+    fontWeight: "bold",
+    lineHeight: 1,
+    color: pageStyle.colorTheme.white
+  },
+  body: {
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.height90,
+    borderBottom: `2px solid ${pageStyle.colorTheme.peach}`,
+    // border: `1px solid ${pageStyle.colorTheme.peach}`,
+    padding: "10px",
+    // boxShadow: `0px 1px 10px ${pageStyle.colorTheme.peach}`,
+    position: "relative",
+    overflow: "hidden",
+    display: "flex",
+  },
+  desc: {
+    position: "relative",
+    margin: "5px 0 0 30px",
+  },
+  image: {
+    width: "70px",
+    height: "70px",
+    borderRadius: "35px",
+  },
+  close: {
+    appearance: "none",
+    width: "15px",
+    height: "20px",
+    backgroundColor: pageStyle.colorTheme.white,
+    lineHeight: 1,
+    position: "absolute",
+    top: "5px",
+    right: "5px",
+    border: "0px",
+    borderRadius: "4px",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
+    transition: "0.5s"
+  }
+}
