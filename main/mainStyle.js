@@ -351,6 +351,7 @@ logoutBtn.addEventListener("click", () => {
 
 main()
 
+/*
 async function getWeatherAsync() {
   let result = [];
   let today = new Date();   
@@ -381,3 +382,4 @@ async function getWeatherAsync() {
 }
 
 getWeatherAsync()
+*/
