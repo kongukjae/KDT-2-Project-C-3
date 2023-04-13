@@ -69,6 +69,10 @@ function slideEvent() {
 
 // 슬라이드 안쪽 구성
 const slideWrap = tagCreate("div", { id: "slideWrap" });
+styleCreate(slideWrap, {
+  display: "flex",
+  flexDirection: "row",
+})
 slide.appendChild(slideWrap);
 // slideWrap.innerHTML = `test`;
 
@@ -166,7 +170,7 @@ slide.children[1].children[0].addEventListener("mousedown", function (e) {
   let startX = e.clientX;
   let widthValue  = slideWidthValueCalculate(slide.children[1].children[0])
 
-  let marginLeftValue = slide.children[1].style.marginLeft;
+  let marginLeftValue = slide.children[1].children[0].style.marginLeft;
   let marginLeftNumValue = Number(marginLeftValue.split("p")[0]);
   let marginLeftCalcValue;
   
