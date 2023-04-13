@@ -7,7 +7,7 @@ let markersObject = {
   userid : "",
   markers : {},
   //필요한 입력값 = [id, 4, marker];
-  // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 3: 익명, 4: 본인
+  // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
     if(markersObject.markers[value[0]] === undefined){
       markersObject.markers[value[0]] = [value[1],[value[2]]];
@@ -308,7 +308,7 @@ function map() {
             parseFloat(res[key][1])
           )
         );
-        markersObject.appendMarker = [cookieId,4,[markerNow]];
+        markersObject.appendMarker = [cookieId,3,[markerNow]];
       }
 
       console.log("정상적으로 지도에 표시됨");
