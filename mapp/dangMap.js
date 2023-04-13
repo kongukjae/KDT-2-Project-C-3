@@ -87,7 +87,7 @@ function map() {
 
   // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-    console.log("클릭 시 : " + overlayChecker);
+    // console.log("클릭 시 : " + overlayChecker);
     // 오버레이 창이 비활성화 되있을 경우에 동작
     if (overlayChecker === false) {
       // 클릭한 위치에 마커를 표시합니다
@@ -117,9 +117,9 @@ function map() {
   //addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
 
   // 마커를 생성하고 지도위에 표시하는 함수입니다
+  overlayChecker = false;
   function addMarker(position) {
     // 오버레이 창 열림/닫힘 체크 변수
-    overlayChecker = false;
 
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
