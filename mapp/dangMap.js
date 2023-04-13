@@ -5,10 +5,10 @@ let markersObject = {
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
-    if(markersObject.markers[value[0]] === undefined){
-      markersObject.markers[value[0]] = [value[1],[value[2]]];
+    if(this.markers[value[0]] === undefined){
+      this.markers[value[0]] = [value[1],[value[2]]];
     }else{
-      markersObject.markers[value[0]][1].push(value[2]);
+      this.markers[value[0]][1].push(value[2]);
     }
   }
 };
@@ -131,10 +131,9 @@ function map() {
     }
   });
 
-  loadMarker(addMarker);
-  starMarker(starAddMarker);
-  frMarker(frAddMarker);
-  otMarker(otAddMarker);
+
+  
+  
   // 마커 하나를 지도위에 표시합니다
   //addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
 
@@ -373,9 +372,8 @@ function map() {
         markersObject.appendMarker = [cookieId,3,[markerNow]];
       }
 
-      console.log("정상적으로 지도에 표시됨");
-      console.log("마커 객체 출력");
-      console.log(markersObject);
+      console.log("내 발자국 확인 중");
+      console.log(Object.keys(markersObject.markers))
     });
   }
 
@@ -412,10 +410,9 @@ function map() {
         }
         markersObject.appendMarker = [sres[key][2],1,[markerNow]];
       }
-
+      console.log("star 발자국 확인 중");
+      console.log(Object.keys(markersObject.markers))
       console.log("정상적");
-      console.log("친구 마커 객체 출력");    
-      console.log(markersObject);
     });
   }
 
@@ -454,8 +451,6 @@ function map() {
       }
 
       console.log("정상적");
-      console.log("친구 마커 객체 출력");    
-      console.log(markersObject);
     });
   }
 
@@ -490,8 +485,6 @@ function map() {
       }
 
       console.log("정상적임");
-      console.log("친구 마커 객체 출력");    
-      console.log(markersObject);
     });
   }
 
@@ -578,5 +571,14 @@ function map() {
       markers[i].setMap(map);
     }
   }
+  async function getMarkersObject(){
+    await loadMarker(addMarker);
+    await starMarker(starAddMarker);
+    await frMarker(frAddMarker);
+    await otMarker(otAddMarker);
+    console.log("await 발자국 확인 중");
+    console.log(Object.keys(markersObject.markers))
+  };
+  getMarkersObject();
 }
 map();
