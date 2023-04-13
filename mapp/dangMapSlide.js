@@ -71,7 +71,10 @@ function slideEvent() {
 const slideWrap = tagCreate("div", { id: "slideWrap" });
 slide.appendChild(slideWrap);
 // slideWrap.innerHTML = `test`;
-styleCreate(slideWrap, targetStyle.menuMapSlideWrap);
+
+const slideWrapInnerDiv = tagCreate("div", {});
+styleCreate(slideWrapInnerDiv, targetStyle.menuMapSlideWrap);
+slideWrap.appendChild(slideWrapInnerDiv);
 
 // 발자국이 찍힌 사람이 총 몇명인지 서버에서 변수로 받아와서 반복문을 돌려야 할 것으로 생각 됨
 // 임시로 최대치인 31을 넣어 둠
@@ -79,7 +82,7 @@ for (let i = 0; i < 31; i++) {
   const slideElement = tagCreate("div", {});
   styleCreate(slideElement, targetStyle.menuMapSlideItems);
   slideElement.innerText = `test${i}`;
-  slideWrap.appendChild(slideElement);
+  slideWrapInnerDiv.appendChild(slideElement);
 }
 //console.dir(slide.children[1]);
 // console.log(slide.children[1].style.marginLeft);
@@ -158,10 +161,10 @@ function searchResultChooseValue(){
 // 슬라이드 스와이프 시 옆으로 이동
 // 마우스 다운한 지점과 마우스 이동한 곳의 좌표값을 비교하여 음수인지 양수인지로 어느 방향으로 이동했는지 판별
 // 한계값을 설정하고 그 이하일 경우에는 이동한 값 만큼 marginLeft 또는 marginRight를 이용하여 실시간 슬라이드 구현
-slide.children[1].addEventListener("mousedown", function (e) {
+slide.children[1].children[0].addEventListener("mousedown", function (e) {
   let mDown = true;
   let startX = e.clientX;
-  let widthValue  = slideWidthValueCalculate(slide.children[1])
+  let widthValue  = slideWidthValueCalculate(slide.children[1].children[0])
 
   let marginLeftValue = slide.children[1].style.marginLeft;
   let marginLeftNumValue = Number(marginLeftValue.split("p")[0]);
@@ -169,7 +172,7 @@ slide.children[1].addEventListener("mousedown", function (e) {
   
   // console.log("startPoint : " + startPoint);
   console.log("startX : " + startX);
-  slide.children[1].addEventListener("mousemove", function (event) {
+  slide.children[1].children[0].addEventListener("mousemove", function (event) {
     if (mDown) {
       console.log("mDown : " + mDown);
       let deltaX = startX - event.clientX;
@@ -177,28 +180,28 @@ slide.children[1].addEventListener("mousedown", function (e) {
       console.log("startX : " + startX + " clientX : " + event.clientX);
       if(deltaX > 0) {
         if (marginLeftNumValue > 0) {
-          slide.children[1].style.marginLeft = 0;
+          slide.children[1].children[0].style.marginLeft = 0;
           changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
           console.log(widthValue);
           marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
-          slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
+          slide.children[1].children[0].style.marginLeft = `${marginLeftCalcValue}px`;
         }
       } 
       else {
         if (marginLeftNumValue > 0) {
-          slide.children[1].style.marginLeft = 0;
+          slide.children[1].children[0].style.marginLeft = 0;
           changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
           marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
-          slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
+          slide.children[1].children[0].style.marginLeft = `${marginLeftCalcValue}px`;
         }
       }
     }
   });
-  slide.children[1].addEventListener("mouseup", function () {
+  slide.children[1].children[0].addEventListener("mouseup", function () {
     mDown = false;
-    changeSliderValueMarginLeft(slide.children[1], marginLeftCalcValue);
+    changeSliderValueMarginLeft(slide.children[1].children[0], marginLeftCalcValue);
   });
 });
 
@@ -258,14 +261,13 @@ function makeControlBtns() {
   });
 
   // 내 프로필 클릭 시 버튼's 생성 / 삭제
-  slide.children[1].children[0].addEventListener("click", () => {
+  slide.children[1].children[0].children[0].addEventListener("click", () => {
     if (controlToggle) {
       slide.removeChild(controlbtnsWrap);
       controlToggle = false;
     } else {
       slide.appendChild(controlbtnsWrap);
       controlToggle = true;
-      console.dir(slide.children[2].children[1]);
       testFunc();
     }
   });
