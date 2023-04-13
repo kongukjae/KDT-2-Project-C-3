@@ -45,14 +45,14 @@ export default function dangMap(request, response) {
           if(myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude);
+              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
               markerMyArr[i] = myArr;
             }
           }
           else {
             for(let i = 0; i < 10; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude);
+              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
               markerMyArr[i] = myArr;
             }
           }
@@ -108,6 +108,7 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerStarArr));
           response.end();
+          console.log(markerStarArr);
         }
       }
     );
@@ -156,6 +157,7 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerFriendsArr));
           response.end();
+          console.log(markerFriendsArr);
         }
       }
     );
@@ -184,26 +186,27 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select * from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
+      `select latitude, longitude, map_tables.id from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
       (err, rows) => {
         if (err) throw err;
         else {
           if (otherCnt <= 10) {
             for (let i = 0; i < otherCnt; i++) {
               let otherArr = [];
-              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
+              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
               markerOtherArr[i] = otherArr;
             }
           } else {
             for (let i = 0; i < 10; i++) {
               let otherArr = [];
-              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
+              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
               markerOtherArr[i] = otherArr;
             }
           }
           response.writeHead(200);
           response.write(JSON.stringify(markerOtherArr));
           response.end();
+          console.log(markerOtherArr);
         }
       }
     );
