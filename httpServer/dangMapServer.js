@@ -50,11 +50,12 @@ export default function dangMap(request, response) {
             let fArr = [];
             fArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
             fMarkerArr[i] = fArr;
+            //console.log("asassasas: " + rows);
           }
           response.writeHead(200);
           response.write(JSON.stringify(fMarkerArr));
           response.end();
-          console.log(JSON.stringify(fMarkerArr));
+          //console.log(JSON.stringify(fMarkerArr));
         }
       }
     );
