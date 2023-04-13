@@ -307,16 +307,25 @@ function testFunc(){
   console.log("controlToggle: " + controlToggle);
   if(controlToggle) {
     console.log("조건문 진입")
-    slide.children[2].children[2].addEventListener('click', () => {
+    slide.children[slide.children.length - 1].children[2].addEventListener('click', () => {
       // 목표 : 내 발자국만 남기고 다른 사람들의 발자국 비활성화
-      // 1. 토큰을 통해 로그인한 ID를 식별
-      // 2-1. ID를 통해 내 발자국만 지도에 출력
-      //      -> dangMap.js의 loadMarker 함수를 실행시켜 내 발자국만 나오도록 핸들링
-      // 2-2. 페이지를 새로 load하면서 서버에서 전달하는 변수를 통해 내것 이외의 발자국을 출력하는 함수를 비활성화
-      //      -> 버튼 클릭시 서버에 요청을 보내고 서버가 요청을 받으면 string으로 문자열을 전달, 전달받은 문자열을 통해
-      //         dangMap.js에서(지금은 map.js에만 적용되어 있음) 친구 발자국과 타인 발자국을 출력하는 함수에 조건문을 걸어서 핸들링
+      // dangMap.js의 마커의 배열을 이용하여 내 발자국 이외의 사람들의 발자국을 숨김
       console.log(markers);
     })
   }
 }
 
+let daySlideWrap = tagCreate('div', {id: "daySlide"});
+// daySlideWrap.innerText = "test";
+styleCreate(daySlideWrap, {
+  position: "absolute",
+  top: "-100px",
+  left: "0px",
+})
+slide.appendChild(daySlideWrap);
+
+let daySlideContent = 
+`
+<input type="range" min="0" max="100" value="50" class="slider-range">
+`
+daySlideWrap.innerHTML = daySlideContent;
