@@ -573,6 +573,8 @@ const targetStyle = {
 }
 console.log(targetStyle.topMenu);
 
+
+// 마이페이지 해당 부분 
 const mypageStyle = {
   mypageRoot : {
     width : pageStyle.width.width500,
@@ -788,3 +790,101 @@ const loginPageStyle = {
     cursor : 'pointer',
   }
 };
+
+// 글쓰기 작성 세부적인 스타일링
+const myWriteStyle={
+  mywriteRoot:{
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height1700,
+    margin : "auto",
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.beige,
+    display : "flex",
+    flexDirection : "column",
+    alignItems : "center"
+  },
+
+ 
+  WriteTopMenu:{
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height126,
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.peach,
+    ...pageStyle.flexRowCenter
+  },
+
+
+// writeTitle:{
+//   // 제목입력칸
+// },
+
+
+// Writemain:{
+// // 메인입력칸
+// },
+
+
+// WritepageButtonWrap:{
+//   // 카테고리 및 사진업로드 전체칸
+// },
+
+
+
+// WriteCategoryModal:{
+//   //카테고리 모달팡
+//   },
+
+
+
+
+
+//   WriteCategoryButton:{
+//     // 중고거래 버튼
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+//     Writemain:{
+//     // 메인입력칸
+//     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

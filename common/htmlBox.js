@@ -65,6 +65,19 @@ const html = {
   findUserInfo : `
   <script src="/common/commonFunc.js"></script>
   <script src="/init_user/findUserInfo.js"></script>
+  `,
+
+ writePage:`
+ <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/mywrite.js"></script>
   `
+ 
+
+
+
+
+
 }
 export default html;

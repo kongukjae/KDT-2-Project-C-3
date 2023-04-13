@@ -163,6 +163,58 @@ styleCreate(logoutBtn, {
 });
 logoutBtn.innerText = "로그아웃";
 
+
+// 윤이의 비밀공간 이라는 버튼을 생성한다.
+// 버튼을 클릭하면, /write 경로로 post 요청을 보낸다.
+// 요청에는 jwt 토큰 값과 targetid 값이 함께 전송된다.
+// 
+let mywritebtn = tagCreate("button", {});
+menuSlide.appendChild(mywritebtn);
+styleCreate(mywritebtn, {
+  width: "100px",
+  height: "30px",
+  backgroundColor: "#fff",
+  borderRadius: "15px",
+  position: "absolute",
+  top: "150px",
+  left: "20px",
+  cursor: "pointer",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  fontWeight: "bold",
+  color: "#F7786B"
+});
+mywritebtn.innerText = "윤이비밀공간";
+
+
+mywritebtn.addEventListener("click", () => {
+  // 1. 토큰이 유효한지 검사한다.
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  let mywriteForm = document.createElement('form');
+
+  mywriteForm.method = "POST"
+  mywriteForm.action = "/mypage";
+  let params = {jwt:token, targetId:"mine"}
+  for(let key in params){
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type","hidden");
+    hiddenField.setAttribute("name",key);
+    hiddenField.setAttribute("value",params[key]);
+    mywriteForm.appendChild(hiddenField);
+  }
+  document.body.appendChild(mywriteForm);
+  mywriteForm.submit();
+});
+
+
+
+
+
+
 myPageBtn.addEventListener("click", () => {
   // 1. 토큰이 유효한지 검사한다.
   const token = document.cookie.replace(
@@ -207,7 +259,6 @@ logoutBtn.addEventListener("click", () => {
   document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location = "/";
 });
-
 
 
 

@@ -15,6 +15,8 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 import myPagePost from "./httpServer/myPagePost.js";
+import mywritepost from "./httpServer/mywritepost.js";
+
 
 
 // import mapMerker from "./mapMerker.js";
@@ -74,19 +76,47 @@ const server = http.createServer(function (request, response) {
     if (request.url === "/favicon") {
       cmServer.fileDirectory(`graphic/dogpaw.png`, response);
     }
-    if (request.url.startsWith("/dupCheck")) {
-      dupCheck(request, response);
-    }else if (request.url === "/friends/mypageStyle.js") {
-      cmServer.fileDirectory(`friends/mypageStyle.js`, response);
-    }else if (request.url === "/friends/yourpageStyle.js") {
-      cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
-    }
-    if (request.url.startsWith("/myMarker")) {
-      myMarker(request, response)
-    }
+ // 글쓰는 곳 
+    // if (request.url === "/mywrite.js") {
+    //   cmServer.fileDirectory(`friends/mywrite.js`, response);
+    //   mywritepost(response);
+    // }
+    // if (request.url === "/mywrite.js") {
+    //   cmServer.fileDirectory(`friends/mywrite.js`, response);
+    // } else if (request.url === "/write") {
+    //   mywritepost(response);
+    // }
+    // if (request.url === "/friends/mywrite.js") {
+    //   cmServer.fileDirectory(`friends/mywrite.js`, response);
+    // } else if (request.url === "/write") {
+    //   mywritepost(request, response);
+    // }
 
+
+
+
+  if (request.url.startsWith("/dupCheck")) {
+    dupCheck(request, response);
+  } else if (request.url === "/friends/mypageStyle.js") {
+    cmServer.fileDirectory(`friends/mypageStyle.js`, response);
+  } else if (request.url === "/friends/yourpageStyle.js") {
+    cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
+
+  //  } else   if (request.url === "/friends/mywrite.js") {
+  //     cmServer.fileDirectory(`friends/mywrite.js`, response);
+  // }
+  } else if (request.url.startsWith("/myMarker")) {
+    myMarker(request, response);
+  }
+
+
+  if (request.url === "/mywrite.js") {
+    cmServer.fileDirectory(`friends/mywrite.js`, response);
+  }
 
     //댕맵
+
+
     dangMapServer(request, response);
 
 
@@ -94,6 +124,14 @@ const server = http.createServer(function (request, response) {
 
   // post request
   if (request.method === 'POST') {
+    // 글작성페이지
+  //    if (request.url.startsWith('/write')) {
+  //   mywritepost(request, response);
+  // } else if (request.url === "/friends/mypageStyle.js") {
+  //   cmServer.fileDirectory(`friends/mypageStyle.js`, response);
+  // }
+     // 글작성 페이지
+    //  mywritepost(request,response);
     //마이페이지
     myPagePost(request, response);
     //업로드, 유저 이미지
