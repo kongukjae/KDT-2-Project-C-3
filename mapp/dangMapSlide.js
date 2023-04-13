@@ -130,7 +130,7 @@ slide.children[2].children[1].addEventListener('click', function(){
   let searchList; //찾은 팔로우 ID값 리스트로 담아 둠.
     for(const key in res){
       searchList += `<option value="${res[key]}">${res[key]}</option>`;
-      // console.log(`값: ${key}, ${res[key]}`)
+      console.log(`값: ${key}, ${res[key]}`)
     }
     slide.children[3].innerHTML = `<select id="searchResult" onchange="searchResultChooseValue()">
     <option value="none">검색 결과</option>
