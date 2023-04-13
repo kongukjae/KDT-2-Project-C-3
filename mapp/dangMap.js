@@ -3,6 +3,19 @@ function getRandom(min, max) {
 }
 
 let markers = [];
+let markersObject = {
+  userid : "",
+  markers : {},
+  //필요한 입력값 = [id, 4, marker];
+  // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
+  set appendMarker(value){
+    if(markersObject.markers[value[0]] === undefined){
+      markersObject.markers[value[0]] = [value[1],[value[2]]];
+    }else{
+      markersObject.markers[value[0]][1].push(value[2]);
+    }
+  }
+};
 
 function map() {
   let root = tagCreate("div", { id: "root" });
@@ -249,6 +262,7 @@ function map() {
       // 객체를 JSON 형식으로 바꿔서 서버로 전송
       httpRequest.send(JSON.stringify(resultObject));
     });
+    return marker;
   }
 
   function frAddMarker(position) {
@@ -271,29 +285,35 @@ function map() {
         markers[i].setMap(map);
       }
     }
+    return marker;
   }
 
   function loadMarker(callback) {
     let res;
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
+    markersObject.userid = cookieId;
     xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send();
     xhr.addEventListener("load", function () {
       res = JSON.parse(xhr.response);
+      console.log(res);
       //res = xhr.response;
       for (const key in res) {
         //console.log(typeof(parseFloat(res['0'][0])))
-        callback(
+        let markerNow = callback(
           new kakao.maps.LatLng(
             parseFloat(res[key][0]),
             parseFloat(res[key][1])
           )
         );
+        markersObject.appendMarker = [cookieId,3,[markerNow]];
       }
 
       console.log("정상적으로 지도에 표시됨");
+      console.log("마커 객체 출력");
+      console.log(markersObject);
     });
   }
 
@@ -307,7 +327,7 @@ function map() {
     xhr.addEventListener("load", function () {
       res2 = JSON.parse(xhr.response); // 응답
       let frResult = {};
-      console.log(res2);
+
       // for(let i of res2){
       //   let frWrap = [];
       //   frWrap.push(i.latitude, i.longitude)
@@ -319,18 +339,21 @@ function map() {
       // //res = xhr.response;
       for (const key in res2) {
         //console.log(typeof(parseFloat(res['0'][0])))
-        callback(
+        let markerNow = callback(
           new kakao.maps.LatLng(
             parseFloat(res2[key][0]),
             parseFloat(res2[key][1])
           )
         );
+        markersObject.appendMarker = [res2[key][2],0,[markerNow]];
         if (res2[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
       }
 
       console.log("정상적");
+      console.log("친구 마커 객체 출력");    
+      console.log(markersObject);
     });
   }
 
