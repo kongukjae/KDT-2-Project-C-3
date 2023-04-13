@@ -170,3 +170,41 @@ function loadMarker(callback) {
     });
     
   }
+// ----- dangMap.js에 내 발자국만 출력되서 임시로 map.js에서 실험
+
+// 토글용 변수
+let toggleVar = false;
+
+// 테스트용 임시 버튼
+let testDiv = tagCreate("div", {});
+styleCreate(testDiv, {
+  width: "50px",
+  height: "50px",
+  position: "absolute",
+  top: "0",
+  left: "0",
+  backgroundColor: "black",
+  zIndex: "10",
+})
+mapContainer.appendChild(testDiv);
+
+// 임시 버튼이 눌렸을 경우 setMarkers()를 이용해 마커를 숨기거나 표시함
+testDiv.addEventListener('click', function(){
+if(toggleVar){
+    setMarkers(map);
+    toggleVar = false;
+  } else {
+    setMarkers(null);
+    toggleVar = true;
+  }
+})
+
+// 사용 안하고 있던 markers 배열 사용
+// 내 발자국의 경우 마커가 찍힐 때 markers에 push하지 않음
+// 친구 발자국 및 타인 발자국의 경우 마커가 찍힐 때 markers에 push함
+// markers 배열에는 내 발자국을 제외한 친구 + 타인의 발자국의 정보만 들어있음 => 반복문을 통해 setMap(null) 혹은 setMap(map)으로 숨기거나 표시함 
+function setMarkers(map) {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}

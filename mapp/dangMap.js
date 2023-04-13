@@ -1,3 +1,22 @@
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+let markers = [];
+let markersObject = {
+  userid : "",
+  markers : {},
+  //필요한 입력값 = [id, 4, marker];
+  // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
+  set appendMarker(value){
+    if(markersObject.markers[value[0]] === undefined){
+      markersObject.markers[value[0]] = [value[1],[value[2]]];
+    }else{
+      markersObject.markers[value[0]][1].push(value[2]);
+    }
+  }
+};
+
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
@@ -262,7 +281,9 @@ function map() {
       // 객체를 JSON 형식으로 바꿔서 서버로 전송
       httpRequest.send(JSON.stringify(resultObject));
     });
+    return marker;
   }
+
   function starAddMarker(position) {
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
@@ -305,29 +326,9 @@ function map() {
         markers[i].setMap(map);
       }
     }
+    return marker;
   }
 
-  function otAddMarker(position) {
-    // 마커를 생성합니다
-    let marker = new kakao.maps.Marker({
-      map: map, // 마커를 표시할 지도
-      position: position, // 마커를 표시할 위치
-      image: otMarkerImage,
-    });
-
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
-
-    // 생성된 마커를 배열에 추가합니다
-    markers.push(marker);
-
-    // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-    function setMarkers(map) {
-      for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-      }
-    }
-  }
 
   function otAddMarker(position) {
     // 마커를 생성합니다
@@ -355,23 +356,28 @@ function map() {
     let res;
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
+    markersObject.userid = cookieId;
     xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send();
     xhr.addEventListener("load", function () {
       res = JSON.parse(xhr.response);
+      console.log(res);
       //res = xhr.response;
       for (const key in res) {
         //console.log(typeof(parseFloat(res['0'][0])))
-        callback(
+        let markerNow = callback(
           new kakao.maps.LatLng(
             parseFloat(res[key][0]),
             parseFloat(res[key][1])
           )
         );
+        markersObject.appendMarker = [cookieId,3,[markerNow]];
       }
 
       console.log("정상적으로 지도에 표시됨");
+      console.log("마커 객체 출력");
+      console.log(markersObject);
     });
   }
 
@@ -434,18 +440,21 @@ function map() {
       // //res = xhr.response;
       for (const key in fres) {
         //console.log(typeof(parseFloat(res['0'][0])))
-        callback(
+        let markerNow = callback(
           new kakao.maps.LatLng(
             parseFloat(fres[key][0]),
             parseFloat(fres[key][1])
           )
         );
-        if (fres[key][2] !== cookieId) {
+        markersObject.appendMarker = [res2[key][2],0,[markerNow]];
+        if (res2[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
       }
 
       console.log("정상적");
+      console.log("친구 마커 객체 출력");    
+      console.log(markersObject);
     });
   }
 

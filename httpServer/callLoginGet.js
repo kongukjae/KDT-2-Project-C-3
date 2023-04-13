@@ -11,7 +11,7 @@ export default function callLoginGet(request, response) {
     response.write(htmlBox.htmlFunc(htmlBox.loginBody));
     response.end();
   } else if (splitURL === "loginPage.js") {
-    console.log("aaaaa2: " + request.url)
+    //console.log("aaaaa2: " + request.url)
     // loginPage.js 파일 read
     cmServer.fileDirectory(`init_user/${splitURL}`, response);
   } else if (request.url.startsWith("/resource/MainLogo")) {

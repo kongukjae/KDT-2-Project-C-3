@@ -19,7 +19,7 @@ export default function callPostDangMap(request, response) {
       response.end();
 
       for (const key in cooData) {
-        console.log(cooData[key]);
+        //console.log(cooData[key]);
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
