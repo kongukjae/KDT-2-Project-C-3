@@ -3,17 +3,6 @@ import mysql from "mysql";
 import cmServer from "./commonServer.js";
 
 export default function(request, response){
-  
-  // let splitURL = request.url.split("/")[2];
-  // console.log(request.url);
-  // if (splitURL === "commonFunc.js") {
-  //   // splitURL = "commonFunc.js";
-  //   cmServer.fileDirectory(`common/${splitURL}`, response);
-  // }
-  // if (splitURL === "dangMapSlideSearchBar.js") {
-  //   // splitURL = "dangMapSlideSearchBar.js";
-  //   cmServer.fileDirectory(`mapp/${splitURL}`, response);
-  // }
   if (request.url.startsWith("/followSearch")) {
     
 
@@ -27,8 +16,10 @@ export default function(request, response){
 
       //데이터 받는 작업 끝나면 검색 키워드와 유저ID값 저장
       let searchVal = body.split("&");
-      let keyword = searchVal[0].split("=")[1]; //검색 키워드
-      let userId = searchVal[1].split("=")[1]; //유저ID
+      let keyword = searchVal[0].split("=")[1]; //검색 키워드 추출
+
+      let userId = searchVal[1].split(";")[0]; //유저ID에서 jwt분리
+      userId = userId.split("=")[1]; //유저ID 추출
       console.log("검색 값: " + keyword)
 
       let count; //검색 결과 개수

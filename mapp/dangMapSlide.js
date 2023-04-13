@@ -103,6 +103,13 @@ styleCreate(slide.children[2].children[0], targetStyle.menuMapSlideSearchBar);
 slide.children[2].appendChild(tagCreate("div", {innerText: "search"}));
 styleCreate(slide.children[2].children[1], targetStyle.menuMapSlideSearchButton);
 
+//팔로우 ID 검색한 값 표시해줄 영역
+let searchResult = tagCreate("div", {});
+slide.appendChild(searchResult);
+styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
+styleCreate(slide.children[3], {display: "none"})
+
+
 //팔로우 검색 버튼 클릭 시 동작 함수
 slide.children[2].children[1].addEventListener('click', function(){
   let res;
@@ -110,11 +117,8 @@ slide.children[2].children[1].addEventListener('click', function(){
   const cookieId = document.cookie.split("=")[1];
   //console.log("쿠키: " + cookieId)
 
-  //팔로우 ID 검색한 값 표시해줄 영역
-  let searchResult = tagCreate("div", {});
-  slide.appendChild(searchResult);
-  styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
-
+  
+  styleCreate(slide.children[3], {display: ""})
   //슬라이드 메뉴 높이 값 조정
   styleCreate(slide, {height: pageStyle.height.height450});
 
@@ -122,6 +126,7 @@ slide.children[2].children[1].addEventListener('click', function(){
   const xhr = new XMLHttpRequest();
   xhr.open("POST", `http://localhost:2080/followSearch`, true);
   // httpRequest.send(`re1=${result[0]}`);
+  console.log(cookieId)
   xhr.send(`searchValue=${findVal}&id=${cookieId}`); 
 
   xhr.addEventListener('load', function(){
