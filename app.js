@@ -15,6 +15,7 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 import myPagePost from "./httpServer/myPagePost.js";
+// import myPage from "./httpServer/myPage.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 
 
@@ -87,7 +88,7 @@ const server = http.createServer(function (request, response) {
     }
 
 
-    //댕맵
+    //댕맵 불러오기
     dangMapServer(request, response);
 
 
