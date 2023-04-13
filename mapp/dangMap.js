@@ -2,6 +2,8 @@ function getRandom(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+let markers = [];
+
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
@@ -76,16 +78,16 @@ function map() {
   markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
 
   // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-  let markers = [];
+  // let markers = [];
   // let latlng = mouseEvent.latLng;
   //let result = [];
   let resultObject = {};
   let cnt = 0;
-  const cookieId = document.cookie.split("=")[1];
+  const cookieId = document.cookie.split("=")[1].split(";")[0];
 
   // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-    console.log("클릭 시 : " + overlayChecker);
+    // console.log("클릭 시 : " + overlayChecker);
     // 오버레이 창이 비활성화 되있을 경우에 동작
     if (overlayChecker === false) {
       // 클릭한 위치에 마커를 표시합니다
@@ -115,9 +117,9 @@ function map() {
   //addMarker(new kakao.maps.LatLng(33.450701, 126.570667));
 
   // 마커를 생성하고 지도위에 표시하는 함수입니다
+  overlayChecker = false;
   function addMarker(position) {
     // 오버레이 창 열림/닫힘 체크 변수
-    overlayChecker = false;
 
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
@@ -135,11 +137,11 @@ function map() {
     marker.setDraggable(true);
 
     // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-    function setMarkers(map) {
-      for (let i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-      }
-    }
+    // function setMarkers(map) {
+    //   for (let i = 0; i < markers.length; i++) {
+    //     markers[i].setMap(map);
+    //   }
+    // }
 
     // 오버레이 내부 구성 요소들
     const content = document.createElement("div");
@@ -274,7 +276,7 @@ function map() {
   function loadMarker(callback) {
     let res;
     const xhr = new XMLHttpRequest();
-    const cookieId = document.cookie.split("=")[1];
+    const cookieId = document.cookie.split("=")[1].split(";")[0];
     xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send();
@@ -298,7 +300,7 @@ function map() {
   function frMarker(callback) {
     let res2;
     const xhr = new XMLHttpRequest();
-    const cookieId = document.cookie.split("=")[1];
+    const cookieId = document.cookie.split("=")[1].split(";")[0];
     xhr.open("GET", `http://localhost:2080/frFootprint?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send();
@@ -401,6 +403,21 @@ function map() {
   // 하단 메뉴
   let menuChild2 = [];
   btmMeun(rootChild[2], menuChild2);
+
+  
+  console.dir(rootChild[2]);
+  console.dir(rootChild[2].children[3]);
+  rootChild[2].children[3].addEventListener('click', function(){
+    console.log(markers);
+    setMarkers(null);
+  })
+
+  function setMarkers(map) {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
 }
+
 
 map();

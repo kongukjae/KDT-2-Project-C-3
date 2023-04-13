@@ -458,7 +458,7 @@ const targetStyle = {
       backgroundColor : pageStyle.colorTheme.beige,
       boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
       position : "absolute",
-      top : "17%",
+      top : "16%",
       left: "50%",
       gap : "30px",
       marginLeft: "-150px",
