@@ -88,6 +88,7 @@ for (let i = 0; i < 31; i++) {
 // let b = a.split("p")[0];
 // console.log(b);
 
+//======================================================================================
 
 //슬라이드 메뉴 - 팔로우 검색 창
 const search = tagCreate("div", {});
@@ -102,14 +103,14 @@ styleCreate(slide.children[2].children[0], targetStyle.menuMapSlideSearchBar);
 slide.children[2].appendChild(tagCreate("div", {innerText: "search"}));
 styleCreate(slide.children[2].children[1], targetStyle.menuMapSlideSearchButton);
 
-//const followSearch = document.getElementById('followSearch');
+//팔로우 검색 버튼 클릭 시 동작 함수
 slide.children[2].children[1].addEventListener('click', function(){
   let res;
   let findVal = slide.children[2].children[0].value;
   const cookieId = document.cookie.split("=")[1];
   //console.log("쿠키: " + cookieId)
 
-
+  //팔로우 ID 검색한 값 표시해줄 영역
   let searchResult = tagCreate("div", {});
   slide.appendChild(searchResult);
   styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
@@ -135,18 +136,24 @@ slide.children[2].children[1].addEventListener('click', function(){
     <option value="none">검색 결과</option>
     ${searchList}
     </select>`;
+
     styleCreate(slide.children[3].children[0], targetStyle.menuMapSlideSearchResultList)
   });
-
 
   
 })
 
+//검색된 팔로우 ID 리스트에서 선택했을 때 동작되는 함수
 function searchResultChooseValue(){
   let choose = document.getElementById("searchResult")
   console.log(`친구 선택: ${choose.options[choose.selectedIndex].value}`)
 
+  //검색된 팔로우 선택하면 기존 창으로 되돌아 감
+  styleCreate(slide.children[3], {display: "none"});
+  styleCreate(slide, {height: pageStyle.height.height308});
 }
+
+//=============================================================================================
 
 // 슬라이드 스와이프 시 옆으로 이동
 // 마우스 다운한 지점과 마우스 이동한 곳의 좌표값을 비교하여 음수인지 양수인지로 어느 방향으로 이동했는지 판별
