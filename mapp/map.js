@@ -47,7 +47,7 @@ let markers = [];
 //let result = [];
 let resultObject = {};
 let cnt = 0;
-const cookieId = document.cookie.split("=")[1];
+const cookieId = document.cookie.split("=")[1].split(";")[0];
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
   // 클릭한 위치에 마커를 표시합니다
   let latlng = mouseEvent.latLng;
@@ -126,7 +126,7 @@ function wholeAddMarker(position) {
 function loadMarker(callback){
   let res;
   const xhr = new XMLHttpRequest();
-  const cookieId = document.cookie.split("=")[1];
+  const cookieId = document.cookie.split("=")[1].split(";")[0];
   xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send(); 
@@ -146,7 +146,7 @@ function loadMarker(callback){
   function wholeMarker(callback){
     let wres;
     const xhr = new XMLHttpRequest();
-    const cookieId = document.cookie.split("=")[1];
+    const cookieId = document.cookie.split("=")[1].split(";")[0];
     xhr.open("GET", `http://localhost:2080/wholeFootprint?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send(); 

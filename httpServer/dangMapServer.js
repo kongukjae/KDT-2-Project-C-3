@@ -75,7 +75,7 @@ export default function dangMap(request, response) {
     console.log("url ==" + request.url);
 
     connection.query(
-      `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = ${targetId} and star = true order by addData desc;`,
+      `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = true order by addData desc;`,
       function (err, data) {
         if (err) throw err;
         else {
@@ -88,7 +88,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select latitude, longitude, fr_id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = ${targetId} and star = true order by addData desc;`,
+      `select latitude, longitude, fr_id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = true order by addData desc;`,
       (err, rows) => {
         if (err) throw err;
         else {
@@ -123,7 +123,7 @@ export default function dangMap(request, response) {
     console.log("url ==" + request.url);
 
     connection.query(
-      `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = ${targetId} and star = false order by addData desc;`,
+      `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = false order by addData desc;`,
       function (err, data) {
         if (err) throw err;
         else {
@@ -136,7 +136,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select latitude, longitude, fr_id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = ${targetId} and star = false order by addData desc;`,
+      `select latitude, longitude, fr_id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = false order by addData desc;`,
       (err, rows) => {
         if (err) throw err;
         else {
@@ -149,7 +149,7 @@ export default function dangMap(request, response) {
           } else {
             for (let i = 0; i < 10; i++) {
               let friendArr = [];
-              starArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
+              friendArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
               markerFriendsArr[i] = friendArr;
             }
           }
@@ -197,7 +197,7 @@ export default function dangMap(request, response) {
           } else {
             for (let i = 0; i < 10; i++) {
               let otherArr = [];
-              starArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
+              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
               markerOtherArr[i] = otherArr;
             }
           }
