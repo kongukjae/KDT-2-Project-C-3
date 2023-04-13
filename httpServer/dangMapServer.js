@@ -184,20 +184,21 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select * from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
+      `select latitude, longitude, map_tables.id from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
       (err, rows) => {
         if (err) throw err;
         else {
+          console.log(rows)
           if (otherCnt <= 10) {
             for (let i = 0; i < otherCnt; i++) {
               let otherArr = [];
-              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
+              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
               markerOtherArr[i] = otherArr;
             }
           } else {
             for (let i = 0; i < 10; i++) {
               let otherArr = [];
-              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
+              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id);
               markerOtherArr[i] = otherArr;
             }
           }
@@ -209,54 +210,6 @@ export default function dangMap(request, response) {
     );
     connection.end();
   }
-  // else if (request.url.startsWith("/otFootprint")) {
-  //   // console.log("url == " + request.url);
-  //   let targetId = request.url.split("=")[1];
-  //   let connection = mysql.createConnection(cmServer.mysqlInfo);
-  //   let otherCnt;
-  //   let markerOtherArr = {};
-  //   connection.connect();
-  //   console.log("url ==" + request.url);
-
-  //   connection.query(
-  //     `select count(*) as count from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
-  //     function (err, data) {
-  //       if (err) throw err;
-  //       else {
-  //         otherCnt = data[0].count;
-  //         console.log("낯선 발자국 수: " + otherCnt);
-  //         // response.writeHead(200);
-  //         // response.end(JSON.stringify(data));
-  //         // console.log(JSON.stringify(data));
-  //       }
-  //     }
-  //   );
-  //   connection.query(
-  //     `select * from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id ='aaa1234') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}'));`,
-  //     (err, rows) => {
-  //       if (err) throw err;
-  //       else {
-  //         if (otherCnt <= 10) {
-  //           for (let i = 0; i < otherCnt; i++) {
-  //             let otherArr = [];
-  //             otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
-  //             markerOtherArr[i] = otherArr;
-  //           }
-  //         } else {
-  //           for (let i = 0; i < 10; i++) {
-  //             let otherArr = [];
-  //             starArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id);
-  //             markerOtherArr[i] = otherArr;
-  //           }
-  //         }
-  //         response.writeHead(200);
-  //         response.write(JSON.stringify(markerOtherArr));
-  //         response.end();
-  //       }
-  //     }
-  //   );
-  //   connection.end();
-  // }
   else if(splitURL === "dangMapSlide.js"){
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
