@@ -315,17 +315,17 @@ function testFunc(){
   }
 }
 
-let daySlideWrap = tagCreate('div', {id: "daySlide"});
-// daySlideWrap.innerText = "test";
-styleCreate(daySlideWrap, {
-  position: "absolute",
-  top: "-100px",
-  left: "0px",
-})
-slide.appendChild(daySlideWrap);
+// let daySlideWrap = tagCreate('div', {id: "daySlide"});
+// // daySlideWrap.innerText = "test";
+// styleCreate(daySlideWrap, {
+//   position: "absolute",
+//   top: "-100px",
+//   left: "0px",
+// })
+// slide.appendChild(daySlideWrap);
 
-let daySlideContent = 
-`
-<input type="range" min="0" max="100" value="50" class="slider-range">
-`
-daySlideWrap.innerHTML = daySlideContent;
+// let daySlideContent = 
+// `
+// <input type="range" min="0" max="100" value="50" class="slider-range">
+// `
+// daySlideWrap.innerHTML = daySlideContent;
