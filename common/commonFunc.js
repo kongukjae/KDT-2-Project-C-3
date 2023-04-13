@@ -272,6 +272,7 @@ const targetStyle = {
   menuMapSlide: {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height308,
+    position: "absolute",
     backgroundColor : "lightgray",
     display : "flex",
     flexDirection : "column",

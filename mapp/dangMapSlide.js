@@ -180,6 +180,7 @@ slide.children[1].addEventListener("mousedown", function (e) {
           slide.children[1].style.marginLeft = 0;
           changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
+          console.log(widthValue);
           marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
           slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
         }
