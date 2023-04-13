@@ -30,7 +30,6 @@ export default function callMain(request, response) {
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   } else if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
-    // console.log("loadmap id is " + targetId);
     let myRowCnt;
     let markerMyArr = {};
 
@@ -74,7 +73,7 @@ export default function callMain(request, response) {
     );
 
     conn.end();
-  } else if (request.url.startsWith("/otFootprint")) {
+  } else if (request.url.startsWith("/wholeFootprint")) {
     let targetId = request.url.split("=")[1];
     let otRowCnt;
     let markerOtArr = {};
