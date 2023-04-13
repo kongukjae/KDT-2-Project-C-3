@@ -171,12 +171,12 @@ export default function dangMap(request, response) {
     console.log("url ==" + request.url);
 
     connection.query(
-      `select count(*) as count from (select * from userinfo where id != '${targetId}' union select id, PW, question, answer, dogName, dogGender from userinfo join fr_list on fr_list.fr_id = userinfo.id where user_id != '${targetId}')count;`,
+      `select count(*) as count from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
       function (err, data) {
         if (err) throw err;
         else {
           otherCnt = data[0].count;
-          console.log("친구 발자국 수: " + otherCnt);
+          console.log("낯선 발자국 수: " + otherCnt);
           // response.writeHead(200);
           // response.end(JSON.stringify(data));
           // console.log(JSON.stringify(data));
@@ -184,7 +184,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.query(
-      `select latitude, longitude, fr_id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = ${targetId} order by addData desc;`,
+      `select * from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
       (err, rows) => {
         if (err) throw err;
         else {
@@ -213,12 +213,3 @@ export default function dangMap(request, response) {
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
 }
-
-// select * from map_tables left join (
-//   select id 
-//   from map_tables 
-//   join fr_list on fr_list.fr_id = map_tables.id 
-//   where user_id = 'aaa1234'
-// ) as mt
-// on map_tables.id = mt.id 
-// where mt.id is null and (map_tables.id not in ('aaa1234'));
