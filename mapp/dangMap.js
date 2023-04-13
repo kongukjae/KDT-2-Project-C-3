@@ -84,7 +84,7 @@ function map() {
   markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
 
   // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-  // let markers = [];
+  let markers = [];
   // let latlng = mouseEvent.latLng;
   //let result = [];
   let resultObject = {};
