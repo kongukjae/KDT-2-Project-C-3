@@ -313,10 +313,10 @@ const targetStyle = {
   menuMapSlideSearch: {
     width : pageStyle.width.width390,
     height : pageStyle.height.height40,
-    // top : "10px",
-    bottom : "15px",
+    top : "5px",
+    // bottom : "15px",
     left: "50%",
-    position : "absolute",
+    position : "relative",
     marginLeft: "-195px",
     display : "flex",
     alignItems : "center",
