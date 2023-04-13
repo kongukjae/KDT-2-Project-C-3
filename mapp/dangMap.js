@@ -1,7 +1,3 @@
-function getRandom(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
 let markers = [];
 let markersObject = {
   userid : "",
@@ -304,6 +300,7 @@ function map() {
         markers[i].setMap(map);
       }
     }
+    return marker;
   }
 
   function frAddMarker(position) {
@@ -350,6 +347,7 @@ function map() {
         markers[i].setMap(map);
       }
     }
+    return marker;
   }
 
   function loadMarker(callback) {
@@ -403,7 +401,7 @@ function map() {
       // //res = xhr.response;
       for (const key in sres) {
         //console.log(typeof(parseFloat(res['0'][0])))
-        callback(
+        let markerNow = callback(
           new kakao.maps.LatLng(
             parseFloat(sres[key][0]),
             parseFloat(sres[key][1])
@@ -412,9 +410,12 @@ function map() {
         if (sres[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
+        markersObject.appendMarker = [sres[key][2],1,[markerNow]];
       }
 
       console.log("정상적");
+      console.log("친구 마커 객체 출력");    
+      console.log(markersObject);
     });
   }
 
@@ -446,10 +447,10 @@ function map() {
             parseFloat(fres[key][1])
           )
         );
-        markersObject.appendMarker = [res2[key][2],0,[markerNow]];
-        if (res2[key][2] !== cookieId) {
+        if (fres[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
+        markersObject.appendMarker = [fres[key][2],0,[markerNow]];
       }
 
       console.log("정상적");
@@ -460,6 +461,8 @@ function map() {
 
   function otMarker(callback) {
     let ores;
+    
+
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
     xhr.open("GET", `http://localhost:2080/otFootprint?id=${cookieId}`);
@@ -467,11 +470,13 @@ function map() {
     xhr.send();
     xhr.addEventListener("load", function () {
       ores = JSON.parse(xhr.response); // 응답
+      console.log('ot');
+      console.log(ores);
       let otResult = {};
       console.log(ores);
       for (const key in ores) {
         //console.log(typeof(parseFloat(res['0'][0])))
-        callback(
+        let markerNow = callback(
           new kakao.maps.LatLng(
             parseFloat(ores[key][0]),
             parseFloat(ores[key][1])
@@ -480,9 +485,13 @@ function map() {
         if (ores[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
+        markersObject.appendMarker = [ores[key][2],2,[markerNow]];
+
       }
 
       console.log("정상적임");
+      console.log("친구 마커 객체 출력");    
+      console.log(markersObject);
     });
   }
 
