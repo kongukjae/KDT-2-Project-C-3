@@ -161,6 +161,7 @@ function searchResultChooseValue(){
 slide.children[1].addEventListener("mousedown", function (e) {
   let mDown = true;
   let startX = e.clientX;
+  let widthValue  = slideWidthValueCalculate(slide.children[1])
 
   let marginLeftValue = slide.children[1].style.marginLeft;
   let marginLeftNumValue = Number(marginLeftValue.split("p")[0]);
