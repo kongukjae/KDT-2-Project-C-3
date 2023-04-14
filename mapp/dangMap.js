@@ -379,12 +379,12 @@ function map() {
     ;
   
   async function getMarkersObject(){
-    let a = await allMarker(allAddMarker,0)
-    let b = await allMarker(allAddMarker,1)
-    let c = await allMarker(allAddMarker,2)
-    let d = await allMarker(allAddMarker,3)
+    await allMarker(allAddMarker,0)
+    await allMarker(allAddMarker,1)
+    await allMarker(allAddMarker,2)
+    await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
-    console.log(Object.keys(markersObject.markers))
+    console.log(markersObject.markers.aaa4567)
   };
   getMarkersObject();
 }
