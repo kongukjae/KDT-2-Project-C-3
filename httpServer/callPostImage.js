@@ -23,6 +23,7 @@ export default function callPostImage(request, response) {
               if (error) throw error;
               else{
                 response.writeHead(200);
+         
                 response.end();
                 }
               });

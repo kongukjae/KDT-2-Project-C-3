@@ -24,13 +24,13 @@ function myPage(){
 
 
 //  3.  root2 본문부분이다. 본문에 작성할 함수
-  styleCreate(rootChild[2],mypageStyle.mypageMainText)
+  styleCreate(rootChild[2],mypageStyle.mypageTopMenu)
   rootChild[2].innerText = `산돌이는 대전에서 잃어버렸어요`;
   let maintext =  tagCreate("div",{});
   
 
   // root3 카테고리, 사진업로드 버튼 
-  styleCreate(rootChild[3],mypageStyle.mypageButtonWrap)
+  styleCreate(rootChild[3],mypageStyle.mypageTopMenu)
   // for(let i = 0; i < 2; i++){
   //   let button = tagCreate("div");
   //   styleCreate(button,mypageStyle.mypageButton)
