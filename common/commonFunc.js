@@ -576,6 +576,7 @@ console.log(targetStyle.topMenu);
 
 // 마이페이지 해당 부분 
 const mypageStyle = {
+  // 마이페이지 전체적인 레이아웃 
   mypageRoot : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height1700,
@@ -586,6 +587,7 @@ const mypageStyle = {
     flexDirection : "column",
     alignItems : "center"
   },
+  //  마이페이지 최상단 메뉴 버튼 느낌 
   mypageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
@@ -594,20 +596,22 @@ const mypageStyle = {
     ...pageStyle.flexRowCenter
 
   },
+  //root1 제목부분 '산돌이를 찾아주세요'
   mypageTitle : {
     width : pageStyle.width.widthP100,
-    height : pageStyle.height.height80,
+    height : pageStyle.height.height100,
     position : "relative",
-    marginTop : "30px",
+    marginTop : "10px",
+    backgroundColor:pageStyle.colorTheme.lightGray,
     ...pageStyle.flexRowCenter,
     fontSize : pageStyle.fontSizeSet.mediumLarge,
     fontWeight : pageStyle.fontWeightSet.bold
   },
-  mypageImageStyle : {
-    width : pageStyle.width.width300,
+  // root2 본문부분, '산돌이는 대전에서 잃어버렸어요'
+  mypageMainText : {
+    width : pageStyle.width.width500,
     height : pageStyle.height.height300,
     backgroundColor : pageStyle.colorTheme.lightGray,
-    borderRadius : "50%",
     position : "relative",
     ...pageStyle.flexRowCenter,
     marginTop : "20px",
@@ -618,8 +622,8 @@ const mypageStyle = {
     backgroundPosition: "center"
   },
   mypageButtonWrap : {
-    width : pageStyle.width.widthP60,
-    height : pageStyle.height.height30,
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height100,
     marginTop : "40px",
     position : "relative",
     borderRadius : "10px",
@@ -629,76 +633,7 @@ const mypageStyle = {
     alignItems : "center",
     backgroundColor : pageStyle.colorTheme.lightGray
   },
-  mypageButton : {
-    width : pageStyle.width.widthP40,
-    height : "70%",
-    backgroundColor : pageStyle.colorTheme.whiteTypeA,
-    cursor : "pointer",
-    borderRadius : "5px",
-    ...pageStyle.flexRowCenter
-  },
-  mypageUserinfoBox :{
-    width : pageStyle.width.widthP90,
-    height : pageStyle.height.height300,
-    marginTop : "40px",
-    position : "relative",
-    borderRadius : "10px",
-    ...pageStyle.flexColCenter,
-    gap : "10px",
-    backgroundColor : pageStyle.colorTheme.whiteTypeB
-  },
-  mypageUserinfoBoxInnerStyle : {
-    width : pageStyle.width.widthP90,
-    height : pageStyle.height.height24,
-    borderRadius : "5px",
-    paddingLeft : "10px",
-    paddingRight : "10px",
-  },
-  mypageUserinfoBoxSelfIntroduce : {
-    height : pageStyle.height.height130,
-    backgroundColor : pageStyle.colorTheme.whiteTypeC
-  },
-  mypageCalender : {
-    width : pageStyle.width.widthP90,
-    height : pageStyle.height.height450,
-    backgroundColor : pageStyle.colorTheme.whiteTypeB,
-    marginTop : "40px",
-    position : "relative",
-    borderRadius : "10px",
-    ...pageStyle.flexRowCenter
-  },
-  mypageUploadModal : {
-    width : pageStyle.width.width300,
-    height : pageStyle.height.height140,
-    padding : "10px",
-    borderRadius : "10px",
-    ...pageStyle.flexColCenter,
-    backgroundColor : pageStyle.colorTheme.whiteTypeD,
-    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
-    position : "absolute",
-    top : "550px",
-    left: "50%",
-    gap : "10px",
-    marginLeft: "-150px",
-  },
-  mypageUploadModalButtonWrap : {
-    display : "flex",
-    gap : "10px"
-  },
-  mypageUploadModalButtonStyle : {
-    border : "0px",
-    width : pageStyle.width.width90,
-    height : pageStyle.height.height30,
-    padding : "10px",
-    fontSize : pageStyle.fontSizeSet.smaller,
-    color : pageStyle.colorTheme.whiteTypeA,
-    borderRadius : "10px",
-    cursor : "pointer",
-    ...pageStyle.flexColCenter,
-    backgroundColor : pageStyle.colorTheme.peach,
-    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
-  },
-};
+}
 
 const loginPageStyle = {
   loginPageRoot: {

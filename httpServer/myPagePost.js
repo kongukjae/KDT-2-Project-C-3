@@ -20,7 +20,7 @@ export default function dangMap(request, response) {
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
       if(target === "mine"){
-        console.log("마이페이지");
+        console.log("마이페");
         connection.query(
           `SELECT * FROM userinfo where id='${requestId}'`,
           (error, rows, fields) => {
