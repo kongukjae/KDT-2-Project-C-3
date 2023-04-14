@@ -140,53 +140,62 @@ function map() {
     marker.setDraggable(true);
 
 
+//==============================================================================================
     // 오버레이 내부 구성 요소들
-    const content = document.createElement("div");
-    styleCreate(content, targetStyle.dangMapOverlayWrap);
+    const content = tagCreate("div", {id: "overlayWrap"});
+    styleCreate(content, dangMapOverlay.wrap);
 
-    const overlayInfo = document.createElement("div");
-    styleCreate(overlayInfo, targetStyle.dangMapOverlayInfo);
+    const overlayInfo = tagCreate("div", {});
     content.appendChild(overlayInfo);
+    styleCreate(overlayInfo, dangMapOverlay.info);
 
-    const overlayTitle = document.createElement("div");
-    styleCreate(overlayTitle, targetStyle.dangMapOverlayTitle);
-    overlayTitle.innerHTML = `멍뭉이`;
+    const overlayTitle = tagCreate("div", {});
     overlayInfo.appendChild(overlayTitle);
+    styleCreate(overlayTitle, dangMapOverlay.title);
+    overlayTitle.innerHTML = `멍뭉이`;
 
-    const overlayBody = document.createElement("div");
-    styleCreate(overlayBody, targetStyle.dangMapOverlayBody);
+    const overlayBody = tagCreate("div", {});
     overlayInfo.appendChild(overlayBody);
+    styleCreate(overlayBody, dangMapOverlay.body);
 
-    const overlayImg = document.createElement("div");
-    overlayImg.innerHTML = `<img src="../resource/MainDogImg.jpg" alt="강아지 사진" width="70" height="70" border-radius="35">`;
+    const overlayImg = tagCreate("div", {});
     overlayBody.appendChild(overlayImg);
+    styleCreate(overlayImg, dangMapOverlay.image);
+    overlayImg.innerHTML = `<img src="../resource/MainDogImg.jpg" alt="강아지 사진" width=70 height=70>`;
 
-    const overlayDesc = document.createElement("div");
-    styleCreate(overlayDesc, targetStyle.dangMapOverlayDesc);
+
+
+    const overlayDesc = tagCreate("div", {});
     overlayBody.appendChild(overlayDesc);
+    styleCreate(overlayDesc, dangMapOverlay.desc);
 
-    const overlayEllipsis = document.createElement("p");
-    overlayEllipsis.innerHTML = `xx분 전`;
+    const overlayEllipsis = tagCreate("p", {});
     overlayDesc.appendChild(overlayEllipsis);
+    overlayEllipsis.innerHTML = `xx분 전`;
 
-    const overlayBtnWrap = document.createElement("div");
+    const overlayBtnWrap = tagCreate("div", {});
     overlayDesc.appendChild(overlayBtnWrap);
+    styleCreate(overlayBtnWrap, {margin: "5px 0 0 0"})
 
-    const overlayProfileBtn = document.createElement("button");
-    overlayProfileBtn.innerText = "프로필 보기";
+    const overlayProfileBtn = tagCreate("button", {});
     overlayBtnWrap.appendChild(overlayProfileBtn);
+    styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle)
+    overlayProfileBtn.innerText = "프로필 보기";
 
-    const overlayfollowBtn = document.createElement("button");
-    overlayfollowBtn.innerText = "팔로우";
+    const overlayfollowBtn = tagCreate("button", {});
     overlayBtnWrap.appendChild(overlayfollowBtn);
+    styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle)
+    styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "50px"})
+    overlayfollowBtn.innerText = "팔로우";
+
 
     // 오버레이 창 닫기 버튼
-    const closeBtn = document.createElement("button");
-    closeBtn.style.position = "absolute";
-    closeBtn.style.top = "5px";
-    closeBtn.style.right = "5px";
-    closeBtn.innerText = "X";
+    const closeBtn = tagCreate("button", {});
     content.appendChild(closeBtn);
+    styleCreate(closeBtn, dangMapOverlay.close)
+    closeBtn.innerText = "X";
+
+    
 
     // 닫기 버튼 클릭 시 열려있는 오버레이 창 닫힘
     closeBtn.onclick = function () {
@@ -207,6 +216,7 @@ function map() {
       // 오버레이가 열려있는지 닫혀있는지 확인하는 변수
       overlayChecker = true;
     });
+//=============================================================================================
 
     let dragStartLat;
     let dragStartLng;
