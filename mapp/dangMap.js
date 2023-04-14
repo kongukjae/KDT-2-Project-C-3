@@ -6,12 +6,19 @@ let markersObject = {
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
     if(markersObject.markers[value[0]] === undefined){
-      markersObject.markers[value[0]] = [value[1],[value[2]]];
+      markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
     }else{
-      markersObject.markers[value[0]][1].push(value[2]);
+      markersObject.markers[value[0]][1].push([value[2],value[3]]);
     }
   }
 };
+
+function changeDate(date) {
+  let nowDate = new Date(date);
+  let formatDate = nowDate.toLocaleString();
+
+  return formatDate;
+}
 
 function map() {
   let root = tagCreate("div", { id: "root" });
@@ -370,7 +377,7 @@ function map() {
             parseFloat(res[key][1])
           )
         );
-        markersObject.appendMarker = [cookieId,3,[markerNow]];
+        markersObject.appendMarker = [cookieId,3,[markerNow],changeDate(res[key][3])];
       }
 
       console.log("정상적으로 지도에 표시됨");
@@ -410,7 +417,7 @@ function map() {
         if (sres[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
-        markersObject.appendMarker = [sres[key][2],1,[markerNow]];
+        markersObject.appendMarker = [sres[key][2],1,[markerNow],changeDate(sres[key][3])];
       }
 
       console.log("정상적");
@@ -450,7 +457,7 @@ function map() {
         if (fres[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
-        markersObject.appendMarker = [fres[key][2],0,[markerNow]];
+        markersObject.appendMarker = [fres[key][2],0,[markerNow],changeDate(fres[key][3])];
       }
 
       console.log("정상적");
@@ -485,7 +492,7 @@ function map() {
         if (ores[key][2] !== cookieId) {
           imageSrc = "#abbbbb";
         }
-        markersObject.appendMarker = [ores[key][2],2,[markerNow]];
+        markersObject.appendMarker = [ores[key][2],2,[markerNow],changeDate(ores[key][3])];
 
       }
 
