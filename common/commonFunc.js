@@ -862,8 +862,21 @@ const dangMapOverlay = {
     height: "70px",
     borderRadius: "35px",
   },
-  close: {
+  btnStyle: {
+    width: "65px",
+    height: "30px",
+    backgroundColor: pageStyle.colorTheme.lightGray,
+    textAlign: "center",
     appearance: "none",
+    borderRadius: "4px",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
+    transition: "0.5s",
+    border: `0px solid ${pageStyle.colorTheme.gray}`,
+    fontSize: pageStyle.fontSizeSet.smaller
+
+  },
+  close: {
     width: "15px",
     height: "20px",
     backgroundColor: pageStyle.colorTheme.white,
@@ -872,9 +885,10 @@ const dangMapOverlay = {
     top: "5px",
     right: "5px",
     border: "0px",
+    appearance: "none",
     borderRadius: "4px",
     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
     cursor: "pointer",
-    transition: "0.5s"
+    transition: "0.5s",
   }
 }

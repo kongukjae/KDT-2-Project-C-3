@@ -210,11 +210,13 @@ function map() {
 
     const overlayProfileBtn = tagCreate("button", {});
     overlayBtnWrap.appendChild(overlayProfileBtn);
+    styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle)
     overlayProfileBtn.innerText = "프로필 보기";
 
     const overlayfollowBtn = tagCreate("button", {});
     overlayBtnWrap.appendChild(overlayfollowBtn);
-    styleCreate(overlayfollowBtn, {margin: "0 0 0 5px"})
+    styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle)
+    styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "50px"})
     overlayfollowBtn.innerText = "팔로우";
 
 
