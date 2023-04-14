@@ -403,9 +403,18 @@ function map() {
     await allMarker(allAddMarker,2)
     await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
-    console.log(markersObject)
+    console.log(Object.keys(markersObject.markers))
+    putUserProfile(Object.keys(markersObject.markers))
   };
   getMarkersObject();
+
 }
 map();
 
+function putUserProfile(arr){
+  let slide = document.getElementById("slideWrap");
+  for(let i = 0;i < arr.length;i++){
+    slide.children[0].childNodes[i].innerText = arr[i] 
+  }
+  
+}
