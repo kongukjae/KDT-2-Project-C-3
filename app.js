@@ -15,7 +15,6 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 import myPagePost from "./httpServer/myPagePost.js";
-import mywritepost from "./httpServer/mywritepost.js";
 
 
 
@@ -110,9 +109,9 @@ const server = http.createServer(function (request, response) {
   }
 
 
-  if (request.url === "/mywrite.js") {
-    cmServer.fileDirectory(`friends/mywrite.js`, response);
-  }
+  // if (request.url === "/mypageStyle.js") {
+  //   cmServer.fileDirectory(`friends/mypageStyle.js`, response);
+  // }
 
     //댕맵
 
@@ -131,7 +130,7 @@ const server = http.createServer(function (request, response) {
   //   cmServer.fileDirectory(`friends/mypageStyle.js`, response);
   // }
      // 글작성 페이지
-    //  mywritepost(request,response);
+    // mywritepost(request,response);
     //마이페이지
     myPagePost(request, response);
     //업로드, 유저 이미지

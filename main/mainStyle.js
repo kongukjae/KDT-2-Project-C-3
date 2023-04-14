@@ -215,27 +215,27 @@ mywritebtn.addEventListener("click", () => {
 
 
 
-myPageBtn.addEventListener("click", () => {
-  // 1. 토큰이 유효한지 검사한다.
-  const token = document.cookie.replace(
-    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-  let mypageForm = document.createElement('form');
+// myPageBtn.addEventListener("click", () => {
+//   // 1. 토큰이 유효한지 검사한다.
+//   const token = document.cookie.replace(
+//     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+//     "$1"
+//   );
+//   let mypageForm = document.createElement('form');
 
-  mypageForm.method = "POST"
-  mypageForm.action = "/mypage";
-  let params = {jwt:token, targetId:"mine"}
-  for(let key in params){
-    let hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type","hidden");
-    hiddenField.setAttribute("name",key);
-    hiddenField.setAttribute("value",params[key]);
-    mypageForm.appendChild(hiddenField);
-  }
-  document.body.appendChild(mypageForm);
-  mypageForm.submit();
-// // 2. 폼데이터에 JWT와 targetID 값을 추가한다.
+//   mypageForm.method = "POST"
+//   mypageForm.action = "/mypage";
+//   let params = {jwt:token, targetId:"mine"}
+//   for(let key in params){
+//     let hiddenField = document.createElement("input");
+//     hiddenField.setAttribute("type","hidden");
+//     hiddenField.setAttribute("name",key);
+//     hiddenField.setAttribute("value",params[key]);
+//     mypageForm.appendChild(hiddenField);
+//   }
+//   document.body.appendChild(mypageForm);
+//   mypageForm.submit();
+// // // 2. 폼데이터에 JWT와 targetID 값을 추가한다.
 //   const formData = new FormData();
 //   formData.append("jwt", token);
 //   formData.append("targetId", "mine");
@@ -250,7 +250,7 @@ myPageBtn.addEventListener("click", () => {
 //       console.log(xhr.response);
 //     }
 //   };
-});
+// });
 
 
 
