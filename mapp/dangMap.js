@@ -5,13 +5,20 @@ let markersObject = {
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
-    if(this.markers[value[0]] === undefined){
-      this.markers[value[0]] = [value[1],[value[2]]];
+    if(markersObject.markers[value[0]] === undefined){
+      markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
     }else{
-      this.markers[value[0]][1].push(value[2]);
+      markersObject.markers[value[0]][1].push([value[2],value[3]]);
     }
   }
 };
+
+function changeDate(date) {
+  let nowDate = new Date(date);
+  let formatDate = nowDate.toLocaleString();
+
+  return formatDate;
+}
 
 function map() {
   let root = tagCreate("div", { id: "root" });
@@ -242,6 +249,9 @@ function map() {
     return marker;
   }
 
+  
+
+ 
   // 검색창
   let searchBarWrap = tagCreate("div");
   styleCreate(searchBarWrap, targetStyle.menuMapSearchBarWrap);
@@ -366,7 +376,7 @@ function map() {
               parseFloat(result[key][1])
             ), type
           );
-          markersObject.appendMarker = [result[key][2],type,[markerNow]];
+          markersObject.appendMarker = [result[key][2],type,[markerNow],changeDate(result[key][3])]
         }
       console.log(markersObject);
       console.log("정상적임");
@@ -375,8 +385,7 @@ function map() {
         resolve("end")
       })
     })
-  }
-    ;
+  };
   
   async function getMarkersObject(){
     await allMarker(allAddMarker,0)
@@ -384,8 +393,9 @@ function map() {
     await allMarker(allAddMarker,2)
     await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
-    console.log(markersObject.markers.aaa4567)
+    console.log(markersObject)
   };
   getMarkersObject();
 }
 map();
+
