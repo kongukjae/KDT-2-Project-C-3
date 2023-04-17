@@ -62,7 +62,7 @@ root.appendChild(writeBtn);
 console.dir(writeBtn);
 
 // 게시글 생성 함수
-function postCreate(parent, src_link, text, src_comment_link) {
+function postCreate(parent, src_link, text, src_comment_link, textName) {
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {});
   styleCreate(postWrap, {
@@ -228,6 +228,19 @@ function postCreate(parent, src_link, text, src_comment_link) {
   // 최신 댓글 내용을 표시할 영역
   const commentViewContentWrap = tagCreate("div", {})
   commentImgContentWrap.appendChild(commentViewContentWrap);
+
+  // 최신 댓글 닉네임 표시
+  const commentViewName = tagCreate("p", {});
+  styleCreate(commentViewName, {
+    fontWeight: "bold",
+    maxWidth: "400px",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+  })
+  // commentViewName.innerText = textName;
+  commentViewName.innerText = "댓글 닉네임 DB에서 가져올 데이터";
+  commentViewContentWrap.appendChild(commentViewName);
 
   // 최신 댓글 내용
   const commentViewContent = tagCreate("p", {});
