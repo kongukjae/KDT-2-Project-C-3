@@ -42,6 +42,7 @@ const pageStyle = {
     width200: "200px",
     width180: "180px",
     width150: "150px",
+    width120: "120px",
     width80: "80px",
     width90: "90px",
     width40: "40px",
@@ -901,21 +902,20 @@ const market = {
     ...pageStyle.flexColCenter,
     backgroundColor: pageStyle.colorTheme.peach,
     margin: "auto",
-    border: '1px solid blue'
+    borderRadius: pageStyle.borderRadius.borderRadius15,
   },
   marketPostImageArea: {
     width: pageStyle.width.width400,
     height: pageStyle.height.height300,
     backgroundColor: pageStyle.colorTheme.white,
-    border: '1px solid blue'
-
+    borderRadius: pageStyle.borderRadius.borderRadius15,
   },
   marketPostImgNameAdd: {
     width: pageStyle.width.width400,
     height: pageStyle.height.height100,
     backgroundColor: pageStyle.colorTheme.white,
     ...pageStyle.flexRowCenter,
-    border: '1px solid blue',
+    borderRadius: pageStyle.borderRadius.borderRadius15,
     margin: '10px',
     gap: '15px'
   },
@@ -923,14 +923,13 @@ const market = {
     width: pageStyle.width.width90,
     height: pageStyle.height.height90,
     // backgroundColor: pageStyle.colorTheme.peach,
-    border: '1px solid blue',
+    border: '1px solid gray',
     borderRadius: pageStyle.borderRadius.borderRadiusP50,
   },
   marketPostnameAddStyle: {
     width: pageStyle.width.width250,
     height: pageStyle.height.height90,
-    // backgroundColor: pageStyle.colorTheme.peach,
-    border: '1px solid blue',
+    boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
     borderRadius: pageStyle.borderRadius.borderRadius15,
     display: "flex",
     alignItems: "center",
@@ -954,10 +953,10 @@ const market = {
     backgroundColor: pageStyle.colorTheme.black,
   },
   marketPostAddModal: {
-    width: pageStyle.width.width90,
-    height: pageStyle.height.height100,
+    width: pageStyle.width.width120,
+    height: pageStyle.height.height126,
     backgroundColor: pageStyle.colorTheme.white,
-    border: `1px solid ${pageStyle.colorTheme.peach}`,
+    border: `3px solid ${pageStyle.colorTheme.peach}`,
     borderRadius: pageStyle.borderRadius.borderRadius15,
     position: 'absolute',
     top : '20px',
@@ -966,10 +965,23 @@ const market = {
     zIndex :'5',
     ...pageStyle.flexColCenter,
   },
+  marketPostAddModalBtn: {
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.height24,
+    backgroundColor: pageStyle.colorTheme.lightGray,
+    textAlign: "center",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+    cursor: "pointer",
+    transition: "0.5s",
+    border: `0px solid ${pageStyle.colorTheme.gray}`,
+    fontSize: pageStyle.fontSizeSet.small,
+  },
   marketPostDetail: {
     width: pageStyle.width.width400,
     height: pageStyle.height.height300,
     backgroundColor: pageStyle.colorTheme.white,
-    border: '1px solid blue'
+    borderRadius: pageStyle.borderRadius.borderRadius15,
   }
 }

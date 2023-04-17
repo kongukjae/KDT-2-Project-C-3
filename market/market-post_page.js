@@ -70,9 +70,13 @@ function marketPostPage() {
   modalContent.appendChild(profileBtn);
   modalContent.appendChild(chatBtn);
   modalContent.appendChild(reportBtn);
+  styleCreate(profileBtn, market.marketPostAddModalBtn);
+  styleCreate(chatBtn, market.marketPostAddModalBtn);
+  styleCreate(reportBtn, market.marketPostAddModalBtn);
 
   // 모달창에 모달컨텐츠 추가
   modal.appendChild(modalContent);
+  styleCreate(modalContent, {gap: '10px'});
 
   nameAdd[1].addEventListener("click", function() {
     nameAdd[1].appendChild(modal);
