@@ -29,6 +29,7 @@ export default function callMain(request, response) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
   } 
+
   else if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
     let myRowCnt;
