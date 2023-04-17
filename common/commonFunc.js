@@ -903,3 +903,15 @@ const dangMapOverlay = {
     transition: "0.5s",
   }
 }
+
+//댕댕마켓 게시글 리스트 스타일
+const marketListStyle = {
+  root: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height2000,
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative"
+  }
+}
