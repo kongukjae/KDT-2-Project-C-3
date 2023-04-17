@@ -148,18 +148,25 @@ function postCreate(parent, src_link, text) {
   const commentWrap = tagCreate("div", {});
   styleCreate(commentWrap, {
     padding: "15px",
+  })
+  postWrap.appendChild(commentWrap);
+
+  // 댓글 입력창과 작성 버튼을 감쌀 form 요소
+  const commentForm = tagCreate("form", {});
+  styleCreate(commentForm, {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
   })
-  postWrap.appendChild(commentWrap);
+  commentWrap.appendChild(commentForm);
 
   // 댓글 입력할 textarea
   const commentInput = tagCreate("textarea", {});
   styleCreate(commentInput, {
-    width: "85%"
+    width: "85%",
+    resize: "none",
   })
-  commentWrap.appendChild(commentInput);
+  commentForm.appendChild(commentInput);
 
   // 댓글 작성 버튼
   const commentSubmit = tagCreate("button", {});
@@ -168,7 +175,7 @@ function postCreate(parent, src_link, text) {
     height: "38px"
   })
   commentSubmit.innerText = "작성";
-  commentWrap.appendChild(commentSubmit);
+  commentForm.appendChild(commentSubmit);
 
   // 최신 댓글 하나가 보여질 영역
   const commentViewWrap = tagCreate("div", {});
