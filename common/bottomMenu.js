@@ -39,4 +39,7 @@ function btmMeun(rootChild, menuChild){
   menuChild[2].addEventListener("click",()=>{
     window.location = "http://localhost:2080/map"
   })
+  menuChild[0].addEventListener("click",()=>{
+    window.location = "http://localhost:2080/secondHand"
+  })
 }
