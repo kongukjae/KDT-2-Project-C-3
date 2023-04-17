@@ -91,6 +91,29 @@ function postCreate(parent, src_link, text) {
     height: "100%", 
   })
   postImgWrap.appendChild(postImg);
+
+  // 텍스트 영역을 감싸는 wrap, 한번 더 wrap을 이용해 감싸는 이유는 padding을 넣기 위함. 직접적으로 padding을 넣으면 paddingLeft 값 때문에 텍스트가 영역을 삐져나감
+  const textWrap = tagCreate("div", {});
+  styleCreate(textWrap, {
+    padding: "25px",
+  });
+  postWrap.appendChild(textWrap);
+
+  // 텍스트가 표시될 영역, DB에서 게시글 내용 텍스트를 가져와서 표시하고 5줄을 넘기면 말줄임표로 표시되도록 구현함
+  const textBox = tagCreate("p", {});
+  // textBox.innerText = text;
+  textBox.innerText = "DB에서 받아올 텍스트 영역 임시로 넣어둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  styleCreate(textBox, {
+    border: "1px solid green",
+    width: "450px", // 500px - 부모의 좌우 패딩 값
+    display: "-webkit-box",
+    webkitBoxOrient: "vertical",
+    webkitLineClamp: "5",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "pre-wrap",
+  })
+  textWrap.appendChild(textBox);
   
   // 좋아요, 댓글, 구독(변경 예정) 버튼을 감싸는 div
   const postBtnWrap = tagCreate("div", {});
@@ -120,27 +143,4 @@ function postCreate(parent, src_link, text) {
     })
     postBtnWrap.appendChild(postBtn);
   }
-  
-  // 텍스트 영역을 감싸는 wrap, 한번 더 wrap을 이용해 감싸는 이유는 padding을 넣기 위함. 직접적으로 padding을 넣으면 paddingLeft 값 때문에 텍스트가 영역을 삐져나감
-  const textWrap = tagCreate("div", {});
-  styleCreate(textWrap, {
-    padding: "25px",
-  });
-  postWrap.appendChild(textWrap);
-
-  // 텍스트가 표시될 영역, DB에서 게시글 내용 텍스트를 가져와서 표시하고 5줄을 넘기면 말줄임표로 표시되도록 구현함
-  const textBox = tagCreate("p", {});
-  // textBox.innerText = text;
-  textBox.innerText = "DB에서 받아올 텍스트 영역 임시로 넣어둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-  styleCreate(textBox, {
-    border: "1px solid green",
-    width: "450px", // 500px - 부모의 좌우 패딩 값
-    display: "-webkit-box",
-    webkitBoxOrient: "vertical",
-    webkitLineClamp: "5",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "pre-wrap",
-  })
-  textWrap.appendChild(textBox);
 }
