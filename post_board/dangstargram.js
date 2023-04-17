@@ -166,7 +166,7 @@ function postCreate(parent, src_link, text, src_comment_link, textName) {
   styleCreate(commentInput, {
     width: "85%",
     height: "38px",
-    resize: "none",
+    outline: "none",
   })
   commentForm.appendChild(commentInput);
 
