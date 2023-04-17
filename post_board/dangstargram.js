@@ -55,6 +55,7 @@ styleCreate(writeBtn, {
   position: "fixed",
   bottom: "20px",
   right: "35%",
+  border: "1px solid black",
 })
 root.appendChild(writeBtn);
 
