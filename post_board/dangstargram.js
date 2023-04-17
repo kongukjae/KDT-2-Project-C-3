@@ -143,4 +143,62 @@ function postCreate(parent, src_link, text) {
     })
     postBtnWrap.appendChild(postBtn);
   }
+
+  // 댓글 입력창 감싸는 div
+  const commentWrap = tagCreate("div", {});
+  styleCreate(commentWrap, {
+    padding: "15px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  })
+  postWrap.appendChild(commentWrap);
+
+  // 댓글 입력할 textarea
+  const commentInput = tagCreate("textarea", {});
+  styleCreate(commentInput, {
+    width: "85%"
+  })
+  commentWrap.appendChild(commentInput);
+
+  // 댓글 작성 버튼
+  const commentSubmit = tagCreate("button", {});
+  styleCreate(commentSubmit, {
+    width: "60px",
+    height: "38px"
+  })
+  commentSubmit.innerText = "작성";
+  commentWrap.appendChild(commentSubmit);
+
+  // 최신 댓글 하나가 보여질 영역
+  const commentViewWrap = tagCreate("div", {});
+  postWrap.appendChild(commentViewWrap);
+
+  // 최신 댓글의 프로필 이미지를 감싸는 div 영역
+  const commentViewImgWrap = tagCreate("div", {})
+  commentViewWrap.appendChild(commentViewImgWrap);
+
+  // 최신 댓글의 프로필 이미지
+  const commentViewImg = tagCreate("img", {})
+  commentViewImgWrap.appendChild(commentViewImg);
+
+  // 최신 댓글 내용을 표시할 영역
+  const commentViewContentWrap = tagCreate("div", {})
+  commentViewWrap.appendChild(commentViewContentWrap);
+
+  // 최신 댓글 내용
+  const commentViewContent = tagCreate("p", {})
+  commentViewContentWrap.appendChild(commentViewContent);
+
+  // 댓글 수정 / 삭제 버튼을 감싸는 div 영역
+  const commentViewBtnWrap = tagCreate("div", {})
+  commentViewWrap.appendChild(commentViewBtnWrap);
+
+  // 댓글 수정 버튼
+  const commentViewEdit = tagCreate("button", {})
+  commentViewBtnWrap.appendChild(commentViewEdit);
+
+  // 댓글 삭제 버튼
+  const commentViewDelet = tagCreate("button", {})
+  commentViewBtnWrap.appendChild(commentViewDelet);
 }
