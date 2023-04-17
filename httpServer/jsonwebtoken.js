@@ -50,3 +50,13 @@ console.log(token);
 console.log(jwtCheck(token.token))
 
 // console.log(accessToken);
+
+// 이 코드는 jsonwebtoken 패키지를 사용하여 JWT(JSON Web Token)를 생성하고 검증하는 기능을 구현한 코드입니다. 해당 코드에서는 다음과 같은 기능들이 구현되어 있습니다.
+
+// jwtinfo 객체: JWT에 대한 설정 정보를 저장하고 있습니다. secretKey는 서명을 생성할 때 사용되는 키이며, option에는 알고리즘, 토큰의 유효 기간, 발행자 정보가 포함되어 있습니다.
+
+// jwtCreate 함수: 인자로 받은 값(value)을 이용해 JWT를 생성합니다. 생성된 토큰은 result 객체에 저장되며, 이를 반환합니다.
+
+// jwtCheck 함수: 인자로 받은 값(value)이 유효한 JWT인지 검사합니다. 만료된 토큰이나 유효하지 않은 토큰의 경우 적절한 에러 메시지를 반환하고, 유효한 토큰일 경우 디코드된 정보를 반환합니다.
+
+// 마지막 부분의 코드는 jwtCreate 함수를 사용해 토큰을 생성하고, 생성된 토큰을 jwtCheck 함수를 사용해 검증하는 예시를 보여줍니다.

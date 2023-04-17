@@ -56,86 +56,16 @@ export default function dangMap(request, response) {
       connection.end();
     })
   } 
-  if (request.url === "/followRequest"){
-    let body = "";
-    request.on("data", function (data) {
-      body = body + data;
-    });
-    request.on("end", function () {
-      let followTarget = JSON.parse(body).you
-      let myId = JWT.jwtCheck(JSON.parse(body).jwt).id;
-      let connection = mysql.createConnection(cmServer.mysqlInfo);
-      connection.connect();
-      connection.query(
-        `INSERT INTO fr_list VALUES('${myId}','${followTarget}',0)`,
-        (error, rows, fields) => {
-          if (error) throw error;
-          else {
-            response.writeHead(200);
-            response.end();
-          }
-        }
-      );
-      connection.end();
-    })
-    
-  }
-  if (request.url === "/unFollowRequest"){
-    let body = "";
-    request.on("data", function (data) {
-      body = body + data;
-    });
-    request.on("end", function () {
-      let followTarget = JSON.parse(body).you
-      let myId = JWT.jwtCheck(JSON.parse(body).jwt).id;
-      let connection = mysql.createConnection(cmServer.mysqlInfo);
-      connection.connect();
-      connection.query(
-        `DELETE FROM fr_list WHERE user_id = '${myId}' AND fr_id = '${followTarget}'`,
-        (error, rows, fields) => {
-          if (error) throw error;
-          else {
-            response.writeHead(200);
-            response.end();
-          }
-        }
-      );
-      connection.end();
-    })
-    
-  }
-  if (request.url === "/followCheck"){
-    let body = "";
-    request.on("data", function (data) {
-      body = body + data;
-    });
-    request.on("end", function () {
-      let followTarget = JSON.parse(body).you
-      let myId = JWT.jwtCheck(JSON.parse(body).jwt).id;
-      let connection = mysql.createConnection(cmServer.mysqlInfo);
-      connection.connect();
-      connection.query(
-        `SELECT * FROM fr_list WHERE user_id = '${myId}'`,
-        (error, rows, fields) => {
-          if (error) throw error;
-          else {
-            let checkFlag = false
-            for(let i of rows){
-              if(i.fr_id === followTarget){
-                checkFlag = true;
-                break
-              }
-            }
-            response.writeHead(200);
-            if(checkFlag){
-              response.end('yes');
-            }else{
-              response.end('no');
-            }
-        }}
-      );
-      connection.end();
-    })
-    
-  }
+ 
 }
+// 서버사이드 코드이다.듈 임포트:
+
+// 필요한 모듈들을 임포트합니다. htmlBox는 HTML 템플릿을 제공하는 모듈, mysql은 MySQL 데이터베이스와의 연결을 관리하는 모듈, cmServer는 일반적인 서버 설정을 제공하는 모듈, JWT는 JSON Web Token을 다루는 모듈입니다.
+// myKeep 함수:
+
+// 이 함수는 클라이언트의 HTTP 요청을 처리하는데 사용됩니다. 클라이언트의 요청 URL에 따라 다양한 작업을 수행합니다.
+// "/mykeep" 요청: 클라이언트로부터 받은 JWT 토큰을 검증하고, 사용자 정보를 데이터베이스에서 가져옵니다. 가져온 사용자 정보를 클라이언트에게 보내주며, 사용자의 마이페이지를 렌더링합니다.
+// "/followRequest" 요청: 클라이언트로부터 받은 JWT 토큰과 팔로우 대상을 데이터베이스에 저장합니다. 이 작업은 사용자가 다른 사용자를 팔로우하고자 할 때 수행됩니다.
+// "/unFollowRequest" 요청: 클라이언트로부터 받은 JWT 토큰과 팔로우 해제 대상을 데이터베이스에서 제거합니다. 이 작업은 사용자가 팔로우를 취소하고자 할 때 수행됩니다.
+// "/followCheck" 요청: 클라이언트로부터 받은 JWT 토큰과 팔로우 대상을 확인하여, 현재 사용자가 대상 사용자를 팔로우하고 있는지 여부를 확인합니다. 이 작업은 팔로우 상태를 확인하고자 할 때 수행됩니다.
+// 이러한 작업들을 통해 사용자의 마이페이지 및 팔로우 관련 기능들을 처리하고 있습니다. 코드는 클라이언트의 요청을 받아 적절한 작업을 수행한 후, 결과를 클라이언트에게 반환하는 역할을 수행합니다.
