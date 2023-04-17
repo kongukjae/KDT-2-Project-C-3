@@ -47,6 +47,7 @@ const pageStyle = {
     width40: "40px",
     width25: "25px",
     width9: "9px",
+    width3: "3px",
   },
   height: {
     height100vh: "100vh",
@@ -890,5 +891,71 @@ const dangMapOverlay = {
     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
     cursor: "pointer",
     transition: "0.5s",
+  }
+}
+
+const market = {
+  marketPost: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height100vh,
+    ...pageStyle.flexColCenter,
+    backgroundColor: pageStyle.colorTheme.peach,
+    margin: "auto",
+    border: '1px solid blue'
+  },
+  marketPostImageArea: {
+    width: pageStyle.width.width400,
+    height: pageStyle.height.height300,
+    backgroundColor: pageStyle.colorTheme.white,
+    border: '1px solid blue'
+
+  },
+  marketPostImgNameAdd: {
+    width: pageStyle.width.width400,
+    height: pageStyle.height.height100,
+    backgroundColor: pageStyle.colorTheme.white,
+    ...pageStyle.flexRowCenter,
+    border: '1px solid blue',
+    margin: '10px',
+    gap: '15px'
+  },
+  marketPostImgStyle: {
+    width: pageStyle.width.width90,
+    height: pageStyle.height.height90,
+    // backgroundColor: pageStyle.colorTheme.peach,
+    border: '1px solid blue',
+    borderRadius: pageStyle.borderRadius.borderRadiusP50,
+  },
+  marketPostnameAddStyle: {
+    width: pageStyle.width.width250,
+    height: pageStyle.height.height90,
+    // backgroundColor: pageStyle.colorTheme.peach,
+    border: '1px solid blue',
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: 'space-between',
+  },
+  marketPostName: {
+    width: pageStyle.width.width80,
+    height: pageStyle.height.height70,
+    ...pageStyle.flexRowCenter,
+  },
+  marketPostAdd: {
+    width: pageStyle.width.width40,
+    height: pageStyle.height.height30,
+    ...pageStyle.flexRowCenter,
+    gap: '5px',
+  },
+  marketPostAddDot: {
+    width: pageStyle.width.width3,
+    height: pageStyle.height.height3,
+    backgroundColor: pageStyle.colorTheme.black,
+  },
+  marketPostDetail: {
+    width: pageStyle.width.width400,
+    height: pageStyle.height.height300,
+    backgroundColor: pageStyle.colorTheme.white,
+    border: '1px solid blue'
   }
 }
