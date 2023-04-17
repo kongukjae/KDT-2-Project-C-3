@@ -18,6 +18,8 @@ function styleCreate(obj, styleOb) {
 // --------------------------------------------------------------------------------------- //
 
 const root = tagCreate("div",{id:"root"});
+root.style.width = "500px";
+root.style.margin = "auto";
 document.body.appendChild(root);
 
 const topMenuWrap = tagCreate("div",{});
@@ -39,7 +41,24 @@ btmMeunWrap.innerText = "바텀메뉴 영역";
 root.appendChild(btmMeunWrap);
 // btmMeun(rootChild[5], menuChild);
 
+// 게시글 작성 버튼
+const writeBtn = tagCreate("button", {});
+styleCreate(writeBtn, {
+  backgroundImage: "url(../resource/write.png)",
+  backgroundSize: "65%",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  cursor: "pointer",
+  width: "50px",
+  height: "50px",
+  borderRadius: "50%",
+  position: "fixed",
+  bottom: "20px",
+  right: "35%",
+})
+root.appendChild(writeBtn);
 
+console.dir(writeBtn);
 
 // 게시글 생성 함수
 function postCreate(parent, src_link) {
