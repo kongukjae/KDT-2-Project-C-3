@@ -414,7 +414,54 @@ map();
 function putUserProfile(arr){
   let slide = document.getElementById("slideWrap");
   for(let i = 0;i < arr.length;i++){
-    slide.children[0].childNodes[i].innerText = arr[i] 
+    slide.children[0].children[i].innerText = '';
+    let target = '';
+    let profileWrap = tagCreate('div');
+    let imageDiv = tagCreate('div');
+    let name = tagCreate('p');
+    let postRequest = arr[i];
+    profileWrap.style.cursor = "pointer"
+    styleCreate(profileWrap,pageStyle.flexColCenter)
+    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle)
+    profileWrap.appendChild(imageDiv);
+    profileWrap.appendChild(name);
+    if(arr[i] === 'undefined'){
+      target = markersObject.userid;
+      postRequest = 'mine';
+    }
+    else{
+      target = arr[i]
+    };
+    name.innerText = target;
+    slide.children[0].children[i].appendChild(profileWrap);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `http://localhost:2080/sendUserImage`);
+    xhr.send(`id=${target}`); 
+    xhr.addEventListener('load', function(){
+        let imageFromServer = xhr.response;
+        imageDiv.style.backgroundImage = `url(${imageFromServer})`
+        console.log("이미지 가져오기 완료");
+    });
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    let mypageForm = document.createElement('form');
+    
+    mypageForm.method = "POST";
+    mypageForm.action = "/mypage";
+    let params = {jwt:token, targetId:postRequest}
+    for(let key in params){
+      let hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type","hidden");
+      hiddenField.setAttribute("name",key);
+      hiddenField.setAttribute("value",params[key]);
+      mypageForm.appendChild(hiddenField);
+    }
+    document.body.appendChild(mypageForm);
+    profileWrap.addEventListener("click",()=>{
+      mypageForm.submit();
+    })
   }
   
 }

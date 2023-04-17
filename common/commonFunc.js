@@ -401,6 +401,17 @@ const targetStyle = {
     ...pageStyle.flexRowCenter,
     paddingBottom : "3px"
   },
+  menuMapSlideImageStyle : {
+    width : pageStyle.width.width40,
+    height : pageStyle.height.height40,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : "50%",
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
 
   //회원가입 결과창
   signupResultRoot: {
