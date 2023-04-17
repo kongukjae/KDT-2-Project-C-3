@@ -43,49 +43,51 @@ function marketPostPage() {
   nameAdd[0].innerText = "뭉뭉";
   styleCreate(nameAdd[1], market.marketPostAdd);
   styleCreate(rootChild[3], market.marketPostDetail);
+  
+  function createModal() {
+    // 모달창 생성
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+    styleCreate(modal, market.marketPostAddModal);
 
-  // 모달창 생성
-  const modal = document.createElement("div");
-  modal.classList.add("modal");
-  styleCreate(modal, market.marketPostAddModal);
+    // 버튼 생성
+    const profileBtn = document.createElement("div");
+    profileBtn.textContent = "프로필 보기";
+    const chatBtn = document.createElement("div");
+    chatBtn.textContent = "채팅";
+    const reportBtn = document.createElement("div");
+    reportBtn.textContent = "신고";
+    const exitBtn = document.createElement("div");
+    exitBtn.innerHTML = "&#x2716;";
+    styleCreate(exitBtn, {
+      display: "flex",
+      justifyContent: "end",
+    });
 
-  // 버튼 생성
-  const profileBtn = document.createElement("div");
-  profileBtn.textContent = "프로필 보기";
-  const chatBtn = document.createElement("div");
-  chatBtn.textContent = "채팅";
-  const reportBtn = document.createElement("div");
-  reportBtn.textContent = "신고";
-  const exitBtn = document.createElement('div');
-  exitBtn.innerHTML = "&#x2716;";
-  styleCreate(exitBtn, {
-    display: 'flex',
-    justifyContent: 'end'
-  })
+    // 버튼을 모달창에 추가
+    const modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content");
+    modalContent.appendChild(exitBtn);
+    modalContent.appendChild(profileBtn);
+    modalContent.appendChild(chatBtn);
+    modalContent.appendChild(reportBtn);
+    styleCreate(profileBtn, market.marketPostAddModalBtn);
+    styleCreate(chatBtn, market.marketPostAddModalBtn);
+    styleCreate(reportBtn, market.marketPostAddModalBtn);
+    // 모달창에 모달컨텐츠 추가
+    modal.appendChild(modalContent);
+    styleCreate(modalContent, { gap: "10px" });
 
-  // 버튼을 모달창에 추가
-  const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
-  modalContent.appendChild(exitBtn);
-  modalContent.appendChild(profileBtn);
-  modalContent.appendChild(chatBtn);
-  modalContent.appendChild(reportBtn);
-  styleCreate(profileBtn, market.marketPostAddModalBtn);
-  styleCreate(chatBtn, market.marketPostAddModalBtn);
-  styleCreate(reportBtn, market.marketPostAddModalBtn);
-
-  // 모달창에 모달컨텐츠 추가
-  modal.appendChild(modalContent);
-  styleCreate(modalContent, {gap: '10px'});
-
-  nameAdd[1].addEventListener("click", function() {
+    exitBtn.addEventListener("mouseover", function () {
+      exitBtn.style.cursor = "pointer";
+    });
     nameAdd[1].appendChild(modal);
+  }
+
+  nameAdd[1].addEventListener("click", function () {
+    createModal();
   });
-  exitBtn.addEventListener('mouseover', function() {
-    exitBtn.style.cursor = 'pointer';
-  })
   exitBtn.addEventListener('click', function() {
-    modal.style.display = 'none';
   })
 }
 marketPostPage();
