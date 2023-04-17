@@ -227,8 +227,8 @@ function map() {
       // 드래그가 시작되는 시점에 동작
       // 마커의 현재 좌표를 저장
       let latlng = marker.getPosition();
-      dragStartLat = latlng.getLat();
-      dragStartLng = latlng.getLng();
+      dragStartLat = latlng.getLat().toFixed(13);
+      dragStartLng = latlng.getLng().toFixed(13);
       console.log("이동 전 lat " + dragStartLat);
       console.log("이동 전 lng " + dragStartLng);
     });
@@ -242,8 +242,8 @@ function map() {
       let wrap = [];
       // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
       wrap.push(
-        latlng.getLat(),
-        latlng.getLng(),
+        latlng.getLat().toFixed(13),
+        latlng.getLng().toFixed(13),
         cookieId,
         dragStartLat,
         dragStartLng
