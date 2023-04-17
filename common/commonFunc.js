@@ -32,6 +32,7 @@ const pageStyle = {
     widthP90: "90%",
     widthP60: "60%",
     widthP40: "40%",
+    width700:"700px",
     width500: "500px",
     width450: "450px",
     width390: "390px",
@@ -55,6 +56,7 @@ const pageStyle = {
     height1700: "1700px",
     height1000: "1000px",
     height690: "690px",
+    height1000: "1000px",
     height500: "500px",
     height450: "450px",
     height308: "308px",
@@ -575,9 +577,9 @@ console.log(targetStyle.topMenu);
 
 
 // 마이페이지 해당 부분 
-const mypageStyle = {
+const keepStyle = {
   // 마이페이지 전체적인 레이아웃 
-  mypageRoot : {
+  pageRoot : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height1700,
     margin : "auto",
@@ -587,8 +589,8 @@ const mypageStyle = {
     flexDirection : "column",
     alignItems : "center"
   },
-  //  마이페이지 최상단 메뉴 버튼 느낌 
-  mypageTopMenu : {
+  //  마이페이지 최상단 메뉴 버튼 
+  pageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
     position : "relative",
@@ -597,20 +599,22 @@ const mypageStyle = {
 
   },
   //root1 제목부분 '산돌이를 찾아주세요'
-  mypageTitle : {
+  pageTitle : {
     width : pageStyle.width.widthP100,
-    height : pageStyle.height.height100,
+    height : pageStyle.height.height40,
     position : "relative",
-    marginTop : "10px",
+    marginTop : "40px",
     backgroundColor:pageStyle.colorTheme.lightGray,
     ...pageStyle.flexRowCenter,
     fontSize : pageStyle.fontSizeSet.mediumLarge,
     fontWeight : pageStyle.fontWeightSet.bold
   },
+
+  
   // root2 본문부분, '산돌이는 대전에서 잃어버렸어요'
-  mypageMainText : {
+  pagemainText : {
     width : pageStyle.width.width500,
-    height : pageStyle.height.height300,
+    height : pageStyle.height.height1000,
     backgroundColor : pageStyle.colorTheme.lightGray,
     position : "relative",
     ...pageStyle.flexRowCenter,
@@ -621,18 +625,144 @@ const mypageStyle = {
     backgroundSize: "cover",
     backgroundPosition: "center"
   },
-  mypageButtonWrap : {
+  pageButtonWrap : {
     width : pageStyle.width.widthP100,
-    height : pageStyle.height.height100,
-    marginTop : "40px",
+    height : pageStyle.height.height150,
+    marginTop : "20px",
     position : "relative",
-    borderRadius : "10px",
+    borderRadius : "20px",
     display : "flex",
     flexDirection : "row",
     justifyContent : "space-around",
     alignItems : "center",
-    backgroundColor : pageStyle.colorTheme.lightGray
+    
   },
+
+  pageButton : {
+    width : pageStyle.width.widthP40,
+    height : "70%",
+    marginTop : "10px",
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    cursor : "pointer",
+    borderRadius : "5px",
+    ...pageStyle.flexRowCenter
+  },
+
+  pageUploadModal : {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height140,
+    padding : "10px",
+    borderRadius : "10px",
+    ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.whiteTypeD,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    position : "absolute",
+    top : "1200px",
+    left: "30%",
+    gap : "10px",
+    marginLeft: "-150px",
+  },
+
+  pageUploadModalButtonWrap : {
+    display : "flex",
+    gap : "10px"
+  },
+
+  pageUploadModalButtonStyle : {
+    border : "0px",
+    width : pageStyle.width.width90,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    fontSize : pageStyle.fontSizeSet.smaller,
+    color : pageStyle.colorTheme.whiteTypeA,
+    borderRadius : "10px",
+    cursor : "pointer",
+    ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+  },
+
+
+// root 3.1 카테고리 버튼
+
+showCategoryModalbt :{
+  width : pageStyle.width.width300,
+    height : pageStyle.height.height140,
+    padding : "10px",
+    borderRadius : "10px",
+    ...pageStyle.flexColCenter,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    backgroundColor : pageStyle.colorTheme.beige,
+    position : "absolute",
+    top : "1100px",
+    left: "30%",
+    gap : "10px",
+    marginLeft: "-150px",
+
+},
+showcategoryModalButtonWrap:{
+display : "flex",
+gap : "10px"
+
+},
+
+
+showcategoryModalButton:{
+  border : "0px",
+  width : pageStyle.width.width100,
+  height : pageStyle.height.height30,
+  padding : "10px",
+  fontSize : pageStyle.fontSizeSet.smaller,
+  color : pageStyle.colorTheme.whiteTypeA,
+  borderRadius : "10px",
+  cursor : "pointer",
+  ...pageStyle.flexColCenter,
+  backgroundColor : pageStyle.colorTheme.peach,
+  boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+},
+
+showcategoryclosebutton:{
+  border : "0px",
+  width : pageStyle.width.width100,
+  height : pageStyle.height.height30,
+  padding : "10px",
+  fontSize : pageStyle.fontSizeSet.smaller,
+  color : pageStyle.colorTheme.whiteTypeA,
+  borderRadius : "10px",
+  cursor : "pointer",
+  ...pageStyle.flexColCenter,
+  backgroundColor : pageStyle.colorTheme.peach,
+  boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  top : "1100px",
+    left: "30%",
+},
+
+
+
+
+
+
+
+
+// 4. 페이지 서브밋
+  pageSubmit : {
+  marginTop : "40px",
+  width : pageStyle.width.widthP40,
+  height : "5%",
+  backgroundColor : pageStyle.colorTheme.whiteTypeA,
+  cursor : "pointer",
+  borderRadius : "20px",
+  ...pageStyle.flexRowCenter
+
+
+
+}
+
+
+
+
+
+
 }
 
 const loginPageStyle = {

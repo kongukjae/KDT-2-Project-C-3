@@ -4,7 +4,7 @@ import cmServer from "./commonServer.js";
 import * as JWT from "./jsonwebtoken.js";
 
 export default function dangMap(request, response) {
-  if (request.url.startsWith("/mypage")) {
+  if (request.url.startsWith("/mykeep")) {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
@@ -20,7 +20,7 @@ export default function dangMap(request, response) {
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
       if(target === "mine"){
-        console.log("마이페");
+      
         connection.query(
           `SELECT * FROM userinfo where id='${requestId}'`,
           (error, rows, fields) => {
@@ -46,10 +46,8 @@ export default function dangMap(request, response) {
               response.writeHead(200);
               response.write(`<script>
               const targetIdFromServer = '${target}';
-              const dogNameFromServer = '${rows[0].dogName}';
-              const dogGenderFromServer = '${rows[0].dogGender}';
+              
             </script>`);
-            response.write(htmlBox.htmlFunc(htmlBox.yourpage));
             response.end();
           }
         }
