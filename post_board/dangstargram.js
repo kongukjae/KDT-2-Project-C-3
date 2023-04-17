@@ -31,7 +31,7 @@ root.appendChild(topMenuWrap);
 
 // 게시글 영역
 for(let i = 0; i < 3; i++) { // i < 3에서 3 부분은 나중에 무한 스크롤 방식을 이용해 적용
-  postCreate(root, "../resource/MainDogImg.jpg"); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
+  postCreate(root, "../resource/MainDogImg.jpg", "text", "../resource/MainDogImg.jpg"); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
 }
 
 
@@ -62,7 +62,7 @@ root.appendChild(writeBtn);
 console.dir(writeBtn);
 
 // 게시글 생성 함수
-function postCreate(parent, src_link, text) {
+function postCreate(parent, src_link, text, src_comment_link) {
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {});
   styleCreate(postWrap, {
@@ -120,7 +120,7 @@ function postCreate(parent, src_link, text) {
   styleCreate(postBtnWrap, {
     border: "1px solid red",
     width: "500px",
-    height: "150px",
+    height: "100px",
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -147,6 +147,7 @@ function postCreate(parent, src_link, text) {
   // 댓글 입력창 감싸는 div
   const commentWrap = tagCreate("div", {});
   styleCreate(commentWrap, {
+    border: "1px solid black",
     padding: "15px",
   })
   postWrap.appendChild(commentWrap);
@@ -161,15 +162,16 @@ function postCreate(parent, src_link, text) {
   commentWrap.appendChild(commentForm);
 
   // 댓글 입력할 textarea
-  const commentInput = tagCreate("textarea", {});
+  const commentInput = tagCreate("input", {type: "text", placeholder: "내용을 입력해주세요"});
   styleCreate(commentInput, {
     width: "85%",
+    height: "38px",
     resize: "none",
   })
   commentForm.appendChild(commentInput);
 
   // 댓글 작성 버튼
-  const commentSubmit = tagCreate("button", {});
+  const commentSubmit = tagCreate("input", {type: "submit", value: "작성"});
   styleCreate(commentSubmit, {
     width: "60px",
     height: "38px"
@@ -179,33 +181,81 @@ function postCreate(parent, src_link, text) {
 
   // 최신 댓글 하나가 보여질 영역
   const commentViewWrap = tagCreate("div", {});
+  styleCreate(commentViewWrap, {
+    position: "relative",
+    width: "100%",
+    height: "100px",
+    padding: "10px",
+  })
   postWrap.appendChild(commentViewWrap);
 
+  // 최신 댓글 프로필 이미지와 내용을 한줄로 넣기 위한 wrap
+  const commentImgContentWrap = tagCreate("div", {});
+  styleCreate(commentImgContentWrap, {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    // justifyContent: "space-between",
+    alignItems: "center",
+  })
+  commentViewWrap.appendChild(commentImgContentWrap);
+
+
   // 최신 댓글의 프로필 이미지를 감싸는 div 영역
-  const commentViewImgWrap = tagCreate("div", {})
-  commentViewWrap.appendChild(commentViewImgWrap);
+  const commentViewImgWrap = tagCreate("div", {});
+  styleCreate(commentViewImgWrap, {
+    width: "60px",
+    height: "60px",
+    border: "1px solid red",
+    borderRadius: "50%",
+    overflow: "hidden",
+    marginRight: "10px",
+    position: "relative",
+  })
+  commentImgContentWrap.appendChild(commentViewImgWrap);
 
   // 최신 댓글의 프로필 이미지
-  const commentViewImg = tagCreate("img", {})
+  const commentViewImg = tagCreate("img", {src:src_comment_link})
+  styleCreate(commentViewImg, {
+    height: "100%",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
+  })
   commentViewImgWrap.appendChild(commentViewImg);
 
   // 최신 댓글 내용을 표시할 영역
   const commentViewContentWrap = tagCreate("div", {})
-  commentViewWrap.appendChild(commentViewContentWrap);
+  commentImgContentWrap.appendChild(commentViewContentWrap);
 
   // 최신 댓글 내용
-  const commentViewContent = tagCreate("p", {})
+  const commentViewContent = tagCreate("p", {});
+  commentViewContent.innerText = "DB에서 가져올 데이터 임시로 입력해둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+  styleCreate(commentViewContent, {
+    width: "400px",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis"
+  })
   commentViewContentWrap.appendChild(commentViewContent);
 
   // 댓글 수정 / 삭제 버튼을 감싸는 div 영역
-  const commentViewBtnWrap = tagCreate("div", {})
+  const commentViewBtnWrap = tagCreate("div", {});
+  styleCreate(commentViewBtnWrap, {
+    position: "absolute",
+    top: "5px",
+    right: "5px",
+  })
   commentViewWrap.appendChild(commentViewBtnWrap);
 
   // 댓글 수정 버튼
-  const commentViewEdit = tagCreate("button", {})
+  const commentViewEdit = tagCreate("button", {});
+  commentViewEdit.innerText = "수정";
   commentViewBtnWrap.appendChild(commentViewEdit);
 
   // 댓글 삭제 버튼
-  const commentViewDelet = tagCreate("button", {})
+  const commentViewDelet = tagCreate("button", {});
+  commentViewDelet.innerText = "삭제";
   commentViewBtnWrap.appendChild(commentViewDelet);
 }
