@@ -35,6 +35,7 @@ const pageStyle = {
     width700:"700px",
     width500: "500px",
     width450: "450px",
+    width400: "400px",
     width390: "390px",
     width300: "300px",
     width288: "288px",
@@ -59,6 +60,8 @@ const pageStyle = {
     height1000: "1000px",
     height500: "500px",
     height450: "450px",
+    height400: "400px",
+    height350: "350px",
     height308: "308px",
     height300: "300px",
     height260: "260px",
@@ -271,11 +274,11 @@ const targetStyle = {
   menuMapSlide: {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height308,
-    position : "relative",
+    position: "absolute",
     backgroundColor : "lightgray",
     display : "flex",
+    flexDirection : "column",
     justifyContent : "flex-start",
-    position : "absolute",
     zIndex : "1",
     bottom : "-155px"
   },
@@ -297,14 +300,73 @@ const targetStyle = {
     padding: "0px 10px 10px 10px",
     display: "grid",
     gridAutoFlow: "column",
+    // position: "absolute",
     gridTemplateColumns: "repeat(16, 160px)",
-    gridTemplateRows: "repeat(2, 140px)",
+    gridTemplateRows: "repeat(2, 110px)",
   },
   menuMapSlideItems: {
     border: "1px solid black",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  //댕맵 슬라이드 메뉴의 팔로우 검색창
+  menuMapSlideSearch: {
+    width : pageStyle.width.width390,
+    height : pageStyle.height.height40,
+    top : "5px",
+    // bottom : "15px",
+    left: "50%",
+    position : "relative",
+    marginLeft: "-195px",
+    display : "flex",
+    alignItems : "center",
+  },
+  menuMapSlideSearchBar : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.heightP100,
+    border : `1px ${pageStyle.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : pageStyle.colorTheme.white,
+    position : "absolute"
+  },
+  menuMapSlideSearchButton: {
+    width : pageStyle.width.width80,
+    height : pageStyle.height.height30,
+    borderRadius : "15px",
+    backgroundColor : pageStyle.colorTheme.peach,
+    position : "relative",
+    left: "300px",
+    color : pageStyle.colorTheme.white,
+    cursor : "pointer",
+    ...pageStyle.flexRowCenter,
+    paddingBottom : "3px"
+  },
+  menuMapSlideSearchResult: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height40,
+    top : "5%",
+    left: "10%",
+    position : "relative",
+    // position : "absolute",
+    // marginLeft: "-195px",
+    display : "flex",
+    alignItems : "center",
+  },
+  menuMapSlideSearchResultList:{
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height40,
+    cursor : "pointer",
+    borderRadius : "15px",
+    padding : "5px",
+    paddingLeft : "20px",
+    paddingRight : "20px",
+    border : "0px",
+    fontSize : pageStyle.fontSizeSet.small,
+    // textAlign : "center"
   },
 
   //댕맵 검색창
@@ -340,6 +402,17 @@ const targetStyle = {
     cursor : "pointer",
     ...pageStyle.flexRowCenter,
     paddingBottom : "3px"
+  },
+  menuMapSlideImageStyle : {
+    width : pageStyle.width.width40,
+    height : pageStyle.height.height40,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : "50%",
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   },
 
   //회원가입 결과창
@@ -478,47 +551,7 @@ const targetStyle = {
       backgroundColor : pageStyle.colorTheme.peach,
       boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
     },
-    // 댕맵 오버레이
-    dangMapOverlayWrap: {
-      position: "absolute",
-      left: "0",
-      bottom: "10px",
-      width: pageStyle.width.width288,
-      height: pageStyle.height.height132,
-      marginLeft: pageStyle.marginLeft.marginLeft_144,
-      textAlign: "left",
-      overflow: "hidden",
-      fontSize: pageStyle.fontSizeSet.smaller,
-    },
-    dangMapOverlayInfo: {
-      width: "286px",
-      height: "120px",
-      borderRadius: "5px",
-      borderBottom: "2px solid #ccc",
-      borderRight: "1px solid #ccc",
-      overflow: "hidden",
-      backgroundColor: "#fff",
-    },
-    dangMapOverlayTitle: {
-      padding: "5px 0 0 10px",
-      height: "30px",
-      backgroundColor: "#eee",
-      borderBottom: "1px solid #ddd",
-      fontSize: "18px",
-      fontWeight: "bold",
-    },
-    dangMapOverlayBody: {
-      border: "0",
-      boxShadow: "0px 1px 2px #888",
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-    },
-    dangMapOverlayDesc: {
-      position: "relative",
-      margin: "13px 0 0 90px",
-      height: "75px",
-    },
+    
     findUserInfoRoot: {
       width : pageStyle.width.width500,
       height : pageStyle.height.height1000,
@@ -573,12 +606,12 @@ const targetStyle = {
     },
 
 }
-console.log(targetStyle.topMenu);
+//console.log(targetStyle.topMenu);
 
 
-// 마이페이지 해당 부분 
+// 게시글 해당 부분 
 const keepStyle = {
-  // 마이페이지 전체적인 레이아웃 
+  // 게시글 전체적인 레이아웃 
   pageRoot : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height1700,
@@ -589,7 +622,7 @@ const keepStyle = {
     flexDirection : "column",
     alignItems : "center"
   },
-  //  마이페이지 최상단 메뉴 버튼 
+  //  게시글 최상단 메뉴 버튼 
   pageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
@@ -855,6 +888,100 @@ const loginPageStyle = {
     cursor : 'pointer',
   }
 };
+
+// 댕맵 오버레이 창
+const dangMapOverlay = {
+  wrap: {
+    position: "absolute",
+    left: "0",
+    bottom: "10px",
+    width: pageStyle.width.width250,
+    height: pageStyle.height.height132,
+    marginLeft: pageStyle.marginLeft.marginLeft_144,
+    textAlign: "left",
+    overflow: "hidden",
+    fontSize: pageStyle.fontSizeSet.smaller,
+  },
+  info: {
+    width: pageStyle.width.widthP100,
+    height: "120px",
+    borderRadius: "5px",
+    // border: `1px solid ${pageStyle.colorTheme.peach}`,
+    overflow: "hidden",
+    backgroundColor: pageStyle.colorTheme.whiteTypeC,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+  },
+  title: {
+    padding: "5px 0 5px 10px",
+    height: "30px",
+    backgroundColor: pageStyle.colorTheme.peach,
+    fontSize: pageStyle.fontSizeSet.small,
+    fontWeight: "bold",
+    lineHeight: 1,
+    color: pageStyle.colorTheme.white
+  },
+  body: {
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.height90,
+    borderBottom: `2px solid ${pageStyle.colorTheme.peach}`,
+    // border: `1px solid ${pageStyle.colorTheme.peach}`,
+    padding: "10px",
+    // boxShadow: `0px 1px 10px ${pageStyle.colorTheme.peach}`,
+    position: "relative",
+    overflow: "hidden",
+    display: "flex",
+  },
+  desc: {
+    position: "relative",
+    margin: "5px 0 0 30px",
+  },
+  image: {
+    width: "70px",
+    height: "70px",
+    borderRadius: "35px",
+  },
+  btnStyle: {
+    width: "65px",
+    height: "30px",
+    backgroundColor: pageStyle.colorTheme.lightGray,
+    textAlign: "center",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
+    transition: "0.5s",
+    border: `0px solid ${pageStyle.colorTheme.gray}`,
+    fontSize: pageStyle.fontSizeSet.smaller
+
+  },
+  close: {
+    width: "15px",
+    height: "20px",
+    backgroundColor: pageStyle.colorTheme.white,
+    lineHeight: 1,
+    position: "absolute",
+    top: "5px",
+    right: "5px",
+    border: "0px",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
+    transition: "0.5s",
+  }
+}
+
+//댕댕마켓 게시글 리스트 스타일
+const marketListStyle = {
+  root: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height2000,
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative"
+  }
+}
 
 // 글쓰기 작성 세부적인 스타일링
 const myWriteStyle={

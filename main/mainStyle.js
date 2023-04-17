@@ -12,9 +12,8 @@ function main(){
   //상단메뉴바 commonFunc로 이동
   rootChild[2].id = "map"
   topMenu(rootChild);
- 
- 
-// ----햄버거 버튼 구역입니다.----
+
+   // ----햄버거 버튼 구역입니다.----
 
 // 루트 오버플로우
 styleCreate(root, {
@@ -70,8 +69,9 @@ styleCreate(bar3, {
   top: "18px",
   left: "0px",
 });
+
 // 메뉴 슬라이드 요소
-let menuSlide = tagCreate("div", {});
+let menuSlide = tagCreate("div", {id: 'hamburgerSlide'});
 root.appendChild(menuSlide);
 styleCreate(menuSlide, {
   width: "300px",
@@ -402,6 +402,7 @@ logoutBtn.addEventListener("click", () => {
 
 main()
 
+/*
 async function getWeatherAsync() {
   let result = [];
   let today = new Date();   
@@ -432,3 +433,4 @@ async function getWeatherAsync() {
 }
 
 getWeatherAsync()
+*/

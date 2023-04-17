@@ -65,10 +65,19 @@ const html = {
   findUserInfo : `
   <script src="/common/commonFunc.js"></script>
   <script src="/init_user/findUserInfo.js"></script>
-  `
- 
- 
+  `,
+  followSearch:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/mapp/dangMapSlideSearchBar.js"></script>`,
+  secondHand:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/market/marketList.js"></script>`,
 
+mykeep:`
+<script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/mykeep.js"></script>`
 
 
 

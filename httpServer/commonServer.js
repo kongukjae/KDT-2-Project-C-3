@@ -9,7 +9,7 @@ const cmServer = {
     database: "mungta",
   },
   fileDirectory: function(request, response) {
-    console.log('bbbbbb: ' + `../${request}`)
+    //console.log('bbbbbb: ' + `../${request}`)
     fs.readFile(`./${request}`, function (err, data) {
       response.writeHead(200);
       response.write(data);

@@ -15,6 +15,11 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 import myPagePost from "./httpServer/myPagePost.js";
+// import myPage from "./httpServer/myPage.js";
+import followSearch from "./httpServer/callPostFollowSearch.js";
+import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
+import myPagePost from "./httpServer/callPostmyKeep";
+
 
 
 
@@ -59,8 +64,8 @@ const server = http.createServer(function (request, response) {
 
     //메인화면
     callMain(request, response);
-    //회원가입
     
+    //회원가입
     if (request.url === "/signUp") {
       response.writeHead(200);
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
@@ -108,15 +113,30 @@ const server = http.createServer(function (request, response) {
     myMarker(request, response);
   }
 
+  if (request.url.startsWith("/dupCheck")) {
+    dupCheck(request, response);
+  } else if (request.url === "/friends/mypageStyle.js") {
+    cmServer.fileDirectory(`friends/mypageStyle.js`, response);
+  } else if (request.url === "/friends/yourpageStyle.js") {
+    cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
+  } else if (request.url === "/myKeep") {
+    cmServer.fileDirectory("myKeep.html", response);
+  }
+
+
+
 
   // if (request.url === "/mypageStyle.js") {
   //   cmServer.fileDirectory(`friends/mypageStyle.js`, response);
   // }
 
-    //댕맵
+    //댕맵 불러오기
 
 
     dangMapServer(request, response);
+    
+    //중고거래 페이지
+    secondHand(request, response);
 
 
   }
@@ -130,7 +150,7 @@ const server = http.createServer(function (request, response) {
   //   cmServer.fileDirectory(`friends/mypageStyle.js`, response);
   // }
      // 글작성 페이지
-    // mywritepost(request,response);
+     keepDiary(request,response);
     //마이페이지
     myPagePost(request, response);
     //업로드, 유저 이미지
@@ -138,10 +158,14 @@ const server = http.createServer(function (request, response) {
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
     callPostDangMap(request, response);
+
+    //로그인
     callPostLogin(request, response);
     if (request.url.startsWith("/signUpResult")) {
       signupResult(request, response)
     }
+
+    followSearch(request, response);
   }
 }
 );

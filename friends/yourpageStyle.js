@@ -41,14 +41,28 @@ function yourPage(){
   }
   rootChild[3].children[0].innerText = "팔로우";
   rootChild[3].children[1].innerText = "쪽지";
-  const cookieId = document.cookie.split("=")[1]
+  const JWT = document.cookie.split("=")[2]
+  let followCheckXhr = new XMLHttpRequest();
+  let _URL = `http://localhost:2080/followCheck`;
+  let followRequestURL = 'http://localhost:2080/followRequest'
+  let followRequestMessage = '팔로우'
+  followCheckXhr.open("POST",_URL);
+  followCheckXhr.send(JSON.stringify({jwt:JWT,you:targetIdFromServer}));
+  followCheckXhr.addEventListener("load",()=>{
+    if(followCheckXhr.response === 'yes'){
+      followRequestURL = 'http://localhost:2080/unFollowRequest'
+      followRequestMessage = '팔로우 취소'
+      rootChild[3].children[0].innerText = "팔로우 취소";
+    }
+  })
+
   rootChild[3].children[0].addEventListener("click",()=>{
     let xhr = new XMLHttpRequest();
-      let _URL = `http://localhost:2080/followRequest?i=${cookieId}&you=${targetIdFromServer}`;
-      xhr.open("GET",_URL);
-      xhr.send();
+      xhr.open("POST",followRequestURL);
+      xhr.send(JSON.stringify({jwt:JWT,you:targetIdFromServer}));
       xhr.addEventListener("load",()=>{
-        alert(`${targetIdFromServer}님을 팔로우 했습니다`)
+        alert(`${targetIdFromServer}님을 ${followRequestMessage} 했습니다`);
+        location.reload();
       })
   })
 

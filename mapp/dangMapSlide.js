@@ -69,9 +69,16 @@ function slideEvent() {
 
 // 슬라이드 안쪽 구성
 const slideWrap = tagCreate("div", { id: "slideWrap" });
+styleCreate(slideWrap, {
+  display: "flex",
+  flexDirection: "row",
+})
 slide.appendChild(slideWrap);
 // slideWrap.innerHTML = `test`;
-styleCreate(slideWrap, targetStyle.menuMapSlideWrap);
+
+const slideWrapInnerDiv = tagCreate("div", {});
+styleCreate(slideWrapInnerDiv, targetStyle.menuMapSlideWrap);
+slideWrap.appendChild(slideWrapInnerDiv);
 
 // 발자국이 찍힌 사람이 총 몇명인지 서버에서 변수로 받아와서 반복문을 돌려야 할 것으로 생각 됨
 // 임시로 최대치인 31을 넣어 둠
@@ -79,25 +86,102 @@ for (let i = 0; i < 31; i++) {
   const slideElement = tagCreate("div", {});
   styleCreate(slideElement, targetStyle.menuMapSlideItems);
   slideElement.innerText = `test${i}`;
-  slideWrap.appendChild(slideElement);
+  slideWrapInnerDiv.appendChild(slideElement);
 }
-console.dir(slide.children[1]);
+//console.dir(slide.children[1]);
+// console.log(slide.children[1].style.marginLeft);
+// let a = slide.children[1].style.marginLeft;
+// console.log(a);
+// let b = a.split("p")[0];
+// console.log(b);
+
+//======================================================================================
+
+//슬라이드 메뉴 - 팔로우 검색 창
+const search = tagCreate("div", {});
+slide.appendChild(search);
+styleCreate(slide.children[2], targetStyle.menuMapSlideSearch)
+
+//팔로우 검색창 - 검색 bar
+slide.children[2].appendChild(tagCreate("input", {name: "followSearch", type: "text" }));
+styleCreate(slide.children[2].children[0], targetStyle.menuMapSlideSearchBar);
+
+//팔로우 검색창 - 검색 button
+slide.children[2].appendChild(tagCreate("div", {innerText: "search"}));
+styleCreate(slide.children[2].children[1], targetStyle.menuMapSlideSearchButton);
+
+//팔로우 ID 검색한 값 표시해줄 영역
+let searchResult = tagCreate("div", {});
+slide.appendChild(searchResult);
+styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
+styleCreate(slide.children[3], {display: "none"})
+
+
+//팔로우 검색 버튼 클릭 시 동작 함수
+slide.children[2].children[1].addEventListener('click', function(){
+  let res;
+  let findVal = slide.children[2].children[0].value;
+  const cookieId = document.cookie.split("=")[1];
+  //console.log("쿠키: " + cookieId)
+
+  
+  styleCreate(slide.children[3], {display: ""})
+  //슬라이드 메뉴 높이 값 조정
+  styleCreate(slide, {height: pageStyle.height.height450});
+
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", `http://localhost:2080/followSearch`, true);
+  // httpRequest.send(`re1=${result[0]}`);
+  console.log(cookieId)
+  xhr.send(`searchValue=${findVal}&id=${cookieId}`); 
+
+  xhr.addEventListener('load', function(){
+    res = JSON.parse(xhr.response);
+
+  let searchList; //찾은 팔로우 ID값 리스트로 담아 둠.
+    for(const key in res){
+      searchList += `<option value="${res[key]}">${res[key]}</option>`;
+      console.log(`값: ${key}, ${res[key]}`)
+    }
+    slide.children[3].innerHTML = `<select id="searchResult" onchange="searchResultChooseValue()">
+    <option value="none">검색 결과</option>
+    ${searchList}
+    </select>`;
+
+    styleCreate(slide.children[3].children[0], targetStyle.menuMapSlideSearchResultList)
+  });
+
+  
+})
+
+//검색된 팔로우 ID 리스트에서 선택했을 때 동작되는 함수
+function searchResultChooseValue(){
+  let choose = document.getElementById("searchResult")
+  console.log(`친구 선택: ${choose.options[choose.selectedIndex].value}`)
+
+  //검색된 팔로우 선택하면 기존 창으로 되돌아 감
+  styleCreate(slide.children[3], {display: "none"});
+  styleCreate(slide, {height: pageStyle.height.height308});
+}
+
+//=============================================================================================
 
 // 슬라이드 스와이프 시 옆으로 이동
 // 마우스 다운한 지점과 마우스 이동한 곳의 좌표값을 비교하여 음수인지 양수인지로 어느 방향으로 이동했는지 판별
 // 한계값을 설정하고 그 이하일 경우에는 이동한 값 만큼 marginLeft 또는 marginRight를 이용하여 실시간 슬라이드 구현
-slide.children[1].addEventListener("mousedown", function (e) {
+slide.children[1].children[0].addEventListener("mousedown", function (e) {
   let mDown = true;
   let startX = e.clientX;
-  let widthValue = slideWidthValueCalculate(slide.children[1]);
 
-  let marginLeftValue = slide.children[1].style.marginLeft;
+  let widthValue  = slideWidthValueCalculate(slide.children[1].children[0])
+  let marginLeftValue = slide.children[1].children[0].style.marginLeft;
   let marginLeftNumValue = Number(marginLeftValue.split("p")[0]);
   let marginLeftCalcValue;
   
   // console.log("startPoint : " + startPoint);
   console.log("startX : " + startX);
-  slide.children[1].addEventListener("mousemove", function (event) {
+  slide.children[1].children[0].addEventListener("mousemove", function (event) {
     if (mDown) {
       console.log("mDown : " + mDown);
       let deltaX = startX - event.clientX;
@@ -105,27 +189,28 @@ slide.children[1].addEventListener("mousedown", function (e) {
       console.log("startX : " + startX + " clientX : " + event.clientX);
       if(deltaX > 0) {
         if (marginLeftNumValue > 0) {
-          slide.children[1].style.marginLeft = 0;
+          slide.children[1].children[0].style.marginLeft = 0;
           changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
+          console.log(widthValue);
           marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
-          slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
+          slide.children[1].children[0].style.marginLeft = `${marginLeftCalcValue}px`;
         }
       } 
       else {
         if (marginLeftNumValue > 0) {
-          slide.children[1].style.marginLeft = 0;
+          slide.children[1].children[0].style.marginLeft = 0;
           changeSliderValueMarginLeft(slide.children[1], 0);
         } else {
           marginLeftCalcValue = calculateMoveSlideValue(marginLeftNumValue, deltaX, widthValue);
-          slide.children[1].style.marginLeft = `${marginLeftCalcValue}px`;
+          slide.children[1].children[0].style.marginLeft = `${marginLeftCalcValue}px`;
         }
       }
     }
   });
-  slide.children[1].addEventListener("mouseup", function () {
+  slide.children[1].children[0].addEventListener("mouseup", function () {
     mDown = false;
-    changeSliderValueMarginLeft(slide.children[1], marginLeftCalcValue);
+    changeSliderValueMarginLeft(slide.children[1].children[0], marginLeftCalcValue);
   });
 });
 
@@ -185,14 +270,13 @@ function makeControlBtns() {
   });
 
   // 내 프로필 클릭 시 버튼's 생성 / 삭제
-  slide.children[1].children[0].addEventListener("click", () => {
+  slide.children[1].children[0].children[0].addEventListener("click", () => {
     if (controlToggle) {
       slide.removeChild(controlbtnsWrap);
       controlToggle = false;
     } else {
       slide.appendChild(controlbtnsWrap);
       controlToggle = true;
-      console.dir(slide.children[2].children[1]);
       testFunc();
     }
   });
@@ -223,16 +307,25 @@ function testFunc(){
   console.log("controlToggle: " + controlToggle);
   if(controlToggle) {
     console.log("조건문 진입")
-    slide.children[2].children[2].addEventListener('click', () => {
+    slide.children[slide.children.length - 1].children[2].addEventListener('click', () => {
       // 목표 : 내 발자국만 남기고 다른 사람들의 발자국 비활성화
-      // 1. 토큰을 통해 로그인한 ID를 식별
-      // 2-1. ID를 통해 내 발자국만 지도에 출력
-      //      -> dangMap.js의 loadMarker 함수를 실행시켜 내 발자국만 나오도록 핸들링
-      // 2-2. 페이지를 새로 load하면서 서버에서 전달하는 변수를 통해 내것 이외의 발자국을 출력하는 함수를 비활성화
-      //      -> 버튼 클릭시 서버에 요청을 보내고 서버가 요청을 받으면 string으로 문자열을 전달, 전달받은 문자열을 통해
-      //         dangMap.js에서(지금은 map.js에만 적용되어 있음) 친구 발자국과 타인 발자국을 출력하는 함수에 조건문을 걸어서 핸들링
+      // dangMap.js의 마커의 배열을 이용하여 내 발자국 이외의 사람들의 발자국을 숨김
       console.log(markers);
     })
   }
 }
 
+// let daySlideWrap = tagCreate('div', {id: "daySlide"});
+// // daySlideWrap.innerText = "test";
+// styleCreate(daySlideWrap, {
+//   position: "absolute",
+//   top: "-100px",
+//   left: "0px",
+// })
+// slide.appendChild(daySlideWrap);
+
+// let daySlideContent = 
+// `
+// <input type="range" min="0" max="100" value="50" class="slider-range">
+// `
+// daySlideWrap.innerHTML = daySlideContent;
