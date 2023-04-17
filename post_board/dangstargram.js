@@ -62,7 +62,7 @@ root.appendChild(writeBtn);
 console.dir(writeBtn);
 
 // 게시글 생성 함수
-function postCreate(parent, src_link) {
+function postCreate(parent, src_link, text) {
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {});
   styleCreate(postWrap, {
@@ -85,13 +85,14 @@ function postCreate(parent, src_link) {
   })
   postWrap.appendChild(postImgWrap);
 
-  // 이미지
+  // 이미지 영역
   const postImg = tagCreate("img", {src:src_link});
   styleCreate(postImg, {
-    height: "100%",
+    height: "100%", 
   })
   postImgWrap.appendChild(postImg);
   
+  // 좋아요, 댓글, 구독(변경 예정) 버튼을 감싸는 div
   const postBtnWrap = tagCreate("div", {});
   styleCreate(postBtnWrap, {
     border: "1px solid red",
@@ -103,6 +104,7 @@ function postCreate(parent, src_link) {
   })
   postWrap.appendChild(postBtnWrap);
 
+  // 각각의 버튼을 만드는 반복문
   for(let i = 0; i < 3; i++) {
     const postBtn = tagCreate("button", {});
     if(i === 0) {
@@ -126,8 +128,10 @@ function postCreate(parent, src_link) {
   });
   postWrap.appendChild(textWrap);
 
+  // 텍스트가 표시될 영역, DB에서 게시글 내용 텍스트를 가져와서 표시하고 5줄을 넘기면 말줄임표로 표시되도록 구현함
   const textBox = tagCreate("p", {});
-  textBox.innerText = "DB에서 받아올 텍스트 영역 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  // textBox.innerText = text;
+  textBox.innerText = "DB에서 받아올 텍스트 영역 임시로 넣어둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
   styleCreate(textBox, {
     border: "1px solid green",
     width: "450px", // 500px - 부모의 좌우 패딩 값
