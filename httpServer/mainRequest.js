@@ -16,6 +16,7 @@ import callLoginGet from "./callLoginGet.js";
 import dangMapServer from "./dangMapServer.js";
 import myPage from "./myPage.js";
 
+import secondHand from "./secondHand.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -52,14 +53,14 @@ import myPage from "./myPage.js";
 
 const server = http.createServer(function (request, response) {
   //로그인
-  let body = "";
   if (request.method === "GET") {
-    callLoginGet(request, response);
 
+
+    callLoginGet(request, response);
+    secondHand(request, response)
     //메인화면
     callMain(request, response);
     //회원가입
-    
     if (request.url === "/signUp") {
       response.writeHead(200);
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
@@ -83,6 +84,7 @@ const server = http.createServer(function (request, response) {
 
     //마이페이지
     myPage(request, response);
+
   }
 
   // post request
