@@ -49,6 +49,22 @@ for(let i = 0;i<3;i++){
   rootChild.push(child);
 }
 
+let add = tagCreate("div", {})
+root.appendChild(add);
+styleCreate(add, {
+  width: "50px",
+  height: "50px",
+  position: "relative",
+  backgroundColor: "#F7786B",
+  bottom: "60px",
+  left: "430px",
+  zIndex: "2",
+  borderRadius: "30px",
+  textAlign: "center",
+})
+add.innerText = "글"
+
+
 //상단메뉴바
 styleCreate(rootChild[0],{
   width: "100%",
