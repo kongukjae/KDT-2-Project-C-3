@@ -34,6 +34,133 @@ for(let i = 0; i < 3; i++) { // i < 3에서 3 부분은 나중에 무한 스크�
   postCreate(root, "../resource/MainDogImg.jpg"); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
 }
 
+let commentBtn = document.getElementById('1');
+let tg = 1;
+
+commentWindow(5)
+cmtModal.style.display = "none";
+commentBtn.addEventListener('click', function(){
+  cmtModal.style.display = "";
+})
+
+let closeBtn = document.getElementById('closeBtn');
+closeBtn.addEventListener("click", function(){
+  cmtModal.style.display = "none";
+
+})
+
+// function comment(){
+//   if(tg === 0){
+//     cmtModal.style.display = "none";
+//     tg = 1;
+//   }
+//   else if(tg === 1){
+//     cmtModal.style.display = "";
+//     tg = 0;
+//   }
+
+// }
+function commentWindow(cmtNumber){
+
+  //console.log("ddddddddddddddddddddddd")
+  let cmtModal = tagCreate("div", {id: "cmtModal"})
+  root.children[1].appendChild(cmtModal)
+  styleCreate(cmtModal, {
+    width: "500px",
+    backgroundColor: "#E6E6E6",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: "absolute",
+    bottom: "100px"
+  })
+
+  let closeWrap = tagCreate("div", {});
+  cmtModal.appendChild(closeWrap);
+  styleCreate(closeWrap, {
+    width: "100%",
+    height: "15px"
+  })
+
+  let closeBtn = tagCreate("button", {id: "closeBtn"});
+  cmtModal.appendChild(closeBtn);
+  styleCreate(closeBtn, {
+    width: "15px",
+    height: "20px",
+    backgroundColor: "#E6E6E6",
+    lineHeight: 1,
+    position: "absolute",
+    top: "3px",
+    right: "5px",
+    border: "0px",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
+    fontWeight: "700"
+  })
+  closeBtn.innerText = "X"
+
+  for(let i = 0; i < cmtNumber; i++){
+    let cmt = tagCreate("div", {});
+    cmtModal.appendChild(cmt);
+    styleCreate(cmt, {
+      width: "100%",
+      height: "80px",
+      display: "flex",
+      justifyContent: "spaceBetween",
+      alignItems: 'center',
+      borderBottom: "1px solid black"
+    });
+
+    let imgChild = tagCreate("div",{});
+    cmt.appendChild(imgChild);
+    styleCreate(imgChild, {
+      width: "15%",
+      height: "95%",
+      border: "1px solid black",
+      margin: "10px",
+      borderRadius: "50%",
+
+    });
+
+    let textChild = tagCreate("div",{});
+    cmt.appendChild(textChild);
+    styleCreate(textChild, {
+      width: "80%",
+      height: "95%",
+      //border: "1px solid black",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: 'center',
+      alignItems: 'center',
+    })
+
+    let userName = tagCreate("div", {});
+    textChild.appendChild(userName);
+    styleCreate(userName, {
+      width: "100%",
+      height: "25px",
+      //border: "1px solid black",
+      padding: "5px",
+      fontSize: "16px",
+      fontWeight: "700"
+    })
+    userName.innerText = "몽뭉이"
+    
+    let comment = tagCreate("div", {});
+    textChild.appendChild(comment);
+    styleCreate(comment, {
+      width: "100%",
+      height: "65px",
+      //border: "1px solid black",
+      padding: "5px",
+      fontSize: "12px",
+    });
+    comment.innerText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+  }
+}
 
 // 바텀 메뉴
 const btmMeunWrap = tagCreate("div", {});
@@ -54,7 +181,7 @@ styleCreate(writeBtn, {
   borderRadius: "50%",
   position: "fixed",
   bottom: "20px",
-  right: "35%",
+  right: "10%",
   border: "1px solid black",
 })
 root.appendChild(writeBtn);
@@ -69,6 +196,7 @@ function postCreate(parent, src_link, text) {
     border: "1px solid black",
     width: "500px",
     marginBottom: "20px",
+    position: "relative"
   })
   parent.appendChild(postWrap);
   
@@ -129,7 +257,7 @@ function postCreate(parent, src_link, text) {
 
   // 각각의 버튼을 만드는 반복문
   for(let i = 0; i < 3; i++) {
-    const postBtn = tagCreate("button", {});
+    const postBtn = tagCreate("button", {id: i});
     if(i === 0) {
       postBtn.innerText = "좋아요";
     } else if(i === 1) {
@@ -143,4 +271,6 @@ function postCreate(parent, src_link, text) {
     })
     postBtnWrap.appendChild(postBtn);
   }
+
+
 }
