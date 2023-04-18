@@ -9,12 +9,8 @@ function myPage(){
     root.appendChild(child);
     rootChild.push(child);
   }
-
-  styleCreate(rootChild[0],mypageStyle.mypageTopMenu)
-  const logoLoginPage = tagCreate('img', '');
-  logoLoginPage.style.width = '28%';
-  logoLoginPage.src = './resource/MainLogo.png';
-  rootChild[0].appendChild(logoLoginPage);
+  topMenu(rootChild[0]);
+  createHamburger(root);
 
 
   styleCreate(rootChild[1],mypageStyle.mypageTitle)
@@ -88,46 +84,88 @@ function myPage(){
     submitbutton.innerText = "업로드";
     let myImage = document.getElementById("myImage");
     let imageFormData = new FormData();
-    let reader = new FileReader();
-    reader.addEventListener("load",()=>{
+    // let reader = new FileReader();
+    // reader.addEventListener("load",()=>{
 
-      let img = new Image();
-      img.src = reader.result;
-      img.onload = function(){
-        const MAX_WIDTH = 100;
-        const MAX_HEIGHT = 100;
-        let targetWidth = img.width;
-        let targetHeight = img.height;
-        if (targetWidth  > targetHeight) {
-          if (targetWidth  > MAX_WIDTH) {
-              targetHeight *= MAX_WIDTH / targetWidth ;
-              targetWidth  = MAX_WIDTH;
-          }
-        } else {
-          if (targetHeight > MAX_HEIGHT) {
-              targetWidth  *= MAX_HEIGHT / targetHeight;
-              targetHeight = MAX_HEIGHT;
-          }
-        }
-        let imageCanvas = document.createElement("canvas");
-        imageCanvas.setAttribute("width", `${targetWidth}px`);
-        imageCanvas.setAttribute("height", `${targetHeight}px`);
-        let context = imageCanvas.getContext("2d");
-        context.drawImage(img,0,0,targetWidth,targetHeight);
-        let dataURL = imageCanvas.toDataURL("image/png",0.5);
-        console.log(dataURL);
-        imageFormData.append("id", cookieId);
-        imageFormData.append("attachedImage", dataURL);
-        rootChild[2].style.backgroundImage = `url(${dataURL})`
-        fetch('http://localhost:2080/uploadImage', {
+    //   let img = new Image();
+    //   img.src = reader.result;
+    //   img.onload = function(){
+    //     const MAX_WIDTH = 100;
+    //     const MAX_HEIGHT = 100;
+    //     let targetWidth = img.width;
+    //     let targetHeight = img.height;
+    //     if (targetWidth  > targetHeight) {
+    //       if (targetWidth  > MAX_WIDTH) {
+    //           targetHeight *= MAX_WIDTH / targetWidth ;
+    //           targetWidth  = MAX_WIDTH;
+    //       }
+    //     } else {
+    //       if (targetHeight > MAX_HEIGHT) {
+    //           targetWidth  *= MAX_HEIGHT / targetHeight;
+    //           targetHeight = MAX_HEIGHT;
+    //       }
+    //     }
+    //     let imageCanvas = document.createElement("canvas");
+    //     imageCanvas.setAttribute("width", `${targetWidth}px`);
+    //     imageCanvas.setAttribute("height", `${targetHeight}px`);
+    //     let context = imageCanvas.getContext("2d");
+    //     context.drawImage(img,0,0,targetWidth,targetHeight);
+    //     let dataURL = imageCanvas.toDataURL("image/png",0.5);
+    //     console.log(dataURL);
+    //     imageFormData.append("id", cookieId);
+    //     imageFormData.append("attachedImage", dataURL);
+    //     rootChild[2].style.backgroundImage = `url(${dataURL})`
+    //     fetch('http://localhost:2080/uploadImage', {
+    //       method: 'POST',
+    //       body: imageFormData
+    //     }).then(res => res)
+    //     .then(result => console.log("done"))
+    //   }
+    // })
+    // submitbutton.addEventListener("click",()=>{
+    //   reader.readAsDataURL(myImage.files[0])
+    // });
+    // reader.addEventListener("load",()=>{
+
+    //   let img = new Image();
+    //   img.src = reader.result;
+    //   img.onload = function(){
+    //     const MAX_WIDTH = 100;
+    //     const MAX_HEIGHT = 100;
+    //     let targetWidth = img.width;
+    //     let targetHeight = img.height;
+    //     if (targetWidth  > targetHeight) {
+    //       if (targetWidth  > MAX_WIDTH) {
+    //           targetHeight *= MAX_WIDTH / targetWidth ;
+    //           targetWidth  = MAX_WIDTH;
+    //       }
+    //     } else {
+    //       if (targetHeight > MAX_HEIGHT) {
+    //           targetWidth  *= MAX_HEIGHT / targetHeight;
+    //           targetHeight = MAX_HEIGHT;
+    //       }
+    //     }
+    //     let imageCanvas = document.createElement("canvas");
+    //     imageCanvas.setAttribute("width", `${targetWidth}px`);
+    //     imageCanvas.setAttribute("height", `${targetHeight}px`);
+    //     let context = imageCanvas.getContext("2d");
+    //     context.drawImage(img,0,0,targetWidth,targetHeight);
+    //     let dataURL = imageCanvas.toDataURL("image/png",0.5);
+    //     console.log(dataURL);
+    //     imageFormData.append("id", cookieId);
+    //     imageFormData.append("attachedImage", dataURL);
+    //     rootChild[2].style.backgroundImage = `url(${dataURL})`
+        
+    //   }
+    // })
+    submitbutton.addEventListener("click",()=>{
+      imageFormData.append("id", cookieId);
+      imageFormData.append("attachedImage", myImage.files[0]);
+      fetch('http://localhost:2080/uploadImage', {
           method: 'POST',
           body: imageFormData
         }).then(res => res)
         .then(result => console.log("done"))
-      }
-    })
-    submitbutton.addEventListener("click",()=>{
-      reader.readAsDataURL(myImage.files[0])
     });
 
     let okaybutton = tagCreate("div",{})
@@ -142,45 +180,10 @@ function myPage(){
   rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리"
 
 
-
-  styleCreate(rootChild[6],targetStyle.bottomMenu)
-
-  let menuChild = [];
-  for(let i = 0;i<5;i++){
-    let child = tagCreate("div",{});
-    rootChild[6].appendChild(child);
-    styleCreate(child,{
-      width : "59px",
-      height : "59px",
-      backgroundColor : "#FDFDFD",
-      borderRadius : "5px",
-      cursor : "pointer",
-      boxShadow : "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-      transition : "scale ease 0.3s",
-      display : "flex",
-      justifyContent: "center",
-      alignItems : "center",
-      fontSize : "13px",
-      fontWeight : "500"
-    })
-    child.onmouseover = ()=>{
-      child.style.scale = "1.1"
-    }
-    child.onmouseout = ()=>{
-      child.style.scale = "1"
-
-    }
-    menuChild.push(child);
-  }
-  menuChild[0].innerText = "댕댕마켓";
-  menuChild[1].innerText = "댕자랑";
-  menuChild[2].innerText = "댕맵";
-
-  menuChild[3].innerText = "댕톡";
-  menuChild[4].innerText = "댕프랜드";
-  menuChild[2].addEventListener("click",()=>{
-    window.location = "http://localhost:2080/map"
-  })
+  
+  
+  btmMeun(rootChild[6]);
+  
 }
 
 myPage()

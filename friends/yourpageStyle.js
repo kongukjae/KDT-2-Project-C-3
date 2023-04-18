@@ -9,8 +9,8 @@ function yourPage(){
     root.appendChild(child);
     rootChild.push(child);
   }
-
-  topMenu(rootChild);
+  topMenu(rootChild[0]);
+  createHamburger(root);
   // styleCreate(rootChild[0],mypageStyle.mypageTopMenu)
   // const logoLoginPage = tagCreate('img', '');
   // logoLoginPage.style.width = '28%';
@@ -91,8 +91,9 @@ function yourPage(){
 
   styleCreate(rootChild[6],targetStyle.bottomMenu)
 
-  let menuChild = [];
-  btmMeun(rootChild[6], menuChild);
+
+  btmMeun(rootChild[6]);
+
   // for(let i = 0;i<5;i++){
   //   let child = tagCreate("div",{});
   //   rootChild[6].appendChild(child);

@@ -23,7 +23,9 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
-//jwt를 구현하기 위해선 다음 두 모듈 필요
+//1. npm에서 mysql 설치 필요
+//npm install mysql
+//2. jwt를 구현하기 위해선 다음 두 모듈 필요
 //npm install rand-token
 //npm install jsonwebtoken
 
@@ -45,6 +47,9 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
     longitude decimal(17,14)
   )
 ]*/
+
+// cmd로 mysql 접속방법
+// mysql -h192.168.0.93 -uguest -p
 
 // const mysqlInfo = {
 //   host: "192.168.0.93",
