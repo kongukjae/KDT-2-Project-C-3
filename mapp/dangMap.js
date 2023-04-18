@@ -227,8 +227,8 @@ function map() {
       // 드래그가 시작되는 시점에 동작
       // 마커의 현재 좌표를 저장
       let latlng = marker.getPosition();
-      dragStartLat = latlng.getLat();
-      dragStartLng = latlng.getLng();
+      dragStartLat = latlng.getLat().toFixed(13);
+      dragStartLng = latlng.getLng().toFixed(13);
       console.log("이동 전 lat " + dragStartLat);
       console.log("이동 전 lng " + dragStartLng);
     });
@@ -242,8 +242,8 @@ function map() {
       let wrap = [];
       // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
       wrap.push(
-        latlng.getLat(),
-        latlng.getLng(),
+        latlng.getLat().toFixed(13),
+        latlng.getLng().toFixed(13),
         cookieId,
         dragStartLat,
         dragStartLng
@@ -414,7 +414,54 @@ map();
 function putUserProfile(arr){
   let slide = document.getElementById("slideWrap");
   for(let i = 0;i < arr.length;i++){
-    slide.children[0].childNodes[i].innerText = arr[i] 
+    slide.children[0].children[i].innerText = '';
+    let target = '';
+    let profileWrap = tagCreate('div');
+    let imageDiv = tagCreate('div');
+    let name = tagCreate('p');
+    let postRequest = arr[i];
+    profileWrap.style.cursor = "pointer"
+    styleCreate(profileWrap,pageStyle.flexColCenter)
+    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle)
+    profileWrap.appendChild(imageDiv);
+    profileWrap.appendChild(name);
+    if(arr[i] === 'undefined'){
+      target = markersObject.userid;
+      postRequest = 'mine';
+    }
+    else{
+      target = arr[i]
+    };
+    name.innerText = target;
+    slide.children[0].children[i].appendChild(profileWrap);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `http://localhost:2080/sendUserImage`);
+    xhr.send(`id=${target}`); 
+    xhr.addEventListener('load', function(){
+        let imageFromServer = xhr.response;
+        imageDiv.style.backgroundImage = `url(${imageFromServer})`
+        console.log("이미지 가져오기 완료");
+    });
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    let mypageForm = document.createElement('form');
+    
+    mypageForm.method = "POST";
+    mypageForm.action = "/mypage";
+    let params = {jwt:token, targetId:postRequest}
+    for(let key in params){
+      let hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type","hidden");
+      hiddenField.setAttribute("name",key);
+      hiddenField.setAttribute("value",params[key]);
+      mypageForm.appendChild(hiddenField);
+    }
+    document.body.appendChild(mypageForm);
+    profileWrap.addEventListener("click",()=>{
+      mypageForm.submit();
+    })
   }
   
 }

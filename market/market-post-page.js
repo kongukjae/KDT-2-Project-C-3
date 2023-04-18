@@ -88,3 +88,16 @@ function marketPostPage() {
   });
 }
 marketPostPage();
+
+
+function secondHandPost(nth) {
+  fetch(`http://localhost:2080/postSecondHand?nth=${nth}`)
+  .then((response) => {
+    return response.json();
+  })
+  .then((result) => {
+    console.log(result[0]);
+  });
+}
+
+secondHandPost(0);

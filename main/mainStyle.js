@@ -13,7 +13,7 @@ function main() {
   rootChild[2].id = "map";
   topMenu(rootChild);
 
-  // ----햄버거 버튼 구역입니다.----
+   // ----햄버거 버튼 구역입니다.----
 
   // 루트 오버플로우
   styleCreate(root, {
@@ -35,63 +35,64 @@ function main() {
   hamburger.addEventListener("click", () => {
     menuSlide.style.left = "0";
   });
-  // 햄버거 바 생성
-  let bar1 = tagCreate("div", {});
-  let bar2 = tagCreate("div", {});
-  let bar3 = tagCreate("div", {});
-  hamburger.appendChild(bar1);
-  hamburger.appendChild(bar2);
-  hamburger.appendChild(bar3);
-  styleCreate(bar1, {
-    width: "100%",
-    height: "4.5px",
-    backgroundColor: "#fff",
-    borderRadius: "5px",
-    position: "absolute",
-    top: "0px",
-    left: "0px",
-  });
-  styleCreate(bar2, {
-    width: "100%",
-    height: "4.5px",
-    backgroundColor: "#fff",
-    borderRadius: "5px",
-    position: "absolute",
-    top: "9px",
-    left: "0px",
-  });
-  styleCreate(bar3, {
-    width: "100%",
-    height: "4.5px",
-    backgroundColor: "#fff",
-    borderRadius: "5px",
-    position: "absolute",
-    top: "18px",
-    left: "0px",
-  });
-  // 메뉴 슬라이드 요소
-  let menuSlide = tagCreate("div", {});
-  root.appendChild(menuSlide);
-  styleCreate(menuSlide, {
-    width: "300px",
-    height: "100%",
-    backgroundColor: "#F7786B",
-    position: "absolute",
-    left: "-600px",
-    top: "0",
-    transition: "left 0.6s ease",
-    zIndex: 1,
-  });
-  // 햄버거 빵, 고기, 빵 이벤트 요소
-  // bar1.addEventListener("click", () => {
-  //   menuSlide.style.left = "0";
-  // });
-  // bar2.addEventListener("click", () => {
-  //   menuSlide.style.left = "0";
-  // });
-  // bar3.addEventListener("click", () => {
-  //   menuSlide.style.left = "0";
-  // });
+// 햄버거 바 생성
+let bar1 = tagCreate("div", {});
+let bar2 = tagCreate("div", {});
+let bar3 = tagCreate("div", {});
+hamburger.appendChild(bar1);
+hamburger.appendChild(bar2);
+hamburger.appendChild(bar3);
+styleCreate(bar1, {
+  width: "100%",
+  height: "4.5px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  position: "absolute",
+  top: "0px",
+  left: "0px",
+});
+styleCreate(bar2, {
+  width: "100%",
+  height: "4.5px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  position: "absolute",
+  top: "9px",
+  left: "0px",
+});
+styleCreate(bar3, {
+  width: "100%",
+  height: "4.5px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  position: "absolute",
+  top: "18px",
+  left: "0px",
+});
+
+// 메뉴 슬라이드 요소
+let menuSlide = tagCreate("div", {id: 'hamburgerSlide'});
+root.appendChild(menuSlide);
+styleCreate(menuSlide, {
+  width: "300px",
+  height: "100%",
+  backgroundColor: "#F7786B",
+  position: "absolute",
+  left: "-600px",
+  top: "0",
+  transition: "left 0.6s ease",
+  zIndex: 1
+});
+// 햄버거 빵, 고기, 빵 이벤트 요소
+// bar1.addEventListener("click", () => {
+//   menuSlide.style.left = "0";
+// });
+// bar2.addEventListener("click", () => {
+//   menuSlide.style.left = "0";
+// });
+// bar3.addEventListener("click", () => {
+//   menuSlide.style.left = "0";
+// });
 
   // X버튼 요소
   let closeButton = tagCreate("div", {});

@@ -17,7 +17,8 @@ import dangMapServer from "./httpServer/dangMapServer.js";
 import myPagePost from "./httpServer/myPagePost.js";
 // import myPage from "./httpServer/myPage.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-
+import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
+import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -44,6 +45,9 @@ import followSearch from "./httpServer/callPostFollowSearch.js";
     longitude decimal(17,14)
   )
 ]*/
+
+// cmd로 mysql 접속방법
+// mysql -h192.168.0.93 -uguest -p
 
 // const mysqlInfo = {
 //   host: "192.168.0.93",
@@ -90,6 +94,10 @@ const server = http.createServer(function (request, response) {
 
     //댕맵 불러오기
     dangMapServer(request, response);
+    
+    //중고거래 페이지
+    secondHand(request, response);
+    secondHandPost(request, response);
 
 
   }

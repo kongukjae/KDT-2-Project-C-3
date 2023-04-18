@@ -69,11 +69,16 @@ const html = {
   followSearch:`
   <script src="/common/commonFunc.js"></script>
   <script src="/mapp/dangMapSlideSearchBar.js"></script>`,
-
+  secondHand:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/market/marketList.js"></script>
+  `,
   marketpost:`
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script src="/market/market-post_page.js"></script>`
+  <script src="/market/market-post-page.js"></script>`
 }
 export default html;

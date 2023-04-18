@@ -403,6 +403,17 @@ const targetStyle = {
     ...pageStyle.flexRowCenter,
     paddingBottom : "3px"
   },
+  menuMapSlideImageStyle : {
+    width : pageStyle.width.width40,
+    height : pageStyle.height.height40,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : "50%",
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
 
   //회원가입 결과창
   signupResultRoot: {
@@ -892,6 +903,18 @@ const dangMapOverlay = {
     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
     cursor: "pointer",
     transition: "0.5s",
+  }
+}
+
+//댕댕마켓 게시글 리스트 스타일
+const marketListStyle = {
+  root: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height2000,
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative"
   }
 }
 
