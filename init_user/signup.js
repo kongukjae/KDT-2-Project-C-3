@@ -56,6 +56,7 @@ function main(){
   let dogNameFlag = false;
   let dogGenderFlag = false;
 
+  // 중복확인 , 클릭했을때 DB에 연결되는 로직 
   rootChild[7].children[0].addEventListener("click",()=>{
     if(!dupCheckFlag){
       alert("아이디 중복 확인을 해주세요")

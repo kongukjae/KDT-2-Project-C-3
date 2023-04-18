@@ -18,7 +18,7 @@ import myPagePost from "./httpServer/myPagePost.js";
 // import myPage from "./httpServer/myPage.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
-
+import myKeepPost from "./httpServer/callpostKeep.js";
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
@@ -67,6 +67,12 @@ const server = http.createServer(function (request, response) {
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
       response.end();
     }
+
+    if (request.url === "/friends/myKeepStyle.js") {
+      cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
+    }    
+
+
     if (request.url === "/init_user/signupstyle.js") {
       cmServer.fileDirectory(`init_user/signup.js`, response);
     }
@@ -100,6 +106,9 @@ const server = http.createServer(function (request, response) {
   // post request
   if (request.method === 'POST') {
     //마이페이지
+
+    myKeepPost(request,response);
+    
     myPagePost(request, response);
     //업로드, 유저 이미지
     callPostImage(request, response);
