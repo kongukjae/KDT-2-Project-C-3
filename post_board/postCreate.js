@@ -14,7 +14,7 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   // 이미지 영역을 감싸는 div
   const postImgWrap = tagCreate("div", {});
   styleCreate(postImgWrap, {
-    border: "1px solid red",
+    //border: "1px solid red",
     width: "500px",
     height: "400px",
     overflow: "hidden",
@@ -69,7 +69,7 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   // 좋아요, 댓글, 구독(변경 예정) 버튼을 감싸는 div
   const postBtnWrap = tagCreate("div", {});
   styleCreate(postBtnWrap, {
-    border: "1px solid red",
+    //border: "1px solid red",
     width: "500px",
     height: "100px",
     display: "flex",
@@ -101,7 +101,7 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   commentInput(postWrap, src_comment_link);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
-  commentWindow(index, 5, root);
+  commentWindow(index, 5, parent);
 
   
 }

@@ -1,5 +1,6 @@
 import cmServer from "./commonServer.js";
 
+
 export default function postBoardFileRead(request, response){
 
   let splitURL = request.url.split("/")[2];
@@ -32,4 +33,7 @@ export default function postBoardFileRead(request, response){
     cmServer.fileDirectory(`post_board/${splitURL}`, response);
   }
 
+  if (request.url.startsWith("/writeImage")) {
+    cmServer.fileDirectory(`resource/write.png`, response);
+  }
 }

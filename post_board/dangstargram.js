@@ -10,11 +10,11 @@ root.appendChild(topMenuWrap);
 topMenu(topMenuWrap);
 
 // 게시글 영역
-for (let i = 0; i < 3; i++) {
-  // i < 3에서 3 부분은 나중에 무한 스크롤 방식을 이용해 적용
-  console.log(i);
-  postCreate(root, "../resource/MainDogImg.jpg", "멍뭉이", "text", "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
-}
+// for (let i = 0; i < 3; i++) {
+//   // i < 3에서 3 부분은 나중에 무한 스크롤 방식을 이용해 적용
+//   console.log(i);
+//   postCreate(root, "../resource/MainDogImg.jpg", "멍뭉이", "text", "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
+// }
 
 // 바텀 메뉴
 const btmMeunWrap = tagCreate("div", {});
@@ -23,8 +23,16 @@ btmMeun(btmMeunWrap);
 
 // 게시글 작성 버튼
 const writeBtn = tagCreate("button", {});
+root.appendChild(writeBtn);
+
+const writeImg = tagCreate("img", {src: '/writeImage'})
+writeBtn.appendChild(writeImg);
+styleCreate(writeImg, {
+  width: "70%",
+  height: "70%",
+})
+
 styleCreate(writeBtn, {
-  // backgroundImage: "url(../resource/write.png)",
   backgroundSize: "65%",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -36,16 +44,30 @@ styleCreate(writeBtn, {
   bottom: "20px",
   right: "15%",
   border: "1px solid black",
+  zIndex: 3
 });
-root.appendChild(writeBtn);
 
 loadDangstargram(0);
 
 function loadDangstargram(nth){
   const xhr = new XMLHttpRequest();
+  let result = {};
   xhr.open("GET", `http://localhost:2080/loadPostBoard?nth=${nth}`);
   xhr.send();
-  
+  xhr.addEventListener('load', function(){
+    let res = JSON.parse(xhr.response);
+    console.log(res);
+    for(let key in res){
+      //console.log(key);
+      result[key] = res[key];
+    }
+  });
+
+  //for(let i in result){
+    console.log(result);
+    
+   //postCreate(root, "../resource/MainDogImg.jpg", result[i].id, result[i].detail, "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
+  //}
   
 }
 
