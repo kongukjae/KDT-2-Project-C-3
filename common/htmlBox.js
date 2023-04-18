@@ -25,6 +25,8 @@ const html = {
     </body>
     </html>`
   },
+
+  //메인
   mapBody: `
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
@@ -44,6 +46,8 @@ const html = {
   signUpResult : `
   <script src="/common/commonFunc.js"></script>
   <script src="/init_user/signupResultStyle.js"></script>`,
+
+  //댕맵
   dangMap : `
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
@@ -69,15 +73,24 @@ const html = {
   followSearch:`
   <script src="/common/commonFunc.js"></script>
   <script src="/mapp/dangMapSlideSearchBar.js"></script>`,
+
+  //댕댕마켓
   secondHand:`
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
   <script src="/market/marketList.js"></script>`,
+
+  //댕스타그램
   postBoard: `
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
+  <script src="/post_board/commentUpdateDelete.js"></script>
+  <script src="/post_board/commentRecent.js"></script>
+  <script src="/post_board/commentInput.js"></script>
+  <script src="/post_board/commentWindow.js"></script>
+  <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
 
   marketpost:`

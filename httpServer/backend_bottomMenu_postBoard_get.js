@@ -20,6 +20,21 @@ export default function secondHand(request, response){
   else if (splitURL === "bottomMenu.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   }
+  else if (splitURL === "commentWindow.js") {
+    cmServer.fileDirectory(`post_board/${splitURL}`, response);
+  }
+  else if (splitURL === "commentRecent.js") {
+    cmServer.fileDirectory(`post_board/${splitURL}`, response);
+  }
+  else if (splitURL === "commentUpdateDelete.js") {
+    cmServer.fileDirectory(`post_board/${splitURL}`, response);
+  }
+  else if (splitURL === "commentInput.js") {
+    cmServer.fileDirectory(`post_board/${splitURL}`, response);
+  }
+  else if (splitURL === "postCreate.js") {
+    cmServer.fileDirectory(`post_board/${splitURL}`, response);
+  }
   else if (splitURL === "dangstargram.js") {
     cmServer.fileDirectory(`post_board/${splitURL}`, response);
   }
