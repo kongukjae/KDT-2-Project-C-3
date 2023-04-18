@@ -71,8 +71,9 @@ styleCreate(rootChild[1],{
 function makeList(nth){
   loadSecondHandBoard(nth);
 }
+// loadSecondHandBoard(0);
 
-makeList(0);
+// makeList(0);
 
 function createSecondHandList(result){
   let child = tagCreate("div",{});
@@ -129,7 +130,6 @@ function createSecondHandList(result){
   });
   text.innerText=result.detail
 }
-
 
 function loadSecondHandBoard(nth){
   fetch(`http://localhost:2080/loadSecondHandBoard?nth=${nth}`)
