@@ -39,13 +39,14 @@ styleCreate(writeBtn, {
 });
 root.appendChild(writeBtn);
 
-/*
-function loadSecondHandBoard(nth){
-  const httpRequest = new XMLHttpRequest();
-  httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
-  // 객체를 JSON 형식으로 바꿔서 서버로 전송
-  httpRequest.send(JSON.stringify(resultObject));
+loadDangstargram(0);
+
+function loadDangstargram(nth){
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `http://localhost:2080/loadPostBoard?nth=${nth}`);
+  xhr.send();
+  
   
 }
-*/
+
 

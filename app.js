@@ -2,23 +2,23 @@ import http from "http";
 import fs from "fs";
 import mysql from "mysql";
 import htmlBox from "./common/htmlBox.js";
-// import ValueCheck from "../ValueCheck.js";
 import { parse } from "path";
-import callMain from "./httpServer/callMain.js";
 import cmServer from "./httpServer/commonServer.js";
-import signupResult from "./httpServer/signupResultRoute.js";
+
+import callMain from "./httpServer/callMain.js";
+import callLoginGet from "./httpServer/callLoginGet.js";
 import dupCheck from "./httpServer/dupCheckRoute.js";
+import dangMapServer from "./httpServer/dangMapServer.js";
+import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
+import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
+
 import callPostImage from "./httpServer/callPostImage.js";
 import callPostLogin from "./httpServer/callPostLogin.js";
 import callPostDangMap from "./httpServer/callPostDangMap.js";
-
-import callLoginGet from "./httpServer/callLoginGet.js";
-import dangMapServer from "./httpServer/dangMapServer.js";
 import myPagePost from "./httpServer/myPagePost.js";
-// import myPage from "./httpServer/myPage.js";
+import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
-import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
+
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -59,9 +59,9 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 // };
 
 const server = http.createServer(function (request, response) {
-  //로그인
-  let body = "";
+  // get request
   if (request.method === "GET") {
+    //로그인
     callLoginGet(request, response);
 
     //메인화면
@@ -102,7 +102,7 @@ const server = http.createServer(function (request, response) {
 
     //댕스타그램 페이지
     postBoard(request, response);
-  }
+  };
 
   // post request
   if (request.method === 'POST') {
@@ -121,9 +121,8 @@ const server = http.createServer(function (request, response) {
     }
 
     followSearch(request, response);
-  }
-}
-);
+  };
+});
 
 
 // 서버 포트 설정
