@@ -22,7 +22,9 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
-//jwt를 구현하기 위해선 다음 두 모듈 필요
+//1. npm에서 mysql 설치 필요
+//npm install mysql
+//2. jwt를 구현하기 위해선 다음 두 모듈 필요
 //npm install rand-token
 //npm install jsonwebtoken
 

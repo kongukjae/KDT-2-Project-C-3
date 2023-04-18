@@ -1,5 +1,7 @@
-function btmMeun(rootChild, menuChild){
-
+// btmMenu는 들어가야할 div 인자로 받고 그 인자를 직접 수정하는 함수
+//  예시 : btmMeun(rootChild[6]);
+function btmMeun(rootChild){
+  let menuChild = [];
   styleCreate(rootChild,targetStyle.bottomMenu)
   
   
@@ -30,6 +32,8 @@ function btmMeun(rootChild, menuChild){
     }
     menuChild.push(child);
   }
+  menuChild[2].id = "mapBtn";
+
   menuChild[0].innerText = "댕댕마켓";
   menuChild[1].innerText = "댕자랑";
   menuChild[2].innerText = "댕맵";

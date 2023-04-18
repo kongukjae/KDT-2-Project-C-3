@@ -51,15 +51,9 @@ styleCreate(add, {
 })
 add.innerText = "글"
 
+topMenu(rootChild[0]);
+createHamburger(root);
 
-//상단메뉴바
-styleCreate(rootChild[0],{
-  width: "100%",
-    height: "126px",
-    position: "relative",
-    backgroundColor: "#F7786B",
-    zIndex: "2"
-  })
 
 styleCreate(rootChild[1],{
   width: "100%",
@@ -148,16 +142,5 @@ function loadSecondHandBoard(nth){
     }
   })
 }
-
 // 하단 메뉴바 
-styleCreate(rootChild[2],{
-  width: "500px",
-    height: "90px",
-    position: "fixed",
-    bottom: "0px",
-    backgroundColor: "#F7786B",
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    zIndex: "2"
-})
+btmMeun(rootChild[2]);
