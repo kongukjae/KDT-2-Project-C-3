@@ -136,10 +136,9 @@ function commentWindow(index, cmtNumber) {
     comment.innerText =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
   }
-  let commentBtn = document.getElementById(`index_${index}`);
-  let tg = 1;
 
-  // commentWindow(5)
+  let commentBtn = document.getElementById(`index_${index}`);
+
   commentBtn.addEventListener("click", function () {
     cmtModal.style.display = "flex";
   });
