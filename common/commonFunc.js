@@ -11,7 +11,13 @@ function styleCreate(obj, styleOb) {
     obj.style[i] = styleOb[i];
   }
 }
+// 날짜 변환
+function changeDate(date) {
+  let nowDate = new Date(date);
+  let formatDate = nowDate.toLocaleString();
 
+  return formatDate;
+}
 const pageStyle = {
   colorTheme: {
     peach: "#F7786B",
@@ -65,6 +71,7 @@ const pageStyle = {
     height308: "308px",
     height300: "300px",
     height260: "260px",
+    height200: "200px",
     height154: "154px",
     height150: "150px",
     height140: "140px",
@@ -946,6 +953,7 @@ const market = {
     width: pageStyle.width.width90,
     height: pageStyle.height.height90,
     // backgroundColor: pageStyle.colorTheme.peach,
+    ...pageStyle.flexColCenter,
     border: '1px solid gray',
     borderRadius: pageStyle.borderRadius.borderRadiusP50,
   },
@@ -1001,10 +1009,40 @@ const market = {
     border: `0px solid ${pageStyle.colorTheme.gray}`,
     fontSize: pageStyle.fontSizeSet.small,
   },
-  marketPostDetail: {
+  marketPostComponent: {
     width: pageStyle.width.width400,
     height: pageStyle.height.height300,
     backgroundColor: pageStyle.colorTheme.white,
     borderRadius: pageStyle.borderRadius.borderRadius15,
+    ...pageStyle.flexColCenter,
+  },
+  marketPostTitle: {
+    width: pageStyle.width.width390,
+    height: pageStyle.height.height52,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'start',
+    borderBottom: '1px solid red',
+  },
+  marketPostDetail: {
+    width: pageStyle.width.width390,
+    height: pageStyle.height.height200,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'start',
+    borderTop: '1px solid red',
+
+  },
+  marketPostDate: {
+    width: pageStyle.width.width390,
+    height: pageStyle.height.height24,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'end',
+    borderBottom: '1px solid red',
+
   }
 }
