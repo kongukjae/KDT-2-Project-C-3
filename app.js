@@ -18,6 +18,7 @@ import myPagePost from "./httpServer/myPagePost.js";
 // import myPage from "./httpServer/myPage.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
+import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -88,13 +89,14 @@ const server = http.createServer(function (request, response) {
     }
 
 
-    //댕맵 불러오기
+    //댕맵 페이지
     dangMapServer(request, response);
     
-    //중고거래 페이지
+    //댕댕마켓 페이지
     secondHand(request, response);
 
-
+    //댕스타그램 페이지
+    postBoard(request, response);
   }
 
   // post request

@@ -71,6 +71,11 @@ const html = {
   <script src="/mapp/dangMapSlideSearchBar.js"></script>`,
   secondHand:`
   <script src="/common/commonFunc.js"></script>
-  <script src="/market/marketList.js"></script>`
+  <script src="/market/marketList.js"></script>`,
+  postBoard: `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/post_board/dangstargram.js"></script>`
 }
 export default html;
