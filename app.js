@@ -45,6 +45,9 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
   )
 ]*/
 
+// cmd로 mysql 접속방법
+// mysql -h192.168.0.93 -uguest -p
+
 // const mysqlInfo = {
 //   host: "192.168.0.93",
 //   user: "guest",
