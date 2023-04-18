@@ -49,26 +49,26 @@ styleCreate(writeBtn, {
 
 loadDangstargram(0);
 
-function loadDangstargram(nth){
+function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
-  let result = {};
+  // let result = {};
   xhr.open("GET", `http://localhost:2080/loadPostBoard?nth=${nth}`);
   xhr.send();
-  xhr.addEventListener('load', function(){
+  xhr.addEventListener("load", function () {
     let res = JSON.parse(xhr.response);
-    console.log(res);
+    console.log(Array.isArray(res));
+    console.dir(res[0].id);
+    console.log(res[0].id);
     for(let key in res){
-      //console.log(key);
-      result[key] = res[key];
+      console.log(key);
+      postCreate(root, "../resource/MainDogImg.jpg", res[key].id, res[key].detail, "../resource/MainDogImg.jpg", "name", key); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
     }
+    // for (let i = 0; i < res.length; i++) {
+    //   // console.log(result);
+    //   console.log("나와라");
+    //   postCreate(root, "../resource/MainDogImg.jpg", res[i].id, res[i].detail, "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
+    // }
   });
-
-  //for(let i in result){
-    console.log(result);
-    
-   //postCreate(root, "../resource/MainDogImg.jpg", result[i].id, result[i].detail, "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
-  //}
-  
 }
 
 
