@@ -32,15 +32,9 @@ function keepDiary(){
   rootChild[2].appendChild(postContentInput);
   
 
-
-
-
-
-
   // root3 카테고리, 사진업로드 버튼 
   styleCreate(rootChild[3],keepStyle.pageButtonWrap)
   
-
 
   for(let i = 0; i < 2; i++){
     let button = tagCreate("div");
