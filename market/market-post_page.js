@@ -75,18 +75,16 @@ function marketPostPage() {
   styleCreate(reportBtn, market.marketPostAddModalBtn);
   // 모달창에 모달컨텐츠 추가
   modal.appendChild(modalContent);
-  styleCreate(modalContent, { gap: "10px" });
 
   exitBtn.addEventListener("mouseover", function () {
     exitBtn.style.cursor = "pointer";
   });
 
   nameAdd[1].addEventListener("click", function () {
-    nameAdd[1].appendChild(modal);
+    imgNameAdd[1].appendChild(modal);
   });
   exitBtn.addEventListener("click", function () {
     modal.remove();
-    modalContent.remove();
   });
 }
 marketPostPage();

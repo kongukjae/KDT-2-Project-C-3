@@ -934,6 +934,7 @@ const market = {
     display: "flex",
     alignItems: "center",
     justifyContent: 'space-between',
+    position: 'relative',
   },
   marketPostName: {
     width: pageStyle.width.width80,
@@ -945,7 +946,6 @@ const market = {
     height: pageStyle.height.height30,
     ...pageStyle.flexRowCenter,
     gap: '5px',
-    position: 'relative',
   },
   marketPostAddDot: {
     width: pageStyle.width.width3,
@@ -959,8 +959,8 @@ const market = {
     border: `3px solid ${pageStyle.colorTheme.peach}`,
     borderRadius: pageStyle.borderRadius.borderRadius15,
     position: 'absolute',
-    top : '20px',
-    left : '20px',
+    top : '50px',
+    left : '200px',
     display:'none',
     zIndex :'5',
     ...pageStyle.flexColCenter,
@@ -968,7 +968,7 @@ const market = {
   marketPostAddModalBtn: {
     width: pageStyle.width.widthP100,
     height: pageStyle.height.height24,
-    backgroundColor: pageStyle.colorTheme.lightGray,
+    backgroundColor: pageStyle.colorTheme.beige,
     textAlign: "center",
     appearance: "none",
     borderRadius: "4px",
