@@ -5,6 +5,7 @@ import cmServer from "./commonServer.js";
 
 
 export default function postBoard(request, response){
+  console.log("요청 들어옴 2")
   
   postBoardFileRead(request, response);
 
