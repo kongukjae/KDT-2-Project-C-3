@@ -200,9 +200,9 @@ const server = http.createServer(function (request, response) {
             //console.log(postLike);
             for(let i = 0; i < postLike.length; i++){
               if(postLike[i] === likeUser){
-                conn.query(`
-                UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
-                WHERE post_index = '${postNumber}'`);
+                conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, JSON_UNQUOTE(JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123'))) WHERE JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123') IS NOT NULL`)
+                // `UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
+                // WHERE post_index = '${postNumber}'`
               }
             }
           }
