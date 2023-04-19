@@ -71,6 +71,21 @@ const html = {
   <script src="/mapp/dangMapSlideSearchBar.js"></script>`,
   secondHand:`
   <script src="/common/commonFunc.js"></script>
-  <script src="/market/marketList.js"></script>`
+  <script src="/market/marketList.js"></script>`,
+
+
+  
+  mykeep : `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/myKeepStyle.js"></script>`,
+
+
+
+
+
+
+
 }
 export default html;
