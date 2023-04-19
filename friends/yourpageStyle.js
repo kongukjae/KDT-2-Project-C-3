@@ -22,12 +22,13 @@ function yourPage(){
   rootChild[1].innerText = `${targetIdFromServer}님의 페이지`;
   
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
- 
+  
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendUserImage`);
-  xhr.send(`id=${targetIdFromServer}`); 
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${targetIdFromServer}`); 
   xhr.addEventListener('load', function(){
-      let imageFromServer = xhr.response;
+      let imageFromServer = URL.createObjectURL(xhr.response);
       rootChild[2].style.backgroundImage = `url(${imageFromServer})`
       console.log("이미지 가져오기 완료");
   });
