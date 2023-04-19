@@ -1,5 +1,5 @@
 // 게시글 생성 함수
-function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, index, postIndex) {
+function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, cmText, index, postIndex) {
   //console.log(index);
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {});
@@ -100,7 +100,7 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   dangstarLike(postIndex, index, writerNickname);
 
   //댓글 입력창 만드는 함수 실행
-  commentInput(postWrap, src_comment_link);
+  commentInput(postWrap, src_comment_link, textName, cmText);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
   commentWindow(index, 5, parent);

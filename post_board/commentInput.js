@@ -1,4 +1,4 @@
-function commentInput(postWrap, src_comment_link){
+function commentInput(postWrap, src_comment_link, textName, cmText){
 
   // 댓글 입력창 감싸는 div
   const commentWrap = tagCreate("div", {});
@@ -9,7 +9,7 @@ function commentInput(postWrap, src_comment_link){
   postWrap.appendChild(commentWrap);
 
   // 댓글 입력창과 작성 버튼을 감쌀 form 요소
-  const commentForm = tagCreate("form", {});
+  const commentForm = tagCreate("form", {action:"/commentSubmit", method: "POST"});
   styleCreate(commentForm, {
     display: "flex",
     justifyContent: "space-between",
@@ -20,6 +20,7 @@ function commentInput(postWrap, src_comment_link){
   // 댓글 입력할 textarea
   const commentInput = tagCreate("input", {
     type: "text",
+    name: "commentValue",
     placeholder: "내용을 입력해주세요",
   });
   styleCreate(commentInput, {
@@ -39,7 +40,7 @@ function commentInput(postWrap, src_comment_link){
   commentForm.appendChild(commentSubmit);
 
   //최신 댓글 1개 보여주는 함수 실행
-  commentRecent(postWrap, src_comment_link);
+  commentRecent(postWrap, src_comment_link, textName, cmText);
 
 
 }

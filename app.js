@@ -61,6 +61,7 @@ import followSearch from "./httpServer/callPostFollowSearch.js";
 const server = http.createServer(function (request, response) {
   // get request
   if (request.method === "GET") {
+    console.log("요청 들어옴 : " + request.url);
     //로그인
     callLoginGet(request, response);
 
@@ -121,6 +122,22 @@ const server = http.createServer(function (request, response) {
     }
 
     followSearch(request, response);
+
+    if(request.url.startsWith("/commentSubmit")) {
+      console.log("덧글 작성 됨");
+      console.log(data)
+      let body = "";
+      request.on("data", function (data) {
+        body = body + data;
+        // console.log("아래 전달 된 데이터임")
+        // console.log(body);
+      });
+      request.on("end", function () {
+        console.log("아래 전달 된 댓글 데이터");
+        console.log(body);
+        console.log("댓글 데이터 처리 부분");
+      });
+    }
   };
 });
 
