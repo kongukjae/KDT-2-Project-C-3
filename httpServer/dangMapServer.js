@@ -45,6 +45,7 @@ export default function dangMap(request, response) {
       function (err, rows) {
         if (err) throw err;
         else {
+          
           if(myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
@@ -59,6 +60,7 @@ export default function dangMap(request, response) {
               markerMyArr[i] = myArr;
             }
           }
+          console.log(markerMyArr)
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
