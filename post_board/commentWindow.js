@@ -6,8 +6,8 @@ function commentWindow(index, cmtNumber, parent) {
   console.log("index");
   console.log(index);
   parent.children[index + 3].appendChild(cmtModal);
-  console.log("parent : ");
-  console.log(parent);
+  // console.log("parent : ");
+  // console.log(parent);
   styleCreate(cmtModal, {
     width: "500px",
     backgroundColor: "#E6E6E6",

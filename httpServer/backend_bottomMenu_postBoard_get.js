@@ -5,11 +5,11 @@ import mysql from "mysql";
 
 
 export default function postBoard(request, response) {
-  console.log("요청 들어옴 2");
+  //console.log("요청 들어옴 2");
 
   postBoardFileRead(request, response);
 
-  if (request.url === "/postBoard") {
+  if (request.url.startsWith('/postBoard')) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.postBoard));
   }
@@ -24,6 +24,7 @@ export default function postBoard(request, response) {
         if (err) throw err;
         else {
           response.writeHead(200);
+          //console.log(JSON.stringify(data))
           response.write(JSON.stringify(data));
           response.end();
         }
@@ -31,4 +32,8 @@ export default function postBoard(request, response) {
     );
     conn.end();
   }
+
+  
+  
+
 }
