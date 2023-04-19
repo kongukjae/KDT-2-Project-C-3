@@ -175,12 +175,38 @@ const server = http.createServer(function (request, response) {
                 //conn.end();
               //} else {
                 conn.query(`UPDATE dangstar SET post_like = JSON_ARRAY_APPEND(post_like, '$.likeUser', '${likeUser}') WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' and post_like IS NOT NULL`);
+
+                // conn.query(`
+                // UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
+                // WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'`);
+
+                // UPDATE dangstar SET post_like = JSON_REMOVE(post_like, REPLACE(JSON_SEARCH(post_like, 'one', '${likeUser}'), '.', '')) WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'`);
+
                 conn.end();
               //}
             }
           }
         );
-        //conn.query(`seelect post_like`)
+        conn.query(`select post_like from dangstar where post_index = '${postNumber}'`,
+        (error, data) => {
+          if(error) throw error;
+          else{
+            //console.log(data)
+            for(let row of data) {
+              let postLikeJson = row.post_like;
+              let postLikeArray = JSON.parse(postLikeJson).likeUser;
+              postLike = postLike.concat(postLikeArray);
+            }
+            //console.log(postLike);
+            for(let i = 0; i < postLike.length; i++){
+              if(postLike[i] === likeUser){
+                conn.query(`
+                UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
+                WHERE post_index = '${postNumber}'`);
+              }
+            }
+          }
+        });
         
       })
     }
