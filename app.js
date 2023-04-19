@@ -61,6 +61,7 @@ import followSearch from "./httpServer/callPostFollowSearch.js";
 const server = http.createServer(function (request, response) {
   // get request
   if (request.method === "GET") {
+    console.log("요청 들어옴 : " + request.url);
     //로그인
     callLoginGet(request, response);
 

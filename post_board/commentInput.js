@@ -1,4 +1,4 @@
-function commentInput(postWrap, src_comment_link){
+function commentInput(postWrap, src_comment_link, textName, cmText){
 
   // 댓글 입력창 감싸는 div
   const commentWrap = tagCreate("div", {});
@@ -40,7 +40,7 @@ function commentInput(postWrap, src_comment_link){
   commentForm.appendChild(commentSubmit);
 
   //최신 댓글 1개 보여주는 함수 실행
-  commentRecent(postWrap, src_comment_link);
+  commentRecent(postWrap, src_comment_link, textName, cmText);
 
 
 }

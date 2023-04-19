@@ -1,5 +1,5 @@
 // 게시글 생성 함수
-function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, index) {
+function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, cmText, index) {
   console.log(index);
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {});
@@ -45,15 +45,15 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   styleCreate(writerName, {
     fontWeight: "bold",
   })
-  // writerName.innerText = writerNickname;
-  writerName.innerText = "작성자 이름 영역"
+  writerName.innerText = writerNickname;
+  // writerName.innerText = "작성자 이름 영역"
   textWrap.appendChild(writerName);
 
   // 텍스트가 표시될 영역, DB에서 게시글 내용 텍스트를 가져와서 표시하고 5줄을 넘기면 말줄임표로 표시되도록 구현함
   const textBox = tagCreate("p", {});
-  // textBox.innerText = text;
-  textBox.innerText =
-    "DB에서 받아올 텍스트 영역 임시로 넣어둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+  textBox.innerText = text;
+  // textBox.innerText =
+  //   "DB에서 받아올 텍스트 영역 임시로 넣어둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
   styleCreate(textBox, {
     border: "1px solid green",
     width: "450px", // 500px - 부모의 좌우 패딩 값
@@ -98,7 +98,7 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   }
   
   //댓글 입력창 만드는 함수 실행
-  commentInput(postWrap, src_comment_link);
+  commentInput(postWrap, src_comment_link, textName, cmText);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
   commentWindow(index, 5, parent);
