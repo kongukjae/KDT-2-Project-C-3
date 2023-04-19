@@ -33,7 +33,6 @@ export default function callPostImage(request, response) {
               if(rows.length === 0){
                 console.log(splitBody[1].split('=')[1]+'님 사진이 없습니다')
                 fs.readFile(`./image/default/null.png`, function (err, data) {
-                  console.log(data)
                   response.end(data);
                 });
               }else{
