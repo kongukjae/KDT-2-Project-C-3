@@ -29,6 +29,8 @@ import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get
 //2. jwt를 구현하기 위해선 다음 두 모듈 필요
 //npm install rand-token
 //npm install jsonwebtoken
+//3. busboy
+//npm install busboy
 
 //db 연동이 되어있으니 아래 테이블을 따로 만들 필요 없음
 // 집에서 수정하려면 만들어야함

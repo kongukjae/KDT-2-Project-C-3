@@ -69,8 +69,9 @@ styleCreate(rootChild[1], {
 function makeList(nth) {
   loadSecondHandBoard(nth);
 }
+// loadSecondHandBoard(0);
 
-makeList(0);
+// makeList(0);
 
 function createSecondHandList(result, count) {
   let child = tagCreate("div", {id : 'selectIndex'+count});

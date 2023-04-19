@@ -435,10 +435,11 @@ function putUserProfile(arr){
     name.innerText = target;
     slide.children[0].children[i].appendChild(profileWrap);
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', `http://localhost:2080/sendUserImage`);
-    xhr.send(`id=${target}`); 
+    xhr.open('POST', `http://localhost:2080/sendImage`);
+    xhr.responseType = 'blob';
+    xhr.send(`type=proFile&id=${target}`); 
     xhr.addEventListener('load', function(){
-        let imageFromServer = xhr.response;
+        let imageFromServer = URL.createObjectURL(xhr.response);
         imageDiv.style.backgroundImage = `url(${imageFromServer})`
         console.log("이미지 가져오기 완료");
     });
