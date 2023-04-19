@@ -66,10 +66,10 @@ styleCreate(rootChild[1], {
   justifyContent: "center",
   alignItems: "center",
 });
-function makeList(nth) {
-  loadSecondHandBoard(nth);
-}
-// loadSecondHandBoard(0);
+// function makeList(nth) {
+//   loadSecondHandBoard(nth);
+// }
+loadSecondHandBoard(0);
 
 // makeList(0);
 
@@ -137,6 +137,7 @@ function loadSecondHandBoard(nth) {
       return response.json();
     })
     .then((result) => {
+      console.log(result)
       for (let i of result) {
         countIndex = countIndex + 1;
         createSecondHandList(i, countIndex);

@@ -9,7 +9,7 @@ import callMain from "./httpServer/callMain.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
 import dupCheck from "./httpServer/dupCheckRoute.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
-import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
+
 import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 
 import callPostImage from "./httpServer/callPostImage.js";
