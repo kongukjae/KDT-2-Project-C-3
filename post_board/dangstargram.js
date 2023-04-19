@@ -56,17 +56,10 @@ function loadDangstargram(nth) {
   xhr.send();
   xhr.addEventListener("load", function () {
     let res = JSON.parse(xhr.response);
-    console.log(Array.isArray(res));
-    console.dir(res[0].id);
-    console.log(res[0].id);
-    // for(let key in res){
-    //   console.log(key);
-    //   postCreate(root, "../resource/MainDogImg.jpg", res[key].id, res[key].detail, "../resource/MainDogImg.jpg", "name", key); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
-    // }
     for (let i = 0; i < res.length; i++) {
-      // console.log(result);
-      console.log("나와라");
-      postCreate(root, "../resource/MainDogImg.jpg", res[i].id, res[i].detail, "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
+      console.log(res);
+      // console.log("나와라");
+      postCreate(root, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, "../resource/MainDogImg.jpg", "name", i, res[i].post_index); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
     }
   });
 }
