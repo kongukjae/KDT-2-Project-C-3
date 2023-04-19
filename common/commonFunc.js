@@ -11,7 +11,13 @@ function styleCreate(obj, styleOb) {
     obj.style[i] = styleOb[i];
   }
 }
+// 날짜 변환
+function changeDate(date) {
+  let nowDate = new Date(date);
+  let formatDate = nowDate.toLocaleString();
 
+  return formatDate;
+}
 const pageStyle = {
   colorTheme: {
     peach: "#F7786B",
@@ -42,11 +48,13 @@ const pageStyle = {
     width200: "200px",
     width180: "180px",
     width150: "150px",
+    width120: "120px",
     width80: "80px",
     width90: "90px",
     width40: "40px",
     width25: "25px",
     width9: "9px",
+    width3: "3px",
   },
   height: {
     height100vh: "100vh",
@@ -63,6 +71,7 @@ const pageStyle = {
     height308: "308px",
     height300: "300px",
     height260: "260px",
+    height200: "200px",
     height154: "154px",
     height150: "150px",
     height140: "140px",
@@ -913,5 +922,127 @@ const marketListStyle = {
     display: "flex",
     flexDirection: "column",
     position: "relative"
+  }
+}
+
+const market = {
+  marketPost: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height100vh,
+    ...pageStyle.flexColCenter,
+    backgroundColor: pageStyle.colorTheme.peach,
+    margin: "auto",
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+  },
+  marketPostImageArea: {
+    width: pageStyle.width.width400,
+    height: pageStyle.height.height300,
+    backgroundColor: pageStyle.colorTheme.white,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+  },
+  marketPostImgNameAdd: {
+    width: pageStyle.width.width400,
+    height: pageStyle.height.height100,
+    backgroundColor: pageStyle.colorTheme.white,
+    ...pageStyle.flexRowCenter,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    margin: '10px',
+    gap: '15px'
+  },
+  marketPostImgStyle: {
+    width: pageStyle.width.width90,
+    height: pageStyle.height.height90,
+    // backgroundColor: pageStyle.colorTheme.peach,
+    ...pageStyle.flexColCenter,
+    border: '1px solid gray',
+    borderRadius: pageStyle.borderRadius.borderRadiusP50,
+  },
+  marketPostnameAddStyle: {
+    width: pageStyle.width.width250,
+    height: pageStyle.height.height90,
+    boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: 'space-between',
+    position: 'relative',
+  },
+  marketPostName: {
+    width: pageStyle.width.width80,
+    height: pageStyle.height.height70,
+    ...pageStyle.flexRowCenter,
+  },
+  marketPostAdd: {
+    width: pageStyle.width.width40,
+    height: pageStyle.height.height30,
+    ...pageStyle.flexRowCenter,
+    gap: '5px',
+  },
+  marketPostAddDot: {
+    width: pageStyle.width.width3,
+    height: pageStyle.height.height3,
+    backgroundColor: pageStyle.colorTheme.black,
+  },
+  marketPostAddModal: {
+    width: pageStyle.width.width120,
+    height: pageStyle.height.height126,
+    backgroundColor: pageStyle.colorTheme.white,
+    border: `3px solid ${pageStyle.colorTheme.peach}`,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    position: 'absolute',
+    top : '50px',
+    left : '200px',
+    display:'none',
+    zIndex :'5',
+    ...pageStyle.flexColCenter,
+  },
+  marketPostAddModalBtn: {
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.height24,
+    backgroundColor: pageStyle.colorTheme.beige,
+    textAlign: "center",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+    cursor: "pointer",
+    transition: "0.5s",
+    border: `0px solid ${pageStyle.colorTheme.gray}`,
+    fontSize: pageStyle.fontSizeSet.small,
+  },
+  marketPostComponent: {
+    width: pageStyle.width.width400,
+    height: pageStyle.height.height300,
+    backgroundColor: pageStyle.colorTheme.white,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    ...pageStyle.flexColCenter,
+  },
+  marketPostTitle: {
+    width: pageStyle.width.width390,
+    height: pageStyle.height.height52,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'start',
+    borderBottom: '1px solid red',
+  },
+  marketPostDetail: {
+    width: pageStyle.width.width390,
+    height: pageStyle.height.height200,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'start',
+    borderTop: '1px solid red',
+
+  },
+  marketPostDate: {
+    width: pageStyle.width.width390,
+    height: pageStyle.height.height24,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'end',
+    borderBottom: '1px solid red',
+
   }
 }

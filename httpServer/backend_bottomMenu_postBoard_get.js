@@ -1,24 +1,24 @@
 import htmlBox from "../common/htmlBox.js";
+import postBoardFileRead from "./backend_postBoardFileRead.js";
 import cmServer from "./commonServer.js";
 import mysql from "mysql";
 
 
-export default function secondHand(request, response){
-  if (request.url === "/secondHand") {
-    response.writeHead(200, { "Content-Type": "text/html" });
-    response.end(htmlBox.htmlFunc(htmlBox.secondHand));
-  } 
-  if (request.url === "/market/marketList.js") {
-    cmServer.fileDirectory(`market/marketList.js`, response);
-  }
-  if(request.url.startsWith('/loadSecondHandBoard')){
-    console.log(request.url);
+export default function postBoard(request, response){
+  
+  postBoardFileRead(request, response);
 
+  if (request.url === "/postBoard") {
+    response.writeHead(200, { "Content-Type": "text/html" });
+    response.end(htmlBox.htmlFunc(htmlBox.postBoard));
+  }
+  if(request.url.startsWith('/loadPostBoard')){
+    console.log(request.url);
     let nth = request.url.split('=')[1];
     let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(
-          `select * from second_hand order by date desc limit ${nth*5},5`,
+          `select * from dangstar order by date desc limit ${nth*3},3`,
           function (err, data) {
             if (err) throw err;
             else {
@@ -29,4 +29,6 @@ export default function secondHand(request, response){
         );
         conn.end();
   }
+  
+
 }
