@@ -73,7 +73,7 @@ function makeList(nth) {
 makeList(0);
 
 function createSecondHandList(result, count) {
-  let child = tagCreate("div", {id : 'selectIndex'+count});
+  let child = tagCreate("div", {id : "index" + count});
   let mother = document.getElementById("1");
   mother.appendChild(child);
   styleCreate(child, {
@@ -130,28 +130,28 @@ function createSecondHandList(result, count) {
 }
 
 function loadSecondHandBoard(nth) {
-  let countIndex = -1;
+  let nextIndex = (nth * 5) - 1;
   fetch(`http://localhost:2080/loadSecondHandBoard?nth=${nth}`)
     .then((response) => {
       return response.json();
     })
     .then((result) => {
       for (let i of result) {
-        countIndex = countIndex + 1;
-        createSecondHandList(i, countIndex);
+        nextIndex = nextIndex + 1;
+        createSecondHandList(i, nextIndex);
       }
     });
 }
 
-// function selectSecondHandPost(nth, index) {
-//   fetch(`http://localhost:2080/secondHandPost?nth=${nth}&index=${index}`)
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((result) => {
-//       return result;
-//     })
-// }
+function selectSecondHandPost(nth, index) {
+  fetch(`http://localhost:2080/secondHandPost?nth=${nth}&index=${index}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+}
 
 
 // 하단 메뉴바
