@@ -2,7 +2,6 @@ import htmlBox from "../common/htmlBox.js";
 import postBoardFileRead from "./backend_postBoardFileRead.js";
 import cmServer from "./commonServer.js";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
 
 
 export default function postBoard(request, response) {
@@ -20,7 +19,7 @@ export default function postBoard(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select * from dangstar order by date desc limit ${nth * 3},3`,
+      `select dangstar.* , cm_post.* FROM dangstar LEFT JOIN cm_post on dangstar.post_index = cm_post.post_index order by post_date desc limit ${nth * 3},3`,
       function (err, data) {
         if (err) throw err;
         else {
