@@ -12,7 +12,8 @@ export default function secondHandPost(request, response) {
     cmServer.fileDirectory(`market/market-post-page.js`, response);
   }
   if (request.url.startsWith("/postSecondHand")) {
-    console.log(request.url);
+    let reqURL = request.url;
+    console.log(reqURL);
     let nth = request.url.split("=")[1];
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();

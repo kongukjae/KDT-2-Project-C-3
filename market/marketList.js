@@ -77,8 +77,8 @@ function makeList(nth) {
 
 makeList(0);
 
-function createSecondHandList(result) {
-  let child = tagCreate("div", {});
+function createSecondHandList(result, count) {
+  let child = tagCreate("div", {id : 'selectIndex'+count});
   let mother = document.getElementById("1");
   mother.appendChild(child);
   styleCreate(child, {
@@ -98,7 +98,7 @@ function createSecondHandList(result) {
     border: "1px solid black",
     margin: "5px",
   });
-  let listTextChild = tagCreate("div", {id:"in"});
+  let listTextChild = tagCreate("div", {});
   child.appendChild(listTextChild);
   styleCreate(listTextChild, {
     width: "300px",
@@ -109,6 +109,7 @@ function createSecondHandList(result) {
     justifyContent: "center",
     alignItems: "center",
   });
+
 
   let title = tagCreate("div", {});
   listTextChild.appendChild(title);
@@ -134,16 +135,29 @@ function createSecondHandList(result) {
 }
 
 function loadSecondHandBoard(nth) {
+  let countIndex = -1;
   fetch(`http://localhost:2080/loadSecondHandBoard?nth=${nth}`)
     .then((response) => {
       return response.json();
     })
     .then((result) => {
       for (let i of result) {
-        createSecondHandList(i);
+        countIndex = countIndex + 1;
+        createSecondHandList(i, countIndex);
       }
     });
 }
+
+// function selectSecondHandPost(nth, index) {
+//   fetch(`http://localhost:2080/secondHandPost?nth=${nth}&index=${index}`)
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((result) => {
+//       return result;
+//     })
+// }
+
 
 // 하단 메뉴바
 styleCreate(rootChild[2], {
