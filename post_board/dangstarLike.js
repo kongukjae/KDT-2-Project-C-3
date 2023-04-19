@@ -8,9 +8,10 @@ function dangstarLike(postIndex, index, writerNickname){
 
     const cookie = document.cookie.split("=")[2];
     //console.log(cookie)
-    // const xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     // xhr.open("POST", `http://localhost:2080/postBoard/postBoardLike`, true);
-    // xhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
+    xhr.open("POST", `http://localhost:2080/postBoardLike`, true);
+    xhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
 
   })
 

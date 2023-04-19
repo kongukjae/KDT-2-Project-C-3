@@ -4,6 +4,7 @@ import mysql from "mysql";
 import htmlBox from "./common/htmlBox.js";
 import { parse } from "path";
 import cmServer from "./httpServer/commonServer.js";
+import * as jwtFunc from "./httpServer/jsonwebtoken.js"
 
 import callMain from "./httpServer/callMain.js";
 import callLoginGet from "./httpServer/callLoginGet.js";
@@ -138,6 +139,50 @@ const server = http.createServer(function (request, response) {
         console.log("댓글 데이터 처리 부분");
       });
     }
+    //if(request.url.startsWith('/postBoard/postBoardLike')){
+  if(request.url.startsWith('/postBoardLike')){
+    // if(splitURL === 'postBoardLike'){
+      console.log("postBoardLike 진입")
+      let body = "";
+    
+      request.on('data', function(data){
+        body += data;
+      })
+      request.on("end", function(){ 
+        //console.log(body)
+        let splitBody = body.split("&");
+        let writeUser = splitBody[0].split("=")[1];
+        let postNumber = splitBody[1].split("=")[1];
+        let likeUser = splitBody[2].split("=")[1];
+        likeUser = jwtFunc.jwtCheck(likeUser).id;
+        console.log(likeUser)
+        // console.log(jwtFunc.jwtCheck(likeUser).id);
+
+        let postLike = [];
+        let conn = mysql.createConnection(cmServer.mysqlInfo);
+        conn.connect();
+        conn.query(
+          `SELECT * FROM dangstar WHERE post_index = '${postNumber}' and post_like IS NULL`, 
+          (error, data) =>{
+            console.log(data);
+            if (error) throw error;
+            else{
+              if(data === 'null'){
+                conn.query(`UPDATE dangstar SET post_like = JSON_INSERT(post_like, '$.likeUser', json_array('${likeUser}')) WHERE post_id = '${writeUser}' and post_index = '${postNumber}'`);
+                conn.end();
+
+              }
+              else{
+                conn.query(`UPDATE dangstar SET post_like = json_set(post_like, '$.likeUser', json_array('${likeUser}')) WHERE post_id = '${writeUser}' and post_index = '${postNumber}'`);
+                conn.end();
+
+              }
+            }
+          }
+        );
+      })
+    }
+  
   };
 });
 

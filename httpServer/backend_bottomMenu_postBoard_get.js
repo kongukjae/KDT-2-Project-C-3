@@ -19,7 +19,7 @@ export default function postBoard(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select dangstar.* , cm_post.* FROM dangstar LEFT JOIN cm_post on dangstar.post_index = cm_post.post_index order by post_date desc limit ${nth * 3},3`,
+      `select dangstar.* , cm_post.cm_index, cm_post.cm_id, cm_post.cm_detail, cm_post.cm_img, cm_post.cm_date FROM dangstar LEFT JOIN cm_post on dangstar.post_index = cm_post.post_index order by post_date desc limit ${nth * 3},3`,
       function (err, data) {
         if (err) throw err;
         else {
@@ -32,21 +32,8 @@ export default function postBoard(request, response) {
     );
     conn.end();
   }
-  let splitURL = request.url.split("/")[2];
-  console.log(splitURL)
-  // if(request.url.startsWith('/postBoard/postBoardLike')){
-  if(splitURL === 'postBoardLike'){
-    console.log("postBoardLike 진입")
-    let body = "";
-  
-    request.on('data', function(data){
-      body += data;
-    })
-    request.on("end", function(){ 
-      console.log(body)
-    })
-  }
 
+  
   
 
 }
