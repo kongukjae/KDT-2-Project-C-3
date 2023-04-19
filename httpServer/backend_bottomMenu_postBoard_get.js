@@ -5,7 +5,7 @@ import mysql from "mysql";
 
 
 export default function postBoard(request, response) {
-  console.log("요청 들어옴 2");
+  //console.log("요청 들어옴 2");
 
   postBoardFileRead(request, response);
 
@@ -24,6 +24,7 @@ export default function postBoard(request, response) {
         if (err) throw err;
         else {
           response.writeHead(200);
+          //console.log(JSON.stringify(data))
           response.write(JSON.stringify(data));
           response.end();
         }
