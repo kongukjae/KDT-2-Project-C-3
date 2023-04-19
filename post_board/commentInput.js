@@ -20,6 +20,7 @@ function commentInput(postWrap, src_comment_link){
   // 댓글 입력할 textarea
   const commentInput = tagCreate("input", {
     type: "text",
+    name: "commentValue",
     placeholder: "내용을 입력해주세요",
   });
   styleCreate(commentInput, {
