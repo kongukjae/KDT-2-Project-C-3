@@ -11,6 +11,8 @@ import dupCheck from "./httpServer/dupCheckRoute.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 
 import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
+import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
+import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 import callPostImage from "./httpServer/callPostImage.js";
 import callPostLogin from "./httpServer/callPostLogin.js";
@@ -18,8 +20,7 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import myPagePost from "./httpServer/myPagePost.js";
 import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
-import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
+
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
