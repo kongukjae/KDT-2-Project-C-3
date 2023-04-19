@@ -80,6 +80,11 @@ const html = {
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
   <script src="/market/marketList.js"></script>`,
+  marketpost:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/market/market-post-page.js"></script>`,
 
   //댕스타그램
   postBoard: `
@@ -92,11 +97,5 @@ const html = {
   <script src="/post_board/commentWindow.js"></script>
   <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
-
-  marketpost:`
-  <script src="/common/commonFunc.js"></script>
-  <script src="/common/topMenu.js"></script>
-  <script src="/common/bottomMenu.js"></script>
-  <script src="/market/market-post_page.js"></script>`
 }
 export default html;

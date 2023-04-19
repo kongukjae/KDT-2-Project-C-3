@@ -18,7 +18,8 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import myPagePost from "./httpServer/myPagePost.js";
 import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-
+import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
+import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -99,6 +100,7 @@ const server = http.createServer(function (request, response) {
     
     //댕댕마켓 페이지
     secondHand(request, response);
+    secondHandPost(request, response);
 
     //댕스타그램 페이지
     postBoard(request, response);

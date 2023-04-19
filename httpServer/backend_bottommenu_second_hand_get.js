@@ -12,6 +12,8 @@ export default function secondHand(request, response){
     cmServer.fileDirectory(`market/marketList.js`, response);
   }
   if(request.url.startsWith('/loadSecondHandBoard')){
+    console.log(request.url);
+
     let nth = request.url.split('=')[1];
     let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
