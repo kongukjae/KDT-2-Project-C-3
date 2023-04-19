@@ -27,6 +27,7 @@ export default function postCommentInput(request, response) {
         `insert into cm_post(cm_id, cm_detail, post_index) values("${cm_id}", "${cm_detail}", 3)`
       );
       conn.end();
+      response.write("<script>window.location='/postBoard'</script>");
       response.end();
     });
   }

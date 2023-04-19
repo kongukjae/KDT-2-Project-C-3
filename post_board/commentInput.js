@@ -37,15 +37,13 @@ function commentInput(postWrap, src_comment_link, textName, cmText){
 
   // 댓글 작성 버튼
   const commentSubmit = tagCreate("input", {
-    id: "submitBtn",
-    type: "button",
+    type: "submit",
     value: "작성",
   });
   styleCreate(commentSubmit, {
     width: "60px",
     height: "38px",
   });
-  let submit = document.getElementById('submitBtn');
   commentForm.appendChild(commentSubmit);
 
   const commentId = tagCreate("input", {
