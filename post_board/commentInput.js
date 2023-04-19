@@ -12,8 +12,7 @@ function commentInput(postWrap, src_comment_link, textName, cmText){
   postWrap.appendChild(commentWrap);
 
   // 댓글 입력창과 작성 버튼을 감쌀 form 요소
-  // const commentForm = tagCreate("form", {action:"/commentSubmit", method: "POST"});
-  const commentForm = tagCreate("form", {id: "commentSubmitForm"});
+  const commentForm = tagCreate("form", {action:"/commentSubmit", method: "POST"});
   styleCreate(commentForm, {
     display: "flex",
     justifyContent: "space-between",
@@ -48,7 +47,6 @@ function commentInput(postWrap, src_comment_link, textName, cmText){
   });
   let submit = document.getElementById('submitBtn');
   commentForm.appendChild(commentSubmit);
-  submit.onclick = commentSubmitFunc();
 
   const commentId = tagCreate("input", {
     type: "hidden",
@@ -63,21 +61,6 @@ function commentInput(postWrap, src_comment_link, textName, cmText){
   //   value: "test",
   // });
   // commentForm.appendChild(commentId);
-
-  function commentSubmitFunc() {
-    console.log("FormData 함수 내부 진입")
-    let commentFormData = new formData(document.getElementById('commentSubmitForm'))
-    let cmXhr = new XMLHttpRequest();
-    cmXhr.open("POST", "/commentSubmit", true);
-    cmXhr.send(commentFormData);
-
-    cmXhr.onreadystatechange = function() {
-      if (cmXhr.readyState === 4 && cmXhr.status === 200) {
-        console.log("응답받음");
-      }
-    }
-  }
-
 
   //최신 댓글 1개 보여주는 함수 실행
   commentRecent(postWrap, src_comment_link, textName, cmText);
