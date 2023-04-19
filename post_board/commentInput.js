@@ -9,7 +9,7 @@ function commentInput(postWrap, src_comment_link){
   postWrap.appendChild(commentWrap);
 
   // 댓글 입력창과 작성 버튼을 감쌀 form 요소
-  const commentForm = tagCreate("form", {});
+  const commentForm = tagCreate("form", {action:"/commentSubmit", method: "POST"});
   styleCreate(commentForm, {
     display: "flex",
     justifyContent: "space-between",
