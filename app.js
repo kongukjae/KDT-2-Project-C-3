@@ -163,23 +163,27 @@ const server = http.createServer(function (request, response) {
         conn.connect();
         conn.query(
           `SELECT * FROM dangstar WHERE post_index = '${postNumber}' and post_like IS NULL`, 
-          (error, data) =>{
+          (error, data) => {
             console.log(data);
             if (error) throw error;
-            else{
-              if(data === 'null'){
-                conn.query(`UPDATE dangstar SET post_like = JSON_INSERT(post_like, '$.likeUser', json_array('${likeUser}')) WHERE post_id = '${writeUser}' and post_index = '${postNumber}'`);
+            else {
+              if (data[0].post_like === null) {
+                console.log("ffff")
+                conn.query(`
+                UPDATE dangstar SET post_like = JSON_OBJECT('likeUser', JSON_ARRAY('${likeUser}'))
+                WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'
+                `);
+                // INSERT INTO mungta.dangstar(post_like) VALUES (JSON_OBJECT('likeUser', JSON_ARRAY('${likeUser}')))
                 conn.end();
-
-              }
-              else{
-                conn.query(`UPDATE dangstar SET post_like = json_set(post_like, '$.likeUser', json_array('${likeUser}')) WHERE post_id = '${writeUser}' and post_index = '${postNumber}'`);
+              } else {
+                console.log("ggggg")
+                conn.query(`UPDATE dangstar SET post_like = JSON_SET(post_like, '$.likeUser', JSON_ARRAY_APPEND(post_like->'$.likeUser', '$', '${likeUser}')) WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'`);
                 conn.end();
-
               }
             }
           }
         );
+        
       })
     }
   
