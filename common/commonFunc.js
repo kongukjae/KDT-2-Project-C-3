@@ -14,9 +14,9 @@ function styleCreate(obj, styleOb) {
 // 날짜 변환
 function changeDate(date) {
   let nowDate = new Date(date);
-  let formatDate = nowDate.toLocaleString();
+  // let formatDate = nowDate.toLocaleString();
 
-  return formatDate;
+  return nowDate ;
 }
 const pageStyle = {
   colorTheme: {
