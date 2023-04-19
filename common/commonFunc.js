@@ -36,6 +36,7 @@ const pageStyle = {
   width: {
     widthP100: "100%",
     widthP90: "90%",
+    widthP80: "80%",
     widthP60: "60%",
     widthP40: "40%",
     width500: "500px",
@@ -49,8 +50,10 @@ const pageStyle = {
     width180: "180px",
     width150: "150px",
     width120: "120px",
+    width100: "100px",
     width80: "80px",
     width90: "90px",
+    width50: "50px",
     width40: "40px",
     width25: "25px",
     width9: "9px",
@@ -60,9 +63,12 @@ const pageStyle = {
     height100vh: "100vh",
     height85vh: "85vh",
     heightP100: "100%",
+    heightP70: "70%",
+    heightP30: "30%",
     height2000: "2000px",
     height1700: "1700px",
     height1000: "1000px",
+    height730: "730px",
     height690: "690px",
     height500: "500px",
     height450: "450px",
@@ -84,6 +90,7 @@ const pageStyle = {
     height83: "83px",
     height80: "80px",
     height52: "52px",
+    height50: "50px",
     height40: "40px",
     height30: "30px",
     height24: "24px",
@@ -913,8 +920,10 @@ const dangMapOverlay = {
   }
 }
 
-//댕댕마켓 게시글 리스트 스타일
-const marketListStyle = {
+//댕댕마켓 게시글 스타일
+
+const market = {
+  //게시글 목록 part
   root: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height2000,
@@ -922,10 +931,58 @@ const marketListStyle = {
     display: "flex",
     flexDirection: "column",
     position: "relative"
-  }
-}
+  },
+  addWrite: {
+    width: pageStyle.width.width50,
+    height: pageStyle.height.height50,
+    position: "relative",
+    backgroundColor: pageStyle.colorTheme.peach,
+    bottom: "60px",
+    left: "430px",
+    zIndex: "2",
+    borderRadius: "30px",
+    textAlign: "center",
+  },
+  listContainer: {
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.height730,
+    border: "1px solid red",
+    position: "relative",
+    zIndex: "1",
+    ...pageStyle.flexColCenter,
+  },
+  listBox: {
+    width: pageStyle.width.widthP80,
+    height: pageStyle.height.height200,
+    border: "1px solid black",
+    margin: "10px 0 10px 0",
+    ...pageStyle.flexRowCenter,
+  },
+  listImg: {
+    width: pageStyle.width.width100,
+    height: pageStyle.height.height100,
+    border: "1px solid black",
+    margin: "5px",
+  },
+  listText: {
+    width: pageStyle.width.width300,
+    height: pageStyle.height.height100,
+    ...pageStyle.flexColCenter,
+  },
+  listTitle: {
+    width: pageStyle.width.widthP90,
+    height: pageStyle.height.heightP30,
+    margin: "3px 0 3px 0",
+    fontSize: "20px",
+    fontWeight: "700",
+  },
+  listElementText: {
+    width: pageStyle.width.widthP90,
+    height: pageStyle.height.heightP70,
+    marginBottom: "3px",
+  },
 
-const market = {
+  //게시글 part
   marketPost: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height100vh,
