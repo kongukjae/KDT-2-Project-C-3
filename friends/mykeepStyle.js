@@ -16,8 +16,6 @@ function keepDiary(){
   logoLoginPage.src = './resource/MainLogo.png';
   rootChild[0].appendChild(logoLoginPage); 
 
-
-
 //  2.  제목부분 root1 제목작성칸
   styleCreate(rootChild[1],keepStyle.pageTitle)
   const yastContentInput = document.createElement("textarea");
@@ -33,18 +31,14 @@ function keepDiary(){
   rootChild[2].appendChild(postContentInput);
 
 
-  
-
   // root3 카테고리, 사진업로드 버튼 
   styleCreate(rootChild[3],keepStyle.pageButtonWrap)
-  
 
   for(let i = 0; i < 2; i++){
     let button = tagCreate("div");
     styleCreate(button,keepStyle.pageButton)
     rootChild[3].appendChild(button)
   }
-  
   
   rootChild[3].children[0].innerText=`사진업로드`;
   rootChild[3].children[1].innerText=`카테고리`;
@@ -60,7 +54,6 @@ function uploadImage(){
     <input id ="myImage" type="file" name="myFile">
   </form>
   `;
-
 
   root.appendChild(uploadImageModal);
   let uploadImageForm = document.getElementById("uploadImageForm");
@@ -154,52 +147,38 @@ function showcategory(){
   });
   styleCreate(bragBtn, keepStyle.showcategoryModalButton);
 
-  // 버튼모둠에 중고,자랑,닫기 버튼
-buttonWrap.appendChild(usedBtn);
-buttonWrap.appendChild(bragBtn);
-buttonWrap.appendChild(closeButton);
-
-// 모달창에 버튼모둠을 자식으로 둔다.
-showCategoryModal.appendChild(buttonWrap);
-
-
-  usedBtn.addEventListener("click", () => {
-    
-  // postForm.id = "postForm";
-  //   postForm.action = "/main";
-  //   postForm.method = "post";
-  //   // window.location = "http://localhost:2080/main"
-
-
-  });
-// "자랑게시판" button
-  bragBtn.addEventListener("click", () => {
-    
-  });
-
   const closeButton = tagCreate("button", {
     textContent: "닫기"
   });
   styleCreate(closeButton,keepStyle.showcategoryclosebutton);
+
+  
+  showCategoryModal.appendChild(buttonWrap);
+   root.appendChild(showCategoryModal);
+buttonWrap.appendChild(usedBtn);
+ buttonWrap.appendChild(bragBtn);
+ buttonWrap.appendChild(closeButton);
+
+ //중고게시판 "클릭시"
+  usedBtn.addEventListener("click", () => {
+ 
+
+  });
+// "자랑게시판" 클릭시
+  bragBtn.addEventListener("click", () => {
+    
+  });
+// 닫기버튼
   closeButton.addEventListener("click", () => {
     showCategoryModal.remove();
   });
   
-  
-  
-  
-  showCategoryModal.appendChild(buttonWrap);
-
-  root.appendChild(showCategoryModal);
-
   let showcategorymodalBT = document.getElementById("showcategorymodalBT");
   showcategorymodalBT.style.width = "200px";
 }
-// console.log(rootChild[3].children[1]);
 
 const cookieId = document.cookie.split("=")[1].split(';')[0];
 const jwt = document.cookie.split("=")[2];
-
 //  root4, 제출버튼
   styleCreate(rootChild[4],keepStyle.pageSubmit)
   rootChild[4].innerText="제출하기";
@@ -207,24 +186,16 @@ const jwt = document.cookie.split("=")[2];
     console.log(yastContentInput.value)
     let titleText=yastContentInput.value;
     let mainText=postContentInput.value;
-    
-   
+  
     let xhr = new XMLHttpRequest();
     xhr.open("POST", `http://localhost:2080/mykeepcute`,true);
     xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-
-    
     // xhr.addEventListener("load",()=>{
     //   let resultFromSeve =xhr.response;
-      
     });
-    
-
-
 
  //root5 바텀메뉴, 맨 밑에 페이지 구간
   styleCreate(rootChild[5],targetStyle.bottomMenu)
-
   let menuChild = [];
   for(let i = 0;i<5;i++){
     let child = tagCreate("div",{});
@@ -249,7 +220,6 @@ const jwt = document.cookie.split("=")[2];
     }
     child.onmouseout = ()=>{
       child.style.scale = "1"
-
     }
     menuChild.push(child);
   }
@@ -263,7 +233,6 @@ const jwt = document.cookie.split("=")[2];
     window.location = "http://localhost:2080/map"
   })
 }
-
 keepDiary()
 
 
