@@ -165,10 +165,10 @@ showCategoryModal.appendChild(buttonWrap);
 
   usedBtn.addEventListener("click", () => {
     
-  postForm.id = "postForm";
-    postForm.action = "/main";
-    postForm.method = "post";
-    // window.location = "http://localhost:2080/main"
+  // postForm.id = "postForm";
+  //   postForm.action = "/main";
+  //   postForm.method = "post";
+  //   // window.location = "http://localhost:2080/main"
 
 
   });
@@ -195,22 +195,23 @@ showCategoryModal.appendChild(buttonWrap);
   let showcategorymodalBT = document.getElementById("showcategorymodalBT");
   showcategorymodalBT.style.width = "200px";
 }
-console.log(rootChild[3].children[1]);
+// console.log(rootChild[3].children[1]);
 
-const cookieId = document.cookie.split("=")[1]
+const cookieId = document.cookie.split("=")[1].split(';')[0];
+const jwt = document.cookie.split("=")[2];
 
 //  root4, 제출버튼
   styleCreate(rootChild[4],keepStyle.pageSubmit)
   rootChild[4].innerText="제출하기";
   rootChild[4].addEventListener("click",()=>{
-
+    console.log(yastContentInput.value)
     let titleText=yastContentInput.value;
     let mainText=postContentInput.value;
     
    
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/mykeep`,true);
-    xhr.send(`titleText=${titleText}&mainText=${mainText} &id=${cookieId}`);
+    xhr.open("POST", `http://localhost:2080/mykeepcute`,true);
+    xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
 
     
     // xhr.addEventListener("load",()=>{
