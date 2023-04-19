@@ -3,7 +3,7 @@ function commentInput(postWrap, src_comment_link){
   // 댓글 입력창 감싸는 div
   const commentWrap = tagCreate("div", {});
   styleCreate(commentWrap, {
-    border: "1px solid black",
+    //border: "1px solid black",
     padding: "15px",
   });
   postWrap.appendChild(commentWrap);
