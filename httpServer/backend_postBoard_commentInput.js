@@ -14,6 +14,7 @@ export default function postCommentInput(request, response) {
     request.on("end", function () {
       console.log(body);
       let firstSplit = body.split('&');
+      console.log(firstSplit);
       let cm_detail = decodeURIComponent(firstSplit[0].split('=')[1]);
       console.log(cm_detail);
       let cm_idCookie = firstSplit[1].split('=')[1];
