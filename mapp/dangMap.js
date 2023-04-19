@@ -318,12 +318,10 @@ function map() {
               parseFloat(result[key][1])
             ), type
           );
-          markersObject.appendMarker = [result[key][2],type,[markerNow],changeDate(result[key][3])]
-          if(result[key][2]===undefined){
-            createOverlay(markersObject.userid,map,markerNow,result[key][0],result[key][1]);
-          }else{
-            createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1]);
-          }
+          markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
+          
+          createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
+        
           
         }
       console.log(markersObject);
@@ -405,7 +403,7 @@ function putUserProfile(arr){
   }
   
 }
-function createOverlay(id,mapNow, markerNow, lat, lng){
+function createOverlay(id,mapNow, markerNow, lat, lng, time){
 
     
   // 오버레이 내부 구성 요소들
@@ -447,7 +445,7 @@ function createOverlay(id,mapNow, markerNow, lat, lng){
 
   const overlayEllipsis = tagCreate("p", {});
   overlayDesc.appendChild(overlayEllipsis);
-  overlayEllipsis.innerHTML = `xx분 전`;
+  overlayEllipsis.innerHTML = `${time}`;
 
   const overlayBtnWrap = tagCreate("div", {});
   overlayDesc.appendChild(overlayBtnWrap);
@@ -511,6 +509,10 @@ function createOverlay(id,mapNow, markerNow, lat, lng){
   kakao.maps.event.addListener(markerNow, "click", function () {
     if(!overlayChecker){
       customOverlay.setMap(mapNow);
+      let now = new Date()
+
+      console.log(Date.parse(time));
+      overlayEllipsis.innerHTML = `${time}`
     }
     // 오버레이가 열려있는지 닫혀있는지 확인하는 변수
     overlayChecker = true;
