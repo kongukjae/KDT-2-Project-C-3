@@ -12,17 +12,6 @@ function styleCreate(obj, styleOb) {
   }
 }
 
-//댕댕마켓 게시글 리스트 스타일
-// const marketListStyle = {
-//   root: {
-//     width: '500px',
-//     height: '1000px',
-//     margin: "auto",
-//     display: "flex",
-//     flexDirection: "column",
-//     //position: "relative"
-//   }
-// }
 
 let root = tagCreate("div", { id: "market" });
 document.body.appendChild(root);
@@ -73,7 +62,8 @@ function makeList(nth) {
 makeList(0);
 
 function createSecondHandList(result, count) {
-  let child = tagCreate("div", {id : "index" + count});
+  let child = tagCreate("a", {id: 'index'+count});
+  child.href = `/secondHandPost?nth=${count}`;
   let mother = document.getElementById("1");
   mother.appendChild(child);
   styleCreate(child, {
@@ -105,6 +95,9 @@ function createSecondHandList(result, count) {
     alignItems: "center",
   });
 
+  document.getElementById(`index${count}`).addEventListener('click', function() {
+    console.log(`index${count}`);
+  })
 
   let title = tagCreate("div", {});
   listTextChild.appendChild(title);
@@ -136,21 +129,12 @@ function loadSecondHandBoard(nth) {
       return response.json();
     })
     .then((result) => {
+      console.log(result);
       for (let i of result) {
         nextIndex = nextIndex + 1;
         createSecondHandList(i, nextIndex);
       }
     });
-}
-
-function selectSecondHandPost(nth, index) {
-  fetch(`http://localhost:2080/secondHandPost?nth=${nth}&index=${index}`)
-    .then((response) => {
-      return response.json();
-    })
-    .then((result) => {
-      return result;
-    })
 }
 
 

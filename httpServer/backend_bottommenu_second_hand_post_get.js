@@ -3,8 +3,12 @@ import cmServer from "./commonServer.js";
 import mysql from "mysql";
 
 export default function secondHandPost(request, response) {
-  if (request.url === "/secondHandPost") {
+  if (request.url.startsWith("/secondHandPost")) {
+    let nth = request.url.split("=")[1];
+    console.log(request.url);
     response.writeHead(200, { "Content-Type": "text/html" });
+    response.write(`<script>const nthfromserver = ${nth}</script>`);
+    
     response.write(htmlBox.htmlFunc(htmlBox.marketpost));
     response.end();
   }
