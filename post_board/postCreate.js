@@ -2,7 +2,7 @@
 function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, cmText, index) {
   console.log(index);
   // 게시글 전체를 감싸는 div
-  const postWrap = tagCreate("div", {});
+  const postWrap = tagCreate("div", {id: `post_${index}`});
   styleCreate(postWrap, {
     border: "1px solid black",
     width: "500px",

@@ -19,7 +19,7 @@ export default function postBoard(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select dangstar.* , cm_post.* FROM dangstar LEFT JOIN cm_post on dangstar.post_index = cm_post.post_index order by post_date desc limit ${nth * 3},3`,
+      `select dangstar.* , cm_post.cm_index, cm_post.cm_id, cm_post.cm_detail, cm_post.cm_img, cm_post.cm_date FROM dangstar LEFT JOIN cm_post on dangstar.post_index = cm_post.post_index order by post_date desc limit ${nth * 3},3`,
       function (err, data) {
         if (err) throw err;
         else {

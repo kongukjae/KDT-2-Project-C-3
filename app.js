@@ -11,6 +11,7 @@ import dupCheck from "./httpServer/dupCheckRoute.js";
 import dangMapServer from "./httpServer/dangMapServer.js";
 import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
 import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
+import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
 
 import callPostImage from "./httpServer/callPostImage.js";
 import callPostLogin from "./httpServer/callPostLogin.js";
@@ -122,22 +123,8 @@ const server = http.createServer(function (request, response) {
     }
 
     followSearch(request, response);
-
-    if(request.url.startsWith("/commentSubmit")) {
-      console.log("덧글 작성 됨");
-      console.log(data)
-      let body = "";
-      request.on("data", function (data) {
-        body = body + data;
-        // console.log("아래 전달 된 데이터임")
-        // console.log(body);
-      });
-      request.on("end", function () {
-        console.log("아래 전달 된 댓글 데이터");
-        console.log(body);
-        console.log("댓글 데이터 처리 부분");
-      });
-    }
+    postCommentInput(request, response);
+    
   };
 });
 
