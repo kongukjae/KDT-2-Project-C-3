@@ -1170,10 +1170,10 @@ const market = {
   marketPost: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height100vh,
-    ...pageStyle.flexColCenter,
+    ...pageStyle.flexColumnTopCenter,
     backgroundColor: pageStyle.colorTheme.peach,
     margin: "auto",
-    borderRadius: pageStyle.borderRadius.borderRadius15,
+    // borderRadius: pageStyle.borderRadius.borderRadius15,
   },
   marketPostImageArea: {
     width: pageStyle.width.width400,

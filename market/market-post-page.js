@@ -1,4 +1,4 @@
-function marketPostPage(postImg, img, dogName, title, detail, date) {
+function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
   styleCreate(root, market.marketPost);
@@ -10,9 +10,8 @@ function marketPostPage(postImg, img, dogName, title, detail, date) {
     root.appendChild(child);
     rootChild.push(child);
   }
-
-  // topMenu(rootChild);
-  // styleCreate(rootChild[0], targetStyle.topMenu);
+  topMenu(rootChild[0]);
+  createHamburger(root);
 
   styleCreate(rootChild[1], market.marketPostImageArea);
   rootChild[1].innerHTML = postImg
@@ -21,6 +20,23 @@ function marketPostPage(postImg, img, dogName, title, detail, date) {
   let nameAdd = [];
   let dotdotdot = [];
   let detailComponent = [];
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  
+  let mypageForm = document.createElement('form');
+    
+  mypageForm.method = "POST";
+  mypageForm.action = "/mypage";
+  let params = {jwt:token, targetId:id}
+  for(let key in params){
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type","hidden");
+    hiddenField.setAttribute("name",key);
+    hiddenField.setAttribute("value",params[key]);
+    mypageForm.appendChild(hiddenField);
+  }
 
   for (let i = 0; i < 2; i++) {
     let imgNameAddChild = tagCreate("div", {});
@@ -64,6 +80,7 @@ function marketPostPage(postImg, img, dogName, title, detail, date) {
   styleCreate(detailComponent[2], market.marketPostDate);
   detailComponent[2].innerHTML = date;
 
+  btmMeun(rootChild[4]);
 
   // 모달창 생성
   const modal = document.createElement("div");
@@ -91,6 +108,8 @@ function marketPostPage(postImg, img, dogName, title, detail, date) {
   modalContent.appendChild(profileBtn);
   modalContent.appendChild(chatBtn);
   modalContent.appendChild(reportBtn);
+  modalContent.appendChild(mypageForm);
+
   styleCreate(profileBtn, market.marketPostAddModalBtn);
   styleCreate(chatBtn, market.marketPostAddModalBtn);
   styleCreate(reportBtn, market.marketPostAddModalBtn);
@@ -108,6 +127,10 @@ function marketPostPage(postImg, img, dogName, title, detail, date) {
     modal.remove();
   });
 
+  profileBtn.addEventListener("click",()=>{
+    mypageForm.submit();
+  })
+
 }
 
 function secondHandPost(nth) {
@@ -116,7 +139,7 @@ function secondHandPost(nth) {
     return response.json();
   })
   .then((result) => {
-    return marketPostPage(result[0].image, result[0].img, result[0].dogName, result[0].title, result[0].detail, changeDate(result[0].date));
+    return marketPostPage(result[0].id,result[0].image, result[0].img, result[0].dogName, result[0].title, result[0].detail, changeDate(result[0].date));
   });
 }
 
