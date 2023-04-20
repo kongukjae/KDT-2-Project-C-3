@@ -12,7 +12,19 @@ function dangstarLike(postIndex, index, writerNickname){
     // xhr.open("POST", `http://localhost:2080/postBoard/postBoardLike`, true);
     xhr.open("POST", `http://localhost:2080/postBoardLike`, true);
     xhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
+    xhr.addEventListener("load", function () {
+      let likeVal = JSON.parse(xhr.response);
+      
+      console.log("like: ", likeVal)
+      const heartImage = document.getElementById('heartImage');
 
+      if(likeVal){
+        heartImage.src = '/fullHeartImage';
+      }
+      else if(!likeVal){
+        heartImage.src = '/emptyHeartImage';
+      }
+    })
   })
 
 }
