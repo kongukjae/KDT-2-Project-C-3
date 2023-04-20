@@ -10,6 +10,7 @@ root.appendChild(topMenuWrap);
 topMenu(topMenuWrap);
 
 // 게시글 영역
+
 // for (let i = 0; i < 3; i++) {
 //   // i < 3에서 3 부분은 나중에 무한 스크롤 방식을 이용해 적용
 //   console.log(i);
@@ -48,6 +49,10 @@ styleCreate(writeBtn, {
 });
 
 loadDangstargram(0);
+// 
+// let test = document.cookie;
+// console.log(test);
+// 
 
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
@@ -56,17 +61,10 @@ function loadDangstargram(nth) {
   xhr.send();
   xhr.addEventListener("load", function () {
     let res = JSON.parse(xhr.response);
-    console.log(Array.isArray(res));
-    console.dir(res[0].id);
-    console.log(res[0].id);
-    // for(let key in res){
-    //   console.log(key);
-    //   postCreate(root, "../resource/MainDogImg.jpg", res[key].id, res[key].detail, "../resource/MainDogImg.jpg", "name", key); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
-    // }
     for (let i = 0; i < res.length; i++) {
-      // console.log(result);
-      console.log("나와라");
-      postCreate(root, "../resource/MainDogImg.jpg", res[i].id, res[i].detail, "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
+      console.log(res[i])
+      // postCreate(부모요소, src_link(이미지 링크), writerNickname(작성자 이름), text(게시글 내용), src_comment_link(댓글 작성자 프로필 이미지), textName(댓글 작성자 이름), cmText(댓글 내용), index(인덱싱), postIndex(DB인덱싱))
+      postCreate(root, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, "../resource/MainDogImg.jpg", res[i].cm_id, res[i].cm_detail, i, res[i].post_index); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
     }
   });
 }
