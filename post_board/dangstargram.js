@@ -49,6 +49,10 @@ styleCreate(writeBtn, {
 });
 
 loadDangstargram(0);
+// 
+// let test = document.cookie;
+// console.log(test);
+// 
 
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
