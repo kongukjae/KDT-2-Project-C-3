@@ -26,13 +26,32 @@ btmMeun(btmMeunWrap);
 const writeBtn = tagCreate("button", {});
 root.appendChild(writeBtn);
 
+writeBtn.addEventListener("click",() =>{
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  let writeForm = document.createElement('form');
+  writeForm.method = "POST"
+  writeForm.action = "/mykeep";
+  let params = {jwt:token, targetId:"mine"}
+  for(let key in params){
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type","hidden");
+    hiddenField.setAttribute("name",key);
+    hiddenField.setAttribute("value",params[key]);
+    writeForm.appendChild(hiddenField);
+}
+document.body.appendChild(writeForm);
+writeForm.submit();
+}); 
+
 const writeImg = tagCreate("img", {src: '/writeImage'})
 writeBtn.appendChild(writeImg);
 styleCreate(writeImg, {
   width: "70%",
   height: "70%",
 })
-
 styleCreate(writeBtn, {
   backgroundSize: "65%",
   backgroundPosition: "center",
@@ -47,13 +66,11 @@ styleCreate(writeBtn, {
   border: "1px solid black",
   zIndex: 3
 });
-
 loadDangstargram(0);
 // 
 // let test = document.cookie;
 // console.log(test);
-// 
-
+//
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
   // let result = {};

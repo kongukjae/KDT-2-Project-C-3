@@ -760,9 +760,6 @@ const keepStyle={
     alignItems : "center"
 
   },
-
-
-
   pageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
@@ -921,7 +918,6 @@ bottomMenu :{
 
 
 }
-
 
 
 

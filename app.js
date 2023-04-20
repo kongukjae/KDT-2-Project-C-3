@@ -22,7 +22,6 @@ import callPostDangMap from "./httpServer/callPostDangMap.js";
 import myPagePost from "./httpServer/myPagePost.js";
 import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 
 // import mapMerker from "./mapMerker.js";
@@ -85,7 +84,9 @@ const server = http.createServer(function (request, response) {
     if (request.url === "/friends/myKeepStyle.js") {
       cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
     }    
+   
 
+  
     if (request.url === "/init_user/signupstyle.js") {
       cmServer.fileDirectory(`init_user/signup.js`, response);
     }
@@ -121,6 +122,9 @@ const server = http.createServer(function (request, response) {
   // post request
   if (request.method === 'POST') {
     //마이페이지
+
+
+    
 
     myKeepPost(request,response);
 

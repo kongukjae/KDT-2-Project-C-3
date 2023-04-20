@@ -22,7 +22,7 @@ add.addEventListener("click",() =>{
  
   let addForm = document.createElement('form');
   addForm.method = "POST"
-  addForm.action = "/mykeep";
+  addForm.action = "/mykoop";
   let params = {jwt:token, targetId:"mine"}
   for(let key in params){
     let hiddenField = document.createElement("input");
