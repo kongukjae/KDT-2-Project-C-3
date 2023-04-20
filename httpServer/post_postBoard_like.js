@@ -112,7 +112,8 @@ export default function postPostBoardLike(request, response) {
 
               if(postLike === 'null' || postLike.length === 0){
                 console.log("값이 없거나 null입니다", postLike)
-
+                response.writeHead(200);
+                response.end('false');
               }
               else{
                 const likeUserArr = JSON.parse(postLike).likeUser;
