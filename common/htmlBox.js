@@ -107,5 +107,11 @@ const html = {
   <script src="/post_board/dangstarLike.js"></script>
   <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
+
+  dangTalkMain:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/dangtalk/chattingRoomMain.js"></script>`
 }
 export default html;

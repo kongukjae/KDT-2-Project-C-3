@@ -1,4 +1,5 @@
 import http from "http";
+import {Server} from "socket.io";
 import fs from "fs";
 import mysql from "mysql";
 import htmlBox from "./common/htmlBox.js";
@@ -25,6 +26,9 @@ import followSearch from "./httpServer/callPostFollowSearch.js";
 
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 
+
+import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main.js";
+
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
@@ -35,6 +39,8 @@ import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 //npm install jsonwebtoken
 //3. busboy
 //npm install busboy
+//4. socket.io 채팅을 위해 필요한 모듈
+// npm install socket.io
 
 //db 연동이 되어있으니 아래 테이블을 따로 만들 필요 없음
 // 집에서 수정하려면 만들어야함
@@ -116,6 +122,9 @@ const server = http.createServer(function (request, response) {
 
     //댕스타그램 페이지
     postBoard(request, response);
+
+    //댕톡
+    dangTalkChatRoom(request, response)
   };
 
   // post request
@@ -213,6 +222,24 @@ const server = http.createServer(function (request, response) {
     }
   
   };
+});
+
+//소켓용 서버
+const socketServer = new Server(server);
+
+// namespace /chat에 접속한다.
+let chat = socketServer.of('/chat').on('connection', function(socket) {
+  socket.on('chat message', function(data){
+    console.log('message from client: ', data);
+    console.log(data);
+    var name = data.name;
+    var room = data.room;
+
+    // room에 join한다
+    socket.join(room);
+    // room에 join되어 있는 클라이언트에게 메시지를 전송한다
+    chat.to(room).emit('chat message', name +"&"+ data.msg);
+  });
 });
 
 
