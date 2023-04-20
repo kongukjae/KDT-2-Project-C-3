@@ -1,4 +1,4 @@
-function commentInput(postWrap, src_comment_link, textName, cmText){
+function commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex){
   let test = document.cookie;
   console.log(test);
   let userID = test.split("jwt=")[1];
@@ -24,6 +24,7 @@ function commentInput(postWrap, src_comment_link, textName, cmText){
 
   // 댓글 입력할 textarea
   const commentInput = tagCreate("input", {
+    id: `comment_${postIndex}_${index}`,
     type: "text",
     name: "commentValue",
     placeholder: "내용을 입력해주세요",
@@ -52,6 +53,13 @@ function commentInput(postWrap, src_comment_link, textName, cmText){
     value: userID,
   });
   commentForm.appendChild(commentId);
+
+  const commentIndex = tagCreate("input", {
+    type: "hidden",
+    name: "index_request",
+    value: postIndex,
+  });
+  commentForm.appendChild(commentIndex);
 
   // const commentIndex = tagCreate("input", {
   //   type: "hidden",

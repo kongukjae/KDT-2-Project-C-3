@@ -179,26 +179,26 @@ const server = http.createServer(function (request, response) {
             }
           }
         );
-        conn.query(`select post_like from dangstar where post_index = '${postNumber}'`,
-        (error, data) => {
-          if(error) throw error;
-          else{
-            //console.log(data)
-            for(let row of data) {
-              let postLikeJson = row.post_like;
-              let postLikeArray = JSON.parse(postLikeJson).likeUser;
-              postLike = postLike.concat(postLikeArray);
-            }
-            //console.log(postLike);
-            for(let i = 0; i < postLike.length; i++){
-              if(postLike[i] === likeUser){
-                conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, JSON_UNQUOTE(JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123'))) WHERE JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123') IS NOT NULL`)
-                // `UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
-                // WHERE post_index = '${postNumber}'`
-              }
-            }
-          }
-        });
+        // conn.query(`select post_like from dangstar where post_index = '${postNumber}'`,
+        // (error, data) => {
+        //   if(error) throw error;
+        //   else{
+        //     //console.log(data)
+        //     for(let row of data) {
+        //       let postLikeJson = row.post_like;
+        //       let postLikeArray = JSON.parse(postLikeJson).likeUser;
+        //       postLike = postLike.concat(postLikeArray);
+        //     }
+        //     //console.log(postLike);
+        //     for(let i = 0; i < postLike.length; i++){
+        //       if(postLike[i] === likeUser){
+        //         conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, JSON_UNQUOTE(JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123'))) WHERE JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123') IS NOT NULL`)
+        //         // `UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
+        //         // WHERE post_index = '${postNumber}'`
+        //       }
+        //     }
+        //   }
+        // });
         
       })
     }

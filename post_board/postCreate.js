@@ -100,7 +100,7 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   dangstarLike(postIndex, index, writerNickname);
 
   //댓글 입력창 만드는 함수 실행
-  commentInput(postWrap, src_comment_link, textName, cmText);
+  commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
   commentWindow(index, 5, parent);

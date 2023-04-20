@@ -20,11 +20,12 @@ export default function postCommentInput(request, response) {
       let cm_idCookie = firstSplit[1].split('=')[1];
       let cm_id = jwtFunc.jwtCheck(cm_idCookie).id;
       console.log(cm_id);
-      let post_index;
+      let post_index = firstSplit[2].split('=')[1];
+      console.log(post_index);
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
-        `insert into cm_post(cm_id, cm_detail, post_index) values("${cm_id}", "${cm_detail}", 3)`
+        `insert into cm_post(cm_id, cm_detail, post_index) values("${cm_id}", "${cm_detail}", ${post_index})`
       );
       conn.end();
       response.write("<script>window.location='/postBoard'</script>");
