@@ -82,7 +82,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   for (let i = 0; i < 3; i++) {
     const postBtn = tagCreate("button", {});
     if (i === 0) {
-      const heartImage = tagCreate("img", {id: 'heartImage',src: '/emptyHeartImage'})
+      const heartImage = tagCreate("img", {id: 'heartImage'})
       postBtn.appendChild(heartImage);
       styleCreate(heartImage, {
         width: "80%",
