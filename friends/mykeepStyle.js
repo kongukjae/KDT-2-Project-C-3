@@ -188,10 +188,13 @@ const jwt = document.cookie.split("=")[2];
     let mainText=postContentInput.value;
   
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/mykeepcute`,true);
+    xhr.open("POST", `http://localhost:2080/secondHand`,true);
     xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-    // xhr.addEventListener("load",()=>{
-    //   let resultFromSeve =xhr.response;
+    
+    // xhr.addEventListener("load", () => {
+    //   console.log(xhr.responseText); // 서버 응답을 콘솔에 출력합니다.
+    // });
+    window.location = "http://localhost:2080/secondHand"
     });
 
  //root5 바텀메뉴, 맨 밑에 페이지 구간
