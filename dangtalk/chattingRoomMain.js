@@ -58,16 +58,16 @@ function main(){
     let msgFrom = data.split('&')[0]
     let msgtext = data.split('&')[1]
     if(myId===msgFrom){
-      createChatMsg(rootChild[2], 'Me', msgFrom+':'+msgtext)
+      createChatMsg(rootChild[2],msgFrom,'Me', msgFrom+':'+msgtext)
     }
     else{
-      createChatMsg(rootChild[2], 'You', msgFrom+':'+msgtext)
+      createChatMsg(rootChild[2],msgFrom,'You', msgFrom+':'+msgtext)
     }
   });
 }
 main()
 
-function createChatMsg(mother, fromMeorYou, msg){
+function createChatMsg(mother,targetId,fromMeorYou, msg){
   let chatBox = tagCreate("div");
   let imagebox = tagCreate("div");
   let msgbox = tagCreate("div");
@@ -88,4 +88,15 @@ function createChatMsg(mother, fromMeorYou, msg){
   msgbox.innerText = msg;
   
   mother.appendChild(chatBox);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${targetId}`); 
+  xhr.addEventListener('load', function(){
+      let imageFromServer = xhr.response;
+      const resultURL = URL.createObjectURL(xhr.response);
+      imagebox.style.backgroundImage = `url(${resultURL})`
+      console.log("이미지 가져오기 완료");
+  })
 }
