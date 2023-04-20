@@ -28,7 +28,8 @@ export default function postCommentInput(request, response) {
         `insert into cm_post(cm_id, cm_detail, post_index) values("${cm_id}", "${cm_detail}", ${post_index})`
       );
       conn.end();
-      response.write("<script>window.location='/postBoard'</script>");
+      console.log("새로고침 시작");
+      response.write("<script>location.reload();</script>");
       response.end();
     });
   }
