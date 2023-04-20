@@ -133,7 +133,7 @@ slide.children[2].children[1].addEventListener('click', function(){
   const xhr = new XMLHttpRequest();
   xhr.open("POST", `http://localhost:2080/followSearch`, true);
   // httpRequest.send(`re1=${result[0]}`);
-  console.log(cookieId)
+  //console.log(cookieId)
   xhr.send(`searchValue=${findVal}&id=${cookieId}`); 
 
   xhr.addEventListener('load', function(){
@@ -142,7 +142,7 @@ slide.children[2].children[1].addEventListener('click', function(){
   let searchList; //찾은 팔로우 ID값 리스트로 담아 둠.
     for(const key in res){
       searchList += `<option value="${res[key]}">${res[key]}</option>`;
-      console.log(`값: ${key}, ${res[key]}`)
+      //console.log(`값: ${key}, ${res[key]}`)
     }
     slide.children[3].innerHTML = `<select id="searchResult" onchange="searchResultChooseValue()">
     <option value="none">검색 결과</option>
