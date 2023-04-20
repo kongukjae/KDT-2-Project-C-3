@@ -26,6 +26,9 @@ export default function postBoardFileRead(request, response){
   else if (splitURL === "commentInput.js") {
     cmServer.fileDirectory(`post_board/${splitURL}`, response);
   }
+  else if (splitURL === "dangstarLike.js") {
+    cmServer.fileDirectory(`post_board/${splitURL}`, response);
+  }
   else if (splitURL === "postCreate.js") {
     cmServer.fileDirectory(`post_board/${splitURL}`, response);
   }
@@ -36,4 +39,5 @@ export default function postBoardFileRead(request, response){
   if (request.url.startsWith("/writeImage")) {
     cmServer.fileDirectory(`resource/write.png`, response);
   }
+  
 }
