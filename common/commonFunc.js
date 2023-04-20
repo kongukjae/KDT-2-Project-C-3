@@ -747,6 +747,184 @@ const mypageStyle = {
   },
 };
 
+const keepStyle={
+
+  pageRoot :{
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height1700,
+    margin : "auto",
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.beige,
+    display : "flex",
+    flexDirection : "column",
+    alignItems : "center"
+
+  },
+
+
+
+  pageTopMenu : {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.height126,
+    position : "relative",
+    backgroundColor : pageStyle.colorTheme.peach,
+    ...pageStyle.flexRowCenter
+  },
+  //root1 제목부분 '산돌이를 찾아주세요'
+  pageTitle : {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height40,
+    position : "relative",
+    marginTop : "40px",
+    backgroundColor:pageStyle.colorTheme.lightGray,
+    ...pageStyle.flexRowCenter,
+    fontSize : pageStyle.fontSizeSet.mediumLarge,
+    fontWeight : pageStyle.fontWeightSet.bold,
+    marginTop: "50px"
+
+  },
+  
+  // root2 본문부분, '산돌이는 대전에서 잃어버렸어요'
+  pagemainText : {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height1000,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    marginTop : "50px",
+    fontSize : pageStyle.fontSizeSet.medium,
+    fontWeight : pageStyle.fontWeightSet.bold,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  pageButtonWrap : {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height100,
+    marginTop : "20px",
+    position : "relative",
+    borderRadius : "20px",
+    display : "flex",
+    flexDirection : "row",
+    justifyContent : "space-around",
+    alignItems : "center",
+    
+  },
+  pageButton : {
+    width : pageStyle.width.widthP40,
+    height : "40%",
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    cursor : "pointer",
+    borderRadius : "5px",
+    ...pageStyle.flexRowCenter
+  },
+  pageUploadModal : {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height140,
+    padding : "10px",
+    borderRadius : "10px",
+    ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.whiteTypeD,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    position : "absolute",
+    top : "1200px",
+    left: "30%",
+    gap : "10px",
+    marginLeft: "-150px",
+  },
+  pageUploadModalButtonWrap : {
+    display : "flex",
+    gap : "10px"
+  },
+  pageUploadModalButtonStyle : {
+    border : "0px",
+    width : pageStyle.width.width90,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    fontSize : pageStyle.fontSizeSet.smaller,
+    color : pageStyle.colorTheme.whiteTypeA,
+    borderRadius : "10px",
+    cursor : "pointer",
+    ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+  },
+// root 3.1 카테고리 버튼
+showCategoryModalbt :{
+  width : pageStyle.width.width300,
+    height : pageStyle.height.height140,
+    padding : "10px",
+    borderRadius : "10px",
+    ...pageStyle.flexColCenter,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    backgroundColor : pageStyle.colorTheme.beige,
+    position : "absolute",
+    top : "1200px",
+    left: "50%",
+    gap : "10px",
+    margileft: "200px",
+},
+showcategoryModalButtonWrap:{
+display : "flex",
+gap : "10px"
+},
+showcategoryModalButton:{
+  border : "0px",
+  width : pageStyle.width.width100,
+  height : pageStyle.height.height30,
+  padding : "10px",
+  fontSize : pageStyle.fontSizeSet.smaller,
+  color : pageStyle.colorTheme.whiteTypeA,
+  borderRadius : "10px",
+  cursor : "pointer",
+  ...pageStyle.flexColCenter,
+  backgroundColor : pageStyle.colorTheme.peach,
+  boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
+},
+showcategoryclosebutton:{
+  border : "0px",
+  width : pageStyle.width.width100,
+  height : pageStyle.height.height30,
+  padding : "10px",
+  fontSize : pageStyle.fontSizeSet.smaller,
+  color : pageStyle.colorTheme.whiteTypeA,
+  borderRadius : "10px",
+  cursor : "pointer",
+  ...pageStyle.flexColCenter,
+  backgroundColor : pageStyle.colorTheme.peach,
+  boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  top : "1100px",
+    left: "30%",
+},
+// 4. 페이지 서브밋
+  pageSubmit : {
+  width : pageStyle.width.width500,
+  height :pageStyle.height.height154,
+  backgroundColor : pageStyle.colorTheme.whiteTypeA,
+  cursor : "pointer",
+  borderRadius : "20px",
+  marginBottom: "150px",
+  alignItems : "center",
+  ...pageStyle.flexRowCenter
+},
+
+bottomMenu :{
+  width : pageStyle.width.width500,
+  height : pageStyle.height.height126,
+  // position : "relative",
+  backgroundColor : pageStyle.colorTheme.peach,
+  ...pageStyle.flexRowCenter
+
+}
+
+
+
+
+}
+
+
+
+
 const loginPageStyle = {
   loginPageRoot: {
     width: pageStyle.width.width500,
@@ -926,7 +1104,7 @@ const market = {
   //게시글 목록 part
   root: {
     width: pageStyle.width.width500,
-    height: pageStyle.height.height2000,
+    // height: pageStyle.height.height2000,
     margin: "auto",
     display: "flex",
     flexDirection: "column",
@@ -935,17 +1113,21 @@ const market = {
   addWrite: {
     width: pageStyle.width.width50,
     height: pageStyle.height.height50,
-    position: "relative",
+    position: "absolute",
     backgroundColor: pageStyle.colorTheme.peach,
-    bottom: "60px",
-    left: "430px",
+    bottom: "110px",
+    right: "20px",
     zIndex: "2",
     borderRadius: "30px",
     textAlign: "center",
+    cursor : 'pointer',
+    ...pageStyle.flexRowCenter,
+    fontSize : '30px',
+    transform : 'rotate(135deg)'
   },
   listContainer: {
     width: pageStyle.width.widthP100,
-    height: pageStyle.height.height730,
+    // height: pageStyle.height.height730,
     border: "1px solid red",
     position: "relative",
     zIndex: "1",
@@ -957,6 +1139,8 @@ const market = {
     border: "1px solid black",
     margin: "10px 0 10px 0",
     ...pageStyle.flexRowCenter,
+    textDecoration: 'none',
+    color: pageStyle.colorTheme.black,
   },
   listImg: {
     width: pageStyle.width.width100,
@@ -986,10 +1170,10 @@ const market = {
   marketPost: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height100vh,
-    ...pageStyle.flexColCenter,
+    ...pageStyle.flexColumnTopCenter,
     backgroundColor: pageStyle.colorTheme.peach,
     margin: "auto",
-    borderRadius: pageStyle.borderRadius.borderRadius15,
+    // borderRadius: pageStyle.borderRadius.borderRadius15,
   },
   marketPostImageArea: {
     width: pageStyle.width.width400,
@@ -1102,4 +1286,149 @@ const market = {
     borderBottom: '1px solid red',
 
   }
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+}
+
+const dangtalkChattingRoom ={
+  mainRoot: {
+    width : pageStyle.width.width500,
+      height : pageStyle.height.height1000,
+      margin : "auto",
+      position : "relative",
+      backgroundColor : pageStyle.colorTheme.beige,
+      ...pageStyle.flexColCenter,
+  },
+  chattingContainer: {
+    width : pageStyle.width.width450,
+    height : "100vh",
+    padding : "30px",
+    borderRadius : "10px",
+    display : "flex",
+    position: "relative",
+    flexDirection : "column",
+    justifyContent : "center",
+    alignItems : "center",
+    backgroundColor : pageStyle.colorTheme.peach,
+    gap : "20px",
+    boxShadow : pageStyle.defaultBoxShadow.ConBoxSdw
+  },
+  signUpListBox: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height70,
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    flexWrap : "wrap"
+  },
+  chattingTitle: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height70,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  },
+  chattingWrap: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height690,
+    padding : "10px",
+    borderRadius : "10px",
+    gap : '5px',
+  ...pageStyle.flexColumnTopCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    overflow : "auto"
+  },
+  chattingInputWrap: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height100,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  },
+  chattingFromMe: {
+  ...pageStyle.flexRowCenter,
+    alignSelf : "flex-end",
+    fontSize : "12px",
+    color : "white",
+    gap : "10px"
+  },
+  chattingFromYou: {
+  ...pageStyle.flexRowCenter,
+    alignSelf : "flex-start",
+    fontSize : "12px",
+    gap : "10px"
+
+  },
+  chattingInputText: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height50,
+    border : "0px",
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    marginRight : "10px",
+    fontSize : "15px",
+    color : "black"
+  },
+  chattingSubmitButton: {
+    width : pageStyle.width.width50,
+    height : pageStyle.height.height50,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    marginRight : "10px",
+    fontSize : "16px",
+    color : "white",
+    cursor : 'pointer'
+  },
+  msgBoxStyleFromMe :{
+    width : pageStyle.width.width120,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    alignSelf : "flex-start",
+    fontSize : "12px"
+  },
+  msgBoxStyleFromYou :{
+    width : pageStyle.width.width120,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    alignSelf : "flex-start",
+    fontSize : "12px"
+  },
+  imageBoxStyle : {
+    width : pageStyle.width.width50,
+    height : pageStyle.height.height50,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : '100%'
+  }
+
 }
