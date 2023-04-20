@@ -10,9 +10,8 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
     root.appendChild(child);
     rootChild.push(child);
   }
-
-  // topMenu(rootChild);
-  // styleCreate(rootChild[0], targetStyle.topMenu);
+  topMenu(rootChild[0]);
+  createHamburger(root);
 
   styleCreate(rootChild[1], market.marketPostImageArea);
   rootChild[1].innerHTML = postImg
@@ -81,6 +80,7 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   styleCreate(detailComponent[2], market.marketPostDate);
   detailComponent[2].innerHTML = date;
 
+  btmMeun(rootChild[4]);
 
   // 모달창 생성
   const modal = document.createElement("div");
