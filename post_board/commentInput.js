@@ -1,4 +1,5 @@
 function commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex){
+// function commentInput(postWrap, index, postIndex){
   let test = document.cookie;
   console.log(test);
   let userID = test.split("jwt=")[1];
@@ -19,7 +20,7 @@ function commentInput(postWrap, src_comment_link, textName, cmText, index, postI
     alignItems: "center",
   });
   commentWrap.appendChild(commentForm);
-  
+
   console.dir(document.getElementById('commentSubmitForm'));
 
   // 댓글 입력할 textarea
@@ -70,5 +71,7 @@ function commentInput(postWrap, src_comment_link, textName, cmText, index, postI
 
   //최신 댓글 1개 보여주는 함수 실행
   commentRecent(postWrap, src_comment_link, textName, cmText);
+  // commentRecent(postWrap);
+
 
 }

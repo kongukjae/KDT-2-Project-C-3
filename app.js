@@ -15,6 +15,7 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
+import postCommentLoad from "./httpServer/backend_postBoard_commentLoad.js"
 
 import callPostImage from "./httpServer/callPostImage.js";
 import callPostLogin from "./httpServer/callPostLogin.js";
@@ -129,6 +130,7 @@ const server = http.createServer(function (request, response) {
     }
 
     followSearch(request, response);
+    postCommentLoad(request, response);
     postCommentInput(request, response);
     
     //if(request.url.startsWith('/postBoard/postBoardLike')){

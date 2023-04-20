@@ -1,6 +1,8 @@
 // 게시글 생성 함수
-function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, cmText, index, postIndex) {
-  //console.log(index);
+// function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, cmText, index, postIndex) {
+function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
+  console.log(index);
+  console.log(postIndex);
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {id: `post_${index}`});
   styleCreate(postWrap, {
@@ -100,10 +102,27 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   dangstarLike(postIndex, index, writerNickname);
 
   //댓글 입력창 만드는 함수 실행
-  commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
+  // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
+  function commentInputData(index, postIndex) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `http://localhost:2080/postBoardCommentData`, true);
+    xhr.send(`postIndex=${postIndex}`);
+    xhr.addEventListener('load', function() {
+      let res = JSON.parse(xhr.response);
+      console.log(res);
+      console.log(res[0]);
+      console.log(res[0].cm_detail);
+
+      let src_comment_link = "../resource/MainDogImg.jpg";
+      let textName = res[0].cm_id;
+      let cmText = res[0].cm_detail;
+      commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
+    })
+    console.log("commentData를 받아오기 위한 함수 실행 테스트");
+  }
+  commentInputData(index, postIndex);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
   commentWindow(index, 5, parent);
 
-  
 }
