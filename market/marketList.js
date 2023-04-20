@@ -67,6 +67,5 @@ function loadSecondHandBoard(nth) {
       }
     });
 }
-
 // 하단 메뉴바
-styleCreate(rootChild[2], targetStyle.bottomMenu);
+btmMeun(rootChild[2])
