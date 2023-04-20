@@ -4,8 +4,8 @@ function keepDiary(){
   styleCreate(root,keepStyle.pageRoot)
 
   let rootChild = [];
-  for(let i = 0;i<7;i++){
-    let child = tagCreate("div",{});
+  for(let i = 0; i < 7; i++){
+    let child = tagCreate("div",{id: i});
     root.appendChild(child);
     rootChild.push(child);
   }
@@ -20,30 +20,33 @@ function keepDiary(){
   styleCreate(rootChild[1],keepStyle.pageTitle)
   const yastContentInput = document.createElement("textarea");
   yastContentInput.setAttribute("placeholder", "제목을 입력하세요");
-  yastContentInput.setAttribute("style", "width: 100%; height: 100px;");
+  yastContentInput.setAttribute("style", "width: 100%; height: 40px; resize: none;");
   rootChild[1].appendChild(yastContentInput);
 
-//  3.  root2 본문부분이다. 본문에 작성할 함수
-  styleCreate(rootChild[2],keepStyle.pagemainText)
+// 3. root2 업로드된 이미지 나오는 칸
+  let postUploadImg = document.createElement("div");
+  styleCreate(rootChild[2], keepStyle.pageuploadImg);
+//  4.  root3 본문부분이다. 본문에 작성할 함수
+  styleCreate(rootChild[3],keepStyle.pagemainText)
   const postContentInput = document.createElement("textarea");
   postContentInput.setAttribute("placeholder", "글 작성 내용을 입력하세요");
-  postContentInput.setAttribute("style", "width: 100%; height: 1000px;");
-  rootChild[2].appendChild(postContentInput);
+  postContentInput.setAttribute("style", "width: 100%; height: 400px;resize: none;");
+  rootChild[3].appendChild(postContentInput);
 
 
-  // root3 카테고리, 사진업로드 버튼 
-  styleCreate(rootChild[3],keepStyle.pageButtonWrap)
+  // 5. root4 카테고리, 사진업로드 버튼 
+  styleCreate(rootChild[4],keepStyle.pageButtonWrap)
 
   for(let i = 0; i < 2; i++){
     let button = tagCreate("div");
     styleCreate(button,keepStyle.pageButton)
-    rootChild[3].appendChild(button)
+    rootChild[4].appendChild(button)
   }
   
-  rootChild[3].children[0].innerText=`사진업로드`;
-  rootChild[3].children[1].innerText=`카테고리`;
+  rootChild[4].children[0].innerText=`사진업로드`;
+  rootChild[4].children[1].innerText=`카테고리`;
 
-rootChild[3].children[0].addEventListener("click",()=>{
+rootChild[4].children[0].addEventListener("click",()=>{
   uploadImage()
 })
 function uploadImage(){
@@ -74,41 +77,7 @@ function uploadImage(){
   let imageFormData = new FormData();
   let reader = new FileReader();
   reader.addEventListener("load",()=>{
-
-    let img = new Image();
-    img.src = reader.result;
-    img.onload = function(){
-      const MAX_WIDTH = 100;
-      const MAX_HEIGHT = 100;
-      let targetWidth = img.width;
-      let targetHeight = img.height;
-      if (targetWidth  > targetHeight) {
-        if (targetWidth  > MAX_WIDTH) {
-            targetHeight *= MAX_WIDTH / targetWidth ;
-            targetWidth  = MAX_WIDTH;
-        }
-      } else {
-        if (targetHeight > MAX_HEIGHT) {
-            targetWidth  *= MAX_HEIGHT / targetHeight;
-            targetHeight = MAX_HEIGHT;
-        }
-      }
-      let imageCanvas = document.createElement("canvas");
-      imageCanvas.setAttribute("width", `${targetWidth}px`);
-      imageCanvas.setAttribute("height", `${targetHeight}px`);
-      let context = imageCanvas.getContext("2d");
-      context.drawImage(img,0,0,targetWidth,targetHeight);
-      let dataURL = imageCanvas.toDataURL("image/png",0.5);
-      console.log(dataURL);
-      imageFormData.append("id", cookieId);
-      imageFormData.append("attachedImage", dataURL);
-      rootChild[2].style.backgroundImage = `url(${dataURL})`
-      fetch('http://localhost:2080/uploadImage', {
-        method: 'POST',
-        body: imageFormData
-      }).then(res => res)
-      .then(result => console.log("done"))
-    }
+    
   })
   submitbutton.addEventListener("click",()=>{
     reader.readAsDataURL(myImage.files[0])
@@ -124,7 +93,7 @@ function uploadImage(){
 }
 
 // 게시판 선택 페이지 => '카테고리'
-rootChild[3].children[1].addEventListener("click",()=>{
+rootChild[4].children[1].addEventListener("click",()=>{
 showcategory()
 })
 function showcategory(){
@@ -179,10 +148,10 @@ buttonWrap.appendChild(usedBtn);
 
 const cookieId = document.cookie.split("=")[1].split(';')[0];
 const jwt = document.cookie.split("=")[2];
-//  root4, 제출버튼
-  styleCreate(rootChild[4],keepStyle.pageSubmit)
-  rootChild[4].innerText="제출하기";
-  rootChild[4].addEventListener("click",()=>{
+// 6.  root5, 제출버튼
+  styleCreate(rootChild[5],keepStyle.pageSubmit)
+  rootChild[5].innerText="제출하기";
+  rootChild[5].addEventListener("click",()=>{
     console.log(yastContentInput.value)
     let titleText=yastContentInput.value;
     let mainText=postContentInput.value;
@@ -197,12 +166,12 @@ const jwt = document.cookie.split("=")[2];
     window.location = "http://localhost:2080/secondHand"
     });
 
- //root5 바텀메뉴, 맨 밑에 페이지 구간
-  styleCreate(rootChild[5],targetStyle.bottomMenu)
+ // 7. root6 바텀메뉴, 맨 밑에 페이지 구간
+  styleCreate(rootChild[6],targetStyle.bottomMenu)
   let menuChild = [];
   for(let i = 0;i<5;i++){
     let child = tagCreate("div",{});
-    rootChild[5].appendChild(child);
+    rootChild[6].appendChild(child);
     styleCreate(child,{
       width : "59px",
       height : "59px",

@@ -69,6 +69,7 @@ const pageStyle = {
     heightP30: "30%",
     height2000: "2000px",
     height1700: "1700px",
+    height1300: "1300px",
     height1000: "1000px",
     height730: "730px",
     height690: "690px",
@@ -757,18 +758,14 @@ const keepStyle={
     margin : "auto",
     position : "relative",
     backgroundColor : pageStyle.colorTheme.beige,
-    display : "flex",
-    flexDirection : "column",
-    alignItems : "center"
-
+    ...pageStyle.flexColumnTopCenter,
   },
-
 
 
   pageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
-    position : "relative",
+    // position : "relative",
     backgroundColor : pageStyle.colorTheme.peach,
     ...pageStyle.flexRowCenter
   },
@@ -777,33 +774,41 @@ const keepStyle={
     width : pageStyle.width.width500,
     height : pageStyle.height.height40,
     position : "relative",
-    marginTop : "40px",
     backgroundColor:pageStyle.colorTheme.lightGray,
     ...pageStyle.flexRowCenter,
     fontSize : pageStyle.fontSizeSet.mediumLarge,
     fontWeight : pageStyle.fontWeightSet.bold,
-    marginTop: "50px"
+    // marginTop: "50px",
+    resize: "none",
 
   },
-  
-  // root2 본문부분, '산돌이는 대전에서 잃어버렸어요'
+  // root2 이미지부분
+  pageuploadImg: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height500,
+    ...pageStyle.flexRowCenter,
+    border: '1px solid red',
+  },
+
+  // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
   pagemainText : {
     width : pageStyle.width.width500,
-    height : pageStyle.height.height1000,
+    height : pageStyle.height.height400,
     backgroundColor : pageStyle.colorTheme.lightGray,
     position : "relative",
     ...pageStyle.flexRowCenter,
-    marginTop : "50px",
+    // marginTop : "50px",
     fontSize : pageStyle.fontSizeSet.medium,
     fontWeight : pageStyle.fontWeightSet.bold,
     overflow : "hidden",
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
+    resize: "none",
   },
   pageButtonWrap : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height100,
-    marginTop : "20px",
+    // marginTop : "20px",
     position : "relative",
     borderRadius : "20px",
     display : "flex",
