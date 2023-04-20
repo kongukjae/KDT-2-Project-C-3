@@ -1,163 +1,72 @@
-
-function tagCreate(tType, props) {
-  let element = document.createElement(tType);
-  for (let i in props) {
-    element[i] = props[i];
-  }
-  return element;
-};
-
-function styleCreate(obj, styleOb) {
-  for (i in styleOb) {
-    obj.style[i] = styleOb[i];
-  }
-}
-
-//댕댕마켓 게시글 리스트 스타일
-// const marketListStyle = {
-//   root: {
-//     width: '500px',
-//     height: '1000px',
-//     margin: "auto",
-//     display: "flex",
-//     flexDirection: "column",
-//     //position: "relative"
-//   }
-// }
-
-
-let root = tagCreate("div",{id:"market"});
+let root = tagCreate("div", { id: "market" });
 document.body.appendChild(root);
-styleCreate(root,marketListStyle.root)
+styleCreate(root, market.root);
 let rootChild = [];
-for(let i = 0;i<3;i++){
-  let child = tagCreate("div",{id:i});
+for (let i = 0; i < 3; i++) {
+  let child = tagCreate("div", { id: i });
   root.appendChild(child);
   rootChild.push(child);
 }
 
-let add = tagCreate("div", {})
+let add = tagCreate("div", {});
 root.appendChild(add);
-styleCreate(add, {
-  width: "50px",
-  height: "50px",
-  position: "relative",
-  backgroundColor: "#F7786B",
-  bottom: "60px",
-  left: "430px",
-  zIndex: "2",
-  borderRadius: "30px",
-  textAlign: "center",
-})
+styleCreate(add, market.addWrite);
 add.innerText = "글"
 
+topMenu(rootChild[0]);
+createHamburger(root);
 
-//상단메뉴바
-styleCreate(rootChild[0],{
-  width: "100%",
-    height: "126px",
-    position: "relative",
-    backgroundColor: "#F7786B",
-    zIndex: "2"
-  })
-
-styleCreate(rootChild[1],{
-  width: "100%",
-    height: "730px",
-    border: "1px solid red",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    position: 'relative',
-    zIndex: "1",
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-})
-function makeList(nth){
+styleCreate(rootChild[1], market.listContainer);
+function makeList(nth) {
   loadSecondHandBoard(nth);
 }
 
 makeList(0);
 
-function createSecondHandList(result){
-  let child = tagCreate("div",{});
-  let mother = document.getElementById('1');
+function createSecondHandList(result, count) {
+  let child = tagCreate("a", {id: 'index'+count});
+  child.href = `/secondHandPost?nth=${count}`;
+  let mother = document.getElementById("1");
   mother.appendChild(child);
-  styleCreate(child, {
-    width: "80%",
-    height: "200px",
-    border: "1px solid black",
-    margin: "10px 0 10px 0",
-    display: "flex",
-    justifyContent: 'center',
-    alignItems: 'center',
-  })
-  let listImgChild = tagCreate("div",{});
+  styleCreate(child, market.listBox);
+
+  let listImgChild = tagCreate("div", {});
   child.appendChild(listImgChild);
-  styleCreate(listImgChild, {
-    width: "100px",
-    height: "100px",
-    border: "1px solid black",
-    margin: "5px"
-  });
-  let listTextChild = tagCreate("div",{});
+  styleCreate(listImgChild, market.listImg);
+
+  let listTextChild = tagCreate("div", {});
   child.appendChild(listTextChild);
-  styleCreate(listTextChild, {
-    width: "300px",
-    height: "100px",
-    //border: "1px solid black",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: 'center',
-    alignItems: 'center',
+  styleCreate(listTextChild, market.listText);
+
+  document.getElementById(`index${count}`).addEventListener('click', function() {
+    console.log(`index${count}`);
   })
 
   let title = tagCreate("div", {});
   listTextChild.appendChild(title);
-  styleCreate(title, {
-    width: "95%",
-    height: "30%",
-    //border: "1px solid black",
-    margin: "3px 0 3px 0",
-    fontSize: "20px",
-    fontWeight: "700"
-  });
-  title.innerText=result.title
+  styleCreate(title, market.listTitle);
+  title.innerText = result.title;
 
   let text = tagCreate("div", {});
   listTextChild.appendChild(text);
-  styleCreate(text, {
-    width: "95%",
-    height: "70%",
-    //border: "1px solid black",
-    marginBottom: "3px"
-  });
-  text.innerText=result.detail
+  styleCreate(text, market.listElementText);
+  text.innerText = result.detail;
 }
 
-
-function loadSecondHandBoard(nth){
+function loadSecondHandBoard(nth) {
+  let nextIndex = (nth * 5) - 1;
   fetch(`http://localhost:2080/loadSecondHandBoard?nth=${nth}`)
-  .then((response) => {
-    return response.json();
-  })
-  .then((result)=>{
-    for(let i of result){
-      createSecondHandList(i);
-    }
-  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      console.log(result);
+      for (let i of result) {
+        nextIndex = nextIndex + 1;
+        createSecondHandList(i, nextIndex);
+      }
+    });
 }
 
-// 하단 메뉴바 
-styleCreate(rootChild[2],{
-  width: "500px",
-    height: "90px",
-    position: "fixed",
-    bottom: "0px",
-    backgroundColor: "#F7786B",
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    zIndex: "2"
-})
+// 하단 메뉴바
+styleCreate(rootChild[2], targetStyle.bottomMenu);

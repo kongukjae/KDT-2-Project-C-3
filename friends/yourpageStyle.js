@@ -9,8 +9,8 @@ function yourPage(){
     root.appendChild(child);
     rootChild.push(child);
   }
-
-  topMenu(rootChild);
+  topMenu(rootChild[0]);
+  createHamburger(root);
   // styleCreate(rootChild[0],mypageStyle.mypageTopMenu)
   // const logoLoginPage = tagCreate('img', '');
   // logoLoginPage.style.width = '28%';
@@ -22,12 +22,13 @@ function yourPage(){
   rootChild[1].innerText = `${targetIdFromServer}님의 페이지`;
   
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
- 
+  
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendUserImage`);
-  xhr.send(`id=${targetIdFromServer}`); 
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${targetIdFromServer}`); 
   xhr.addEventListener('load', function(){
-      let imageFromServer = xhr.response;
+      let imageFromServer = URL.createObjectURL(xhr.response);
       rootChild[2].style.backgroundImage = `url(${imageFromServer})`
       console.log("이미지 가져오기 완료");
   });
@@ -91,8 +92,9 @@ function yourPage(){
 
   styleCreate(rootChild[6],targetStyle.bottomMenu)
 
-  let menuChild = [];
-  btmMeun(rootChild[6], menuChild);
+
+  btmMeun(rootChild[6]);
+
   // for(let i = 0;i<5;i++){
   //   let child = tagCreate("div",{});
   //   rootChild[6].appendChild(child);

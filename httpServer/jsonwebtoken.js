@@ -47,6 +47,6 @@ let token = jwtCreate({id:"asdasd123"});
 
 console.log(token);
 // console.log(jwt.verify(token.token,jwtinfo.secretKey))
-console.log(jwtCheck(token.token))
+console.log(jwtCheck(token.token).id)
 
 // console.log(accessToken);
