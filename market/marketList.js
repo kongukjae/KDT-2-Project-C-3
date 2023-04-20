@@ -7,11 +7,36 @@ for (let i = 0; i < 3; i++) {
   root.appendChild(child);
   rootChild.push(child);
 }
-
+// 글쓰기 작성 페이지
 let add = tagCreate("div", {});
-root.appendChild(add);
+rootChild[2].appendChild(add);
 styleCreate(add, market.addWrite);
-add.innerText = "글"
+add.innerText = "✏"
+
+add.addEventListener("click",() =>{
+
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+ 
+  let addForm = document.createElement('form');
+  addForm.method = "POST"
+  addForm.action = "/mykeep";
+  let params = {jwt:token, targetId:"mine"}
+  for(let key in params){
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type","hidden");
+    hiddenField.setAttribute("name",key);
+    hiddenField.setAttribute("value",params[key]);
+    addForm.appendChild(hiddenField);
+}
+document.body.appendChild(addForm);
+addForm.submit();
+}); 
+
+
+
 
 topMenu(rootChild[0]);
 createHamburger(root);
@@ -67,6 +92,5 @@ function loadSecondHandBoard(nth) {
       }
     });
 }
-
 // 하단 메뉴바
-styleCreate(rootChild[2], targetStyle.bottomMenu);
+btmMeun(rootChild[2])
