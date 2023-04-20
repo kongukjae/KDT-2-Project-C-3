@@ -1,4 +1,4 @@
-function commentRecent(postWrap, src_comment_link){
+function commentRecent(postWrap, src_comment_link, textName, cmText){
   // 최신 댓글 하나가 보여질 영역
   const commentViewWrap = tagCreate("div", {});
   styleCreate(commentViewWrap, {
@@ -57,14 +57,15 @@ function commentRecent(postWrap, src_comment_link){
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
   });
-  // commentViewName.innerText = textName;
-  commentViewName.innerText = "댓글 닉네임 DB에서 가져올 데이터";
+  commentViewName.innerText = textName;
+  // commentViewName.innerText = "댓글 닉네임 DB에서 가져올 데이터";
   commentViewContentWrap.appendChild(commentViewName);
 
   // 최신 댓글 내용
   const commentViewContent = tagCreate("p", {});
-  commentViewContent.innerText =
-    "DB에서 가져올 데이터 임시로 입력해둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+  commentViewContent.innerText = cmText;
+  // commentViewContent.innerText =
+    // "DB에서 가져올 데이터 임시로 입력해둔 더미 텍스트 Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
   styleCreate(commentViewContent, {
     width: "400px",
     whiteSpace: "nowrap",

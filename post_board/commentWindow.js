@@ -2,14 +2,12 @@
 
 //댓글 창 만드는 함수
 function commentWindow(index, cmtNumber, parent) {
-  //console.log("ddddddddddddddddddddddd")
   let cmtModal = tagCreate("div", { id: "cmtModal" });
   console.log("index");
   console.log(index);
-  // 댓글 창 만드는 함수임!! children 경로 수정 필요
   parent.children[index + 3].appendChild(cmtModal);
-  console.log("parent : ");
-  console.log(parent);
+  // console.log("parent : ");
+  // console.log(parent);
   styleCreate(cmtModal, {
     width: "500px",
     backgroundColor: "#E6E6E6",

@@ -95,6 +95,7 @@ const html = {
   <script src="/post_board/commentRecent.js"></script>
   <script src="/post_board/commentInput.js"></script>
   <script src="/post_board/commentWindow.js"></script>
+  <script src="/post_board/dangstarLike.js"></script>
   <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
 }
