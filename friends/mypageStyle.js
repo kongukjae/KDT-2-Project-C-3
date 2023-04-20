@@ -17,13 +17,17 @@ function myPage(){
   rootChild[1].innerText = `마이 페이지`;
 
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
-  const cookieId = document.cookie.split("=")[1]
+  const cookieId = document.cookie.split("=")[1].split(";")[0]
+  
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendUserImage`);
-  xhr.send(`id=${cookieId}`); 
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${cookieId}`); 
   xhr.addEventListener('load', function(){
       let imageFromServer = xhr.response;
-      rootChild[2].style.backgroundImage = `url(${imageFromServer})`
+      const resultURL = URL.createObjectURL(xhr.response);
+      rootChild[2].style.backgroundImage = `url(${resultURL})`
+      console.log(imageFromServer);
       console.log("이미지 가져오기 완료");
   });
   styleCreate(rootChild[3],mypageStyle.mypageButtonWrap)
@@ -84,81 +88,15 @@ function myPage(){
     submitbutton.innerText = "업로드";
     let myImage = document.getElementById("myImage");
     let imageFormData = new FormData();
-    // let reader = new FileReader();
-    // reader.addEventListener("load",()=>{
+    let reader = new FileReader();
+    reader.addEventListener("load",()=>{
+      rootChild[2].style.backgroundImage = `url(${reader.result})`
+    })
 
-    //   let img = new Image();
-    //   img.src = reader.result;
-    //   img.onload = function(){
-    //     const MAX_WIDTH = 100;
-    //     const MAX_HEIGHT = 100;
-    //     let targetWidth = img.width;
-    //     let targetHeight = img.height;
-    //     if (targetWidth  > targetHeight) {
-    //       if (targetWidth  > MAX_WIDTH) {
-    //           targetHeight *= MAX_WIDTH / targetWidth ;
-    //           targetWidth  = MAX_WIDTH;
-    //       }
-    //     } else {
-    //       if (targetHeight > MAX_HEIGHT) {
-    //           targetWidth  *= MAX_HEIGHT / targetHeight;
-    //           targetHeight = MAX_HEIGHT;
-    //       }
-    //     }
-    //     let imageCanvas = document.createElement("canvas");
-    //     imageCanvas.setAttribute("width", `${targetWidth}px`);
-    //     imageCanvas.setAttribute("height", `${targetHeight}px`);
-    //     let context = imageCanvas.getContext("2d");
-    //     context.drawImage(img,0,0,targetWidth,targetHeight);
-    //     let dataURL = imageCanvas.toDataURL("image/png",0.5);
-    //     console.log(dataURL);
-    //     imageFormData.append("id", cookieId);
-    //     imageFormData.append("attachedImage", dataURL);
-    //     rootChild[2].style.backgroundImage = `url(${dataURL})`
-    //     fetch('http://localhost:2080/uploadImage', {
-    //       method: 'POST',
-    //       body: imageFormData
-    //     }).then(res => res)
-    //     .then(result => console.log("done"))
-    //   }
-    // })
-    // submitbutton.addEventListener("click",()=>{
-    //   reader.readAsDataURL(myImage.files[0])
-    // });
-    // reader.addEventListener("load",()=>{
-
-    //   let img = new Image();
-    //   img.src = reader.result;
-    //   img.onload = function(){
-    //     const MAX_WIDTH = 100;
-    //     const MAX_HEIGHT = 100;
-    //     let targetWidth = img.width;
-    //     let targetHeight = img.height;
-    //     if (targetWidth  > targetHeight) {
-    //       if (targetWidth  > MAX_WIDTH) {
-    //           targetHeight *= MAX_WIDTH / targetWidth ;
-    //           targetWidth  = MAX_WIDTH;
-    //       }
-    //     } else {
-    //       if (targetHeight > MAX_HEIGHT) {
-    //           targetWidth  *= MAX_HEIGHT / targetHeight;
-    //           targetHeight = MAX_HEIGHT;
-    //       }
-    //     }
-    //     let imageCanvas = document.createElement("canvas");
-    //     imageCanvas.setAttribute("width", `${targetWidth}px`);
-    //     imageCanvas.setAttribute("height", `${targetHeight}px`);
-    //     let context = imageCanvas.getContext("2d");
-    //     context.drawImage(img,0,0,targetWidth,targetHeight);
-    //     let dataURL = imageCanvas.toDataURL("image/png",0.5);
-    //     console.log(dataURL);
-    //     imageFormData.append("id", cookieId);
-    //     imageFormData.append("attachedImage", dataURL);
-    //     rootChild[2].style.backgroundImage = `url(${dataURL})`
-        
-    //   }
-    // })
+    
+    
     submitbutton.addEventListener("click",()=>{
+      reader.readAsDataURL(myImage.files[0])
       imageFormData.append("id", cookieId);
       imageFormData.append("attachedImage", myImage.files[0]);
       fetch('http://localhost:2080/uploadImage', {
