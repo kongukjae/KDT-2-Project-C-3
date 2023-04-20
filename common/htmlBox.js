@@ -77,7 +77,8 @@ const html = {
   //댕댕마켓
   secondHand:`
   <script src="/common/commonFunc.js"></script>
-<<<<<<< HEAD
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
   <script src="/market/marketList.js"></script>`,
 
 
@@ -88,16 +89,6 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/friends/myKeepStyle.js"></script>`,
 
-
-
-
-
-
-
-=======
-  <script src="/common/topMenu.js"></script>
-  <script src="/common/bottomMenu.js"></script>
-  <script src="/market/marketList.js"></script>`,
   marketpost:`
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
@@ -116,6 +107,5 @@ const html = {
   <script src="/post_board/dangstarLike.js"></script>
   <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
->>>>>>> 444cd66d5f7b2d83201ca2da7d54b8e0e2e63cd1
 }
 export default html;

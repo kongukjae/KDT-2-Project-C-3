@@ -24,7 +24,6 @@ import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
-import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
