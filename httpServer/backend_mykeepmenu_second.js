@@ -15,8 +15,8 @@ export default function dangMap(request, response) {
       response.end();
     });
   } 
-  
-  if (request.url === "/mykeepcute") {
+  // 제출했을때 --> mykeepcute로 이동하는 일련의 과정
+  if (request.url === "/secondHand") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
@@ -29,6 +29,7 @@ export default function dangMap(request, response) {
       const jwtunlockId = JWT.jwtCheck(jsonwebtoken).id; 
       const title = result[2].split("=")[1];
       const text = result[3].split("=")[1];
+      console.log(result);
 
 
       let connection = mysql.createConnection(cmServer.mysqlInfo);
@@ -36,11 +37,14 @@ export default function dangMap(request, response) {
       //  if(target === "mine"){
        connection.query(
         `INSERT INTO second_hand (id, title, detail,img) VALUES ('${jwtunlockId}', '${title}', '${text}','image_url')`,
-        (error,) => {
-          if (error) throw error;
-        }
+         (error,) => {
+           if (error) throw error;
+       },
        )
       connection.end();
+      response.writeHead(200);
+      response.end();
+
     });
   }
 }
