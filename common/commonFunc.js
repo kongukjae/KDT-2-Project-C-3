@@ -957,6 +957,8 @@ const market = {
     border: "1px solid black",
     margin: "10px 0 10px 0",
     ...pageStyle.flexRowCenter,
+    textDecoration: 'none',
+    color: pageStyle.colorTheme.black,
   },
   listImg: {
     width: pageStyle.width.width100,
