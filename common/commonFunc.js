@@ -35,6 +35,7 @@ const pageStyle = {
   },
   width: {
     widthP100: "100%",
+    widthP95: "95%",
     widthP90: "90%",
     widthP80: "80%",
     widthP60: "60%",
@@ -55,6 +56,7 @@ const pageStyle = {
     width90: "90px",
     width50: "50px",
     width40: "40px",
+    width30: "30px",
     width25: "25px",
     width9: "9px",
     width3: "3px",
@@ -1127,7 +1129,6 @@ const market = {
   },
   listContainer: {
     width: pageStyle.width.widthP100,
-    // height: pageStyle.height.height730,
     border: "1px solid red",
     position: "relative",
     zIndex: "1",
@@ -1284,20 +1285,65 @@ const market = {
     justifyContent: 'center',
     alignItems: 'end',
     borderBottom: '1px solid red',
-
   }
+}
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
+const dangtalk = {
+  chatRoot: {
+    width: pageStyle.width.width500,
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative"
+  },
+  chatlistContainer: {
+    width: pageStyle.width.widthP100,
+    // border: "1px solid blue",
+    position: "relative",
+    zIndex: "1",
+    ...pageStyle.flexColCenter,
+  },
+  chatlistBox: {
+    width: pageStyle.width.widthP95,
+    height: pageStyle.height.height100,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    margin: "10px 0 10px 0",
+    ...pageStyle.flexRowCenter,
+    textDecoration: 'none',
+    color: pageStyle.colorTheme.black,
+    backgroundColor: pageStyle.colorTheme.peach,
+    boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+  },
+  chatlistImg: {
+    width: pageStyle.width.width80,
+    height: pageStyle.height.height80,
+    border: "1px solid black",
+    borderRadius: pageStyle.borderRadius.borderRadius9,
+    margin: "5px",
+  },
+  chatlistBoxComponent: {
+    width: pageStyle.width.width300,
+    height: pageStyle.height.height100,
+    ...pageStyle.flexColCenter,
+  },
+  chatlistUserName: {
+    width: pageStyle.width.widthP90,
+    height: pageStyle.height.heightP30,
+    margin: "3px 0 3px 0",
+    fontSize: "20px",
+    fontWeight: "700",
+  },
+  chatlistlastMsg: {
+    width: pageStyle.width.widthP90,
+    height: pageStyle.height.heightP30,
+    marginBottom: "3px",
+  },
+  chatlistCount: {
+    width: pageStyle.width.width30,
+    height: pageStyle.height.height30,
+    ...pageStyle.flexRowCenter,
+    margin: '5px',
+    fontSize: "15px",
+    fontWeight: "700",
+  }
 }

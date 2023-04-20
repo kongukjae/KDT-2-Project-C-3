@@ -63,10 +63,6 @@ function createSecondHandList(result, count) {
   child.appendChild(listTextChild);
   styleCreate(listTextChild, market.listText);
 
-  document.getElementById(`index${count}`).addEventListener('click', function() {
-    console.log(`index${count}`);
-  })
-
   let title = tagCreate("div", {});
   listTextChild.appendChild(title);
   styleCreate(title, market.listTitle);
