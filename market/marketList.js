@@ -9,9 +9,9 @@ for (let i = 0; i < 3; i++) {
 }
 
 let add = tagCreate("div", {});
-root.appendChild(add);
+rootChild[2].appendChild(add);
 styleCreate(add, market.addWrite);
-add.innerText = "글"
+add.innerText = "✏"
 
 topMenu(rootChild[0]);
 createHamburger(root);
@@ -67,6 +67,5 @@ function loadSecondHandBoard(nth) {
       }
     });
 }
-
 // 하단 메뉴바
-styleCreate(rootChild[2], targetStyle.bottomMenu);
+btmMeun(rootChild[2])

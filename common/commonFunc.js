@@ -1104,7 +1104,7 @@ const market = {
   //게시글 목록 part
   root: {
     width: pageStyle.width.width500,
-    height: pageStyle.height.height2000,
+    // height: pageStyle.height.height2000,
     margin: "auto",
     display: "flex",
     flexDirection: "column",
@@ -1113,17 +1113,21 @@ const market = {
   addWrite: {
     width: pageStyle.width.width50,
     height: pageStyle.height.height50,
-    position: "relative",
+    position: "absolute",
     backgroundColor: pageStyle.colorTheme.peach,
-    bottom: "60px",
-    left: "430px",
+    bottom: "110px",
+    right: "20px",
     zIndex: "2",
     borderRadius: "30px",
     textAlign: "center",
+    cursor : 'pointer',
+    ...pageStyle.flexRowCenter,
+    fontSize : '30px',
+    transform : 'rotate(135deg)'
   },
   listContainer: {
     width: pageStyle.width.widthP100,
-    height: pageStyle.height.height730,
+    // height: pageStyle.height.height730,
     border: "1px solid red",
     position: "relative",
     zIndex: "1",
