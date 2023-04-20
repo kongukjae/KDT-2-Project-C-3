@@ -22,7 +22,7 @@ export default function postPostBoardLike(request, response) {
           console.log(likeUser)
           // console.log(jwtFunc.jwtCheck(likeUser).id);
   
-          let postLike = [];
+          let likeResult = {re: false};
           let conn = mysql.createConnection(cmServer.mysqlInfo);
           conn.connect();
           conn.query(
@@ -42,8 +42,13 @@ export default function postPostBoardLike(request, response) {
                   conn.query(`
                     UPDATE dangstar 
                     SET post_like = JSON_OBJECT('likeUser', JSON_ARRAY('${likeUser}'))
-                    WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'
+                    WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' AND post_like IS NULL
                   `);
+
+                  likeResult['re'] = true;
+                  response.writeHead(200);
+                  response.write(JSON.stringify(likeResult));
+                  response.end();
                 } 
                 else {
                   const likeUserArr = JSON.parse(postLike).likeUser;
@@ -55,7 +60,13 @@ export default function postPostBoardLike(request, response) {
                     let cnt = likeUserArr.indexOf(likeUser);
                     console.log(cnt);
                     conn.query(`
-                    UPDATE dangstar SET post_like = JSON_REMOVE(post_like, '$.likeUser[1]')`);
+                    UPDATE dangstar SET post_like = JSON_REMOVE(post_like, '$.likeUser[${cnt}]') 
+                      WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'
+                    `);
+                    likeResult['re'] = false;
+                    response.writeHead(200);
+                    response.write(JSON.stringify(likeResult));
+                    response.end();
 
                   } 
                   // 3. likeUser 배열에 존재하지 않는 경우 해당 값을 추가
@@ -65,83 +76,18 @@ export default function postPostBoardLike(request, response) {
                       SET post_like = JSON_ARRAY_APPEND(post_like, '$.likeUser', '${likeUser}')
                       WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' AND post_like IS NOT NULL
                     `);
+
+                    likeResult['re'] = true;
+                    response.writeHead(200);
+                    response.write(JSON.stringify(likeResult));
+                    response.end();
                   }
                 }
               }
+              conn.end();
             }
             
           );
-          /*
-          conn.query(
-            `SELECT * FROM dangstar WHERE post_index = '${postNumber}'`, 
-            (error, data) => {
-              if (error) throw error;
-              else {
-                //if (data.length === 0) {
-                  console.log("좋아요 개수: 0",writeUser, data)
-                  conn.query(`
-                  UPDATE dangstar SET post_like = JSON_OBJECT('likeUser', JSON_ARRAY('${likeUser}'))
-                  WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' and post_like IS NULL
-                  `);
-                  //conn.end();
-                //} else {
-                  conn.query(`SELECT * FROM dangstar WHERE JSON_CONTAINS(post_like->'$.likeUser', 'euni123')`,
-                  (error, data) =>{
-                    if (error) throw error;
-                    else {
-                      if (data.length === 0) {
-                        conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'all', '${likeUser}'), ']')) WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' and post_like IS NOT NULL`);
-                      }
-                      else{
-                        conn.query(`UPDATE dangstar SET post_like = JSON_ARRAY_APPEND(post_like, '$.likeUser', '${likeUser}') WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' and post_like IS NOT NULL`);
-                        
-                      }
-  
-                    }
-                  });
-  
-                  conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'all', '${likeUser}'), ']')) WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' and post_like IS NOT NULL`);
-  
-                  conn.query(`
-                  UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
-                  WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'`);
-  
-                  UPDATE dangstar SET post_like = JSON_REMOVE(post_like, REPLACE(JSON_SEARCH(post_like, 'one', '${likeUser}'), '.', '')) WHERE post_index = '${postNumber}' AND post_id = '${writeUser}'`);
-  
-                }
-              }
-            }
-          );*/
-          
-  
-          // conn.end();
-  
-          // conn.query(`select post_like from dangstar where post_index = '${postNumber}'`,
-          // (error, data) => {
-          //   if(error) throw error;
-          //   else{
-          //     //console.log(data)
-          //     for(let row of data) {
-          //       let postLikeJson = row.post_like;
-          //       let postLikeArray = JSON.parse(postLikeJson).likeUser;
-          //       postLike = postLike.concat(postLikeArray);
-          //     }
-          //     //console.log(postLike);
-          //     for(let i = 0; i < postLike.length; i++){
-          //       //if(postLike[i] === likeUser){
-          //         conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, JSON_UNQUOTE(json_extract(post_like, '$.likeUser[${i}]')), 'all', '${likeUser}') WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' and post_like is not null`)
-  
-                  
-                  // conn.query(`UPDATE dangstar SET post_like = JSON_REMOVE(post_like, JSON_UNQUOTE(JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123'))) WHERE JSON_SEARCH(post_like->'$.likeUser', 'one', 'euni123') IS NOT NULL`)
-                  // `UPDATE dangstar SET post_like = JSON_REMOVE(post_like, CONCAT('$.likeUser[', JSON_SEARCH(post_like, 'one', '${likeUser}'), ']'))
-                  // WHERE post_index = '${postNumber}'`
-                //}
-          //     }
-              
-          //   }
-          // });
-          // )
-          
         })
       }
     }

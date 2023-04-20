@@ -80,7 +80,13 @@ function postCreate(parent, src_link, writerNickname, text, src_comment_link, te
   for (let i = 0; i < 3; i++) {
     const postBtn = tagCreate("button", {});
     if (i === 0) {
-      postBtn.innerText = "좋아요";
+      const heartImage = tagCreate("img", {id: 'heartImage',src: '/emptyHeartImage'})
+      postBtn.appendChild(heartImage);
+      styleCreate(heartImage, {
+        width: "80%",
+        height: "80%",
+      })
+      //postBtn.innerText = "좋아요";
       postBtn.id = `like_${postIndex}_${index}`;
     } else if (i === 1) {
       postBtn.innerText = "댓글";
