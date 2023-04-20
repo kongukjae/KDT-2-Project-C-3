@@ -1403,7 +1403,7 @@ const dangtalkChattingRoom ={
     cursor : 'pointer'
   },
   msgBoxStyleFromMe :{
-    width : pageStyle.width.width120,
+    // width : pageStyle.width.width120,
     height : pageStyle.height.height30,
     padding : "10px",
     borderRadius : "10px",
@@ -1414,7 +1414,7 @@ const dangtalkChattingRoom ={
     fontSize : "12px"
   },
   msgBoxStyleFromYou :{
-    width : pageStyle.width.width120,
+    // width : pageStyle.width.width120,
     height : pageStyle.height.height30,
     padding : "10px",
     borderRadius : "10px",
@@ -1428,7 +1428,10 @@ const dangtalkChattingRoom ={
     width : pageStyle.width.width50,
     height : pageStyle.height.height50,
     backgroundColor : pageStyle.colorTheme.lightGray,
-    borderRadius : '100%'
+    borderRadius : '100%',
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   }
 
 }
