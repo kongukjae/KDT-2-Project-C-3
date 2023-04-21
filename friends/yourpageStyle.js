@@ -21,7 +21,23 @@ function yourPage(){
   styleCreate(rootChild[1],mypageStyle.mypageTitle)
   rootChild[1].innerText = `${targetIdFromServer}님의 페이지`;
   
-  styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
+  styleCreate(rootChild[2],mypageStyle.mypageImageStyle);
+
+  // 즐겨찾기 표시용 아이콘
+  let star = tagCreate('button', {id: "star"});
+  styleCreate(star, {
+    position: "absolute",
+    top: "0px",
+    right: "0px",
+    width: "50px",
+    height: "50px",
+    backgroundColor: "yellow",
+  })
+  rootChild[2].appendChild(star);
+  star.addEventListener('click', () => {
+    console.log("click");
+  })
+
   
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `http://localhost:2080/sendImage`);
