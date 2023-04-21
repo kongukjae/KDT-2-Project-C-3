@@ -41,7 +41,7 @@ function yourPage(){
     rootChild[3].appendChild(button)
   }
   rootChild[3].children[0].innerText = "팔로우";
-  rootChild[3].children[1].innerText = "쪽지";
+  rootChild[3].children[1].innerText = "채팅";
   const JWT = document.cookie.split("=")[2]
   let followCheckXhr = new XMLHttpRequest();
   let _URL = `http://localhost:2080/followCheck`;
@@ -67,6 +67,33 @@ function yourPage(){
         location.reload();
       })
   })
+  rootChild[3].children[1].addEventListener('click',()=>{
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    
+    fetch('http://localhost:2080/createChatRoomRequest', {
+      method: 'POST',
+      body: JSON.stringify({jwt:jwt,targetId:targetIdFromServer})
+    }).then((result)=>{
+      console.log(result);
+      let chatBoxForm = document.createElement('form');
+      chatBoxForm.method = "POST"
+      chatBoxForm.action = "/dangTalkChatRoom";
+      let params = {jwt:jwt, targetId:targetIdFromServer};
+      for(let key in params){
+        let hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type","hidden");
+        hiddenField.setAttribute("name",key);
+        hiddenField.setAttribute("value",params[key]);
+        chatBoxForm.appendChild(hiddenField);
+      }
+      document.body.appendChild(chatBoxForm);
+      chatBoxForm.submit();
+    })
+  })
+
 
   styleCreate(rootChild[4],mypageStyle.mypageUserinfoBox)
   for(let i = 0; i < 5;i++){

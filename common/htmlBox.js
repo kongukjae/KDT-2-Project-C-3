@@ -96,6 +96,24 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/market/market-post-page.js"></script>`,
 
+<<<<<<< HEAD
+=======
+
+//댕스타그램
+postBoard: `
+<script src="/common/commonFunc.js"></script>
+<script src="/common/topMenu.js"></script>
+<script src="/common/bottomMenu.js"></script>
+<script src="/post_board/commentUpdateDelete.js"></script>
+<script src="/post_board/commentRecent.js"></script>
+<script src="/post_board/commentInput.js"></script>
+<script src="/post_board/commentWindow.js"></script>
+<script src="/post_board/dangstarLike.js"></script>
+<script src="/post_board/postCreate.js"></script>
+<script src="/post_board/dangstargram.js"></script>`,
+
+
+>>>>>>> 35fb9ae940bb993a1146cbb641b2c7194f257d8d
   //댕스타그램
   postBoard: `
   <script src="/common/commonFunc.js"></script>
@@ -113,6 +131,16 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
+<<<<<<< HEAD
   <script src="/dangtalk/chattingRoomMain.js"></script>`
+=======
+  <script src="/dangtalk/chattingRoomMain.js"></script>`,
+
+  dangTalkList:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/dangtalk/dangtalk_list.js"></script>`
+>>>>>>> 35fb9ae940bb993a1146cbb641b2c7194f257d8d
 }
 export default html;

@@ -29,8 +29,10 @@ import starLoad from "./httpServer/backend_yourpage_starLoad.js";
 
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 
+import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
+import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main_get.js";
+import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_main_post.js";
 
-import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -160,26 +162,12 @@ const server = http.createServer(function (request, response) {
     postBoardLike(request, response);
     starCheck(request, response);
     starLoad(request, response);
+    dangTalkChatRoomPost(request, response)
   };
 });
 
-//소켓용 서버
-const socketServer = new Server(server);
-
-// namespace /chat에 접속한다.
-let chat = socketServer.of('/chat').on('connection', function(socket) {
-  socket.on('chat message', function(data){
-    console.log('message from client: ', data);
-    console.log(data);
-    var name = data.name;
-    var room = data.room;
-
-    // room에 join한다
-    socket.join(room);
-    // room에 join되어 있는 클라이언트에게 메시지를 전송한다
-    chat.to(room).emit('chat message', name +"&"+ data.msg);
-  });
-});
+//chatting Socket
+chatWithSocketIo(server)
 
 
 // 서버 포트 설정

@@ -1316,15 +1316,19 @@ const dangtalk = {
     ...pageStyle.flexRowCenter,
     textDecoration: 'none',
     color: pageStyle.colorTheme.black,
-    backgroundColor: pageStyle.colorTheme.peach,
+    backgroundColor: pageStyle.colorTheme.beige,
     boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+    cursor : 'pointer'
   },
   chatlistImg: {
-    width: pageStyle.width.width80,
-    height: pageStyle.height.height80,
-    border: "1px solid black",
-    borderRadius: pageStyle.borderRadius.borderRadius9,
+    width: '70px',
+    height: '70px',
+    // border: "1px solid black",
+    borderRadius: '50%',
     margin: "5px",
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   },
   chatlistBoxComponent: {
     width: pageStyle.width.width300,
@@ -1354,11 +1358,136 @@ const dangtalk = {
 }
 
 
+const dangtalkChattingRoom ={
+  mainRoot: {
+    width : pageStyle.width.width500,
+      height : pageStyle.height.height1000,
+      margin : "auto",
+      position : "relative",
+      backgroundColor : pageStyle.colorTheme.beige,
+      ...pageStyle.flexColCenter,
+  },
+  chattingContainer: {
+    width : pageStyle.width.width450,
+    height : "100vh",
+    padding : "30px",
+    borderRadius : "10px",
+    display : "flex",
+    position: "relative",
+    flexDirection : "column",
+    justifyContent : "center",
+    alignItems : "center",
+    backgroundColor : pageStyle.colorTheme.peach,
+    gap : "20px",
+    boxShadow : pageStyle.defaultBoxShadow.ConBoxSdw
+  },
+  signUpListBox: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height70,
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    flexWrap : "wrap"
+  },
+  chattingTitle: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height70,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  },
+  chattingWrap: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height690,
+    padding : "10px",
+    borderRadius : "10px",
+    gap : '5px',
+  ...pageStyle.flexColumnTopCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    overflow : "auto"
+  },
+  chattingInputWrap: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height100,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
 
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  },
+  chattingFromMe: {
+  ...pageStyle.flexRowCenter,
+    alignSelf : "flex-end",
+    fontSize : "12px",
+    color : "white",
+    gap : "10px"
+  },
+  chattingFromYou: {
+  ...pageStyle.flexRowCenter,
+    alignSelf : "flex-start",
+    fontSize : "12px",
+    gap : "10px"
 
-  
+  },
+  chattingInputText: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height50,
+    border : "0px",
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    marginRight : "10px",
+    fontSize : "15px",
+    color : "black"
+  },
+  chattingSubmitButton: {
+    width : pageStyle.width.width50,
+    height : pageStyle.height.height50,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    marginRight : "10px",
+    fontSize : "16px",
+    color : "white",
+    cursor : 'pointer'
+  },
+  msgBoxStyleFromMe :{
+    // width : pageStyle.width.width120,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    alignSelf : "flex-start",
+    fontSize : "12px"
+  },
+  msgBoxStyleFromYou :{
+    // width : pageStyle.width.width120,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    alignSelf : "flex-start",
+    fontSize : "12px"
+  },
+  imageBoxStyle : {
+    width : pageStyle.width.width50,
+    height : pageStyle.height.height50,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : '100%',
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  }
 
-
-
-
-
+}
