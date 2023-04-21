@@ -6,7 +6,8 @@ styleCreate(root, {
     margin: "auto",
     display: "flex",
     flexDirection: "column",
-    position: "relative"
+    position: "relative",
+
 });
 
 let rootChild = [];
@@ -16,34 +17,37 @@ for (let i = 0; i < 3; i++) {
   rootChild.push(child);
 }
 
+//댕프렌드 리스트 자리
 styleCreate(rootChild[1], {
   ...pageStyle.flexColCenter,
   width: pageStyle.width.widthP100,
 })
 
-let parent = rootChild[1];
+//즐겨찾기한 팔로우 자리
+let starFriends = tagCreate("div", {id:"star"});
+rootChild[1].appendChild(starFriends);
+styleCreate(starFriends, {
+  ...pageStyle.flexColCenter,
+width: pageStyle.width.widthP100,
+});
 
-  let starFriends = tagCreate("div", {id:"star"});
-  rootChild[1].appendChild(starFriends);
-  styleCreate(starFriends, {
-    ...pageStyle.flexColCenter,
-  width: pageStyle.width.widthP100,
-  });
+//구분선
+let grid = tagCreate("div", {});
+rootChild[1].appendChild(grid);
+styleCreate(grid, {
+width: pageStyle.width.widthP95,
+height: pageStyle.height.height3,
+border: `2px solid ${pageStyle.colorTheme.lightGray}`,
+margin: '10px 0 10px 0'
+});
 
-  let grid = tagCreate("div", {});
-  rootChild[1].appendChild(grid);
-  styleCreate(grid, {
-  width: pageStyle.width.widthP95,
-  height: pageStyle.height.height3,
-  border: `2px solid ${pageStyle.colorTheme.lightGray}`,
-  });
-
-  let friends = tagCreate("div", {id:"friends"});
-  rootChild[1].appendChild(friends);
-  styleCreate(friends, {
-    ...pageStyle.flexColCenter,
-  width: pageStyle.width.widthP100,
-  });
+//일반 팔로우 자리
+let friends = tagCreate("div", {id:"friends"});
+rootChild[1].appendChild(friends);
+styleCreate(friends, {
+  ...pageStyle.flexColCenter,
+width: pageStyle.width.widthP100,
+});
 
 //상단 메뉴바
 topMenu(rootChild[0]);
@@ -60,9 +64,15 @@ function loadFriendsList(starFriends, friends) {
   xhr.open("POST", _URL, true);
   xhr.send(`{id=${cookie}}`);
   xhr.addEventListener("load", function () {
-    for(let i = 0; i < 5; i++){
-      createfriendsList(friends, i);
+    const friendsList = JSON.parse(this.response)
+    // console.log(friendsList.starFriends.length)
 
+    for(let i = 0; i < friendsList.starFriends.length; i++){
+      createfriendsList(starFriends);
+    }
+
+    for(let i = 0; i < friendsList.stdFriends.length; i++){
+      createfriendsList(friends);
     }
     // let res = JSON.parse(xhr.response);
     // for (let i = 0; i < res.length; i++) {
@@ -84,8 +94,8 @@ function createfriendsList(parent){
     ...pageStyle.flexRowCenter,
     textDecoration: 'none',
     color: pageStyle.colorTheme.black,
-    backgroundColor: pageStyle.colorTheme.peach,
-    // boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+    backgroundColor: pageStyle.colorTheme.beige,
+    boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
   });
 
   let chatlistUserImg = tagCreate("div", {});

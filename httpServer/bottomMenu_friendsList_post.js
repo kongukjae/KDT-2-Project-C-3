@@ -21,19 +21,40 @@ export default function postPostBoardLike(request, response) {
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         let starFriends = [];
         let stdFriends = [];
+        let friend = {};
 
         conn.connect();
         conn.query(`select fr_id from fr_list where user_id = '${userID}' and star = '1'`, 
         (err, data) => {
           if(err) throw err;
           else{
-            console.log("내 친구: ", data);
+            data.forEach(element => {
+              starFriends.push(element.fr_id);
+            });
           }
+          conn.query(`select fr_id from fr_list where user_id = '${userID}' and star = '0'`, 
+          (err, data) => {
+            if(err) throw err;
+            else{
+              data.forEach(element => {
+                stdFriends.push(element.fr_id);
+              });
+            }
+            // console.log("star: ", starFriends)
+            // console.log("std: ", stdFriends)
+
+            // starFriends.forEach(element => {
+              friend['starFriends'] = starFriends;
+              friend['stdFriends'] = stdFriends;
+            // });
+            // friend.push(starFriends)
+            console.log("친구목록: ", friend)
+            response.writeHead(200)
+            response.end(JSON.stringify(friend))
+          });
         });
+        
 
-
-        response.writeHead(200, { "Content-Type": "text/html" })
-        response.end()
 
       })
     // let nth = request.url.split("=")[1];
