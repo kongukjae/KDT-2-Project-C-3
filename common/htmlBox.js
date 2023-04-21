@@ -113,7 +113,12 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script src="/dangtalk/chattingRoomMain.js"></script>`
+  <script src="/dangtalk/chattingRoomMain.js"></script>`,
 
+  dangTalkList:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/dangtalk/dangtalk_list.js"></script>`
 }
 export default html;

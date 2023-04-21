@@ -1316,15 +1316,19 @@ const dangtalk = {
     ...pageStyle.flexRowCenter,
     textDecoration: 'none',
     color: pageStyle.colorTheme.black,
-    backgroundColor: pageStyle.colorTheme.peach,
+    backgroundColor: pageStyle.colorTheme.beige,
     boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+    cursor : 'pointer'
   },
   chatlistImg: {
-    width: pageStyle.width.width80,
-    height: pageStyle.height.height80,
-    border: "1px solid black",
-    borderRadius: pageStyle.borderRadius.borderRadius9,
+    width: '70px',
+    height: '70px',
+    // border: "1px solid black",
+    borderRadius: '50%',
     margin: "5px",
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   },
   chatlistBoxComponent: {
     width: pageStyle.width.width300,
