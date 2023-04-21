@@ -32,8 +32,10 @@ function yourPage(){
     right: "0px",
     width: "50px",
     height: "50px",
+    cursor: "pointer",
     border: "1px solid black",
-    // backgroundColor: "yellow",
+    backgroundColor: "lightBlue",
+    // backgroundImage: `url(../resource/emptyStar.png)`,
   })
   rootChild[2].appendChild(star);
   star.addEventListener('click', () => {
@@ -49,10 +51,10 @@ function yourPage(){
       let starRes = JSON.parse(xhr.response);
       if(starRes === true) {
         console.log("꽉 찬 별");
-        star.style.backgroundColor = "lightBlue";
+        star.style.backgroundColor = "yellow";
       } else {
         console.log("속 빈 별");
-        star.style.backgroundColor = "lightPink";
+        star.style.backgroundColor = "lightBlue";
 
       }
     })
@@ -90,6 +92,7 @@ function yourPage(){
       followRequestURL = 'http://localhost:2080/unFollowRequest'
       followRequestMessage = '팔로우 취소'
       rootChild[3].children[0].innerText = "팔로우 취소";
+      // 즐겨찾기 버튼 표시
       star.style.display = "block";
     }
   })
