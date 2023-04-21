@@ -791,6 +791,7 @@ const keepStyle={
     ...pageStyle.flexRowCenter,
     border: `1px solid ${pageStyle.colorTheme.peach}`,
     borderRadius: pageStyle.borderRadius.borderRadius9,
+    backgroundSize: "cover",
   },
 
   // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
