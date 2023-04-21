@@ -112,10 +112,13 @@ const server = http.createServer(function (request, response) {
     }else if (request.url === "/friends/yourpageStyle.js") {
       cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
     }
+    if (request.url === "/friends/starCheck.js") {
+      cmServer.fileDirectory(`/friends/starCheck.js`, response);
+    }
     if (request.url.startsWith("/myMarker")) {
       myMarker(request, response)
     }
-
+   
 
     //댕맵 페이지
     dangMapServer(request, response);

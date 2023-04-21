@@ -61,6 +61,7 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/starCheck.js"></script>
   <script src="/friends/yourpageStyle.js"></script>`,
   findUserInfo : `
   <script src="/common/commonFunc.js"></script>
