@@ -54,4 +54,7 @@ function btmMeun(rootChild){
   menuChild[3].addEventListener("click",()=>{
     window.location = "http://localhost:2080/dangTalkChatList"
   });
+  menuChild[4].addEventListener("click",()=>{
+    window.location = "http://localhost:2080/friendsList"
+  });
 }

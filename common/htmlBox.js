@@ -79,7 +79,13 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/friends/myKeepStyle.js"></script>`,
 
-  
+  //댕프렌드
+  friendsList: `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/friendsListPage.js"></script>`,
+
 
   //댕댕마켓
   secondHand:`

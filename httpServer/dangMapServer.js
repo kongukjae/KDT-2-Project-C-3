@@ -27,7 +27,7 @@ export default function dangMap(request, response) {
     let myRowCnt;
     let markerMyArr = {};
 
-    console.log("url: " + request.url);
+    // console.log("url: " + request.url);
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
@@ -60,7 +60,7 @@ export default function dangMap(request, response) {
               markerMyArr[i] = myArr;
             }
           }
-          console.log(markerMyArr)
+          // console.log(markerMyArr)
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
