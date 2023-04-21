@@ -23,8 +23,6 @@ function yourPage(){
   
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle);
 
-  starChecker(rootChild[2]);
-  
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `http://localhost:2080/sendImage`);
   xhr.responseType = 'blob';
@@ -53,11 +51,10 @@ function yourPage(){
   followCheckXhr.send(JSON.stringify({jwt:JWT,you:targetIdFromServer}));
   followCheckXhr.addEventListener("load",()=>{
     if(followCheckXhr.response === 'yes'){
+      starCheck(rootChild[2]);
       followRequestURL = 'http://localhost:2080/unFollowRequest'
       followRequestMessage = '팔로우 취소'
       rootChild[3].children[0].innerText = "팔로우 취소";
-      // 즐겨찾기 버튼 표시
-      star.style.display = "block";
     }
   })
 

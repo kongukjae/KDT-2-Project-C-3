@@ -25,6 +25,7 @@ import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import postBoardLike from "./httpServer/post_postBoard_like.js";
 import starCheck from "./httpServer/backend_yourpage_starCheck.js";
+import starLoad from "./httpServer/backend_yourpage_starLoad.js";
 
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 
@@ -158,6 +159,7 @@ const server = http.createServer(function (request, response) {
     postCommentInput(request, response);
     postBoardLike(request, response);
     starCheck(request, response);
+    starLoad(request, response);
   };
 });
 

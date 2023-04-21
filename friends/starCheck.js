@@ -1,8 +1,29 @@
 // 즐겨찾기
-function starChecker(parent) {
+function starCheck(parent) {
+  console.log("starCheck 진입")
+  let userID = document.cookie.split("jwt=")[1];
+  let fr_id = targetIdFromServer;
+
+  // 즐겨찾기 버튼을 만들기 전 상대방을 즐겨찾기 등록을 했는지 안했는지 판단
+  let starValue;
+  const starXhr = new XMLHttpRequest();
+  starXhr.open('POST', `http://localhost:2080/starLoad`)
+  starXhr.send(`userID=${userID}&fr_id=${fr_id}`);
+  starXhr.addEventListener('load', function() {
+    console.log("star load 응답");
+    let starLoadRes = JSON.parse(starXhr.response);
+    starValue = starLoadRes;
+    console.log(starValue);
+    starBtnCreate(parent, starValue, userID, fr_id);
+  })
+
+  // console.log("로딩 후 star Load 값 : " + starValue);
+}
+
+function starBtnCreate(parent, starValue, userID, fr_id) {
+  console.log("starBtnCreate 진입")
   let star = tagCreate("button", { id: "star" });
   styleCreate(star, {
-    display: "none",
     position: "absolute",
     top: "0px",
     right: "0px",
@@ -11,13 +32,15 @@ function starChecker(parent) {
     cursor: "pointer",
     border: "1px solid black",
   });
+  if(starValue) {
+    star.style.backgroundColor = "yellow";
+  } else {
+    star.style.backgroundColor = "lightBlue";
+  }
   parent.appendChild(star);
+  console.log("btn 생성 완료")
   star.addEventListener("click", () => {
     console.log("click");
-    console.log(targetIdFromServer);
-    let userID = document.cookie.split("jwt=")[1];
-    console.log(userID);
-    let fr_id = targetIdFromServer;
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `http://localhost:2080/starCheck`);
     xhr.send(`userID=${userID}&fr_id=${fr_id}`);
