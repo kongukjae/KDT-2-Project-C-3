@@ -35,6 +35,7 @@ const pageStyle = {
   },
   width: {
     widthP100: "100%",
+    widthP95: "95%",
     widthP90: "90%",
     widthP80: "80%",
     widthP60: "60%",
@@ -55,6 +56,7 @@ const pageStyle = {
     width90: "90px",
     width50: "50px",
     width40: "40px",
+    width30: "30px",
     width25: "25px",
     width9: "9px",
     width3: "3px",
@@ -67,6 +69,7 @@ const pageStyle = {
     heightP30: "30%",
     height2000: "2000px",
     height1700: "1700px",
+    height1300: "1300px",
     height1000: "1000px",
     height730: "730px",
     height690: "690px",
@@ -746,17 +749,19 @@ const mypageStyle = {
     boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
   },
 };
+
 const keepStyle={
+
   pageRoot :{
     width : pageStyle.width.width500,
     height : pageStyle.height.height1700,
     margin : "auto",
     position : "relative",
     backgroundColor : pageStyle.colorTheme.beige,
-    display : "flex",
-    flexDirection : "column",
-    alignItems : "center"
+    ...pageStyle.flexColumnTopCenter,
   },
+
+
   pageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
@@ -769,31 +774,42 @@ const keepStyle={
     width : pageStyle.width.width500,
     height : pageStyle.height.height40,
     position : "relative",
-    marginTop : "40px",
     backgroundColor:pageStyle.colorTheme.lightGray,
     ...pageStyle.flexRowCenter,
     fontSize : pageStyle.fontSizeSet.mediumLarge,
     fontWeight : pageStyle.fontWeightSet.bold,
   },
-  
-  // root2 본문부분, '산돌이는 대전에서 잃어버렸어요'
-  pagemainText : {
+  pageTitle: {
     width : pageStyle.width.width500,
-    height : pageStyle.height.height1000,
+    height : pageStyle.height.height40,
+    resize: "none",
+  },
+  // root2 이미지부분
+  pageuploadImg: {
+    width: pageStyle.width.width500,
+    height: pageStyle.height.height500,
+    ...pageStyle.flexRowCenter,
+    border: `1px solid ${pageStyle.colorTheme.peach}`,
+    borderRadius: pageStyle.borderRadius.borderRadius9,
+  },
+
+  // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
+  pagemainTextBox : {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height400,
     backgroundColor : pageStyle.colorTheme.lightGray,
     position : "relative",
     ...pageStyle.flexRowCenter,
-    marginTop : "50px",
     fontSize : pageStyle.fontSizeSet.medium,
     fontWeight : pageStyle.fontWeightSet.bold,
     overflow : "hidden",
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundPosition: "center",
   },
   pageButtonWrap : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height100,
-    marginTop : "20px",
+    // marginTop : "20px",
     position : "relative",
     borderRadius : "20px",
     display : "flex",
@@ -910,7 +926,12 @@ bottomMenu :{
 }
 
 
+
+
 }
+
+
+
 
 const loginPageStyle = {
   loginPageRoot: {
@@ -1114,7 +1135,6 @@ const market = {
   },
   listContainer: {
     width: pageStyle.width.widthP100,
-    // height: pageStyle.height.height730,
     border: "1px solid red",
     position: "relative",
     zIndex: "1",
@@ -1271,12 +1291,68 @@ const market = {
     justifyContent: 'center',
     alignItems: 'end',
     borderBottom: '1px solid red',
-
   }
+}
 
-
-
-
+const dangtalk = {
+  chatRoot: {
+    width: pageStyle.width.width500,
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative"
+  },
+  chatlistContainer: {
+    width: pageStyle.width.widthP100,
+    // border: "1px solid blue",
+    position: "relative",
+    zIndex: "1",
+    ...pageStyle.flexColCenter,
+  },
+  chatlistBox: {
+    width: pageStyle.width.widthP95,
+    height: pageStyle.height.height100,
+    borderRadius: pageStyle.borderRadius.borderRadius15,
+    margin: "10px 0 10px 0",
+    ...pageStyle.flexRowCenter,
+    textDecoration: 'none',
+    color: pageStyle.colorTheme.black,
+    backgroundColor: pageStyle.colorTheme.peach,
+    boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+  },
+  chatlistImg: {
+    width: pageStyle.width.width80,
+    height: pageStyle.height.height80,
+    border: "1px solid black",
+    borderRadius: pageStyle.borderRadius.borderRadius9,
+    margin: "5px",
+  },
+  chatlistBoxComponent: {
+    width: pageStyle.width.width300,
+    height: pageStyle.height.height100,
+    ...pageStyle.flexColCenter,
+  },
+  chatlistUserName: {
+    width: pageStyle.width.widthP90,
+    height: pageStyle.height.heightP30,
+    margin: "3px 0 3px 0",
+    fontSize: "20px",
+    fontWeight: "700",
+  },
+  chatlistlastMsg: {
+    width: pageStyle.width.widthP90,
+    height: pageStyle.height.heightP30,
+    marginBottom: "3px",
+  },
+  chatlistCount: {
+    width: pageStyle.width.width30,
+    height: pageStyle.height.height30,
+    ...pageStyle.flexRowCenter,
+    margin: '5px',
+    fontSize: "15px",
+    fontWeight: "700",
+  }
+}
 
 
 
@@ -1287,4 +1363,3 @@ const market = {
 
 
 
-}
