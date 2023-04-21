@@ -35,7 +35,6 @@ export default function FollowStarLoad(request, response) {
               (error, data) => {
                 console.log(data[0]);
                 console.log(data[0].star);
-                console.log("ddaattaa");
                 if (data[0].star === 0) {
                   response.end("false");
                 } else {

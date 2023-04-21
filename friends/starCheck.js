@@ -24,20 +24,32 @@ function starBtnCreate(parent, starValue, userID, fr_id) {
   console.log("starBtnCreate 진입")
   let star = tagCreate("button", { id: "star" });
   styleCreate(star, {
+    display: "flex",
+    justifyConent: "center",
+    alignItems: "center",
     position: "absolute",
     top: "0px",
     right: "0px",
     width: "50px",
     height: "50px",
     cursor: "pointer",
-    border: "1px solid black",
+    border: "1px solid #DDD",
+    borderRadius: "7px",
+    backgroundColor: "transparent",
   });
-  if(starValue) {
-    star.style.backgroundColor = "yellow";
-  } else {
-    star.style.backgroundColor = "lightBlue";
-  }
   parent.appendChild(star);
+
+  let starImg = tagCreate("img", {});
+  styleCreate(starImg, {
+    width: "100%",
+  })
+  star.appendChild(starImg);
+  if(starValue) {
+    star.children[0].src = "/fullStarImage";
+  } else {
+    star.children[0].src = "/emptyStarImage";
+  }
+  
   console.log("btn 생성 완료")
   star.addEventListener("click", () => {
     console.log("click");
@@ -48,10 +60,10 @@ function starBtnCreate(parent, starValue, userID, fr_id) {
       let starRes = JSON.parse(xhr.response);
       if (starRes === true) {
         console.log("꽉 찬 별");
-        star.style.backgroundColor = "yellow";
+        star.children[0].src = "/fullStarImage";
       } else {
         console.log("속 빈 별");
-        star.style.backgroundColor = "lightBlue";
+        star.children[0].src = "/emptyStarImage";
       }
     });
   });
