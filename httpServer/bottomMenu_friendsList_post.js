@@ -16,43 +16,75 @@ export default function postPostBoardLike(request, response) {
         userID = userID.split("}")[0]
         // console.log(userID)
         userID = jwtFunc.jwtCheck(userID).id;
-        console.log("댕프렌드 유저ID", userID)
+        // console.log("댕프렌드 유저ID", userID)
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
-        let starFriends = [];
-        let stdFriends = [];
+        
+        //즐겨찾기 팔로우 정보담는 변수
+        let starFriendsID = [];
+        let starFriendsDogName = [];
+        let starFriendsIntro = [];
+
+        //일반 팔로우 정보담는 변수
+        let stdFriendsID = [];
+        let stdFriendsDogName = [];
+        let stdFriendsIntro = [];
+
+        //최종 즐겨찾기, 일반 팔로우 정보
         let friend = {};
 
         conn.connect();
-        conn.query(`select fr_id from fr_list where user_id = '${userID}' and star = '1'`, 
+        conn.query(`select id, dogName, intro from userinfo join fr_list on fr_list.fr_id = userinfo.id where user_id = '${userID}' and star = '1'`, 
         (err, data) => {
           if(err) throw err;
           else{
             data.forEach(element => {
-              starFriends.push(element.fr_id);
+              starFriendsID.push(element.id);
+              starFriendsDogName.push(element.dogName);
+              starFriendsIntro.push(element.intro);
             });
-          }
-          conn.query(`select fr_id from fr_list where user_id = '${userID}' and star = '0'`, 
-          (err, data) => {
-            if(err) throw err;
-            else{
-              data.forEach(element => {
-                stdFriends.push(element.fr_id);
-              });
-            }
-            // console.log("star: ", starFriends)
-            // console.log("std: ", stdFriends)
+            // for(let i = 0; i < data.length; i++){
+              // console.log(data[i].id)
+              friend['starId'] = starFriendsID;
+              friend['starDogName'] = starFriendsDogName;
+              friend['starIntro'] = starFriendsIntro;
 
-            // starFriends.forEach(element => {
-              friend['starFriends'] = starFriends;
-              friend['stdFriends'] = stdFriends;
-            // });
-            // friend.push(starFriends)
-            console.log("친구목록: ", friend)
-            response.writeHead(200)
-            response.end(JSON.stringify(friend))
-          });
+            // }
+            // console.log("즐찾친구: ", starFriends);
+          }
         });
+        conn.query(`select id, dogName, intro from userinfo join fr_list on fr_list.fr_id = userinfo.id where user_id = '${userID}' and star = '0'`, 
+        (err, data) => {
+          if(err) throw err;
+          else{
+            data.forEach(element => {
+              stdFriendsID.push(element.id);
+              stdFriendsDogName.push(element.dogName);
+              stdFriendsIntro.push(element.intro);
+            });
+            // for(let i = 0; i < data.length; i++){
+              // console.log(data[i].id)
+              friend['stdId'] = stdFriendsID;
+              friend['stdDogName'] = stdFriendsDogName;
+              friend['stdIntro'] = stdFriendsIntro;
+
+
+          }
+          console.log("친구목록: ", friend);
+
+
+          response.writeHead(200)
+          response.end(JSON.stringify(friend))
+        });
+        // conn.query(
+        //   `select id, dogName, intro from userinfo join fr_list on fr_list.fr_id = userinfo.id where user_id = '${userID}' and star = '1'`,
+        //   (err, data) => {
+        //     if(err) throw err;
+        //     else{
+        //       console.log("join Data: ", data)
+        //     }
+        // })
+        
         
 
 

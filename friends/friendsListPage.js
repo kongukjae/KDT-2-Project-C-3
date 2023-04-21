@@ -29,6 +29,7 @@ rootChild[1].appendChild(starFriends);
 styleCreate(starFriends, {
   ...pageStyle.flexColCenter,
 width: pageStyle.width.widthP100,
+marginTop: "10px"
 });
 
 //구분선
@@ -65,14 +66,13 @@ function loadFriendsList(starFriends, friends) {
   xhr.send(`{id=${cookie}}`);
   xhr.addEventListener("load", function () {
     const friendsList = JSON.parse(this.response)
-    // console.log(friendsList.starFriends.length)
 
-    for(let i = 0; i < friendsList.starFriends.length; i++){
-      createfriendsList(starFriends);
+    for(let i = 0; i < friendsList.starId.length; i++){
+      createfriendsList(starFriends, friendsList.starDogName[i], friendsList.starIntro[i]);
     }
 
-    for(let i = 0; i < friendsList.stdFriends.length; i++){
-      createfriendsList(friends);
+    for(let i = 0; i < friendsList.stdId.length; i++){
+      createfriendsList(friends, friendsList.stdDogName[i], friendsList.stdIntro[i]);
     }
     // let res = JSON.parse(xhr.response);
     // for (let i = 0; i < res.length; i++) {
@@ -82,7 +82,7 @@ function loadFriendsList(starFriends, friends) {
   });
 }
 
-function createfriendsList(parent){
+function createfriendsList(parent, dogName, intro){
 
   let box = tagCreate("div", {});
   parent.appendChild(box);
@@ -113,26 +113,39 @@ function createfriendsList(parent){
   styleCreate(chatlistBoxComponent, {
     width: pageStyle.width.width300,
     height: pageStyle.height.height100,
-    ...pageStyle.flexColCenter,
+    display: "flex",
+    flexDirection: "column",
+    // justifyContent: "center",
+    alignItems: "center",
+    margin: "20px 0 0 10px"
   });
+
+  // let userSapce = tagCreate("div", {})
+  // chatlistBoxComponent.appendChild(userSapce);
+  // styleCreate(userSapce, {
+
+  // })
 
   let chatlistUserName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistUserName);
   styleCreate(chatlistUserName, {
-    width: pageStyle.width.width300,
-    height: pageStyle.height.height100,
-    ...pageStyle.flexColCenter,
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.heightP30,
+    fontSize: pageStyle.fontSizeSet.small,
+    fontWeight: "700",
+    marginBottom: "5px"
+    // ...pageStyle.flexColCenter,
   });
-  chatlistUserName.innerText = "나다";
+  chatlistUserName.innerText = dogName;
 
   let chatlastMsg = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlastMsg);
   styleCreate(chatlastMsg, {
-    width: pageStyle.width.widthP90,
-    height: pageStyle.height.heightP30,
+    width: pageStyle.width.widthP100,
+    height: pageStyle.height.heightP70,
     marginBottom: "3px",
   });
-  chatlastMsg.innerText = "ㅎㅇ";
+  chatlastMsg.innerText = intro;
 
   let chatlistCount = tagCreate("div", {});
   box.appendChild(chatlistCount);
@@ -141,10 +154,11 @@ function createfriendsList(parent){
     height: pageStyle.height.height30,
     ...pageStyle.flexRowCenter,
     margin: '5px',
-    // fontSize: "15px",
-    // fontWeight: "700",
+    fontSize: pageStyle.fontSizeSet.small,
+    fontWeight: "800",
+    textAlign: 'center'
   });
-  chatlistCount.innerText = '...';
+  chatlistCount.innerText = '. . .';
 }
 
 
