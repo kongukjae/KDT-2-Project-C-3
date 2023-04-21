@@ -29,7 +29,7 @@ export default function postCommentInput(request, response) {
       );
       conn.end();
       console.log("새로고침 시작");
-      response.write("<script>location.reload();</script>");
+      // response.write("<script>location.reload();</script>");
       response.end();
     });
   }
