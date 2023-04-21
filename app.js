@@ -24,6 +24,7 @@ import myPagePost from "./httpServer/myPagePost.js";
 import signupResult from "./httpServer/signupResultRoute.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import postBoardLike from "./httpServer/post_postBoard_like.js";
+import starCheck from "./httpServer/backend_yourpage_starCheck.js";
 
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 
@@ -134,9 +135,6 @@ const server = http.createServer(function (request, response) {
   if (request.method === 'POST') {
     //마이페이지
 
-
-    
-
     myKeepPost(request,response);
 
     myPagePost(request, response);
@@ -156,6 +154,7 @@ const server = http.createServer(function (request, response) {
     postCommentLoad(request, response);
     postCommentInput(request, response);
     postBoardLike(request, response);
+    starCheck(request, response);
   };
 });
 

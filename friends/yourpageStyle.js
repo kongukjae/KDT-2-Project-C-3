@@ -36,6 +36,16 @@ function yourPage(){
   rootChild[2].appendChild(star);
   star.addEventListener('click', () => {
     console.log("click");
+    console.log(targetIdFromServer);
+    let userID = document.cookie.split("jwt=")[1];
+    console.log(userID);
+    let fr_id = targetIdFromServer;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `http://localhost:2080/starCheck`);
+    xhr.send(`userID=${userID}&fr_id=${fr_id}`);
+    xhr.addEventListener('load', function() {
+      console.log("응답");
+    })
   })
 
   
