@@ -21,8 +21,8 @@ function yourPage(){
   styleCreate(rootChild[1],mypageStyle.mypageTitle)
   rootChild[1].innerText = `${targetIdFromServer}님의 페이지`;
   
-  styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
-  
+  styleCreate(rootChild[2],mypageStyle.mypageImageStyle);
+
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `http://localhost:2080/sendImage`);
   xhr.responseType = 'blob';
@@ -51,6 +51,7 @@ function yourPage(){
   followCheckXhr.send(JSON.stringify({jwt:JWT,you:targetIdFromServer}));
   followCheckXhr.addEventListener("load",()=>{
     if(followCheckXhr.response === 'yes'){
+      starCheck(rootChild[2]);
       followRequestURL = 'http://localhost:2080/unFollowRequest'
       followRequestMessage = '팔로우 취소'
       rootChild[3].children[0].innerText = "팔로우 취소";

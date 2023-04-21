@@ -38,6 +38,8 @@ import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import getFriendsList from "./httpServer/bottomMenu_friendsList_get.js"
 import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
+import starCheck from "./httpServer/backend_yourpage_starCheck.js";
+import starLoad from "./httpServer/backend_yourpage_starLoad.js";
 
 //import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
 import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main_get.js";
@@ -132,6 +134,9 @@ const server = http.createServer(function (request, response) {
     }else if (request.url === "/friends/yourpageStyle.js") {
       cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
     }
+    if (request.url === "/friends/starCheck.js") {
+      cmServer.fileDirectory(`/friends/starCheck.js`, response);
+    }
     if (request.url.startsWith("/myMarker")) {
       myMarker(request, response)
     }
@@ -190,6 +195,8 @@ const server = http.createServer(function (request, response) {
     //댕프렌드
     PostFriendsList(request, response)
 
+    starCheck(request, response);
+    starLoad(request, response);
     dangTalkChatRoomPost(request, response)
   };
 });
