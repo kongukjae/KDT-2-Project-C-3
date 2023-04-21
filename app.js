@@ -92,7 +92,9 @@ const server = http.createServer(function (request, response) {
     if (request.url === "/friends/myKeepStyle.js") {
       cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
     }    
+   
 
+  
     if (request.url === "/init_user/signupstyle.js") {
       cmServer.fileDirectory(`init_user/signup.js`, response);
     }
@@ -131,6 +133,9 @@ const server = http.createServer(function (request, response) {
   // post request
   if (request.method === 'POST') {
     //마이페이지
+
+
+    
 
     myKeepPost(request,response);
 

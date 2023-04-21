@@ -14,14 +14,42 @@ function keepDiary(){
   const logoLoginPage = tagCreate('img', '');
   logoLoginPage.style.width = '28%';
   logoLoginPage.src = './resource/MainLogo.png';
-  rootChild[0].appendChild(logoLoginPage); 
-
+  rootChild[0].appendChild(logoLoginPage);
+  
+  
+  // id를 titleTextboxWrap을 정해주고, 받아주는 서버 
+  // 즉 /mykoop 부분에서 조절해준다.
+  rootChild[1].id = 'titleTextboxWrap'
 //  2.  제목부분 root1 제목작성칸
   styleCreate(rootChild[1],keepStyle.pageTitle)
   const yastContentInput = document.createElement("textarea");
+  // document.addEventListener('click', function () {
+  //   const currentUrl = window.location.pathname;
+  //   if (currentUrl === '/mykeep') {
+  //     {
+  //       rootChild[1].style.display = 'none';
+  //     }
+  //   }
+  // });
   yastContentInput.setAttribute("placeholder", "제목을 입력하세요");
   yastContentInput.setAttribute("style", "width: 100%; height: 100px;");
   rootChild[1].appendChild(yastContentInput);
+
+  
+  // if (window.location.href.includes("/mykeep")) {
+  //   // 제목 요소 선택
+  //   const titleElement = document.querySelector(rootchild[1]);
+  
+  //   // 제목 요소에 click 이벤트 추가
+  //   titleElement.addEventListener("click", () => {
+  //     // display:none 스타일 적용
+  //     titleElement.style.display = "none";
+  //   });
+  // }
+
+
+
+
 
 //  3.  root2 본문부분이다. 본문에 작성할 함수
   styleCreate(rootChild[2],keepStyle.pagemainText)
@@ -179,6 +207,7 @@ buttonWrap.appendChild(usedBtn);
 
 const cookieId = document.cookie.split("=")[1].split(';')[0];
 const jwt = document.cookie.split("=")[2];
+
 //  root4, 제출버튼
   styleCreate(rootChild[4],keepStyle.pageSubmit)
   rootChild[4].innerText="제출하기";
@@ -186,13 +215,30 @@ const jwt = document.cookie.split("=")[2];
     console.log(yastContentInput.value)
     let titleText=yastContentInput.value;
     let mainText=postContentInput.value;
-  
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/mykeepcute`,true);
-    xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-    // xhr.addEventListener("load",()=>{
-    //   let resultFromSeve =xhr.response;
-    });
+
+     let xhr = new XMLHttpRequest();
+     if (window.location.href.includes("/mykeep")) {
+      xhr.open("POST", "http://localhost:2080/postBoard", true);
+      xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+      window.location.href = "http://localhost:2080/postBoard";
+    } else {
+      xhr.open("POST", "http://localhost:2080/secondHand", true);
+      xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+      window.location.href = "http://localhost:2080/secondHand";
+    }
+
+
+    //  xhr.open("POST", `http://localhost:2080/secondHand`,true);
+    //  xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+    //  window.location = "http://localhost:2080/secondHand"
+    
+     
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", `http://localhost:2080/postBoard`,true);
+    // xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+    // window.location = "http://localhost:2080/postBoard"
+
+  });
 
  //root5 바텀메뉴, 맨 밑에 페이지 구간
   styleCreate(rootChild[5],targetStyle.bottomMenu)
