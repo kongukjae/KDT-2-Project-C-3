@@ -115,7 +115,7 @@ function myPage(){
     })
   }
 
-  rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리"
+  rootChild[5].innerText = "캘린더 자리"
 
 
   

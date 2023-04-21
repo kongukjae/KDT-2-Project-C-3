@@ -93,8 +93,6 @@ const server = http.createServer(function (request, response) {
       cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
     }    
    
-
-  
     if (request.url === "/init_user/signupstyle.js") {
       cmServer.fileDirectory(`init_user/signup.js`, response);
     }
