@@ -107,7 +107,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   //좋아요 표시 함수 실행
   dangstarLike(postIndex, index, writerNickname);
 
-  //댓글 입력창 만드는 함수 실행
+  //댓글 정보를 받아오는 함수
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   function commentInputData(index, postIndex) {
     const xhr = new XMLHttpRequest();
@@ -116,13 +116,27 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     xhr.addEventListener('load', function() {
       let res = JSON.parse(xhr.response);
       console.log(res);
-      console.log(res[0]);
-      console.log(res[0].cm_detail);
-
+      // console.log(res[0]);
+      // console.log(res[0].cm_detail);
+      let textName;
+      let cmText;
       let src_comment_link = "../resource/MainDogImg.jpg";
-      let textName = res[0].cm_id;
-      let cmText = res[0].cm_detail;
+      // 댓글 데이터가 있을 경우에만
+      if(res.length !== 0) {
+        console.log("조건문 안쪽")
+        textName = res[0].cm_id;
+        cmText = res[0].cm_detail;
+        
+        //최신 댓글 1개 보여주는 함수 실행
+        commentRecent(postWrap, src_comment_link, textName, cmText);
+      }
+      // 댓글 입력창 만드는 함수
       commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
+      // else {
+      //   textName = res[0].cm_id;
+      //   cmText = res[0].cm_detail;
+      // }
+
     })
     console.log("commentData를 받아오기 위한 함수 실행 테스트");
   }
