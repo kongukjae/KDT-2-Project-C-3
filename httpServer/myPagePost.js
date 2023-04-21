@@ -138,6 +138,25 @@ export default function dangMap(request, response) {
       );
       connection.end();
     })
-    
+    // 중고거래 게시판 보이게 만드는 방법
+  } if (request.url === "/secondHand") {
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+    });
+    request.on("end", function () {
+      console.log('cute') //확인용
+     
+     
+      connection.end();
+      response.writeHead(200);
+      response.end();
+
+    });
   }
+
+
+
+
+
 }

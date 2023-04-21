@@ -628,7 +628,7 @@ const targetStyle = {
 const mypageStyle = {
   mypageRoot : {
     width : pageStyle.width.width500,
-    height : pageStyle.height.height1700,
+    height : pageStyle.height.height2000,
     margin : "auto",
     position : "relative",
     backgroundColor : pageStyle.colorTheme.beige,
@@ -748,6 +748,28 @@ const mypageStyle = {
     backgroundColor : pageStyle.colorTheme.peach,
     boxShadow : pageStyle.defaultBoxShadow.defBoxSdw
   },
+  mypageMywriteWrap : {
+    width : pageStyle.width.widthP90,
+    height : pageStyle.height.height500,
+    marginTop : "40px",
+    position : "relative",
+    borderRadius : "10px",
+    display : "flex",
+    justifyContent : "space-around",
+    alignItems : "center",
+  },
+  mypageWriteButton :{
+    width : pageStyle.width.widthP90,
+    height : "20%",
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    display : "flex",
+    flexDirection : "row",
+    cursor : "pointer",
+    ...pageStyle.flexRowCenter
+
+  }
+
+
 };
 
 const keepStyle={

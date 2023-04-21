@@ -30,6 +30,9 @@ import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 
 import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main.js";
 
+
+ import myListMyWriting from "./httpServer/backend_bottommenu_mypage_mywriting_list_post.js";
+
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
 
@@ -133,9 +136,8 @@ const server = http.createServer(function (request, response) {
   // post request
   if (request.method === 'POST') {
     //마이페이지
-
-
-    
+   
+   myListMyWriting(request, response)
 
     myKeepPost(request,response);
 

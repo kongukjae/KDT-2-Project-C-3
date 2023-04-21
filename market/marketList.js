@@ -14,12 +14,10 @@ styleCreate(add, market.addWrite);
 add.innerText = "✏"
 
 add.addEventListener("click",() =>{
-
   const token = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
- 
   let addForm = document.createElement('form');
   addForm.method = "POST"
   addForm.action = "/mykoop";
@@ -35,11 +33,10 @@ document.body.appendChild(addForm);
 addForm.submit();
 }); 
 
-
-
-
 topMenu(rootChild[0]);
 createHamburger(root);
+
+// rootChild[1].id = 'mainBox'
 
 styleCreate(rootChild[1], market.listContainer);
 function makeList(nth) {
@@ -62,6 +59,10 @@ function createSecondHandList(result, count) {
   let listTextChild = tagCreate("div", {});
   child.appendChild(listTextChild);
   styleCreate(listTextChild, market.listText);
+
+  document.getElementById(`index${count}`).addEventListener('click', function() {
+    console.log(`index${count}`);
+  })
 
   let title = tagCreate("div", {});
   listTextChild.appendChild(title);

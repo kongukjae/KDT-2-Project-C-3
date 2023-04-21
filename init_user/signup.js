@@ -36,7 +36,12 @@ function main(){
     styleCreate(rootChild[i].children[0],targetStyle.signUpListWithoutID)
   }
   styleCreate(rootChild[1].children[0],targetStyle.signUpListID)
+  
+  
   let postForm = document.createElement("form");
+  // 1. 요청
+
+
   rootChild[7].appendChild(postForm);
   postForm.action = "/signUpResult";
   postForm.method = "post";
@@ -56,6 +61,7 @@ function main(){
   let dogNameFlag = false;
   let dogGenderFlag = false;
 
+  // 중복확인 , 클릭했을때 DB에 연결되는 로직 
   rootChild[7].children[0].addEventListener("click",()=>{
     if(!dupCheckFlag){
       alert("아이디 중복 확인을 해주세요")
@@ -98,6 +104,7 @@ function main(){
       dupCheckResultModal.remove();
     })
   }
+  // 요청 2개 ..
   dupCheck.addEventListener("click",()=>{
     let checkName = document.getElementById("idValueCheck")
     let xhr = new XMLHttpRequest();

@@ -16,6 +16,9 @@ function keepDiary(){
   logoLoginPage.src = './resource/MainLogo.png';
   rootChild[0].appendChild(logoLoginPage); 
 
+
+  rootChild[1].id = 'titleTextboxWrap'
+
 //  2.  제목부분 root1 제목작성칸
   styleCreate(rootChild[1],keepStyle.pageTitleBox)
   const yastContentInput = document.createElement("textarea");
@@ -159,8 +162,16 @@ const jwt = document.cookie.split("=")[2];
     let mainText=postContentInput.value;
   
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/secondHand`,true);
-    xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+    if (window.location.href.includes("/mykeep")) {
+     xhr.open("POST", "http://localhost:2080/postBoard", true);
+     xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+     window.location.href = "http://localhost:2080/postBoard";
+   } else {
+     xhr.open("POST", "http://localhost:2080/secondHand", true);
+     xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+     window.location.href = "http://localhost:2080/secondHand";
+   }
+
     
     // xhr.addEventListener("load", () => {
     //   console.log(xhr.responseText); // 서버 응답을 콘솔에 출력합니다.

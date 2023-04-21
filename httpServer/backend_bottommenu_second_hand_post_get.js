@@ -33,4 +33,19 @@ export default function secondHandPost(request, response) {
     );
     conn.end();
   }
+
+
 }
+  
+  
+  // response.write();
+
+
+
+
+
+
+// `<script>
+//   let target = document.getElementById('mainBox');
+//   target.style.display = 'none';
+//   </script>`

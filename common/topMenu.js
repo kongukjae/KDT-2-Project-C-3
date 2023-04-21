@@ -71,7 +71,6 @@ function topMenu(rootChild){
     left: "0px",
   });
 
-
  // 햄버거 설정 이곳이 메뉴 공간
 
  // 메뉴 슬라이드 요소
