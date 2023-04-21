@@ -95,7 +95,6 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/market/market-post-page.js"></script>`,
 
-<<<<<<< HEAD
 
 //댕스타그램
 postBoard: `
@@ -111,11 +110,6 @@ postBoard: `
 <script src="/post_board/dangstargram.js"></script>`,
 
 
-
-
-
-
-=======
   //댕스타그램
   postBoard: `
   <script src="/common/commonFunc.js"></script>
@@ -133,7 +127,12 @@ postBoard: `
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script src="/dangtalk/chattingRoomMain.js"></script>`
->>>>>>> 0602dd499d7efac1f317d778ca00afee25eb0524
+  <script src="/dangtalk/chattingRoomMain.js"></script>`,
+
+  dangTalkList:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/dangtalk/dangtalk_list.js"></script>`
 }
 export default html;
