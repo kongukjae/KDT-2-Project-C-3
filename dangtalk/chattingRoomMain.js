@@ -85,7 +85,7 @@ function createChatMsg(mother,targetId,fromMeorYou, msg){
   
   styleCreate(imagebox,dangtalkChattingRoom.imageBoxStyle);
 
-  msgbox.innerText = msg;
+   msgbox.innerText = msg;
   
   mother.appendChild(chatBox);
 
