@@ -17,20 +17,22 @@ function keepDiary(){
   rootChild[0].appendChild(logoLoginPage); 
 
 //  2.  제목부분 root1 제목작성칸
-  styleCreate(rootChild[1],keepStyle.pageTitle)
+  styleCreate(rootChild[1],keepStyle.pageTitleBox)
   const yastContentInput = document.createElement("textarea");
   yastContentInput.setAttribute("placeholder", "제목을 입력하세요");
-  yastContentInput.setAttribute("style", "width: 100%; height: 40px; resize: none;");
+  yastContentInput.setAttribute("focus", "none");
+  yastContentInput.setAttribute("style", "width: 500px; height: 40px; resize: none; border: 3px solid #F7786B; border-radius: 9px; font-size: 20px");
   rootChild[1].appendChild(yastContentInput);
 
 // 3. root2 업로드된 이미지 나오는 칸
   let postUploadImg = document.createElement("div");
   styleCreate(rootChild[2], keepStyle.pageuploadImg);
+  rootChild[2].innerHTML = "업로드 된 이미지";
 //  4.  root3 본문부분이다. 본문에 작성할 함수
-  styleCreate(rootChild[3],keepStyle.pagemainText)
+  styleCreate(rootChild[3],keepStyle.pagemainTextBox)
   const postContentInput = document.createElement("textarea");
   postContentInput.setAttribute("placeholder", "글 작성 내용을 입력하세요");
-  postContentInput.setAttribute("style", "width: 100%; height: 400px;resize: none;");
+  postContentInput.setAttribute("style", "width: 500px; height: 400px;resize: none; border: 3px solid #F7786B; border-radius: 9px; font-size: 20px");
   rootChild[3].appendChild(postContentInput);
 
 

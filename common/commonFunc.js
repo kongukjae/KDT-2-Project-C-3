@@ -765,12 +765,12 @@ const keepStyle={
   pageTopMenu : {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height126,
-    // position : "relative",
+    position : "relative",
     backgroundColor : pageStyle.colorTheme.peach,
     ...pageStyle.flexRowCenter
   },
   //root1 제목부분 '산돌이를 찾아주세요'
-  pageTitle : {
+  pageTitleBox : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height40,
     position : "relative",
@@ -778,32 +778,33 @@ const keepStyle={
     ...pageStyle.flexRowCenter,
     fontSize : pageStyle.fontSizeSet.mediumLarge,
     fontWeight : pageStyle.fontWeightSet.bold,
-    // marginTop: "50px",
+  },
+  pageTitle: {
+    width : pageStyle.width.width500,
+    height : pageStyle.height.height40,
     resize: "none",
-
   },
   // root2 이미지부분
   pageuploadImg: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height500,
     ...pageStyle.flexRowCenter,
-    border: '1px solid red',
+    border: `1px solid ${pageStyle.colorTheme.peach}`,
+    borderRadius: pageStyle.borderRadius.borderRadius9,
   },
 
   // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
-  pagemainText : {
+  pagemainTextBox : {
     width : pageStyle.width.width500,
     height : pageStyle.height.height400,
     backgroundColor : pageStyle.colorTheme.lightGray,
     position : "relative",
     ...pageStyle.flexRowCenter,
-    // marginTop : "50px",
     fontSize : pageStyle.fontSizeSet.medium,
     fontWeight : pageStyle.fontWeightSet.bold,
     overflow : "hidden",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    resize: "none",
   },
   pageButtonWrap : {
     width : pageStyle.width.width500,
