@@ -17,7 +17,7 @@ function dangstarLike(postIndex, index, writerNickname){
       like.children[0].src = '/emptyHeartImage';
 
     }
-    else{
+    if(heartImage){
       like.children[0].src = '/fullHeartImage';
 
     }
