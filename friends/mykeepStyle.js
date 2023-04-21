@@ -14,23 +14,11 @@ function keepDiary(){
   const logoLoginPage = tagCreate('img', '');
   logoLoginPage.style.width = '28%';
   logoLoginPage.src = './resource/MainLogo.png';
-  rootChild[0].appendChild(logoLoginPage);
-  
-  
-  // id를 titleTextboxWrap을 정해주고, 받아주는 서버 
-  // 즉 /mykoop 부분에서 조절해준다.
-  rootChild[1].id = 'titleTextboxWrap'
+  rootChild[0].appendChild(logoLoginPage); 
+
 //  2.  제목부분 root1 제목작성칸
   styleCreate(rootChild[1],keepStyle.pageTitleBox)
   const yastContentInput = document.createElement("textarea");
-  // document.addEventListener('click', function () {
-  //   const currentUrl = window.location.pathname;
-  //   if (currentUrl === '/mykeep') {
-  //     {
-  //       rootChild[1].style.display = 'none';
-  //     }
-  //   }
-  // });
   yastContentInput.setAttribute("placeholder", "제목을 입력하세요");
   yastContentInput.setAttribute("focus", "none");
   yastContentInput.setAttribute("style", "width: 500px; height: 40px; resize: none; border: 3px solid #F7786B; border-radius: 9px; font-size: 20px");
@@ -169,30 +157,16 @@ const jwt = document.cookie.split("=")[2];
     console.log(yastContentInput.value)
     let titleText=yastContentInput.value;
     let mainText=postContentInput.value;
-
-     let xhr = new XMLHttpRequest();
-     if (window.location.href.includes("/mykeep")) {
-      xhr.open("POST", "http://localhost:2080/postBoard", true);
-      xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-      window.location.href = "http://localhost:2080/postBoard";
-    } else {
-      xhr.open("POST", "http://localhost:2080/secondHand", true);
-      xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-      window.location.href = "http://localhost:2080/secondHand";
-    }
-
-
-    //  xhr.open("POST", `http://localhost:2080/secondHand`,true);
-    //  xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-    //  window.location = "http://localhost:2080/secondHand"
+  
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", `http://localhost:2080/secondHand`,true);
+    xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
     
-     
-    // let xhr = new XMLHttpRequest();
-    // xhr.open("POST", `http://localhost:2080/postBoard`,true);
-    // xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
-    // window.location = "http://localhost:2080/postBoard"
-
-  });
+    // xhr.addEventListener("load", () => {
+    //   console.log(xhr.responseText); // 서버 응답을 콘솔에 출력합니다.
+    // });
+    window.location = "http://localhost:2080/secondHand"
+    });
 
  // 7. root6 바텀메뉴, 맨 밑에 페이지 구간
   styleCreate(rootChild[6],targetStyle.bottomMenu)
