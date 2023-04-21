@@ -23,15 +23,17 @@ function yourPage(){
   
   styleCreate(rootChild[2],mypageStyle.mypageImageStyle);
 
-  // 즐겨찾기 표시용 아이콘
+  // 즐겨찾기 아이콘
   let star = tagCreate('button', {id: "star"});
   styleCreate(star, {
+    display: "none",
     position: "absolute",
     top: "0px",
     right: "0px",
     width: "50px",
     height: "50px",
-    backgroundColor: "yellow",
+    border: "1px solid black",
+    // backgroundColor: "yellow",
   })
   rootChild[2].appendChild(star);
   star.addEventListener('click', () => {
@@ -44,7 +46,15 @@ function yourPage(){
     xhr.open('POST', `http://localhost:2080/starCheck`);
     xhr.send(`userID=${userID}&fr_id=${fr_id}`);
     xhr.addEventListener('load', function() {
-      console.log("응답");
+      let starRes = JSON.parse(xhr.response);
+      if(starRes === true) {
+        console.log("꽉 찬 별");
+        star.style.backgroundColor = "lightBlue";
+      } else {
+        console.log("속 빈 별");
+        star.style.backgroundColor = "lightPink";
+
+      }
     })
   })
 
@@ -80,6 +90,7 @@ function yourPage(){
       followRequestURL = 'http://localhost:2080/unFollowRequest'
       followRequestMessage = '팔로우 취소'
       rootChild[3].children[0].innerText = "팔로우 취소";
+      star.style.display = "block";
     }
   })
 
