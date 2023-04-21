@@ -663,7 +663,6 @@ const mypageStyle = {
     marginTop : "20px",
     fontSize : pageStyle.fontSizeSet.medium,
     fontWeight : pageStyle.fontWeightSet.bold,
-    overflow : "hidden",
     backgroundSize: "cover",
     backgroundPosition: "center"
   },
