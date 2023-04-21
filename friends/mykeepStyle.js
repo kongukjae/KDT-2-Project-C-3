@@ -49,8 +49,6 @@ function keepDiary(){
 
 
 
-
-
 //  3.  root2 본문부분이다. 본문에 작성할 함수
   styleCreate(rootChild[2],keepStyle.pagemainText)
   const postContentInput = document.createElement("textarea");
