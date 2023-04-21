@@ -95,6 +95,7 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/market/market-post-page.js"></script>`,
 
+
   //댕스타그램
   postBoard: `
   <script src="/common/commonFunc.js"></script>
@@ -113,5 +114,6 @@ const html = {
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
   <script src="/dangtalk/chattingRoomMain.js"></script>`
+
 }
 export default html;
