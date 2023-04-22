@@ -148,35 +148,50 @@ function myPage(){
   // window.location = "http://localhost:2080/secondHand"
   // });
 
-
-
-
   
   const jwt = document.cookie.split("=")[2];
 
   styleCreate(rootChild[6],mypageStyle.mypageMywriteWrap)
-  for(let i = 0; i < 4; i++){
+
+
+// 먼저 버튼을 추가합니다.
+let buttonWrap = tagCreate("div");
+styleCreate(buttonWrap, mypageStyle.mybuttonWrap);
+
+let postButton = tagCreate("button");
+postButton.innerText = "내가쓴글";
+styleCreate(postButton, mypageStyle.mypostButton);
+buttonWrap.appendChild(postButton);
+
+
+
+let keepButton = tagCreate("button");
+keepButton.innerText = "내가쓴글";
+styleCreate(keepButton, mypageStyle.mykeepButton);
+buttonWrap.appendChild(keepButton);
+
+rootChild[6].appendChild(buttonWrap);
+
+  for(let i = 0; i < 5; i++){
     let resultDiv = tagCreate("div");
     styleCreate(resultDiv,mypageStyle.mypageWriteButton)
     rootChild[6].appendChild(resultDiv)
   }
 
-
-
     const xhrr = new XMLHttpRequest();
     xhrr.open('POST', `http://localhost:2080/second`);
+    
     xhrr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         // 응답이 오면 실행되는 부분
         const data = JSON.parse(this.responseText);
         console.log(data); // 터미널에 출력해 보는 부분
-        for (let i = 0; i < data.length; i++) {
-          rootChild[6].children[i].textContent = data[i].detail; // 값 할당 부분
-        }
+          for (let i = 0; i < data.length; i++) {
+            rootChild[6].querySelectorAll('div')[i].innerHTML = `id: ${data[i].id}, 내가쓴글: ${data[i].detail}`;
+          }
+
       }
     };
-
-
     xhrr.send(`id=${cookieId}&jwt=${jwt}`);
  
   

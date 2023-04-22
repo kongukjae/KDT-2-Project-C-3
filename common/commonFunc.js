@@ -751,18 +751,49 @@ const mypageStyle = {
   mypageMywriteWrap : {
     width : pageStyle.width.widthP90,
     height : pageStyle.height.height500,
-    marginTop : "40px",
+    marginTop : "20px",
     position : "relative",
     borderRadius : "10px",
     display : "flex",
-    flexDirection : "row",
-
+    flexDirection : "column",
+    backgroundColor : pageStyle.colorTheme.peach,
     justifyContent : "space-around",
     alignItems : "center",
   },
+
+  mybuttonWrap:{
+  width : pageStyle.width.width500,
+  height : pageStyle.height.height50,
+  //  marginTop : "-50px",
+  position : "relative",
+  display : "flex",
+  flexDirection : "row",
+  justifyContent : "space-around",
+  alignItems : "flex-start",
+},
+
+mypostButton:{
+  width : pageStyle.width.widthP40,
+  height : "70%",
+  marginTop: "-20px",
+  backgroundColor : pageStyle.colorTheme.whiteTypeA,
+  cursor : "pointer",
+  borderRadius : "5px",
+  ...pageStyle.flexRowCenter
+},
+mykeepButton:{
+  width : pageStyle.width.widthP40,
+  height : "70%",
+  marginTop: "-20px",
+  backgroundColor : pageStyle.colorTheme.whiteTypeA,
+  cursor : "pointer",
+  borderRadius : "5px",
+  ...pageStyle.flexRowCenter
+},
+
   mypageWriteButton :{
     width : pageStyle.width.widthP90,
-    height : "60%",
+    height : "5%",
     backgroundColor : pageStyle.colorTheme.whiteTypeB,
     display : "flex",
     cursor : "pointer",
