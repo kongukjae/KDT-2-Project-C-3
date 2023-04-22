@@ -155,7 +155,7 @@ function myPage(){
 
 
 // 먼저 버튼을 추가합니다.
-let buttonWrap = tagCreate("div");
+let buttonWrap = tagCreate("span");
 styleCreate(buttonWrap, mypageStyle.mybuttonWrap);
 
 let postButton = tagCreate("button");
@@ -166,9 +166,38 @@ buttonWrap.appendChild(postButton);
 
 
 let keepButton = tagCreate("button");
-keepButton.innerText = "내가쓴글";
+keepButton.innerText = "내댓글";
 styleCreate(keepButton, mypageStyle.mykeepButton);
 buttonWrap.appendChild(keepButton);
+// 클릭했을때, 요소가
+keepButton.addEventListener('click', function() {
+  const xhrr = new XMLHttpRequest();
+  xhrr.open('POST', `http://localhost:2080/Five`);
+  xhrr.send(`id=${cookieId}&jwt=${jwt}`);
+
+
+  xhrr.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      // 응답이 오면 실행되는 부분
+      const data = JSON.parse(this.responseText);
+      console.log(data); 
+
+      while (rootChild[6].firstChild) {
+        rootChild[6].removeChild(rootChild[6].firstChild);
+      }
+    
+
+      for (let i = 0; i < 5; i++) {
+        const newElement = document.createElement('div');
+        newElement.innerText = `id: ${data[i].cm_id}, 내가쓴글: ${data[i].cm_detail}`;
+        // 필요한 스타일링 작업을 수행합니다.
+
+        rootChild[6].appendChild(newElement);
+      }     
+    }
+  };
+});
+
 
 rootChild[6].appendChild(buttonWrap);
 
@@ -177,7 +206,6 @@ rootChild[6].appendChild(buttonWrap);
     styleCreate(resultDiv,mypageStyle.mypageWriteButton)
     rootChild[6].appendChild(resultDiv)
   }
-
     const xhrr = new XMLHttpRequest();
     xhrr.open('POST', `http://localhost:2080/second`);
     

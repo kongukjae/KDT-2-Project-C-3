@@ -32,6 +32,8 @@ import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main.j
 
 
  import myListMyWriting from "./httpServer/backend_bottommenu_mypage_mywriting_list_post.js";
+ import myListMyWritingFive from "./httpServer/backend_bottommenu_mypage_mywriting_list_postFive.js";
+
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };
@@ -133,11 +135,14 @@ const server = http.createServer(function (request, response) {
     dangTalkChatRoom(request, response)
   };
 
+
   // post request
   if (request.method === 'POST') {
     //마이페이지
-   
+    myListMyWritingFive(request, response)
     
+   console.log("파이브가 들어왔다는겨");
+
 
    myListMyWriting(request, response)
 
