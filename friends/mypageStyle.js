@@ -151,56 +151,35 @@ function myPage(){
 
 
 
-
+  
   const jwt = document.cookie.split("=")[2];
 
   styleCreate(rootChild[6],mypageStyle.mypageMywriteWrap)
-  // let mainBox=tagCreate("div");
-  rootChild[6].addEventListener("click",()=>{
+  for(let i = 0; i < 4; i++){
+    let resultDiv = tagCreate("div");
+    styleCreate(resultDiv,mypageStyle.mypageWriteButton)
+    rootChild[6].appendChild(resultDiv)
+  }
+
+
+
     const xhrr = new XMLHttpRequest();
     xhrr.open('POST', `http://localhost:2080/second`);
-    xhrr.send(`id=${cookieId}&jwt=${jwt}`);
-
-    xhrr.onreadystatechange = () => {
-      if (xhrr.readyState === 4 && xhrr.status === 200) {
-        const responseData = JSON.parse(xhrr.responseText);
-        displayResults(responseData);
+    xhrr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // 응답이 오면 실행되는 부분
+        const data = JSON.parse(this.responseText);
+        console.log(data); // 터미널에 출력해 보는 부분
+        for (let i = 0; i < data.length; i++) {
+          rootChild[6].children[i].textContent = data[i].detail; // 값 할당 부분
+        }
       }
     };
 
-    
-    // 요청을 할때의 URL 주소는 내가 임의대로 지을수있다.
-    //  즉, form tag로 작성했을때 action 부분과 동일하다.
-    // const xhr = new XMLHttpRequest();
-    // xhr.open('POST', `http://localhost:2080/second`);
-    // xhr.send(`id=${cookieId}&jwt=${jwt}`);
-  })
 
-  function displayResults(data) {
-    data.forEach(item => {
-      // HTML 요소를 생성합니다 (예: div, p, span 등)
-      const resultElement = document.createElement("div");
-      resultElement.textContent = `id:${item.id}, detail: ${item.detail}`;
-      styleCreate(clickButton, mypageStyle.mypageWriteButton, resultElement);
-      // 생성한 요소를 페이지에 추가합니다.
-    });
-  }
+    xhrr.send(`id=${cookieId}&jwt=${jwt}`);
+ 
   
-
-  // for(let i = 0; i < 2; i++){
-  //   let clickButton = tagCreate("div");
-  //  styleCreate(clickButton,mypageStyle.mypageWriteButton)
-  //   rootChild[6].appendChild(clickButton)
-  //  }
-  // styleCreate(mainBox,mypageStyle.mypageWriteBox)
-  // rootChild[6].appendChild(mainBox)
-  // for(let i = 0; i < 2; i++){
-  //   let clickButton = tagCreate("div");
-  //   styleCreate(clickButton,mypageStyle.mypageWriteButton)
-  //   rootChild[6].appendChild(clickButton)
-  // }
-  // rootChild[6].children[2].innerText = "내가쓴댓글";
-  // rootChild[6].children[1].innerText = "내가쓴 글";
 
   
 
@@ -212,23 +191,6 @@ function myPage(){
 
 
 
-
-
-  
-  // styleCreate(rootChild[2],mypageStyle.mypageImageStyle)
-  // const cookieId = document.cookie.split("=")[1].split(";")[0]
-  
-  // const xhr = new XMLHttpRequest();
-  // xhr.open('POST', `http://localhost:2080/sendImage`);
-  // xhr.responseType = 'blob';
-  // xhr.send(`type=proFile&id=${cookieId}`); 
-  // xhr.addEventListener('load', function(){
-  //     let imageFromServer = xhr.response;
-  //     const resultURL = URL.createObjectURL(xhr.response);
-  //     rootChild[2].style.backgroundImage = `url(${resultURL})`
-  //     console.log(imageFromServer);
-  //     console.log("이미지 가져오기 완료");
-  // });
 
 
 

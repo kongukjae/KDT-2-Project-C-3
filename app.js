@@ -137,7 +137,11 @@ const server = http.createServer(function (request, response) {
   if (request.method === 'POST') {
     //마이페이지
    
+    
+
    myListMyWriting(request, response)
+
+   console.log("포스트 요청이 들어왔다는거야");
 
     myKeepPost(request,response);
 

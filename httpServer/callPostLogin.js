@@ -147,6 +147,8 @@ export default function callPostLogin(request, response) {
       const hashedTargetPassword = crypto.createHash('sha512').update(targetPW).digest('hex');
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
+
+      
       connection.query(`UPDATE userinfo SET PW = '${hashedTargetPassword}' WHERE id = '${targetId}'`,(error, data, fields) =>{
         if(error) throw error;
         else{

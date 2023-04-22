@@ -25,12 +25,12 @@ export default function myListMyWriting(request, response) {
     conn.connect();
     conn.query(
       `select id,detail from second_hand where id='${jwtunlockId}'order by '${text}' desc limit 5  `,
-      function (err, row) {
+      function (err, data) {
         if (err) throw err;
         else {
-          console.log(row);
+          console.log(data);
           response.writeHead(200,{'content-Type':'application/json'});
-          response.write(JSON.stringify(row));
+          response.write(JSON.stringify(data));
           response.end();
         }
       }

@@ -755,15 +755,16 @@ const mypageStyle = {
     position : "relative",
     borderRadius : "10px",
     display : "flex",
+    flexDirection : "row",
+
     justifyContent : "space-around",
     alignItems : "center",
   },
   mypageWriteButton :{
     width : pageStyle.width.widthP90,
-    height : "20%",
-    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    height : "60%",
+    backgroundColor : pageStyle.colorTheme.whiteTypeB,
     display : "flex",
-    flexDirection : "row",
     cursor : "pointer",
     ...pageStyle.flexRowCenter
 
