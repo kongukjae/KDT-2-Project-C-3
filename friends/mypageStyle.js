@@ -153,7 +153,6 @@ function myPage(){
 
   styleCreate(rootChild[6],mypageStyle.mypageMywriteWrap)
 
-
 // 먼저 버튼을 추가합니다.
 let buttonWrap = tagCreate("span");
 styleCreate(buttonWrap, mypageStyle.mybuttonWrap);
@@ -163,13 +162,11 @@ postButton.innerText = "내가쓴글";
 styleCreate(postButton, mypageStyle.mypostButton);
 buttonWrap.appendChild(postButton);
 
-
-
 let keepButton = tagCreate("button");
 keepButton.innerText = "내댓글";
 styleCreate(keepButton, mypageStyle.mykeepButton);
 buttonWrap.appendChild(keepButton);
-// 클릭했을때, 요소가
+// 클릭했을때
 keepButton.addEventListener('click', function() {
   const xhrr = new XMLHttpRequest();
   xhrr.open('POST', `http://localhost:2080/Five`);
@@ -185,8 +182,6 @@ keepButton.addEventListener('click', function() {
       while (rootChild[6].firstChild) {
         rootChild[6].removeChild(rootChild[6].firstChild);
       }
-    
-
       for (let i = 0; i < 5; i++) {
         const newElement = document.createElement('div');
         newElement.innerText = `id: ${data[i].cm_id}, 내가쓴글: ${data[i].cm_detail}`;
@@ -197,7 +192,6 @@ keepButton.addEventListener('click', function() {
     }
   };
 });
-
 
 rootChild[6].appendChild(buttonWrap);
 
@@ -217,7 +211,6 @@ rootChild[6].appendChild(buttonWrap);
           for (let i = 0; i < data.length; i++) {
             rootChild[6].querySelectorAll('div')[i].innerHTML = `id: ${data[i].id}, 내가쓴글: ${data[i].detail}`;
           }
-
       }
     };
     xhrr.send(`id=${cookieId}&jwt=${jwt}`);
