@@ -2,6 +2,7 @@ let markers = [];
 let markersObject = {
   userid : "",
   markers : {},
+  position :[],
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
@@ -10,6 +11,9 @@ let markersObject = {
     }else{
       markersObject.markers[value[0]][1].push([value[2],value[3]]);
     }
+  },
+  set appendPosition(value){
+    this.position.push(value);
   }
 };
 let overlayChecker = false
@@ -319,7 +323,7 @@ function map() {
             ), type
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          
+          markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
         
           
@@ -341,7 +345,8 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
-
+    console.log(markersObject.markers['asdasd123'][1][0][0][0])
+    
     
   };
   
