@@ -359,58 +359,57 @@ function map() {
 map();
 
 function putUserProfile(arr){
+  let filterArr = arr.filter(function(data) {
+    return data !== markersObject.userid;
+  });
+  let targetArr = [markersObject.userid, ...filterArr];
   let slide = document.getElementById("slideWrap");
-  for(let i = 0;i < arr.length;i++){
+  for(let i = 0;i < targetArr.length;i++){
     slide.children[0].children[i].innerText = '';
-    let target = '';
+  
     let profileWrap = tagCreate('div');
     let imageDiv = tagCreate('div');
     let name = tagCreate('p');
-    let postRequest = arr[i];
+    let postRequest = targetArr[i];
     profileWrap.style.cursor = "pointer"
     styleCreate(profileWrap,pageStyle.flexColCenter)
     styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle)
     profileWrap.appendChild(imageDiv);
     profileWrap.appendChild(name);
-    if(arr[i] === 'undefined'){
-      target = markersObject.userid;
-      postRequest = 'mine';
-    }
-    else{
-      target = arr[i]
-    };
-    name.innerText = target;
+    name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `http://localhost:2080/sendImage`);
     xhr.responseType = 'blob';
-    xhr.send(`type=proFile&id=${target}`); 
+    xhr.send(`type=proFile&id=${targetArr[i]}`); 
     xhr.addEventListener('load', function(){
         let imageFromServer = URL.createObjectURL(xhr.response);
         imageDiv.style.backgroundImage = `url(${imageFromServer})`
         console.log("이미지 가져오기 완료");
     });
-    const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    let mypageForm = document.createElement('form');
-    
-    mypageForm.method = "POST";
-    mypageForm.action = "/mypage";
-    let params = {jwt:token, targetId:postRequest}
-    for(let key in params){
-      let hiddenField = document.createElement("input");
-      hiddenField.setAttribute("type","hidden");
-      hiddenField.setAttribute("name",key);
-      hiddenField.setAttribute("value",params[key]);
-      mypageForm.appendChild(hiddenField);
+    if(i>0){
+      const token = document.cookie.replace(
+        /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+      let mypageForm = document.createElement('form');
+      
+      mypageForm.method = "POST";
+      mypageForm.action = "/mypage";
+      let params = {jwt:token, targetId:postRequest}
+      for(let key in params){
+        let hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type","hidden");
+        hiddenField.setAttribute("name",key);
+        hiddenField.setAttribute("value",params[key]);
+        mypageForm.appendChild(hiddenField);
+      }
+      document.body.appendChild(mypageForm);
+      profileWrap.addEventListener("click",()=>{
+        mypageForm.submit();
+      }
+      )
     }
-    document.body.appendChild(mypageForm);
-    profileWrap.addEventListener("click",()=>{
-      mypageForm.submit();
-    }
-    )
   }
   
 }
