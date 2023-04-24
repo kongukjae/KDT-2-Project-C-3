@@ -110,8 +110,12 @@ function map() {
       //console.log("result: " + result);
       // resultObject[cnt] = wrap;
       resultObject[0] = wrap;
+      console.log(markersObject.markers[markersObject.userid][1].length);
+      countResult = markersObject.markers[markersObject.userid][1].length;
 
-      console.log('aa'+countResult);
+      if(countResult === 10){
+        alert(`오늘은 더 이상 발자국을 찍을 수 없습니다.`);
+      }
       //cnt++;
       //console.log("cnt = " + cnt);
 
