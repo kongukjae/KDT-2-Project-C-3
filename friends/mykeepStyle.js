@@ -17,6 +17,7 @@ function keepDiary(){
   rootChild[0].appendChild(logoLoginPage); 
 
 //  2.  제목부분 root1 제목작성칸
+rootChild[1].id = 'titleTextboxWrap'
   styleCreate(rootChild[1],keepStyle.pageTitleBox)
   const yastContentInput = document.createElement("textarea");
   yastContentInput.setAttribute("placeholder", "제목을 입력하세요");
