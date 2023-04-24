@@ -1,18 +1,18 @@
 let markers = [];
 let markersObject = {
-  userid : "",
-  markers : {},
+  userid: "",
+  markers: {},
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
-  set appendMarker(value){
-    if(markersObject.markers[value[0]] === undefined){
-      markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
-    }else{
-      markersObject.markers[value[0]][1].push([value[2],value[3]]);
+  set appendMarker(value) {
+    if (markersObject.markers[value[0]] === undefined) {
+      markersObject.markers[value[0]] = [value[1], [[value[2], value[3]]]];
+    } else {
+      markersObject.markers[value[0]][1].push([value[2], value[3]]);
     }
-  }
+  },
 };
-let overlayChecker = false
+let overlayChecker = false;
 function changeDate(date) {
   let nowDate = new Date(date);
   let formatDate = nowDate.toLocaleString();
@@ -68,22 +68,22 @@ function map() {
     }
   });
   console.log(mapOption.level);
- // 지도를 생성한다
- let map = new kakao.maps.Map(mapContainer, mapOption);
- map.setZoomable(false);
+  // 지도를 생성한다
+  let map = new kakao.maps.Map(mapContainer, mapOption);
+  map.setZoomable(false);
 
- //  이미지 링크 생성을 해서 넣으니까 되었다.
- let imageSrc = "https://i.ibb.co/zR5p1G9/dogpaw.png";
- (imageSize = new kakao.maps.Size(30, 30)), // 마커이미지의 크기입니다
-   // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다.
-   (imageOption = { offset: new kakao.maps.Point(15, 15) }); // 마커이미지의 옵션입니다.
+  //  이미지 링크 생성을 해서 넣으니까 되었다.
+  let imageSrc = "https://i.ibb.co/zR5p1G9/dogpaw.png";
+  (imageSize = new kakao.maps.Size(30, 30)), // 마커이미지의 크기입니다
+    // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다.
+    (imageOption = { offset: new kakao.maps.Point(15, 15) }); // 마커이미지의 옵션입니다.
 
- // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
- let markerImage = new kakao.maps.MarkerImage(
-   imageSrc,
-   imageSize,
-   imageOption
- );
+  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+  let markerImage = new kakao.maps.MarkerImage(
+    imageSrc,
+    imageSize,
+    imageOption
+  );
 
   markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
 
@@ -92,23 +92,26 @@ function map() {
   // let latlng = mouseEvent.latLng;
   //let result = [];
   let resultObject = {};
+  let countResult;
   const cookieId = document.cookie.split("=")[1].split(";")[0];
-
   // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+    let wrap = [];
     // console.log("클릭 시 : " + overlayChecker);
     // 오버레이 창이 비활성화 되있을 경우에 동작
     if (overlayChecker === false) {
       // 클릭한 위치에 마커를 표시합니다
       let latlng = mouseEvent.latLng;
-      let wrap = [];
+
       addMarker(latlng);
       wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
       //result.push(wrap);
+      // console.log(wrap);
       //console.log("result: " + result);
       // resultObject[cnt] = wrap;
       resultObject[0] = wrap;
-      //console.log(resultObject);
+
+      console.log('aa'+countResult);
       //cnt++;
       //console.log("cnt = " + cnt);
 
@@ -139,16 +142,9 @@ function map() {
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
 
+    //==============================================================================================
 
-//==============================================================================================
-  
-    
-
-    
-
-
-
-//=============================================================================================
+    //=============================================================================================
 
     let dragStartLat;
     let dragStartLng;
@@ -192,16 +188,14 @@ function map() {
   }
 
   //남은 발자국 개수 박스
-    let countFootprintBox = tagCreate('div', {});
-    styleCreate(countFootprintBox, targetStyle.countFootprintBox);
-    root.appendChild(countFootprintBox);
-    
-    let countFootprint = tagCreate('div', {});
-    styleCreate(countFootprint, targetStyle.countFootprint);
-    countFootprintBox.appendChild(countFootprint);
-    countFootprint.innerText = "남은 발자국: ";
-  //
+  let countFootprintBox = tagCreate("div", {});
+  styleCreate(countFootprintBox, targetStyle.countFootprintBox);
+  root.appendChild(countFootprintBox);
 
+  let countFootprint = tagCreate("div", {});
+  styleCreate(countFootprint, targetStyle.countFootprint);
+  countFootprintBox.appendChild(countFootprint);
+  countFootprint.innerText = "남은 발자국: ";
 
   // 검색창
   // let searchBarWrap = tagCreate("div");
@@ -274,13 +268,12 @@ function map() {
   let menuChild2 = [];
   btmMeun(rootChild[2], menuChild2);
 
-  
   console.dir(rootChild[2]);
   console.dir(rootChild[2].children[3]);
-  rootChild[2].children[3].addEventListener('click', function(){
+  rootChild[2].children[3].addEventListener("click", function () {
     console.log(markers);
     setMarkers(null);
-  })
+  });
 
   function setMarkers(map) {
     for (let i = 0; i < markers.length; i++) {
@@ -288,17 +281,18 @@ function map() {
     }
   }
   const markersImage = {
-   0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
-   1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
-   2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
-   3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
+    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
+    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
+    2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
+    3: "https://i.ibb.co/zR5p1G9/dogpaw.png",
+  };
   const getURL = {
-    0: 'frFootprint',
-    1: 'starFootprint',
-    2: 'otFootprint',
-    3: 'loadMap'
-  }
-  
+    0: "frFootprint",
+    1: "starFootprint",
+    2: "otFootprint",
+    3: "loadMap",
+  };
+
   const targetId = document.cookie.split("=")[1].split(";")[0];
   markersObject.userid = targetId;
   function allAddMarker(position, imageType) {
@@ -315,109 +309,115 @@ function map() {
     return marker;
   }
   function allMarker(callback, type) {
-    return new Promise(function(resolve, reject){
+    return new Promise(function (resolve, reject) {
       fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
       .then((response) => response.json())
-      .then((result) =>{
-        console.log(result)
-        for (const key in result) {
-          //console.log(typeof(parseFloat(res['0'][0])))
-          let markerNow = callback(
-            new kakao.maps.LatLng(
-              parseFloat(result[key][0]),
-              parseFloat(result[key][1])
-            ), type
-          );
-          markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          
-          createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-        
-          
-        }
-      console.log(markersObject);
-      console.log("정상적임");
-      })
-      .then(()=>{
-        resolve("end")
-      })
-    })
-  };
-  
-  async function getMarkersObject(){
-    await allMarker(allAddMarker,0)
-    await allMarker(allAddMarker,1)
-    await allMarker(allAddMarker,2)
-    await allMarker(allAddMarker,3)
-    console.log("await 발자국 확인 중");
-    console.log(markersObject)
-    putUserProfile(Object.keys(markersObject.markers))
-  };
-  
-  getMarkersObject();
+      .then((result) => {
+          countResult = Object.keys(result).length
+          for (const key in result) {
+            //console.log(typeof(parseFloat(res['0'][0])))
+            let markerNow = callback(
+              new kakao.maps.LatLng(
+                parseFloat(result[key][0]),
+                parseFloat(result[key][1])
+              ),
+              type
+            );
+            markersObject.appendMarker = [
+              result[key][2],
+              type,
+              [markerNow],
+              new Date(result[key][3]),
+            ];
 
+            createOverlay(
+              result[key][2],
+              map,
+              markerNow,
+              result[key][0],
+              result[key][1],
+              changeDate(result[key][3])
+            );
+          }
+          console.log(markersObject);
+          console.log("정상적임");
+        })
+        .then(() => {
+          resolve("end");
+        });
+    });
+  }
+
+  async function getMarkersObject() {
+    await allMarker(allAddMarker, 0);
+    await allMarker(allAddMarker, 1);
+    await allMarker(allAddMarker, 2);
+    await allMarker(allAddMarker, 3);
+    console.log("await 발자국 확인 중");
+    console.log(markersObject);
+    putUserProfile(Object.keys(markersObject.markers));
+  }
+
+  getMarkersObject();
 }
 map();
 
-function putUserProfile(arr){
-  let filterArr = arr.filter(function(data) {
+function putUserProfile(arr) {
+  let filterArr = arr.filter(function (data) {
     return data !== markersObject.userid;
   });
   let targetArr = [markersObject.userid, ...filterArr];
   let slide = document.getElementById("slideWrap");
-  for(let i = 0;i < targetArr.length;i++){
-    slide.children[0].children[i].innerText = '';
-  
-    let profileWrap = tagCreate('div');
-    let imageDiv = tagCreate('div');
-    let name = tagCreate('p');
+  for (let i = 0; i < targetArr.length; i++) {
+    slide.children[0].children[i].innerText = "";
+
+    let profileWrap = tagCreate("div");
+    let imageDiv = tagCreate("div");
+    let name = tagCreate("p");
     let postRequest = targetArr[i];
-    profileWrap.style.cursor = "pointer"
-    styleCreate(profileWrap,pageStyle.flexColCenter)
-    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle)
+    profileWrap.style.cursor = "pointer";
+    styleCreate(profileWrap, pageStyle.flexColCenter);
+    styleCreate(imageDiv, targetStyle.menuMapSlideImageStyle);
     profileWrap.appendChild(imageDiv);
     profileWrap.appendChild(name);
     name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', `http://localhost:2080/sendImage`);
-    xhr.responseType = 'blob';
-    xhr.send(`type=proFile&id=${targetArr[i]}`); 
-    xhr.addEventListener('load', function(){
-        let imageFromServer = URL.createObjectURL(xhr.response);
-        imageDiv.style.backgroundImage = `url(${imageFromServer})`
-        console.log("이미지 가져오기 완료");
+    xhr.open("POST", `http://localhost:2080/sendImage`);
+    xhr.responseType = "blob";
+    xhr.send(`type=proFile&id=${targetArr[i]}`);
+    xhr.addEventListener("load", function () {
+      let imageFromServer = URL.createObjectURL(xhr.response);
+      imageDiv.style.backgroundImage = `url(${imageFromServer})`;
+      console.log("이미지 가져오기 완료");
     });
-    if(i>0){
+    if (i > 0) {
       const token = document.cookie.replace(
         /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
-      let mypageForm = document.createElement('form');
-      
+      let mypageForm = document.createElement("form");
+
       mypageForm.method = "POST";
       mypageForm.action = "/mypage";
-      let params = {jwt:token, targetId:postRequest}
-      for(let key in params){
+      let params = { jwt: token, targetId: postRequest };
+      for (let key in params) {
         let hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type","hidden");
-        hiddenField.setAttribute("name",key);
-        hiddenField.setAttribute("value",params[key]);
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", params[key]);
         mypageForm.appendChild(hiddenField);
       }
       document.body.appendChild(mypageForm);
-      profileWrap.addEventListener("click",()=>{
+      profileWrap.addEventListener("click", () => {
         mypageForm.submit();
-      }
-      )
+      });
     }
   }
-  
 }
-function createOverlay(id,mapNow, markerNow, lat, lng, time){
-
-    
+function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   // 오버레이 내부 구성 요소들
-  const content = tagCreate("div", {id: "overlayWrap"});
+  const content = tagCreate("div", { id: "overlayWrap" });
   styleCreate(content, dangMapOverlay.wrap);
 
   const overlayInfo = tagCreate("div", {});
@@ -427,7 +427,7 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   const overlayTitle = tagCreate("div", {});
   overlayInfo.appendChild(overlayTitle);
   styleCreate(overlayTitle, dangMapOverlay.title);
-  overlayTitle.innerHTML = `${id}`; 
+  overlayTitle.innerHTML = `${id}`;
 
   const overlayBody = tagCreate("div", {});
   overlayInfo.appendChild(overlayBody);
@@ -438,16 +438,13 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   styleCreate(overlayImg, dangMapOverlay.image);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendImage`);
-  xhr.responseType = 'blob';
-  xhr.send(`type=proFile&id=${id}`); 
-  xhr.addEventListener('load', function(){
-      const resultURL = URL.createObjectURL(xhr.response);
-      overlayImg.innerHTML = `<img src=${resultURL} alt="강아지 사진" width=70 height=70>`;;
+  xhr.open("POST", `http://localhost:2080/sendImage`);
+  xhr.responseType = "blob";
+  xhr.send(`type=proFile&id=${id}`);
+  xhr.addEventListener("load", function () {
+    const resultURL = URL.createObjectURL(xhr.response);
+    overlayImg.innerHTML = `<img src=${resultURL} alt="강아지 사진" width=70 height=70>`;
   });
-
-
-
 
   const overlayDesc = tagCreate("div", {});
   overlayBody.appendChild(overlayDesc);
@@ -459,48 +456,44 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
 
   const overlayBtnWrap = tagCreate("div", {});
   overlayDesc.appendChild(overlayBtnWrap);
-  styleCreate(overlayBtnWrap, {margin: "5px 0 0 0"})
+  styleCreate(overlayBtnWrap, { margin: "5px 0 0 0" });
 
   const overlayProfileBtn = tagCreate("button", {});
   overlayBtnWrap.appendChild(overlayProfileBtn);
-  styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle)
+  styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle);
   overlayProfileBtn.innerText = "프로필 보기";
-  
+
   const token = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  let mypageForm = document.createElement('form');
-    
+  let mypageForm = document.createElement("form");
+
   mypageForm.method = "POST";
   mypageForm.action = "/mypage";
-  let params = {jwt:token, targetId:id}
-  for(let key in params){
+  let params = { jwt: token, targetId: id };
+  for (let key in params) {
     let hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type","hidden");
-    hiddenField.setAttribute("name",key);
-    hiddenField.setAttribute("value",params[key]);
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", key);
+    hiddenField.setAttribute("value", params[key]);
     mypageForm.appendChild(hiddenField);
   }
   document.body.appendChild(mypageForm);
-  overlayProfileBtn.addEventListener("click",()=>{
+  overlayProfileBtn.addEventListener("click", () => {
     mypageForm.submit();
-  })
-  
-  
-  
+  });
 
   const overlayfollowBtn = tagCreate("button", {});
   overlayBtnWrap.appendChild(overlayfollowBtn);
-  styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle)
-  styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "50px"})
+  styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle);
+  styleCreate(overlayfollowBtn, { margin: "0 0 0 5px", width: "50px" });
   overlayfollowBtn.innerText = "팔로우";
-
 
   // 오버레이 창 닫기 버튼
   const closeBtn = tagCreate("button", {});
   content.appendChild(closeBtn);
-  styleCreate(closeBtn, dangMapOverlay.close)
+  styleCreate(closeBtn, dangMapOverlay.close);
   closeBtn.innerText = "X";
   const positionNow = new kakao.maps.LatLng(lat, lng); //인포윈도우 표시 위치입니다
 
@@ -513,19 +506,19 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   // 닫기 버튼 클릭 시 열려있는 오버레이 창 닫힘
   closeBtn.onclick = function () {
     customOverlay.setMap(null);
-    overlayChecker = false; 
+    overlayChecker = false;
   };
   // 마커 클릭 시 오버레이를 표시
   kakao.maps.event.addListener(markerNow, "click", function () {
-    if(!overlayChecker){
+    if (!overlayChecker) {
       customOverlay.setMap(mapNow);
-      let now = new Date()
+      let now = new Date();
 
       // console.log(Date.parse(time));
-      overlayEllipsis.innerHTML = `${time}`
+      overlayEllipsis.innerHTML = `${time}`;
     }
     // 오버레이가 열려있는지 닫혀있는지 확인하는 변수
     overlayChecker = true;
   });
   return customOverlay;
-  }
+}
