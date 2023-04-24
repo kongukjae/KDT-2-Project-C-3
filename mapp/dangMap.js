@@ -341,6 +341,8 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(Object.keys(markersObject.markers))
+
+    
   };
   
   getMarkersObject();
@@ -455,6 +457,9 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   overlayBtnWrap.appendChild(overlayProfileBtn);
   styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle)
   overlayProfileBtn.innerText = "프로필 보기";
+
+
+
   
   const token = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
@@ -483,8 +488,29 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   const overlayfollowBtn = tagCreate("button", {});
   overlayBtnWrap.appendChild(overlayfollowBtn);
   styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle)
-  styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "50px"})
+  styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "65px"})
   overlayfollowBtn.innerText = "팔로우";
+
+  const JWT = document.cookie.split("=")[2]
+  let followRequestURL = 'http://localhost:2080/followRequest'
+  let followRequestMessage = '팔로우'
+  
+  if(markersObject.markers[id][0] === 0 || markersObject.markers[id][0] === 1){
+      followRequestURL = 'http://localhost:2080/unFollowRequest'
+      followRequestMessage = '팔로우 취소'
+      overlayfollowBtn.innerText = "팔로우 취소";
+  }
+
+  overlayfollowBtn.addEventListener("click",()=>{
+    let xhr = new XMLHttpRequest();
+      xhr.open("POST",followRequestURL);
+      xhr.send(JSON.stringify({jwt:JWT,you:id}));
+      xhr.addEventListener("load",()=>{
+        alert(`${id}님을 ${followRequestMessage} 했습니다`);
+        location.reload();
+      })
+  })
+
 
 
   // 오버레이 창 닫기 버튼
