@@ -143,7 +143,6 @@ function map() {
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
 
-
 //==============================================================================================
   
     
@@ -282,10 +281,10 @@ function map() {
     }
   }
   const markersImage = {
-   0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
-   1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
-   2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
-   3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
+    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
+    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
+    2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
+    3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
   const getURL = {
     0: 'frFootprint',
     1: 'starFootprint',
@@ -323,7 +322,7 @@ function map() {
             ), type
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
+          markersObject.appendPosition = {"lat":result[key][0],"lng":result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
         
           
@@ -345,11 +344,46 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
-    console.log(markersObject.markers['asdasd123'][1][0][0][0])
-    
-    
-  };
+    // -------------------------------------------------
+    // 클러스터에 필요한 좌표값 추출 중
+    console.log("test area");
+    // console.log(markersObject.position)
+    let testA = markersObject.position;
+    console.log(testA.length);
+    // -------------------------------------------------
+      // --------------------------------------------------------------------------------------
+    // 클러스터 적용부
+    console.log("cluster test")
+    let clusterer = new kakao.maps.MarkerClusterer({
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 3, // 클러스터 할 최소 지도 레벨
+    });
   
+    for(let i = 0; i < markersObject.position.length; i++) {
+      console.log("반복 테스트")
+    }
+
+    console.log(markersObject.position);
+    let cl_markers = markersObject.position.map(function(position) {
+      return new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(position.lat, position.lng)
+      });
+    });
+  
+    // 생성된 마커를 마커 저장하는 변수에 넣음(마커 클러스터러 관련)
+    // markers.push(cl_marker);
+  
+    // const cl_markers = data.positions.map(function (position) {
+    //   return new kakao.maps.Marker({
+    //     position: new kakao.maps.LatLng(position.lat, position.lng),
+    //   });
+    // });
+    console.log(cl_markers)
+    clusterer.addMarkers(cl_markers);
+    // --------------------------------------------------------------------------------------
+  };
+
   getMarkersObject();
 
 }
