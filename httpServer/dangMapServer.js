@@ -19,6 +19,9 @@ export default function dangMap(request, response) {
   else if (splitURL === "bottomMenu.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   } 
+  else if (splitURL === "dangMap_userChatList.js") {
+    cmServer.fileDirectory(`mapp/${splitURL}`, response);
+  } 
   else if(splitURL === "dangMap.js") {
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }

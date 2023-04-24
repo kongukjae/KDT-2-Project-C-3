@@ -20,10 +20,13 @@ function changeDate(date) {
   return formatDate;
 }
 
+
+
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
   styleCreate(root, targetStyle.menuMapRoot);
+
 
   let rootChild = [];
   for (let i = 0; i < 3; i++) {
@@ -38,6 +41,7 @@ function map() {
 
   rootChild[1].id = "slide";
   styleCreate(rootChild[2], targetStyle.bottomMenu);
+
 
   let mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapOption = {
@@ -142,7 +146,7 @@ function map() {
 
 //==============================================================================================
   
-    
+
 
     
 
@@ -341,12 +345,60 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(Object.keys(markersObject.markers))
+    
   };
   
   getMarkersObject();
 
 }
 map();
+
+let test = tagCreate("div", {})
+document.body.appendChild(test);
+styleCreate(test, {
+  width: "50px",
+  height: "50px",
+  zindex: '3',
+  position: 'relative',
+  backgroundColor: "black",
+  bottom: '1000px'
+})
+
+//단체방 리스트 생성 함수
+createUserOrgchat(test);
+
+let ggg = document.getElementById('chatList')
+ggg.style.display = 'none'
+
+let tg = true;
+
+test.addEventListener('click', function(test){
+
+  if(tg){
+    ggg.style.display = ''
+    tg = false;
+  }
+  else if(!tg){
+    ggg.style.display = 'none'
+    tg = true;
+  }
+
+let chatImage = document.getElementById('chatImage_0')
+
+  let target = markersObject.userid;
+  console.log("cookie: ", target);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${target}`); 
+  xhr.addEventListener('load', function(){
+    let imageFromServer = URL.createObjectURL(xhr.response);
+    chatImage.style.backgroundImage = `url(${imageFromServer})`
+    console.log("이미지 가져오기 완료");
+  });
+
+})
 
 function putUserProfile(arr){
   let slide = document.getElementById("slideWrap");

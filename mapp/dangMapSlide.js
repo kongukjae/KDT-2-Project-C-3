@@ -9,53 +9,11 @@ let move;
 let down = true;
 slide.style.transition = "cubic-bezier(0.07,0.6,0.71,0.97) 0.7s";
 
-// 객체의 drag를 이용해 구현
-/*
-slide.draggable = "true";
-
-slide.addEventListener('dragend', function(){
-  if(sw){
-    slide.style.bottom = '90px';
-    sw = false;
-  }
-  else if(!sw){
-  slide.style.bottom = '-155px';
-    sw = true;
-  }
-})
-*/
 
 slideEvent(); //마우스 이벤트를 이용해 구현
 
 function slideEvent() {
-  // slide.onmousedown = function(){
-  //   down = true;
-  //   return down;
-  // }
-  // slide.onmousemove = function(){
-  //   if(down){
-  //     move = true;
-  //     return move;
-  //   }
-  // }
-  // slide.onmouseup = function(){
-  //   if(move){
-  //     if(sw){
-  //       slide.style.bottom = '90px';
-  //       sw = false;
-  //     }
-  //     else if(!sw){
-  //     slide.style.bottom = '-155px';
-  //       sw = true;
-  //     }
-  //     console.log(down)
-  //     console.log(move)
 
-  //   }
-  //   move = false;
-  //   down = false;
-
-  // }
   slide.children[0].addEventListener("click", function () {
     if (down) {
       slide.style.bottom = "90px";
@@ -88,12 +46,6 @@ for (let i = 0; i < 31; i++) {
   slideElement.innerText = `test${i}`;
   slideWrapInnerDiv.appendChild(slideElement);
 }
-//console.dir(slide.children[1]);
-// console.log(slide.children[1].style.marginLeft);
-// let a = slide.children[1].style.marginLeft;
-// console.log(a);
-// let b = a.split("p")[0];
-// console.log(b);
 
 //======================================================================================
 
@@ -164,7 +116,6 @@ function searchResultChooseValue(){
   styleCreate(slide.children[3], {display: "none"});
   styleCreate(slide, {height: pageStyle.height.height308});
 }
-
 //=============================================================================================
 
 // 슬라이드 스와이프 시 옆으로 이동
@@ -240,13 +191,6 @@ function calculateMoveSlideValue(before, after, maxWidth) {
   return value;
 }
 
-// slide.children[1].children[0] => 내 프로필 위치
-// slide.children[1].children[0].addEventListener('click', function(){
-//   let res;
-//   const xhr = new XMLHttpRequest();
-//   xhr.open("GET", `http://localhost:2080/myMarker`);
-//   xhr.send();
-// })
 
 makeControlBtns();
 // 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
@@ -314,18 +258,3 @@ function testFunc(){
     })
   }
 }
-
-// let daySlideWrap = tagCreate('div', {id: "daySlide"});
-// // daySlideWrap.innerText = "test";
-// styleCreate(daySlideWrap, {
-//   position: "absolute",
-//   top: "-100px",
-//   left: "0px",
-// })
-// slide.appendChild(daySlideWrap);
-
-// let daySlideContent = 
-// `
-// <input type="range" min="0" max="100" value="50" class="slider-range">
-// `
-// daySlideWrap.innerHTML = daySlideContent;
