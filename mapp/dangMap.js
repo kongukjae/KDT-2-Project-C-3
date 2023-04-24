@@ -35,9 +35,12 @@ function map() {
   styleCreate(rootChild[0], targetStyle.menuMap);
   rootChild[0].id = "map";
   styleCreate(rootChild[1], targetStyle.menuMapSlide);
-
   rootChild[1].id = "slide";
   styleCreate(rootChild[2], targetStyle.bottomMenu);
+
+// -------------------------------------
+
+  // 맵 구분 시작점 
 
   let mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapOption = {
@@ -277,6 +280,7 @@ function map() {
       markers[i].setMap(map);
     }
   }
+  // 마커이미지 해당하는 부분
   const markersImage = {
    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
@@ -304,6 +308,7 @@ function map() {
     marker.setMap(map);
     return marker;
   }
+  //markernow 는 모든 발자국을 의미한다.
   function allMarker(callback, type) {
     return new Promise(function(resolve, reject){
       fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
@@ -312,35 +317,78 @@ function map() {
         console.log(result)
         for (const key in result) {
           //console.log(typeof(parseFloat(res['0'][0])))
+          // 여기서 callback함수를 사용해서 markerNow를 생성한다.
+          // 이함수는, 라따롱따뚜이와 type을 인자로 받는다.
+          // 그렇다면 type은 무엇인가? 전염병에 걸린 marker이다.
           let markerNow = callback(
             new kakao.maps.LatLng(
               parseFloat(result[key][0]),
               parseFloat(result[key][1])
             ), type
+         
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
           
+          // 오버레이를 생성하는 함수이다. 
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-        
-          
+         // 지우거나 생성 하는 공간
+         // 여기에 발자국을 만지는 순간, 찍한만큼 반복이된다.
+            // markerNow.setMap(null);
+           // markerNow.setMap(map);
+      console.log(markerNow);
+
+              
+              
         }
-      console.log(markersObject);
-      console.log("정상적임");
+      
+      console.log("정상적임2");
       })
       .then(()=>{
         resolve("end")
       })
     })
   };
-  
   async function getMarkersObject(){
-    await allMarker(allAddMarker,0)
-    await allMarker(allAddMarker,1)
-    await allMarker(allAddMarker,2)
-    await allMarker(allAddMarker,3)
+    await allMarker(allAddMarker,0) //차단친구
+    await allMarker(allAddMarker,1) //베프
+    await allMarker(allAddMarker,2) //남
+    await allMarker(allAddMarker,3) //나
     console.log("await 발자국 확인 중");
+    console.log(markersObject.children);
+
+
+    console.log('-----------------------------여기확인')
+
     console.log(markersObject)
+
+    console.log(markersObject.markers)
+
+    console.log(markersObject.markers['aaa1234'])
+
+    console.log(markersObject.markers['aaa1234'][1])
+  
+    console.log(markersObject.markers['aaa1234'][1][0])
+
+     console.log(markersObject.markers['aaa1234'][1][0][0])
+     console.log(markersObject.markers['aaa1234'][1][0][0][0])
+
+    // let cnt = 0;
+    // setInterval(() => {
+    //   if(cnt%2===0){
+    //     // null값을 먹여서 해당값을 없앤다.
+    //     markersObject.markers['aaa1234'][1][0][0][0].setMap(null);
+    //   }else{
+    //     // setMap(map)값은 해당값을 나타나게 한다.
+    //     markersObject.markers['aaa1234'][1][0][0][0].setMap(map);
+    //   }
+    //   cnt ++;  
+    // }, 1000);
+
+
+    console.log('-----------------------------여기확인')
+
     putUserProfile(Object.keys(markersObject.markers))
+
   };
   getMarkersObject();
 
@@ -403,6 +451,7 @@ function putUserProfile(arr){
   }
   
 }
+
 function createOverlay(id,mapNow, markerNow, lat, lng, time){
 
     

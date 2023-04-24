@@ -253,7 +253,7 @@ makeControlBtns();
 // 버튼들을 토글시키기 위한 변수
 let controlToggle = false;
 
-function makeControlBtns() {
+ function makeControlBtns() {
   let controlbtnsWrap = tagCreate("div", {});
   // 버튼들의 wrap의 스타일 값
   styleCreate(controlbtnsWrap, {
@@ -282,14 +282,25 @@ function makeControlBtns() {
   });
 
   // 3개의 버튼을 만들기 위한 반복문
+
+  
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
     if (i === 1) {
       controlbtns.innerText = "추가";
+      controlbtns.addEventListener("click", () => {
+        controlbtns.style.backgroundColor = "green";
+      });
     } else if (i === 2) {
       controlbtns.innerText = "수정";
+      controlbtns.addEventListener("click", () => {
+        controlbtns.style.backgroundColor = "yellow";
+      });
     } else {
       controlbtns.innerText = "삭제";
+      controlbtns.addEventListener("click", () => {
+        controlbtns.style.backgroundColor = "red";
+      });
     }
     // 버튼들의 스타일 값
     styleCreate(controlbtns, {
