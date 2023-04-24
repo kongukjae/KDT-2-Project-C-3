@@ -53,20 +53,22 @@ export default function callMain(request, response) {
       function (err, rows) {
         if (err) throw err;
         else {
+          console.log(rows)
           if(myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude);
+              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
               markerMyArr[i] = myArr;
             }
           }
           else {
             for(let i = 0; i < 10; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude);
+              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
               markerMyArr[i] = myArr;
             }
           }
+          
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();

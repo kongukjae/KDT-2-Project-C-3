@@ -342,6 +342,7 @@ function map() {
     console.log(markersObject)
     putUserProfile(Object.keys(markersObject.markers))
   };
+  
   getMarkersObject();
 
 }
@@ -511,7 +512,7 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
       customOverlay.setMap(mapNow);
       let now = new Date()
 
-      console.log(Date.parse(time));
+      // console.log(Date.parse(time));
       overlayEllipsis.innerHTML = `${time}`
     }
     // 오버레이가 열려있는지 닫혀있는지 확인하는 변수
