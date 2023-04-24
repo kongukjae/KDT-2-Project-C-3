@@ -82,10 +82,10 @@ slideWrap.appendChild(slideWrapInnerDiv);
 
 // 발자국이 찍힌 사람이 총 몇명인지 서버에서 변수로 받아와서 반복문을 돌려야 할 것으로 생각 됨
 // 임시로 최대치인 31을 넣어 둠
-for (let i = 0; i < 31; i++) {
+for (let i = 0; i < 30; i++) {
   const slideElement = tagCreate("div", {});
   styleCreate(slideElement, targetStyle.menuMapSlideItems);
-  slideElement.innerText = `test${i}`;
+  // slideElement.innerText = `test${i}`;
   slideWrapInnerDiv.appendChild(slideElement);
 }
 //console.dir(slide.children[1]);

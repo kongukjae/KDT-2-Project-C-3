@@ -22,6 +22,8 @@ const pageStyle = {
   colorTheme: {
     peach: "#F7786B",
     beige: "#F3EDE8",
+    beigeTypeB : '#EBE4DF',
+    beigeTypeC : '#D9D3CE',
     lightGray: "#E6E6E6",
     blue: "#2353FF",
     gray : "gray",
@@ -292,7 +294,7 @@ const targetStyle = {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height308,
     position: "absolute",
-    backgroundColor : "lightgray",
+    backgroundColor : pageStyle.colorTheme.beigeTypeC,
     display : "flex",
     flexDirection : "column",
     justifyContent : "flex-start",
@@ -322,10 +324,20 @@ const targetStyle = {
     gridTemplateRows: "repeat(2, 110px)",
   },
   menuMapSlideItems: {
-    border: "1px solid black",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  menuMapSlideUserBox: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection : 'column',
+    width : '80%',
+    height : '80%',
+    backgroundColor : pageStyle.colorTheme.beigeTypeB,
+    borderRadius : '10px',
+    boxShadow : "0 1px 20px rgba(0,0,0,0.21), 0 1px 1px rgba(0,0,0,0.22)"
   },
 
   //댕맵 슬라이드 메뉴의 팔로우 검색창
@@ -430,6 +442,20 @@ const targetStyle = {
     overflow : "hidden",
     backgroundSize: "cover",
     backgroundPosition: "center"
+  },
+  menuMapSlideImageWrapStyle : {
+    width : '44px',
+    height : '44px',
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : "50%",
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  menuMapSlideTextStyle : {
+    fontSize : '15px'
   },
 
   //회원가입 결과창

@@ -340,7 +340,7 @@ function map() {
     await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
     console.log(markersObject)
-    putUserProfile(Object.keys(markersObject.markers))
+    putUserProfile(markersObject.markers)
 
     
   };
@@ -350,7 +350,8 @@ function map() {
 }
 map();
 
-function putUserProfile(arr){
+function putUserProfile(object){
+  let arr = Object.keys(object);
   let filterArr = arr.filter(function(data) {
     return data !== markersObject.userid;
   });
@@ -361,15 +362,35 @@ function putUserProfile(arr){
   
     let profileWrap = tagCreate('div');
     let imageDiv = tagCreate('div');
+    let imageDivWrap = tagCreate('div');
     let name = tagCreate('p');
     let postRequest = targetArr[i];
     profileWrap.style.cursor = "pointer"
-    styleCreate(profileWrap,pageStyle.flexColCenter)
-    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle)
-    profileWrap.appendChild(imageDiv);
+    styleCreate(profileWrap,targetStyle.menuMapSlideUserBox);
+    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle);
+    styleCreate(imageDivWrap,targetStyle.menuMapSlideImageWrapStyle);
+    styleCreate(name,targetStyle.menuMapSlideTextStyle);
+    imageDivWrap.appendChild(imageDiv);
+    profileWrap.appendChild(imageDivWrap);
     profileWrap.appendChild(name);
     name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
+    
+    let frType = object[targetArr[i]][0];
+    if(frType === 0){
+      imageDivWrap.style.backgroundColor = '#1ea1ff';
+    }else if(frType === 1){
+      imageDivWrap.style.backgroundColor = '#fdbc0b';
+    }
+    else if(frType === 2){
+      imageDivWrap.style.backgroundColor = '#7c8487';
+    }
+    else if(frType === 3){
+      imageDivWrap.style.backgroundColor = '#ffa485';
+    }
+
+
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `http://localhost:2080/sendImage`);
     xhr.responseType = 'blob';
