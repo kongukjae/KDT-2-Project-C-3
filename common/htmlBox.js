@@ -115,6 +115,7 @@ const html = {
   <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
 
+
   dangTalkMain:`
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
