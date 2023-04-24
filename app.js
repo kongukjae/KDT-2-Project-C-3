@@ -41,7 +41,7 @@ import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
 import starCheck from "./httpServer/backend_yourpage_starCheck.js";
 import starLoad from "./httpServer/backend_yourpage_starLoad.js";
 
-//import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
+import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
 import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main_get.js";
 import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_main_post.js";
 
