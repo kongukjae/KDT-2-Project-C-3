@@ -385,7 +385,30 @@ const targetStyle = {
     fontSize : pageStyle.fontSizeSet.small,
     // textAlign : "center"
   },
-
+  //댕맵 남은 발자국 개수
+  countFootprintBox: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height40,
+    top : "45px",
+    left: "50%",
+    position : "absolute",
+    marginLeft: "-150px",
+    zIndex : "3",
+    display : "flex",
+    alignItems : "center"
+  },
+  countFootprint: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.heightP100,
+    border : `1px ${pageStyle.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : pageStyle.colorTheme.white,
+    position : "absolute",
+    ...pageStyle.flexRowCenter,
+    justifyContent: "start",
+  },
   //댕맵 검색창
   menuMapSearchBarWrap: {
     width : pageStyle.width.width300,
