@@ -147,7 +147,7 @@ function map() {
     // 생성된 마커를 배열에 추가
     markers.push(marker);
     // 마커가 드래그 가능하도록 설정
-    marker.setDraggable(true);
+    // marker.setDraggable(true);
 
 //==============================================================================================
   
@@ -357,8 +357,8 @@ function map() {
       markers: markersObject.markersArray,
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
       minLevel: 5, // 클러스터 할 최소 지도 레벨
+      disableDrag: true,
       disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
-      
       //   styles: [{
         //     width : '53px', height : '52px',
         //     background: 'url(cluster.png) no-repeat',
@@ -367,7 +367,7 @@ function map() {
     //     lineHeight: '54px'
     // }]
   });
-  
+
 };
 getMarkersObject();
 
