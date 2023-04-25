@@ -347,7 +347,6 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
-    getMarkersObject();
     
     let clusterer = new kakao.maps.MarkerClusterer({
       map: map,
@@ -355,18 +354,19 @@ function map() {
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
       minLevel: 5, // 클러스터 할 최소 지도 레벨
       disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
-
-    //   styles: [{
-    //     width : '53px', height : '52px',
-    //     background: 'url(cluster.png) no-repeat',
-    //     color: '#fff',
-    //     textAlign: 'center',
+      
+      //   styles: [{
+        //     width : '53px', height : '52px',
+        //     background: 'url(cluster.png) no-repeat',
+        //     color: '#fff',
+        //     textAlign: 'center',
     //     lineHeight: '54px'
     // }]
-    });
-    
-  };
+  });
   
+};
+getMarkersObject();
+
   }
 map();
 
