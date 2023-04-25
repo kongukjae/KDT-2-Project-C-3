@@ -4,7 +4,7 @@ function myPage(){
   styleCreate(root,mypageStyle.mypageRoot)
 
   let rootChild = [];
-  for(let i = 0;i<7;i++){
+  for(let i = 0;i<8;i++){
     let child = tagCreate("div",{});
     root.appendChild(child);
     rootChild.push(child);
@@ -120,8 +120,97 @@ function myPage(){
 
   
   
-  btmMeun(rootChild[6]);
+
+
+  const jwt = document.cookie.split("=")[2];
+
+  styleCreate(rootChild[6],mypageStyle.mypageMywriteWrap)
+
+// 먼저 버튼을 추가합니다.
+let buttonWrap = tagCreate("span");
+styleCreate(buttonWrap, mypageStyle.mybuttonWrap);
+
+let postButton = tagCreate("button");
+postButton.innerText = "내가쓴글";
+styleCreate(postButton, mypageStyle.mypostButton);
+buttonWrap.appendChild(postButton);
+
+let keepButton = tagCreate("button");
+keepButton.innerText = "내댓글";
+styleCreate(keepButton, mypageStyle.mykeepButton);
+buttonWrap.appendChild(keepButton);
+// 클릭했을때
+keepButton.addEventListener('click', function() {
+  const xhrr = new XMLHttpRequest();
+  xhrr.open('POST', `http://localhost:2080/Five`);
+  xhrr.send(`id=${cookieId}&jwt=${jwt}`);
+
+
+  xhrr.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      // 응답이 오면 실행되는 부분
+      const data = JSON.parse(this.responseText);
+      console.log(data); 
+
+      while (rootChild[6].firstChild) {
+        rootChild[6].removeChild(rootChild[6].firstChild);
+      }
+      for (let i = 0; i < 5; i++) {
+        const newElement = document.createElement('div');
+        newElement.innerText = `id: ${data[i].cm_id}, 내가쓴글: ${data[i].cm_detail}`;
+        // 필요한 스타일링 작업을 수행합니다.
+        rootChild[6].appendChild(newElement);
+      }     
+    }
+  };
+});
+
+rootChild[6].appendChild(buttonWrap);
+
+  for(let i = 0; i < 5; i++){
+    let resultDiv = tagCreate("div");
+    styleCreate(resultDiv,mypageStyle.mypageWriteButton)
+    rootChild[6].appendChild(resultDiv)
+  }
+    const xhrr = new XMLHttpRequest();
+    xhrr.open('POST', `http://localhost:2080/second`);
+    
+    xhrr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // 응답이 오면 실행되는 부분
+        const data = JSON.parse(this.responseText);
+        console.log(data); // 터미널에 출력해 보는 부분
+          for (let i = 0; i < data.length; i++) {
+            rootChild[6].querySelectorAll('div')[i].innerHTML = `id: ${data[i].id}, 내가쓴글: ${data[i].detail}`;
+          }
+      }
+    };
+    xhrr.send(`id=${cookieId}&jwt=${jwt}`);
+ 
   
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  btmMeun(rootChild[7]);
+
+
 }
 
 myPage()

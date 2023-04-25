@@ -2,6 +2,7 @@ let markers = [];
 let markersObject = {
   userid : "",
   markers : {},
+  position :[],
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
@@ -10,6 +11,9 @@ let markersObject = {
     }else{
       markersObject.markers[value[0]][1].push([value[2],value[3]]);
     }
+  },
+  set appendPosition(value){
+    this.position.push(value);
   }
 };
 let overlayChecker = false
@@ -329,49 +333,70 @@ function map() {
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
           
+          markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
+
           // 오버레이를 생성하는 함수이다. 
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
          // 지우거나 생성 하는 공간
          // 여기에 발자국을 만지는 순간, 찍한만큼 반복이된다.
             // markerNow.setMap(null);
            // markerNow.setMap(map);
-      console.log(markerNow);
-
-              
-              
-        }
+      console.log(result[key][2]); // 나를 제외하고, 다른애들의 아이디가 뜬다.
+      console.log(result[key][0]); // 위도.
+      console.log(result[key][1]); // 경도.
+      console.log(result[key][3]); // 시간.
+      console.log(markerNow); // 찍힌 애들의 수많은 객체가 찍힌다.
+      console.log(markersObject.markers);
+      }
       
       console.log("정상적임2");
+
       })
       .then(()=>{
         resolve("end")
       })
     })
   };
+
+  
+  // alladdMarker는 지도에 추가할 마커 정보를 담고있는 배열
+  // type은 마커의 종류를 나타내는 정보
+  // await를 사용해서 함수 실행을 대기한다.
+  // 여기가 공장
   async function getMarkersObject(){
     await allMarker(allAddMarker,0) //차단친구
     await allMarker(allAddMarker,1) //베프
     await allMarker(allAddMarker,2) //남
     await allMarker(allAddMarker,3) //나
     console.log("await 발자국 확인 중");
-    console.log(markersObject.children);
+    console.log(markersObject);
+    console.log(markersObject.markers);
+    
+    console.log(markersObject.markers[markersObject.userid]);
+    console.log(markersObject.markers[markersObject.userid][1]);
+    console.log(markersObject.markers[markersObject.userid][1][0][0][0]);
+
+    //for문을 돌려서 나 삭제하기 -삭제할떄 필요함
+    // for (let i = 0; i < 10; i++) {
+    //   markersObject.markers[markersObject.userid][1][i][0][0].setMap(null);
+    // }
 
 
-    console.log('-----------------------------여기확인')
-
-    console.log(markersObject)
-
-    console.log(markersObject.markers)
-
-    console.log(markersObject.markers['aaa1234'])
-
-    console.log(markersObject.markers['aaa1234'][1])
+    document.body.addEventListener('click', function() {
+      
+  // for문을 돌려서 다른친구만 삭제하기 -수정할때 필요함
   
-    console.log(markersObject.markers['aaa1234'][1][0])
-
-     console.log(markersObject.markers['aaa1234'][1][0][0])
-     console.log(markersObject.markers['aaa1234'][1][0][0][0])
-
+      for (let key in markersObject.markers) {
+      if (markersObject.markers[key][0] === 0 || markersObject.markers[key][0] === 1 || markersObject.markers[key][0] === 2) {
+    for (let i = 0; i < markersObject.markers[key][1].length; i++) {
+     markersObject.markers[key][1][i][0][0].setMap(null);
+         }
+        }
+      }
+    
+  });
+    
+  
     // let cnt = 0;
     // setInterval(() => {
     //   if(cnt%2===0){
@@ -384,12 +409,12 @@ function map() {
     //   cnt ++;  
     // }, 1000);
 
-
-    console.log('-----------------------------여기확인')
+    console.log('-----------------------------여기확인아래')
 
     putUserProfile(Object.keys(markersObject.markers))
 
   };
+
   getMarkersObject();
 
 }
