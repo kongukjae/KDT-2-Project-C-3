@@ -45,8 +45,8 @@ export default function callPostDangMap(request, response) {
     })
     request.on("end", function(){ // 전송된 데이터를 다 받은 후
       dragData = JSON.parse(body);
-      console.log("아래는 dragData 입니다")
-      console.log(dragData);
+      // console.log("아래는 dragData 입니다")
+      // console.log(dragData);
   
       response.writeHead(200, {'Content-Type': 'text/html'});
       response.end();

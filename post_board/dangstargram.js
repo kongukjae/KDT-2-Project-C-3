@@ -8,6 +8,8 @@ document.body.appendChild(root);
 const topMenuWrap = tagCreate("div", {});
 root.appendChild(topMenuWrap);
 topMenu(topMenuWrap);
+createHamburger(root);
+
 
 // 게시글 영역
 

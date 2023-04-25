@@ -2,14 +2,20 @@ let markers = [];
 let markersObject = {
   userid : "",
   markers : {},
+  position :[],
+  markersArray : [],
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
+    this.markersArray.push(value[2])
     if(markersObject.markers[value[0]] === undefined){
       markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
     }else{
       markersObject.markers[value[0]][1].push([value[2],value[3]]);
     }
+  },
+  set appendPosition(value){
+    this.position.push(value);
   }
 };
 let overlayChecker = false
@@ -20,10 +26,13 @@ function changeDate(date) {
   return formatDate;
 }
 
+
+
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
   styleCreate(root, targetStyle.menuMapRoot);
+
 
   let rootChild = [];
   for (let i = 0; i < 3; i++) {
@@ -39,6 +48,7 @@ function map() {
   rootChild[1].id = "slide";
   styleCreate(rootChild[2], targetStyle.bottomMenu);
 
+
   let mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapOption = {
       center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
@@ -49,9 +59,9 @@ function map() {
   mapContainer.addEventListener("wheel", function (e) {
     // 지도 위에서 휠 이벤트가 발생했을 때
     e.preventDefault();
-    console.log(e.deltaY); // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
+    //console.log(e.deltaY); // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
     let mapLevel = map.getLevel(); // 지도의 현재 확대 레벨을 가져옴
-    console.log(mapLevel);
+    //console.log(mapLevel);
 
     if (e.deltaY > 0) {
       // 휠을 내릴 때 => 지도를 축소 할 때
@@ -67,7 +77,7 @@ function map() {
       map.setLevel(mapLevel - 1); // 확대/축소 제한 없음
     }
   });
-  console.log(mapOption.level);
+  //console.log(mapOption.level);
  // 지도를 생성한다
  let map = new kakao.maps.Map(mapContainer, mapOption);
  map.setZoomable(false);
@@ -139,10 +149,9 @@ function map() {
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
 
-
 //==============================================================================================
   
-    
+
 
     
 
@@ -161,16 +170,16 @@ function map() {
       let latlng = marker.getPosition();
       dragStartLat = latlng.getLat().toFixed(13);
       dragStartLng = latlng.getLng().toFixed(13);
-      console.log("이동 전 lat " + dragStartLat);
-      console.log("이동 전 lng " + dragStartLng);
+      //console.log("이동 전 lat " + dragStartLat);
+      //console.log("이동 전 lng " + dragStartLng);
     });
 
     kakao.maps.event.addListener(marker, "dragend", function () {
       // 드래그가 끝나는 시점에 동작
       // 드래그가 끝난 지점의 좌표를 불러옴
       let latlng = marker.getPosition();
-      console.log("이동 후 lat " + latlng.getLat());
-      console.log("이동 후 lng " + latlng.getLng());
+      //console.log("이동 후 lat " + latlng.getLat());
+      //console.log("이동 후 lng " + latlng.getLng());
       let wrap = [];
       // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
       wrap.push(
@@ -265,10 +274,10 @@ function map() {
   btmMeun(rootChild[2], menuChild2);
 
   
-  console.dir(rootChild[2]);
-  console.dir(rootChild[2].children[3]);
+  //console.dir(rootChild[2]);
+  //console.dir(rootChild[2].children[3]);
   rootChild[2].children[3].addEventListener('click', function(){
-    console.log(markers);
+    //console.log(markers);
     setMarkers(null);
   })
 
@@ -278,10 +287,10 @@ function map() {
     }
   }
   const markersImage = {
-   0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
-   1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
-   2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
-   3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
+    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
+    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
+    2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
+    3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
   const getURL = {
     0: 'frFootprint',
     1: 'starFootprint',
@@ -293,7 +302,7 @@ function map() {
   markersObject.userid = targetId;
   function allAddMarker(position, imageType) {
     let marker = new kakao.maps.Marker({
-      map: map,
+      // map: map,
       position: position,
       image: new kakao.maps.MarkerImage(
         markersImage[imageType],
@@ -301,7 +310,7 @@ function map() {
         imageOption
       ),
     });
-    marker.setMap(map);
+    // marker.setMap(map);
     return marker;
   }
   function allMarker(callback, type) {
@@ -309,7 +318,7 @@ function map() {
       fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
       .then((response) => response.json())
       .then((result) =>{
-        console.log(result)
+        //console.log(result)
         for (const key in result) {
           //console.log(typeof(parseFloat(res['0'][0])))
           let markerNow = callback(
@@ -318,13 +327,14 @@ function map() {
               parseFloat(result[key][1])
             ), type
           );
-          markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          
+          markersObject.appendMarker = [result[key][2],type,markerNow,new Date(result[key][3])]
+          markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-        
+          console.log("result 값");
+          console.log(result[key][2]);
           
         }
-      console.log(markersObject);
+      //console.log(markersObject);
       console.log("정상적임");
       })
       .then(()=>{
@@ -334,72 +344,141 @@ function map() {
   };
   
   async function getMarkersObject(){
-    await allMarker(allAddMarker,0)
     await allMarker(allAddMarker,1)
+    await allMarker(allAddMarker,0)
     await allMarker(allAddMarker,2)
     await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
     console.log(markersObject)
-    putUserProfile(Object.keys(markersObject.markers))
-  };
-  getMarkersObject();
+    putUserProfile(markersObject.markers)
+    
+    let clusterer = new kakao.maps.MarkerClusterer({
+      map: map,
+      markers: markersObject.markersArray,
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 5, // 클러스터 할 최소 지도 레벨
+      disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
+      
+      //   styles: [{
+        //     width : '53px', height : '52px',
+        //     background: 'url(cluster.png) no-repeat',
+        //     color: '#fff',
+        //     textAlign: 'center',
+    //     lineHeight: '54px'
+    // }]
+  });
+  
+};
+getMarkersObject();
 
-}
+  }
 map();
 
-function putUserProfile(arr){
+//대표 발자국 대신할 임시 버튼
+let test = tagCreate("div", {})
+document.body.appendChild(test);
+styleCreate(test, {
+  width: "50px",
+  height: "50px",
+  zindex: '3',
+  position: 'relative',
+  backgroundColor: "black",
+  bottom: '1000px'
+})
+
+
+//단체방 리스트 생성 함수
+const roomName = 'test1';
+createUserOrgchat(test, roomName);
+
+let ggg = document.getElementById('chatList')
+// ggg.style.display = 'none'
+let tg = true;
+
+test.addEventListener('click', function(test){
+  if(tg){
+    ggg.style.display = 'flex'
+    tg = false;
+  }
+  else if(!tg){
+    ggg.style.display = 'none'
+    tg = true;
+  }
+})
+
+function putUserProfile(object){
+  let arr = Object.keys(object);
+  let filterArr = arr.filter(function(data) {
+    return data !== markersObject.userid;
+  });
+  let targetArr = [markersObject.userid, ...filterArr];
   let slide = document.getElementById("slideWrap");
-  for(let i = 0;i < arr.length;i++){
+  for(let i = 0;i < targetArr.length;i++){
     slide.children[0].children[i].innerText = '';
-    let target = '';
+  
     let profileWrap = tagCreate('div');
     let imageDiv = tagCreate('div');
+    let imageDivWrap = tagCreate('div');
     let name = tagCreate('p');
-    let postRequest = arr[i];
+    let postRequest = targetArr[i];
     profileWrap.style.cursor = "pointer"
-    styleCreate(profileWrap,pageStyle.flexColCenter)
-    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle)
-    profileWrap.appendChild(imageDiv);
+    styleCreate(profileWrap,targetStyle.menuMapSlideUserBox);
+    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle);
+    styleCreate(imageDivWrap,targetStyle.menuMapSlideImageWrapStyle);
+    styleCreate(name,targetStyle.menuMapSlideTextStyle);
+    imageDivWrap.appendChild(imageDiv);
+    profileWrap.appendChild(imageDivWrap);
     profileWrap.appendChild(name);
-    if(arr[i] === 'undefined'){
-      target = markersObject.userid;
-      postRequest = 'mine';
-    }
-    else{
-      target = arr[i]
-    };
-    name.innerText = target;
+    name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
+    
+    let frType = object[targetArr[i]][0];
+    if(frType === 0){
+      imageDivWrap.style.backgroundColor = '#1ea1ff';
+    }else if(frType === 1){
+      imageDivWrap.style.backgroundColor = '#fdbc0b';
+    }
+    else if(frType === 2){
+      imageDivWrap.style.backgroundColor = '#7c8487';
+    }
+    else if(frType === 3){
+      imageDivWrap.style.backgroundColor = '#ffa485';
+    }
+
+
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `http://localhost:2080/sendImage`);
     xhr.responseType = 'blob';
-    xhr.send(`type=proFile&id=${target}`); 
+    xhr.send(`type=proFile&id=${targetArr[i]}`); 
     xhr.addEventListener('load', function(){
         let imageFromServer = URL.createObjectURL(xhr.response);
         imageDiv.style.backgroundImage = `url(${imageFromServer})`
         console.log("이미지 가져오기 완료");
     });
-    const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    let mypageForm = document.createElement('form');
-    
-    mypageForm.method = "POST";
-    mypageForm.action = "/mypage";
-    let params = {jwt:token, targetId:postRequest}
-    for(let key in params){
-      let hiddenField = document.createElement("input");
-      hiddenField.setAttribute("type","hidden");
-      hiddenField.setAttribute("name",key);
-      hiddenField.setAttribute("value",params[key]);
-      mypageForm.appendChild(hiddenField);
+    if(i>0){
+      const token = document.cookie.replace(
+        /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+      let mypageForm = document.createElement('form');
+      
+      mypageForm.method = "POST";
+      mypageForm.action = "/mypage";
+      let params = {jwt:token, targetId:postRequest}
+      for(let key in params){
+        let hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type","hidden");
+        hiddenField.setAttribute("name",key);
+        hiddenField.setAttribute("value",params[key]);
+        mypageForm.appendChild(hiddenField);
+      }
+      document.body.appendChild(mypageForm);
+      profileWrap.addEventListener("click",()=>{
+        mypageForm.submit();
+      }
+      )
     }
-    document.body.appendChild(mypageForm);
-    profileWrap.addEventListener("click",()=>{
-      mypageForm.submit();
-    }
-    )
   }
   
 }
@@ -455,6 +534,9 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   overlayBtnWrap.appendChild(overlayProfileBtn);
   styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle)
   overlayProfileBtn.innerText = "프로필 보기";
+
+
+
   
   const token = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
@@ -483,8 +565,29 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
   const overlayfollowBtn = tagCreate("button", {});
   overlayBtnWrap.appendChild(overlayfollowBtn);
   styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle)
-  styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "50px"})
+  styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "65px"})
   overlayfollowBtn.innerText = "팔로우";
+
+  const JWT = document.cookie.split("=")[2]
+  let followRequestURL = 'http://localhost:2080/followRequest'
+  let followRequestMessage = '팔로우'
+  
+  if(markersObject.markers[id][0] === 0 || markersObject.markers[id][0] === 1){
+      followRequestURL = 'http://localhost:2080/unFollowRequest'
+      followRequestMessage = '팔로우 취소'
+      overlayfollowBtn.innerText = "팔로우 취소";
+  }
+
+  overlayfollowBtn.addEventListener("click",()=>{
+    let xhr = new XMLHttpRequest();
+      xhr.open("POST",followRequestURL);
+      xhr.send(JSON.stringify({jwt:JWT,you:id}));
+      xhr.addEventListener("load",()=>{
+        alert(`${id}님을 ${followRequestMessage} 했습니다`);
+        location.reload();
+      })
+  })
+
 
 
   // 오버레이 창 닫기 버튼
@@ -511,7 +614,7 @@ function createOverlay(id,mapNow, markerNow, lat, lng, time){
       customOverlay.setMap(mapNow);
       let now = new Date()
 
-      console.log(Date.parse(time));
+      // console.log(Date.parse(time));
       overlayEllipsis.innerHTML = `${time}`
     }
     // 오버레이가 열려있는지 닫혀있는지 확인하는 변수

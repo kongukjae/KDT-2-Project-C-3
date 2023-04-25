@@ -45,5 +45,11 @@ export default function postBoardFileRead(request, response){
   else if (request.url.startsWith("/fullHeartImage")) {
     cmServer.fileDirectory(`resource/fullHeart.png`, response);
   }
+  if (request.url.startsWith("/emptyStarImage")) {
+    cmServer.fileDirectory(`resource/emptyStar.png`, response);
+  }
+  else if (request.url.startsWith("/fullStarImage")) {
+    cmServer.fileDirectory(`resource/fullStar.png`, response);
+  }
   
 }
