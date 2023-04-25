@@ -305,6 +305,32 @@ function map() {
       ),
     });
     // marker.setMap(map);
+    // --------------------------------------------------------------------------------------
+    // 클러스터 적용부
+    console.log("cluster test")
+    let clusterer = new kakao.maps.MarkerClusterer({
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 5, // 클러스터 할 최소 지도 레벨
+    });
+
+    // 지도에 표시되고 있는 마커들의 좌표 값
+    console.log(markersObject.position);
+
+    let cl_markers = markersObject.position.map(function(position) { //map 메서드를 이용하여 마커들의 좌표를 이용한 새로운 배열을 만듦
+      return new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(position.lat, position.lng),
+        image: new kakao.maps.MarkerImage(
+          markersImage[imageType],
+          imageSize,
+          imageOption
+        ),
+      });
+    });
+  
+    console.log(cl_markers)
+    clusterer.addMarkers(cl_markers);
+    // --------------------------------------------------------------------------------------
     return marker;
   }
   function allMarker(callback, type) {
@@ -344,32 +370,6 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
-    // --------------------------------------------------------------------------------------
-    // 클러스터 적용부
-    console.log("cluster test")
-    let clusterer = new kakao.maps.MarkerClusterer({
-      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
-      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-      minLevel: 5, // 클러스터 할 최소 지도 레벨
-    });
-
-    // 지도에 표시되고 있는 마커들의 좌표 값
-    console.log(markersObject.position);
-
-    let cl_markers = markersObject.position.map(function(position) { //map 메서드를 이용하여 마커들의 좌표를 이용한 새로운 배열을 만듦
-      return new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(position.lat, position.lng),
-        image: new kakao.maps.MarkerImage(
-          markersImage[3],
-          imageSize,
-          imageOption
-        ),
-      });
-    });
-  
-    console.log(cl_markers)
-    clusterer.addMarkers(cl_markers);
-    // --------------------------------------------------------------------------------------
   };
 
   getMarkersObject();
