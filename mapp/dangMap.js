@@ -296,7 +296,7 @@ function map() {
   markersObject.userid = targetId;
   function allAddMarker(position, imageType) {
     let marker = new kakao.maps.Marker({
-      map: map,
+      // map: map,
       position: position,
       image: new kakao.maps.MarkerImage(
         markersImage[imageType],
@@ -304,7 +304,7 @@ function map() {
         imageOption
       ),
     });
-    marker.setMap(map);
+    // marker.setMap(map);
     return marker;
   }
   function allMarker(callback, type) {
