@@ -80,7 +80,7 @@ export default function dangMap(request, response) {
     let starCnt;
     let markerStarArr = {};
     connection.connect();
-    console.log("url ==" + request.url);
+    //console.log("url ==" + request.url);
 
     connection.query(
       `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = true order by addData desc;`,
@@ -128,7 +128,7 @@ export default function dangMap(request, response) {
     let friendCnt;
     let markerFriendsArr = {};
     connection.connect();
-    console.log("url ==" + request.url);
+    //console.log("url ==" + request.url);
 
     connection.query(
       `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = false order by addData desc;`,
@@ -176,7 +176,7 @@ export default function dangMap(request, response) {
     let otherCnt;
     let markerOtherArr = {};
     connection.connect();
-    console.log("url ==" + request.url);
+    //console.log("url ==" + request.url);
 
     connection.query(
       `select count(*) as count from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
@@ -203,7 +203,7 @@ export default function dangMap(request, response) {
               markerOtherArr[i] = otherArr;
             }
           } else {
-            console.log(rows);
+            //console.log(rows);
             for (let i = 0; i < 10; i++) {
               let otherArr = [];
               otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);

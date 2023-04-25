@@ -8,7 +8,7 @@ function createUserOrgchat(test){
     width: pageStyle.width.width250,
       // height: pageStyle.height.height2000,
       margin: "auto",
-      display: "flex",
+      display: "none",
       flexDirection: "column",
       position: "absolute",
       border: "1px solid black",
@@ -60,18 +60,22 @@ function createUserOrgchat(test){
     
   });
 
-   //root.addEventListener('load', () => {
-    //let chatList = document.getElementById('chatList');
-    
+  const http = new XMLHttpRequest();
+  const url = `http://localhost:2080/mapChatList`;
 
-    for(let i = 0; i < 5; i++){
-      createUserOrgchatList(chatChild[1], i);
+  http.open("GET", url);
+  http.send();
+  http.addEventListener('load', () => {
+    let roomList = JSON.parse(http.response);
+
+    for (const key in roomList) {
+      createUserOrgchatList(chatChild[1], key, roomList[key][0], roomList[key][1]);        
     }
-  //})
+  });
 
 }
 
-function createUserOrgchatList(parent, index){
+function createUserOrgchatList(parent, index, userID, dogName){
 
   let box = tagCreate("div", {});
   parent.appendChild(box);
@@ -124,7 +128,7 @@ function createUserOrgchatList(parent, index){
     // ...pageStyle.flexColCenter,
   });
   // chatlistUserName.innerText = dogName;
-  chatlistUserName.innerText = "견주님";
+  chatlistUserName.innerText = userID;
 
   let chatlastMsg = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlastMsg);
@@ -133,5 +137,20 @@ function createUserOrgchatList(parent, index){
     height: pageStyle.height.heightP50,
     // marginBottom: "3px",
   });
-  chatlastMsg.innerText = "초코";
+  chatlastMsg.innerText = dogName;
+
+  let chatImage = document.getElementById('chatImage_0')
+
+  let target = userID;
+  console.log("cookie: ", target);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${target}`); 
+  xhr.addEventListener('load', function(){
+    let imageFromServer = URL.createObjectURL(xhr.response);
+    chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`
+    console.log("이미지 가져오기 완료");
+  });
 }

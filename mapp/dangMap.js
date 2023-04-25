@@ -53,9 +53,9 @@ function map() {
   mapContainer.addEventListener("wheel", function (e) {
     // 지도 위에서 휠 이벤트가 발생했을 때
     e.preventDefault();
-    console.log(e.deltaY); // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
+    //console.log(e.deltaY); // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
     let mapLevel = map.getLevel(); // 지도의 현재 확대 레벨을 가져옴
-    console.log(mapLevel);
+    //console.log(mapLevel);
 
     if (e.deltaY > 0) {
       // 휠을 내릴 때 => 지도를 축소 할 때
@@ -71,7 +71,7 @@ function map() {
       map.setLevel(mapLevel - 1); // 확대/축소 제한 없음
     }
   });
-  console.log(mapOption.level);
+  //console.log(mapOption.level);
  // 지도를 생성한다
  let map = new kakao.maps.Map(mapContainer, mapOption);
  map.setZoomable(false);
@@ -165,16 +165,16 @@ function map() {
       let latlng = marker.getPosition();
       dragStartLat = latlng.getLat().toFixed(13);
       dragStartLng = latlng.getLng().toFixed(13);
-      console.log("이동 전 lat " + dragStartLat);
-      console.log("이동 전 lng " + dragStartLng);
+      //console.log("이동 전 lat " + dragStartLat);
+      //console.log("이동 전 lng " + dragStartLng);
     });
 
     kakao.maps.event.addListener(marker, "dragend", function () {
       // 드래그가 끝나는 시점에 동작
       // 드래그가 끝난 지점의 좌표를 불러옴
       let latlng = marker.getPosition();
-      console.log("이동 후 lat " + latlng.getLat());
-      console.log("이동 후 lng " + latlng.getLng());
+      //console.log("이동 후 lat " + latlng.getLat());
+      //console.log("이동 후 lng " + latlng.getLng());
       let wrap = [];
       // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
       wrap.push(
@@ -269,10 +269,10 @@ function map() {
   btmMeun(rootChild[2], menuChild2);
 
   
-  console.dir(rootChild[2]);
-  console.dir(rootChild[2].children[3]);
+  //console.dir(rootChild[2]);
+  //console.dir(rootChild[2].children[3]);
   rootChild[2].children[3].addEventListener('click', function(){
-    console.log(markers);
+    //console.log(markers);
     setMarkers(null);
   })
 
@@ -313,7 +313,7 @@ function map() {
       fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
       .then((response) => response.json())
       .then((result) =>{
-        console.log(result)
+        //console.log(result)
         for (const key in result) {
           //console.log(typeof(parseFloat(res['0'][0])))
           let markerNow = callback(
@@ -328,7 +328,7 @@ function map() {
         
           
         }
-      console.log(markersObject);
+      //console.log(markersObject);
       console.log("정상적임");
       })
       .then(()=>{
@@ -353,6 +353,7 @@ function map() {
 }
 map();
 
+//대표 발자국 대신할 임시 버튼
 let test = tagCreate("div", {})
 document.body.appendChild(test);
 styleCreate(test, {
@@ -368,36 +369,19 @@ styleCreate(test, {
 createUserOrgchat(test);
 
 let ggg = document.getElementById('chatList')
-ggg.style.display = 'none'
+// ggg.style.display = 'none'
 
 let tg = true;
 
 test.addEventListener('click', function(test){
-
   if(tg){
-    ggg.style.display = ''
+    ggg.style.display = 'flex'
     tg = false;
   }
   else if(!tg){
     ggg.style.display = 'none'
     tg = true;
   }
-
-let chatImage = document.getElementById('chatImage_0')
-
-  let target = markersObject.userid;
-  console.log("cookie: ", target);
-
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendImage`);
-  xhr.responseType = 'blob';
-  xhr.send(`type=proFile&id=${target}`); 
-  xhr.addEventListener('load', function(){
-    let imageFromServer = URL.createObjectURL(xhr.response);
-    chatImage.style.backgroundImage = `url(${imageFromServer})`
-    console.log("이미지 가져오기 완료");
-  });
-
 })
 
 function putUserProfile(arr){
