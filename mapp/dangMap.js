@@ -26,10 +26,13 @@ function changeDate(date) {
   return formatDate;
 }
 
+
+
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
   styleCreate(root, targetStyle.menuMapRoot);
+
 
   let rootChild = [];
   for (let i = 0; i < 3; i++) {
@@ -45,6 +48,7 @@ function map() {
   rootChild[1].id = "slide";
   styleCreate(rootChild[2], targetStyle.bottomMenu);
 
+
   let mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapOption = {
       center: new kakao.maps.LatLng(36.35, 127.385), // 지도의 중심좌표
@@ -55,9 +59,9 @@ function map() {
   mapContainer.addEventListener("wheel", function (e) {
     // 지도 위에서 휠 이벤트가 발생했을 때
     e.preventDefault();
-    console.log(e.deltaY); // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
+    //console.log(e.deltaY); // e.deltaY => 휠 방향 감지[양수: 휠 내림 / 음수: 휠 올림]
     let mapLevel = map.getLevel(); // 지도의 현재 확대 레벨을 가져옴
-    console.log(mapLevel);
+    //console.log(mapLevel);
 
     if (e.deltaY > 0) {
       // 휠을 내릴 때 => 지도를 축소 할 때
@@ -73,7 +77,7 @@ function map() {
       map.setLevel(mapLevel - 1); // 확대/축소 제한 없음
     }
   });
-  console.log(mapOption.level);
+  //console.log(mapOption.level);
  // 지도를 생성한다
  let map = new kakao.maps.Map(mapContainer, mapOption);
  map.setZoomable(false);
@@ -145,10 +149,9 @@ function map() {
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
 
-
 //==============================================================================================
   
-    
+
 
     
 
@@ -167,16 +170,16 @@ function map() {
       let latlng = marker.getPosition();
       dragStartLat = latlng.getLat().toFixed(13);
       dragStartLng = latlng.getLng().toFixed(13);
-      console.log("이동 전 lat " + dragStartLat);
-      console.log("이동 전 lng " + dragStartLng);
+      //console.log("이동 전 lat " + dragStartLat);
+      //console.log("이동 전 lng " + dragStartLng);
     });
 
     kakao.maps.event.addListener(marker, "dragend", function () {
       // 드래그가 끝나는 시점에 동작
       // 드래그가 끝난 지점의 좌표를 불러옴
       let latlng = marker.getPosition();
-      console.log("이동 후 lat " + latlng.getLat());
-      console.log("이동 후 lng " + latlng.getLng());
+      //console.log("이동 후 lat " + latlng.getLat());
+      //console.log("이동 후 lng " + latlng.getLng());
       let wrap = [];
       // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
       wrap.push(
@@ -271,10 +274,10 @@ function map() {
   btmMeun(rootChild[2], menuChild2);
 
   
-  console.dir(rootChild[2]);
-  console.dir(rootChild[2].children[3]);
+  //console.dir(rootChild[2]);
+  //console.dir(rootChild[2].children[3]);
   rootChild[2].children[3].addEventListener('click', function(){
-    console.log(markers);
+    //console.log(markers);
     setMarkers(null);
   })
 
@@ -284,10 +287,10 @@ function map() {
     }
   }
   const markersImage = {
-   0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
-   1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
-   2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
-   3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
+    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
+    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
+    2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
+    3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
   const getURL = {
     0: 'frFootprint',
     1: 'starFootprint',
@@ -299,7 +302,7 @@ function map() {
   markersObject.userid = targetId;
   function allAddMarker(position, imageType) {
     let marker = new kakao.maps.Marker({
-      map: map,
+      // map: map,
       position: position,
       image: new kakao.maps.MarkerImage(
         markersImage[imageType],
@@ -307,7 +310,7 @@ function map() {
         imageOption
       ),
     });
-    marker.setMap(map);
+    // marker.setMap(map);
     return marker;
   }
   function allMarker(callback, type) {
@@ -315,7 +318,7 @@ function map() {
       fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
       .then((response) => response.json())
       .then((result) =>{
-        console.log(result)
+        //console.log(result)
         for (const key in result) {
           //console.log(typeof(parseFloat(res['0'][0])))
           let markerNow = callback(
@@ -327,10 +330,11 @@ function map() {
           markersObject.appendMarker = [result[key][2],type,markerNow,new Date(result[key][3])]
           markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-        
+          console.log("result 값");
+          console.log(result[key][2]);
           
         }
-      console.log(markersObject);
+      //console.log(markersObject);
       console.log("정상적임");
       })
       .then(()=>{
@@ -369,6 +373,38 @@ getMarkersObject();
 
   }
 map();
+
+//대표 발자국 대신할 임시 버튼
+let test = tagCreate("div", {})
+document.body.appendChild(test);
+styleCreate(test, {
+  width: "50px",
+  height: "50px",
+  zindex: '3',
+  position: 'relative',
+  backgroundColor: "black",
+  bottom: '1000px'
+})
+
+
+//단체방 리스트 생성 함수
+const roomName = 'test1';
+createUserOrgchat(test, roomName);
+
+let ggg = document.getElementById('chatList')
+// ggg.style.display = 'none'
+let tg = true;
+
+test.addEventListener('click', function(test){
+  if(tg){
+    ggg.style.display = 'flex'
+    tg = false;
+  }
+  else if(!tg){
+    ggg.style.display = 'none'
+    tg = true;
+  }
+})
 
 function putUserProfile(object){
   let arr = Object.keys(object);

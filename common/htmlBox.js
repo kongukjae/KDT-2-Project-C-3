@@ -48,6 +48,7 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
+  <script src="/common/dangMap_userChatList.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services,clusterer"></script>
   <script src="/mapp/dangMap.js"></script>
   <script src="/mapp/dangMapSlide.js"></script>`
@@ -102,19 +103,19 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/market/market-post-page.js"></script>`,
 
+  //댕스타그램
+  postBoard: `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/post_board/commentUpdateDelete.js"></script>
+  <script src="/post_board/commentRecent.js"></script>
+  <script src="/post_board/commentInput.js"></script>
+  <script src="/post_board/commentWindow.js"></script>
+  <script src="/post_board/dangstarLike.js"></script>
+  <script src="/post_board/postCreate.js"></script>
+  <script src="/post_board/dangstargram.js"></script>`,
 
-//댕스타그램
-postBoard: `
-<script src="/common/commonFunc.js"></script>
-<script src="/common/topMenu.js"></script>
-<script src="/common/bottomMenu.js"></script>
-<script src="/post_board/commentUpdateDelete.js"></script>
-<script src="/post_board/commentRecent.js"></script>
-<script src="/post_board/commentInput.js"></script>
-<script src="/post_board/commentWindow.js"></script>
-<script src="/post_board/dangstarLike.js"></script>
-<script src="/post_board/postCreate.js"></script>
-<script src="/post_board/dangstargram.js"></script>`,
 
   dangTalkMain:`
   <script src="/common/commonFunc.js"></script>
