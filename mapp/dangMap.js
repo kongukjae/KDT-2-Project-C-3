@@ -358,7 +358,12 @@ function map() {
 
     let cl_markers = markersObject.position.map(function(position) { //map 메서드를 이용하여 마커들의 좌표를 이용한 새로운 배열을 만듦
       return new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(position.lat, position.lng)
+        position: new kakao.maps.LatLng(position.lat, position.lng),
+        image: new kakao.maps.MarkerImage(
+          markersImage[3],
+          imageSize,
+          imageOption
+        ),
       });
     });
   
