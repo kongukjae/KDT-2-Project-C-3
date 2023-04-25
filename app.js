@@ -21,6 +21,7 @@ import signupResult from "./httpServer/signupResultRoute.js";
 //import map
 import dangMapServer from "./httpServer/dangMapServer.js";
 import callPostDangMap from "./httpServer/callPostDangMap.js";
+import dangmapChatList from "./httpServer/bottomMenu_map_chatList_post.js";
 
 //import post board
 import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
@@ -87,10 +88,6 @@ import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_ma
   ]
 ----------------------------------------------------
 */
-
-
-// cmd로 mysql 접속방법
-// mysql -h192.168.0.93 -uguest -p
 
 /*
 ------------DB 정보---------------
@@ -178,6 +175,8 @@ const server = http.createServer(function (request, response) {
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
     callPostDangMap(request, response);
+    //댕맵 - 채팅 참여자 리스트
+    dangmapChatList(request, response);
 
     //로그인
     callPostLogin(request, response);

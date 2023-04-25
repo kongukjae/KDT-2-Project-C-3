@@ -88,7 +88,7 @@ async function getRoomListAsync() {
     }else{
       targetRoomObject[Object.keys(targetRoomObject)[i]].putRecentText(recentText[0].text)
     }
-   
+  
   }
   
   for(let i in targetRoomObject){
