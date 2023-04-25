@@ -322,9 +322,10 @@ function map() {
             ), type
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          markersObject.appendPosition = {"lat":result[key][0],"lng":result[key][1],"friend":type, "name":result[key][2]}
+          markersObject.appendPosition = {"lat":result[key][0],"lng":result[key][1],"friend":type, "name":result[key][2], "marker": [markerNow], "date": result[key][3]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-        
+          console.log("result 값");
+          console.log(result[key][2]);
           
         }
       console.log(markersObject);
@@ -372,6 +373,12 @@ function map() {
   
     console.log(cl_markers)
     clusterer.addMarkers(cl_markers);
+
+    console.log(markersObject.position[0].marker)
+    // 오버레이 만드는 함수 위치 및 매개변수 변경하면 될 것 같음
+    // for(let i = 0; i < markersObject.position.length; i++) {
+    //   createOverlay(markersObject.position[i].name,map,markersObject.position[0].marker,markersObject.position.lat,markersObject.position.lat,changeDate(markersObject.position.date));
+    // }
     // --------------------------------------------------------------------------------------
   };
 
