@@ -19,7 +19,7 @@ export default function dangMap(request, response) {
       let requestId = JWT.jwtCheck(jwtfromClient).id;
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
-      if(target === "mine"){
+      if(target === "mine" || target === requestId){
         console.log("마이페이지");
         connection.query(
           `SELECT * FROM userinfo where id='${requestId}'`,

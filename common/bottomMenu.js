@@ -21,7 +21,8 @@ function btmMeun(rootChild){
       justifyContent: "center",
       alignItems : "center",
       fontSize : "13px",
-      fontWeight : "500"
+      fontWeight : "500",
+      position : 'relative'
     })
     child.onmouseover = ()=>{
       child.style.scale = "1.1"
@@ -40,8 +41,27 @@ function btmMeun(rootChild){
   
   menuChild[3].innerText = "댕톡";
   menuChild[4].innerText = "댕프랜드";
+  const jwt = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  fetch('http://localhost:2080/bottomMenuUnreadCircle', {
+    method: 'POST',
+    body:  jwt
+  }).then(response => response.json())
+  .then((result)=>{
+    let cnt = 0;
+    for(let i of result){
+      cnt += i.unread
+    }
+    if(cnt>0){
+      let unread = tagCreate('div');
+      styleCreate(unread,targetStyle.unreadCircle)
+      menuChild[3].appendChild(unread)
+      unread.innerText = cnt;
+    }
+  })
 
-  
   menuChild[0].addEventListener("click",()=>{
     window.location = "http://localhost:2080/secondHand"
   });
