@@ -37,11 +37,15 @@ function createchatList(id, text, unread) {
   chatlistBoxComponent.appendChild(chatlastMsg);
   styleCreate(chatlastMsg, dangtalk.chatlistlastMsg);
   chatlastMsg.innerText = text;
-
+  
   let chatlistCount = tagCreate("div", {});
   chatBox.appendChild(chatlistCount);
   styleCreate(chatlistCount, dangtalk.chatlistCount);
   chatlistCount.innerText = unread;
+  if(unread === 0){
+    chatlistCount.style.display = 'none'
+  }
+
   const xhr = new XMLHttpRequest();
     xhr.open('POST', `http://localhost:2080/sendImage`);
     xhr.responseType = 'blob';

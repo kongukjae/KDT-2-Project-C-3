@@ -184,6 +184,19 @@ const targetStyle = {
     alignItems: "center",
     zIndex: "2"
   },
+  unreadCircle: {
+    width: '25px',
+    height: '25px',
+    ...pageStyle.flexRowCenter,
+    position: "absolute",
+    borderRadius : '50%',
+    backgroundColor : '#2353FF',
+    color : 'white',
+    fontSize: "12px",
+    fontWeight: "300",
+    right : '-8px',
+    top : '-8px'
+  },
   mainRoot: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height2000,
@@ -1374,12 +1387,15 @@ const dangtalk = {
     marginBottom: "3px",
   },
   chatlistCount: {
-    width: pageStyle.width.width30,
-    height: pageStyle.height.height30,
+    width: pageStyle.width.width25,
+    height: '25px',
     ...pageStyle.flexRowCenter,
     margin: '5px',
-    fontSize: "15px",
-    fontWeight: "700",
+    borderRadius : '50%',
+    backgroundColor : '#2353FF',
+    color : 'white',
+    fontSize: "12px",
+    fontWeight: "300",
   }
 }
 
