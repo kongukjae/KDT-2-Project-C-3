@@ -68,21 +68,16 @@ function loadFriendsList(starFriends, friends) {
     const friendsList = JSON.parse(this.response)
 
     for(let i = 0; i < friendsList.starId.length; i++){
-      createfriendsList(starFriends, friendsList.starDogName[i], friendsList.starIntro[i]);
+      createfriendsList(starFriends, friendsList.starId[i], friendsList.starDogName[i], friendsList.starIntro[i]);
     }
 
     for(let i = 0; i < friendsList.stdId.length; i++){
-      createfriendsList(friends, friendsList.stdDogName[i], friendsList.stdIntro[i]);
+      createfriendsList(friends, friendsList.stdId[i], friendsList.stdDogName[i], friendsList.stdIntro[i]);
     }
-    // let res = JSON.parse(xhr.response);
-    // for (let i = 0; i < res.length; i++) {
-    //   console.log(res[i])
-    //   createfriendsList();
-    // }
   });
 }
 
-function createfriendsList(parent, dogName, intro){
+function createfriendsList(parent, userID, dogName, intro){
 
   let box = tagCreate("div", {});
   parent.appendChild(box);
@@ -90,7 +85,7 @@ function createfriendsList(parent, dogName, intro){
     width: pageStyle.width.widthP95,
     height: pageStyle.height.height100,
     borderRadius: pageStyle.borderRadius.borderRadius15,
-    margin: "10px 0 10px 0",
+    margin: "10px 0 5px 0",
     ...pageStyle.flexRowCenter,
     textDecoration: 'none',
     color: pageStyle.colorTheme.black,
@@ -103,9 +98,10 @@ function createfriendsList(parent, dogName, intro){
   styleCreate(chatlistUserImg, {
     width: pageStyle.width.width80,
     height: pageStyle.height.height80,
-    border: "1px solid black",
     borderRadius: pageStyle.borderRadius.borderRadius9,
     margin: "5px",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   });
 
   let chatlistBoxComponent = tagCreate("div", {});
@@ -120,23 +116,36 @@ function createfriendsList(parent, dogName, intro){
     margin: "20px 0 0 10px"
   });
 
-  // let userSapce = tagCreate("div", {})
-  // chatlistBoxComponent.appendChild(userSapce);
-  // styleCreate(userSapce, {
-
-  // })
-
-  let chatlistUserName = tagCreate("div", {});
-  chatlistBoxComponent.appendChild(chatlistUserName);
-  styleCreate(chatlistUserName, {
+  let userSapce = tagCreate("div", {})
+  chatlistBoxComponent.appendChild(userSapce);
+  styleCreate(userSapce, {
     width: pageStyle.width.widthP100,
     height: pageStyle.height.heightP30,
+    display: "flex",
+    marginBottom: "5px",
+    alignItems: "center",
+    textAlign: "center"
+
+  })
+
+  let friendListDogName = tagCreate("div", {});
+  userSapce.appendChild(friendListDogName);
+  styleCreate(friendListDogName, {
+    // width: pageStyle.width.widthP30,
     fontSize: pageStyle.fontSizeSet.small,
     fontWeight: "700",
-    marginBottom: "5px"
-    // ...pageStyle.flexColCenter,
   });
-  chatlistUserName.innerText = dogName;
+  friendListDogName.innerText = dogName;
+
+  let friendListUserName = tagCreate("div", {});
+  userSapce.appendChild(friendListUserName);
+  styleCreate(friendListUserName, {
+    // width: pageStyle.width.widthP70,
+    fontSize: "14px"
+  });
+  friendListUserName.innerText = `(${userID})`;
+
+
 
   let chatlastMsg = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlastMsg);
@@ -159,6 +168,16 @@ function createfriendsList(parent, dogName, intro){
     textAlign: 'center'
   });
   chatlistCount.innerText = '. . .';
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.responseType = 'blob';
+  xhr.send(`type=proFile&id=${userID}`); 
+  xhr.addEventListener('load', function(){
+    let imageFromServer = URL.createObjectURL(xhr.response);
+    chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`;
+    console.log("이미지 가져오기 완료");
+  });
 }
 
 
