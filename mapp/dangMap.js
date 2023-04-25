@@ -322,7 +322,7 @@ function map() {
             ), type
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          markersObject.appendPosition = {"lat":result[key][0],"lng":result[key][1]}
+          markersObject.appendPosition = {"lat":result[key][0],"lng":result[key][1],"friend":type, "name":result[key][2]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
         
           
@@ -355,12 +355,14 @@ function map() {
 
     // 지도에 표시되고 있는 마커들의 좌표 값
     console.log(markersObject.position);
+    // 지도에 표시되고 있는 마커와 유저의 관계 값
+    console.log(markersObject.markers);
 
     let cl_markers = markersObject.position.map(function(position) { //map 메서드를 이용하여 마커들의 좌표를 이용한 새로운 배열을 만듦
       return new kakao.maps.Marker({
         position: new kakao.maps.LatLng(position.lat, position.lng),
         image: new kakao.maps.MarkerImage(
-          markersImage[3],
+          markersImage[position.friend],
           imageSize,
           imageOption
         ),
