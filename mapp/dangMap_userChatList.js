@@ -150,7 +150,8 @@ function createUserOrgchatList(parent, index, userID, dogName){
   xhr.send(`type=proFile&id=${target}`); 
   xhr.addEventListener('load', function(){
     let imageFromServer = URL.createObjectURL(xhr.response);
-    chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`
+    chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`;
+    chatlistUserImg.style.backgroundSize = '40px 50px'
     console.log("이미지 가져오기 완료");
   });
 }
