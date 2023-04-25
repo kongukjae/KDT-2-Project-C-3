@@ -143,7 +143,6 @@ function map() {
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
 
-
 //==============================================================================================
   
     
@@ -282,10 +281,10 @@ function map() {
     }
   }
   const markersImage = {
-   0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
-   1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
-   2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
-   3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
+    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
+    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
+    2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
+    3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
   const getURL = {
     0: 'frFootprint',
     1: 'starFootprint',
@@ -297,7 +296,7 @@ function map() {
   markersObject.userid = targetId;
   function allAddMarker(position, imageType) {
     let marker = new kakao.maps.Marker({
-      map: map,
+      // map: map,
       position: position,
       image: new kakao.maps.MarkerImage(
         markersImage[imageType],
@@ -305,7 +304,7 @@ function map() {
         imageOption
       ),
     });
-    marker.setMap(map);
+    // marker.setMap(map);
     return marker;
   }
   function allMarker(callback, type) {
@@ -323,9 +322,10 @@ function map() {
             ), type
           );
           markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
-          markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
+          markersObject.appendPosition = {"lat":result[key][0],"lng":result[key][1],"friend":type, "name":result[key][2], "marker": [markerNow], "date": result[key][3]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-        
+          console.log("result 값");
+          console.log(result[key][2]);
           
         }
       console.log(markersObject);
@@ -345,10 +345,43 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
-    
-    
-  };
+    // --------------------------------------------------------------------------------------
+    // 클러스터 적용부
+    console.log("cluster test")
+    let clusterer = new kakao.maps.MarkerClusterer({
+      map: map,
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 5, // 클러스터 할 최소 지도 레벨
+      disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
+    });
+
+    // 지도에 표시되고 있는 마커들의 좌표 값
+    console.log(markersObject.position);
+    // 지도에 표시되고 있는 마커와 유저의 관계 값
+    console.log(markersObject.markers);
+
+    let cl_markers = markersObject.position.map(function(position) { //map 메서드를 이용하여 마커들의 좌표를 이용한 새로운 배열을 만듦
+      return new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(position.lat, position.lng),
+        image: new kakao.maps.MarkerImage(
+          markersImage[position.friend],
+          imageSize,
+          imageOption
+        ),
+      });
+    });
   
+    console.log(cl_markers)
+    clusterer.addMarkers(cl_markers);
+
+    console.log(markersObject.position[0].marker)
+    // 오버레이 만드는 함수 위치 및 매개변수 변경하면 될 것 같음
+    // for(let i = 0; i < markersObject.position.length; i++) {
+    //   createOverlay(markersObject.position[i].name,map,markersObject.position[0].marker,markersObject.position.lat,markersObject.position.lat,changeDate(markersObject.position.date));
+    // }
+    // --------------------------------------------------------------------------------------
+  };
+
   getMarkersObject();
 
 }
