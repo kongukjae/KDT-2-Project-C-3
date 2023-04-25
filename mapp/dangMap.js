@@ -87,42 +87,64 @@ function map() {
 
   markerPosition = new kakao.maps.LatLng(36.35, 127.385); // 마커가 표시될 위치입니다
 
+  //남은 발자국 개수 박스
+  let countFootprintBox = tagCreate("div", {});
+  styleCreate(countFootprintBox, targetStyle.countFootprintBox);
+  root.appendChild(countFootprintBox);
+
+  let countFootprintText = tagCreate("div", {});
+  styleCreate(countFootprintText, targetStyle.countFootprintText);
+  countFootprintBox.appendChild(countFootprintText);
+  countFootprintText.innerHTML = `오늘 찍을 수 있는 발자국 수`;
+
+  let countFootprintCount = tagCreate("div", {});
+  styleCreate(countFootprintCount, targetStyle.countFootprintCount);
+  countFootprintBox.appendChild(countFootprintCount);
+  
+
   // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
   let markers = [];
   // let latlng = mouseEvent.latLng;
   //let result = [];
   let resultObject = {};
-  let countResult;
   const cookieId = document.cookie.split("=")[1].split(";")[0];
   // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
+  let textCount;
+  // console.log(textCount);
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+    resultCount = 1;
     let wrap = [];
     // console.log("클릭 시 : " + overlayChecker);
     // 오버레이 창이 비활성화 되있을 경우에 동작
     if (overlayChecker === false) {
       // 클릭한 위치에 마커를 표시합니다
       let latlng = mouseEvent.latLng;
+      const httpRequest = new XMLHttpRequest();
 
-      addMarker(latlng);
-      wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
       //result.push(wrap);
       // console.log(wrap);
       //console.log("result: " + result);
       // resultObject[cnt] = wrap;
-      resultObject[0] = wrap;
-      console.log(markersObject.markers[markersObject.userid][1].length);
-      countResult = markersObject.markers[markersObject.userid][1].length;
+      // countResult = markersObject.markers[markersObject.userid][1].length;
+      console.log(textCount);
+      textCount -= resultCount;
+      countFootprintCount.innerText = textCount;
+      if(textCount < 10 && textCount >= 0) {
+        addMarker(latlng);
+        wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
+        resultObject[0] = wrap;
 
-      if(countResult === 10){
-        alert(`오늘은 더 이상 발자국을 찍을 수 없습니다.`);
+        countFootprintCount.innerText = textCount;
+        httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+        httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
+      } else if(textCount < 0) {
+        alert(`오늘은 더 이상 마커를 찍을 수 없습니다.`);
+        countFootprintCount.innerText = 0;
       }
+      
       //cnt++;
       //console.log("cnt = " + cnt);
-
-      const httpRequest = new XMLHttpRequest();
-      httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
       // httpRequest.send(`re1=${result[0]}`);
-      httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
     }
   });
 
@@ -190,16 +212,6 @@ function map() {
     });
     return marker;
   }
-
-  //남은 발자국 개수 박스
-  let countFootprintBox = tagCreate("div", {});
-  styleCreate(countFootprintBox, targetStyle.countFootprintBox);
-  root.appendChild(countFootprintBox);
-
-  let countFootprint = tagCreate("div", {});
-  styleCreate(countFootprint, targetStyle.countFootprint);
-  countFootprintBox.appendChild(countFootprint);
-  countFootprint.innerText = "남은 발자국: ";
 
   // 검색창
   // let searchBarWrap = tagCreate("div");
@@ -315,9 +327,9 @@ function map() {
   function allMarker(callback, type) {
     return new Promise(function (resolve, reject) {
       fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
-      .then((response) => response.json())
-      .then((result) => {
-          countResult = Object.keys(result).length
+        .then((response) => response.json())
+        .then((result) => {
+          countResult = Object.keys(result).length;
           for (const key in result) {
             //console.log(typeof(parseFloat(res['0'][0])))
             let markerNow = callback(
@@ -360,8 +372,15 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject);
     putUserProfile(Object.keys(markersObject.markers));
+    if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
+      countFootprintCount.innerText = 10;
+    } else {
+      countFootprintCount.innerText = (10 - markersObject.markers[markersObject.userid][1].length);
+    }
+    textCount = Number(countFootprintCount.innerText);
+    // console.log(parseInt(countFootprintCount.innerText));
   }
-
+  
   getMarkersObject();
 }
 map();

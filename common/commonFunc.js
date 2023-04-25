@@ -397,7 +397,7 @@ const targetStyle = {
     display : "flex",
     alignItems : "center"
   },
-  countFootprint: {
+  countFootprintText: {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.heightP100,
     border : `1px ${pageStyle.colorTheme.lightGray} solid`,
@@ -408,6 +408,17 @@ const targetStyle = {
     position : "absolute",
     ...pageStyle.flexRowCenter,
     justifyContent: "start",
+  },
+  countFootprintCount: {
+    width : pageStyle.width.width80,
+    height : pageStyle.height.height30,
+    borderRadius : "15px",
+    backgroundColor : pageStyle.colorTheme.peach,
+    position : "relative",
+    left : "210px",
+    color : pageStyle.colorTheme.white,
+    ...pageStyle.flexRowCenter,
+    paddingBottom : "3px"
   },
   //댕맵 검색창
   menuMapSearchBarWrap: {
