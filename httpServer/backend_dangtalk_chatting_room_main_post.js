@@ -140,4 +140,27 @@ export default function dangTalkMainPost(request, response) {
       conn.end();
       });
   }
+  if(request.url === '/bottomMenuUnreadCircle'){
+    let body = "";
+      request.on("data", function (data) {
+        body = body + data;
+      });
+      request.on("end", function () {
+        const targetId = JWT.jwtCheck(body).id;
+        let conn = mysql.createConnection(cmServer.mysqlInfo);
+        conn.connect();
+        conn.query(
+        `select * from chat_room where id='${targetId}';`,
+        function (err, rows) {
+          if (err) throw err;
+          else {
+            response.writeHead(200);
+            response.write(JSON.stringify(rows));
+            response.end();
+          }
+        }
+      );
+      conn.end();
+      });
+  };
 }

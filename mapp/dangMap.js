@@ -338,14 +338,13 @@ function map() {
   };
   
   async function getMarkersObject(){
-    await allMarker(allAddMarker,0)
     await allMarker(allAddMarker,1)
+    await allMarker(allAddMarker,0)
     await allMarker(allAddMarker,2)
     await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
-    console.log(markersObject.markers['asdasd123'][1][0][0][0])
     
     
   };

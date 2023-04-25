@@ -21,6 +21,10 @@ function main(){
   styleCreate(rootChild[4],{
     height : "120px"
   })
+  // rootChild[2].addEventListener('scroll', function(){
+  //   console.log(rootChild[2].scrollY)
+  // });
+
   rootChild[1].innerText = `${targetId} 님과의 채팅방`;
   let inputWrapChild = [];
   let inputWrapChildInput = tagCreate("input",{type:'text'});
@@ -37,7 +41,6 @@ function main(){
 
   // 하단 메뉴바
   btmMeun(rootChild[5])
-
   // 이전채팅 불러오기
   fetch('http://localhost:2080/loadBeforeChatRequest', {
     method: 'POST',
@@ -59,6 +62,9 @@ function main(){
 
   //채팅
   let chat = io('http://localhost:2080/chat')
+  chat.emit("login", {
+      name: `${userId}`,
+      room: `${roomName}`})
   inputWrapChild[1].addEventListener("click",()=>{
     let msgNow = inputWrapChild[0].value
     // 서버로 자신의 정보를 전송한다.
@@ -70,7 +76,19 @@ function main(){
 
     inputWrapChild[0].value='';
   });
-
+  inputWrapChild[0].addEventListener("keydown",(e)=>{
+    if(e.key==='Enter'){
+      let msgNow = inputWrapChild[0].value
+      // 서버로 자신의 정보를 전송한다.
+      chat.emit("chat message", {
+        name: `${userId}`,
+        room: `${roomName}`,
+        msg: msgNow
+      });
+  
+      inputWrapChild[0].value='';
+    }
+  });
  
   // 서버로부터의 메시지가 수신되면
   chat.on("chat message", function(data) {
