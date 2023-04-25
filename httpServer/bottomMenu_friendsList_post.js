@@ -41,7 +41,13 @@ export default function postPostBoardLike(request, response) {
             data.forEach(element => {
               starFriendsID.push(element.id);
               starFriendsDogName.push(element.dogName);
-              starFriendsIntro.push(element.intro);
+
+              if(element.intro === null){
+                starFriendsIntro.push(" ");
+              }
+              else{
+                starFriendsIntro.push(element.intro);
+              }
             });
             // for(let i = 0; i < data.length; i++){
               // console.log(data[i].id)
@@ -60,7 +66,13 @@ export default function postPostBoardLike(request, response) {
             data.forEach(element => {
               stdFriendsID.push(element.id);
               stdFriendsDogName.push(element.dogName);
-              stdFriendsIntro.push(element.intro);
+
+              if(element.intro === null){
+                stdFriendsIntro.push(" ");
+              }
+              else{
+                stdFriendsIntro.push(element.intro);
+              }
             });
             // for(let i = 0; i < data.length; i++){
               // console.log(data[i].id)
