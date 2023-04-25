@@ -146,8 +146,6 @@ const server = http.createServer(function (request, response) {
 
     //댕맵 페이지
     dangMapServer(request, response);
-    //댕맵 - 채팅 참여자 리스트
-    dangmapChatList(request, response);
     
     //댕댕마켓 페이지
     secondHand(request, response);
@@ -177,6 +175,8 @@ const server = http.createServer(function (request, response) {
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
     callPostDangMap(request, response);
+    //댕맵 - 채팅 참여자 리스트
+    dangmapChatList(request, response);
 
     //로그인
     callPostLogin(request, response);

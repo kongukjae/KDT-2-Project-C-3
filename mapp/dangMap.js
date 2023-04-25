@@ -365,12 +365,13 @@ styleCreate(test, {
   bottom: '1000px'
 })
 
+
 //단체방 리스트 생성 함수
-createUserOrgchat(test);
+const roomName = 'test1';
+createUserOrgchat(test, roomName);
 
 let ggg = document.getElementById('chatList')
 // ggg.style.display = 'none'
-
 let tg = true;
 
 test.addEventListener('click', function(test){

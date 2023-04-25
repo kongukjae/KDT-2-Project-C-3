@@ -1,20 +1,20 @@
 
-function createUserOrgchat(test){
-
+function createUserOrgchat(test, roomName){
   let chatList = tagCreate("div", {id: 'chatList'});
   // document.body.appendChild(chatList);
   test.appendChild(chatList);
   styleCreate(chatList, {
     width: pageStyle.width.width250,
-      // height: pageStyle.height.height2000,
-      margin: "auto",
-      display: "none",
-      flexDirection: "column",
-      position: "absolute",
-      border: "1px solid black",
-      zIndex: '5',
-      left: "50px",
-      backgroundColor: pageStyle.colorTheme.peach
+    // height: pageStyle.height.height2000,
+    margin: "auto",
+    display: "none",
+    flexDirection: "column",
+    position: "absolute",
+    border: "1px solid black",
+    zIndex: '5',
+    left: "50px",
+    backgroundColor: pageStyle.colorTheme.peach,
+
 
   });
 
@@ -26,9 +26,11 @@ function createUserOrgchat(test){
   }
   //채팅방 제목 영억
   styleCreate(chatChild[0], {
-    ...pageStyle.flexRowBetweenCenter,
+    ...pageStyle.flexRowCenter,
     width: pageStyle.width.widthP100,
-    height: pageStyle.height.height30,
+    height: pageStyle.height.height40,
+    textAlign : "center"
+
   })
   
   //채팅방 이름
@@ -36,18 +38,17 @@ function createUserOrgchat(test){
   chatChild[0].appendChild(chatTitle);
   styleCreate(chatTitle, {
     width: pageStyle.width.widthP70,
-    height: pageStyle.height.heightP100,
+    fontWeight: pageStyle.fontWeightSet.bold
   });
-  chatTitle.innerText = "단체방입니다"
+  chatTitle.innerText = roomName + "방 입니다"
 
   //채팅 참가 버튼
   let attend = tagCreate("button", {});
   chatChild[0].appendChild(attend);
   styleCreate(attend, {
-    width: pageStyle.width.width40,
-    height: pageStyle.height.height24,
-    border: "1px solid red",
-    margin: "5px"
+    width: pageStyle.width.width50,
+    height: pageStyle.height.height30,
+
   })
   attend.innerText = "참가"
 
@@ -63,41 +64,44 @@ function createUserOrgchat(test){
   const http = new XMLHttpRequest();
   const url = `http://localhost:2080/mapChatList`;
 
-  http.open("GET", url);
-  http.send();
+
+  http.open("POST", url);
+  http.send(`roomName=${roomName}`);
   http.addEventListener('load', () => {
     let roomList = JSON.parse(http.response);
 
     for (const key in roomList) {
-      createUserOrgchatList(chatChild[1], key, roomList[key][0], roomList[key][1]);        
+      createUserOrgchatList(chatChild[1], roomList[key][0], roomList[key][1]);        
     }
   });
 
 }
 
-function createUserOrgchatList(parent, index, userID, dogName){
+function createUserOrgchatList(parent, userID, dogName){
 
   let box = tagCreate("div", {});
   parent.appendChild(box);
   styleCreate(box, {
     width: pageStyle.width.widthP95,
-    height: pageStyle.height.height50,
+    height: pageStyle.height.height52,
     borderRadius: pageStyle.borderRadius.borderRadius9,
-    margin: "5px 0 5px 0",
+    // margin: "5px 0 5px 0",
+    marginBottom: "5px",
     ...pageStyle.flexRowCenter,
     color: pageStyle.colorTheme.black,
     backgroundColor: pageStyle.colorTheme.beige,
     boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
   });
 
-  let chatlistUserImg = tagCreate("div", {id: `chatImage_${index}`});
+  let chatlistUserImg = tagCreate("div", {});
   box.appendChild(chatlistUserImg);
   styleCreate(chatlistUserImg, {
     width: pageStyle.width.width50,
-    height: pageStyle.height.heightP90,
-    border: "1px solid black",
-    borderRadius: pageStyle.borderRadius.borderRadius15,
-    margin: "10px",
+    height: "95%",
+    borderRadius: pageStyle.borderRadius.borderRadiusP50,
+    marginRight: "10px",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   });
 
   let chatlistBoxComponent = tagCreate("div", {});
@@ -130,16 +134,15 @@ function createUserOrgchatList(parent, index, userID, dogName){
   // chatlistUserName.innerText = dogName;
   chatlistUserName.innerText = userID;
 
-  let chatlastMsg = tagCreate("div", {});
-  chatlistBoxComponent.appendChild(chatlastMsg);
-  styleCreate(chatlastMsg, {
+  let chatlistDogName = tagCreate("div", {});
+  chatlistBoxComponent.appendChild(chatlistDogName);
+  styleCreate(chatlistDogName, {
     width: pageStyle.width.width90,
     height: pageStyle.height.heightP50,
+    fontSize: "13px"
     // marginBottom: "3px",
   });
-  chatlastMsg.innerText = dogName;
-
-  let chatImage = document.getElementById('chatImage_0')
+  chatlistDogName.innerText = dogName;
 
   let target = userID;
   console.log("cookie: ", target);
@@ -151,7 +154,6 @@ function createUserOrgchatList(parent, index, userID, dogName){
   xhr.addEventListener('load', function(){
     let imageFromServer = URL.createObjectURL(xhr.response);
     chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`;
-    chatlistUserImg.style.backgroundSize = '40px 50px'
     console.log("이미지 가져오기 완료");
   });
 }
