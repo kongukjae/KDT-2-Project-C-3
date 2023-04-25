@@ -3,9 +3,11 @@ let markersObject = {
   userid : "",
   markers : {},
   position :[],
+  markersArray : [],
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
+    this.markersArray.push(value[2])
     if(markersObject.markers[value[0]] === undefined){
       markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
     }else{
@@ -322,7 +324,7 @@ function map() {
               parseFloat(result[key][1])
             ), type
           );
-          markersObject.appendMarker = [result[key][2],type,[markerNow],new Date(result[key][3])]
+          markersObject.appendMarker = [result[key][2],type,markerNow,new Date(result[key][3])]
           markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
         
@@ -345,13 +347,27 @@ function map() {
     console.log("await 발자국 확인 중");
     console.log(markersObject)
     putUserProfile(markersObject.markers)
+    getMarkersObject();
     
+    let clusterer = new kakao.maps.MarkerClusterer({
+      map: map,
+      markers: markersObject.markersArray,
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 5, // 클러스터 할 최소 지도 레벨
+      disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
+
+    //   styles: [{
+    //     width : '53px', height : '52px',
+    //     background: 'url(cluster.png) no-repeat',
+    //     color: '#fff',
+    //     textAlign: 'center',
+    //     lineHeight: '54px'
+    // }]
+    });
     
   };
   
-  getMarkersObject();
-
-}
+  }
 map();
 
 function putUserProfile(object){
