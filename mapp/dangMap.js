@@ -348,9 +348,10 @@ function map() {
     // 클러스터 적용부
     console.log("cluster test")
     let clusterer = new kakao.maps.MarkerClusterer({
-      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      map: map,
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
       minLevel: 5, // 클러스터 할 최소 지도 레벨
+      disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
     });
 
     // 지도에 표시되고 있는 마커들의 좌표 값
