@@ -130,13 +130,13 @@ function map() {
 
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
-      map: map, // 마커를 표시할 지도
+      // map: map, // 마커를 표시할 지도
       position: position, // 마커를 표시할 위치
       image: markerImage,
     });
 
     // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
+    // marker.setMap(map);
 
     // 생성된 마커를 배열에 추가
     markers.push(marker);
