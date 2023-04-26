@@ -1,4 +1,4 @@
-import cmServer from "./commonServer.js";
+import cmServer from "../../../httpServer/commonServer.js";
 import mysql from "mysql";
 
 export default function postCommentLoad(request, response) {
