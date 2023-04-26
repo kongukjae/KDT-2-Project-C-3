@@ -1,18 +1,13 @@
 import mysql from "mysql";
 import cmServer from "../../commonServer.js";
-import htmlBox from "../../../common/htmlBox.js";
-// import dangmap_HTML from "./dangmap_get.js";
+import dangmap_HTML from "./dangmap_get.js";
 
 export default function dangMap(request, response) {
   let splitURL = request.url.split("/")[2];
 
-  if (request.url === "/map") {
-    response.writeHead(200);
-    response.write(htmlBox.htmlFunc(htmlBox.dangMap));
-    response.end();
-  }
+  dangmap_HTML(request, response);
 
-  else if (splitURL === "commonFunc.js") {
+  if (splitURL === "commonFunc.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   }
   else if (splitURL === "topMenu.js") {
