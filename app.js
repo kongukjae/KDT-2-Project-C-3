@@ -28,19 +28,19 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 import postBoardLike from "./httpServer/post_postBoard_like.js";
 import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
 import postCommentLoad from "./httpServer/backend_postBoard_commentLoad.js"
-
-//import secondHand
 import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
-//import friends
+//import profile
 import myPagePost from "./httpServer/myPagePost.js";
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import getFriendsList from "./httpServer/bottomMenu_friendsList_get.js"
-import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
 import starCheck from "./httpServer/backend_yourpage_starCheck.js";
 import starLoad from "./httpServer/backend_yourpage_starLoad.js";
+
+//import social
+import dangfriendGet from "./httpServer/router/sicial/dangfriendGet.js"
+import dangfriendPost from "./httpServer/router/sicial/dangfriendPost.js"
 
 // import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
 import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
@@ -132,7 +132,7 @@ const server = http.createServer(function (request, response) {
     dangTalkChatRoom(request, response)
 
     //댕프렌드
-    getFriendsList(request, response);
+    dangfriendGet(request, response);
 
   };
 
@@ -167,7 +167,7 @@ const server = http.createServer(function (request, response) {
     postBoardLike(request, response);
 
     //댕프렌드
-    PostFriendsList(request, response)
+    dangfriendPost(request, response)
 
     starCheck(request, response);
     starLoad(request, response);
