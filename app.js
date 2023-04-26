@@ -123,27 +123,6 @@ const server = http.createServer(function (request, response) {
     //회원가입
     signupGet(request, response);
 
-    //게시글 작성 페이지
-    if (request.url === "/friends/myKeepStyle.js") {
-      cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
-    } 
-
-    // if (request.url === "/favicon") {
-    //   cmServer.fileDirectory(`graphic/dogpaw.png`, response);
-    // }
-    // if (request.url.startsWith("/dupCheck")) {
-    //   dupCheck(request, response);
-    // }
-    
-    if (request.url.startsWith("/myMarker")) {
-      myMarker(request, response)
-    }
-
-    //게시글 작성 페이지
-    // console.log("aaaaaa:" + request.url)
-    if (request.url === "/backEnd/router/postBoard/dangWritePagePost.js") {
-      cmServer.fileDirectory(`/backEnd/router/postBoard/dangWritePagePost.js`, response);
-    } 
 
     //댕맵 페이지
     dangmapReadGet(request, response);
