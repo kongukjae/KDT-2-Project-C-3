@@ -37,16 +37,16 @@ const html = {
   loginBody : `
   <script src="/script/common/commonFunc.js"></script>
   <div id='root'></div>
-  <script src="/script/init_user/loginPage.js"></script>`,
+  <script src="/script/frontEnd/login/login_page.js"></script>`,
   signupPage : `
   <script src="/script/common/commonFunc.js"></script>
 
-  <script src="/script/init_user/signupstyle.js"></script>`,
+  <script src="/script/frontEnd/login/signup_page.js"></script>`,
   
 
   signUpResult : `
   <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/init_user/signupResultStyle.js"></script>`,
+  <script src="/script/frontEnd/login/signup_page_result.js"></script>`,
   dangMap : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -60,16 +60,16 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/mypageStyle.js"></script>`,
+  <script src="/script/frontEnd/profile/mypage_style.js"></script>`,
   yourpage : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/starCheck.js"></script>
-  <script src="/script/friends/yourpageStyle.js"></script>`,
+  <script src="/script/frontEnd/profile/userprofile_star_check.js"></script>
+  <script src="/script/frontEnd/profile/yourpage_style.js"></script>`,
   findUserInfo : `
   <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/init_user/findUserInfo.js"></script>
+  <script src="/script/frontEnd/login/find_password.js"></script>
   `,
 
   // 게시글 작성 페이지
@@ -84,7 +84,7 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/friendsListPage.js"></script>`,
+  <script src="/script/frontEnd/dangfriends/dangfriends_list.js"></script>`,
 
 
   //댕댕마켓
@@ -119,12 +119,12 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/dangtalk/chattingRoomMain.js"></script>`,
+  <script src="/script/frontEnd/dangtalk/dangtalk_room.js"></script>`,
 
   dangTalkList:`
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/dangtalk/dangtalk_list.js"></script>`
+  <script src="/script/frontEnd/dangtalk/dangtalk_list.js"></script>`
 }
 export default html;
