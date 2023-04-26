@@ -37,16 +37,16 @@ const html = {
   loginBody : `
   <script src="/script/common/commonFunc.js"></script>
   <div id='root'></div>
-  <script src="/script/init_user/loginPage.js"></script>`,
+  <script src="/script/frontEnd/login/login_page.js"></script>`,
   signupPage : `
   <script src="/script/common/commonFunc.js"></script>
 
-  <script src="/script/init_user/signupstyle.js"></script>`,
+  <script src="/script/frontEnd/login/signup_page.js"></script>`,
   
 
   signUpResult : `
   <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/init_user/signupResultStyle.js"></script>`,
+  <script src="/script/frontEnd/login/signup_page_result.js"></script>`,
   dangMap : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -69,7 +69,7 @@ const html = {
   <script src="/script/friends/yourpageStyle.js"></script>`,
   findUserInfo : `
   <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/init_user/findUserInfo.js"></script>
+  <script src="/script/frontEnd/login/find_password.js"></script>
   `,
 
   // 게시글 작성 페이지
