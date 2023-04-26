@@ -1,12 +1,12 @@
-import htmlBox from "../common/htmlBox.js";
-import cmServer from "./commonServer.js";
+import htmlBox from "../../../common/htmlBox.js";
+import cmServer from "../../../httpServer/commonServer.js";
 import mysql from "mysql";
 
 
 export default function secondHand(request, response){
   if (request.url === "/secondHand") {
     response.writeHead(200, { "Content-Type": "text/html" });
-    response.end(htmlBox.htmlFunc(htmlBox.secondHand));
+    response.end(htmlBox.htmlFunc(htmlBox.dangMarket));
   } 
   if(request.url.startsWith('/loadSecondHandBoard')){
     console.log(request.url);

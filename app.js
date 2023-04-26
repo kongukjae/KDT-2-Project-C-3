@@ -31,8 +31,8 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 import postBoardLike from "./httpServer/post_postBoard_like.js";
 import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
 import postCommentLoad from "./httpServer/backend_postBoard_commentLoad.js"
-import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
-import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
+import dangMarket from "./backEnd/Router/PostBoard/dangMarketGet.js"
+import dangMarketDetailPage from "./backEnd/Router/PostBoard/dangMarketDetailPageGet.js";
 
 //import profile
 import userPagePost from "./router/profile/userPage_Post.js";
@@ -145,8 +145,8 @@ const server = http.createServer(function (request, response) {
     dangMapServer(request, response);
     
     //댕댕마켓 페이지
-    secondHand(request, response);
-    secondHandPost(request, response);
+    dangMarket(request, response);
+    dangMarketDetailPage(request, response);
 
     //댕스타그램 페이지
     postBoard(request, response);

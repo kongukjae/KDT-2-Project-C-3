@@ -72,10 +72,7 @@ const html = {
   <script src="/script/init_user/findUserInfo.js"></script>
   `,
 
-  secondHand:`
-  <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/market/marketList.js"></script>`,
-
+  // 게시글 작성 페이지
   dangWrite : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -91,7 +88,7 @@ const html = {
 
 
   //댕댕마켓
-  secondHand:`
+  dangMarket:`
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
