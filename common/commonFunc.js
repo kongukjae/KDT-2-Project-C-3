@@ -22,6 +22,8 @@ const pageStyle = {
   colorTheme: {
     peach: "#F7786B",
     beige: "#F3EDE8",
+    beigeTypeB : '#EBE4DF',
+    beigeTypeC : '#D9D3CE',
     lightGray: "#E6E6E6",
     blue: "#2353FF",
     gray : "gray",
@@ -38,8 +40,10 @@ const pageStyle = {
     widthP95: "95%",
     widthP90: "90%",
     widthP80: "80%",
+    widthP70: "70%",
     widthP60: "60%",
     widthP40: "40%",
+    widthP30: "30%",
     width500: "500px",
     width450: "450px",
     width400: "400px",
@@ -65,7 +69,9 @@ const pageStyle = {
     height100vh: "100vh",
     height85vh: "85vh",
     heightP100: "100%",
+    heightP90: "90%",
     heightP70: "70%",
+    heightP50: "50%",
     heightP30: "30%",
     height2000: "2000px",
     height1700: "1700px",
@@ -182,6 +188,19 @@ const targetStyle = {
     alignItems: "center",
     zIndex: "2"
   },
+  unreadCircle: {
+    width: '25px',
+    height: '25px',
+    ...pageStyle.flexRowCenter,
+    position: "absolute",
+    borderRadius : '50%',
+    backgroundColor : '#2353FF',
+    color : 'white',
+    fontSize: "12px",
+    fontWeight: "300",
+    right : '-8px',
+    top : '-8px'
+  },
   mainRoot: {
     width: pageStyle.width.width500,
     height: pageStyle.height.height2000,
@@ -292,7 +311,7 @@ const targetStyle = {
     width : pageStyle.width.widthP100,
     height : pageStyle.height.height308,
     position: "absolute",
-    backgroundColor : "lightgray",
+    backgroundColor : pageStyle.colorTheme.beigeTypeC,
     display : "flex",
     flexDirection : "column",
     justifyContent : "flex-start",
@@ -322,10 +341,20 @@ const targetStyle = {
     gridTemplateRows: "repeat(2, 110px)",
   },
   menuMapSlideItems: {
-    border: "1px solid black",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  menuMapSlideUserBox: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection : 'column',
+    width : '80%',
+    height : '80%',
+    backgroundColor : pageStyle.colorTheme.beigeTypeB,
+    borderRadius : '10px',
+    boxShadow : "0 1px 20px rgba(0,0,0,0.21), 0 1px 1px rgba(0,0,0,0.22)"
   },
 
   //댕맵 슬라이드 메뉴의 팔로우 검색창
@@ -385,7 +414,41 @@ const targetStyle = {
     fontSize : pageStyle.fontSizeSet.small,
     // textAlign : "center"
   },
-
+  //댕맵 남은 발자국 개수
+  countFootprintBox: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height40,
+    top : "45px",
+    left: "50%",
+    position : "absolute",
+    marginLeft: "-150px",
+    zIndex : "3",
+    display : "flex",
+    alignItems : "center"
+  },
+  countFootprintText: {
+    width : pageStyle.width.widthP100,
+    height : pageStyle.height.heightP100,
+    border : `1px ${pageStyle.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : pageStyle.colorTheme.white,
+    position : "absolute",
+    ...pageStyle.flexRowCenter,
+    justifyContent: "start",
+  },
+  countFootprintCount: {
+    width : pageStyle.width.width80,
+    height : pageStyle.height.height30,
+    borderRadius : "15px",
+    backgroundColor : pageStyle.colorTheme.peach,
+    position : "relative",
+    left : "210px",
+    color : pageStyle.colorTheme.white,
+    ...pageStyle.flexRowCenter,
+    paddingBottom : "3px"
+  },
   //댕맵 검색창
   menuMapSearchBarWrap: {
     width : pageStyle.width.width300,
@@ -430,6 +493,20 @@ const targetStyle = {
     overflow : "hidden",
     backgroundSize: "cover",
     backgroundPosition: "center"
+  },
+  menuMapSlideImageWrapStyle : {
+    width : '44px',
+    height : '44px',
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : "50%",
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  menuMapSlideTextStyle : {
+    fontSize : '15px'
   },
 
   //회원가입 결과창
@@ -663,7 +740,6 @@ const mypageStyle = {
     marginTop : "20px",
     fontSize : pageStyle.fontSizeSet.medium,
     fontWeight : pageStyle.fontWeightSet.bold,
-    overflow : "hidden",
     backgroundSize: "cover",
     backgroundPosition: "center"
   },
@@ -1317,15 +1393,19 @@ const dangtalk = {
     ...pageStyle.flexRowCenter,
     textDecoration: 'none',
     color: pageStyle.colorTheme.black,
-    backgroundColor: pageStyle.colorTheme.peach,
+    backgroundColor: pageStyle.colorTheme.beige,
     boxShadow: pageStyle.defaultBoxShadow.ConBoxSdw,
+    cursor : 'pointer'
   },
   chatlistImg: {
-    width: pageStyle.width.width80,
-    height: pageStyle.height.height80,
-    border: "1px solid black",
-    borderRadius: pageStyle.borderRadius.borderRadius9,
+    width: '70px',
+    height: '70px',
+    // border: "1px solid black",
+    borderRadius: '50%',
     margin: "5px",
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   },
   chatlistBoxComponent: {
     width: pageStyle.width.width300,
@@ -1345,21 +1425,149 @@ const dangtalk = {
     marginBottom: "3px",
   },
   chatlistCount: {
-    width: pageStyle.width.width30,
-    height: pageStyle.height.height30,
+    width: pageStyle.width.width25,
+    height: '25px',
     ...pageStyle.flexRowCenter,
     margin: '5px',
-    fontSize: "15px",
-    fontWeight: "700",
+    borderRadius : '50%',
+    backgroundColor : '#2353FF',
+    color : 'white',
+    fontSize: "12px",
+    fontWeight: "300",
   }
 }
 
 
+const dangtalkChattingRoom ={
+  mainRoot: {
+    width : pageStyle.width.width500,
+      height : pageStyle.height.height1000,
+      margin : "auto",
+      position : "relative",
+      backgroundColor : pageStyle.colorTheme.beige,
+      ...pageStyle.flexColCenter,
+  },
+  chattingContainer: {
+    width : pageStyle.width.width450,
+    height : "100vh",
+    padding : "30px",
+    borderRadius : "10px",
+    display : "flex",
+    position: "relative",
+    flexDirection : "column",
+    justifyContent : "center",
+    alignItems : "center",
+    backgroundColor : pageStyle.colorTheme.peach,
+    gap : "20px",
+    boxShadow : pageStyle.defaultBoxShadow.ConBoxSdw
+  },
+  signUpListBox: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height70,
+    position : "relative",
+    ...pageStyle.flexRowCenter,
+    flexWrap : "wrap"
+  },
+  chattingTitle: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height70,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  },
+  chattingWrap: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height690,
+    padding : "10px",
+    borderRadius : "10px",
+    gap : '5px',
+  ...pageStyle.flexColumnTopCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    overflow : "auto"
+  },
+  chattingInputWrap: {
+    width : pageStyle.width.width400,
+    height : pageStyle.height.height100,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
 
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+  },
+  chattingFromMe: {
+  ...pageStyle.flexRowCenter,
+    alignSelf : "flex-end",
+    fontSize : "12px",
+    color : "white",
+    gap : "10px"
+  },
+  chattingFromYou: {
+  ...pageStyle.flexRowCenter,
+    alignSelf : "flex-start",
+    fontSize : "12px",
+    gap : "10px"
 
-  
+  },
+  chattingInputText: {
+    width : pageStyle.width.width300,
+    height : pageStyle.height.height50,
+    border : "0px",
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.whiteTypeA,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    marginRight : "10px",
+    fontSize : "15px",
+    color : "black"
+  },
+  chattingSubmitButton: {
+    width : pageStyle.width.width50,
+    height : pageStyle.height.height50,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexColCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    marginRight : "10px",
+    fontSize : "16px",
+    color : "white",
+    cursor : 'pointer'
+  },
+  msgBoxStyleFromMe :{
+    // width : pageStyle.width.width120,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.peach,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    alignSelf : "flex-start",
+    fontSize : "12px"
+  },
+  msgBoxStyleFromYou :{
+    // width : pageStyle.width.width120,
+    height : pageStyle.height.height30,
+    padding : "10px",
+    borderRadius : "10px",
+  ...pageStyle.flexRowCenter,
+    backgroundColor : pageStyle.colorTheme.beige,
+    boxShadow : pageStyle.defaultBoxShadow.defBoxSdw,
+    alignSelf : "flex-start",
+    fontSize : "12px"
+  },
+  imageBoxStyle : {
+    width : pageStyle.width.width50,
+    height : pageStyle.height.height50,
+    backgroundColor : pageStyle.colorTheme.lightGray,
+    borderRadius : '100%',
+    overflow : "hidden",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  }
 
-
-
-
-
+}

@@ -19,6 +19,9 @@ export default function dangMap(request, response) {
   else if (splitURL === "bottomMenu.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   } 
+  else if (splitURL === "dangMap_userChatList.js") {
+    cmServer.fileDirectory(`mapp/${splitURL}`, response);
+  } 
   else if(splitURL === "dangMap.js") {
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
@@ -27,25 +30,24 @@ export default function dangMap(request, response) {
     let myRowCnt;
     let markerMyArr = {};
 
-    console.log("url: " + request.url);
+    // console.log("url: " + request.url);
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select count(*) as count from map_tables where id='${targetId}'`,
+      `select count(*) as count from map_tables where (addData BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()) and id = '${targetId}' order by addData desc;`,
       function (err, data) {
         if (err) throw err;
         else {
           myRowCnt = data[0].count;
-          // console.log("a "+ myRowCnt);
+          console.log("a "+ myRowCnt);
         }
       }
     );
     conn.query(
-      `select * from map_tables where id='${targetId}' order by addData desc;`,
+      `select * from map_tables where (addData BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()) and id = '${targetId}' order by addData desc;`,
       function (err, rows) {
         if (err) throw err;
         else {
-          
           if(myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
@@ -60,7 +62,7 @@ export default function dangMap(request, response) {
               markerMyArr[i] = myArr;
             }
           }
-          console.log(markerMyArr)
+          // console.log(markerMyArr)
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
@@ -77,7 +79,7 @@ export default function dangMap(request, response) {
     let starCnt;
     let markerStarArr = {};
     connection.connect();
-    console.log("url ==" + request.url);
+    //console.log("url ==" + request.url);
 
     connection.query(
       `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = true order by addData desc;`,
@@ -125,7 +127,7 @@ export default function dangMap(request, response) {
     let friendCnt;
     let markerFriendsArr = {};
     connection.connect();
-    console.log("url ==" + request.url);
+    //console.log("url ==" + request.url);
 
     connection.query(
       `select count(*) as count from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}' and star = false order by addData desc;`,
@@ -173,7 +175,7 @@ export default function dangMap(request, response) {
     let otherCnt;
     let markerOtherArr = {};
     connection.connect();
-    console.log("url ==" + request.url);
+    //console.log("url ==" + request.url);
 
     connection.query(
       `select count(*) as count from map_tables left join (select id from map_tables join fr_list on fr_list.fr_id = map_tables.id where user_id = '${targetId}') as mt on map_tables.id = mt.id where mt.id is null and (map_tables.id not in ('${targetId}')) order by addData desc;`,
@@ -200,7 +202,7 @@ export default function dangMap(request, response) {
               markerOtherArr[i] = otherArr;
             }
           } else {
-            console.log(rows);
+            //console.log(rows);
             for (let i = 0; i < 10; i++) {
               let otherArr = [];
               otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);

@@ -19,7 +19,7 @@ export default function callPostDangMap(request, response) {
       response.end();
 
       for (const key in cooData) {
-        //console.log(cooData[key]);
+        console.log(cooData[key]);
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
@@ -45,8 +45,8 @@ export default function callPostDangMap(request, response) {
     })
     request.on("end", function(){ // 전송된 데이터를 다 받은 후
       dragData = JSON.parse(body);
-      console.log("아래는 dragData 입니다")
-      console.log(dragData);
+      // console.log("아래는 dragData 입니다")
+      // console.log(dragData);
   
       response.writeHead(200, {'Content-Type': 'text/html'});
       response.end();

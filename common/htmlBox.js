@@ -48,7 +48,8 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
+  <script src="/common/dangMap_userChatList.js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services,clusterer"></script>
   <script src="/mapp/dangMap.js"></script>
   <script src="/mapp/dangMapSlide.js"></script>`
 ,
@@ -61,6 +62,7 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/starCheck.js"></script>
   <script src="/friends/yourpageStyle.js"></script>`,
   findUserInfo : `
   <script src="/common/commonFunc.js"></script>
@@ -79,7 +81,13 @@ const html = {
   <script src="/common/bottomMenu.js"></script>
   <script src="/friends/myKeepStyle.js"></script>`,
 
-  
+  //댕프렌드
+  friendsList: `
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/friends/friendsListPage.js"></script>`,
+
 
   //댕댕마켓
   secondHand:`
@@ -108,10 +116,17 @@ const html = {
   <script src="/post_board/postCreate.js"></script>
   <script src="/post_board/dangstargram.js"></script>`,
 
+
   dangTalkMain:`
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script src="/dangtalk/chattingRoomMain.js"></script>`
+  <script src="/dangtalk/chattingRoomMain.js"></script>`,
+
+  dangTalkList:`
+  <script src="/common/commonFunc.js"></script>
+  <script src="/common/topMenu.js"></script>
+  <script src="/common/bottomMenu.js"></script>
+  <script src="/dangtalk/dangtalk_list.js"></script>`
 }
 export default html;
