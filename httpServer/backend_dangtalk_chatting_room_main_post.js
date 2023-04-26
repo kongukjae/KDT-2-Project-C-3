@@ -25,9 +25,7 @@ export default function dangTalkMainPost(request, response) {
         response.write(htmlBox.htmlFunc(htmlBox.dangTalkMain));
         response.end();
       })
-  } else if (request.url === "/dangtalk/chattingRoomMain.js") {
-    cmServer.fileDirectory(`dangtalk/chattingRoomMain.js`, response);
-  }
+  } 
   if(request.url === '/chatRoomRequest'){
     let body = "";
       request.on("data", function (data) {

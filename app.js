@@ -7,6 +7,9 @@ import { parse } from "path";
 import cmServer from "./httpServer/commonServer.js";
 import callPostImage from "./httpServer/callPostImage.js";
 
+//fileReaderScript
+import fileReaderScriptRouter from "./httpServer/fileReader/script.js"
+
 //import Main
 import callMain from "./httpServer/callMain.js";
 
@@ -103,6 +106,9 @@ import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_ma
 const server = http.createServer(function (request, response) {
   // get request
   if (request.method === "GET") {
+    //fileReaderScript
+    fileReaderScriptRouter(request, response)
+
     //console.log("요청 들어옴 : " + request.url);
     //로그인
     callLoginGet(request, response);
@@ -116,18 +122,17 @@ const server = http.createServer(function (request, response) {
       response.write(htmlBox.htmlFunc(htmlBox.signupPage));
       response.end();
     }   
+
+    /*
+    fileReader로 이동
+
     if (request.url === "/init_user/signupstyle.js") {
       cmServer.fileDirectory(`init_user/signup.js`, response);
     }
     if (request.url === "/init_user/signupResultStyle.js") {
       cmServer.fileDirectory(`init_user/signupResult.js`, response);
     }
-    if (request.url === "/favicon") {
-      cmServer.fileDirectory(`graphic/dogpaw.png`, response);
-    }
-    if (request.url.startsWith("/dupCheck")) {
-      dupCheck(request, response);
-    }else if (request.url === "/friends/mypageStyle.js") {
+    else if (request.url === "/friends/mypageStyle.js") {
       cmServer.fileDirectory(`friends/mypageStyle.js`, response);
     }else if (request.url === "/friends/yourpageStyle.js") {
       cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
@@ -135,14 +140,22 @@ const server = http.createServer(function (request, response) {
     if (request.url === "/friends/starCheck.js") {
       cmServer.fileDirectory(`/friends/starCheck.js`, response);
     }
-    if (request.url.startsWith("/myMarker")) {
-      myMarker(request, response)
-    }
-
     //게시글 작성 페이지
     if (request.url === "/friends/myKeepStyle.js") {
       cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
     } 
+
+    */
+    if (request.url === "/favicon") {
+      cmServer.fileDirectory(`graphic/dogpaw.png`, response);
+    }
+    if (request.url.startsWith("/dupCheck")) {
+      dupCheck(request, response);
+    }
+    
+    if (request.url.startsWith("/myMarker")) {
+      myMarker(request, response)
+    }
 
     //댕맵 페이지
     dangMapServer(request, response);

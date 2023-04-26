@@ -8,9 +8,6 @@ export default function secondHand(request, response){
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.secondHand));
   } 
-  if (request.url === "/market/marketList.js") {
-    cmServer.fileDirectory(`market/marketList.js`, response);
-  }
   if(request.url.startsWith('/loadSecondHandBoard')){
     console.log(request.url);
 
