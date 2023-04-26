@@ -1,10 +1,10 @@
-import * as jwtFunc from "./jsonwebtoken.js"
-import cmServer from "./commonServer.js";
+import * as jwtFunc from "../../../httpServer/jsonwebtoken.js"
+import cmServer from "../../../httpServer/commonServer.js";
 import mysql from "mysql";
   
   
 export default function postPostBoardLike(request, response) {
-    if(request.url.startsWith('/postBoardLike')){
+    if(request.url.startsWith('/dangstarLike')){
       // if(splitURL === 'postBoardLike'){
       console.log("postBoardLike 진입")
       let body = "";

@@ -30,9 +30,11 @@ import dangmapChatList from "./httpServer/router/Map/dangmap_chatList_post.js";
 
 //import dangstar
 import dangstar from "./backEnd/router/postBoard/dangstarGet.js";
-import postBoardLike from "./httpServer/post_postBoard_like.js";
+import dangstarLike from "./backEnd/router/postBoard/dangstarLikePost.js";
 import dangstarCommentInputPost from "./backEnd/router/postBoard/dangstarCommentInputPost.js"
 import dangstarCommentLoadPost from "./backEnd/router/postBoard/dangstarCommentLoadPost.js"
+
+// import dangMarket
 import dangMarket from "./backEnd/router/postBoard/dangMarketGet.js"
 import dangMarketDetailPage from "./backEnd/router/postBoard/dangMarketDetailPageGet.js";
 
@@ -189,7 +191,7 @@ const server = http.createServer(function (request, response) {
     //댕스타그램
     dangstarCommentLoadPost(request, response);
     dangstarCommentInputPost(request, response);
-    postBoardLike(request, response);
+    dangstarLike(request, response);
 
     //댕프렌드
     dangfriendPost(request, response)
