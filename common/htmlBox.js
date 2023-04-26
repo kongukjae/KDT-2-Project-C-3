@@ -84,7 +84,7 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/friendsListPage.js"></script>`,
+  <script src="/script/frontEnd/dangfriends/dangfriends_list.js"></script>`,
 
 
   //댕댕마켓
@@ -119,12 +119,12 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/dangtalk/chattingRoomMain.js"></script>`,
+  <script src="/script/frontEnd/dangtalk/dangtalk_room.js"></script>`,
 
   dangTalkList:`
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/dangtalk/dangtalk_list.js"></script>`
+  <script src="/script/frontEnd/dangtalk/dangtalk_list.js"></script>`
 }
 export default html;
