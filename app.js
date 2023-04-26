@@ -7,6 +7,9 @@ import { parse } from "path";
 import cmServer from "./httpServer/commonServer.js";
 import callPostImage from "./httpServer/callPostImage.js";
 
+//fileReaderScript
+import fileReaderScriptRouter from "./httpServer/fileReader/script.js"
+
 //import Main
 import homeGet from "./httpServer/router/home/homeGet.js";
 
@@ -103,6 +106,9 @@ import dangTalkChatRoomPost from "./httpServer/router/chat/dangtalkPost.js";
 const server = http.createServer(function (request, response) {
   // get request
   if (request.method === "GET") {
+    //fileReaderScript
+    fileReaderScriptRouter(request, response)
+
     //console.log("요청 들어옴 : " + request.url);
     //로그인
     loginGet(request, response);
@@ -117,6 +123,17 @@ const server = http.createServer(function (request, response) {
     if (request.url === "/friends/myKeepStyle.js") {
       cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
     } 
+
+    if (request.url === "/favicon") {
+      cmServer.fileDirectory(`graphic/dogpaw.png`, response);
+    }
+    if (request.url.startsWith("/dupCheck")) {
+      dupCheck(request, response);
+    }
+    
+    if (request.url.startsWith("/myMarker")) {
+      myMarker(request, response)
+    }
 
     //댕맵 페이지
     dangMapServer(request, response);
