@@ -44,8 +44,8 @@ import starCheckPost from "./httpServer/router/profile/userPage_starCheck_post.j
 import starLoadPost from "./httpServer/router/profile/userPage_starLoad_Post.js";
 
 //import social
-import dangfriendGet from "./httpServer/router/sicial/dangfriendGet.js"
-import dangfriendPost from "./httpServer/router/sicial/dangfriendPost.js"
+import dangfriendGet from "./httpServer/router/social/dangfriendGet.js"
+import dangfriendPost from "./httpServer/router/social/dangfriendPost.js"
 
 // import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
 import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
