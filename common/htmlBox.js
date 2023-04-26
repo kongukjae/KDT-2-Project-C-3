@@ -92,27 +92,27 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/market/marketList.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangmarket_list.js"></script>`,
 
 
   marketpost:`
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/market/market-post-page.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangmarket_detail_page.js"></script>`,
 
   //댕스타그램
   postBoard: `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/post_board/commentUpdateDelete.js"></script>
-  <script src="/script/post_board/commentRecent.js"></script>
-  <script src="/script/post_board/commentInput.js"></script>
-  <script src="/script/post_board/commentWindow.js"></script>
-  <script src="/script/post_board/dangstarLike.js"></script>
-  <script src="/script/post_board/postCreate.js"></script>
-  <script src="/script/post_board/dangstargram.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_update_delete_btn.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_recent.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_input.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_window.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_like.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_create.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page.js"></script>`,
 
 
   dangTalkMain:`
