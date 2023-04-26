@@ -8,7 +8,7 @@ import cmServer from "./httpServer/commonServer.js";
 import callPostImage from "./httpServer/callPostImage.js";
 
 //import Main
-import callMain from "./httpServer/callMain.js";
+import homeGet from "./httpServer/router/home/homeGet.js";
 
 //import Login
 import callLoginGet from "./httpServer/callLoginGet.js";
@@ -108,7 +108,7 @@ const server = http.createServer(function (request, response) {
     callLoginGet(request, response);
 
     //메인화면
-    callMain(request, response);
+    homeGet(request, response);
     
     //회원가입
     if (request.url === "/signUp") {

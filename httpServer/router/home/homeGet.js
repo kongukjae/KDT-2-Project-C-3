@@ -1,8 +1,8 @@
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js"
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../../commonServer.js"
 
-export default function callMain(request, response) {
+export default function homeGet(request, response) {
   // const mysqlInfo = {
   //   host: "192.168.0.93",
   //   user: "guest",
