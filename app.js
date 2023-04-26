@@ -140,7 +140,7 @@ const server = http.createServer(function (request, response) {
     }
 
     //게시글 작성 페이지
-    console.log("aaaaaa:" + request.url)
+    // console.log("aaaaaa:" + request.url)
     if (request.url === "/backEnd/Router/PostBoard/dangWritePagePost.js") {
       cmServer.fileDirectory(`/backEnd/Router/PostBoard/dangWritePagePost.js`, response);
     } 

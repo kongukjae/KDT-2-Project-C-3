@@ -5,7 +5,7 @@ import * as JWT from "../../../httpServer/jsonwebtoken.js";
 
 export default function dangMap(request, response) {
   // 댕스타 작성글 클릭시 게시글
-  if (request.url === "/dangWrite") {
+  if (request.url === "/dangStarWrite") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
@@ -21,7 +21,7 @@ export default function dangMap(request, response) {
     });
   } 
 //중고거래 작성글 클릭시 게시글
-  if (request.url === "/mykoop") {
+  if (request.url === "/dangMarketWrite") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
