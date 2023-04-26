@@ -4,10 +4,13 @@ let markersObject = {
   markers : {},
   position :[],
   markersArray : [],
+  usersArray :[],
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
     this.markersArray.push(value[2])
+    this.usersArray.push(value[0])
+
     if(markersObject.markers[value[0]] === undefined){
       markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
     }else{
@@ -469,7 +472,10 @@ function putUserProfile(object){
     name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
     
+    
     let frType = object[targetArr[i]];
+    console.log(targetArr[i])
+    console.log(frType)
     if(frType === 0){
       imageDivWrap.style.backgroundColor = '#1ea1ff';
     }else if(frType === 1){
