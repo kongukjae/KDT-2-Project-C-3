@@ -35,11 +35,11 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 //import profile
-import userPagePost from "./router/profile/userPage_Post.js";
+import userPagePost from "./httpServer/router/profile/userPage_Post.js";
 import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import starCheckPost from "./router/profile/userPage_starCheck_Post.js";
-import starLoadPost from "./router/profile/userPage_starLoad_Post.js";
+import starCheckPost from "./httpServer/router/profile/userPage_starCheck_post.js";
+import starLoadPost from "./httpServer/router/profile/userPage_starLoad_Post.js";
 
 //import social
 import dangfriendGet from "./httpServer/router/sicial/dangfriendGet.js"
