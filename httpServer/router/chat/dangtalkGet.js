@@ -1,7 +1,7 @@
-import htmlBox from "../common/htmlBox.js";
-import cmServer from "./commonServer.js";
+import htmlBox from "../../../common/htmlBox.js";
+import cmServer from "../../commonServer.js";
 
-export default function dangTalkMain(request, response) {
+export default function dangTalk(request, response) {
   if (request.url === "/dangTalkChatList") {
     response.writeHead(200);
     response.write(htmlBox.htmlFunc(htmlBox.dangTalkList));

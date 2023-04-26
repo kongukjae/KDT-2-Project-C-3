@@ -1,10 +1,10 @@
-import htmlBox from "../common/htmlBox.js";
-import cmServer from "./commonServer.js";
-import * as JWT from "./jsonwebtoken.js";  
+import htmlBox from "../../../common/htmlBox.js";
+import cmServer from "../../commonServer.js";
+import * as JWT from "../../jsonwebtoken.js";  
 import mysql from "mysql";
 
 
-export default function dangTalkMainPost(request, response) {
+export default function dangTalkPost(request, response) {
   if (request.url === "/dangTalkChatRoom") {
     let body = "";
       request.on("data", function (data) {
