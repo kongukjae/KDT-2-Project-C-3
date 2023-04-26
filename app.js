@@ -34,13 +34,13 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 //import friends
-import myPagePost from "./httpServer/myPagePost.js";
+import userPagePost from "./router/profile/userPage_Post.js";
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import getFriendsList from "./httpServer/bottomMenu_friendsList_get.js"
 import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
-import starCheck from "./httpServer/backend_yourpage_starCheck.js";
-import starLoad from "./httpServer/backend_yourpage_starLoad.js";
+import starCheckPost from "./router/profile/userPage_starCheck_Post.js";
+import starLoadPost from "./router/profile/userPage_starLoad_Post.js";
 
 // import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
 import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
@@ -165,7 +165,7 @@ const server = http.createServer(function (request, response) {
 /*-----------------post request-----------------------*/
   if (request.method === 'POST') {
     //마이페이지
-    myPagePost(request, response);
+    userPagePost(request, response);
 
     //게시글 작성
     myKeepPost(request,response);
@@ -195,8 +195,8 @@ const server = http.createServer(function (request, response) {
     //댕프렌드
     PostFriendsList(request, response)
 
-    starCheck(request, response);
-    starLoad(request, response);
+    starCheckPost(request, response);
+    starLoadPost(request, response);
     dangTalkChatRoomPost(request, response)
   };
 });
