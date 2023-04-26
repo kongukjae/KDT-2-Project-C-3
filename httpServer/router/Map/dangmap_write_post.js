@@ -1,5 +1,5 @@
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../../commonServer.js";
 
 export default function callPostDangMap(request, response) {
   if (request.url.startsWith("/menuMap")) { //댕맵의 지도에 발자국 전부 띄우는 코드

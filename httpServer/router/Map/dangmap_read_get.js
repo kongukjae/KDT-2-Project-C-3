@@ -1,6 +1,7 @@
-import htmlBox from "../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../../commonServer.js";
+import htmlBox from "../../../common/htmlBox.js";
+// import dangmap_HTML from "./dangmap_get.js";
 
 export default function dangMap(request, response) {
   let splitURL = request.url.split("/")[2];
@@ -11,7 +12,6 @@ export default function dangMap(request, response) {
     response.end();
   }
 
-  /* to fileReader
   else if (splitURL === "commonFunc.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   }
@@ -27,8 +27,6 @@ export default function dangMap(request, response) {
   else if(splitURL === "dangMap.js") {
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
-  */
-
   else if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
     let myRowCnt;

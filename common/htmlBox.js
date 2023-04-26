@@ -76,11 +76,11 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/market/marketList.js"></script>`,
 
-  mykeep : `
+  dangWrite : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/myKeepStyle.js"></script>`,
+  <script src="/script/backEnd/Router/PostBoard/dangWritePagePost.js"></script>`,
 
   //댕프렌드
   friendsList: `

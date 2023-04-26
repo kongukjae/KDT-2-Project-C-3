@@ -9,7 +9,7 @@ import callPostImage from "./httpServer/callPostImage.js";
 
 //fileReader
 import fileReaderScriptRouter from "./httpServer/fileReader/script.js";
-import fileReaderImageRouter from "./httpServer/fileReader/image.js";
+// import fileReaderImageRouter from "./httpServer/fileReader/image.js";
 
 
 //import Main
@@ -24,9 +24,9 @@ import signupGet from "./httpServer/router/login/signupGet.js";
 import signupResultPost from "./httpServer/router/login/signupResultPost.js";
 
 //import map
-import dangMapServer from "./httpServer/dangMapServer.js";
-import callPostDangMap from "./httpServer/callPostDangMap.js";
-import dangmapChatList from "./httpServer/bottomMenu_map_chatList_post.js";
+import dangmapReadGet from "./httpServer/router/Map/dangmap_read_get.js"; // 전 dangmapServer
+import dangmapWritePost from "./httpServer/router/Map/dangmap_write_post.js"; // 전 callpostdangmap
+import dangmapChatList from "./httpServer/router/Map/dangmap_chatList_post.js";
 
 //import post board
 import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
@@ -37,11 +37,11 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 //import profile
-import myPagePost from "./httpServer/myPagePost.js";
-import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
+import userPagePost from "./router/profile/userPage_Post.js";
+import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import starCheck from "./httpServer/backend_yourpage_starCheck.js";
-import starLoad from "./httpServer/backend_yourpage_starLoad.js";
+import starCheckPost from "./router/profile/userPage_starCheck_Post.js";
+import starLoadPost from "./router/profile/userPage_starLoad_Post.js";
 
 //import social
 import dangfriendGet from "./httpServer/router/sicial/dangfriendGet.js"
@@ -110,7 +110,7 @@ const server = http.createServer(function (request, response) {
   if (request.method === "GET") {
     //fileReaderScript
     fileReaderScriptRouter(request, response);
-    fileReaderImageRouter(request, response);
+    // fileReaderImageRouter(request, response);
     //console.log("요청 들어옴 : " + request.url);
     //로그인
     loginGet(request, response);
@@ -137,8 +137,14 @@ const server = http.createServer(function (request, response) {
       myMarker(request, response)
     }
 
+    //게시글 작성 페이지
+    // console.log("aaaaaa:" + request.url)
+    if (request.url === "/backEnd/Router/PostBoard/dangWritePagePost.js") {
+      cmServer.fileDirectory(`/backEnd/Router/PostBoard/dangWritePagePost.js`, response);
+    } 
+
     //댕맵 페이지
-    dangMapServer(request, response);
+    dangmapReadGet(request, response);
     
     //댕댕마켓 페이지
     secondHand(request, response);
@@ -158,16 +164,16 @@ const server = http.createServer(function (request, response) {
 /*-----------------post request-----------------------*/
   if (request.method === 'POST') {
     //마이페이지
-    myPagePost(request, response);
+    userPagePost(request, response);
 
     //게시글 작성
-    myKeepPost(request,response);
+    dangWritePost(request,response);
 
     //업로드, 유저 이미지
     callPostImage(request, response);
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
-    callPostDangMap(request, response);
+    dangmapWritePost(request, response);
     //댕맵 - 채팅 참여자 리스트
     dangmapChatList(request, response);
 
@@ -188,8 +194,8 @@ const server = http.createServer(function (request, response) {
     //댕프렌드
     dangfriendPost(request, response)
 
-    starCheck(request, response);
-    starLoad(request, response);
+    starCheckPost(request, response);
+    starLoadPost(request, response);
     dangTalkChatRoomPost(request, response)
   };
 });
