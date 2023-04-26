@@ -1,5 +1,5 @@
-import htmlBox from "../common/htmlBox.js";
-import cmServer from "./commonServer.js";
+import htmlBox from "../../../common/htmlBox.js";
+import cmServer from "../../commonServer.js";
 
 export default function callLoginGet(request, response) {
   // 들어온 요청이 GET일 경우

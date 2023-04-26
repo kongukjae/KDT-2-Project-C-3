@@ -11,15 +11,15 @@ import callPostImage from "./httpServer/callPostImage.js";
 import fileReaderScriptRouter from "./httpServer/fileReader/script.js"
 
 //import Main
-import callMain from "./httpServer/callMain.js";
+import homeGet from "./httpServer/router/home/homeGet.js";
 
 //import Login
-import callLoginGet from "./httpServer/callLoginGet.js";
-import callPostLogin from "./httpServer/callPostLogin.js";
-import dupCheck from "./httpServer/dupCheckRoute.js";
+import loginGet from "./httpServer/router/login/loginGet.js";
+import loginPost from "./httpServer/router/login/loginPost.js";
 
 //import singup
-import signupResult from "./httpServer/signupResultRoute.js";
+import signupGet from "./httpServer/router/login/signupGet.js";
+import signupResultPost from "./httpServer/router/login/signupResultPost.js";
 
 //import map
 import dangMapServer from "./httpServer/dangMapServer.js";
@@ -31,24 +31,24 @@ import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
 import postBoardLike from "./httpServer/post_postBoard_like.js";
 import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
 import postCommentLoad from "./httpServer/backend_postBoard_commentLoad.js"
-
-//import secondHand
 import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
-//import friends
+//import profile
 import myPagePost from "./httpServer/myPagePost.js";
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import getFriendsList from "./httpServer/bottomMenu_friendsList_get.js"
-import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
 import starCheck from "./httpServer/backend_yourpage_starCheck.js";
 import starLoad from "./httpServer/backend_yourpage_starLoad.js";
 
+//import social
+import dangfriendGet from "./httpServer/router/sicial/dangfriendGet.js"
+import dangfriendPost from "./httpServer/router/sicial/dangfriendPost.js"
+
 // import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
 import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
-import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main_get.js";
-import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_main_post.js";
+import dangTalkChatRoom from "./httpServer/router/chat/dangtalkGet.js";
+import dangTalkChatRoomPost from "./httpServer/router/chat/dangtalkPost.js";
 
 
 
@@ -111,41 +111,19 @@ const server = http.createServer(function (request, response) {
 
     //console.log("요청 들어옴 : " + request.url);
     //로그인
-    callLoginGet(request, response);
+    loginGet(request, response);
 
     //메인화면
-    callMain(request, response);
+    homeGet(request, response);
     
     //회원가입
-    if (request.url === "/signUp") {
-      response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.signupPage));
-      response.end();
-    }   
+    signupGet(request, response);
 
-    /*
-    fileReader로 이동
-
-    if (request.url === "/init_user/signupstyle.js") {
-      cmServer.fileDirectory(`init_user/signup.js`, response);
-    }
-    if (request.url === "/init_user/signupResultStyle.js") {
-      cmServer.fileDirectory(`init_user/signupResult.js`, response);
-    }
-    else if (request.url === "/friends/mypageStyle.js") {
-      cmServer.fileDirectory(`friends/mypageStyle.js`, response);
-    }else if (request.url === "/friends/yourpageStyle.js") {
-      cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
-    }
-    if (request.url === "/friends/starCheck.js") {
-      cmServer.fileDirectory(`/friends/starCheck.js`, response);
-    }
     //게시글 작성 페이지
     if (request.url === "/friends/myKeepStyle.js") {
       cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
     } 
 
-    */
     if (request.url === "/favicon") {
       cmServer.fileDirectory(`graphic/dogpaw.png`, response);
     }
@@ -171,7 +149,7 @@ const server = http.createServer(function (request, response) {
     dangTalkChatRoom(request, response)
 
     //댕프렌드
-    getFriendsList(request, response);
+    dangfriendGet(request, response);
 
   };
 
@@ -192,9 +170,9 @@ const server = http.createServer(function (request, response) {
     dangmapChatList(request, response);
 
     //로그인
-    callPostLogin(request, response);
+    loginPost(request, response);
     if (request.url.startsWith("/signUpResult")) {
-      signupResult(request, response)
+      signupResultPost(request, response)
     }
 
     //팔로우 기능
@@ -206,7 +184,7 @@ const server = http.createServer(function (request, response) {
     postBoardLike(request, response);
 
     //댕프렌드
-    PostFriendsList(request, response)
+    dangfriendPost(request, response)
 
     starCheck(request, response);
     starLoad(request, response);
