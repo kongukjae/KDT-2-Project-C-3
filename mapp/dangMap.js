@@ -469,7 +469,7 @@ function putUserProfile(object){
     name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
     
-    let frType = object[targetArr[i]][0];
+    let frType = object[targetArr[i]];
     if(frType === 0){
       imageDivWrap.style.backgroundColor = '#1ea1ff';
     }else if(frType === 1){
