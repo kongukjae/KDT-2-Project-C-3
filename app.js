@@ -22,9 +22,9 @@ import signupGet from "./httpServer/router/login/signupGet.js";
 import signupResultPost from "./httpServer/router/login/signupResultPost.js";
 
 //import map
-import dangMapServer from "./httpServer/dangMapServer.js";
-import callPostDangMap from "./httpServer/callPostDangMap.js";
-import dangmapChatList from "./httpServer/bottomMenu_map_chatList_post.js";
+import dangmapReadGet from "./httpServer/router/Map/dangmap_read_get.js"; // 전 dangmapServer
+import dangmapWritePost from "./httpServer/router/Map/dangmap_write_post.js"; // 전 callpostdangmap
+import dangmapChatList from "./httpServer/router/Map/dangmap_chatList_post.js";
 
 //import post board
 import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
@@ -142,7 +142,7 @@ const server = http.createServer(function (request, response) {
     } 
 
     //댕맵 페이지
-    dangMapServer(request, response);
+    dangmapReadGet(request, response);
     
     //댕댕마켓 페이지
     secondHand(request, response);
@@ -171,7 +171,7 @@ const server = http.createServer(function (request, response) {
     callPostImage(request, response);
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
-    callPostDangMap(request, response);
+    dangmapWritePost(request, response);
     //댕맵 - 채팅 참여자 리스트
     dangmapChatList(request, response);
 
