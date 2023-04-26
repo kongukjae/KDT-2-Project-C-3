@@ -1,6 +1,6 @@
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../commonServer.js";
 
 export default function(request, response){
   if (request.url.startsWith("/followSearch")) {

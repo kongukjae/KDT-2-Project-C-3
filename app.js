@@ -5,7 +5,7 @@ import mysql from "mysql";
 import htmlBox from "./common/htmlBox.js";
 import { parse } from "path";
 import cmServer from "./httpServer/commonServer.js";
-import callPostImage from "./httpServer/callPostImage.js";
+import callPostImage from "./httpServer/module/imageUpload.js";
 
 //fileReader
 import fileReaderScriptRouter from "./httpServer/fileReader/script.js";
@@ -39,7 +39,7 @@ import dangMarketDetailPage from "./backEnd/Router/PostBoard/dangMarketDetailPag
 //import profile
 import userPagePost from "./httpServer/router/profile/userPage_Post.js";
 import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
-import followSearch from "./httpServer/callPostFollowSearch.js";
+import followSearch from "./httpServer/module/followSearch.js";
 import starCheckPost from "./httpServer/router/profile/userPage_starCheck_post.js";
 import starLoadPost from "./httpServer/router/profile/userPage_starLoad_Post.js";
 
@@ -48,7 +48,7 @@ import dangfriendGet from "./httpServer/router/social/dangfriendGet.js"
 import dangfriendPost from "./httpServer/router/social/dangfriendPost.js"
 
 // import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
-import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
+import chatWithSocketIo from "./httpServer/module/dangtalkSocketIo.js"
 import dangTalkChatRoom from "./httpServer/router/chat/dangtalkGet.js";
 import dangTalkChatRoomPost from "./httpServer/router/chat/dangtalkPost.js";
 
