@@ -48,7 +48,7 @@ document.body.appendChild(writeForm);
 writeForm.submit();
 }); 
 
-const writeImg = tagCreate("img", {src: '/writeImage'})
+const writeImg = tagCreate("img", {src: '/image/resource/write.png'})
 writeBtn.appendChild(writeImg);
 styleCreate(writeImg, {
   width: "70%",
