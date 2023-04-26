@@ -66,7 +66,7 @@ function btmMeun(rootChild){
     window.location = "http://localhost:2080/secondHand"
   });
   menuChild[1].addEventListener("click",()=>{
-    window.location = "http://localhost:2080/postBoard"
+    window.location = "http://localhost:2080/dangstar"
   });
   menuChild[2].addEventListener("click",()=>{
     window.location = "http://localhost:2080/map"
