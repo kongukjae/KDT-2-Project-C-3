@@ -7,22 +7,7 @@ export default function dangMap(request, response) {
 
   dangmap_HTML(request, response);
 
-  if (splitURL === "commonFunc.js") {
-    cmServer.fileDirectory(`common/${splitURL}`, response);
-  }
-  else if (splitURL === "topMenu.js") {
-    cmServer.fileDirectory(`common/${splitURL}`, response);
-  }
-  else if (splitURL === "bottomMenu.js") {
-    cmServer.fileDirectory(`common/${splitURL}`, response);
-  } 
-  else if (splitURL === "dangMap_userChatList.js") {
-    cmServer.fileDirectory(`mapp/${splitURL}`, response);
-  } 
-  else if(splitURL === "dangMap.js") {
-    cmServer.fileDirectory(`mapp/${splitURL}`, response);
-  }
-  else if (request.url.startsWith("/loadMap")) {
+  if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
     let myRowCnt;
     let markerMyArr = {};
