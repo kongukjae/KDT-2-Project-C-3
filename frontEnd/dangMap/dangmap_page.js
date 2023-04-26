@@ -375,13 +375,12 @@ function map() {
   };
   
   async function getMarkersObject(){
+    await allMarker(allAddMarker,3)
     await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,0)
     await allMarker(allAddMarker,2)
-    await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
     console.log(markersObject);
-    putUserProfile(Object.keys(markersObject.markers));
     if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
       countFootprintCount.innerText = 10;
     } else {
@@ -472,9 +471,9 @@ function putUserProfile(object){
     name.innerText = targetArr[i];
     slide.children[0].children[i].appendChild(profileWrap);
     
-    
-    let frType = object[targetArr[i]];
-    console.log(targetArr[i])
+    console.log(targetArr[i]);
+    let frType = object[targetArr[i]][0];
+    console.log('here')
     console.log(frType)
     if(frType === 0){
       imageDivWrap.style.backgroundColor = '#1ea1ff';
