@@ -1,7 +1,7 @@
 import mysql from "mysql";
-import cmServer from "../commonServer.js";
-import htmlBox from "../../common/htmlBox.js";
-import dangmap_HTML from "./dangmap_get.js";
+import cmServer from "../../commonServer.js";
+import htmlBox from "../../../common/htmlBox.js";
+// import dangmap_HTML from "./dangmap_get.js";
 
 export default function dangMap(request, response) {
   let splitURL = request.url.split("/")[2];

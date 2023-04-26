@@ -1,10 +1,10 @@
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
-import ValueCheck from "../init_user/ValueCheck.js";
+import cmServer from "../../commonServer.js";
+import ValueCheck from "../../../init_user/ValueCheck.js";
 import crypto from "crypto";
 
-export default function signUpResult(request, response) {
+export default function signupResult(request, response) {
 
   let body = "";
   request.on("data", function (data) {

@@ -1,5 +1,5 @@
-import htmlBox from "../common/htmlBox.js";
-import friendsListFileRead from "./friendsList_fileRead.js";
+import htmlBox from "../../../common/htmlBox.js";
+import friendsListFileRead from "../../friendsList_fileRead.js";
 
 
 export default function friendsList(request, response) {

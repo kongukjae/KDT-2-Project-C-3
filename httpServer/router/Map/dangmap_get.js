@@ -1,4 +1,4 @@
-import htmlBox from "../../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js";
 
 export default function dangmap_HTML(request, response) {
 
