@@ -32,7 +32,7 @@ const html = {
   <script src="/script/main/weather.js"></script>
   <script src="/script/main/mainStyle.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac"></script>
-  <script src="/script/mapp/map.js"></script>`,
+  <script src="/script/frontEnd/dangMap/map.js"></script>`,
 
   loginBody : `
   <script src="/script/common/commonFunc.js"></script>
@@ -51,10 +51,10 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/mapp/dangMap_userChatList.js"></script>
+  <script src="/script/frontEnd/dangMap/dangmap_userList.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services,clusterer"></script>
-  <script src="/script/mapp/dangMap.js"></script>
-  <script src="/script/mapp/dangMapSlide.js"></script>`
+  <script src="/script/frontEnd/dangMap/dangmap_page.js"></script>
+  <script src="/script/frontEnd/dangMap/dangmap_slide.js"></script>`
 ,
   mypage : `
   <script src="/script/common/commonFunc.js"></script>
