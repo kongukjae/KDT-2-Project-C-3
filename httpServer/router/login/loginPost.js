@@ -1,8 +1,8 @@
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../../commonServer.js";
 import crypto from "crypto";
-import * as JWT from "./jsonwebtoken.js";
+import * as JWT from "../../jsonwebtoken.js";
 
 export default function callPostLogin(request, response) {
   let body = "";

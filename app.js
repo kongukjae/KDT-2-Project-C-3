@@ -11,12 +11,12 @@ import callPostImage from "./httpServer/callPostImage.js";
 import homeGet from "./httpServer/router/home/homeGet.js";
 
 //import Login
-import callLoginGet from "./httpServer/callLoginGet.js";
-import callPostLogin from "./httpServer/callPostLogin.js";
-import dupCheck from "./httpServer/dupCheckRoute.js";
+import loginGet from "./httpServer/router/login/loginGet.js";
+import loginPost from "./httpServer/router/login/loginPost.js";
 
 //import singup
-import signupResult from "./httpServer/signupResultRoute.js";
+import signupGet from "./httpServer/router/login/signupGet.js";
+import signupResultPost from "./httpServer/router/login/signupResultPost.js";
 
 //import map
 import dangMapServer from "./httpServer/dangMapServer.js";
@@ -105,39 +105,13 @@ const server = http.createServer(function (request, response) {
   if (request.method === "GET") {
     //console.log("요청 들어옴 : " + request.url);
     //로그인
-    callLoginGet(request, response);
+    loginGet(request, response);
 
     //메인화면
     homeGet(request, response);
     
     //회원가입
-    if (request.url === "/signUp") {
-      response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.signupPage));
-      response.end();
-    }   
-    if (request.url === "/init_user/signupstyle.js") {
-      cmServer.fileDirectory(`init_user/signup.js`, response);
-    }
-    if (request.url === "/init_user/signupResultStyle.js") {
-      cmServer.fileDirectory(`init_user/signupResult.js`, response);
-    }
-    if (request.url === "/favicon") {
-      cmServer.fileDirectory(`graphic/dogpaw.png`, response);
-    }
-    if (request.url.startsWith("/dupCheck")) {
-      dupCheck(request, response);
-    }else if (request.url === "/friends/mypageStyle.js") {
-      cmServer.fileDirectory(`friends/mypageStyle.js`, response);
-    }else if (request.url === "/friends/yourpageStyle.js") {
-      cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
-    }
-    if (request.url === "/friends/starCheck.js") {
-      cmServer.fileDirectory(`/friends/starCheck.js`, response);
-    }
-    if (request.url.startsWith("/myMarker")) {
-      myMarker(request, response)
-    }
+    signupGet(request, response);
 
     //게시글 작성 페이지
     if (request.url === "/friends/myKeepStyle.js") {
@@ -179,9 +153,9 @@ const server = http.createServer(function (request, response) {
     dangmapChatList(request, response);
 
     //로그인
-    callPostLogin(request, response);
+    loginPost(request, response);
     if (request.url.startsWith("/signUpResult")) {
-      signupResult(request, response)
+      signupResultPost(request, response)
     }
 
     //팔로우 기능
