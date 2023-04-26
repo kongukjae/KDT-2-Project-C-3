@@ -1,29 +1,14 @@
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js"
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../../commonServer.js"
 
-export default function callMain(request, response) {
+export default function homeGet(request, response) {
   // const mysqlInfo = {
   //   host: "192.168.0.93",
   //   user: "guest",
   //   password: "0000",
   //   database: "mungta",
   // }
-
-  let splitURL = request.url.split("/")[2];
-  if (splitURL === "commonFunc.js") {
-    cmServer.fileDirectory(`common/${splitURL}`, response);
-  } else if (splitURL === "topMenu.js") {
-    cmServer.fileDirectory(`common/${splitURL}`, response);
-  } else if (splitURL === "bottomMenu.js") {
-    cmServer.fileDirectory(`common/${splitURL}`, response);
-  } else if (splitURL === "weather.js") {
-    cmServer.fileDirectory(`main/${splitURL}`, response);
-  } else if (splitURL === "mainStyle.js") {
-    cmServer.fileDirectory(`main/${splitURL}`, response);
-  } else if (splitURL === "map.js") {
-    cmServer.fileDirectory(`mapp/${splitURL}`, response);
-  }
 
   if (request.url === "/main") {
     response.writeHead(200, { "Content-Type": "text/html" });

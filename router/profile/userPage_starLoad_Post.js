@@ -1,5 +1,5 @@
-import cmServer from "./commonServer.js";
-import * as jwtFunc from "./jsonwebtoken.js";
+import cmServer from "../../httpServer/commonServer.js";
+import * as jwtFunc from "../../httpServer/jsonwebtoken.js";
 import mysql from "mysql";
 
 export default function FollowStarLoad(request, response) {
