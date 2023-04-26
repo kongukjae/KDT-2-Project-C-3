@@ -34,21 +34,20 @@ export default function dangMap(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select count(*) as count from map_tables where id='${targetId}'`,
+      `select count(*) as count from map_tables where (addData BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()) and id = '${targetId}' order by addData desc;`,
       function (err, data) {
         if (err) throw err;
         else {
           myRowCnt = data[0].count;
-          // console.log("a "+ myRowCnt);
+          console.log("a "+ myRowCnt);
         }
       }
     );
     conn.query(
-      `select * from map_tables where id='${targetId}' order by addData desc;`,
+      `select * from map_tables where (addData BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()) and id = '${targetId}' order by addData desc;`,
       function (err, rows) {
         if (err) throw err;
         else {
-          
           if(myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
