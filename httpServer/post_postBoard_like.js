@@ -1,4 +1,4 @@
-import * as jwtFunc from "./jsonwebtoken.js"
+import * as jwtFunc from "./module/jsonWebToken.js"
 import cmServer from "./commonServer.js";
 import mysql from "mysql";
   

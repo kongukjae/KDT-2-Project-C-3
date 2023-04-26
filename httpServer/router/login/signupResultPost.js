@@ -1,7 +1,7 @@
 import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "../../commonServer.js";
-import ValueCheck from "../../../init_user/ValueCheck.js";
+import ValueCheck from "../../module/validityCheck.js";
 import crypto from "crypto";
 
 export default function signupResult(request, response) {

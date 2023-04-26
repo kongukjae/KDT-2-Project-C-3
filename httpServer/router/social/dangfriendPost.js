@@ -1,6 +1,6 @@
 import cmServer from "../../commonServer.js";
 import mysql from "mysql";
-import * as jwtFunc from "../../jsonwebtoken.js"
+import * as jwtFunc from "../../module/jsonWebToken.js"
 
 export default function postPostBoardLike(request, response) {
   if (request.url.startsWith("/loadFriendsList")) {

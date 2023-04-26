@@ -1,7 +1,7 @@
 import mysql from "mysql";
 import fs from "fs";
-import cmServer from "./commonServer.js";
-import busboyImageSave from "./backend_module_busboy_image_save.js";
+import cmServer from "../commonServer.js";
+import busboyImageSave from "./imageSaveBusboy.js";
 
 export default function callPostImage(request, response) {
   if(request.url.startsWith('/uploadImage')){

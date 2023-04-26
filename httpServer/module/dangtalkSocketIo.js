@@ -1,6 +1,6 @@
 import {Server} from "socket.io";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../commonServer.js";
 
 //네임 테일은 이름 정할 때 아이디 뒤에 들어갈 이미지 이름 넣어주는 곳
 //없다면 '.'만 넣으면 됌
