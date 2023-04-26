@@ -29,10 +29,10 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/main/weather.js"></script>
-  <script src="/script/main/mainStyle.js"></script>
+  <script src="/script/frontEnd/Home/home_weather.js"></script>
+  <script src="/script/frontEnd/Home/home_style.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac"></script>
-  <script src="/script/mapp/map.js"></script>`,
+  <script src="/script/frontEnd/Home/home_map.js"></script>`,
 
   loginBody : `
   <script src="/script/common/commonFunc.js"></script>
