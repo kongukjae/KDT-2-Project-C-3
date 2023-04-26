@@ -1,5 +1,5 @@
 import htmlBox from "../../../common/htmlBox.js";
-import cmServer from "../../../httpServer/commonServer.js";
+import cmServer from "../../commonServer.js";
 import mysql from "mysql";
 
 export default function secondHandPost(request, response) {

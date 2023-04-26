@@ -1,4 +1,4 @@
-import cmServer from "./commonServer.js";
+// import cmServer from "./commonServer.js";
 
 
 export default function postBoardFileRead(request, response){

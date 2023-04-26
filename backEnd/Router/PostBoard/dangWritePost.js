@@ -1,6 +1,6 @@
 import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "../../../httpServer/commonServer.js";
+import cmServer from "../../commonServer.js";
 import * as JWT from "../../../httpServer/jsonwebtoken.js";  
 
 export default function dangMap(request, response) {

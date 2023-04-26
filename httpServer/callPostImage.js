@@ -1,6 +1,6 @@
 import mysql from "mysql";
 import fs from "fs";
-import cmServer from "./commonServer.js";
+import cmServer from "../backEnd/commonServer.js";
 import busboyImageSave from "./backend_module_busboy_image_save.js";
 
 export default function callPostImage(request, response) {

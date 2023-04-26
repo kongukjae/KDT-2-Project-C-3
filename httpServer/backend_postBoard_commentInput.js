@@ -1,4 +1,4 @@
-import cmServer from "./commonServer.js";
+import cmServer from "../backEnd/commonServer.js";
 import * as jwtFunc from "./jsonwebtoken.js"
 import mysql from "mysql";
 

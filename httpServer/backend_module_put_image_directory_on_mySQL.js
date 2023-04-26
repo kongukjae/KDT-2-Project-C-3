@@ -1,5 +1,5 @@
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
+import cmServer from "../backEnd/commonServer.js";
 
 
 export default function putUserImageDirectoryOnMySQL(request, response, tableName,columnName,id, direc){
