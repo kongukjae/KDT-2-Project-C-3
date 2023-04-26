@@ -14,11 +14,11 @@ function dangstarLike(postIndex, index, writerNickname){
     heartImage = JSON.parse(likeXhr.response);
 
     if(!heartImage){
-      like.children[0].src = '/emptyHeartImage';
+      like.children[0].src = '/image/resource/emptyHeart.png';
 
     }
     if(heartImage){
-      like.children[0].src = '/fullHeartImage';
+      like.children[0].src = '/image/resource/fullHeart.png';
 
     }
   })
@@ -37,10 +37,10 @@ function dangstarLike(postIndex, index, writerNickname){
       
       console.log("like: ", likeVal)
       if(likeVal){
-        like.children[0].src = '/fullHeartImage';
+        like.children[0].src = '/image/resource/fullHeart.png';
       }
       if(!likeVal){
-        like.children[0].src = '/emptyHeartImage';
+        like.children[0].src = '/image/resource/emptyHeart.png';
   
       }
     })
