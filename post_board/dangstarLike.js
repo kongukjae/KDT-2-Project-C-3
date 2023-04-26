@@ -6,7 +6,7 @@ function dangstarLike(postIndex, index, writerNickname){
 
   const likeXhr = new XMLHttpRequest();
   const _URL = `http://localhost:2080/likeCheck`;
-  const likeURL = 'http://localhost:2080/postBoardLike';
+  const likeURL = 'http://localhost:2080/dangstarLike';
 
   likeXhr.open("POST", _URL, true);
   likeXhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);

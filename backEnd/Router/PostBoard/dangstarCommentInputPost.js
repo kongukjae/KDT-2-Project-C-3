@@ -1,5 +1,5 @@
-import cmServer from "./commonServer.js";
-import * as jwtFunc from "./module/jsonWebToken.js"
+import cmServer from "../../../httpServer/commonServer.js";
+import * as jwtFunc from "../../../httpServer/module/jsonWebToken.js"
 import mysql from "mysql";
 
 export default function postCommentInput(request, response) {
