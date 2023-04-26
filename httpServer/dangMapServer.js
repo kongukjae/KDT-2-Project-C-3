@@ -10,6 +10,8 @@ export default function dangMap(request, response) {
     response.write(htmlBox.htmlFunc(htmlBox.dangMap));
     response.end();
   }
+
+  /* to fileReader
   else if (splitURL === "commonFunc.js") {
     cmServer.fileDirectory(`common/${splitURL}`, response);
   }
@@ -25,6 +27,8 @@ export default function dangMap(request, response) {
   else if(splitURL === "dangMap.js") {
     cmServer.fileDirectory(`mapp/${splitURL}`, response);
   }
+  */
+
   else if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
     let myRowCnt;
