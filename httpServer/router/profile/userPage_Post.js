@@ -1,7 +1,7 @@
-import htmlBox from "../../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "../../httpServer/commonServer.js";
-import * as JWT from "../../httpServer/jsonwebtoken.js";
+import cmServer from "../../commonServer.js";
+import * as JWT from "../../jsonwebtoken.js";
 
 export default function dangMap(request, response) {
   if (request.url.startsWith("/mypage")) {
