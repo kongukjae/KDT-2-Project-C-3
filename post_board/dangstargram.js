@@ -35,7 +35,7 @@ writeBtn.addEventListener("click",() =>{
   );
   let writeForm = document.createElement('form');
   writeForm.method = "POST"
-  writeForm.action = "/mykeep";
+  writeForm.action = "/dangWrite";
   let params = {jwt:token, targetId:"mine"}
   for(let key in params){
     let hiddenField = document.createElement("input");

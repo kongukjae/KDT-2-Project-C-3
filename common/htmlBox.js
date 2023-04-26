@@ -75,11 +75,11 @@ const html = {
   <script src="/common/commonFunc.js"></script>
   <script src="/market/marketList.js"></script>`,
 
-  mykeep : `
+  dangWrite : `
   <script src="/common/commonFunc.js"></script>
   <script src="/common/topMenu.js"></script>
   <script src="/common/bottomMenu.js"></script>
-  <script src="/friends/myKeepStyle.js"></script>`,
+  <script src="/backEnd/Router/PostBoard/dangWritePagePost.js"></script>`,
 
   //댕프렌드
   friendsList: `

@@ -35,7 +35,7 @@ import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get
 
 //import friends
 import myPagePost from "./httpServer/myPagePost.js";
-import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
+import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import getFriendsList from "./httpServer/bottomMenu_friendsList_get.js"
 import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
@@ -140,8 +140,9 @@ const server = http.createServer(function (request, response) {
     }
 
     //게시글 작성 페이지
-    if (request.url === "/friends/myKeepStyle.js") {
-      cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
+    console.log("aaaaaa:" + request.url)
+    if (request.url === "/backEnd/Router/PostBoard/dangWritePagePost.js") {
+      cmServer.fileDirectory(`/backEnd/Router/PostBoard/dangWritePagePost.js`, response);
     } 
 
     //댕맵 페이지
@@ -168,7 +169,7 @@ const server = http.createServer(function (request, response) {
     myPagePost(request, response);
 
     //게시글 작성
-    myKeepPost(request,response);
+    dangWritePost(request,response);
 
     //업로드, 유저 이미지
     callPostImage(request, response);

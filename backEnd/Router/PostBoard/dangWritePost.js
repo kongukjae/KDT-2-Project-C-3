@@ -1,18 +1,18 @@
-import htmlBox from "../common/htmlBox.js";
+import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "./commonServer.js";
-import * as JWT from "./jsonwebtoken.js";  
+import cmServer from "../../../httpServer/commonServer.js";
+import * as JWT from "../../../httpServer/jsonwebtoken.js";  
 
 export default function dangMap(request, response) {
   // 댕스타 작성글 클릭시 게시글
-  if (request.url === "/mykeep") {
+  if (request.url === "/dangWrite") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
     });
     request.on("end", function () {
       response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.mykeep));
+      response.write(htmlBox.htmlFunc(htmlBox.dangWrite));
       response.write(`<script>
       let target = document.getElementById('titleTextboxWrap');
       target.style.display = 'none';
@@ -28,7 +28,7 @@ export default function dangMap(request, response) {
     });
     request.on("end", function () {
       response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.mykeep));
+      response.write(htmlBox.htmlFunc(htmlBox.dangWrite));
       response.end();
     });
   } 
