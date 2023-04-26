@@ -32,11 +32,11 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 //import profile
-import myPagePost from "./httpServer/myPagePost.js";
+import userPagePost from "./router/profile/userPage_Post.js";
 import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
-import starCheck from "./httpServer/backend_yourpage_starCheck.js";
-import starLoad from "./httpServer/backend_yourpage_starLoad.js";
+import starCheckPost from "./router/profile/userPage_starCheck_Post.js";
+import starLoadPost from "./router/profile/userPage_starLoad_Post.js";
 
 //import social
 import dangfriendGet from "./httpServer/router/sicial/dangfriendGet.js"
@@ -139,7 +139,7 @@ const server = http.createServer(function (request, response) {
 /*-----------------post request-----------------------*/
   if (request.method === 'POST') {
     //마이페이지
-    myPagePost(request, response);
+    userPagePost(request, response);
 
     //게시글 작성
     myKeepPost(request,response);
@@ -169,8 +169,8 @@ const server = http.createServer(function (request, response) {
     //댕프렌드
     dangfriendPost(request, response)
 
-    starCheck(request, response);
-    starLoad(request, response);
+    starCheckPost(request, response);
+    starLoadPost(request, response);
     dangTalkChatRoomPost(request, response)
   };
 });
