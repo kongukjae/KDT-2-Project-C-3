@@ -35,8 +35,8 @@ import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
 import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
 
 //import profile
-import userPagePost from "./httpServer/router/profile/userPage_Post.js";
-import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
+import userPagePost from "./router/profile/userPage_Post.js";
+import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
 import followSearch from "./httpServer/callPostFollowSearch.js";
 import starCheckPost from "./httpServer/router/profile/userPage_starCheck_Post.js";
 import starLoadPost from "./httpServer/router/profile/userPage_starLoad_Post.js";
@@ -135,6 +135,12 @@ const server = http.createServer(function (request, response) {
       myMarker(request, response)
     }
 
+    //게시글 작성 페이지
+    // console.log("aaaaaa:" + request.url)
+    if (request.url === "/backEnd/Router/PostBoard/dangWritePagePost.js") {
+      cmServer.fileDirectory(`/backEnd/Router/PostBoard/dangWritePagePost.js`, response);
+    } 
+
     //댕맵 페이지
     dangMapServer(request, response);
     
@@ -159,7 +165,7 @@ const server = http.createServer(function (request, response) {
     userPagePost(request, response);
 
     //게시글 작성
-    myKeepPost(request,response);
+    dangWritePost(request,response);
 
     //업로드, 유저 이미지
     callPostImage(request, response);
