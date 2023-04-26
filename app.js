@@ -5,7 +5,7 @@ import mysql from "mysql";
 import htmlBox from "./common/htmlBox.js";
 import { parse } from "path";
 import cmServer from "./backEnd/commonServer.js";
-import callPostImage from "./httpServer/callPostImage.js";
+import callPostImage from "./backEnd/module/imageUpload.js";
 
 //fileReader
 import fileReaderScriptRouter from "./backEnd/fileReader/script.js";
@@ -28,18 +28,20 @@ import dangmapReadGet from "./backEnd/router/Map/dangmap_read_get.js"; // 전 da
 import dangmapWritePost from "./backEnd/router/Map/dangmap_write_post.js"; // 전 callpostdangmap
 import dangmapChatList from "./backEnd/router/Map/dangmap_chatList_post.js";
 
-//import post board
-import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
-import postBoardLike from "./httpServer/post_postBoard_like.js";
-import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
-import postCommentLoad from "./httpServer/backend_postBoard_commentLoad.js"
+//import dangstar
+import dangstar from "./backEnd/router/postBoard/dangstarGet.js";
+import dangstarLike from "./backEnd/router/postBoard/dangstarLikePost.js";
+import dangstarCommentInputPost from "./backEnd/router/postBoard/dangstarCommentInputPost.js"
+import dangstarCommentLoadPost from "./backEnd/router/postBoard/dangstarCommentLoadPost.js"
+
+// import dangMarket
 import dangMarket from "./backEnd/router/postBoard/dangMarketGet.js"
 import dangMarketDetailPage from "./backEnd/router/postBoard/dangMarketDetailPageGet.js";
 
 //import profile
 import userPagePost from "./backEnd/router/profile/userPage_Post.js";
 import dangWritePost from "./backEnd/router/postBoard/dangWritePost.js";
-import followSearch from "./httpServer/callPostFollowSearch.js";
+import followSearch from "./backEnd/module/followSearch.js";
 import starCheckPost from "./backEnd/router/profile/userPage_starCheck_post.js";
 import starLoadPost from "./backEnd/router/profile/userPage_starLoad_Post.js";
 
@@ -48,7 +50,7 @@ import dangfriendGet from "./backEnd/router/social/dangfriendGet.js"
 import dangfriendPost from "./backEnd/router/social/dangfriendPost.js"
 
 // import chatimport chatWithSocketIo from "./backEnd/backend_module_bottommenu_dangtalk_socketIo.js"
-import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
+import chatWithSocketIo from "./backEnd/module/dangtalkSocketIo.js"
 import dangTalkChatRoom from "./backEnd/router/chat/dangtalkGet.js";
 import dangTalkChatRoomPost from "./backEnd/router/chat/dangtalkPost.js";
 
@@ -139,8 +141,8 @@ const server = http.createServer(function (request, response) {
 
     //게시글 작성 페이지
     // console.log("aaaaaa:" + request.url)
-    if (request.url === "/backEnd/Router/PostBoard/dangWritePagePost.js") {
-      cmServer.fileDirectory(`/backEnd/Router/PostBoard/dangWritePagePost.js`, response);
+    if (request.url === "/backEnd/router/postBoard/dangWritePagePost.js") {
+      cmServer.fileDirectory(`/backEnd/router/postBoard/dangWritePagePost.js`, response);
     } 
 
     //댕맵 페이지
@@ -151,7 +153,7 @@ const server = http.createServer(function (request, response) {
     dangMarketDetailPage(request, response);
 
     //댕스타그램 페이지
-    postBoard(request, response);
+    dangstar(request, response);
 
     //댕톡
     dangTalkChatRoom(request, response)
@@ -187,9 +189,9 @@ const server = http.createServer(function (request, response) {
     followSearch(request, response);
 
     //댕스타그램
-    postCommentLoad(request, response);
-    postCommentInput(request, response);
-    postBoardLike(request, response);
+    dangstarCommentLoadPost(request, response);
+    dangstarCommentInputPost(request, response);
+    dangstarLike(request, response);
 
     //댕프렌드
     dangfriendPost(request, response)

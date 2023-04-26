@@ -1,6 +1,6 @@
-import htmlBox from "../common/htmlBox.js";
-import postBoardFileRead from "./backend_postBoardFileRead.js";
-import cmServer from "../backEnd/commonServer.js";
+import htmlBox from "../../../common/htmlBox.js";
+// import postBoardFileRead from "./backend_postBoardFileRead.js";
+import cmServer from "../../commonServer.js";
 import mysql from "mysql";
 
 
@@ -8,9 +8,7 @@ import mysql from "mysql";
 export default function postBoard(request, response) {
   //console.log("요청 들어옴 2");
 
-  postBoardFileRead(request, response);
-
-  if (request.url.startsWith("/postBoard")) {
+  if (request.url.startsWith("/dangstar")) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.postBoard));
   }

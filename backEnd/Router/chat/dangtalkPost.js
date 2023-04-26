@@ -1,6 +1,6 @@
 import htmlBox from "../../../common/htmlBox.js";
 import cmServer from "../../commonServer.js";
-import * as JWT from "../../../httpServer/jsonwebtoken.js";  
+import * as JWT from "../../module/jsonWebToken.js";  
 import mysql from "mysql";
 
 

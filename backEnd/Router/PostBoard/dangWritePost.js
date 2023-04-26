@@ -1,7 +1,7 @@
 import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
 import cmServer from "../../commonServer.js";
-import * as JWT from "../../../httpServer/jsonwebtoken.js";  
+import * as JWT from "../../module/jsonWebToken.js";  
 
 export default function dangMap(request, response) {
   // 댕스타 작성글 클릭시 게시글

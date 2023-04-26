@@ -1,6 +1,6 @@
 import fs from "fs";
 import busboy from 'busboy';
-import putUserImageDirectoryOnMySQL from './backend_module_put_image_directory_on_mySQL.js'
+import putUserImageDirectoryOnMySQL from './imageWriteMySQL.js'
 
 //네임 테일은 이름 정할 때 아이디 뒤에 들어갈 이미지 이름 넣어주는 곳
 //없다면 '.'만 넣으면 됌
