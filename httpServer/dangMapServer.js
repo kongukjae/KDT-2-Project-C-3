@@ -221,7 +221,7 @@ export default function dangMap(request, response) {
     );
     connection.end();
   }
-  else if(splitURL === "dangMapSlide.js"){
-    cmServer.fileDirectory(`mapp/${splitURL}`, response);
-  }
+  // else if(splitURL === "dangMapSlide.js"){
+  //   cmServer.fileDirectory(`mapp/${splitURL}`, response);
+  // }
 }

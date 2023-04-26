@@ -7,8 +7,10 @@ import { parse } from "path";
 import cmServer from "./httpServer/commonServer.js";
 import callPostImage from "./httpServer/callPostImage.js";
 
-//fileReaderScript
-import fileReaderScriptRouter from "./httpServer/fileReader/script.js"
+//fileReader
+import fileReaderScriptRouter from "./httpServer/fileReader/script.js";
+import fileReaderImageRouter from "./httpServer/fileReader/image.js";
+
 
 //import Main
 import homeGet from "./httpServer/router/home/homeGet.js";
@@ -107,8 +109,8 @@ const server = http.createServer(function (request, response) {
   // get request
   if (request.method === "GET") {
     //fileReaderScript
-    fileReaderScriptRouter(request, response)
-
+    fileReaderScriptRouter(request, response);
+    fileReaderImageRouter(request, response);
     //console.log("요청 들어옴 : " + request.url);
     //로그인
     loginGet(request, response);

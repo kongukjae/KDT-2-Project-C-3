@@ -45,9 +45,9 @@ function starBtnCreate(parent, starValue, userID, fr_id) {
   })
   star.appendChild(starImg);
   if(starValue) {
-    star.children[0].src = "/fullStarImage";
+    star.children[0].src = "/image/resource/fullStar.png";
   } else {
-    star.children[0].src = "/emptyStarImage";
+    star.children[0].src = "/image/resource/emptyStar.png";
   }
   
   console.log("btn 생성 완료")
@@ -60,10 +60,10 @@ function starBtnCreate(parent, starValue, userID, fr_id) {
       let starRes = JSON.parse(xhr.response);
       if (starRes === true) {
         console.log("꽉 찬 별");
-        star.children[0].src = "/fullStarImage";
+        star.children[0].src = "/image/resource/fullStar.png";
       } else {
         console.log("속 빈 별");
-        star.children[0].src = "/emptyStarImage";
+        star.children[0].src = "/image/resource/emptyStar.png";
       }
     });
   });

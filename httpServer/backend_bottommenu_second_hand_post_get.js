@@ -12,9 +12,9 @@ export default function secondHandPost(request, response) {
     response.write(htmlBox.htmlFunc(htmlBox.marketpost));
     response.end();
   }
-  if (request.url === "/market/market-post-page.js") {
-    cmServer.fileDirectory(`market/market-post-page.js`, response);
-  }
+  // if (request.url === "/market/market-post-page.js") {
+  //   cmServer.fileDirectory(`market/market-post-page.js`, response);
+  // }
   if (request.url.startsWith("/postSecondHand")) {
     console.log(request.url);
     let nth = request.url.split("=")[1];
