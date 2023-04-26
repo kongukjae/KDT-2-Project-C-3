@@ -60,13 +60,13 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/mypageStyle.js"></script>`,
+  <script src="/script/frontEnd/profile/mypage_style.js"></script>`,
   yourpage : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/starCheck.js"></script>
-  <script src="/script/friends/yourpageStyle.js"></script>`,
+  <script src="/script/frontEnd/profile/userprofile_star_check.js"></script>
+  <script src="/script/frontEnd/profile/yourpage_style.js"></script>`,
   findUserInfo : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/frontEnd/login/find_password.js"></script>
