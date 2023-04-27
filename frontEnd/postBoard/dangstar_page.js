@@ -16,15 +16,20 @@ createHamburger(root);
 //   postCreate(root, "../resource/MainDogImg.jpg", "멍뭉이", "text", "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
 // }
 
+const postWrap = tagCreate("div", {});
+styleCreate(postWrap, dangstarStyle.dangstarFeedListWrap);
+root.appendChild(postWrap);
+
 // 바텀 메뉴
 const btmMeunWrap = tagCreate("div", {});
 root.appendChild(btmMeunWrap);
 btmMeun(btmMeunWrap);
 
 // 게시글 작성 버튼
-const writeBtn = tagCreate("button", {});
+const writeBtn = tagCreate("div", {});
 styleCreate(writeBtn, dangstarStyle.dangstarAddWriteBtn);
-root.appendChild(writeBtn);
+btmMeunWrap.appendChild(writeBtn);
+writeBtn.innerText = "✏";
 
 writeBtn.addEventListener("click", () => {
   const token = document.cookie.replace(
@@ -46,18 +51,7 @@ writeBtn.addEventListener("click", () => {
   writeForm.submit();
 });
 
-const writeImg = tagCreate("img", { src: "/image/resource/write.png" });
-writeBtn.appendChild(writeImg);
-styleCreate(writeImg, dangstarStyle.dangstarAddWriteImg);
 loadDangstargram(0);
-//
-// let test = document.cookie;
-// console.log(test);
-//
-
-const postWrap = tagCreate("div", {});
-styleCreate(postWrap, dangstarStyle.dangstarFeedListWrap);
-root.appendChild(postWrap);
 
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
