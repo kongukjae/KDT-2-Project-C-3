@@ -1282,7 +1282,7 @@ const dangMarketStyle = {
     height: stylePropertyUnion.height.height50,
     position: "absolute",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
-    bottom: "110px",
+    bottom: "160px",
     right: "20px",
     zIndex: "2",
     borderRadius: "30px",
