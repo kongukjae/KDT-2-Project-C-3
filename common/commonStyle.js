@@ -489,6 +489,12 @@ const targetStyle = {
     fontSize : '15px'
   },
 
+
+}
+//console.log(targetStyle.topMenu);
+
+const signupPageStyle = {
+  
   //회원가입 결과창
   signupResultRoot: {
     width : stylePropertyUnion.width.width500,
@@ -677,10 +683,9 @@ const targetStyle = {
       gap : "30px",
       marginTop: "-225px",
       marginLeft: "-195px",
-    },
-
+    }
 }
-//console.log(targetStyle.topMenu);
+
 
 const mypageStyle = {
   mypageRoot : {
@@ -1350,7 +1355,7 @@ const market = {
   }
 }
 
-const dangtalk = {
+const dangtalkStyle = {
   chatRoot: {
     width: stylePropertyUnion.width.width500,
     margin: "auto",
@@ -1418,7 +1423,7 @@ const dangtalk = {
 }
 
 
-const dangtalkChattingRoom ={
+const dangtalkChattingRoomStyle ={
   mainRoot: {
     width : stylePropertyUnion.width.width500,
       height : stylePropertyUnion.height.height1000,

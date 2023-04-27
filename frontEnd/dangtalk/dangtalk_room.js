@@ -2,9 +2,9 @@ function main(){
 
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
-  styleCreate(root,dangtalkChattingRoom.mainRoot)
+  styleCreate(root,dangtalkChattingRoomStyle.mainRoot)
   let wrap = tagCreate("div",{id : "wrap"});
-  styleCreate(wrap,dangtalkChattingRoom.chattingContainer)
+  styleCreate(wrap,dangtalkChattingRoomStyle.chattingContainer)
   root.appendChild(wrap);
   let rootChild = [];
   for(let i = 0;i<6;i++){
@@ -15,9 +15,9 @@ function main(){
   topMenu(rootChild[0]);
   createHamburger(root);
   
-  styleCreate(rootChild[1],dangtalkChattingRoom.chattingTitle)
-  styleCreate(rootChild[2],dangtalkChattingRoom.chattingWrap)
-  styleCreate(rootChild[3],dangtalkChattingRoom.chattingInputWrap)
+  styleCreate(rootChild[1],dangtalkChattingRoomStyle.chattingTitle)
+  styleCreate(rootChild[2],dangtalkChattingRoomStyle.chattingWrap)
+  styleCreate(rootChild[3],dangtalkChattingRoomStyle.chattingInputWrap)
   styleCreate(rootChild[4],{
     height : "120px"
   })
@@ -34,8 +34,8 @@ function main(){
   rootChild[3].appendChild(inputWrapChildButton);
   inputWrapChild.push(inputWrapChildButton);
 
-  styleCreate(inputWrapChild[0],dangtalkChattingRoom.chattingInputText)
-  styleCreate(inputWrapChild[1],dangtalkChattingRoom.chattingSubmitButton)
+  styleCreate(inputWrapChild[0],dangtalkChattingRoomStyle.chattingInputText)
+  styleCreate(inputWrapChild[1],dangtalkChattingRoomStyle.chattingSubmitButton)
   inputWrapChild[1].innerText = "전송"
 
 
@@ -109,18 +109,18 @@ function createChatMsg(mother,targetId,fromMeorYou, msg){
   let imagebox = tagCreate("div");
   let msgbox = tagCreate("div");
   if(fromMeorYou ==='Me'){
-    styleCreate(chatBox,dangtalkChattingRoom.chattingFromMe);
-    styleCreate(msgbox,dangtalkChattingRoom.msgBoxStyleFromMe);
+    styleCreate(chatBox,dangtalkChattingRoomStyle.chattingFromMe);
+    styleCreate(msgbox,dangtalkChattingRoomStyle.msgBoxStyleFromMe);
     chatBox.appendChild(msgbox);
     chatBox.appendChild(imagebox);
   }else{
-    styleCreate(chatBox,dangtalkChattingRoom.chattingFromYou);
-    styleCreate(msgbox,dangtalkChattingRoom.msgBoxStyleFromYou);
+    styleCreate(chatBox,dangtalkChattingRoomStyle.chattingFromYou);
+    styleCreate(msgbox,dangtalkChattingRoomStyle.msgBoxStyleFromYou);
     chatBox.appendChild(imagebox);
     chatBox.appendChild(msgbox);
   };
   
-  styleCreate(imagebox,dangtalkChattingRoom.imageBoxStyle);
+  styleCreate(imagebox,dangtalkChattingRoomStyle.imageBoxStyle);
 
    msgbox.innerText = msg;
   

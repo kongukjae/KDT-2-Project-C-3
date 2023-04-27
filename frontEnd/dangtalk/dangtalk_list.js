@@ -1,6 +1,6 @@
 let root = tagCreate("div", { id: "chat" });
 document.body.appendChild(root);
-styleCreate(root, dangtalk.chatRoot);
+styleCreate(root, dangtalkStyle.chatRoot);
 let rootChild = [];
 
 for (let i = 0; i < 3; i++) {
@@ -12,35 +12,35 @@ for (let i = 0; i < 3; i++) {
 topMenu(rootChild[0]);
 createHamburger(root);
 
-styleCreate(rootChild[1], dangtalk.chatlistContainer);
+styleCreate(rootChild[1], dangtalkStyle.chatlistContainer);
 
 function createchatList(id, text, unread) {
   let chatBox = tagCreate("div", {});
   let mother = document.getElementById("1");
   mother.appendChild(chatBox);
-  styleCreate(chatBox, dangtalk.chatlistBox);
+  styleCreate(chatBox, dangtalkStyle.chatlistBox);
 
   let chatlistUserImg = tagCreate("div", {});
   chatBox.appendChild(chatlistUserImg);
-  styleCreate(chatlistUserImg, dangtalk.chatlistImg);
+  styleCreate(chatlistUserImg, dangtalkStyle.chatlistImg);
 
   let chatlistBoxComponent = tagCreate("div", {});
   chatBox.appendChild(chatlistBoxComponent);
-  styleCreate(chatlistBoxComponent, dangtalk.chatlistBoxComponent);
+  styleCreate(chatlistBoxComponent, dangtalkStyle.chatlistBoxComponent);
 
   let chatlistUserName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistUserName);
-  styleCreate(chatlistUserName, dangtalk.chatlistUserName);
+  styleCreate(chatlistUserName, dangtalkStyle.chatlistUserName);
   chatlistUserName.innerText = id;
 
   let chatlastMsg = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlastMsg);
-  styleCreate(chatlastMsg, dangtalk.chatlistlastMsg);
+  styleCreate(chatlastMsg, dangtalkStyle.chatlistlastMsg);
   chatlastMsg.innerText = text;
   
   let chatlistCount = tagCreate("div", {});
   chatBox.appendChild(chatlistCount);
-  styleCreate(chatlistCount, dangtalk.chatlistCount);
+  styleCreate(chatlistCount, dangtalkStyle.chatlistCount);
   chatlistCount.innerText = unread;
   if(unread === 0){
     chatlistCount.style.display = 'none'
