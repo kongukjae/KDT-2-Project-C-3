@@ -92,8 +92,6 @@ function createfriendsList(parent, userID, dogName, intro){
   styleCreate(friendsMore, dangfriendsStyle.profileMore);
   friendsMore.innerText = '. . .';
 
-  createModalWindow(friendsMore);
-
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `http://localhost:2080/sendImage`);
   xhr.responseType = 'blob';
@@ -103,9 +101,13 @@ function createfriendsList(parent, userID, dogName, intro){
     profileimg.style.backgroundImage = `url(${imageFromServer})`;
     console.log("이미지 가져오기 완료");
   });
+
+  createModalWindow(friendsMore)
 }
 
 function createModalWindow(friendsMore){
+
+  let root = document.getElementById('root')
   // 모달창 생성
   const modal = document.createElement("div");
   modal.classList.add("modal");
@@ -146,9 +148,10 @@ function createModalWindow(friendsMore){
 
   friendsMore.addEventListener("click", function () {
     friendsMore.appendChild(modal);
+
   });
   exitBtn.addEventListener("click", function () {
-    modal.remove();
+    modal.style.display = 'none';
   });
 
   // profileBtn.addEventListener("click",()=>{
