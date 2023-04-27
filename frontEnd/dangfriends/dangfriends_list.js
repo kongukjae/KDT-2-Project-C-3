@@ -87,10 +87,12 @@ function createfriendsList(parent, userID, dogName, intro){
   styleCreate(friendIntro, dangfriendsStyle.friendsIntro);
   friendIntro.innerText = intro;
 
-  let chatlistCount = tagCreate("div", {});
-  box.appendChild(chatlistCount);
-  styleCreate(chatlistCount, dangfriendsStyle.profileMore);
-  chatlistCount.innerText = '. . .';
+  let friendsMore = tagCreate("div", {});
+  box.appendChild(friendsMore);
+  styleCreate(friendsMore, dangfriendsStyle.profileMore);
+  friendsMore.innerText = '. . .';
+
+  createModalWindow(friendsMore);
 
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `http://localhost:2080/sendImage`);
@@ -103,6 +105,56 @@ function createfriendsList(parent, userID, dogName, intro){
   });
 }
 
+function createModalWindow(friendsMore){
+  // 모달창 생성
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  styleCreate(modal, dangfriendsStyle.friendsMoreModal);
 
+  // 버튼 생성
+  const profileBtn = document.createElement("div");
+  profileBtn.textContent = "즐겨찾기 추가/ 삭제";
+  const chatBtn = document.createElement("div");
+  chatBtn.textContent = "채팅";
+  const reportBtn = document.createElement("div");
+  reportBtn.textContent = "차단";
+  const exitBtn = document.createElement("div");
+  exitBtn.innerHTML = "&#x2716;";
+  styleCreate(exitBtn, {
+    display: "flex",
+    justifyContent: "end",
+  });
+
+  // 버튼을 모달창에 추가
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+  modalContent.appendChild(exitBtn);
+  modalContent.appendChild(profileBtn);
+  modalContent.appendChild(chatBtn);
+  modalContent.appendChild(reportBtn);
+  // modalContent.appendChild(mypageForm);
+
+  styleCreate(profileBtn, dangfriendsStyle.friendsMoreModalBtn);
+  styleCreate(chatBtn, dangfriendsStyle.friendsMoreModalBtn);
+  styleCreate(reportBtn, dangfriendsStyle.friendsMoreModalBtn);
+  // 모달창에 모달컨텐츠 추가
+  modal.appendChild(modalContent);
+
+  exitBtn.addEventListener("mouseover", function () {
+    exitBtn.style.cursor = "pointer";
+  });
+
+  friendsMore.addEventListener("click", function () {
+    friendsMore.appendChild(modal);
+  });
+  exitBtn.addEventListener("click", function () {
+    modal.remove();
+  });
+
+  // profileBtn.addEventListener("click",()=>{
+  //   mypageForm.submit();
+  // })
+
+}
 // 하단 메뉴바
 btmMeun(rootChild[2])
