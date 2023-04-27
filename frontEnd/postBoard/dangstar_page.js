@@ -56,6 +56,18 @@ loadDangstargram(0);
 // let test = document.cookie;
 // console.log(test);
 //
+
+const postWrap = tagCreate('div', {})
+styleCreate(postWrap, {
+  width: stylePropertyUnion.width.widthP100,
+  minHeight: "calc(100vh - 216px)",
+  marginBottom: "90px",
+  position: "relative",
+  zIndex: "1",
+  ...stylePropertyUnion.flexColumnTopCenter,
+})
+root.appendChild(postWrap);
+
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
   // let result = {};
@@ -67,7 +79,7 @@ function loadDangstargram(nth) {
       console.log(res[i])
       // postCreate(부모요소, src_link(이미지 링크), writerNickname(작성자 이름), text(게시글 내용), src_comment_link(댓글 작성자 프로필 이미지), textName(댓글 작성자 이름), cmText(댓글 내용), index(인덱싱), postIndex(DB인덱싱))
       // postCreate(root, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, "../resource/MainDogImg.jpg", res[i].cm_id, res[i].cm_detail, i, res[i].post_index);
-      postCreate(root, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, i, res[i].post_index);
+      postCreate(postWrap, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, i, res[i].post_index);
     }
   });
 }

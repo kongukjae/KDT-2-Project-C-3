@@ -1463,7 +1463,7 @@ const dangtalkStyle = {
   chatlistContainer: {
     width: stylePropertyUnion.width.widthP100,
     minHeight: "calc(100vh - 216px)",
-    // border: "1px solid blue",
+    marginBottom: "90px",
     position: "relative",
     zIndex: "1",
     ...stylePropertyUnion.flexColumnTopCenter,
@@ -1658,6 +1658,7 @@ const dangstarStyle = {
   dangstarRoot: {
     width: stylePropertyUnion.width.width500,
     margin: stylePropertyUnion.margin.marginAuto,
+    position: "relative",
   },
   dangstarAddWriteBtn: {
     backgroundSize: "65%",
@@ -1679,7 +1680,7 @@ const dangstarStyle = {
   dangstarFeedWrap: {
     border: "1px solid black",
     width: stylePropertyUnion.width.width500,
-    marginBottom: stylePropertyUnion.marginBottom.marginBottom20,
+    // marginBottom: stylePropertyUnion.marginBottom.marginBottom20,
     position: "relative",
   },
   dangstarFeedImgWrap: {
