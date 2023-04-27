@@ -1948,7 +1948,7 @@ const dangfriendsStyle = {
     textAlign: 'center'
   },
   friendsMoreModal: {
-    width: stylePropertyUnion.width.width120,
+    width: stylePropertyUnion.width.width150,
     height: stylePropertyUnion.height.height126,
     backgroundColor: stylePropertyUnion.colorTheme.white,
     border: `3px solid ${stylePropertyUnion.colorTheme.peach}`,
