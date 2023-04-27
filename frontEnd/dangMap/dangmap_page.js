@@ -382,7 +382,7 @@ function map() {
       })
     })
   };
-  
+  // 추가
   function countMarkersDate() {
     let markersDateCount = 10; // 전날보다 이전 - 이후 +
     let markersTodayData = markersObject.markers[markersObject.userid][1];
@@ -403,18 +403,20 @@ function map() {
     // console.log(markersDateCount);
   }
 
-  async function getMarkersObject(){
-    await allMarker(allAddMarker,0)
+  async function getMarkersObject(){ 
+    await allMarker(allAddMarker,3)
     await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,2)
-    await allMarker(allAddMarker,3)
+    await allMarker(allAddMarker,0)
     console.log("await 발자국 확인 중");
     console.log(markersObject);
     if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
       countFootprintCount.innerText = 10;
     } else {
       countMarkersDate();
+    
     }
+
     textCount = Number(countFootprintCount.innerText);
     // console.log(parseInt(countFootprintCount.innerText));
     console.log(markersObject)
@@ -435,25 +437,44 @@ function map() {
     // }]
   });
 
+
+  
     console.log('// --------------------여기확인용----------------------')
  //!for문을 돌려서 나 삭제하기 - 나를 삭제할때 필요하다.
 
 //  console.log(markersObject.markers[markersObject.userid][1][0]);
-//     console.log(markersObject.markers[markersObject.userid][1][i]);
+    console.log(markersObject.markers[markersObject.userid][1][0][0]);
 //     console.log(markersObject.markers[markersObject.userid][1][0][0][0]);
 
  console.log(markersObject)
  console.log(markersObject.markers)
- console.log(markersObject.markers['asdasd1234'][1][0])
+//  console.log(markersObject.markers[key][0])
 
  console.log(markersObject.markers['asdasd1234'][1][0][0])
+// markersObject.markers['asdasd1234'][1][0][0].setMap(null);
 
- markersObject.markers[markersObject.userid][1][0].setMap(null);
+// markersObject.markers[markersObject.userid][1][0][0].setMap(null);
+
+
+    let cnt = 0;
+    setInterval(() => {
+      if(cnt%2===0){
+        // null값을 먹여서 해당값을 없앤다.
+        markersObject.markers['asdasd1234'][1][0][0].setMap(null);
+      }else{
+        // setMap(map)값은 해당값을 나타나게 한다.
+        markersObject.markers['asdasd1234'][1][0][0].setMap(map);
+      }
+      cnt ++;  
+    }, 1000);
 
 
 
 
- markersObject.markers[markersObject.userid][1][1].setMap(null);
+
+
+
+//  markersObject.markers[markersObject.userid][1][1].setMap(null);
   //  markersObject.markers['asdasd1234'][1][0].setMap(null);
 //  console.log(markersObject.markers[key][0])
 //  document.body.addEventListener('click', function() {
@@ -469,9 +490,6 @@ function map() {
 //       }
 
 //   });
-
-
-
 
   }
     
