@@ -1462,10 +1462,11 @@ const dangtalkStyle = {
   },
   chatlistContainer: {
     width: stylePropertyUnion.width.widthP100,
+    minHeight: "calc(100vh - 216px)",
     // border: "1px solid blue",
     position: "relative",
     zIndex: "1",
-    ...stylePropertyUnion.flexColCenter,
+    ...stylePropertyUnion.flexColumnTopCenter,
   },
   chatlistBox: {
     width: stylePropertyUnion.width.widthP95,
