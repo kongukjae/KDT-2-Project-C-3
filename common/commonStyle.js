@@ -1552,7 +1552,7 @@ const dangtalkChattingRoom ={
 
 }
 
-//댕프렌즈 스타일 부분
+//! 댕프렌즈 스타일 부분
 const dangfriendsStyle = {
   rootStyle: {
     width: stylePropertyUnion.width.width500,
