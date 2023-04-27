@@ -30,6 +30,44 @@ function changeDate(date) {
 }
 
 
+map();
+
+//지도 사이드 버튼: 검색, 단톡 표시 버튼
+sideButton()
+
+//대표 발자국 대신할 임시 버튼
+let test = tagCreate("div", {})
+document.body.appendChild(test);
+styleCreate(test, {
+  width: "50px",
+  height: "50px",
+  zindex: '3',
+  position: 'relative',
+  backgroundColor: "black",
+  bottom: '1000px'
+})
+
+
+//단체방 리스트 생성 함수
+const roomName = 'test1';
+createUserOrgchat(test, roomName);
+
+let ggg = document.getElementById('chatList')
+// ggg.style.display = 'none'
+let tg = true;
+
+test.addEventListener('click', function(test){
+  if(tg){
+    ggg.style.display = 'flex'
+    tg = false;
+  }
+  else if(!tg){
+    ggg.style.display = 'none'
+    tg = true;
+  }
+})
+
+
 
 function map() {
   let root = tagCreate("div", { id: "root" });
@@ -233,71 +271,10 @@ function map() {
   }
 
   // 검색창
-  // let searchBarWrap = tagCreate("div");
-  // styleCreate(searchBarWrap, targetStyle.menuMapSearchBarWrap);
-  // root.appendChild(searchBarWrap);
-  // let searchBar = tagCreate("input", { type: "text" });
-  // searchBarWrap.appendChild(searchBar);
-  // styleCreate(searchBar, targetStyle.menuMapSearchBar);
-  // let searchButton = tagCreate("div", { innerText: "search" });
-  // searchBarWrap.appendChild(searchButton);
-  // styleCreate(searchButton, targetStyle.menuMapSearchButton);
-  // let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-  // let ps = new kakao.maps.services.Places();
+  let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+  let ps = new kakao.maps.services.Places();
 
-  // function clearMarkers(arr) {
-  //   for (let i of arr) {
-  //     i.setMap(null);
-  //   }
-  // }
-
-  // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-  // function placesSearchCB(data, status, pagination) {
-  //   if (status === kakao.maps.services.Status.OK) {
-  //     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-  //     // LatLngBounds 객체에 좌표를 추가합니다
-  //     let bounds = new kakao.maps.LatLngBounds();
-  //     clearMarkers(searchMarkers);
-  //     for (let i = 0; i < data.length; i++) {
-  //       displayMarker(data[i]);
-  //       bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-  //     }
-
-  //     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-  //     map.setBounds(bounds);
-  //   }
-  // }
-  // let searchMarkers = [];
-
-  // // 지도에 마커를 표시하는 함수입니다
-  // function displayMarker(place) {
-  //   // 마커를 생성하고 지도에 표시합니다
-  //   let marker = new kakao.maps.Marker({
-  //     map: map,
-  //     position: new kakao.maps.LatLng(place.y, place.x),
-  //   });
-  //   searchMarkers.push(marker);
-  //   // 마커에 클릭이벤트를 등록합니다
-  //   kakao.maps.event.addListener(marker, "click", function () {
-  //     // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-  //     infowindow.setContent(
-  //       '<div style="padding:5px;font-size:12px;">' +
-  //         place.place_name +
-  //         "</div>"
-  //     );
-  //     infowindow.open(map, marker);
-  //   });
-  // }
-
-  // searchButton.addEventListener("click", () => {
-  //   // 키워드로 장소를 검색합니다
-  //   ps.keywordSearch(searchBar.value, placesSearchCB);
-  // });
-  // searchBar.addEventListener("keydown", (e) => {
-  //   if (e.key === "Enter") {
-  //     ps.keywordSearch(searchBar.value, placesSearchCB);
-  //   }
-  // });
+  
 
   // 하단 메뉴
   let menuChild2 = [];
@@ -305,13 +282,13 @@ function map() {
   const gotop = document.getElementById('goTop');
   gotop.style.display = "none";
 
-  
   //console.dir(rootChild[2]);
   //console.dir(rootChild[2].children[3]);
   rootChild[2].children[3].addEventListener('click', function(){
     //console.log(markers);
     setMarkers(null);
   });
+
 
   function setMarkers(map) {
     for (let i = 0; i < markers.length; i++) {
@@ -413,39 +390,6 @@ function map() {
   getMarkersObject();
   
 };
-map();
-
-//대표 발자국 대신할 임시 버튼
-let test = tagCreate("div", {})
-document.body.appendChild(test);
-styleCreate(test, {
-  width: "50px",
-  height: "50px",
-  zindex: '3',
-  position: 'relative',
-  backgroundColor: "black",
-  bottom: '1000px'
-})
-
-
-//단체방 리스트 생성 함수
-const roomName = 'test1';
-createUserOrgchat(test, roomName);
-
-let ggg = document.getElementById('chatList')
-// ggg.style.display = 'none'
-let tg = true;
-
-test.addEventListener('click', function(test){
-  if(tg){
-    ggg.style.display = 'flex'
-    tg = false;
-  }
-  else if(!tg){
-    ggg.style.display = 'none'
-    tg = true;
-  }
-})
 
 function putUserProfile(object){
   let arr = Object.keys(object);

@@ -450,40 +450,41 @@ const dangMapStyle = {
     ...stylePropertyUnion.flexRowCenter,
     paddingBottom : "3px"
   },
-  //?댕맵 검색창
-  // menuMapSearchBarWrap: {
-  //   width : stylePropertyUnion.width.width300,
-  //   height : stylePropertyUnion.height.height40,
-  //   top : "45px",
-  //   left: "50%",
-  //   position : "absolute",
-  //   marginLeft: "-150px",
-  //   zIndex : "3",
-  //   display : "flex",
-  //   alignItems : "center"
-  // },
-  // menuMapSearchBar : {
-  //   width : stylePropertyUnion.width.widthP100,
-  //   height : stylePropertyUnion.height.heightP100,
-  //   border : `1px ${stylePropertyUnion.colorTheme.lightGray} solid`,
-  //   paddingLeft : "20px",
-  //   paddingright : "50px",
-  //   borderRadius : "20px",
-  //   backgroundColor : stylePropertyUnion.colorTheme.white,
-  //   position : "absolute"
-  // },
-  // menuMapSearchButton: {
-  //   width : stylePropertyUnion.width.width80,
-  //   height : stylePropertyUnion.height.height30,
-  //   borderRadius : "15px",
-  //   backgroundColor : stylePropertyUnion.colorTheme.peach,
-  //   position : "relative",
-  //   left : "210px",
-  //   color : stylePropertyUnion.colorTheme.white,
-  //   cursor : "pointer",
-  //   ...stylePropertyUnion.flexRowCenter,
-  //   paddingBottom : "3px"
-  // },
+
+  //!댕맵 검색창
+  menuMapSearchBarWrap: {
+    width : stylePropertyUnion.width.width300,
+    height : stylePropertyUnion.height.height40,
+    top : "45px",
+    left: "50%",
+    position : "absolute",
+    marginLeft: "-150px",
+    zIndex : "3",
+    display : "flex",
+    alignItems : "center"
+  },
+  menuMapSearchBar : {
+    width : stylePropertyUnion.width.widthP100,
+    height : stylePropertyUnion.height.heightP100,
+    border : `1px ${stylePropertyUnion.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : stylePropertyUnion.colorTheme.white,
+    position : "absolute"
+  },
+  menuMapSearchButton: {
+    width : stylePropertyUnion.width.width80,
+    height : stylePropertyUnion.height.height30,
+    borderRadius : "15px",
+    backgroundColor : stylePropertyUnion.colorTheme.peach,
+    position : "relative",
+    left : "210px",
+    color : stylePropertyUnion.colorTheme.white,
+    cursor : "pointer",
+    ...stylePropertyUnion.flexRowCenter,
+    paddingBottom : "3px"
+  },
 
   //! 댕맵 슬라이드
   menuMapSlideImageStyle : {
@@ -682,8 +683,40 @@ const dangMapStyle = {
     // marginBottom: "3px",
   },
 
+  //! 댕맵 사이드 버튼 스타일
+  sideBtnStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    position : "absolute",
+    top : "47px",
+    left: "87%",
+    zIndex : "3",
+    cursor: "pointer"
+  },
+  serchBtnStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    position : "relative",
+    top : "42px",
+    zIndex : "3",
+  },
+  orgChatBtnStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    position : "relative",
+    top : "44px",
+    zIndex : "3",
+  },
+
 }
 
+//! 회원가입 페이지 스타일
 const signupPageStyle = {
   
   //회원가입 결과창
@@ -875,7 +908,7 @@ const signupPageStyle = {
     }
 }
 
-
+//! 마이페이지 스타일
 const mypageStyle = {
   mypageRoot: {
     width: stylePropertyUnion.width.width500,
@@ -999,6 +1032,7 @@ const mypageStyle = {
   },
 };
 
+//! 게시글 작성 페이지 스타일
 const keepStyle = {
   pageRoot: {
     width: stylePropertyUnion.width.width500,
@@ -1172,7 +1206,7 @@ const keepStyle = {
 };
 
 // 작업한 부분 - start
-// 로그인 페이지 스타일
+//! 로그인 페이지 스타일
 const loginStyle = {
   loginPageRoot: {
     width: stylePropertyUnion.width.width500,
@@ -1265,8 +1299,7 @@ const loginStyle = {
 };
 // 작업한 부분 - end
 
-//댕댕마켓 게시글 스타일
-
+//! 댕댕마켓 게시글 스타일
 const dangMarketStyle = {
   //게시글 목록 part
   root: {
@@ -1452,6 +1485,7 @@ const dangMarketStyle = {
   },
 };
 
+//! 댕톡 리스트 스타일
 const dangtalkStyle = {
   chatRoot: {
     width: stylePropertyUnion.width.width500,
@@ -1519,7 +1553,7 @@ const dangtalkStyle = {
   },
 };
 
-
+//! 댕톡 채팅방 스타일
 const dangtalkChattingRoomStyle ={
   mainRoot: {
     width: stylePropertyUnion.width.width500,

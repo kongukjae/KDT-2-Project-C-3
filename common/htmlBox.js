@@ -53,11 +53,14 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/frontEnd/login/signup_page_result.js"></script>`,
+
+  //지도 페이지
   dangMap : `
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
+  <script src="/script/frontEnd/dangMap/dangmap_side_button.js"></script>
   <script src="/script/frontEnd/dangMap/dangmap_userList.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services,clusterer"></script>
   <script src="/script/frontEnd/dangMap/dangmap_page.js"></script>
