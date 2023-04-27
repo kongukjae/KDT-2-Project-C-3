@@ -376,6 +376,26 @@ function map() {
     })
   };
   
+  function countMarkersDate() {
+    let markersDateCount = 10; // 전날보다 이전 - 이후 +
+    let markersTodayData = markersObject.markers[markersObject.userid][1];
+    let beforeDate = new Date().getDate() - 1;
+    let boolDate;
+
+    for (i in markersTodayData) {
+      if(markersTodayData[i][1].getDate() <= beforeDate) {
+        markersDateCount += 0;
+      } else if(markersTodayData[i][1].getDate() > beforeDate){
+        markersDateCount -= 1;
+      }
+    }
+
+    countFootprintCount.innerText = markersDateCount;
+
+    // console.log(markersObject.markers[markersObject.userid][1]);
+    // console.log(markersDateCount);
+  }
+
   async function getMarkersObject(){
     await allMarker(allAddMarker,3)
     await allMarker(allAddMarker,1)
@@ -386,7 +406,7 @@ function map() {
     if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
       countFootprintCount.innerText = 10;
     } else {
-      countFootprintCount.innerText = (10 - markersObject.markers[markersObject.userid][1].length);
+      countMarkersDate();
     }
     textCount = Number(countFootprintCount.innerText);
     // console.log(parseInt(countFootprintCount.innerText));
