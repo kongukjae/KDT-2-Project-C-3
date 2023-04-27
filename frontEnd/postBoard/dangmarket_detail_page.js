@@ -1,7 +1,7 @@
 function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
-  styleCreate(root, market.marketPost);
+  styleCreate(root, dangMarketStyle.marketPost);
   // styleCreate(root, targetStyle.mainRoot);
 
   let rootChild = [];
@@ -13,9 +13,9 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   topMenu(rootChild[0]);
   createHamburger(root);
 
-  styleCreate(rootChild[1], market.marketPostImageArea);
+  styleCreate(rootChild[1], dangMarketStyle.marketPostImageArea);
   rootChild[1].innerHTML = postImg
-  styleCreate(rootChild[2], market.marketPostImgNameAdd);
+  styleCreate(rootChild[2], dangMarketStyle.marketPostImgNameAdd);
   let imgNameAdd = [];
   let nameAdd = [];
   let dotdotdot = [];
@@ -53,31 +53,31 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
     let dot = tagCreate("div", {});
     nameAdd[1].appendChild(dot);
     dotdotdot.push(dot);
-    styleCreate(dotdotdot[i], market.marketPostAddDot);
+    styleCreate(dotdotdot[i], dangMarketStyle.marketPostAddDot);
   }
   //게시자 프로필이미지
-  styleCreate(imgNameAdd[0], market.marketPostImgStyle);
+  styleCreate(imgNameAdd[0], dangMarketStyle.marketPostImgStyle);
   imgNameAdd[0].innerHTML = img;
-  styleCreate(imgNameAdd[1], market.marketPostnameAddStyle);
+  styleCreate(imgNameAdd[1], dangMarketStyle.marketPostnameAddStyle);
   //게시자 강아지 이름
-  styleCreate(nameAdd[0], market.marketPostName);
+  styleCreate(nameAdd[0], dangMarketStyle.marketPostName);
   nameAdd[0].innerHTML = dogName;
 
-  styleCreate(nameAdd[1], market.marketPostAdd);
-  styleCreate(rootChild[3], market.marketPostComponent);
+  styleCreate(nameAdd[1], dangMarketStyle.marketPostAdd);
+  styleCreate(rootChild[3], dangMarketStyle.marketPostComponent);
   for(let i = 0; i < 3; i++) {
     let deComponent = tagCreate('div', {});
     rootChild[3].appendChild(deComponent);
     detailComponent.push(deComponent);
   }
   //내용의 제목
-  styleCreate(detailComponent[0], market.marketPostTitle);
+  styleCreate(detailComponent[0], dangMarketStyle.marketPostTitle);
   detailComponent[0].innerHTML = title;
   //내용
-  styleCreate(detailComponent[1], market.marketPostDetail);
+  styleCreate(detailComponent[1], dangMarketStyle.marketPostDetail);
   detailComponent[1].innerHTML = detail;
   //날짜
-  styleCreate(detailComponent[2], market.marketPostDate);
+  styleCreate(detailComponent[2], dangMarketStyle.marketPostDate);
   detailComponent[2].innerHTML = date;
 
   btmMeun(rootChild[4]);
@@ -85,7 +85,7 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   // 모달창 생성
   const modal = document.createElement("div");
   modal.classList.add("modal");
-  styleCreate(modal, market.marketPostAddModal);
+  styleCreate(modal, dangMarketStyle.marketPostAddModal);
 
   // 버튼 생성
   const profileBtn = document.createElement("div");
@@ -110,9 +110,9 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   modalContent.appendChild(reportBtn);
   modalContent.appendChild(mypageForm);
 
-  styleCreate(profileBtn, market.marketPostAddModalBtn);
-  styleCreate(chatBtn, market.marketPostAddModalBtn);
-  styleCreate(reportBtn, market.marketPostAddModalBtn);
+  styleCreate(profileBtn, dangMarketStyle.marketPostAddModalBtn);
+  styleCreate(chatBtn, dangMarketStyle.marketPostAddModalBtn);
+  styleCreate(reportBtn, dangMarketStyle.marketPostAddModalBtn);
   // 모달창에 모달컨텐츠 추가
   modal.appendChild(modalContent);
 
