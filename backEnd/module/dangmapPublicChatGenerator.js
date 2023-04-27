@@ -26,14 +26,25 @@ const korea = {
 
 }
 
-function publicChatGenerator(id, lat, lag){
-  let PublicChatRoom = locationAverageStringInput(lat.toString()) + '&' + locationAverageStringInput(lag.toString())
+let chatRoomList = [];
+function publicChatGenerator(id, lat, lag, date){
+  let PublicChatRoom = locationAverageStringInput(lat.toString()) + '&' + locationAverageStringInput(lag.toString());
   const data = fs.readFileSync('dangmapPubilcChatList.json');
   let publlicChatList = JSON.parse(data)
   if(publlicChatList[PublicChatRoom] === undefined){
     publlicChatList[PublicChatRoom] = [id];
   }else{
     publlicChatList[PublicChatRoom].push(id);
+    if(publlicChatList[PublicChatRoom].length===10){
+      console.log('------------------------')
+      console.log('단톡방이 생성되었습니다.')
+      console.log('초대 알림 맴버 : ' + publlicChatList[PublicChatRoom])
+      console.log('------------------------')
+
+    }
+    if(publlicChatList[PublicChatRoom].length>10 && !chatRoomList.includes(PublicChatRoom)){
+      chatRoomList.push(PublicChatRoom);
+    }
   }
   fs.writeFileSync('dangmapPubilcChatList.json', JSON.stringify(publlicChatList));
 }
@@ -55,7 +66,9 @@ function locationAverageStringInput(value){
     }else if(checkNum <= 99){
       result = (Number(result + tail.slice(0,2)) + 0.01).toString() + '0';
     }
-    return result
+    return result.split('.')[0] +'.' +result.split('.')[1].padEnd(3,'0').slice(0,3)
+
+    
 
   }else{
     result = value + '.000'
@@ -64,13 +77,15 @@ function locationAverageStringInput(value){
 
 }
 
+// console.log(locationAverageStringInput('127.38'));
 let connection = mysql.createConnection(cmServer.mysqlInfo);
 connection.connect();
 connection.query(`SELECT * FROM map_tables`, (error, rows, fields) => {
   if (error) throw error;
   else{
     for(let i of rows){
-      publicChatGenerator(i.id, i.latitude, i.longitude)
+      publicChatGenerator(i.id, i.latitude, i.longitude, i.addData)
     }
+    console.log(chatRoomList)
 }})
 connection.end();
