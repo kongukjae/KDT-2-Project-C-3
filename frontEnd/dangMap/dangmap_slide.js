@@ -79,7 +79,7 @@ slide.children[2].children[1].addEventListener('click', function(){
   
   styleCreate(slide.children[3], {display: ""})
   //슬라이드 메뉴 높이 값 조정
-  styleCreate(slide, {height: pageStyle.height.height450});
+  styleCreate(slide, {height: stylePropertyUnion.height.height450});
 
 
   const xhr = new XMLHttpRequest();
@@ -114,7 +114,7 @@ function searchResultChooseValue(){
 
   //검색된 팔로우 선택하면 기존 창으로 되돌아 감
   styleCreate(slide.children[3], {display: "none"});
-  styleCreate(slide, {height: pageStyle.height.height308});
+  styleCreate(slide, {height: stylePropertyUnion.height.height308});
 }
 //=============================================================================================
 

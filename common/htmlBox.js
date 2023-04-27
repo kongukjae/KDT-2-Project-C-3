@@ -27,6 +27,7 @@ const html = {
   },
   mapBody: `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/Home/home_weather.js"></script>
@@ -36,18 +37,22 @@ const html = {
 
   loginBody : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <div id='root'></div>
   <script src="/script/frontEnd/login/login_page.js"></script>`,
   signupPage : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/frontEnd/login/signup_page.js"></script>`,
   
 
   signUpResult : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/frontEnd/login/signup_page_result.js"></script>`,
   dangMap : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/dangMap/dangmap_userList.js"></script>
@@ -57,23 +62,27 @@ const html = {
 
   mypage : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/profile/mypage_style.js"></script>`,
   yourpage : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/profile/userprofile_star_check.js"></script>
   <script src="/script/frontEnd/profile/yourpage_style.js"></script>`,
   findUserInfo : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/frontEnd/login/find_password.js"></script>
   `,
 
   // 게시글 작성 페이지
   dangWrite : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/postBoard/dangWritePagePost.js"></script>`,
@@ -81,6 +90,7 @@ const html = {
   //댕프렌드
   friendsList: `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/dangfriends/dangfriends_list.js"></script>`,
@@ -89,6 +99,7 @@ const html = {
   //댕댕마켓
   dangMarket:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/postBoard/dangmarket_list.js"></script>`,
@@ -96,6 +107,7 @@ const html = {
 
   marketpost:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/postBoard/dangmarket_detail_page.js"></script>`,
@@ -103,6 +115,7 @@ const html = {
   //댕스타그램
   postBoard: `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/postBoard/dangstar_page_comment_update_delete_btn.js"></script>
@@ -116,12 +129,14 @@ const html = {
 
   dangTalkMain:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/dangtalk/dangtalk_room.js"></script>`,
 
   dangTalkList:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/dangtalk/dangtalk_list.js"></script>`

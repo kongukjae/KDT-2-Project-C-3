@@ -4,8 +4,8 @@ function createUserOrgchat(test, roomName){
   // document.body.appendChild(chatList);
   test.appendChild(chatList);
   styleCreate(chatList, {
-    width: pageStyle.width.width250,
-    // height: pageStyle.height.height2000,
+    width: stylePropertyUnion.width.width250,
+    // height: stylePropertyUnion.height.height2000,
     margin: "auto",
     display: "none",
     flexDirection: "column",
@@ -13,7 +13,7 @@ function createUserOrgchat(test, roomName){
     border: "1px solid black",
     zIndex: '5',
     left: "50px",
-    backgroundColor: pageStyle.colorTheme.peach,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
 
 
   });
@@ -26,9 +26,9 @@ function createUserOrgchat(test, roomName){
   }
   //채팅방 제목 영억
   styleCreate(chatChild[0], {
-    ...pageStyle.flexRowCenter,
-    width: pageStyle.width.widthP100,
-    height: pageStyle.height.height40,
+    ...stylePropertyUnion.flexRowCenter,
+    width: stylePropertyUnion.width.widthP100,
+    height: stylePropertyUnion.height.height40,
     textAlign : "center"
 
   })
@@ -37,8 +37,8 @@ function createUserOrgchat(test, roomName){
   let chatTitle = tagCreate("div", {});
   chatChild[0].appendChild(chatTitle);
   styleCreate(chatTitle, {
-    width: pageStyle.width.widthP70,
-    fontWeight: pageStyle.fontWeightSet.bold
+    width: stylePropertyUnion.width.widthP70,
+    fontWeight: stylePropertyUnion.fontWeightSet.bold
   });
   chatTitle.innerText = roomName + "방 입니다"
 
@@ -46,8 +46,8 @@ function createUserOrgchat(test, roomName){
   let attend = tagCreate("button", {});
   chatChild[0].appendChild(attend);
   styleCreate(attend, {
-    width: pageStyle.width.width50,
-    height: pageStyle.height.height30,
+    width: stylePropertyUnion.width.width50,
+    height: stylePropertyUnion.height.height30,
 
   })
   attend.innerText = "참가"
@@ -56,8 +56,8 @@ function createUserOrgchat(test, roomName){
   //채팅 참여자 리스트 영역
   //chatChild[1].id = "chatList";
   styleCreate(chatChild[1], {
-    ...pageStyle.flexColCenter,
-    width: pageStyle.width.widthP100,
+    ...stylePropertyUnion.flexColCenter,
+    width: stylePropertyUnion.width.widthP100,
     
   });
 
@@ -82,23 +82,23 @@ function createUserOrgchatList(parent, userID, dogName){
   let box = tagCreate("div", {});
   parent.appendChild(box);
   styleCreate(box, {
-    width: pageStyle.width.widthP95,
-    height: pageStyle.height.height52,
-    borderRadius: pageStyle.borderRadius.borderRadius9,
+    width: stylePropertyUnion.width.widthP95,
+    height: stylePropertyUnion.height.height52,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
     // margin: "5px 0 5px 0",
     marginBottom: "5px",
-    ...pageStyle.flexRowCenter,
-    color: pageStyle.colorTheme.black,
-    backgroundColor: pageStyle.colorTheme.beige,
-    boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.black,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
   });
 
   let chatlistUserImg = tagCreate("div", {});
   box.appendChild(chatlistUserImg);
   styleCreate(chatlistUserImg, {
-    width: pageStyle.width.width50,
+    width: stylePropertyUnion.width.width50,
     height: "95%",
-    borderRadius: pageStyle.borderRadius.borderRadiusP50,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     marginRight: "10px",
     backgroundSize: "cover",
     backgroundPosition: "center"
@@ -107,8 +107,8 @@ function createUserOrgchatList(parent, userID, dogName){
   let chatlistBoxComponent = tagCreate("div", {});
   box.appendChild(chatlistBoxComponent);
   styleCreate(chatlistBoxComponent, {
-    width: pageStyle.width.width150,
-    height: pageStyle.height.heightP90,
+    width: stylePropertyUnion.width.width150,
+    height: stylePropertyUnion.height.heightP90,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -125,11 +125,11 @@ function createUserOrgchatList(parent, userID, dogName){
   let chatlistUserName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistUserName);
   styleCreate(chatlistUserName, {
-    width: pageStyle.width.width90,
-    height: pageStyle.height.heightP50,
+    width: stylePropertyUnion.width.width90,
+    height: stylePropertyUnion.height.heightP50,
     fontWeight: "700",
     // marginBottom: "5px"
-    // ...pageStyle.flexColCenter,
+    // ...stylePropertyUnion.flexColCenter,
   });
   // chatlistUserName.innerText = dogName;
   chatlistUserName.innerText = userID;
@@ -137,8 +137,8 @@ function createUserOrgchatList(parent, userID, dogName){
   let chatlistDogName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistDogName);
   styleCreate(chatlistDogName, {
-    width: pageStyle.width.width90,
-    height: pageStyle.height.heightP50,
+    width: stylePropertyUnion.width.width90,
+    height: stylePropertyUnion.height.heightP50,
     fontSize: "13px"
     // marginBottom: "3px",
   });
