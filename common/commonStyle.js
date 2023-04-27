@@ -1551,3 +1551,90 @@ const dangtalkChattingRoom ={
   }
 
 }
+
+//댕프렌즈 스타일 부분
+const dangfriendsStyle = {
+  rootStyle: {
+    width: stylePropertyUnion.width.width500,
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+  },
+  friendsWrapArea: {
+    ...stylePropertyUnion.flexColCenter,
+    width: stylePropertyUnion.width.widthP100,
+  },
+  starFriendsArea: {
+    ...stylePropertyUnion.flexColCenter,
+    width: stylePropertyUnion.width.widthP100,
+    marginTop: "10px"
+  },
+  divisLine: {
+    width: stylePropertyUnion.width.widthP95,
+    height: stylePropertyUnion.height.height3,
+    border: `2px solid ${stylePropertyUnion.colorTheme.lightGray}`,
+    margin: '10px 0 10px 0'
+  },
+  stdFriendsArea: {
+    ...stylePropertyUnion.flexColCenter,
+    width: stylePropertyUnion.width.widthP100,
+  },
+  friendsProfile: {
+    width: stylePropertyUnion.width.widthP95,
+    height: stylePropertyUnion.height.height100,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    margin: "10px 0 5px 0",
+    ...stylePropertyUnion.flexRowCenter,
+    textDecoration: 'none',
+    color: stylePropertyUnion.colorTheme.black,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
+  },
+  profileImage: {
+    width: stylePropertyUnion.width.width80,
+    height: stylePropertyUnion.height.height80,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
+    margin: "5px",
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
+  profileTextArea: {
+    width: stylePropertyUnion.width.width300,
+    height: stylePropertyUnion.height.height100,
+    margin: "20px 0 0 10px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  profileNameArea: {
+    width: stylePropertyUnion.width.widthP100,
+    height: stylePropertyUnion.height.heightP30,
+    marginBottom: "5px",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+
+  },
+  friendsDogname: {
+    fontSize: stylePropertyUnion.fontSizeSet.small,
+    fontWeight: stylePropertyUnion.fontWeightSet.bold,
+  },
+  friendsName: {
+    fontSize: "14px"
+  },
+  friendsIntro: {
+    width: stylePropertyUnion.width.widthP100,
+    height: stylePropertyUnion.height.heightP70,
+    marginBottom: "3px",
+  },
+  profileMore: {
+    width: stylePropertyUnion.width.width30,
+    height: stylePropertyUnion.height.height30,
+    ...stylePropertyUnion.flexRowCenter,
+    margin: '5px',
+    fontSize: stylePropertyUnion.fontSizeSet.small,
+    fontWeight: "800",
+    textAlign: 'center'
+  }
+}
