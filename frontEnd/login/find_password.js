@@ -2,15 +2,15 @@
 function findWindow(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
-  styleCreate(root,targetStyle.findUserInfoRoot)
+  styleCreate(root,signupPageStyle.findUserInfoRoot)
   let wrap = tagCreate("div",{id : "wrap"});
-  styleCreate(wrap,targetStyle.findUserInfoWrap)
+  styleCreate(wrap,signupPageStyle.findUserInfoWrap)
 
   root.appendChild(wrap);
   let rootChild = [];
   for(let i = 0;i<5;i++){
     let child = tagCreate("div",{});
-    styleCreate(child,targetStyle.signupResultMent)
+    styleCreate(child,signupPageStyle.signupResultMent)
     wrap.appendChild(child);
     rootChild.push(child);
   }
@@ -37,10 +37,10 @@ function findWindow(){
 
 
 
-  styleCreate(rootChild[1].firstChild,targetStyle.findUserInfoInput);
-  styleCreate(rootChild[2].firstChild,targetStyle.findUserInfoInput);
-  styleCreate(rootChild[3].firstChild,targetStyle.findUserInfoInput);
-  styleCreate(rootChild[4],targetStyle.signupResultBackBtn);
+  styleCreate(rootChild[1].firstChild,signupPageStyle.findUserInfoInput);
+  styleCreate(rootChild[2].firstChild,signupPageStyle.findUserInfoInput);
+  styleCreate(rootChild[3].firstChild,signupPageStyle.findUserInfoInput);
+  styleCreate(rootChild[4],signupPageStyle.signupResultBackBtn);
   rootChild[4].addEventListener("click",()=>{
     let data = new FormData;
     data.append("id",rootChild[1].firstChild.value);
@@ -66,14 +66,14 @@ findWindow()
 
 function updatePW(token){
   let dupCheckResultModal =  tagCreate("div",{});
-  styleCreate(dupCheckResultModal,targetStyle.findUserInfoUpdatePWModal)
+  styleCreate(dupCheckResultModal,signupPageStyle.findUserInfoUpdatePWModal)
   dupCheckResultModal.innerHTML = `<p>새 비밀번호를 입력해주세요<p>
   <input type="text" id="newPW" name="newPW" placeholder="비밀번호">`;
   let newPW = dupCheckResultModal.children[1].children[0]
-  styleCreate(newPW,targetStyle.findUserInfoInput);
+  styleCreate(newPW,signupPageStyle.findUserInfoInput);
   wrap.appendChild(dupCheckResultModal);
   let okaybutton = tagCreate("div",{})
-  styleCreate(okaybutton,targetStyle.signUpOKBtn)
+  styleCreate(okaybutton,signupPageStyle.signUpOKBtn)
   dupCheckResultModal.appendChild(okaybutton);
   okaybutton.innerText = "완료";
   okaybutton.addEventListener("click",()=>{
