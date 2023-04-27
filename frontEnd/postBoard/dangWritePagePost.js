@@ -39,7 +39,6 @@ function keepDiary(){
 
   // 5. root4 카테고리, 사진업로드 버튼 
   styleCreate(rootChild[4],keepStyle.pageButtonWrap)
-
   for(let i = 0; i < 2; i++){
     let button = tagCreate("div");
     styleCreate(button,keepStyle.pageButton)
@@ -80,7 +79,10 @@ function uploadImage(){
   let imageFormData = new FormData();
   let reader = new FileReader();
   reader.addEventListener("load",()=>{
-    
+    rootChild[2].innerHTML = '';
+    rootChild[2].style.backgroundImage = `url(${reader.result})`
+    uploadImageModal.style.display = 'none';
+
   })
   submitbutton.addEventListener("click",()=>{
     reader.readAsDataURL(myImage.files[0])
@@ -91,7 +93,7 @@ function uploadImage(){
   buttonWrap.appendChild(okaybutton);
   okaybutton.innerText = "닫기";
   okaybutton.addEventListener("click",()=>{
-    uploadImageModal.remove();
+    uploadImageModal.style.display = 'none';
   })
 }
 
@@ -155,18 +157,22 @@ const jwt = document.cookie.split("=")[2];
   styleCreate(rootChild[5],keepStyle.pageSubmit)
   rootChild[5].innerText="제출하기";
   rootChild[5].addEventListener("click",()=>{
-    console.log(yastContentInput.value)
-    let titleText=yastContentInput.value;
-    let mainText=postContentInput.value;
+    let targetImage = document.getElementById('myImage')
+    console.log(targetImage.files[0])
+
+
+    // console.log(yastContentInput.value)
+    // let titleText=yastContentInput.value;
+    // let mainText=postContentInput.value;
   
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/secondHand`,true);
-    xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", `http://localhost:2080/secondHand`,true);
+    // xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
     
-    // xhr.addEventListener("load", () => {
-    //   console.log(xhr.responseText); // 서버 응답을 콘솔에 출력합니다.
-    // });
-    window.location = "http://localhost:2080/secondHand"
+    // // xhr.addEventListener("load", () => {
+    // //   console.log(xhr.responseText); // 서버 응답을 콘솔에 출력합니다.
+    // // });
+    // window.location = "http://localhost:2080/secondHand"
     });
 
  // 7. root6 바텀메뉴, 맨 밑에 페이지 구간

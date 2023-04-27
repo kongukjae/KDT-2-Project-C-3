@@ -1038,6 +1038,8 @@ const keepStyle = {
     ...stylePropertyUnion.flexRowCenter,
     border: `1px solid ${stylePropertyUnion.colorTheme.peach}`,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
+    backgroundSize: "cover",
+    backgroundPosition: "center"
   },
 
   // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
