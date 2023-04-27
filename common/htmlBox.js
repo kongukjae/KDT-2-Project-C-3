@@ -18,6 +18,9 @@ const html = {
           margin: 0%;
           font-family: 'Noto Sans KR', sans-serif;
         }
+        html {
+          scroll-behavior: smooth;
+        }
       </style>
     </head>
     <body onselectstart="return false">

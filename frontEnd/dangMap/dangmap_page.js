@@ -302,6 +302,8 @@ function map() {
   // 하단 메뉴
   let menuChild2 = [];
   btmMeun(rootChild[2], menuChild2);
+  const gotop = document.getElementById('goTop');
+  gotop.style.display = "none";
 
   
   //console.dir(rootChild[2]);
@@ -317,10 +319,10 @@ function map() {
     }
   }
   const markersImage = {
-    0: "https://i.ibb.co/xCWmVQg/fr-dogpaw.png",
-    1: "https://i.ibb.co/nwQPZS9/star-dogpaw.png",
-    2: "https://i.ibb.co/7KX3D8w/ot-dogpaw.png",
-    3 : "https://i.ibb.co/zR5p1G9/dogpaw.png"}
+    0: "/image/graphic/fr_dogpaw.png",
+    1: "/image/graphic/star_dogpaw.png",
+    2: "/image/graphic/ot_dogpaw.png",
+    3 : "/image/graphic/dogpaw.png"}
   const getURL = {
     0: "frFootprint",
     1: "starFootprint",

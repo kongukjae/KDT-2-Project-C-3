@@ -10,9 +10,13 @@ function topMenu(rootChild){
   styleCreate(rootChild,targetStyle.topMenu)
   const logoLoginPage = tagCreate('img', '');
   logoLoginPage.style.width = '28%';
+  logoLoginPage.style.cursor = 'pointer'
   logoLoginPage.src = './resource/MainLogo.png';
   rootChild.appendChild(logoLoginPage);
 
+  logoLoginPage.addEventListener('click',()=>{
+    window.location = "http://localhost:2080/main"
+  })
 }
 
    // ----햄버거 버튼 구역입니다.----
@@ -85,7 +89,7 @@ function topMenu(rootChild){
     left: "-600px",
     top: "0",
     transition: "left 0.6s ease",
-    zIndex: 1
+    zIndex: 10,
   });
  // 햄버거 빵, 고기, 빵 이벤트 요소
  // bar1.addEventListener("click", () => {
