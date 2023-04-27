@@ -4,48 +4,55 @@ import fs from "fs";
 import mysql from "mysql";
 import htmlBox from "./common/htmlBox.js";
 import { parse } from "path";
-import cmServer from "./httpServer/commonServer.js";
-import callPostImage from "./httpServer/callPostImage.js";
+import cmServer from "./backEnd/commonServer.js";
+import callPostImage from "./backEnd/module/imageUpload.js";
+
+//fileReader
+import fileReaderScriptRouter from "./backEnd/fileReader/script.js";
+// import fileReaderImageRouter from "./httpServer/fileReader/image.js";
+
 
 //import Main
-import callMain from "./httpServer/callMain.js";
+import homeGet from "./backEnd/router/home/homeGet.js";
 
 //import Login
-import callLoginGet from "./httpServer/callLoginGet.js";
-import callPostLogin from "./httpServer/callPostLogin.js";
-import dupCheck from "./httpServer/dupCheckRoute.js";
+import loginGet from "./backEnd/router/login/loginGet.js";
+import loginPost from "./backEnd/router/login/loginPost.js";
 
 //import singup
-import signupResult from "./httpServer/signupResultRoute.js";
+import signupGet from "./backEnd/router/login/signupGet.js";
+import signupResultPost from "./backEnd/router/login/signupResultPost.js";
 
 //import map
-import dangMapServer from "./httpServer/dangMapServer.js";
-import callPostDangMap from "./httpServer/callPostDangMap.js";
-import dangmapChatList from "./httpServer/bottomMenu_map_chatList_post.js";
+import dangmapReadGet from "./backEnd/router/Map/dangmap_read_get.js"; // 전 dangmapServer
+import dangmapWritePost from "./backEnd/router/Map/dangmap_write_post.js"; // 전 callpostdangmap
+import dangmapChatList from "./backEnd/router/Map/dangmap_chatList_post.js";
 
-//import post board
-import postBoard from "./httpServer/backend_bottomMenu_postBoard_get.js";
-import postBoardLike from "./httpServer/post_postBoard_like.js";
-import postCommentInput from "./httpServer/backend_postBoard_commentInput.js"
-import postCommentLoad from "./httpServer/backend_postBoard_commentLoad.js"
+//import dangstar
+import dangstar from "./backEnd/router/postBoard/dangstarGet.js";
+import dangstarLike from "./backEnd/router/postBoard/dangstarLikePost.js";
+import dangstarCommentInputPost from "./backEnd/router/postBoard/dangstarCommentInputPost.js"
+import dangstarCommentLoadPost from "./backEnd/router/postBoard/dangstarCommentLoadPost.js"
 
-//import secondHand
-import secondHand from "./httpServer/backend_bottommenu_second_hand_get.js"
-import secondHandPost from "./httpServer/backend_bottommenu_second_hand_post_get.js";
+// import dangMarket
+import dangMarket from "./backEnd/router/postBoard/dangMarketGet.js"
+import dangMarketDetailPage from "./backEnd/router/postBoard/dangMarketDetailPageGet.js";
 
-//import friends
-import myPagePost from "./httpServer/myPagePost.js";
-import myKeepPost from "./httpServer/backend_mykeepmenu_second.js";
-import followSearch from "./httpServer/callPostFollowSearch.js";
-import getFriendsList from "./httpServer/bottomMenu_friendsList_get.js"
-import PostFriendsList from "./httpServer/bottomMenu_friendsList_post.js"
-import starCheck from "./httpServer/backend_yourpage_starCheck.js";
-import starLoad from "./httpServer/backend_yourpage_starLoad.js";
+//import profile
+import userPagePost from "./backEnd/router/profile/userPage_Post.js";
+import dangWritePost from "./backEnd/router/postBoard/dangWritePost.js";
+import followSearch from "./backEnd/module/followSearch.js";
+import starCheckPost from "./backEnd/router/profile/userPage_starCheck_post.js";
+import starLoadPost from "./backEnd/router/profile/userPage_starLoad_Post.js";
 
-// import chatimport chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
-import chatWithSocketIo from "./httpServer/backend_module_bottommenu_dangtalk_socketIo.js"
-import dangTalkChatRoom from "./httpServer/backend_dangtalk_chatting_room_main_get.js";
-import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_main_post.js";
+//import social
+import dangfriendGet from "./backEnd/router/social/dangfriendGet.js"
+import dangfriendPost from "./backEnd/router/social/dangfriendPost.js"
+
+// import chatimport chatWithSocketIo from "./backEnd/backend_module_bottommenu_dangtalk_socketIo.js"
+import chatWithSocketIo from "./backEnd/module/dangtalkSocketIo.js"
+import dangTalkChatRoom from "./backEnd/router/chat/dangtalkGet.js";
+import dangTalkChatRoomPost from "./backEnd/router/chat/dangtalkPost.js";
 
 
 
@@ -103,100 +110,73 @@ import dangTalkChatRoomPost from "./httpServer/backend_dangtalk_chatting_room_ma
 const server = http.createServer(function (request, response) {
   // get request
   if (request.method === "GET") {
+    //fileReaderScript
+    fileReaderScriptRouter(request, response);
+    // fileReaderImageRouter(request, response);
     //console.log("요청 들어옴 : " + request.url);
     //로그인
-    callLoginGet(request, response);
+    loginGet(request, response);
 
     //메인화면
-    callMain(request, response);
+    homeGet(request, response);
     
     //회원가입
-    if (request.url === "/signUp") {
-      response.writeHead(200);
-      response.write(htmlBox.htmlFunc(htmlBox.signupPage));
-      response.end();
-    }   
-    if (request.url === "/init_user/signupstyle.js") {
-      cmServer.fileDirectory(`init_user/signup.js`, response);
-    }
-    if (request.url === "/init_user/signupResultStyle.js") {
-      cmServer.fileDirectory(`init_user/signupResult.js`, response);
-    }
-    if (request.url === "/favicon") {
-      cmServer.fileDirectory(`graphic/dogpaw.png`, response);
-    }
-    if (request.url.startsWith("/dupCheck")) {
-      dupCheck(request, response);
-    }else if (request.url === "/friends/mypageStyle.js") {
-      cmServer.fileDirectory(`friends/mypageStyle.js`, response);
-    }else if (request.url === "/friends/yourpageStyle.js") {
-      cmServer.fileDirectory(`friends/yourpageStyle.js`, response);
-    }
-    if (request.url === "/friends/starCheck.js") {
-      cmServer.fileDirectory(`/friends/starCheck.js`, response);
-    }
-    if (request.url.startsWith("/myMarker")) {
-      myMarker(request, response)
-    }
+    signupGet(request, response);
 
-    //게시글 작성 페이지
-    if (request.url === "/friends/myKeepStyle.js") {
-      cmServer.fileDirectory(`/friends/myKeepStyle.js`, response);
-    } 
 
     //댕맵 페이지
-    dangMapServer(request, response);
+    dangmapReadGet(request, response);
     
     //댕댕마켓 페이지
-    secondHand(request, response);
-    secondHandPost(request, response);
+    dangMarket(request, response);
+    dangMarketDetailPage(request, response);
 
     //댕스타그램 페이지
-    postBoard(request, response);
+    dangstar(request, response);
 
     //댕톡
     dangTalkChatRoom(request, response)
 
     //댕프렌드
-    getFriendsList(request, response);
+    dangfriendGet(request, response);
 
   };
 
 /*-----------------post request-----------------------*/
   if (request.method === 'POST') {
     //마이페이지
-    myPagePost(request, response);
+    userPagePost(request, response);
 
     //게시글 작성
-    myKeepPost(request,response);
+    dangWritePost(request,response);
 
     //업로드, 유저 이미지
     callPostImage(request, response);
 
     //댕맵 - 지도에 발자국 표시, 발자국 드래그
-    callPostDangMap(request, response);
+    dangmapWritePost(request, response);
     //댕맵 - 채팅 참여자 리스트
     dangmapChatList(request, response);
 
     //로그인
-    callPostLogin(request, response);
+    loginPost(request, response);
     if (request.url.startsWith("/signUpResult")) {
-      signupResult(request, response)
+      signupResultPost(request, response)
     }
 
     //팔로우 기능
     followSearch(request, response);
 
     //댕스타그램
-    postCommentLoad(request, response);
-    postCommentInput(request, response);
-    postBoardLike(request, response);
+    dangstarCommentLoadPost(request, response);
+    dangstarCommentInputPost(request, response);
+    dangstarLike(request, response);
 
     //댕프렌드
-    PostFriendsList(request, response)
+    dangfriendPost(request, response)
 
-    starCheck(request, response);
-    starLoad(request, response);
+    starCheckPost(request, response);
+    starLoadPost(request, response);
     dangTalkChatRoomPost(request, response)
   };
 });

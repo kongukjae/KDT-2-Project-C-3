@@ -10,9 +10,13 @@ function topMenu(rootChild){
   styleCreate(rootChild,targetStyle.topMenu)
   const logoLoginPage = tagCreate('img', '');
   logoLoginPage.style.width = '28%';
+  logoLoginPage.style.cursor = 'pointer'
   logoLoginPage.src = './resource/MainLogo.png';
   rootChild.appendChild(logoLoginPage);
 
+  logoLoginPage.addEventListener('click',()=>{
+    window.location = "http://localhost:2080/main"
+  })
 }
 
    // ----햄버거 버튼 구역입니다.----
@@ -104,7 +108,7 @@ function topMenu(rootChild){
   styleCreate(closeButton, {
     width: "30px",
     height: "30px",
-    backgroundColor: pageStyle.colorTheme.peach,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: "50%",
     position: "absolute",
     top: "20px",
