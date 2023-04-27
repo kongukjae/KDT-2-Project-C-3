@@ -371,6 +371,15 @@ function map() {
     })
   };
   
+  function countMarkersDate() {
+    let markersDate = markersObject.markers[markersObject.userid][1][0][1].getDate();
+    let now = new Date().getDate();
+
+    if(markersDate)
+
+    return
+  }
+
   async function getMarkersObject(){
     await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,0)
@@ -383,6 +392,9 @@ function map() {
       countFootprintCount.innerText = 10;
     } else {
       countFootprintCount.innerText = (10 - markersObject.markers[markersObject.userid][1].length);
+      console.log(countMarkersDate());
+      // countMarkersDate();
+      console.log(new Date().getDate());
     }
     textCount = Number(countFootprintCount.innerText);
     // console.log(parseInt(countFootprintCount.innerText));
