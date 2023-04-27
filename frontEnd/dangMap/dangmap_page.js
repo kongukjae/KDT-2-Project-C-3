@@ -375,12 +375,23 @@ function map() {
   };
   
   function countMarkersDate() {
-    let markersDate = markersObject.markers[markersObject.userid][1][0][1].getDate();
-    let now = new Date().getDate();
+    let markersDateCount = 10; // 전날보다 이전 - 이후 +
+    let markersTodayData = markersObject.markers[markersObject.userid][1];
+    let beforeDate = new Date().getDate() - 1;
+    let boolDate;
 
-    if(markersDate)
+    for (i in markersTodayData) {
+      if(markersTodayData[i][1].getDate() <= beforeDate) {
+        markersDateCount += 0;
+      } else if(markersTodayData[i][1].getDate() > beforeDate){
+        markersDateCount -= 1;
+      }
+    }
 
-    return
+    countFootprintCount.innerText = markersDateCount;
+
+    // console.log(markersObject.markers[markersObject.userid][1]);
+    // console.log(markersDateCount);
   }
 
   async function getMarkersObject(){
@@ -393,10 +404,7 @@ function map() {
     if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
       countFootprintCount.innerText = 10;
     } else {
-      countFootprintCount.innerText = (10 - markersObject.markers[markersObject.userid][1].length);
-      console.log(countMarkersDate());
-      // countMarkersDate();
-      console.log(new Date().getDate());
+      countMarkersDate();
     }
     textCount = Number(countFootprintCount.innerText);
     // console.log(parseInt(countFootprintCount.innerText));
