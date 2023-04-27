@@ -1,7 +1,6 @@
 
 const root = tagCreate("div", { id: "root" });
-root.style.width = "500px";
-root.style.margin = "auto";
+styleCreate(root, dangstarStyle.dangstarRoot);
 document.body.appendChild(root);
 
 // 탑 메뉴
@@ -26,6 +25,7 @@ btmMeun(btmMeunWrap);
 
 // 게시글 작성 버튼
 const writeBtn = tagCreate("button", {});
+styleCreate(writeBtn, dangstarStyle.dangstarAddWriteBtn);
 root.appendChild(writeBtn);
 
 writeBtn.addEventListener("click",() =>{
@@ -50,24 +50,7 @@ writeForm.submit();
 
 const writeImg = tagCreate("img", {src: '/image/resource/write.png'})
 writeBtn.appendChild(writeImg);
-styleCreate(writeImg, {
-  width: "70%",
-  height: "70%",
-})
-styleCreate(writeBtn, {
-  backgroundSize: "65%",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  cursor: "pointer",
-  width: "50px",
-  height: "50px",
-  borderRadius: "50%",
-  position: "fixed",
-  bottom: "20px",
-  right: "15%",
-  border: "1px solid black",
-  zIndex: 3
-});
+styleCreate(writeImg, dangstarStyle.dangstarAddWriteImg);
 loadDangstargram(0);
 // 
 // let test = document.cookie;
