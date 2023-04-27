@@ -362,7 +362,13 @@ function map() {
           markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
           console.log("result 값");
-          console.log(result[key][2]);
+          console.log(result);//! 모든값
+          // console.log(result[key]);//! 시간
+          // console.log(result[key][2]);//! 다른넘
+          // console.log(result[key][0]);//! 위도 
+          // console.log(result[key][1]);//! 경도
+          // console.log(result[key][3]);//! 시간
+
           
         }
       //console.log(markersObject);
@@ -375,10 +381,10 @@ function map() {
   };
   
   async function getMarkersObject(){
-    await allMarker(allAddMarker,3)
-    await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,0)
+    await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,2)
+    await allMarker(allAddMarker,3)
     console.log("await 발자국 확인 중");
     console.log(markersObject);
     if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
@@ -397,7 +403,6 @@ function map() {
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
       minLevel: 5, // 클러스터 할 최소 지도 레벨
       disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
-      
       //   styles: [{
         //     width : '53px', height : '52px',
         //     background: 'url(cluster.png) no-repeat',
@@ -406,6 +411,34 @@ function map() {
     //     lineHeight: '54px'
     // }]
   });
+
+     
+ //!for문을 돌려서 나 삭제하기 - 나를 삭제할때 필요하다.
+ console.log(markersObject)
+
+ console.log(markersObject.markers)
+ console.log(markersObject.markers['asdasd1234'][1][0][0][0])
+
+
+  markersObject.markers['asdasd1234'][1][0][0][0].setMap(null);
+//  console.log(markersObject.markers[key][0])
+ document.body.addEventListener('click', function() {
+
+//   // for문을 돌려서 다른친구만 삭제하기 -수정할때 필요함
+
+      for (let key in markersObject.markers) {
+      if (markersObject.markers[key][0] === 0 || markersObject.markers[key][0] === 1 || markersObject.markers[key][0] === 2) {
+    for (let i = 0; i < markersObject.markers[key][1].length; i++) {
+     markersObject.markers[key][1][i][0][0].setMap(null);
+         }
+        }
+      }
+
+  });
+
+
+
+
   }
     
   getMarkersObject();

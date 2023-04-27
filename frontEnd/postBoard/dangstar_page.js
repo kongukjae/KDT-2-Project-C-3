@@ -5,10 +5,12 @@ root.style.margin = "auto";
 document.body.appendChild(root);
 
 // 탑 메뉴
+
 const topMenuWrap = tagCreate("div", {});
 root.appendChild(topMenuWrap);
-topMenu(topMenuWrap);
 createHamburger(root);
+topMenu(topMenuWrap);
+
 
 
 // 게시글 영역
