@@ -1,3 +1,4 @@
+
 const stylePropertyUnion = {
   colorTheme: {
     peach: "#F7786B",
@@ -681,7 +682,7 @@ const targetStyle = {
 
 }
 //console.log(targetStyle.topMenu);
-
+// 1. 마이페이지 유어페이지 해당부분
 const mypageStyle = {
   mypageRoot : {
     width : stylePropertyUnion.width.width500,
