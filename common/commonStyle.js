@@ -1247,92 +1247,9 @@ const loginStyle = {
 };
 // 작업한 부분 - end
 
-// 댕맵 오버레이 창
-const dangMapOverlay = {
-  wrap: {
-    position: "absolute",
-    left: "0",
-    bottom: "10px",
-    width: stylePropertyUnion.width.width250,
-    height: stylePropertyUnion.height.height132,
-    marginLeft: stylePropertyUnion.marginLeft.marginLeft_144,
-    textAlign: "left",
-    overflow: "hidden",
-    fontSize: stylePropertyUnion.fontSizeSet.smaller,
-  },
-  info: {
-    width: stylePropertyUnion.width.widthP100,
-    height: "120px",
-    borderRadius: "5px",
-    // border: `1px solid ${stylePropertyUnion.colorTheme.peach}`,
-    overflow: "hidden",
-    backgroundColor: stylePropertyUnion.colorTheme.whiteTypeC,
-    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
-  },
-  title: {
-    padding: "5px 0 5px 10px",
-    height: "30px",
-    backgroundColor: stylePropertyUnion.colorTheme.peach,
-    fontSize: stylePropertyUnion.fontSizeSet.small,
-    fontWeight: "bold",
-    lineHeight: 1,
-    color: stylePropertyUnion.colorTheme.white,
-  },
-  body: {
-    width: stylePropertyUnion.width.widthP100,
-    height: stylePropertyUnion.height.height90,
-    borderBottom: `2px solid ${stylePropertyUnion.colorTheme.peach}`,
-    // border: `1px solid ${stylePropertyUnion.colorTheme.peach}`,
-    padding: "10px",
-    // boxShadow: `0px 1px 10px ${stylePropertyUnion.colorTheme.peach}`,
-    position: "relative",
-    overflow: "hidden",
-    display: "flex",
-  },
-  desc: {
-    position: "relative",
-    margin: "5px 0 0 30px",
-  },
-  image: {
-    width: "70px",
-    height: "70px",
-    borderRadius: "35px",
-  },
-  btnStyle: {
-    width: "65px",
-    height: "30px",
-    backgroundColor: stylePropertyUnion.colorTheme.lightGray,
-    textAlign: "center",
-    appearance: "none",
-    borderRadius: "4px",
-    boxShadow:
-      "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-    cursor: "pointer",
-    transition: "0.5s",
-    border: `0px solid ${stylePropertyUnion.colorTheme.gray}`,
-    fontSize: stylePropertyUnion.fontSizeSet.smaller,
-  },
-  close: {
-    width: "15px",
-    height: "20px",
-    backgroundColor: stylePropertyUnion.colorTheme.white,
-    lineHeight: 1,
-    position: "absolute",
-    top: "5px",
-    right: "5px",
-    border: "0px",
-    appearance: "none",
-    borderRadius: "4px",
-    boxShadow:
-      "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-    cursor: "pointer",
-    transition: "0.5s",
-  },
-};
-
 //댕댕마켓 게시글 스타일
 
-const market = {
+const dangMarketStyle = {
   //게시글 목록 part
   root: {
     width: stylePropertyUnion.width.width500,
