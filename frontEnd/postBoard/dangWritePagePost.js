@@ -15,7 +15,8 @@ function keepDiary(){
   logoLoginPage.style.width = '28%';
   logoLoginPage.src = './resource/MainLogo.png';
   rootChild[0].appendChild(logoLoginPage); 
-
+  
+  rootChild[1].id = 'titleTextboxWrap'
 //  2.  제목부분 root1 제목작성칸
   styleCreate(rootChild[1],keepStyle.pageTitleBox)
   const yastContentInput = document.createElement("textarea");

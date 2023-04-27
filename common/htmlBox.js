@@ -76,7 +76,7 @@ const html = {
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/backEnd/router/postBoard/dangWritePagePost.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangWritePagePost.js"></script>`,
 
   //댕프렌드
   friendsList: `
