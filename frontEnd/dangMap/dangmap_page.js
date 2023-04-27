@@ -34,7 +34,7 @@ function changeDate(date) {
 function map() {
   let root = tagCreate("div", { id: "root" });
   document.body.appendChild(root);
-  styleCreate(root, targetStyle.menuMapRoot);
+  styleCreate(root, dangMapStyle.menuMapRoot);
 
 
   let rootChild = [];
@@ -44,12 +44,12 @@ function map() {
     rootChild.push(child);
   }
 
-  styleCreate(rootChild[0], targetStyle.menuMap);
+  styleCreate(rootChild[0], dangMapStyle.menuMap);
   rootChild[0].id = "map";
-  styleCreate(rootChild[1], targetStyle.menuMapSlide);
+  styleCreate(rootChild[1], dangMapStyle.menuMapSlide);
 
   rootChild[1].id = "slide";
-  styleCreate(rootChild[2], targetStyle.bottomMenu);
+  styleCreate(rootChild[2], dangMapStyle.bottomMenu);
 
 
   let mapContainer = document.getElementById("map"), // 지도를 표시할 div
@@ -102,16 +102,16 @@ function map() {
 
   //남은 발자국 개수 박스
   let countFootprintBox = tagCreate("div", {});
-  styleCreate(countFootprintBox, targetStyle.countFootprintBox);
+  styleCreate(countFootprintBox, dangMapStyle.countFootprintBox);
   root.appendChild(countFootprintBox);
 
   let countFootprintText = tagCreate("div", {});
-  styleCreate(countFootprintText, targetStyle.countFootprintText);
+  styleCreate(countFootprintText, dangMapStyle.countFootprintText);
   countFootprintBox.appendChild(countFootprintText);
   countFootprintText.innerHTML = `오늘 찍을 수 있는 발자국 수`;
 
   let countFootprintCount = tagCreate("div", {});
-  styleCreate(countFootprintCount, targetStyle.countFootprintCount);
+  styleCreate(countFootprintCount, dangMapStyle.countFootprintCount);
   countFootprintBox.appendChild(countFootprintCount);
   
 
@@ -461,10 +461,10 @@ function putUserProfile(object){
     let name = tagCreate('p');
     let postRequest = targetArr[i];
     profileWrap.style.cursor = "pointer"
-    styleCreate(profileWrap,targetStyle.menuMapSlideUserBox);
-    styleCreate(imageDiv,targetStyle.menuMapSlideImageStyle);
-    styleCreate(imageDivWrap,targetStyle.menuMapSlideImageWrapStyle);
-    styleCreate(name,targetStyle.menuMapSlideTextStyle);
+    styleCreate(profileWrap,dangMapStyle.menuMapSlideUserBox);
+    styleCreate(imageDiv,dangMapStyle.menuMapSlideImageStyle);
+    styleCreate(imageDivWrap,dangMapStyle.menuMapSlideImageWrapStyle);
+    styleCreate(name,dangMapStyle.menuMapSlideTextStyle);
     imageDivWrap.appendChild(imageDiv);
     profileWrap.appendChild(imageDivWrap);
     profileWrap.appendChild(name);
@@ -525,24 +525,24 @@ function putUserProfile(object){
 function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   // 오버레이 내부 구성 요소들
   const content = tagCreate("div", { id: "overlayWrap" });
-  styleCreate(content, dangMapOverlay.wrap);
+  styleCreate(content, dangMapStyle.overlayWrap);
 
   const overlayInfo = tagCreate("div", {});
   content.appendChild(overlayInfo);
-  styleCreate(overlayInfo, dangMapOverlay.info);
+  styleCreate(overlayInfo, dangMapStyle.overlayInfo);
 
   const overlayTitle = tagCreate("div", {});
   overlayInfo.appendChild(overlayTitle);
-  styleCreate(overlayTitle, dangMapOverlay.title);
+  styleCreate(overlayTitle, dangMapStyle.overlayTitle);
   overlayTitle.innerHTML = `${id}`;
 
   const overlayBody = tagCreate("div", {});
   overlayInfo.appendChild(overlayBody);
-  styleCreate(overlayBody, dangMapOverlay.body);
+  styleCreate(overlayBody, dangMapStyle.overlayBody);
 
   const overlayImg = tagCreate("div", {});
   overlayBody.appendChild(overlayImg);
-  styleCreate(overlayImg, dangMapOverlay.image);
+  styleCreate(overlayImg, dangMapStyle.overlayImage);
 
   const xhr = new XMLHttpRequest();
   xhr.open("POST", `http://localhost:2080/sendImage`);
@@ -555,7 +555,7 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
 
   const overlayDesc = tagCreate("div", {});
   overlayBody.appendChild(overlayDesc);
-  styleCreate(overlayDesc, dangMapOverlay.desc);
+  styleCreate(overlayDesc, dangMapStyle.overlayDesc);
 
   const overlayEllipsis = tagCreate("p", {});
   overlayDesc.appendChild(overlayEllipsis);
@@ -567,7 +567,7 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
 
   const overlayProfileBtn = tagCreate("button", {});
   overlayBtnWrap.appendChild(overlayProfileBtn);
-  styleCreate(overlayProfileBtn, dangMapOverlay.btnStyle);
+  styleCreate(overlayProfileBtn, dangMapStyle.overlayBtnStyle);
   overlayProfileBtn.innerText = "프로필 보기";
 
 
@@ -596,7 +596,7 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
 
   const overlayfollowBtn = tagCreate("button", {});
   overlayBtnWrap.appendChild(overlayfollowBtn);
-  styleCreate(overlayfollowBtn, dangMapOverlay.btnStyle)
+  styleCreate(overlayfollowBtn, dangMapStyle.overlayBtnStyle)
   styleCreate(overlayfollowBtn, {margin: "0 0 0 5px", width: "65px"})
   overlayfollowBtn.innerText = "팔로우";
 
@@ -625,7 +625,7 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   // 오버레이 창 닫기 버튼
   const closeBtn = tagCreate("button", {});
   content.appendChild(closeBtn);
-  styleCreate(closeBtn, dangMapOverlay.close);
+  styleCreate(closeBtn, dangMapStyle.overlayClose);
   closeBtn.innerText = "X";
   const positionNow = new kakao.maps.LatLng(lat, lng); //인포윈도우 표시 위치입니다
 
