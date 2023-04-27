@@ -11,25 +11,43 @@ function sideButton(){
   styleCreate(serch, dangMapStyle.serchBtnStyle)
   styleCreate(orgChat, dangMapStyle.orgChatBtnStyle)
 
-  
-  
+  let searchBarWrap = tagCreate("div");
+  styleCreate(searchBarWrap, dangMapStyle.menuMapSearchBarWrap);
+  root.appendChild(searchBarWrap);
+  let searchBar = tagCreate("input", { type: "text" });
+  searchBarWrap.appendChild(searchBar);
+  styleCreate(searchBar, dangMapStyle.menuMapSearchBar);
+  let searchButton = tagCreate("div", { innerText: "search" });
+  searchBarWrap.appendChild(searchButton);
+  styleCreate(searchButton, dangMapStyle.menuMapSearchButton);
+
+  searchBarWrap.style.display = 'none';
+
+
+  let tg = true;
   sideBtn.addEventListener('click', function(){
-    sideBtn.appendChild(serch);
-    sideBtn.appendChild(orgChat);
+    if(tg){
+      sideBtn.appendChild(serch);
+      sideBtn.appendChild(orgChat);
 
-    // alert("^0^")
+      tg = false;
+    }
+    else if(!tg){
+      sideBtn.removeChild(serch);
+      sideBtn.removeChild(orgChat);
+      tg = true;
+    }
+
   })
-
+  
   serch.addEventListener('click', function(){
-    // let searchBarWrap = tagCreate("div");
-    // styleCreate(searchBarWrap, targetStyle.menuMapSearchBarWrap);
-    // root.appendChild(searchBarWrap);
-    // let searchBar = tagCreate("input", { type: "text" });
-    // searchBarWrap.appendChild(searchBar);
-    // styleCreate(searchBar, targetStyle.menuMapSearchBar);
-    // let searchButton = tagCreate("div", { innerText: "search" });
-    // searchBarWrap.appendChild(searchButton);
-    // styleCreate(searchButton, targetStyle.menuMapSearchButton);
+    root.children[3].style.display = 'none';
+    searchBarWrap.style.display = ''
+    
+  })
+  orgChat.addEventListener('click', function(){
+    alert("^0^")
+
   })
 }
 
