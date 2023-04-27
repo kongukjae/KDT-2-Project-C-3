@@ -1657,6 +1657,7 @@ const dangstarStyle = {
   dangstarRoot: {
     width: stylePropertyUnion.width.width500,
     margin: stylePropertyUnion.margin.marginAuto,
+    position: "relative",
   },
   dangstarAddWriteBtn: {
     backgroundSize: "65%",

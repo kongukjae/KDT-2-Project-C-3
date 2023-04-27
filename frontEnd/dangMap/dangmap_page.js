@@ -363,14 +363,15 @@ function map() {
           markersObject.appendMarker = [result[key][2],type,markerNow,new Date(result[key][3])]
           markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-          console.log("result 값");
-          console.log(result);//! 모든값
+          // console.log("result 값");
+          // console.log(result);//! 모든값
           // console.log(result[key]);//! 시간
           // console.log(result[key][2]);//! 다른넘
           // console.log(result[key][0]);//! 위도 
           // console.log(result[key][1]);//! 경도
           // console.log(result[key][3]);//! 시간
-
+          //  console.log(markerNow);//! 다른넘들 
+         
           
         }
       //console.log(markersObject);
@@ -414,29 +415,40 @@ function map() {
     // }]
   });
 
-     
+    console.log('// --------------------여기확인용----------------------')
  //!for문을 돌려서 나 삭제하기 - 나를 삭제할때 필요하다.
+
+//  console.log(markersObject.markers[markersObject.userid][1][0]);
+//     console.log(markersObject.markers[markersObject.userid][1][i]);
+//     console.log(markersObject.markers[markersObject.userid][1][0][0][0]);
+
  console.log(markersObject)
-
  console.log(markersObject.markers)
- console.log(markersObject.markers['asdasd1234'][1][0][0][0])
+ console.log(markersObject.markers['asdasd1234'][1][0])
+
+ console.log(markersObject.markers['asdasd1234'][1][0][0])
+
+ markersObject.markers[markersObject.userid][1][0].setMap(null);
 
 
-  markersObject.markers['asdasd1234'][1][0][0][0].setMap(null);
+
+
+ markersObject.markers[markersObject.userid][1][1].setMap(null);
+  //  markersObject.markers['asdasd1234'][1][0].setMap(null);
 //  console.log(markersObject.markers[key][0])
- document.body.addEventListener('click', function() {
+//  document.body.addEventListener('click', function() {
 
-//   // for문을 돌려서 다른친구만 삭제하기 -수정할때 필요함
+// //   // for문을 돌려서 다른친구만 삭제하기 -수정할때 필요함
 
-      for (let key in markersObject.markers) {
-      if (markersObject.markers[key][0] === 0 || markersObject.markers[key][0] === 1 || markersObject.markers[key][0] === 2) {
-    for (let i = 0; i < markersObject.markers[key][1].length; i++) {
-     markersObject.markers[key][1][i][0][0].setMap(null);
-         }
-        }
-      }
+//       for (let key in markersObject.markers) {
+//       if (markersObject.markers[key][0] === 0 || markersObject.markers[key][0] === 1 || markersObject.markers[key][0] === 2) {
+//     for (let i = 0; i < markersObject.markers[key][1].length; i++) {
+//      markersObject.markers[key][1][i][0][0].setMap(null);
+//          }
+//         }
+//       }
 
-  });
+//   });
 
 
 

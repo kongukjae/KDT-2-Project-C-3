@@ -7,8 +7,9 @@ document.body.appendChild(root);
 
 const topMenuWrap = tagCreate("div", {});
 root.appendChild(topMenuWrap);
-createHamburger(root);
 topMenu(topMenuWrap);
+createHamburger(root);
+
 
 
 

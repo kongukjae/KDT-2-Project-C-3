@@ -89,7 +89,7 @@ function topMenu(rootChild){
     left: "-600px",
     top: "0",
     transition: "left 0.6s ease",
-    zIndex: 1
+    zIndex: 10
   });
  // 햄버거 빵, 고기, 빵 이벤트 요소
  // bar1.addEventListener("click", () => {
