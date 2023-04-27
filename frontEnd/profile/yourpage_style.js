@@ -1,7 +1,7 @@
 function yourPage(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
-  styleCreate(root,mypageStyle.mypageRoot)
+  styleCreate(root, mypageStyle.mypageRoot)
 
   let rootChild = [];
   for(let i = 0;i<7;i++){
@@ -18,10 +18,10 @@ function yourPage(){
   // rootChild[0].appendChild(logoLoginPage);
 
 
-  styleCreate(rootChild[1],mypageStyle.mypageTitle)
+  styleCreate(rootChild[1], mypageStyle.mypageTitle)
   rootChild[1].innerText = `${targetIdFromServer}님의 페이지`;
   
-  styleCreate(rootChild[2],mypageStyle.mypageImageStyle);
+  styleCreate(rootChild[2], mypageStyle.mypageImageStyle);
 
   const xhr = new XMLHttpRequest();
   xhr.open('POST', `http://localhost:2080/sendImage`);
@@ -34,10 +34,10 @@ function yourPage(){
   });
 
 
-  styleCreate(rootChild[3],mypageStyle.mypageButtonWrap)
+  styleCreate(rootChild[3], mypageStyle.mypageButtonWrap)
   for(let i = 0; i < 2; i++){
     let button = tagCreate("div");
-    styleCreate(button,mypageStyle.mypageButton)
+    styleCreate(button, mypageStyle.mypageButton)
     rootChild[3].appendChild(button)
   }
   rootChild[3].children[0].innerText = "팔로우";
@@ -95,10 +95,10 @@ function yourPage(){
   })
 
 
-  styleCreate(rootChild[4],mypageStyle.mypageUserinfoBox)
+  styleCreate(rootChild[4], mypageStyle.mypageUserinfoBox)
   for(let i = 0; i < 5;i++){
     let infoTag = tagCreate("div");
-    styleCreate(infoTag,mypageStyle.mypageUserinfoBoxInnerStyle)
+    styleCreate(infoTag, mypageStyle.mypageUserinfoBoxInnerStyle)
     rootChild[4].appendChild(infoTag)
   }
   rootChild[4].children[0].innerText = `강아지 이름 : ${dogNameFromServer}`
@@ -111,16 +111,12 @@ function yourPage(){
   rootChild[4].children[3].innerText = "소개글"
 
 
-  styleCreate(rootChild[4].lastChild,mypageStyle.mypageUserinfoBoxSelfIntroduce)
+  styleCreate(rootChild[4].lastChild, mypageStyle.mypageUserinfoBoxSelfIntroduce)
 
-  styleCreate(rootChild[5],mypageStyle.mypageCalender)
+  styleCreate(rootChild[5], mypageStyle.mypageCalender)
   rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리"
 
-
-
-  styleCreate(rootChild[6],targetStyle.bottomMenu)
-
-
+  
   btmMeun(rootChild[6]);
 
   // for(let i = 0;i<5;i++){

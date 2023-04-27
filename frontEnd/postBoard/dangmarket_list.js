@@ -1,6 +1,6 @@
 let root = tagCreate("div", { id: "market" });
 document.body.appendChild(root);
-styleCreate(root, market.root);
+styleCreate(root, dangMarketStyle.root);
 let rootChild = [];
 for (let i = 0; i < 3; i++) {
   let child = tagCreate("div", { id: i });
@@ -10,7 +10,7 @@ for (let i = 0; i < 3; i++) {
 // 글쓰기 작성 페이지
 let add = tagCreate("div", {});
 rootChild[2].appendChild(add);
-styleCreate(add, market.addWrite);
+styleCreate(add, dangMarketStyle.addWrite);
 add.innerText = "✏"
 
 add.addEventListener("click",() =>{
@@ -41,7 +41,7 @@ addForm.submit();
 topMenu(rootChild[0]);
 createHamburger(root);
 
-styleCreate(rootChild[1], market.listContainer);
+styleCreate(rootChild[1], dangMarketStyle.listContainer);
 function makeList(nth) {
   loadSecondHandBoard(nth);
 }
@@ -53,24 +53,24 @@ function createSecondHandList(result, count) {
   child.href = `/secondHandPost?nth=${count}`;
   let mother = document.getElementById("1");
   mother.appendChild(child);
-  styleCreate(child, market.listBox);
+  styleCreate(child, dangMarketStyle.listBox);
 
   let listImgChild = tagCreate("div", {});
   child.appendChild(listImgChild);
-  styleCreate(listImgChild, market.listImg);
+  styleCreate(listImgChild, dangMarketStyle.listImg);
 
   let listTextChild = tagCreate("div", {});
   child.appendChild(listTextChild);
-  styleCreate(listTextChild, market.listText);
+  styleCreate(listTextChild, dangMarketStyle.listText);
 
   let title = tagCreate("div", {});
   listTextChild.appendChild(title);
-  styleCreate(title, market.listTitle);
+  styleCreate(title, dangMarketStyle.listTitle);
   title.innerText = result.title;
 
   let text = tagCreate("div", {});
   listTextChild.appendChild(text);
-  styleCreate(text, market.listElementText);
+  styleCreate(text, dangMarketStyle.listElementText);
   text.innerText = result.detail;
 }
 
