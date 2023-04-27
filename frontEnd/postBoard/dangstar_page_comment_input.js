@@ -6,19 +6,12 @@ function commentInput(postWrap, src_comment_link, textName, cmText, index, postI
 
   // 댓글 입력창 감싸는 div
   const commentWrap = tagCreate("div", {});
-  styleCreate(commentWrap, {
-    //border: "1px solid black",
-    padding: "15px",
-  });
+  styleCreate(commentWrap, dangstarStyle.dangstarCommentWrap);
   postWrap.appendChild(commentWrap);
 
   // 댓글 입력창과 작성 버튼을 감쌀 form 요소
   const commentForm = tagCreate("form", {});
-  styleCreate(commentForm, {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  });
+  styleCreate(commentForm, dangstarStyle.dangstarCommentForm);
   commentWrap.appendChild(commentForm);
 
   // 댓글 입력할 textarea
@@ -28,26 +21,12 @@ function commentInput(postWrap, src_comment_link, textName, cmText, index, postI
     name: "commentValue",
     placeholder: "내용을 입력해주세요",
   });
-  styleCreate(commentInput, {
-    width: "85%",
-    height: "38px",
-    outline: "none",
-  });
+  styleCreate(commentInput, dangstarStyle.dangstarCommentInput);
   commentForm.appendChild(commentInput);
 
   // 댓글 작성 버튼
   const commentSubmit = tagCreate("div", {id: `commentSend_${index}`});
-  styleCreate(commentSubmit, {
-    width: "60px",
-    height: "38px",
-    backgroundColor: "#ddd",
-    border: "1px solid #999",
-    borderRadius: "5px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-  });
+  styleCreate(commentSubmit, dangstarStyle.dangstarCommentWriteBtn);
   commentSubmit.innerText = "작성";
   commentForm.appendChild(commentSubmit);
   let commentSendBtn = document.getElementById(`commentSend_${index}`);
