@@ -79,7 +79,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       let src_comment_link = "../resource/MainDogImg.jpg";
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
-        console.log("조건문 안쪽")
+        // console.log("조건문 안쪽")
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
         
