@@ -2,6 +2,7 @@ function keepDiary(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
   styleCreate(root,keepStyle.pageRoot)
+  let imageButtonFlag = false;
 
   let rootChild = [];
   for(let i = 0; i < 7; i++){
@@ -10,11 +11,14 @@ function keepDiary(){
     rootChild.push(child);
   }
   // 1.메뉴상단 부분 root 0  ==> 메뉴 최상단
-  styleCreate(rootChild[0],keepStyle.pageTopMenu)
-  const logoLoginPage = tagCreate('img', '');
-  logoLoginPage.style.width = '28%';
-  logoLoginPage.src = './resource/MainLogo.png';
-  rootChild[0].appendChild(logoLoginPage); 
+  topMenu(rootChild[0]);
+  createHamburger(root);
+  // styleCreate(rootChild[0],keepStyle.pageTopMenu)
+  // const logoLoginPage = tagCreate('img', '');
+  // logoLoginPage.style.width = '28%';
+  // logoLoginPage.src = './resource/MainLogo.png';
+  // rootChild[0].appendChild(logoLoginPage); 
+
   
   rootChild[1].id = 'titleTextboxWrap'
 //  2.  제목부분 root1 제목작성칸
@@ -35,22 +39,19 @@ function keepDiary(){
   postContentInput.setAttribute("placeholder", "글 작성 내용을 입력하세요");
   postContentInput.setAttribute("style", "width: 500px; height: 400px;resize: none; border: 3px solid #F7786B; border-radius: 9px; font-size: 20px");
   rootChild[3].appendChild(postContentInput);
-
-
+  rootChild[2].style.position = 'relative'
+  let uploadButton = tagCreate('div');
+  rootChild[2].appendChild(uploadButton);
+  styleCreate(uploadButton,keepStyle.addImageButton)
+  uploadButton.innerText = '+'
   // 5. root4 카테고리, 사진업로드 버튼 
-  styleCreate(rootChild[4],keepStyle.pageButtonWrap)
-  for(let i = 0; i < 2; i++){
-    let button = tagCreate("div");
-    styleCreate(button,keepStyle.pageButton)
-    rootChild[4].appendChild(button)
-  }
-  
-  rootChild[4].children[0].innerText=`사진업로드`;
-  rootChild[4].children[1].innerText=`카테고리`;
+ 
 
-rootChild[4].children[0].addEventListener("click",()=>{
-  uploadImage()
-})
+
+  uploadButton.addEventListener("click",()=>{
+    uploadImage();
+    imageButtonFlag = true;
+  })
 function uploadImage(){
   let uploadImageModal =  tagCreate("div",{});
   styleCreate(uploadImageModal,keepStyle.pageUploadModal)
@@ -75,14 +76,14 @@ function uploadImage(){
 
   buttonWrap.appendChild(submitbutton);
   submitbutton.innerText = "업로드";
-  let myImage = document.getElementById("myImage");
   let imageFormData = new FormData();
   let reader = new FileReader();
+  let myImage = document.getElementById("myImage");
   reader.addEventListener("load",()=>{
     rootChild[2].innerHTML = '';
     rootChild[2].style.backgroundImage = `url(${reader.result})`
     uploadImageModal.style.display = 'none';
-
+    
   })
   submitbutton.addEventListener("click",()=>{
     reader.readAsDataURL(myImage.files[0])
@@ -98,58 +99,58 @@ function uploadImage(){
 }
 
 // 게시판 선택 페이지 => '카테고리'
-rootChild[4].children[1].addEventListener("click",()=>{
-showcategory()
-})
-function showcategory(){
-  let showCategoryModal = tagCreate("div", {});
-  styleCreate(showCategoryModal, keepStyle.showCategoryModalbt);
-  showCategoryModal.innerHTML = `<p1>어디에 쓰실건가요?</p1>`;
+// rootChild[4].children[1].addEventListener("click",()=>{
+// showcategory()
+// })
+// function showcategory(){
+//   let showCategoryModal = tagCreate("div", {});
+//   styleCreate(showCategoryModal, keepStyle.showCategoryModalbt);
+//   showCategoryModal.innerHTML = `<p1>어디에 쓰실건가요?</p1>`;
 
-  // 버튼모둠 
-  let buttonWrap = tagCreate("div", {});
-  styleCreate(buttonWrap, keepStyle.showcategoryModalButtonWrap);
+//   // 버튼모둠 
+//   let buttonWrap = tagCreate("div", {});
+//   styleCreate(buttonWrap, keepStyle.showcategoryModalButtonWrap);
 
-  // 카테고리 버튼 <중고게시판>
-  const usedBtn = tagCreate("div", {
-    textContent: "중고게시판"
-  });  
-  styleCreate(usedBtn, keepStyle.showcategoryModalButton);
-// 카테고리 버튼<자랑게시판>
-  const bragBtn = tagCreate("div", {
-    textContent: "자랑게시판"
-  });
-  styleCreate(bragBtn, keepStyle.showcategoryModalButton);
+//   // 카테고리 버튼 <중고게시판>
+//   const usedBtn = tagCreate("div", {
+//     textContent: "중고게시판"
+//   });  
+//   styleCreate(usedBtn, keepStyle.showcategoryModalButton);
+// // 카테고리 버튼<자랑게시판>
+//   const bragBtn = tagCreate("div", {
+//     textContent: "자랑게시판"
+//   });
+//   styleCreate(bragBtn, keepStyle.showcategoryModalButton);
 
-  const closeButton = tagCreate("button", {
-    textContent: "닫기"
-  });
-  styleCreate(closeButton,keepStyle.showcategoryclosebutton);
+//   const closeButton = tagCreate("button", {
+//     textContent: "닫기"
+//   });
+//   styleCreate(closeButton,keepStyle.showcategoryclosebutton);
 
   
-  showCategoryModal.appendChild(buttonWrap);
-   root.appendChild(showCategoryModal);
-buttonWrap.appendChild(usedBtn);
- buttonWrap.appendChild(bragBtn);
- buttonWrap.appendChild(closeButton);
+//   showCategoryModal.appendChild(buttonWrap);
+//    root.appendChild(showCategoryModal);
+// buttonWrap.appendChild(usedBtn);
+//  buttonWrap.appendChild(bragBtn);
+//  buttonWrap.appendChild(closeButton);
 
- //중고게시판 "클릭시"
-  usedBtn.addEventListener("click", () => {
+//  //중고게시판 "클릭시"
+//   usedBtn.addEventListener("click", () => {
  
 
-  });
-// "자랑게시판" 클릭시
-  bragBtn.addEventListener("click", () => {
+//   });
+// // "자랑게시판" 클릭시
+//   bragBtn.addEventListener("click", () => {
     
-  });
-// 닫기버튼
-  closeButton.addEventListener("click", () => {
-    showCategoryModal.remove();
-  });
+//   });
+// // 닫기버튼
+//   closeButton.addEventListener("click", () => {
+//     showCategoryModal.remove();
+//   });
   
-  let showcategorymodalBT = document.getElementById("showcategorymodalBT");
-  showcategorymodalBT.style.width = "200px";
-}
+//   let showcategorymodalBT = document.getElementById("showcategorymodalBT");
+//   showcategorymodalBT.style.width = "200px";
+// }
 
 const cookieId = document.cookie.split("=")[1].split(';')[0];
 const jwt = document.cookie.split("=")[2];
@@ -158,23 +159,62 @@ const jwt = document.cookie.split("=")[2];
   rootChild[5].innerText="제출하기";
   rootChild[5].addEventListener("click",()=>{
     let targetImage = document.getElementById('myImage')
-    console.log(targetImage.files[0])
-
-
-    // console.log(yastContentInput.value)
-    // let titleText=yastContentInput.value;
-    // let mainText=postContentInput.value;
-  
-    // let xhr = new XMLHttpRequest();
-    // xhr.open("POST", `http://localhost:2080/secondHand`,true);
-    // xhr.send(`id=${cookieId}&jwt=${jwt}&titleText=${titleText}&mainText=${mainText}`);
+    // console.log(targetImage);
+    uploadPost(postBoardType);
     
-    // // xhr.addEventListener("load", () => {
-    // //   console.log(xhr.responseText); // 서버 응답을 콘솔에 출력합니다.
-    // // });
-    // window.location = "http://localhost:2080/secondHand"
-    });
+    
+  });
 
+  async function uploadPost(type){
+    let moveToURL = '';
+    let body = {}
+    let imageType = null
+    let imageNameFromServer = '';
+    let targetImage = document.getElementById('myImage')
+    if(!imageButtonFlag){
+      console.log('이미지 없음')
+    }else if(imageButtonFlag&&targetImage.files.length>0){
+      imageType = targetImage.files[0].name.split('.').slice(-1)[0];
+      console.log('이미지 있음')
+    }else{
+      console.log('이미지 없음')
+    }
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    let imageFormData = new FormData();
+    
+    
+    if(type === 'dangStar'){
+      moveToURL = 'http://localhost:2080/dangstar';
+      body = {jwt:token,mainText:postContentInput.value,imageType:imageType};
+    }else{
+      moveToURL = 'http://localhost:2080/secondHand'
+      body = {jwt:token,titleText:yastContentInput.value,mainText:postContentInput.value,imageType:imageType};
+    }
+    await fetch(`http://localhost:2080/${type}WriteSubmit`, {
+      method: 'POST',
+      body: JSON.stringify(body)
+    }).then(res => res.text())
+    .then((result) => {
+      imageNameFromServer = result;
+      imageFormData.append("name", imageNameFromServer);
+      if(imageButtonFlag){
+        imageFormData.append("attachedImage", myImage.files[0]);
+      }else{
+        imageFormData.append("attachedImage", 'null')
+      }
+      })
+    await fetch(`http://localhost:2080/${type}ImageSubmit`, {
+      method: 'POST',
+      body: imageFormData
+    }).then(res => res)
+    .then((result) => {
+      console.log('게시글 업로드 완료')
+      window.location = moveToURL;
+    })
+  }
  // 7. root6 바텀메뉴, 맨 밑에 페이지 구간
   btmMeun(rootChild[6]);
   

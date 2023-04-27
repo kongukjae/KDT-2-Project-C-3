@@ -14,7 +14,17 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   createHamburger(root);
 
   styleCreate(rootChild[1], dangMarketStyle.marketPostImageArea);
-  rootChild[1].innerHTML = postImg
+  if(postImg === 'null.png'){
+    rootChild[1].innerHTML = `<img id = 'image' src="/image/image/default/null.png"/>`
+  }else{
+    rootChild[1].innerHTML = `<img id = 'image' src="/image/image/dangMarket/${postImg}"/>`
+  }
+  let imagetag = document.getElementById('image');
+  styleCreate(imagetag,{
+    width:'100%',
+    height:'100%',
+    borderRadius : '10px'
+  })
   styleCreate(rootChild[2], dangMarketStyle.marketPostImgNameAdd);
   let imgNameAdd = [];
   let nameAdd = [];
@@ -57,7 +67,15 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   }
   //게시자 프로필이미지
   styleCreate(imgNameAdd[0], dangMarketStyle.marketPostImgStyle);
-  imgNameAdd[0].innerHTML = img;
+  const xhr = new XMLHttpRequest();
+    xhr.open("POST", `http://localhost:2080/sendImage`);
+    xhr.responseType = "blob";
+    xhr.send(`type=proFile&id=${id}`);
+    xhr.addEventListener("load", function () {
+      let imageFromServer = URL.createObjectURL(xhr.response);
+      imgNameAdd[0].style.backgroundImage = `url(${imageFromServer})`;
+      console.log("이미지 가져오기 완료");
+    });
   styleCreate(imgNameAdd[1], dangMarketStyle.marketPostnameAddStyle);
   //게시자 강아지 이름
   styleCreate(nameAdd[0], dangMarketStyle.marketPostName);
@@ -132,14 +150,15 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   })
 
 }
-
+// id ,postImg, img, dogName, title, detail, date
 function secondHandPost(nth) {
   fetch(`http://localhost:2080/postSecondHand?nth=${nth}`)
   .then((response) => {
     return response.json();
   })
   .then((result) => {
-    return marketPostPage(result[0].id,result[0].image, result[0].img, result[0].dogName, result[0].title, result[0].detail, changeDate(result[0].date));
+    console.log(result)
+    return marketPostPage(result[0].id,result[0].img, result[0].image, result[0].dogName, result[0].title, result[0].detail, changeDate(result[0].date));
   });
 }
 

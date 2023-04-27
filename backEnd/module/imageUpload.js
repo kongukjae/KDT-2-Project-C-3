@@ -1,12 +1,26 @@
 import mysql from "mysql";
 import fs from "fs";
 import cmServer from "../commonServer.js";
-import busboyImageSave from "./imageSaveBusboy.js";
+import {SaveRequestedProfileImagewithBusboy, SaveRequestedPostBoardImagewithBusboy} from "./imageSaveBusboy.js";
 
 export default function callPostImage(request, response) {
   if(request.url.startsWith('/uploadImage')){
     console.log('업로드 시도');
-    busboyImageSave(request,response,'./image/userProfile/','.')  
+    SaveRequestedProfileImagewithBusboy(request,response,'./image/userProfile/','.')  
+    response.writeHead(200);
+    response.end();
+    
+  }
+  if(request.url === '/dangMarketImageSubmit'){
+    console.log('중고마켓 업로드 시도');
+    SaveRequestedPostBoardImagewithBusboy(request, response, './image/dangMarket/');
+    response.writeHead(200);
+    response.end();
+    
+  }
+  console.log('댕스타 이미지 업로드 시도');
+  if(request.url === '/dangStarImageSubmit'){
+    SaveRequestedPostBoardImagewithBusboy(request, response, './image/dangstar/');
     response.writeHead(200);
     response.end();
     

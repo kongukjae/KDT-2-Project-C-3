@@ -55,9 +55,14 @@ function createSecondHandList(result, count) {
   mother.appendChild(child);
   styleCreate(child, dangMarketStyle.listBox);
 
-  let listImgChild = tagCreate("div", {});
+  let listImgChild = tagCreate("img", {});
   child.appendChild(listImgChild);
   styleCreate(listImgChild, dangMarketStyle.listImg);
+  if(result.img === 'null.png'){
+    listImgChild.src = "/image/image/default/null.png"
+  }else{
+    listImgChild.src = `/image/image/dangMarket/${result.img}`
+  }
 
   let listTextChild = tagCreate("div", {});
   child.appendChild(listTextChild);

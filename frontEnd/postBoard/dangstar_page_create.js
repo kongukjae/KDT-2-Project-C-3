@@ -76,7 +76,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       // console.log(res[0].cm_detail);
       let textName;
       let cmText;
-      let src_comment_link = "../resource/MainDogImg.jpg";
+      let src_comment_link = "/image/resource/MainDogImg.jpg";
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         console.log("조건문 안쪽")

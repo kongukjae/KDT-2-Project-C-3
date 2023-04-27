@@ -11,16 +11,6 @@ export default function callLoginGet(request, response) {
     response.write(htmlBox.htmlFunc(htmlBox.loginBody));
     response.end();
   } 
-
-  
-  else if (request.url.startsWith("/resource/MainLogo")) {
-    // MainLogo.png 파일 read
-    cmServer.fileDirectory(`resource/MainLogo.png`, response);
-  } 
-  else if (request.url.startsWith("/resource/MainDog")) {
-    // MainDogImg.png 파일 read
-    cmServer.fileDirectory(`resource/MainDogImg.jpg`, response);
-  } 
   else if(request.url === "/findUserInfo"){
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/html");
