@@ -3,9 +3,10 @@
 //댓글 창 만드는 함수
 function commentWindow(index, cmtNumber, parent) {
   let cmtModal = tagCreate("div", { id: "cmtModal" });
-  console.log("index");
-  console.log(index);
-  parent.children[index + 4].appendChild(cmtModal);
+  // console.log("index");
+  // console.log(index);
+  // console.log(parent);
+  parent.children[index].appendChild(cmtModal);
   // console.log("parent : ");
   // console.log(parent);
   styleCreate(cmtModal, dangstarStyle.dangstarCommentModal);

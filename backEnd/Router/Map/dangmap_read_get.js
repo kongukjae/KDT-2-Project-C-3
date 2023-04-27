@@ -16,7 +16,7 @@ export default function dangMap(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select count(*) as count from map_tables where (addData BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()) and id = '${targetId}' order by addData desc;`,
+      `select count(*) as count from map_tables where id = '${targetId}' order by addData desc;`,
       function (err, data) {
         if (err) throw err;
         else {
@@ -26,7 +26,7 @@ export default function dangMap(request, response) {
       }
     );
     conn.query(
-      `select * from map_tables where (addData BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW()) and id = '${targetId}' order by addData desc;`,
+      `select * from map_tables where id = '${targetId}' order by addData desc;`,
       function (err, rows) {
         if (err) throw err;
         else {
