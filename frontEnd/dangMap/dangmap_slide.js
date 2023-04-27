@@ -2,7 +2,7 @@ const slide = document.getElementById("slide");
 
 const element = document.createElement("div");
 slide.appendChild(element);
-styleCreate(slide.children[0], targetStyle.menuMapSlideBar);
+styleCreate(slide.children[0], dangMapStyle.menuMapSlideBar);
 
 let sw = true;
 let move;
@@ -27,22 +27,19 @@ function slideEvent() {
 
 // 슬라이드 안쪽 구성
 const slideWrap = tagCreate("div", { id: "slideWrap" });
-styleCreate(slideWrap, {
-  display: "flex",
-  flexDirection: "row",
-})
+styleCreate(slideWrap, dangMapStyle.menuMapSlideContainer);
 slide.appendChild(slideWrap);
 // slideWrap.innerHTML = `test`;
 
 const slideWrapInnerDiv = tagCreate("div", {});
-styleCreate(slideWrapInnerDiv, targetStyle.menuMapSlideWrap);
+styleCreate(slideWrapInnerDiv, dangMapStyle.menuMapSlideWrap);
 slideWrap.appendChild(slideWrapInnerDiv);
 
 // 발자국이 찍힌 사람이 총 몇명인지 서버에서 변수로 받아와서 반복문을 돌려야 할 것으로 생각 됨
 // 임시로 최대치인 31을 넣어 둠
 for (let i = 0; i < 30; i++) {
   const slideElement = tagCreate("div", {});
-  styleCreate(slideElement, targetStyle.menuMapSlideItems);
+  styleCreate(slideElement, dangMapStyle.menuMapSlideItems);
   // slideElement.innerText = `test${i}`;
   slideWrapInnerDiv.appendChild(slideElement);
 }
@@ -52,20 +49,20 @@ for (let i = 0; i < 30; i++) {
 //슬라이드 메뉴 - 팔로우 검색 창
 const search = tagCreate("div", {});
 slide.appendChild(search);
-styleCreate(slide.children[2], targetStyle.menuMapSlideSearch)
+styleCreate(slide.children[2], dangMapStyle.menuMapSlideSearch)
 
 //팔로우 검색창 - 검색 bar
 slide.children[2].appendChild(tagCreate("input", {name: "followSearch", type: "text" }));
-styleCreate(slide.children[2].children[0], targetStyle.menuMapSlideSearchBar);
+styleCreate(slide.children[2].children[0], dangMapStyle.menuMapSlideSearchBar);
 
 //팔로우 검색창 - 검색 button
 slide.children[2].appendChild(tagCreate("div", {innerText: "search"}));
-styleCreate(slide.children[2].children[1], targetStyle.menuMapSlideSearchButton);
+styleCreate(slide.children[2].children[1], dangMapStyle.menuMapSlideSearchButton);
 
 //팔로우 ID 검색한 값 표시해줄 영역
 let searchResult = tagCreate("div", {});
 slide.appendChild(searchResult);
-styleCreate(slide.children[3], targetStyle.menuMapSlideSearchResult)
+styleCreate(slide.children[3], dangMapStyle.menuMapSlideSearchResult)
 styleCreate(slide.children[3], {display: "none"})
 
 
@@ -101,7 +98,7 @@ slide.children[2].children[1].addEventListener('click', function(){
     ${searchList}
     </select>`;
 
-    styleCreate(slide.children[3].children[0], targetStyle.menuMapSlideSearchResultList)
+    styleCreate(slide.children[3].children[0], dangMapStyle.menuMapSlideSearchResultList)
   });
 
   
@@ -200,18 +197,7 @@ let controlToggle = false;
 function makeControlBtns() {
   let controlbtnsWrap = tagCreate("div", {});
   // 버튼들의 wrap의 스타일 값
-  styleCreate(controlbtnsWrap, {
-    position: "absolute",
-    top: "-160px",
-    left: "0",
-    width: "60px",
-    height: "160px",
-    border: "1px solid black",
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    flexDirection: "column",
-  });
+  styleCreate(controlbtnsWrap, dangMapStyle.controlbtnsWrap);
 
   // 내 프로필 클릭 시 버튼's 생성 / 삭제
   slide.children[1].children[0].children[0].addEventListener("click", () => {

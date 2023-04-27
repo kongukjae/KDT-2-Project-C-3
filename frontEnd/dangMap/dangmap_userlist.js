@@ -3,20 +3,7 @@ function createUserOrgchat(test, roomName){
   let chatList = tagCreate("div", {id: 'chatList'});
   // document.body.appendChild(chatList);
   test.appendChild(chatList);
-  styleCreate(chatList, {
-    width: stylePropertyUnion.width.width250,
-    // height: stylePropertyUnion.height.height2000,
-    margin: "auto",
-    display: "none",
-    flexDirection: "column",
-    position: "absolute",
-    border: "1px solid black",
-    zIndex: '5',
-    left: "50px",
-    backgroundColor: stylePropertyUnion.colorTheme.peach,
-
-
-  });
+  styleCreate(chatList, dangMapStyle.userList);
 
   let chatChild = [];
   for (let i = 0; i < 2; i++) {
@@ -25,41 +12,24 @@ function createUserOrgchat(test, roomName){
     chatChild.push(child);
   }
   //채팅방 제목 영억
-  styleCreate(chatChild[0], {
-    ...stylePropertyUnion.flexRowCenter,
-    width: stylePropertyUnion.width.widthP100,
-    height: stylePropertyUnion.height.height40,
-    textAlign : "center"
-
-  })
+  styleCreate(chatChild[0], dangMapStyle.chatRoomTitleBox);
   
   //채팅방 이름
   let chatTitle = tagCreate("div", {});
   chatChild[0].appendChild(chatTitle);
-  styleCreate(chatTitle, {
-    width: stylePropertyUnion.width.widthP70,
-    fontWeight: stylePropertyUnion.fontWeightSet.bold
-  });
+  styleCreate(chatTitle, dangMapStyle.chatRoomTitle);
   chatTitle.innerText = roomName + "방 입니다"
 
   //채팅 참가 버튼
   let attend = tagCreate("button", {});
   chatChild[0].appendChild(attend);
-  styleCreate(attend, {
-    width: stylePropertyUnion.width.width50,
-    height: stylePropertyUnion.height.height30,
-
-  })
+  styleCreate(attend, dangMapStyle.chatJoinBtn);
   attend.innerText = "참가"
 
   
   //채팅 참여자 리스트 영역
   //chatChild[1].id = "chatList";
-  styleCreate(chatChild[1], {
-    ...stylePropertyUnion.flexColCenter,
-    width: stylePropertyUnion.width.widthP100,
-    
-  });
+  styleCreate(chatChild[1], dangMapStyle.chatPeopleListContainer);
 
   const http = new XMLHttpRequest();
   const url = `http://localhost:2080/mapChatList`;
@@ -81,40 +51,15 @@ function createUserOrgchatList(parent, userID, dogName){
 
   let box = tagCreate("div", {});
   parent.appendChild(box);
-  styleCreate(box, {
-    width: stylePropertyUnion.width.widthP95,
-    height: stylePropertyUnion.height.height52,
-    borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
-    // margin: "5px 0 5px 0",
-    marginBottom: "5px",
-    ...stylePropertyUnion.flexRowCenter,
-    color: stylePropertyUnion.colorTheme.black,
-    backgroundColor: stylePropertyUnion.colorTheme.beige,
-    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
-  });
+  styleCreate(box, dangMapStyle.chatPeopleListBox);
 
   let chatlistUserImg = tagCreate("div", {});
   box.appendChild(chatlistUserImg);
-  styleCreate(chatlistUserImg, {
-    width: stylePropertyUnion.width.width50,
-    height: "95%",
-    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
-    marginRight: "10px",
-    backgroundSize: "cover",
-    backgroundPosition: "center"
-  });
+  styleCreate(chatlistUserImg, dangMapStyle.chatlistUserImg);
 
   let chatlistBoxComponent = tagCreate("div", {});
   box.appendChild(chatlistBoxComponent);
-  styleCreate(chatlistBoxComponent, {
-    width: stylePropertyUnion.width.width150,
-    height: stylePropertyUnion.height.heightP90,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    // alignItems: "center",
-    margin: "5px"
-  });
+  styleCreate(chatlistBoxComponent, dangMapStyle.chatlistBoxComponent);
 
   // let userSapce = tagCreate("div", {})
   // chatlistBoxComponent.appendChild(userSapce);
@@ -124,24 +69,13 @@ function createUserOrgchatList(parent, userID, dogName){
 
   let chatlistUserName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistUserName);
-  styleCreate(chatlistUserName, {
-    width: stylePropertyUnion.width.width90,
-    height: stylePropertyUnion.height.heightP50,
-    fontWeight: "700",
-    // marginBottom: "5px"
-    // ...stylePropertyUnion.flexColCenter,
-  });
+  styleCreate(chatlistUserName, dangMapStyle.chatlistUserName);
   // chatlistUserName.innerText = dogName;
   chatlistUserName.innerText = userID;
 
   let chatlistDogName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistDogName);
-  styleCreate(chatlistDogName, {
-    width: stylePropertyUnion.width.width90,
-    height: stylePropertyUnion.height.heightP50,
-    fontSize: "13px"
-    // marginBottom: "3px",
-  });
+  styleCreate(chatlistDogName, dangMapStyle.chatlistDogName);
   chatlistDogName.innerText = dogName;
 
   let target = userID;
