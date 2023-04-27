@@ -1276,7 +1276,7 @@ const dangMarketStyle = {
     height: stylePropertyUnion.height.height50,
     position: "absolute",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
-    bottom: "110px",
+    bottom: "160px",
     right: "20px",
     zIndex: "2",
     borderRadius: "30px",
@@ -1949,6 +1949,32 @@ const dangfriendsStyle = {
     margin: "5px",
     fontSize: stylePropertyUnion.fontSizeSet.small,
     fontWeight: "800",
-    textAlign: "center",
+    textAlign: 'center'
   },
-};
+  friendsMoreModal: {
+    width: stylePropertyUnion.width.width120,
+    height: stylePropertyUnion.height.height126,
+    backgroundColor: stylePropertyUnion.colorTheme.white,
+    border: `3px solid ${stylePropertyUnion.colorTheme.peach}`,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    position: "absolute",
+    top: "50px",
+    left: "200px",
+    display: "none",
+    zIndex: "5",
+    ...stylePropertyUnion.flexColCenter,
+  },
+  friendsMoreModalBtn: {
+    width: stylePropertyUnion.width.widthP100,
+    height: stylePropertyUnion.height.height24,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    textAlign: "center",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow: stylePropertyUnion.defaultBoxShadow.ConBoxSdw,
+    cursor: "pointer",
+    transition: "0.5s",
+    border: `0px solid ${stylePropertyUnion.colorTheme.gray}`,
+    fontSize: stylePropertyUnion.fontSizeSet.small,
+  }
+}

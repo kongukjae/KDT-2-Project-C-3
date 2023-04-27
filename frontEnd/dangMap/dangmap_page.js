@@ -302,6 +302,8 @@ function map() {
   // 하단 메뉴
   let menuChild2 = [];
   btmMeun(rootChild[2], menuChild2);
+  const gotop = document.getElementById('goTop');
+  gotop.style.display = "none";
 
   
   //console.dir(rootChild[2]);
