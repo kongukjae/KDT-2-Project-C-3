@@ -27,6 +27,7 @@ const html = {
   },
   mapBody: `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/Home/home_weather.js"></script>
@@ -36,95 +37,108 @@ const html = {
 
   loginBody : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <div id='root'></div>
-  <script src="/script/init_user/loginPage.js"></script>`,
+  <script src="/script/frontEnd/login/login_page.js"></script>`,
   signupPage : `
   <script src="/script/common/commonFunc.js"></script>
-
-  <script src="/script/init_user/signupstyle.js"></script>`,
+  <script src="/script/common/commonStyle.js"></script>
+  <script src="/script/frontEnd/login/signup_page.js"></script>`,
   
 
   signUpResult : `
   <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/init_user/signupResultStyle.js"></script>`,
+  <script src="/script/common/commonStyle.js"></script>
+  <script src="/script/frontEnd/login/signup_page_result.js"></script>`,
   dangMap : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/dangMap/dangmap_userList.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services,clusterer"></script>
   <script src="/script/frontEnd/dangMap/dangmap_page.js"></script>
-  <script src="/script/frontEnd/dangMap/dangmap_slide.js"></script>`
-,
+  <script src="/script/frontEnd/dangMap/dangmap_slide.js"></script>`,
+
   mypage : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/mypageStyle.js"></script>`,
+  <script src="/script/frontEnd/profile/mypage_style.js"></script>`,
   yourpage : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/starCheck.js"></script>
-  <script src="/script/friends/yourpageStyle.js"></script>`,
+  <script src="/script/frontEnd/profile/userprofile_star_check.js"></script>
+  <script src="/script/frontEnd/profile/yourpage_style.js"></script>`,
   findUserInfo : `
   <script src="/script/common/commonFunc.js"></script>
-  <script src="/script/init_user/findUserInfo.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
+  <script src="/script/frontEnd/login/find_password.js"></script>
   `,
 
   // 게시글 작성 페이지
   dangWrite : `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/backEnd/router/postBoard/dangWritePagePost.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangWritePagePost.js"></script>`,
 
   //댕프렌드
   friendsList: `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/friends/friendsListPage.js"></script>`,
+  <script src="/script/frontEnd/dangfriends/dangfriends_list.js"></script>`,
 
 
   //댕댕마켓
   dangMarket:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/market/marketList.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangmarket_list.js"></script>`,
 
 
   marketpost:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/market/market-post-page.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangmarket_detail_page.js"></script>`,
 
   //댕스타그램
   postBoard: `
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/post_board/commentUpdateDelete.js"></script>
-  <script src="/script/post_board/commentRecent.js"></script>
-  <script src="/script/post_board/commentInput.js"></script>
-  <script src="/script/post_board/commentWindow.js"></script>
-  <script src="/script/post_board/dangstarLike.js"></script>
-  <script src="/script/post_board/postCreate.js"></script>
-  <script src="/script/post_board/dangstargram.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_update_delete_btn.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_recent.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_input.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_window.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_like.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_create.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page.js"></script>`,
 
 
   dangTalkMain:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/dangtalk/chattingRoomMain.js"></script>`,
+  <script src="/script/frontEnd/dangtalk/dangtalk_room.js"></script>`,
 
   dangTalkList:`
   <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/dangtalk/dangtalk_list.js"></script>`
+  <script src="/script/frontEnd/dangtalk/dangtalk_list.js"></script>`
 }
 export default html;

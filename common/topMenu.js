@@ -104,7 +104,7 @@ function topMenu(rootChild){
   styleCreate(closeButton, {
     width: "30px",
     height: "30px",
-    backgroundColor: pageStyle.colorTheme.peach,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: "50%",
     position: "absolute",
     top: "20px",

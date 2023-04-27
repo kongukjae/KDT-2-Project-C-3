@@ -1,22 +1,8 @@
-
 function createUserOrgchat(test, roomName){
   let chatList = tagCreate("div", {id: 'chatList'});
   // document.body.appendChild(chatList);
   test.appendChild(chatList);
-  styleCreate(chatList, {
-    width: pageStyle.width.width250,
-    // height: pageStyle.height.height2000,
-    margin: "auto",
-    display: "none",
-    flexDirection: "column",
-    position: "absolute",
-    border: "1px solid black",
-    zIndex: '5',
-    left: "50px",
-    backgroundColor: pageStyle.colorTheme.peach,
-
-
-  });
+  styleCreate(chatList, dangMapStyle.userList);
 
   let chatChild = [];
   for (let i = 0; i < 2; i++) {
@@ -25,41 +11,24 @@ function createUserOrgchat(test, roomName){
     chatChild.push(child);
   }
   //채팅방 제목 영억
-  styleCreate(chatChild[0], {
-    ...pageStyle.flexRowCenter,
-    width: pageStyle.width.widthP100,
-    height: pageStyle.height.height40,
-    textAlign : "center"
-
-  })
+  styleCreate(chatChild[0], dangMapStyle.chatRoomTitleBox);
   
   //채팅방 이름
   let chatTitle = tagCreate("div", {});
   chatChild[0].appendChild(chatTitle);
-  styleCreate(chatTitle, {
-    width: pageStyle.width.widthP70,
-    fontWeight: pageStyle.fontWeightSet.bold
-  });
+  styleCreate(chatTitle, dangMapStyle.chatRoomTitle);
   chatTitle.innerText = roomName + "방 입니다"
 
   //채팅 참가 버튼
   let attend = tagCreate("button", {});
   chatChild[0].appendChild(attend);
-  styleCreate(attend, {
-    width: pageStyle.width.width50,
-    height: pageStyle.height.height30,
-
-  })
+  styleCreate(attend, dangMapStyle.chatJoinBtn);
   attend.innerText = "참가"
 
   
   //채팅 참여자 리스트 영역
   //chatChild[1].id = "chatList";
-  styleCreate(chatChild[1], {
-    ...pageStyle.flexColCenter,
-    width: pageStyle.width.widthP100,
-    
-  });
+  styleCreate(chatChild[1], dangMapStyle.chatPeopleListContainer);
 
   const http = new XMLHttpRequest();
   const url = `http://localhost:2080/mapChatList`;
@@ -81,40 +50,15 @@ function createUserOrgchatList(parent, userID, dogName){
 
   let box = tagCreate("div", {});
   parent.appendChild(box);
-  styleCreate(box, {
-    width: pageStyle.width.widthP95,
-    height: pageStyle.height.height52,
-    borderRadius: pageStyle.borderRadius.borderRadius9,
-    // margin: "5px 0 5px 0",
-    marginBottom: "5px",
-    ...pageStyle.flexRowCenter,
-    color: pageStyle.colorTheme.black,
-    backgroundColor: pageStyle.colorTheme.beige,
-    boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
-  });
+  styleCreate(box, dangMapStyle.chatPeopleListBox);
 
   let chatlistUserImg = tagCreate("div", {});
   box.appendChild(chatlistUserImg);
-  styleCreate(chatlistUserImg, {
-    width: pageStyle.width.width50,
-    height: "95%",
-    borderRadius: pageStyle.borderRadius.borderRadiusP50,
-    marginRight: "10px",
-    backgroundSize: "cover",
-    backgroundPosition: "center"
-  });
+  styleCreate(chatlistUserImg, dangMapStyle.chatlistUserImg);
 
   let chatlistBoxComponent = tagCreate("div", {});
   box.appendChild(chatlistBoxComponent);
-  styleCreate(chatlistBoxComponent, {
-    width: pageStyle.width.width150,
-    height: pageStyle.height.heightP90,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    // alignItems: "center",
-    margin: "5px"
-  });
+  styleCreate(chatlistBoxComponent, dangMapStyle.chatlistBoxComponent);
 
   // let userSapce = tagCreate("div", {})
   // chatlistBoxComponent.appendChild(userSapce);
@@ -124,24 +68,13 @@ function createUserOrgchatList(parent, userID, dogName){
 
   let chatlistUserName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistUserName);
-  styleCreate(chatlistUserName, {
-    width: pageStyle.width.width90,
-    height: pageStyle.height.heightP50,
-    fontWeight: "700",
-    // marginBottom: "5px"
-    // ...pageStyle.flexColCenter,
-  });
+  styleCreate(chatlistUserName, dangMapStyle.chatlistUserName);
   // chatlistUserName.innerText = dogName;
   chatlistUserName.innerText = userID;
 
   let chatlistDogName = tagCreate("div", {});
   chatlistBoxComponent.appendChild(chatlistDogName);
-  styleCreate(chatlistDogName, {
-    width: pageStyle.width.width90,
-    height: pageStyle.height.heightP50,
-    fontSize: "13px"
-    // marginBottom: "3px",
-  });
+  styleCreate(chatlistDogName, dangMapStyle.chatlistDogName);
   chatlistDogName.innerText = dogName;
 
   let target = userID;

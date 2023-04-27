@@ -1,18 +1,18 @@
 function main(){
   let root = tagCreate("div",{id:"root"});
   document.body.appendChild(root);
-  styleCreate(root,targetStyle.signUpMain)
+  styleCreate(root,signupPageStyle.signUpMain)
   let wrap = tagCreate("div",{id : "wrap"});
-  styleCreate(wrap,targetStyle.signUpContainer)
+  styleCreate(wrap,signupPageStyle.signUpContainer)
   root.appendChild(wrap);
   let rootChild = [];
   for(let i = 0;i<8;i++){
     let child = tagCreate("div",{});
-    styleCreate(child,targetStyle.signUpListBox);
+    styleCreate(child,signupPageStyle.signUpListBox);
     wrap.appendChild(child);
     rootChild.push(child);
   }
-  styleCreate(rootChild[0],targetStyle.signUpTitle)
+  styleCreate(rootChild[0],signupPageStyle.signUpTitle)
   rootChild[1].innerHTML = `<input type="text" id="idValueCheck" name="signUpId" placeholder="아이디를 입력하세요" form="signUpForm">`
   ;
   rootChild[2].innerHTML = `<input type="text" name="signUpPW" placeholder="비밀번호를 입력하세요" form="signUpForm">`;
@@ -33,9 +33,9 @@ function main(){
   </select>`;
   rootChild[7].innerHTML = `<div>제출</div>`
   for(let i = 2;i<8;i++){
-    styleCreate(rootChild[i].children[0],targetStyle.signUpListWithoutID)
+    styleCreate(rootChild[i].children[0],signupPageStyle.signUpListWithoutID)
   }
-  styleCreate(rootChild[1].children[0],targetStyle.signUpListID)
+  styleCreate(rootChild[1].children[0],signupPageStyle.signUpListID)
   let postForm = document.createElement("form");
   rootChild[7].appendChild(postForm);
   postForm.action = "/signUpResult";
@@ -69,7 +69,7 @@ function main(){
   })
   rootChild[0].innerText = "회원가입";
   let dupCheck =  tagCreate("div",{});
-  styleCreate(dupCheck,targetStyle.signUpDupCheck)
+  styleCreate(dupCheck,signupPageStyle.signUpDupCheck)
   rootChild[1].appendChild(dupCheck);
   dupCheck.innerText = "중복확인";
   for(let i = 1; i < 7; i++){
@@ -87,11 +87,11 @@ function main(){
 
   function dupCheckResultModalWindow(value){
     let dupCheckResultModal =  tagCreate("div",{});
-    styleCreate(dupCheckResultModal,targetStyle.signUpDupCheckModal)
+    styleCreate(dupCheckResultModal,signupPageStyle.signUpDupCheckModal)
     dupCheckResultModal.innerText = value
     wrap.appendChild(dupCheckResultModal);
     let okaybutton = tagCreate("div",{})
-    styleCreate(okaybutton,targetStyle.signUpOKBtn)
+    styleCreate(okaybutton,signupPageStyle.signUpOKBtn)
     dupCheckResultModal.appendChild(okaybutton);
     okaybutton.innerText = "닫기";
     okaybutton.addEventListener("click",()=>{
