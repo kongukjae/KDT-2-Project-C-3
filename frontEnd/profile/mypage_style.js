@@ -93,8 +93,6 @@ function myPage(){
     reader.addEventListener("load",()=>{
       rootChild[2].style.backgroundImage = `url(${reader.result})`
     })
-
-    
     
     submitbutton.addEventListener("click",()=>{
       reader.readAsDataURL(myImage.files[0])
