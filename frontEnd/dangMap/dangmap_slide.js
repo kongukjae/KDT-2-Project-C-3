@@ -230,10 +230,20 @@ function makeControlBtns() {
     let controlbtns = tagCreate("button", {});
     if (i === 1) {
       controlbtns.innerText = "추가";
+      controlbtns.addEventListener("click", () => {
+        controlbtns.style.backgroundColor = "green";
+      });
+
     } else if (i === 2) {
       controlbtns.innerText = "수정";
+      controlbtns.addEventListener("click", () => {
+        controlbtns.style.backgroundColor = "yellow";
+      });
     } else {
       controlbtns.innerText = "삭제";
+      controlbtns.addEventListener("click", () => {
+        controlbtns.style.backgroundColor = "red";
+      });
     }
     // 버튼들의 스타일 값
     styleCreate(controlbtns, {
