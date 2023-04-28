@@ -1889,6 +1889,8 @@ const dangfriendsStyle = {
   friendsWrapArea: {
     ...stylePropertyUnion.flexColCenter,
     width: stylePropertyUnion.width.widthP100,
+    minHeight: "calc(100vh - 216px)",
+    marginBottom: "90px",
   },
   starFriendsArea: {
     ...stylePropertyUnion.flexColCenter,
