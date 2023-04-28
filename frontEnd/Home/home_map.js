@@ -5,6 +5,8 @@ let mapContainer = document.getElementById("map"), // 지도를 표시할 div
     mapTypeId: kakao.maps.MapTypeId.ROADMAP, // 지도종류
   };
 
+
+
 mapContainer.addEventListener("wheel", function (e) {
   // 지도 위에서 휠 이벤트가 발생했을 때
   e.preventDefault();
