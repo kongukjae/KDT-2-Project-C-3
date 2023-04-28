@@ -72,16 +72,20 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     xhr.addEventListener('load', function() {
       let res = JSON.parse(xhr.response);
       console.log(res);
+      console.log("res res res res res");
       // console.log(res[0]);
       // console.log(res[0].cm_detail);
       let textName;
       let cmText;
-      let src_comment_link = "/image/resource/MainDogImg.jpg";
+      let src_comment_link;
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         // console.log("조건문 안쪽")
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
+        src_comment_link = res[0].image;
+        console.log(src_comment_link)
+        console.log(src_comment_link.toString())
         
         //최신 댓글 1개 보여주는 함수 실행
         commentRecent(postWrap, src_comment_link, textName, cmText);
