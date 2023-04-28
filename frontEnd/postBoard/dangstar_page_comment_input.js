@@ -41,6 +41,4 @@ function commentInput(postWrap, src_comment_link, textName, cmText, index, postI
     })
   })
 
-  // 최신 댓글 1개 보여주는 함수 실행
-  // commentRecent(postWrap, src_comment_link, textName, cmText);
 }
