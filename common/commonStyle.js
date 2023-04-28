@@ -443,6 +443,7 @@ const dangMapStyle = {
     height: stylePropertyUnion.height.height30,
     borderRadius: "15px",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
+    marginTop: "5px",
     position: "relative",
     left: "210px",
     color: stylePropertyUnion.colorTheme.white,
@@ -477,8 +478,9 @@ const dangMapStyle = {
   menuMapSearchButton: {
     width: stylePropertyUnion.width.width80,
     height: stylePropertyUnion.height.height30,
-    borderRadius: "15px",
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
     backgroundColor: stylePropertyUnion.colorTheme.peach,
+    marginTop: "5px",
     position: "relative",
     left: "210px",
     color: stylePropertyUnion.colorTheme.white,
