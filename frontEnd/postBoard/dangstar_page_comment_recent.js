@@ -36,6 +36,24 @@ function commentRecent(postWrap, src_comment_link, textName, cmText){
   styleCreate(commentViewContent, dangstarStyle.dangstarRecentCommentTextBox);
   commentViewContentWrap.appendChild(commentViewContent);
 
-  commentUpdateDelete(commentViewWrap)
+  userCheck().then((userID) => {
+    if (textName === userID) {
+      commentUpdateDelete(commentViewWrap);
+    }
+  });
+}
 
+// 접속한 유저가 작성한 댓글인지 판단하는 함수
+function userCheck() {
+  return new Promise((resolve, reject) => {
+    let userIDSend = document.cookie.split("jwt=")[1];
+    console.log("comment userID: " + userIDSend);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `http://localhost:2080/userCheck`);
+    xhr.send(`userID=${userIDSend}`);
+    xhr.addEventListener('load', () => {
+      let userID = JSON.parse(xhr.response);
+      resolve(userID);
+    });
+  });
 }
