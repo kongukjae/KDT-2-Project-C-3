@@ -31,6 +31,10 @@ export default function dangMap(request, response) {
               const targetIdFromServer = '${requestId}';
               const dogNameFromServer = '${rows[0].dogName}';
               const dogGenderFromServer = '${rows[0].dogGender}';
+              const introFromServer = '${rows[0].intro}';
+              const dogsizeFromServer = '${rows[0].dogsize}';
+              const dogageFromServer = '${rows[0].dogage}';
+
             </script>`);
             response.write(htmlBox.htmlFunc(htmlBox.mypage));
             response.end();
@@ -48,6 +52,9 @@ export default function dangMap(request, response) {
               const targetIdFromServer = '${target}';
               const dogNameFromServer = '${rows[0].dogName}';
               const dogGenderFromServer = '${rows[0].dogGender}';
+              const introFromServer = '${rows[0].intro}';
+              const dogsizeFromServer = '${rows[0].dogsize}';
+              const dogageFromServer = '${rows[0].dogage}';
             </script>`);
             response.write(htmlBox.htmlFunc(htmlBox.yourpage));
             response.end();
@@ -135,6 +142,42 @@ export default function dangMap(request, response) {
               response.end('no');
             }
         }}
+      );
+      connection.end();
+    })
+    
+  }
+  if (request.url === "/userinfoUpdate"){
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+    });
+    request.on("end", function () {
+      let result = JSON.parse(body)
+      console.log(result)
+      let myId = JWT.jwtCheck(result.jwt).id;
+      console.log(myId)
+      if(result.dogName === ''){
+        result.dogName = result.originDogName
+      }
+      if(result.intro === ''){
+        result.intro = 'null';
+      }
+      if(result.dogage === ''){
+        result.dogage='null';
+      }
+      console.log(result)
+      let connection = mysql.createConnection(cmServer.mysqlInfo);
+      connection.connect();
+      connection.query(
+        `UPDATE userinfo SET dogName = '${result.dogName}', dogGender=${result.dogGender}, intro = '${result.intro}', dogsize = ${result.dogsize}, dogage = ${result.dogage} WHERE id = '${myId}'`,
+        (error, rows, fields) => {
+          if (error) throw error;
+          else {
+            response.writeHead(200);
+            response.end();
+          }
+        }
       );
       connection.end();
     })

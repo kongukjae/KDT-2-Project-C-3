@@ -96,21 +96,42 @@ function yourPage(){
 
 
   styleCreate(rootChild[4], mypageStyle.mypageUserinfoBox)
-  for(let i = 0; i < 5;i++){
+  for(let i = 0; i < 7;i++){
     let infoTag = tagCreate("div");
     styleCreate(infoTag, mypageStyle.mypageUserinfoBoxInnerStyle)
     rootChild[4].appendChild(infoTag)
   }
   rootChild[4].children[0].innerText = `강아지 이름 : ${dogNameFromServer}`
-  rootChild[4].children[1].innerText = "나이"
-  if(dogGenderFromServer === '1'){
-    rootChild[4].children[2].innerText = "성별 : 남자"
+  if(dogageFromServer === 'null'){
+    rootChild[4].children[1].innerText = `나이 : 나이 정보가 없습니다`
   }else{
-    rootChild[4].children[2].innerText = "성별 : 여자"
+    rootChild[4].children[1].innerText = `나이 : ${dogageFromServer}`
   }
-  rootChild[4].children[3].innerText = "소개글"
+  if(dogsizeFromServer === 'null'){
+    rootChild[4].children[2].innerText = `강아지 크기 : 강아지 크기정보가 없습니다`
+  }else if(dogsizeFromServer === '1'){
+    rootChild[4].children[2].innerText = `강아지 크기 : 소형견`
+  }else if(dogsizeFromServer === '2'){
+    rootChild[4].children[2].innerText = `강아지 크기 : 중형견`
+  }else if(dogsizeFromServer === '3'){
+    rootChild[4].children[2].innerText = `강아지 크기 : 대형견`
+  }
+  
 
+  rootChild[4].children[3].innerText = `산책온도 :`
+  if(dogGenderFromServer === '1'){
+    rootChild[4].children[4].innerText = "성별 : 남자"
+  }else{
+    rootChild[4].children[4].innerText = "성별 : 여자"
+  }
+  if(introFromServer === 'null'){
+    rootChild[4].children[6].innerText = '소개글이 없습니다'
+  }else{
+    rootChild[4].children[6].innerText = introFromServer;
+  }
+  rootChild[4].children[5].innerText = `소개글`
 
+  rootChild[4].style.height = '400px'
   styleCreate(rootChild[4].lastChild, mypageStyle.mypageUserinfoBoxSelfIntroduce)
 
   styleCreate(rootChild[5], mypageStyle.mypageCalender)
