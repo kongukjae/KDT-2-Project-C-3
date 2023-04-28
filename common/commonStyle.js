@@ -1826,6 +1826,8 @@ const dangstarStyle = {
     overflow: "hidden",
     marginRight: "10px",
     position: "relative",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   dangstarRecentCommentProfileImg: {
     height: stylePropertyUnion.height.heightP100,
