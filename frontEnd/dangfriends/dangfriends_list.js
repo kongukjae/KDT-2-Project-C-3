@@ -10,7 +10,7 @@ for (let i = 0; i < 3; i++) {
 }
 
 //댕프렌드 리스트 자리
-styleCreate(rootChild[1], dangfriendsStyle.listArea)
+styleCreate(rootChild[1], dangfriendsStyle.friendsWrapArea)
 
 //즐겨찾기한 팔로우 자리
 let starFriends = tagCreate("div", {id:"star"});
