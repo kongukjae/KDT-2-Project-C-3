@@ -212,15 +212,31 @@ function makeControlBtns() {
   });
 
   // 3개의 버튼을 만들기 위한 반복문
+
+  window.handleClickAdd = function() {
+    console.log("추가 버튼이 클릭되었습니다.");
+  };
+  
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
+  
     if (i === 1) {
       controlbtns.innerText = "추가";
+      controlbtns.addEventListener("click", window.handleClickAdd);
     } else if (i === 2) {
       controlbtns.innerText = "수정";
+      controlbtns.addEventListener("click", () => {
+        console.log("수정 버튼이 클릭되었습니다.");
+      });
     } else {
       controlbtns.innerText = "삭제";
+      controlbtns.addEventListener("click", () => {
+        console.log("삭제 버튼이 클릭되었습니다.");
+      });
     }
+  
+    // 나머지 코드 생략...
+  
     // 버튼들의 스타일 값
     styleCreate(controlbtns, {
       width: "50px",
@@ -231,6 +247,7 @@ function makeControlBtns() {
     controlbtnsWrap.appendChild(controlbtns);
   }
 }
+
 
 function testFunc(){
   console.log("test함수 진입함");

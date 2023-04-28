@@ -439,7 +439,7 @@ searchBar.addEventListener("keydown", (e) => {
     // console.log(markersDateCount);
   }
 
-  async function getMarkersObject(){ 
+  window.getMarkersObject=async function getMarkersObject(){ 
     await allMarker(allAddMarker,3)
     await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,2)
@@ -539,22 +539,23 @@ console.log(markersObject.markers[Object.keys]);
 //       markersObject.markers[key][1][j][0].setMap(null);
 //   }
 // }
-let target = [];
-for(let i in markersObject.markers){
-  if(markersObject.markers[i][0] === 3){
-    console.log(markersObject.markers[i][1]);
-    for(let j of markersObject.markers[i][1]){
-      target.push(j[0])
+window.handleClickAdd = function() {
+  let target = [];
+  for(let i in markersObject.markers){
+    if(markersObject.markers[i][0] === 3){
+      console.log(markersObject.markers[i][1]);
+      for(let j of markersObject.markers[i][1]){
+        target.push(j[0])
+      }
     }
   }
-  
-}
-// clusterer.removeMarkers(target);
-// clusterer.addMarkers(target);
-clusterer.clear(); //사라짐
-for(let i of target){
-  i.setMap(map);
-}
+  // clusterer.removeMarkers(target);
+  // clusterer.addMarkers(target);
+  clusterer.clear(); //사라짐
+  for(let i of target){
+    i.setMap(map);
+  }
+};
 // clusterer.redraw();
 //marker -> 내 발자국만 띄우고
 // 수정 끝나면 
