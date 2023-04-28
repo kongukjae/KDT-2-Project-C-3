@@ -29,23 +29,33 @@ async function getWeatherAsync() {
   result.push(temp.response.body.items.item[4].fcstValue);
   if (sky.response.body.items.item[8].fcstValue < 6) {
     result.push("맑음");
+    weatherIcon.src = "/image/graphic/clear.png";
   } else if (sky.response.body.items.item[8].fcstValue < 9) {
     result.push("구름많음");
+    weatherIcon.src = "/image/graphic/cloud.png";
   } else {
     result.push("흐림");
+    weatherIcon.src = "/image/graphic/lotsofcloud.png";
   }
 
   switch (rainOrSnow.response.body.items.item[6].fcstValue) {
-    case "0": result.push("")
+    case "0": 
+      result.push("")
     break;
     case "1":
-    case "5": result.push("비")
+    case "5": 
+      result.push("비")
+      weatherIcon.src = "/image/graphic/rain.png";
     break;
     case "3":
-    case "7": result.push("눈")
+    case "7": 
+      result.push("눈")
+      weatherIcon.src = "/image/graphic/snow.png";
     break;
     case "2": 
-    case "6": result.push("비 또는 눈")
+    case "6": 
+      result.push("비 또는 눈");
+      weatherIcon.src = "/image/graphic/rainorsnow.png";
     break;
   }
   console.log(rainOrSnow.response.body.items.item[6].fcstValue);
