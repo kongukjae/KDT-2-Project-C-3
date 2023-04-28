@@ -11,7 +11,7 @@ function topMenu(rootChild){
   const logoLoginPage = tagCreate('img', '');
   logoLoginPage.style.width = '28%';
   logoLoginPage.style.cursor = 'pointer'
-  logoLoginPage.src = './resource/MainLogo.png';
+  logoLoginPage.src = '/image/resource/MainLogo.png';
   rootChild.appendChild(logoLoginPage);
 
   logoLoginPage.addEventListener('click',()=>{

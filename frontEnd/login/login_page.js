@@ -9,7 +9,7 @@ rootLoginPage.appendChild(logoLoginPageWaper);
 
 const logoLoginPage = tagCreate('img', '');
 styleCreate(logoLoginPage, loginStyle.loginPageLogo);
-logoLoginPage.src = './resource/MainLogo.png';
+logoLoginPage.src = '/image/resource/MainLogo.png';
 logoLoginPageWaper.appendChild(logoLoginPage);
 
 // 로그인 페이지 이미지 요소 생성
@@ -19,7 +19,7 @@ styleCreate(imgLoginPageWrapper, loginStyle.loginPageImgWarp);
 rootLoginPage.appendChild(imgLoginPageWrapper);
 const imgLoginPage = tagCreate('img', '');
 styleCreate(imgLoginPage, loginStyle.loginPageImg);
-imgLoginPage.src = './resource/MainDogImg.jpg';
+imgLoginPage.src = '/image/resource/MainDogImg.jpg';
 imgLoginPage.alt = '로그인 페이지 이미지';
 imgLoginPageWrapper.appendChild(imgLoginPage);
 
