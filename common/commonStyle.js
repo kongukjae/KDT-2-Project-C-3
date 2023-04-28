@@ -46,6 +46,7 @@ const stylePropertyUnion = {
     width40: "40px",
     width30: "30px",
     width25: "25px",
+    width20: "20px",
     width15: "15px",
     width9: "9px",
     width3: "3px",
@@ -202,6 +203,40 @@ const targetStyle = {
     width: stylePropertyUnion.width.width40,
     height: stylePropertyUnion.height.height40,
     cursor:'pointer'
+  },
+  alarmWindStyle: {
+    width: stylePropertyUnion.width.width450,
+    minHeight: "calc(100vh - 750px)",
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    border: `3px outset ${stylePropertyUnion.colorTheme.gray}`,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    position: 'absolute',
+    top: "90%",
+    left: "25px",
+    zIndex: "3"
+  },
+  alarmListStyle: {
+    width: stylePropertyUnion.width.widthP95,
+    height: stylePropertyUnion.height.height50,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
+    margin: "10px 0 0 10px"
+  },
+  alarmClose: {
+    width: stylePropertyUnion.width.width20,
+    height: stylePropertyUnion.height.height25,
+    backgroundColor: stylePropertyUnion.colorTheme.white,
+    position: "absolute",
+    top: "5px",
+    right: "10px",
+    border: "0px",
+    appearance: "none",
+    borderRadius: "4px",
+    boxShadow:
+      "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    cursor: "pointer",
+    transition: "0.5s",
+    fontWeight: stylePropertyUnion.fontWeightSet.bold
   },
   mainRoot: {
     width: stylePropertyUnion.width.width500,

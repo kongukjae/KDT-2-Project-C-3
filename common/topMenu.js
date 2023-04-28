@@ -25,25 +25,50 @@ function topMenu(rootChild){
     ...stylePropertyUnion.flexRowCenter,
     position: 'absolute',
     left: "85%"
-
-
   })
+
   let alarmImg = tagCreate('img', {})
   alarmImg.src = '/image/resource/alarm.png';
   styleCreate(alarmImg, targetStyle.alarmStyle)
   alarmWrap.appendChild(alarmImg);
 
-  alarmWindow(alarmImg);
+  //알림버튼 클릭 시 나올 모달창
+  let alarmWind = tagCreate('div', {});
+  styleCreate(alarmWind, targetStyle.alarmWindStyle);
 
-}
-
-
-function alarmWindow(alarmImg){
-  alarmImg.addEventListener('click', () => {
-    console.log("aaaaaaaaaa")
+  //닫기 버튼 영역
+  let closeArea = tagCreate('div', {})
+  alarmWind.appendChild(closeArea);
+  styleCreate(closeArea, {
+    width: stylePropertyUnion.width.widthP100,
+    height: stylePropertyUnion.height.height30
   })
 
+  let closeBtn = tagCreate("button", {});
+  closeArea.appendChild(closeBtn);
+  styleCreate(closeBtn, targetStyle.alarmClose);
+  closeBtn.innerText = "X";
+
+  //모달창에 알림 리스트 영역
+  let alarmList = tagCreate('div', {});
+  styleCreate(alarmList, targetStyle.alarmListStyle);
+  alarmWind.appendChild(alarmList);
+
+
+  alarmImg.addEventListener('click', () => {
+    rootChild.appendChild(alarmWind);
+
+    console.log("aaaaaaaaaa")
+  })
+  
+  closeBtn.addEventListener('click', () => {
+    rootChild.removeChild(alarmWind);
+
+  })
+  
 }
+
+
 
    // ----햄버거 버튼 구역입니다.----
 
