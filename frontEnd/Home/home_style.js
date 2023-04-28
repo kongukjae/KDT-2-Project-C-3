@@ -17,7 +17,6 @@ function main() {
 
   //날씨 메뉴 commonFunc로 이동
   styleCreate(rootChild[1], targetStyle.mainWeatherBanner);
-  rootChild[1].innerText = "날씨 정보를 불러오는 중입니다...";
   styleCreate(rootChild[2], targetStyle.mainMap);
   styleCreate(rootChild[3], targetStyle.mainSlideWrap);
   styleCreate(rootChild[4], targetStyle.mainFindingDogs);
@@ -171,5 +170,5 @@ async function getWeatherAsync() {
   return result;
 }
 
-getWeatherAsync()
 */
+getWeatherAsync();
