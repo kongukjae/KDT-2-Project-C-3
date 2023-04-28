@@ -119,6 +119,34 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
     justifyContent: "end",
   });
 
+  chatBtn.addEventListener('click',()=>{
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    
+    fetch('http://localhost:2080/createChatRoomRequest', {
+      method: 'POST',
+      body: JSON.stringify({jwt:jwt,targetId:id})
+    }).then((result)=>{
+      console.log(result);
+      let chatBoxForm = document.createElement('form');
+      chatBoxForm.method = "POST"
+      chatBoxForm.action = "/dangTalkChatRoom";
+      let params = {jwt:jwt, targetId:id};
+      for(let key in params){
+        let hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type","hidden");
+        hiddenField.setAttribute("name",key);
+        hiddenField.setAttribute("value",params[key]);
+        chatBoxForm.appendChild(hiddenField);
+      }
+      document.body.appendChild(chatBoxForm);
+      chatBoxForm.submit();
+    })
+  })
+
+
   // 버튼을 모달창에 추가
   const modalContent = document.createElement("div");
   modalContent.classList.add("modal-content");
