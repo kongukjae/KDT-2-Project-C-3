@@ -967,13 +967,20 @@ const mypageStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.whiteTypeC,
   },
   mypageCalender: {
-    width: stylePropertyUnion.width.widthP90,
+    width: stylePropertyUnion.width.width450,
     height: stylePropertyUnion.height.height450,
     backgroundColor: stylePropertyUnion.colorTheme.whiteTypeB,
     marginTop: "40px",
     position: "relative",
     borderRadius: "10px",
     ...stylePropertyUnion.flexRowCenter,
+  },
+  mypageCalenderTable: {
+    width: stylePropertyUnion.width.width450,
+    height: stylePropertyUnion.height.height450,
+    backgroundColor: stylePropertyUnion.colorTheme.beigeTypeB,
+    border: '1px solid red',
+    position: "relative",
   },
   mypageUploadModal: {
     width: stylePropertyUnion.width.width300,
