@@ -36,26 +36,24 @@ function commentRecent(postWrap, src_comment_link, textName, cmText){
   styleCreate(commentViewContent, dangstarStyle.dangstarRecentCommentTextBox);
   commentViewContentWrap.appendChild(commentViewContent);
 
-  userCheck();
-  // if(textName === userID) {
-    commentUpdateDelete(commentViewWrap)
-  // }
-
+  userCheck().then((userID) => {
+    if (textName === userID) {
+      commentUpdateDelete(commentViewWrap);
+    }
+  });
 }
 
-// 댓글 DB를 날려서 호출이 안됨
-// 댓글 recent 주석 처리된거 임시로 해제하고 실험 할 것
+// 접속한 유저가 작성한 댓글인지 판단하는 함수
 function userCheck() {
-  console.log("체크 함수 들어옴")
-  let userIDSend = document.cookie.split("jwt=")[1];
-  console.log("comment userID: " + userID);
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://localhost:2080/userCheck`);
-  xhr.send(`userID=${userIDSend}`)
-  xhr.addEventListener('load', () => {
-    console.log("데이터 체크 응답 옴")
-    let res = JSON.parse(xhr.response);
-    console.log("res res res res res");
-    console.log(res);
-  })
+  return new Promise((resolve, reject) => {
+    let userIDSend = document.cookie.split("jwt=")[1];
+    console.log("comment userID: " + userIDSend);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `http://localhost:2080/userCheck`);
+    xhr.send(`userID=${userIDSend}`);
+    xhr.addEventListener('load', () => {
+      let userID = JSON.parse(xhr.response);
+      resolve(userID);
+    });
+  });
 }
