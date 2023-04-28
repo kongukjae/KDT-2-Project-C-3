@@ -25,6 +25,8 @@ function main() {
   // 하단 메뉴바 common.js
 
   btmMeun(rootChild[5]);
+  const gotop = document.getElementById('goTop');
+  gotop.style.display = "none";
 
 
   let slideCover = tagCreate("div", {});

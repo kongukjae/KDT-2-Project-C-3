@@ -1892,8 +1892,9 @@ const dangfriendsStyle = {
     position: "relative",
   },
   friendsWrapArea: {
-    ...stylePropertyUnion.flexColCenter,
+    ...stylePropertyUnion.flexColumnTopCenter,
     width: stylePropertyUnion.width.widthP100,
+    minHeight: "calc(100vh - 216px)",
   },
   starFriendsArea: {
     ...stylePropertyUnion.flexColCenter,
