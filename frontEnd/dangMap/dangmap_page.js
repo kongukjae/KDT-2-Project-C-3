@@ -442,35 +442,117 @@ function map() {
     console.log('// --------------------여기확인용----------------------')
  //!for문을 돌려서 나 삭제하기 - 나를 삭제할때 필요하다.
 
-//  console.log(markersObject.markers[markersObject.userid][1][0]);
+  console.log(markersObject.markers[markersObject.userid][1]);
     console.log(markersObject.markers[markersObject.userid][1][0][0]);
 //     console.log(markersObject.markers[markersObject.userid][1][0][0][0]);
 
  console.log(markersObject)
- console.log(markersObject.markers)
-//  console.log(markersObject.markers[key][0])
+ console.log(markersObject.markers['asdasd123'][0])
+ console.log(markersObject.markers['qwer123'][0])
+ console.log(markersObject.markers['euni123'][0])
 
+ // 모든 마커에 해당하는 키값을 조회할수있다.
+ const markerIds = Object.keys(markersObject.markers);
+markerIds.forEach((markerId) => {
+  const marker = markersObject.markers[markerId];
+  
+  if (marker && marker.value && Array.isArray(marker.value) && marker.value.length > 0) {
+    const value0 = marker.value[0];
+    if (value0 === 0 || value0 === 1 || value0 === 2) {
+      marker.setMap(null);
+    }
+  }
+});
  console.log(markersObject.markers['asdasd1234'][1][0][0])
 // markersObject.markers['asdasd1234'][1][0][0].setMap(null);
 
 // markersObject.markers[markersObject.userid][1][0][0].setMap(null);
 
 
-    let cnt = 0;
-    setInterval(() => {
-      if(cnt%2===0){
-        // null값을 먹여서 해당값을 없앤다.
-        markersObject.markers['asdasd1234'][1][0][0].setMap(null);
-      }else{
-        // setMap(map)값은 해당값을 나타나게 한다.
-        markersObject.markers['asdasd1234'][1][0][0].setMap(map);
-      }
-      cnt ++;  
-    }, 1000);
+// const userMarkers = markersObject.markers[markersObject.userid];
+
+// if (userMarkers && Array.isArray(userMarkers[1])) {
+//   for (let i = 0; i < userMarkers[1].length; i++) {
+//     const markerObject = userMarkers[1][i];
+//     if (markerObject && Array.isArray(markerObject) && markerObject.length > 0) {
+//       const marker = markerObject[0];
+//       marker.setMap(null);
+//     }
+//   }
+// }
+
+console.log(markersObject.markers);
+
+console.log(markersObject.markers[Object.keys]);
 
 
 
 
+console.log(markersObject.markers[Object.keys(markersObject.markers)[0]]); // 나
+console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
+console.log(markersObject.markers[Object.keys(markersObject.markers)[2]]); // 다른넘
+console.log(markersObject.markers[Object.keys(markersObject.markers)[3]]); // 다른넘
+console.log(markersObject.markers[Object.keys(markersObject.markers)[4]]); // 다른넘
+console.log(markersObject.markers[Object.keys(markersObject.markers)[5]]); // 다른넘
+
+console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][1][0]])
+
+for (let i = 0; i < 5; i++) {
+  const key = Object.keys(markersObject.markers)[i];
+  for (let j = 0; j < 10; j++) {
+      markersObject.markers[key][1][j][0].setMap(null);
+  }
+}
+
+
+// const firstKey = Object.keys(markersObject.markers)[0];
+
+// for (let i = 0; i < 10; i++) {
+//     markersObject.markers[firstKey][1][i][0].setMap(null);
+// }
+
+
+// const thirdKey = Object.keys(markersObject.markers)[2];
+
+// for (let i = 0; i < 10; i++) {
+//     markersObject.markers[thirdKey][1][i][0].setMap(null);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let cnt = 0;
+// setInterval(() => {
+//   const userMarkers = markersObject.markers[markersObject.userid];
+
+//   if (userMarkers && Array.isArray(userMarkers[1])) {
+//     userMarkers[1].forEach((markerObject) => {
+//       if (markerObject && Array.isArray(markerObject) && markerObject.length > 0) {
+//         const marker = markerObject[0];
+
+//         if (cnt % 2 === 0) {
+//           marker.setMap(null);
+//         } else {
+//           marker.setMap(map);
+//         }
+//       }
+//     });
+//   }
+//   cnt++;
+// }, 1000);
+
+
+console.log('-------------------------여기확인용')
 
 
 
