@@ -36,6 +36,7 @@ const stylePropertyUnion = {
     width200: "200px",
     width180: "180px",
     width150: "150px",
+    width140: "140px",
     width120: "120px",
     width100: "100px",
     width90: "90px",
@@ -196,6 +197,11 @@ const targetStyle = {
     fontWeight: "300",
     right: "-8px",
     top: "-8px",
+  },
+  alarmStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    cursor:'pointer'
   },
   mainRoot: {
     width: stylePropertyUnion.width.width500,
