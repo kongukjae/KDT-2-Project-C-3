@@ -15,6 +15,9 @@ import fileReaderScriptRouter from "./backEnd/fileReader/script.js";
 //import Main
 import homeGet from "./backEnd/router/home/homeGet.js";
 
+//import alarm
+import alarm from "./backEnd/Router/alarm/alarmPost.js";
+
 //import Login
 import loginGet from "./backEnd/router/login/loginGet.js";
 import loginPost from "./backEnd/router/login/loginPost.js";
@@ -145,6 +148,10 @@ const server = http.createServer(function (request, response) {
 
 /*-----------------post request-----------------------*/
   if (request.method === 'POST') {
+
+    //알림
+    alarm(request, response);
+
     //마이페이지
     userPagePost(request, response);
 

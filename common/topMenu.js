@@ -58,6 +58,21 @@ function topMenu(rootChild){
   alarmImg.addEventListener('click', () => {
     rootChild.appendChild(alarmWind);
 
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    fetch("http://localhost:2080/alarmMark", {
+      method: "POST",
+      body: jwt,
+    })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("re: ", result)
+      
+    });
+
+    
     console.log("aaaaaaaaaa")
   })
   
