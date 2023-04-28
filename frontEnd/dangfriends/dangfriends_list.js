@@ -201,7 +201,6 @@ function createfriendsList(parent, userID, dogName, intro){
   exitBtn.addEventListener("click", function () {
     modal.remove();
   });
-  
   profileBtn.addEventListener("click",()=>{
     mypageForm.submit();
   })
