@@ -3,7 +3,7 @@ import mysql from "mysql";
 import * as jwtFunc from "../../module/jsonWebToken.js";
 
 export default function postMapChatList(request, response) {
-  if(request.url.startsWith('/mapChatList')){
+  if(request.url === '/mapChatList'){
     console.log("채팅 리스트 페이지 진입")
 
     let body = '';

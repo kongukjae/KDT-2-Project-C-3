@@ -1,30 +1,6 @@
 import fs from "fs";
 import mysql from "mysql";
-import cmServer from "../commonServer.js";
-
-const korea = {
-  point :{
-    west : [37.969444, 124.61],
-    east : [37.240778, 131.869556],
-    south : [33.111944, 126.268611],
-    north : [38.611111, 128.364167]
-  },
-  squire : {
-    west:124.61,
-    east:131.869556,
-    south : 33.111944,
-    north : 38.611111
-  },
-  demention : {
-    height : 5.499167,
-    width : 7.259556,
-  },
-  dementionBlock : {
-    height : 5499.167,
-    width : 7259.556
-  }
-
-}
+import cmServer from "../../commonServer.js";
 
 let chatRoomList = [];
 function publicChatGenerator(id, lat, lag, date){
@@ -35,7 +11,7 @@ function publicChatGenerator(id, lat, lag, date){
     publlicChatList[PublicChatRoom] = [id];
   }else{
     publlicChatList[PublicChatRoom].push(id);
-    if(publlicChatList[PublicChatRoom].length===15){
+    if(publlicChatList[PublicChatRoom].length===7){
       console.log('------------------------')
       console.log('단톡방이 생성되었습니다.')
       console.log('초대 알림 맴버 : ' + publlicChatList[PublicChatRoom])
@@ -81,15 +57,15 @@ function locationAverageStringInput(value){
 
 }
 
-console.log(locationAverageStringInput('127.38'));
-let connection = mysql.createConnection(cmServer.mysqlInfo);
-connection.connect();
-connection.query(`SELECT * FROM map_tables`, (error, rows, fields) => {
-  if (error) throw error;
-  else{
-    for(let i of rows){
-      publicChatGenerator(i.id, i.latitude, i.longitude, i.addData)
-    }
-    console.log(chatRoomList)
-}})
-connection.end();
+// console.log(locationAverageStringInput('127.38'));
+// let connection = mysql.createConnection(cmServer.mysqlInfo);
+// connection.connect();
+// connection.query(`SELECT * FROM map_tables`, (error, rows, fields) => {
+//   if (error) throw error;
+//   else{
+//     for(let i of rows){
+//       publicChatGenerator(i.id, i.latitude, i.longitude, i.addData)
+//     }
+//     console.log(chatRoomList)
+// }})
+// connection.end();

@@ -468,7 +468,29 @@ searchBar.addEventListener("keydown", (e) => {
     
   getMarkersObject();
   
-};
+  fetch('http://localhost:2080/publicChatLocation')
+    .then((res)=>{return res.json()})
+    .then((result)=>{
+      console.log(result)
+      for(let i of result){
+        const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
+        let heartimage = tagCreate('img')
+        styleCreate(heartimage,{
+          width : '30px',
+          height : '30px'
+        })
+        heartimage.src = '/image/resource/fullHeart.png'
+        const customOverlay = new kakao.maps.CustomOverlay({
+        position: positionNow,
+        content: heartimage,
+        xAnchor: 0.3,
+        yAnchor: 0.91,
+        });
+        customOverlay.setMap(map)
+      }
+    })
+
+};  
 
 function putUserProfile(object){
   let arr = Object.keys(object);
