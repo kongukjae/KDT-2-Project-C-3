@@ -475,6 +475,7 @@ function putUserProfile(object){
   let filterArr = arr.filter(function(data) {
     return data !== markersObject.userid;
   });
+  console.log(markersObject.userid)
   let targetArr = [markersObject.userid, ...filterArr];
   let slide = document.getElementById("slideWrap");
   for(let i = 0;i < targetArr.length;i++){
@@ -497,7 +498,12 @@ function putUserProfile(object){
     slide.children[0].children[i].appendChild(profileWrap);
     
     console.log(targetArr[i]);
-    let frType = object[targetArr[i]][0];
+    let frType
+    if(i === 0){
+      frType = 3;
+    }else{
+      frType = object[targetArr[i]][0];
+    }
     console.log('here')
     console.log(frType)
     if(frType === 0){
