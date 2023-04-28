@@ -524,23 +524,57 @@ console.log(markersObject.markers[Object.keys]);
 
 
 
-console.log(markersObject.markers[Object.keys(markersObject.markers)[0]]); // 나
-console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
-console.log(markersObject.markers[Object.keys(markersObject.markers)[2]]); // 다른넘
-console.log(markersObject.markers[Object.keys(markersObject.markers)[3]]); // 다른넘
-console.log(markersObject.markers[Object.keys(markersObject.markers)[4]]); // 다른넘
-console.log(markersObject.markers[Object.keys(markersObject.markers)[5]]); // 다른넘
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[0]]); // 나
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[2]]); // 다른넘
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[3]]); // 다른넘
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[4]]); // 다른넘
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[5]]); // 다른넘
 
-console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][1][0]])
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][1][0]])
 
-for (let i = 0; i < 5; i++) {
-  const key = Object.keys(markersObject.markers)[i];
-  for (let j = 0; j < 10; j++) {
-      markersObject.markers[key][1][j][0].setMap(null);
+// for (let i = 0; i < 5; i++) {
+//   const key = Object.keys(markersObject.markers)[i];
+//   for (let j = 0; j < 10; j++) {
+//       markersObject.markers[key][1][j][0].setMap(null);
+//   }
+// }
+let target = [];
+for(let i in markersObject.markers){
+  if(markersObject.markers[i][0] === 3){
+    console.log(markersObject.markers[i][1]);
+    for(let j of markersObject.markers[i][1]){
+      target.push(j[0])
+    }
   }
+  
 }
+// clusterer.removeMarkers(target);
+// clusterer.addMarkers(target);
+clusterer.clear(); //사라짐
+for(let i of target){
+  i.setMap(map);
+}
+// clusterer.redraw();
+//marker -> 내 발자국만 띄우고
+// 수정 끝나면 
 
+// let cnt = 0
+// setInterval(()=>{
+//   // for(let j of target){
+//   //   if(cnt%2===0){
+//   //     j.setMap(null);
 
+//   //   }else{
+//   //     j.setMap(map);
+//   //   }
+//   // }
+//   if(cnt )
+//   cnt ++
+// },400)
+// setTimeout()
+// clusterer.clear()
+// clusterer.redraw();
 // const firstKey = Object.keys(markersObject.markers)[0];
 
 // for (let i = 0; i < 10; i++) {
