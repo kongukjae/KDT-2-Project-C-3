@@ -9,8 +9,12 @@ function sideButton(){
   const orgChat = tagCreate("div", {});
 
   styleCreate(serch, dangMapStyle.serchBtnStyle)
+  serch.innerText = "검색"
   styleCreate(orgChat, dangMapStyle.orgChatBtnStyle)
+  orgChat.innerText = "단톡"
 
+
+  //검색창 레이아웃
   let searchBarWrap = tagCreate("div");
   styleCreate(searchBarWrap, dangMapStyle.menuMapSearchBarWrap);
   root.appendChild(searchBarWrap);
