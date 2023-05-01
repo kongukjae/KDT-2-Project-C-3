@@ -15,6 +15,9 @@ import fileReaderScriptRouter from "./backEnd/fileReader/script.js";
 //import Main
 import homeGet from "./backEnd/router/home/homeGet.js";
 
+//import alarm
+import alarm from "./backEnd/Router/alarm/alarmPost.js";
+
 //import Login
 import loginGet from "./backEnd/router/login/loginGet.js";
 import loginPost from "./backEnd/router/login/loginPost.js";
@@ -100,13 +103,13 @@ import dangTalkChatRoomPost from "./backEnd/router/chat/dangtalkPost.js";
 
 /*
 ------------DB 정보---------------
-  host: "192.168.0.93",
+  host: "192.168.100.63",
   user: "guest",
   password: "0000",
   database: "mungta",
 
   cmd로 mysql 접속방법
-  > mysql -h192.168.0.93 -uguest -p
+  > mysql -h192.168.100.63 -uguest -p
 ----------------------------------
 */
 const server = http.createServer(function (request, response) {
@@ -146,6 +149,10 @@ const server = http.createServer(function (request, response) {
 
 /*-----------------post request-----------------------*/
   if (request.method === 'POST') {
+
+    //알림
+    alarm(request, response);
+
     //마이페이지
     userPagePost(request, response);
 
