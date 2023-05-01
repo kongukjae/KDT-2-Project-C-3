@@ -474,15 +474,15 @@ searchBar.addEventListener("keydown", (e) => {
       console.log(result)
       for(let i of result){
         const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
-        let heartimage = tagCreate('img')
-        styleCreate(heartimage,{
-          width : '30px',
-          height : '30px'
+        let publicTalkIcon = tagCreate('img')
+        styleCreate(publicTalkIcon,{
+          width : '45px',
+          height : '45px'
         })
-        heartimage.src = '/image/resource/fullHeart.png'
+        publicTalkIcon.src = '/image/resource/publicTalk.png'
         const customOverlay = new kakao.maps.CustomOverlay({
         position: positionNow,
-        content: heartimage,
+        content: publicTalkIcon,
         xAnchor: 0.3,
         yAnchor: 0.91,
         });
