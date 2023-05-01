@@ -60,8 +60,8 @@ const html = {
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
-  <script src="/script/frontEnd/dangMap/dangmap_side_button.js"></script>
   <script src="/script/frontEnd/dangMap/dangmap_userList.js"></script>
+  <script src="/script/frontEnd/dangMap/dangmap_side_button.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services,clusterer"></script>
   <script src="/script/frontEnd/dangMap/dangmap_page.js"></script>
   <script src="/script/frontEnd/dangMap/dangmap_slide.js"></script>`,
