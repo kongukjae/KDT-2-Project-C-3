@@ -22,6 +22,7 @@ function commentRecent(postWrap, src_comment_link, textName, cmText, commentInde
 
   // 최신 댓글 내용을 표시할 영역
   const commentViewContentWrap = tagCreate("div", {});
+  styleCreate(commentViewContentWrap, dangstarStyle.dangstarRecentCommentWrap)
   commentImgContentWrap.appendChild(commentViewContentWrap);
 
   // 최신 댓글 닉네임 표시

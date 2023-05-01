@@ -22,7 +22,9 @@ export default function dangstarCommentEdit(request, response) {
       )
       response.end();
     })
-  } else if(request.url.startsWith("/commentUpdate")) {
+  }
+  if(request.url === "/commentUpdateBtn") {
+    console.log(request.url)
     console.log("코멘트 수정 진입 코멘트 수정 진입 코멘트 수정 진입 코멘트 수정 진입");
     let body = '';
     request.on('data', function(data){
@@ -52,6 +54,36 @@ export default function dangstarCommentEdit(request, response) {
         }
       );
       conn.end();
+    })
+  }
+  if(request.url === "/commentUpdateSubmit") {
+    console.log(request.url)
+    console.log("코멘트 수정 입력 진입 코멘트 수정 입력 진입 코멘트 수정 입력 진입 코멘트 수정 입력 진입");
+    let body = '';
+    request.on('data', function(data){
+      body = body + data;
+    })
+    request.on('end', function() {
+      let result = JSON.parse(body);
+      console.log(result);
+      let userID = jwtFunc.jwtCheck(result.userID).id;
+      console.log(userID);
+      let commentIndex = result.cm_index;
+      console.log(commentIndex);
+      let commentValue = result.cm_detail;
+      console.log(commentValue);
+      let conn = mysql.createConnection(cmServer.mysqlInfo);
+      conn.connect();
+      conn.query(
+        `UPDATE cm_post SET cm_detail = '${commentValue}' where cm_index = ${commentIndex}`, (err, data) => {
+          if (err) throw err;
+          else {
+            console.log("댓글 수정 DB 업데이트 성공");
+          }
+        }
+      )
+      response.end();
+      conn.end()
     })
   }
 }
