@@ -1,51 +1,37 @@
 //댓글 창 만드는 함수
-function commentWindow(index, cmtNumber, parent) {
-  let cmtModal = tagCreate("div", { id: "cmtModal" });
-  parent.children[index].appendChild(cmtModal);
-  styleCreate(cmtModal, dangstarStyle.dangstarCommentModal);
+function commentWindow(parent, cmText, cmName, profileImg, i) {
+  console.log(i);
+  // 댓글 하나가 보여질 영역
+  let cmt = tagCreate("div", {});
+  parent.appendChild(cmt);
+  styleCreate(cmt, dangstarStyle.dangstarCommentModalWrap);
+  cmt.style.order = i;
 
-  let closeWrap = tagCreate("div", {});
-  cmtModal.appendChild(closeWrap);
-  styleCreate(closeWrap, dangstarStyle.dangstarCommentModalCloseWrap);
+  // 최신 댓글 프로필 이미지와 내용을 한줄로 넣기 위한 wrap
+  let imgWrap = tagCreate("div", {});
+  cmt.appendChild(imgWrap);
+  styleCreate(imgWrap, dangstarStyle.dangstarRecentCommentContentWrap);
 
-  let closeBtn = tagCreate("button", { id: "closeBtn" });
-  cmtModal.appendChild(closeBtn);
-  styleCreate(closeBtn, dangstarStyle.dangstarCommentModalCloseBtn);
-  closeBtn.innerText = "X";
+  // 최신 댓글의 프로필 이미지 영역
+  let imgChild = tagCreate("div", {});
+  imgWrap.appendChild(imgChild);
+  styleCreate(imgChild, dangstarStyle.dangstarCommentModalImg);
+  imgChild.style.backgroundImage = `url(${profileImg})`;
 
-  for (let i = 0; i < cmtNumber; i++) {
-    let cmt = tagCreate("div", {});
-    cmtModal.appendChild(cmt);
-    styleCreate(cmt, dangstarStyle.dangstarCommentModalWrap);
+  // 최신 댓글 내용을 표시할 영역
+  let textChild = tagCreate("div", {});
+  imgWrap.appendChild(textChild);
+  styleCreate(textChild, dangstarStyle.dangstarCommentModalTextWrap);
 
-    let imgChild = tagCreate("div", {});
-    cmt.appendChild(imgChild);
-    styleCreate(imgChild, dangstarStyle.dangstarCommentModalImg);
+  // 최신 댓글 닉네임 표시
+  let userName = tagCreate("p", {});
+  textChild.appendChild(userName);
+  styleCreate(userName, dangstarStyle.dangstarCommentModalWriterName);
+  userName.innerText = cmName;
 
-    let textChild = tagCreate("div", {});
-    cmt.appendChild(textChild);
-    styleCreate(textChild, dangstarStyle.dangstarCommentModalTextWrap);
-
-    let userName = tagCreate("div", {});
-    textChild.appendChild(userName);
-    styleCreate(userName, dangstarStyle.dangstarCommentModalWriterName);
-    userName.innerText = "몽뭉이";
-
-    let comment = tagCreate("div", {});
-    textChild.appendChild(comment);
-    styleCreate(comment, dangstarStyle.dangstarCommentModalTextBox);
-    comment.innerText =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
-  }
-
-  let commentBtn = document.getElementById(`index_${index}`);
-
-  commentBtn.addEventListener("click", function () {
-    cmtModal.style.display = "flex";
-  });
-
-  closeBtn.addEventListener("click", function () {
-    console.log("닫기");
-    cmtModal.style.display = "none";
-  });
+  // 최신 댓글 내용
+  let comment = tagCreate("p", {});
+  textChild.appendChild(comment);
+  styleCreate(comment, dangstarStyle.dangstarCommentModalTextBox);
+  comment.innerText = cmText;
 }
