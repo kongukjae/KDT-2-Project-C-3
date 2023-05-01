@@ -1,4 +1,4 @@
-function commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex){
+function commentInput(postWrap, index, postIndex){
 // function commentInput(postWrap, index, postIndex){
   let test = document.cookie;
   console.log(test);

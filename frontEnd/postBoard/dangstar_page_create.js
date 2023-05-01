@@ -102,7 +102,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
         
       }
       // 댓글 입력창 만드는 함수
-      commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
+      commentInput(postWrap, index, postIndex);
       // else {
       //   textName = res[0].cm_id;
       //   cmText = res[0].cm_detail;
