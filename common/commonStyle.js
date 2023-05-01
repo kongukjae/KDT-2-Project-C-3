@@ -461,40 +461,41 @@ const dangMapStyle = {
     ...stylePropertyUnion.flexRowCenter,
     paddingBottom: "3px",
   },
-  //?댕맵 검색창
-  // menuMapSearchBarWrap: {
-  //   width : stylePropertyUnion.width.width300,
-  //   height : stylePropertyUnion.height.height40,
-  //   top : "45px",
-  //   left: "50%",
-  //   position : "absolute",
-  //   marginLeft: "-150px",
-  //   zIndex : "3",
-  //   display : "flex",
-  //   alignItems : "center"
-  // },
-  // menuMapSearchBar : {
-  //   width : stylePropertyUnion.width.widthP100,
-  //   height : stylePropertyUnion.height.heightP100,
-  //   border : `1px ${stylePropertyUnion.colorTheme.lightGray} solid`,
-  //   paddingLeft : "20px",
-  //   paddingright : "50px",
-  //   borderRadius : "20px",
-  //   backgroundColor : stylePropertyUnion.colorTheme.white,
-  //   position : "absolute"
-  // },
-  // menuMapSearchButton: {
-  //   width : stylePropertyUnion.width.width80,
-  //   height : stylePropertyUnion.height.height30,
-  //   borderRadius : "15px",
-  //   backgroundColor : stylePropertyUnion.colorTheme.peach,
-  //   position : "relative",
-  //   left : "210px",
-  //   color : stylePropertyUnion.colorTheme.white,
-  //   cursor : "pointer",
-  //   ...stylePropertyUnion.flexRowCenter,
-  //   paddingBottom : "3px"
-  // },
+  //!댕맵 검색창
+  menuMapSearchBarWrap: {
+    width : stylePropertyUnion.width.width300,
+    height : stylePropertyUnion.height.height40,
+    top : "45px",
+    left: "50%",
+    position : "absolute",
+    marginLeft: "-150px",
+    zIndex : "3",
+    display : "flex",
+    alignItems : "center"
+  },
+  menuMapSearchBar : {
+    width : stylePropertyUnion.width.widthP100,
+    height : stylePropertyUnion.height.heightP100,
+    border : `1px ${stylePropertyUnion.colorTheme.lightGray} solid`,
+    paddingLeft : "20px",
+    paddingright : "50px",
+    borderRadius : "20px",
+    backgroundColor : stylePropertyUnion.colorTheme.white,
+    position : "absolute"
+  },
+  menuMapSearchButton: {
+    width : stylePropertyUnion.width.width80,
+    height : stylePropertyUnion.height.height30,
+    borderRadius : "15px",
+    backgroundColor : stylePropertyUnion.colorTheme.peach,
+    position : "relative",
+    left : "210px",
+    color : stylePropertyUnion.colorTheme.white,
+    cursor : "pointer",
+    ...stylePropertyUnion.flexRowCenter,
+    paddingBottom : "3px"
+  },
+  
 
   //! 댕맵 슬라이드
   menuMapSlideImageStyle: {
@@ -693,6 +694,40 @@ const dangMapStyle = {
     fontSize: "13px",
     // marginBottom: "3px",
   },
+  //! 댕맵 사이드 버튼 스타일
+  sideBtnStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    position : "absolute",
+    top : "47px",
+    left: "87%",
+    zIndex : "3",
+    cursor: "pointer"
+  },
+  serchBtnStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    position : "relative",
+    top : "42px",
+    zIndex : "3",
+    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
+
+  },
+  orgChatBtnStyle: {
+    width: stylePropertyUnion.width.width40,
+    height: stylePropertyUnion.height.height40,
+    backgroundColor: stylePropertyUnion.colorTheme.peach,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    position : "relative",
+    top : "44px",
+    zIndex : "3",
+    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
+  },
+
 };
 
 const signupPageStyle = {
