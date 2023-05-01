@@ -98,6 +98,8 @@ function createfriendsList(parent, userID, dogName, intro){
   xhr.send(`type=proFile&id=${userID}`); 
   xhr.addEventListener('load', function(){
     let imageFromServer = URL.createObjectURL(xhr.response);
+    console.log(imageFromServer)
+    console.log("imageFromServer")
     profileimg.style.backgroundImage = `url(${imageFromServer})`;
     console.log("이미지 가져오기 완료");
   });

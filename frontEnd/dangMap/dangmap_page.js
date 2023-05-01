@@ -422,8 +422,8 @@ searchBar.addEventListener("keydown", (e) => {
   function countMarkersDate() {
     let markersDateCount = 10; // 전날보다 이전 - 이후 +
     let markersTodayData = markersObject.markers[markersObject.userid][1];
-    let beforeDate = new Date().getDate() - 1;
-    let boolDate;
+    let todayDate = new Date();
+    let beforeDate = new Date(todayDate.setDate(todayDate.getDate() - 1));
 
     for (i in markersTodayData) {
       if(markersTodayData[i][1].getDate() <= beforeDate) {
@@ -436,7 +436,7 @@ searchBar.addEventListener("keydown", (e) => {
     countFootprintCount.innerText = markersDateCount;
 
     // console.log(markersObject.markers[markersObject.userid][1]);
-    // console.log(markersDateCount);
+    console.log(beforeDate);
   }
 
   async function getMarkersObject(){ 
@@ -540,22 +540,22 @@ console.log(markersObject.markers[Object.keys]);
 //   }
 // }
 
-let target = [];
-for(let i in markersObject.markers){
-  if(markersObject.markers[i][0] !== 3){
-    console.log(markersObject.markers[i][1]);
-    for(let j of markersObject.markers[i][1]){
-      target.push(j[0])
+window.handleClickAdd = function() {
+  let target = [];
+  for(let i in markersObject.markers){
+    if(markersObject.markers[i][0] === 3){
+      console.log(markersObject.markers[i][1]);
+      for(let j of markersObject.markers[i][1]){
+        target.push(j[0])
+      }
     }
+    
   }
-  
+  clusterer.clear(); //사라짐
+  for(let i of target){
+    i.setMap(map);
+  } 
 }
-// clusterer.removeMarkers(target);
-// clusterer.addMarkers(target);
-clusterer.clear(); //사라짐
-for(let i of target){
-  i.setMap(map);
-} 
 // clusterer.redraw();
 //marker -> 내 발자국만 띄우고
 // 수정 끝나면 
@@ -647,7 +647,29 @@ console.log('-------------------------여기확인용')
     
   getMarkersObject();
   
-};
+  fetch('http://localhost:2080/publicChatLocation')
+    .then((res)=>{return res.json()})
+    .then((result)=>{
+      console.log(result)
+      for(let i of result){
+        const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
+        let heartimage = tagCreate('img')
+        styleCreate(heartimage,{
+          width : '30px',
+          height : '30px'
+        })
+        heartimage.src = '/image/resource/fullHeart.png'
+        const customOverlay = new kakao.maps.CustomOverlay({
+        position: positionNow,
+        content: heartimage,
+        xAnchor: 0.3,
+        yAnchor: 0.91,
+        });
+        customOverlay.setMap(map)
+      }
+    })
+
+};  
 
 function putUserProfile(object){
   let arr = Object.keys(object);

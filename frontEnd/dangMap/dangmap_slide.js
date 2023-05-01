@@ -213,16 +213,16 @@ function makeControlBtns() {
 
   // 3개의 버튼을 만들기 위한 반복문
 
-  window.handleClickAdd = function() {
-    console.log("추가 버튼이 클릭되었습니다.");
-  };
   
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
   
     if (i === 1) {
       controlbtns.innerText = "추가";
-      controlbtns.addEventListener("click", window.handleClickAdd);
+      controlbtns.addEventListener("click", ()=>{
+        console.log("추가 버튼이 클릭되었습니다.");
+        
+      } );
     } else if (i === 2) {
       controlbtns.innerText = "수정";
       controlbtns.addEventListener("click", () => {

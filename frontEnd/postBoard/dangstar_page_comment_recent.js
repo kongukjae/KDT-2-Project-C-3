@@ -12,12 +12,13 @@ function commentRecent(postWrap, src_comment_link, textName, cmText){
   // 최신 댓글의 프로필 이미지를 감싸는 div 영역
   const commentViewImgWrap = tagCreate("div", {});
   styleCreate(commentViewImgWrap, dangstarStyle.dangstarRecentCommentProfileWrap);
+  commentViewImgWrap.style.backgroundImage = `url(${src_comment_link})`;
   commentImgContentWrap.appendChild(commentViewImgWrap);
 
   // 최신 댓글의 프로필 이미지
-  const commentViewImg = tagCreate("img", { src: src_comment_link });
-  styleCreate(commentViewImg, dangstarStyle.dangstarRecentCommentProfileImg);
-  commentViewImgWrap.appendChild(commentViewImg);
+  // const commentViewImg = tagCreate("img", { src: src_comment_link });
+  // styleCreate(commentViewImg, dangstarStyle.dangstarRecentCommentProfileImg);
+  // commentViewImgWrap.appendChild(commentViewImg);
 
   // 최신 댓글 내용을 표시할 영역
   const commentViewContentWrap = tagCreate("div", {});
