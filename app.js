@@ -33,6 +33,7 @@ import dangstar from "./backEnd/router/postBoard/dangstarGet.js";
 import dangstarLike from "./backEnd/router/postBoard/dangstarLikePost.js";
 import dangstarCommentInputPost from "./backEnd/router/postBoard/dangstarCommentInputPost.js"
 import dangstarCommentLoadPost from "./backEnd/router/postBoard/dangstarCommentLoadPost.js"
+import dangstarCommentEdit from "./backEnd/router/postBoard/dangstarCommentEdit.js"
 import dangstarUserCheck from "./backEnd/router/postBoard/dangstarUserCheck.js"
 
 // import dangMarket
@@ -171,6 +172,7 @@ const server = http.createServer(function (request, response) {
     //댕스타그램
     dangstarCommentLoadPost(request, response);
     dangstarCommentInputPost(request, response);
+    dangstarCommentEdit(request, response);
     dangstarLike(request, response);
     dangstarUserCheck(request, response);
 

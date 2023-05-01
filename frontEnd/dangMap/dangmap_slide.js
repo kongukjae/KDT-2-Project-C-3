@@ -189,7 +189,7 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 }
 
 
-makeControlBtns();
+let makeControlBtnsArr = makeControlBtns();
 // 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
 // 버튼들을 토글시키기 위한 변수
 let controlToggle = false;
@@ -214,40 +214,28 @@ function makeControlBtns() {
   // 3개의 버튼을 만들기 위한 반복문
 
   
-
-  window.handleClickAdd = function() {
-    console.log("추가 버튼이 클릭되었습니다.");
-    
-  };
-  
-  window.handleClickEdit = function() {
-    console.log("수정 버튼이 클릭되었습니다.");
-    // 수정 버튼 클릭시 실행될 로직
-  };
-  
-  window.handleClickDelete = function() {
-    console.log("삭제 버튼이 클릭되었습니다.");
-    // 삭제 버튼 클릭시 실행될 로직
-  };
+// 배열을 먼저 준다.
   let buttonArr = [];
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
-  
     if (i === 1) {
       controlbtns.innerText = "추가";
-      controlbtns.id = "addButton";
-      // controlbtns.addEventListener("click", window.handleClickAdd);
+      controlbtns.addEventListener("click", () => {
+        console.log("추가 버튼이 클릭되었습니다.");
+      });
     } else if (i === 2) {
       controlbtns.innerText = "수정";
-      controlbtns.id = "editButton";
-      controlbtns.addEventListener("click", window.handleClickEdit);
+      controlbtns.addEventListener("click", () => {
+        console.log("수정 버튼이 클릭되었습니다.");
+      });
     } else {
       controlbtns.innerText = "삭제";
-      controlbtns.id = "deleteButton";
-      controlbtns.addEventListener("click", window.handleClickDelete);
+      controlbtns.addEventListener("click", () => {
+        console.log("삭제 버튼이 클릭되었습니다.");
+      });
     }
     buttonArr.push(controlbtns)
-    // 나머지 코드 생략...
+    
   
     // 버튼들의 스타일 값
     styleCreate(controlbtns, {
@@ -258,6 +246,7 @@ function makeControlBtns() {
     });
     controlbtnsWrap.appendChild(controlbtns);
   }
+  // 리턴을 해준다. 그렇다면 0번째 삭제, 첫번째 추가..
   return buttonArr
 }
 

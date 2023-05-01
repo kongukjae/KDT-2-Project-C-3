@@ -33,7 +33,7 @@ function changeDate(date) {
 map();
 
 //지도 사이드 버튼: 검색, 단톡 표시 버튼
-sideButton();
+let sideArr = sideButton();
 
 
 //대표 발자국 대신할 임시 버튼
@@ -525,7 +525,7 @@ console.log(markersObject.markers[Object.keys]);
 
 
 
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[0]]); // 나
+console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][0]]); // 나
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[2]]); // 다른넘
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[3]]); // 다른넘
@@ -541,10 +541,13 @@ console.log(markersObject.markers[Object.keys]);
 //   }
 // }
 
-const addButton = document.getElementById("addButton");
-addButton.addEventListener("click", () => {
-  window.handleClickAdd();
+// makeControlBtnsArr[0].addEventListener('click',()=>{
+//   alert('hi')
+// })
 
+// const addButton = document.getElementById("addButton");
+// 수정버튼을 클릭했을떄, 
+makeControlBtnsArr[2].addEventListener("click", () => {
   let target = [];
   for (let i in markersObject.markers) {
     if (markersObject.markers[i][0] === 3) {
@@ -554,17 +557,44 @@ addButton.addEventListener("click", () => {
       }
     }
   }
-
   clusterer.clear(); //사라짐
   for (let i of target) {
     i.setMap(map);
   }
+
+  const rootChilds = rootChild[1]
+
+  for (let i = 0; i < rootChilds.length; i++) {
+    if (rootChilds[i].id === "slide") {
+      rootChilds[i].style.display = "none";
+    }
+  }
+
+
 });
 
+// 삭제버튼 눌렀을때,
+makeControlBtnsArr[0].addEventListener("click", () => {
+  let target = [];
+
+  for (let i in markersObject.markers) {
+    if (markersObject.markers[i][0] === 3) {
+      console.log(markersObject.markers[i][1]);
+      for (let j of markersObject.markers[i][1]) {
+        target.push(j[0]);
+      }
+    }
+  }
+  clusterer.clear(); //사라짐
+  for (let i of target) {
+    i.setMap(map);
+  }
+
+    markerkersObject.markers.setDraggable(true);
 
 
 
-
+});
 
 
 
@@ -605,7 +635,7 @@ addButton.addEventListener("click", () => {
 
 
 
-
+console.log(markersObject.markers[markersObject.userid]);
 
 
 
@@ -657,33 +687,56 @@ console.log('-------------------------여기확인용')
 
 //   });
 
+    markersObject['clusterer'] = clusterer;
   }
     
   getMarkersObject();
-  
-  fetch('http://localhost:2080/publicChatLocation')
-    .then((res)=>{return res.json()})
-    .then((result)=>{
-      console.log(result)
-      for(let i of result){
-        const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
-        let heartimage = tagCreate('img')
-        styleCreate(heartimage,{
-          width : '30px',
-          height : '30px'
-        })
-        heartimage.src = '/image/resource/fullHeart.png'
-        const customOverlay = new kakao.maps.CustomOverlay({
-        position: positionNow,
-        content: heartimage,
-        xAnchor: 0.3,
-        yAnchor: 0.91,
-        });
-        customOverlay.setMap(map)
-      }
-    })
+  publicTalkAsync()
 
-};  
+  async function publicTalkAsync(){
+    let publicTalkList = await fetch('http://localhost:2080/publicChatLocation')
+      .then((res)=>{return res.json()})
+      .then((result)=>{
+        let publicTalkIconArr = []
+        for(let i of result){
+          const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
+          let publicTalkIcon = tagCreate('img')
+          styleCreate(publicTalkIcon,{
+            width : '45px',
+            height : '45px'
+          })
+          publicTalkIcon.src = '/image/resource/publicTalk.png'
+          const customOverlay = new kakao.maps.CustomOverlay({
+          position: positionNow,
+          content: publicTalkIcon,
+          xAnchor: 0.3,
+          yAnchor: 0.91,
+          });
+          publicTalkIconArr.push(customOverlay)
+        }
+        return publicTalkIconArr;
+      })
+      let publicTalkFlag = false;
+      sideArr[1].addEventListener('click',()=>{
+        if(!publicTalkFlag){
+          for(let i of publicTalkList){
+            i.setMap(map);
+          }
+          markersObject.clusterer.clear();
+          publicTalkFlag = true;
+        }else{
+          for(let i of publicTalkList){
+            i.setMap(null);
+          }
+          markersObject.clusterer.addMarkers(markersObject.markersArray)
+          publicTalkFlag = false;
+        }
+      })
+    };  
+
+  }
+  
+  
 
 function putUserProfile(object){
   let arr = Object.keys(object);

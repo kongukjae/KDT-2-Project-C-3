@@ -1,4 +1,4 @@
-function commentRecent(postWrap, src_comment_link, textName, cmText){
+function commentRecent(postWrap, src_comment_link, textName, cmText, commentIndex){
   // 최신 댓글 하나가 보여질 영역
   const commentViewWrap = tagCreate("div", {});
   styleCreate(commentViewWrap, dangstarStyle.dangstarRecentComment);
@@ -38,8 +38,9 @@ function commentRecent(postWrap, src_comment_link, textName, cmText){
   commentViewContentWrap.appendChild(commentViewContent);
 
   userCheck().then((userID) => {
+    // 접속한 유저의 ID와 작성자의 ID가 일치한다면 수정/삭제 버튼 표시
     if (textName === userID) {
-      commentUpdateDelete(commentViewWrap);
+      commentUpdateDelete(commentViewWrap, commentIndex);
     }
   });
 }
