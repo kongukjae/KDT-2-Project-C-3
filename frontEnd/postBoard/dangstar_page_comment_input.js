@@ -1,4 +1,4 @@
-function commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex){
+function commentInput(parent, index, postIndex){
 // function commentInput(postWrap, index, postIndex){
   let test = document.cookie;
   console.log(test);
@@ -7,7 +7,7 @@ function commentInput(postWrap, src_comment_link, textName, cmText, index, postI
   // 댓글 입력창 감싸는 div
   const commentWrap = tagCreate("div", {});
   styleCreate(commentWrap, dangstarStyle.dangstarCommentWrap);
-  postWrap.appendChild(commentWrap);
+  parent.appendChild(commentWrap);
 
   // 댓글 입력창과 작성 버튼을 감쌀 form 요소
   const commentForm = tagCreate("form", {});
