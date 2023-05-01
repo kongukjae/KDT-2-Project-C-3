@@ -481,12 +481,13 @@ searchBar.addEventListener("keydown", (e) => {
 
   console.log(markersObject.markers[markersObject.userid][1]);
     console.log(markersObject.markers[markersObject.userid][1][0][0]);
-//     console.log(markersObject.markers[markersObject.userid][1][0][0][0]);
 
  console.log(markersObject)
+//  console.log(markersObject.markersArray[0])
+//  for (let i = 0; i < 10; i++) {
+//   console.log(markersObject.markersArray[i]);
+// }
  console.log(markersObject.markers['asdasd123'][0])
-//  console.log(markersObject.markers['qwer123'][0])
-//  console.log(markersObject.markers['euni123'][0])
 
  // 모든 마커에 해당하는 키값을 조회할수있다.
 //  const markerIds = Object.keys(markersObject.markers);
@@ -570,12 +571,13 @@ makeControlBtnsArr[2].addEventListener("click", () => {
     }
   }
 
-
 });
 
 // 삭제버튼 눌렀을때,
 makeControlBtnsArr[0].addEventListener("click", () => {
   let target = [];
+
+
 
   for (let i in markersObject.markers) {
     if (markersObject.markers[i][0] === 3) {
@@ -590,13 +592,11 @@ makeControlBtnsArr[0].addEventListener("click", () => {
     i.setMap(map);
   }
 
-    markerkersObject.markers.setDraggable(true);
-
-
+   
+  console.log('클릭 이벤트 발생');
 
 });
-
-
+markersObject.markers[markersObject.userid][1]
 
 
 
@@ -635,13 +635,6 @@ makeControlBtnsArr[0].addEventListener("click", () => {
 
 
 
-console.log(markersObject.markers[markersObject.userid]);
-
-
-
-
-
-
 
 
 
@@ -665,27 +658,6 @@ console.log(markersObject.markers[markersObject.userid]);
 //   cnt++;
 // }, 1000);
 
-
-console.log('-------------------------여기확인용')
-
-
-
-//  markersObject.markers[markersObject.userid][1][1].setMap(null);
-  //  markersObject.markers['asdasd1234'][1][0].setMap(null);
-//  console.log(markersObject.markers[key][0])
-//  document.body.addEventListener('click', function() {
-
-// //   // for문을 돌려서 다른친구만 삭제하기 -수정할때 필요함
-
-//       for (let key in markersObject.markers) {
-//       if (markersObject.markers[key][0] === 0 || markersObject.markers[key][0] === 1 || markersObject.markers[key][0] === 2) {
-//     for (let i = 0; i < markersObject.markers[key][1].length; i++) {
-//      markersObject.markers[key][1][i][0][0].setMap(null);
-//          }
-//         }
-//       }
-
-//   });
 
     markersObject['clusterer'] = clusterer;
   }
