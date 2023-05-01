@@ -1,7 +1,6 @@
-function createUserOrgchat(test, roomName){
+function createUserOrgchat(positionNow, roomName){
   let chatList = tagCreate("div", {id: 'chatList'});
   // document.body.appendChild(chatList);
-  test.appendChild(chatList);
   styleCreate(chatList, dangMapStyle.userList);
 
   let chatChild = [];
@@ -44,7 +43,15 @@ function createUserOrgchat(test, roomName){
     }
   });
 
+  const customOverlay = new kakao.maps.CustomOverlay({
+    position: positionNow,
+    content: chatList,
+    xAnchor: 0.3,
+    yAnchor: 0.91,
+  });
+  return customOverlay;
 }
+
 
 function createUserOrgchatList(parent, userID, dogName){
 
