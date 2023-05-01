@@ -78,12 +78,14 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       let textName;
       let cmText;
       let src_comment_link;
+      let commentIndex;
+      let cnt = res.length;
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         console.log("조건문 안쪽")
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
-
+        commentIndex = res[0].cm_index;
         const xhr = new XMLHttpRequest();
         xhr.open("POST", `http://localhost:2080/sendImage`);
         xhr.responseType = "blob";
@@ -95,17 +97,18 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
           console.log("imageFromServer");
           src_comment_link = imageFromServer;
           //최신 댓글 1개 보여주는 함수 실행
-          commentRecent(postWrap, src_comment_link, textName, cmText);
+          commentRecent(postWrap, src_comment_link, textName, cmText, commentIndex);
         });
         // console.log(src_comment_link);
         
       }
       // 댓글 입력창 만드는 함수
-      commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
+      commentInput(postWrap, index, postIndex);
       // else {
       //   textName = res[0].cm_id;
       //   cmText = res[0].cm_detail;
       // }
+      commentWindow(index, cnt, parent);
 
     })
     console.log("commentData를 받아오기 위한 함수 실행 테스트");
@@ -113,6 +116,8 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   commentInputData(index, postIndex);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
-  commentWindow(index, 5, parent);
-
+  // function commentModal(index, cmtNumber, parent) {
+  //   commentWindow(index, cmtNumber, parent);
+  // }
+  // commentModal()
 }
