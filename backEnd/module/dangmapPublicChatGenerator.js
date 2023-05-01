@@ -84,7 +84,7 @@ function locationAverageStringInput(value){
 console.log(locationAverageStringInput('127.38'));
 let connection = mysql.createConnection(cmServer.mysqlInfo);
 connection.connect();
-connection.query(`SELECT * FROM map_tables`, (error, rows, fields) => {
+connection.query(`SELECT * FROM map_tables WHERE addData >= '2023-4-25 00:00:00'`, (error, rows, fields) => {
   if (error) throw error;
   else{
     for(let i of rows){
