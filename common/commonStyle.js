@@ -1019,6 +1019,66 @@ const mypageStyle = {
     border: '1px solid red',
     position: "relative",
   },
+  mypageCalendarRoot: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "400px",
+    height: "400px",
+  },
+  mypageCalendarMonthOfNameBox: {
+    width: "400px",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  mypageCalendarBeforeNextMonthBtn: {
+    width: "80px",
+    height: "30px",
+    fontSize: "40px",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  myPageCalendarMonthBox: {
+    width: "150px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "40px",
+    fontWeight: "700",
+  },
+  mypageCalendarWeekNameBox: {
+    width: "400px",
+    height: "40px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  mypageCalendarTable: {
+      width: "400px",
+      height: "360px",
+      backgroundColor: "#F7786B",
+      borderRadius: "15px",
+      boxShadow: "0 5px 20px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)",
+  },
+  mypageCalendarDayIndex: {
+    color: "white",
+    flexDirection: "row",
+    justfyContent: "center",
+    textAlign: "center",
+    fontSize: "24px",
+    fontWeight: "700",
+  },
+  mypageCalendarNowDayIndex: {
+    color: "black",
+    backgroundColor: "#F3EDE8",
+    borderRadius: "50%",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.21)",
+  },
   mypageUploadModal: {
     width: stylePropertyUnion.width.width300,
     height: stylePropertyUnion.height.height140,
@@ -1050,6 +1110,7 @@ const mypageStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
   },
+  
 };
 
 const keepStyle = {
