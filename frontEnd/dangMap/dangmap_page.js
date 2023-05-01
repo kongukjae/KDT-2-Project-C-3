@@ -33,7 +33,7 @@ function changeDate(date) {
 map();
 
 //지도 사이드 버튼: 검색, 단톡 표시 버튼
-sideButton();
+let sideArr = sideButton();
 
 
 //대표 발자국 대신할 임시 버튼
@@ -464,33 +464,56 @@ searchBar.addEventListener("keydown", (e) => {
     //     lineHeight: '54px'
     // }]
   });
+    markersObject['clusterer'] = clusterer;
   }
     
   getMarkersObject();
-  
-  fetch('http://localhost:2080/publicChatLocation')
-    .then((res)=>{return res.json()})
-    .then((result)=>{
-      console.log(result)
-      for(let i of result){
-        const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
-        let publicTalkIcon = tagCreate('img')
-        styleCreate(publicTalkIcon,{
-          width : '45px',
-          height : '45px'
-        })
-        publicTalkIcon.src = '/image/resource/publicTalk.png'
-        const customOverlay = new kakao.maps.CustomOverlay({
-        position: positionNow,
-        content: publicTalkIcon,
-        xAnchor: 0.3,
-        yAnchor: 0.91,
-        });
-        customOverlay.setMap(map)
-      }
-    })
+  publicTalkAsync()
 
-};  
+  async function publicTalkAsync(){
+    let publicTalkList = await fetch('http://localhost:2080/publicChatLocation')
+      .then((res)=>{return res.json()})
+      .then((result)=>{
+        let publicTalkIconArr = []
+        for(let i of result){
+          const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
+          let publicTalkIcon = tagCreate('img')
+          styleCreate(publicTalkIcon,{
+            width : '45px',
+            height : '45px'
+          })
+          publicTalkIcon.src = '/image/resource/publicTalk.png'
+          const customOverlay = new kakao.maps.CustomOverlay({
+          position: positionNow,
+          content: publicTalkIcon,
+          xAnchor: 0.3,
+          yAnchor: 0.91,
+          });
+          publicTalkIconArr.push(customOverlay)
+        }
+        return publicTalkIconArr;
+      })
+      let publicTalkFlag = false;
+      sideArr[1].addEventListener('click',()=>{
+        if(!publicTalkFlag){
+          for(let i of publicTalkList){
+            i.setMap(map);
+          }
+          markersObject.clusterer.clear();
+          publicTalkFlag = true;
+        }else{
+          for(let i of publicTalkList){
+            i.setMap(null);
+          }
+          markersObject.clusterer.addMarkers(markersObject.markersArray)
+          publicTalkFlag = false;
+        }
+      })
+    };  
+
+  }
+  
+  
 
 function putUserProfile(object){
   let arr = Object.keys(object);
