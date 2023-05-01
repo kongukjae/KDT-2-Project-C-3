@@ -487,6 +487,7 @@ const dangMapStyle = {
     width : stylePropertyUnion.width.width80,
     height : stylePropertyUnion.height.height30,
     borderRadius : "15px",
+    marginTop: "5px",
     backgroundColor : stylePropertyUnion.colorTheme.peach,
     position : "relative",
     left : "210px",
