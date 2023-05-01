@@ -14,6 +14,7 @@ export default function alarmMark(request, response){
         let like = [];
         let follow = [];
         let comment = [];
+        let commentIdx = [];
         let alarmData = {};
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
@@ -25,12 +26,17 @@ export default function alarmMark(request, response){
             // console.log("gkgkgkgkgk: ", data);
             data.forEach((value, index) => {
               like.push(value.postlike);
-              follow.push(value.follow)
+              follow.push(value.follow);
+              comment.push(value.comment);
+              commentIdx.push(value.comment_index);
+              
               
             })
             alarmData['like'] = like;
             alarmData['follow'] = follow;
-            // console.log("value: ", alarmData)
+            alarmData['comment'] = comment;
+            alarmData['commentIdx'] = commentIdx;
+            console.log("value: ", alarmData)
 
             response.writeHead(200);
             response.write(JSON.stringify(alarmData));

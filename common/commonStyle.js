@@ -207,6 +207,7 @@ const targetStyle = {
   },
   alarmWindStyle: {
     width: stylePropertyUnion.width.width450,
+    // height: stylePropertyUnion.height.height500,
     minHeight: "calc(100vh - 750px)",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     border: `3px outset ${stylePropertyUnion.colorTheme.gray}`,
@@ -221,7 +222,7 @@ const targetStyle = {
     height: stylePropertyUnion.height.height50,
     backgroundColor: stylePropertyUnion.colorTheme.beige,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
-    margin: "10px 0 0 10px",
+    margin: "0 0 10px 10px",
     // textAlign: "center",
     padding: "12px 0 0 15px"
   },

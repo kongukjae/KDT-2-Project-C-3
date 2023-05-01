@@ -36,10 +36,12 @@ function topMenu(rootChild){
   let alarmWind = tagCreate('div', {});
   styleCreate(alarmWind, targetStyle.alarmWindStyle);
 
-  
-
-  
-
+  // let scrollBar = tagCreate('div', {});
+  // styleCreate(scrollBar, {
+  //   width: stylePropertyUnion.width.width15,
+  //   height: stylePropertyUnion.height.height500,
+  // });
+  // alarmWind.appendChild(scrollBar);
 
   alarmImg.addEventListener('click', () => {
     rootChild.appendChild(alarmWind);
@@ -59,13 +61,14 @@ function topMenu(rootChild){
       let msg;
       for(key in result){
         console.log(result[key], key);
+
         result[key].forEach((value) => {
-          if(value !== null){
+          if(value !== null && key !== 'commentIdx'){
             msg = createMent(key, value);
-            createList(alarmWind, msg)
+            createList(rootChild.children[3].children[1], msg);
+            
           }
         });
-        cnt++;
       }
     });
   })
@@ -84,11 +87,22 @@ function topMenu(rootChild){
     styleCreate(closeBtn, targetStyle.alarmClose);
     closeBtn.innerText = "X";
 
+    let listArea = tagCreate('div', {});
+    styleCreate(listArea, {
+      width: "440px",
+      height: stylePropertyUnion.height.height450,
+      overflowY : "scroll",
+      marginTop: "10px"
+    });
+    parent.appendChild(listArea);
+
     closeBtn.addEventListener('click', () => {
       alarmWind.innerHTML = '';
       rootChild.removeChild(alarmWind);
   
     });
+
+
   }
   function createList(parent, text){
     //모달창에 알림 리스트 영역

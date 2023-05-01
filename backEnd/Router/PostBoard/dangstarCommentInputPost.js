@@ -22,12 +22,30 @@ export default function postCommentInput(request, response) {
       console.log(cm_id);
       let post_index = firstSplit[2].split('=')[1];
       console.log(post_index);
+
+      let postID;
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
         `insert into cm_post(cm_id, cm_detail, post_index) values("${cm_id}", "${cm_detail}", ${post_index})`
       );
-      conn.end();
+      conn.query(`select post_id from dangstar where post_index = ${post_index}`,
+      (err, data) => {
+        if(err) throw err;
+        else{
+          postID = data[0].post_id;
+          // console.log("indexsskssskksks: ", data[0].post_id)
+          conn.query(`select cm_index from cm_post order by cm_index desc limit 1`,
+          (err, data) => {
+            if(err) throw err;
+            else{
+              // console.log("kjdaksjdjasdklaj::::::::::", data[0].cm_index)
+              conn.query(`insert into alarm(id, comment, comment_index) values ('${postID}', '${cm_id}', '${data[0].cm_index}')`)
+              conn.end();
+            }
+          });
+        };
+      });
       console.log("새로고침 시작");
       // response.write("<script>location.reload();</script>");
       response.end();
