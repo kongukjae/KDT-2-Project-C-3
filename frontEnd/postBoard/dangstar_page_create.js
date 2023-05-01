@@ -72,19 +72,33 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     xhr.addEventListener('load', function() {
       let res = JSON.parse(xhr.response);
       console.log(res);
+      console.log("res res res res res");
       // console.log(res[0]);
       // console.log(res[0].cm_detail);
       let textName;
       let cmText;
-      let src_comment_link = "/image/resource/MainDogImg.jpg";
+      let src_comment_link;
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
-        // console.log("조건문 안쪽")
+        console.log("조건문 안쪽")
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `http://localhost:2080/sendImage`);
+        xhr.responseType = "blob";
+        xhr.send(`type=proFile&id=${res[0].cm_id}`);
+        xhr.addEventListener("load", function () {
+          console.log("이미지 응답 받음")
+          let imageFromServer = URL.createObjectURL(xhr.response);
+          console.log(imageFromServer);
+          console.log("imageFromServer");
+          src_comment_link = imageFromServer;
+          //최신 댓글 1개 보여주는 함수 실행
+          commentRecent(postWrap, src_comment_link, textName, cmText);
+        });
+        // console.log(src_comment_link);
         
-        //최신 댓글 1개 보여주는 함수 실행
-        commentRecent(postWrap, src_comment_link, textName, cmText);
       }
       // 댓글 입력창 만드는 함수
       commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);

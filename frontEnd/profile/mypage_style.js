@@ -153,10 +153,33 @@ function myPage(){
     })
   }
 
-  rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리"
+  // rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리" //캘린더
 
+  function calendar(target) {
+    let getNow = new Date();
+    let nowYear = getNow.getFullYear();
+    let nowMonth = getNow.getMonth() + 1;
+    let nowDate = getNow.getDate();
 
+    const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+    if (calendarYear % 400 == 0) {
+      monthDays[1] = 29;
+    } else if (calendarYear % 100 == 0) {
+      monthDays[1] = 28;
+    } else if (calendarYear % 4 == 0) {
+      monthDays[1] = 29;
+    }
+
+    let monthLastDate = monthDays[date.getMonth()];
+
+    let table = tagCreate('div', {id: 'calendar'});
+    target.appendChild(table);
+    styleCreate(table, mypageStyle.mypageCalenderTable);
+    
+  }
+
+  calendar(rootChild[5]);
   
   btmMeun(rootChild[6]);
   function userInfoUpdate(){
