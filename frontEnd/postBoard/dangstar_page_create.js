@@ -79,6 +79,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       let cmText;
       let src_comment_link;
       let commentIndex;
+      let cnt = res.length;
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         console.log("조건문 안쪽")
@@ -107,6 +108,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       //   textName = res[0].cm_id;
       //   cmText = res[0].cm_detail;
       // }
+      commentWindow(index, cnt, parent);
 
     })
     console.log("commentData를 받아오기 위한 함수 실행 테스트");
@@ -114,6 +116,8 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   commentInputData(index, postIndex);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
-  commentWindow(index, 5, parent);
-
+  // function commentModal(index, cmtNumber, parent) {
+  //   commentWindow(index, cmtNumber, parent);
+  // }
+  // commentModal()
 }
