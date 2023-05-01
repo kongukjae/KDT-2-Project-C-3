@@ -1739,6 +1739,8 @@ const dangstarStyle = {
     width: stylePropertyUnion.width.width500,
     // marginBottom: stylePropertyUnion.marginBottom.marginBottom20,
     position: "relative",
+    display: "flex",
+    flexDirection: "column",
   },
   dangstarFeedImgWrap: {
     width: stylePropertyUnion.width.width500,
@@ -1893,6 +1895,7 @@ const dangstarStyle = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    order: "1",
     // position: "absolute",
     // bottom: "170px",
   },
