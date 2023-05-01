@@ -439,7 +439,7 @@ searchBar.addEventListener("keydown", (e) => {
     // console.log(markersDateCount);
   }
 
-  window.getMarkersObject=async function getMarkersObject(){ 
+  async function getMarkersObject(){ 
     await allMarker(allAddMarker,3)
     await allMarker(allAddMarker,1)
     await allMarker(allAddMarker,2)
@@ -484,8 +484,8 @@ searchBar.addEventListener("keydown", (e) => {
 
  console.log(markersObject)
  console.log(markersObject.markers['asdasd123'][0])
- console.log(markersObject.markers['qwer123'][0])
- console.log(markersObject.markers['euni123'][0])
+//  console.log(markersObject.markers['qwer123'][0])
+//  console.log(markersObject.markers['euni123'][0])
 
  // 모든 마커에 해당하는 키값을 조회할수있다.
  const markerIds = Object.keys(markersObject.markers);
@@ -539,27 +539,26 @@ console.log(markersObject.markers[Object.keys]);
 //       markersObject.markers[key][1][j][0].setMap(null);
 //   }
 // }
-window.handleClickAdd = function() {
-  let target = [];
-  for(let i in markersObject.markers){
-    if(markersObject.markers[i][0] === 3){
-      console.log(markersObject.markers[i][1]);
-      for(let j of markersObject.markers[i][1]){
-        target.push(j[0])
-      }
+
+let target = [];
+for(let i in markersObject.markers){
+  if(markersObject.markers[i][0] !== 3){
+    console.log(markersObject.markers[i][1]);
+    for(let j of markersObject.markers[i][1]){
+      target.push(j[0])
     }
   }
-  // clusterer.removeMarkers(target);
-  // clusterer.addMarkers(target);
-  clusterer.clear(); //사라짐
-  for(let i of target){
-    i.setMap(map);
-  }
-};
+  
+}
+// clusterer.removeMarkers(target);
+// clusterer.addMarkers(target);
+clusterer.clear(); //사라짐
+for(let i of target){
+  i.setMap(map);
+} 
 // clusterer.redraw();
 //marker -> 내 발자국만 띄우고
 // 수정 끝나면 
-
 // let cnt = 0
 // setInterval(()=>{
 //   // for(let j of target){
