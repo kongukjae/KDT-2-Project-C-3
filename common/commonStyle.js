@@ -629,7 +629,6 @@ const dangMapStyle = {
     width: stylePropertyUnion.width.width250,
     // height: stylePropertyUnion.height.height2000,
     margin: "auto",
-    display: "none",
     flexDirection: "column",
     position: "absolute",
     border: "1px solid black",
@@ -646,6 +645,7 @@ const dangMapStyle = {
   chatRoomTitle: {
     width: stylePropertyUnion.width.widthP70,
     fontWeight: stylePropertyUnion.fontWeightSet.bold,
+    fontSize : '12px'
   },
   chatJoinBtn: {
     width: stylePropertyUnion.width.width50,

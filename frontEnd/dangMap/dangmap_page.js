@@ -5,7 +5,7 @@ let markersObject = {
   position :[],
   markersArray : [],
   usersArray :[],
-  publicChat : {detail:{}},
+  publicChat : {detail:{},overlay:[]},
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
@@ -493,16 +493,18 @@ searchBar.addEventListener("keydown", (e) => {
           xAnchor: 0.3,
           yAnchor: 0.91,
           });
+          
+          
           publicTalkIconArr.push(customOverlay)
-          let memberOverlay = createUserOrgchat(positionNow,'!public!'+i)
-          memberOverlay.setMap(map);
+
           let callback = function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
               markersObject['appendPublicChat'] = ['!public!'+i,customOverlay,result[0].address.address_name]
-              let memberOverlay = createUserOrgchat(positionNow,'!public!'+i)
+              let publicChatRoomList = createUserOrgchat(positionNow, result[0].address.address_name)
+
               publicTalkIcon.addEventListener('click',()=>{
-                console.log('setMap')
-                memberOverlay.setMap(map);
+                publicChatRoomList.setMap(map);
+
               })
             }
           };
@@ -748,3 +750,4 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   });
   return customOverlay;
 }
+
