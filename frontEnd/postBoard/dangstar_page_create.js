@@ -78,12 +78,13 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       let textName;
       let cmText;
       let src_comment_link;
+      let commentIndex;
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         console.log("조건문 안쪽")
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
-
+        commentIndex = res[0].cm_index;
         const xhr = new XMLHttpRequest();
         xhr.open("POST", `http://localhost:2080/sendImage`);
         xhr.responseType = "blob";
@@ -95,7 +96,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
           console.log("imageFromServer");
           src_comment_link = imageFromServer;
           //최신 댓글 1개 보여주는 함수 실행
-          commentRecent(postWrap, src_comment_link, textName, cmText);
+          commentRecent(postWrap, src_comment_link, textName, cmText, commentIndex);
         });
         // console.log(src_comment_link);
         
