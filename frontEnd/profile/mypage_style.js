@@ -153,9 +153,24 @@ function myPage(){
     })
   }
 
-  // rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리" //캘린더
+  //! 마이페이지 캘린더 부분
 
-  function calendar(now) {
+  function calendar(now, callback) {
+
+    let dateres;
+    const xhr = new XMLHttpRequest();
+    const cookieId = document.cookie.split("=")[1].split(";")[0];
+    xhr.open("GET", `http://localhost:2080/allloadMap?id=${cookieId}`);
+    xhr.send();
+    xhr.addEventListener("load", function () {
+      dateres = JSON.parse(xhr.response);
+      for (const key in dateres) {
+        console.log(dateres);
+      }
+      console.log(dateres);
+      console.log("dateres");
+    });
+
     let nowYear = now.getFullYear();
     let nowMonth = now.getMonth() + 1;
     let nowDate = now.getDate();
@@ -279,6 +294,7 @@ function myPage(){
       rootChild[5].innerHTML = '';
       calendar(nextMonth);
     });
+
   }
 
   calendar(new Date());

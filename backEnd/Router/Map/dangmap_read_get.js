@@ -51,8 +51,30 @@ export default function dangMap(request, response) {
         }
       }
     );
-
     conn.end();
+  }
+  else if (request.url.startsWith("/allloadMap")) {
+    let targetId = request.url.split("=")[1];
+    let connection = mysql.createConnection(cmServer.mysqlInfo);
+    let markerMyAllArr = {};
+    connection.connect();
+
+    connection.query(
+      `select * from map_tables where id = '${targetId}' order by addData desc;`,
+      function (err, rows) {
+        if (err) throw err;
+        else {
+          for(let i = 0; i < rows.length; i++) {
+            let myArr = [];
+            myArr.push(rows[i].id, rows[i].addData);
+            markerMyAllArr[i] = myArr;
+          }
+          response.writeHead(200);
+          response.write(JSON.stringify(markerMyAllArr));
+          response.end();
+        }
+      }
+    );
   }
   else if (request.url.startsWith("/starFootprint")) {
     // console.log("url == " + request.url);
