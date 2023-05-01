@@ -63,4 +63,26 @@ export default function callPostDangMap(request, response) {
       }
     })
   }
+  else if (request.url.startsWith("/mapDelete")) {
+    let connection = mysql.createConnection(cmServer.mysqlInfo);
+    connection.connect();
+    let body = '';
+    request.on('data', chunk => {
+      body += chunk.toString();
+    });
+  connection.query(`DELETE FROM map_table WHERE id = ${id} AND addData = '${date}'`, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+      console.log(date);
+      response.statusCode = 500;
+      response.end();
+      return;
+    }
+
+    console.log('Deleted rows:', results.affectedRows);
+    response.statusCode = 200;
+    response.end();
+  });
+
+}
 }

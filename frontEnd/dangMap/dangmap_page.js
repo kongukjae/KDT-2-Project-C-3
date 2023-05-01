@@ -521,12 +521,12 @@ searchBar.addEventListener("keydown", (e) => {
 
 console.log(markersObject.markers);
 
-console.log(markersObject.markers[Object.keys]);
+// console.log(markersObject.markers[Object.keys]);
 
 
 
 
-console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][0]]); // 나
+// console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][0]]); // 나
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[2]]); // 다른넘
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[3]]); // 다른넘
@@ -573,10 +573,9 @@ makeControlBtnsArr[2].addEventListener("click", () => {
 
 });
 
-// 삭제버튼 눌렀을때,
+
 makeControlBtnsArr[0].addEventListener("click", () => {
   let target = [];
-
 
 
   for (let i in markersObject.markers) {
@@ -590,15 +589,40 @@ makeControlBtnsArr[0].addEventListener("click", () => {
   clusterer.clear(); //사라짐
   for (let i of target) {
     i.setMap(map);
+    console.log(i)
+    kakao.maps.event.addListener(i, 'click', function() {
+      const id = markersObject.userid;
+      console.log(id);
+     
+      const dateTime = markersObject.markers[markersObject.userid][1][target.indexOf(i)][1];
+      
+      alert(dateTime);
+      i.setMap(null);
+      
+      let xhr = new XMLHttpRequest();
+      
+      xhr.open("POST", `http://localhost:2080/mapDelete`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify({ id: id, date: dateTime }));
+    });
   }
-
-   
+  
   console.log('클릭 이벤트 발생');
-
 });
-markersObject.markers[markersObject.userid][1]
 
 
+
+
+
+
+
+console.log(markersObject.markers[markersObject.userid][1])
+
+
+
+
+
+console.log(markersObject.markers[markersObject.userid][1][0][0])
 
 // clusterer.redraw();
 //marker -> 내 발자국만 띄우고
@@ -657,6 +681,7 @@ markersObject.markers[markersObject.userid][1]
 //   }
 //   cnt++;
 // }, 1000);
+
 
 
     markersObject['clusterer'] = clusterer;
