@@ -415,8 +415,8 @@ searchBar.addEventListener("keydown", (e) => {
   function countMarkersDate() {
     let markersDateCount = 10; // 전날보다 이전 - 이후 +
     let markersTodayData = markersObject.markers[markersObject.userid][1];
-    let beforeDate = new Date().getDate() - 1;
-    let boolDate;
+    let todayDate = new Date();
+    let beforeDate = new Date(todayDate.setDate(todayDate.getDate() - 1));
 
     for (i in markersTodayData) {
       if(markersTodayData[i][1].getDate() <= beforeDate) {
@@ -429,7 +429,7 @@ searchBar.addEventListener("keydown", (e) => {
     countFootprintCount.innerText = markersDateCount;
 
     // console.log(markersObject.markers[markersObject.userid][1]);
-    // console.log(markersDateCount);
+    console.log(beforeDate);
   }
 
   async function getMarkersObject(){
