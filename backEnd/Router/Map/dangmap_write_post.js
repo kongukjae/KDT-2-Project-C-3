@@ -1,5 +1,6 @@
 import mysql from "mysql";
 import cmServer from "../../commonServer.js";
+import {publicChatGenerator} from '../../module/dangmapPublicChatGenerator.js'
 
 export default function callPostDangMap(request, response) {
   if (request.url.startsWith("/menuMap")) { //댕맵의 지도에 발자국 전부 띄우는 코드
@@ -20,7 +21,7 @@ export default function callPostDangMap(request, response) {
 
       for (const key in cooData) {
         console.log(cooData[key]);
-
+        publicChatGenerator(cooData[key][2], cooData[key][0].toFixed(13), cooData[key][1].toFixed(13), 'none', './backEnd/module/dangmapPubilcChatListCheck.json','./backEnd/module/dangmapPubilcChatListResult.json')
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(
