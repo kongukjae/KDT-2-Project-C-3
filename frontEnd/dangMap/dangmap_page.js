@@ -85,9 +85,10 @@ function map() {
 
   styleCreate(rootChild[0], dangMapStyle.menuMap);
   rootChild[0].id = "map";
-  styleCreate(rootChild[1], dangMapStyle.menuMapSlide);
 
+  styleCreate(rootChild[1], dangMapStyle.menuMapSlide);
   rootChild[1].id = "slide";
+
   styleCreate(rootChild[2], dangMapStyle.bottomMenu);
 
 
@@ -488,17 +489,17 @@ searchBar.addEventListener("keydown", (e) => {
 //  console.log(markersObject.markers['euni123'][0])
 
  // 모든 마커에 해당하는 키값을 조회할수있다.
- const markerIds = Object.keys(markersObject.markers);
-markerIds.forEach((markerId) => {
-  const marker = markersObject.markers[markerId];
+//  const markerIds = Object.keys(markersObject.markers);
+// markerIds.forEach((markerId) => {
+//   const marker = markersObject.markers[markerId];
   
-  if (marker && marker.value && Array.isArray(marker.value) && marker.value.length > 0) {
-    const value0 = marker.value[0];
-    if (value0 === 0 || value0 === 1 || value0 === 2) {
-      marker.setMap(null);
-    }
-  }
-});
+//   if (marker && marker.value && Array.isArray(marker.value) && marker.value.length > 0) {
+//     const value0 = marker.value[0];
+//     if (value0 === 0 || value0 === 1 || value0 === 2) {
+//       marker.setMap(null);
+//     }
+//   }
+// });
  console.log(markersObject.markers['asdasd1234'][1][0][0])
 // markersObject.markers['asdasd1234'][1][0][0].setMap(null);
 
@@ -540,22 +541,35 @@ console.log(markersObject.markers[Object.keys]);
 //   }
 // }
 
-window.handleClickAdd = function() {
+const addButton = document.getElementById("addButton");
+addButton.addEventListener("click", () => {
+  window.handleClickAdd();
+
   let target = [];
-  for(let i in markersObject.markers){
-    if(markersObject.markers[i][0] === 3){
+  for (let i in markersObject.markers) {
+    if (markersObject.markers[i][0] === 3) {
       console.log(markersObject.markers[i][1]);
-      for(let j of markersObject.markers[i][1]){
-        target.push(j[0])
+      for (let j of markersObject.markers[i][1]) {
+        target.push(j[0]);
       }
     }
-    
   }
+
   clusterer.clear(); //사라짐
-  for(let i of target){
+  for (let i of target) {
     i.setMap(map);
-  } 
-}
+  }
+});
+
+
+
+
+
+
+
+
+
+
 // clusterer.redraw();
 //marker -> 내 발자국만 띄우고
 // 수정 끝나면 
