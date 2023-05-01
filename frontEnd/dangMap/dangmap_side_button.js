@@ -6,7 +6,7 @@ function sideButton(){
   styleCreate(sideBtn, dangMapStyle.sideBtnStyle);
 
   const serch = tagCreate("div", {});
-  const orgChat = tagCreate("div", {});
+  const orgChat = tagCreate("div", {id:'SideButtonforPublicTalk'});
 
   styleCreate(serch, dangMapStyle.serchBtnStyle)
   serch.innerText = "검색"
@@ -67,10 +67,6 @@ function sideButton(){
     });
     
   })
-  
-  orgChat.addEventListener('click', function(){
-    alert("^0^")
-
-  })
+  return [serch,orgChat];
 }
 
