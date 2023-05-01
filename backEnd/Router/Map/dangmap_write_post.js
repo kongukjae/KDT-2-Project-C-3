@@ -18,13 +18,13 @@ export default function callPostDangMap(request, response) {
       response.writeHead(200, { "Content-Type": "text/html" });
       response.end();
 
-      for (const key in cooData) {
-        console.log(cooData[key]);
+      // for (const key in cooData) {
+        // console.log("coo::: ", cooData[0]);
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(
-          `insert into map_tables(latitude, longitude, id, addData) values(${cooData[key][0].toFixed(13)}, ${cooData[key][1].toFixed(13)}, '${cooData[key][2].split(";")[0]}', now())`,
+          `insert into map_tables(latitude, longitude, id, addData) values(${cooData[0][0].toFixed(13)}, ${cooData[0][1].toFixed(13)}, '${cooData[0][2].split(";")[0]}', now())`,
           function (err) {
             if (err) throw err;
             else {
@@ -33,7 +33,7 @@ export default function callPostDangMap(request, response) {
           }
         );
         conn.end();
-      }
+      // }
     });
   }
   if(request.url.startsWith('/dragMarker')) { // 댕맵에서 마커 드래그가 끝났을 때

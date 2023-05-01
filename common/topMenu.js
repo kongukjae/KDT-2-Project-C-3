@@ -36,27 +36,14 @@ function topMenu(rootChild){
   let alarmWind = tagCreate('div', {});
   styleCreate(alarmWind, targetStyle.alarmWindStyle);
 
-  //닫기 버튼 영역
-  let closeArea = tagCreate('div', {})
-  alarmWind.appendChild(closeArea);
-  styleCreate(closeArea, {
-    width: stylePropertyUnion.width.widthP100,
-    height: stylePropertyUnion.height.height30
-  })
+  
 
-  let closeBtn = tagCreate("button", {});
-  closeArea.appendChild(closeBtn);
-  styleCreate(closeBtn, targetStyle.alarmClose);
-  closeBtn.innerText = "X";
-
-  //모달창에 알림 리스트 영역
-  let alarmList = tagCreate('div', {});
-  styleCreate(alarmList, targetStyle.alarmListStyle);
-  alarmWind.appendChild(alarmList);
+  
 
 
   alarmImg.addEventListener('click', () => {
     rootChild.appendChild(alarmWind);
+    createClose(alarmWind);
 
     const jwt = document.cookie.replace(
       /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
@@ -68,18 +55,62 @@ function topMenu(rootChild){
     })
     .then((response) => response.json())
     .then((result) => {
-      console.log("re: ", result)
-      
+
+      let msg;
+      for(key in result){
+        console.log(result[key], key);
+        result[key].forEach((value) => {
+          if(value !== null){
+            msg = createMent(key, value);
+            createList(alarmWind, msg)
+          }
+        });
+        cnt++;
+      }
     });
-
-    
-    console.log("aaaaaaaaaa")
   })
+
+  function createClose(parent){
+    //닫기 버튼 영역
+    let closeArea = tagCreate('div', {})
+    parent.appendChild(closeArea);
+    styleCreate(closeArea, {
+      width: stylePropertyUnion.width.widthP100,
+      height: stylePropertyUnion.height.height30
+    })
+
+    let closeBtn = tagCreate("button", {});
+    closeArea.appendChild(closeBtn);
+    styleCreate(closeBtn, targetStyle.alarmClose);
+    closeBtn.innerText = "X";
+
+    closeBtn.addEventListener('click', () => {
+      alarmWind.innerHTML = '';
+      rootChild.removeChild(alarmWind);
   
-  closeBtn.addEventListener('click', () => {
-    rootChild.removeChild(alarmWind);
+    });
+  }
+  function createList(parent, text){
+    //모달창에 알림 리스트 영역
+    let alarmList = tagCreate('div', {});
+    styleCreate(alarmList, targetStyle.alarmListStyle);
+    parent.appendChild(alarmList);
+    alarmList.innerText = text;
 
-  })
+  }
+
+  function createMent(type, value){
+    if(type === 'like'){
+      return `${value}님이 회원님의 게시글에 하트를 표시했습니다.`
+    }
+    else if(type === 'follow'){
+      return `${value}님이 회원님을 팔로우 했습니다.`
+    }
+    else if(type === 'comment'){
+      return `${value}님이 회원님의 게시글에 댓글을 남겼습니다.`
+    }
+  }
+  
   
 }
 

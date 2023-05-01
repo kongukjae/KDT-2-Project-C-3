@@ -45,6 +45,7 @@ export default function postPostBoardLike(request, response) {
                   WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' AND post_like IS NULL
                 `);
                 likeResult = true;
+                conn.query(`insert into alarm(id, postlike) values ('${writeUser}', '${likeUser}')`)
               } 
               else {
                 const likeUserArr = JSON.parse(postLike).likeUser;
@@ -61,6 +62,10 @@ export default function postPostBoardLike(request, response) {
                   `);
                   likeResult = false;
 
+                  //console.log("likeUser:::::: ", likeUser)
+                  conn.query(`delete from alarm where id = '${writeUser}' and postlike = '${likeUser}'`);
+
+
                 } 
                 // 3. likeUser 배열에 존재하지 않는 경우 해당 값을 추가
                 else {
@@ -70,6 +75,8 @@ export default function postPostBoardLike(request, response) {
                     WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' AND post_like IS NOT NULL
                   `);
                   likeResult = true;
+                  conn.query(`insert into alarm(id, postlike) values ('${writeUser}', '${likeUser}')`)
+
 
                 }
               }

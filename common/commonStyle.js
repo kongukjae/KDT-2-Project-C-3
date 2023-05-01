@@ -220,7 +220,9 @@ const targetStyle = {
     height: stylePropertyUnion.height.height50,
     backgroundColor: stylePropertyUnion.colorTheme.beige,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
-    margin: "10px 0 0 10px"
+    margin: "10px 0 0 10px",
+    // textAlign: "center",
+    padding: "12px 0 0 15px"
   },
   alarmClose: {
     width: stylePropertyUnion.width.width20,
