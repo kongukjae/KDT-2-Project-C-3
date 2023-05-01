@@ -102,13 +102,13 @@ import dangTalkChatRoomPost from "./backEnd/router/chat/dangtalkPost.js";
 
 /*
 ------------DB 정보---------------
-  host: "192.168.0.93",
+  host: "192.168.100.63",
   user: "guest",
   password: "0000",
   database: "mungta",
 
   cmd로 mysql 접속방법
-  > mysql -h192.168.0.93 -uguest -p
+  > mysql -h192.168.100.63 -uguest -p
 ----------------------------------
 */
 const server = http.createServer(function (request, response) {
