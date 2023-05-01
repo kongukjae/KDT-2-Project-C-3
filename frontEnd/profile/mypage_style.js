@@ -158,6 +158,7 @@ function myPage(){
   function calendar(now, callback) {
 
     let dateres;
+    let dateData = [];
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
     xhr.open("GET", `http://localhost:2080/allloadMap?id=${cookieId}`);
@@ -165,12 +166,10 @@ function myPage(){
     xhr.addEventListener("load", function () {
       dateres = JSON.parse(xhr.response);
       for (const key in dateres) {
-        console.log(dateres);
+        dateData.push(dateres[key][1]);
       }
-      console.log(dateres);
-      console.log("dateres");
+      console.log(dateData);
     });
-
     let nowYear = now.getFullYear();
     let nowMonth = now.getMonth() + 1;
     let nowDate = now.getDate();
