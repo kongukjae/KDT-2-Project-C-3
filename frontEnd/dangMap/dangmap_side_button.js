@@ -52,6 +52,8 @@ function sideButton(){
       // 키워드로 장소를 검색합니다
       //ps.keywordSearch(searchBar.value, placesSearchCB);
       root.children[3].style.display = '';
+      root.children[3].children[1].style.marginTop = "5px",
+
       root.children[5].style.display = 'none';
     
     });
