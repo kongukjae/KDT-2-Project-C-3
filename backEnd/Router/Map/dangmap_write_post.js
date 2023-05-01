@@ -70,19 +70,24 @@ export default function callPostDangMap(request, response) {
     request.on('data', chunk => {
       body += chunk.toString();
     });
-  connection.query(`DELETE FROM map_table WHERE id = ${id} AND addData = '${date}'`, (error, results, fields) => {
-    if (error) {
-      console.log(error);
-      console.log(date);
-      response.statusCode = 500;
+  
+    const { id, dateTime } = JSON.parse(body);
+    const isoDateTime = new Date(dateTime).toISOString();
+    const formattedDateTime = isoDateTime.replace('T', ' ').slice(0, -5); // 'T'를 공백으로 치환하고 끝에서 5글자를 제외함
+    console.log(formattedDateTime); // 2023-05-01 14:48:09
+  
+    connection.query(`DELETE FROM map_table WHERE id = ${id} AND addData = '${formattedDateTime}'`, (error, results, fields) => {
+      if (error) {
+        console.log(error);
+        console.log(dateTime);
+        response.statusCode = 500;
+        response.end();
+        return;
+      }
+  
+      console.log('Deleted rows:', results.affectedRows);
+      response.statusCode = 200;
       response.end();
-      return;
-    }
-
-    console.log('Deleted rows:', results.affectedRows);
-    response.statusCode = 200;
-    response.end();
-  });
-
-}
+    });
+  }
 }

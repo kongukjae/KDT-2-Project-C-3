@@ -594,8 +594,10 @@ makeControlBtnsArr[0].addEventListener("click", () => {
       const id = markersObject.userid;
       console.log(id);
      
+
+     
       const dateTime = markersObject.markers[markersObject.userid][1][target.indexOf(i)][1];
-      
+      console.log(dateTime); 
       alert(dateTime);
       i.setMap(null);
       
