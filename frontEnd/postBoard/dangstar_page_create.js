@@ -62,14 +62,38 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   
   //좋아요 표시 함수 실행
   dangstarLike(postIndex, index, writerNickname);
+  // 댓글 입력 창 및 최신 댓글 표시 함수 실행
+  commentInputData(index, postIndex);
 
   //댓글 정보를 받아오는 함수
+  // 숨김 / 표시를 컨트롤 할 영역
+  let cmtModal = tagCreate("div", { id: "cmtModal" });
+  parent.children[index].appendChild(cmtModal);
+  styleCreate(cmtModal, dangstarStyle.dangstarCommentModal);
+
+  // 댓글 버튼 클릭 시 이전 댓글 보이기 / 감추기
+  let commentBtn = document.getElementById(`index_${index}`);
+
+  let cmBtnCount = true;
+  commentBtn.addEventListener("click", function () {
+    if(cmBtnCount) {
+      cmtModal.style.display = "flex";
+      cmBtnCount = false;
+    } else {
+      cmtModal.style.display = "none";
+      cmBtnCount = true;
+    }
+  });
+
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   function commentInputData(index, postIndex) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `http://localhost:2080/postBoardCommentData`, true);
     xhr.send(`postIndex=${postIndex}`);
     xhr.addEventListener('load', function() {
+      // 댓글 입력창 만드는 함수
+      commentInput(postWrap, index, postIndex);
+
       let res = JSON.parse(xhr.response);
       console.log(res);
       console.log("res res res res res");
@@ -79,7 +103,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       let cmText;
       let src_comment_link;
       let commentIndex;
-      let cnt = res.length;
+      let cnt = res.length - 1;
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         console.log("조건문 안쪽")
@@ -98,22 +122,33 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
           src_comment_link = imageFromServer;
           //최신 댓글 1개 보여주는 함수 실행
           commentRecent(postWrap, src_comment_link, textName, cmText, commentIndex);
+
+          // 이전 댓글 목록 불러오기
+          for(let i = 1; i < cnt + 1; i++) {
+            let text = res[i].cm_detail;
+            let name = res[i].cm_id;
+            let profileImg;
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", `http://localhost:2080/sendImage`);
+            xhr.responseType = "blob";
+            xhr.send(`type=proFile&id=${res[i].cm_id}`);
+            xhr.addEventListener("load", function () {
+              profileImg = URL.createObjectURL(xhr.response);
+              commentWindow(cmtModal, text, name, profileImg, i);
+            })
+          }
         });
         // console.log(src_comment_link);
-        
       }
-      // 댓글 입력창 만드는 함수
-      commentInput(postWrap, index, postIndex);
       // else {
       //   textName = res[0].cm_id;
       //   cmText = res[0].cm_detail;
       // }
-      commentWindow(index, cnt, parent);
+      // commentWindow(index, cnt, parent);
 
     })
     console.log("commentData를 받아오기 위한 함수 실행 테스트");
   }
-  commentInputData(index, postIndex);
   
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
   // function commentModal(index, cmtNumber, parent) {
