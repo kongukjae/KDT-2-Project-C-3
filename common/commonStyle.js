@@ -1870,6 +1870,7 @@ const dangstarStyle = {
     width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height100,
     padding: "10px",
+    borderTop: "1px solid #333",
   },
   dangstarRecentCommentContentWrap: {
     width: stylePropertyUnion.width.widthP100,
@@ -1880,7 +1881,7 @@ const dangstarStyle = {
   dangstarRecentCommentProfileWrap: {
     width: stylePropertyUnion.width.width60,
     height: stylePropertyUnion.height.height60,
-    border: "1px solid red",
+    border: "1px solid #333",
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     overflow: "hidden",
     // marginRight: "10px",
