@@ -23,7 +23,7 @@ export default function dangstarCommentEdit(request, response) {
       response.end();
     })
   }
-  if(request.url === "/commentUpdateBtn") {
+  if(request.url.startsWith("/commentUpdateBtn")) {
     console.log(request.url)
     console.log("코멘트 수정 진입 코멘트 수정 진입 코멘트 수정 진입 코멘트 수정 진입");
     let body = '';
@@ -56,7 +56,7 @@ export default function dangstarCommentEdit(request, response) {
       conn.end();
     })
   }
-  if(request.url === "/commentUpdateSubmit") {
+  if(request.url.startsWith("/commentUpdateSubmit")) {
     console.log(request.url)
     console.log("코멘트 수정 입력 진입 코멘트 수정 입력 진입 코멘트 수정 입력 진입 코멘트 수정 입력 진입");
     let body = '';
