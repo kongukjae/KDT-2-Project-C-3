@@ -43,34 +43,43 @@ function topMenu(rootChild){
   // });
   // alarmWind.appendChild(scrollBar);
 
+  let tg = true;
   alarmImg.addEventListener('click', () => {
-    rootChild.appendChild(alarmWind);
-    createClose(alarmWind);
-
-    const jwt = document.cookie.replace(
-      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    fetch("http://localhost:2080/alarmMark", {
-      method: "POST",
-      body: jwt,
-    })
-    .then((response) => response.json())
-    .then((result) => {
-
-      let msg;
-      for(key in result){
-        console.log(result[key], key);
-
-        result[key].forEach((value) => {
-          if(value !== null && key !== 'commentIdx'){
-            msg = createMent(key, value);
-            createList(rootChild.children[3].children[1], msg);
-            
-          }
-        });
-      }
-    });
+    if(tg){
+      rootChild.appendChild(alarmWind);
+      createClose(alarmWind);
+  
+      const jwt = document.cookie.replace(
+        /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+      fetch("http://localhost:2080/alarmMark", {
+        method: "POST",
+        body: jwt,
+      })
+      .then((response) => response.json())
+      .then((result) => {
+  
+        let msg;
+        for(key in result){
+          console.log(result[key], key);
+  
+          result[key].forEach((value) => {
+            if(value !== null && key !== 'commentIdx'){
+              msg = createMent(key, value);
+              createList(rootChild.children[3].children[1], msg);
+              
+            }
+          });
+        }
+      });
+      tg = false;
+    }
+    else if(!tg){
+      alarmWind.innerHTML = '';
+      rootChild.removeChild(alarmWind);
+      tg = true;
+    }
   })
 
   function createClose(parent){
@@ -99,7 +108,7 @@ function topMenu(rootChild){
     closeBtn.addEventListener('click', () => {
       alarmWind.innerHTML = '';
       rootChild.removeChild(alarmWind);
-  
+      tg = true;
     });
 
 
