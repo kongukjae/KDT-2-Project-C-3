@@ -4,7 +4,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   console.log(index);
   console.log(postIndex);
   // 게시글 전체를 감싸는 div
-  const postWrap = tagCreate("div", {id: `post_${index}`});
+  const postWrap = tagCreate("div", {id: `post_${postIndex}`});
   styleCreate(postWrap, dangstarStyle.dangstarFeedWrap);
   parent.appendChild(postWrap);
 
@@ -51,7 +51,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       postBtn.id = `like_${postIndex}_${index}`;
     } else if (i === 1) {
       postBtn.innerText = "댓글";
-      postBtn.id = `index_${index}`
+      postBtn.id = `index_${postIndex}`
     } else {
       postBtn.innerText = "구독";
     }
@@ -63,16 +63,16 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   //좋아요 표시 함수 실행
   dangstarLike(postIndex, index, writerNickname);
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
-  commentInputData(index, postIndex);
+  commentInputData(postIndex);
 
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
   let cmtModal = tagCreate("div", { id: "cmtModal" });
-  parent.children[index].appendChild(cmtModal);
+  document.getElementById(`post_${postIndex}`).appendChild(cmtModal);
   styleCreate(cmtModal, dangstarStyle.dangstarCommentModal);
 
   // 댓글 버튼 클릭 시 이전 댓글 보이기 / 감추기
-  let commentBtn = document.getElementById(`index_${index}`);
+  let commentBtn = document.getElementById(`index_${postIndex}`);
 
   let cmBtnCount = true;
   commentBtn.addEventListener("click", function () {
@@ -86,13 +86,13 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   });
 
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
-  function commentInputData(index, postIndex) {
+  function commentInputData(postIndex) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `http://localhost:2080/postBoardCommentData`, true);
     xhr.send(`postIndex=${postIndex}`);
     xhr.addEventListener('load', function() {
       // 댓글 입력창 만드는 함수
-      commentInput(postWrap, index, postIndex);
+      commentInput(postWrap, postIndex);
 
       let res = JSON.parse(xhr.response);
       console.log(res);
