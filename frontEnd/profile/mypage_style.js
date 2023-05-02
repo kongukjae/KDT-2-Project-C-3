@@ -5,7 +5,7 @@ function myPage(){
   
 
   let rootChild = [];
-  for(let i = 0;i<7;i++){
+  for(let i = 0;i<8;i++){
     let child = tagCreate("div",{});
     root.appendChild(child);
     rootChild.push(child);
@@ -288,8 +288,48 @@ function myPage(){
   }
 
   calendar(new Date());
+
+  let tabMenuContainer = tagCreate("div", { id: "tabMenuContainer" });
+  rootChild[6].appendChild(tabMenuContainer);
   
-  btmMeun(rootChild[6]);
+  let tabButtons = [
+    {
+      id: "tabButton1",
+      text: "Menu 1",
+    },
+    {
+      id: "tabButton2",
+      text: "Menu 2",
+    },
+  ];
+  
+
+
+  let tapMenuWrap = tagCreate("div", { id: "root" });
+  rootChild[6].appendChild(tapMenuWrap);
+  styleCreate(tapMenuWrap, mypageStyle.mypageCalendarRoot);
+   
+  let tabMenu = tagCreate("div",{});
+  rootChild[6].appendChild(tabMenu);
+  styleCreate(tabMenu, mypageStyle.mypageCalendarMonthOfNameBox);
+  
+   let tabLeft= tagCreate("div",{});
+   tabMenu.appendChild(tabLeft);
+   stylecreate(tabLeft,mypageStyle.mypageCalendarMonthOfNameBox);
+
+  let tabRight= tagCreate("div",{});
+   tabMenu.appendChild(tabRight);
+   stylecreate(tabRight,mypageStyle.mypageCalendarMonthOfNameBox);
+
+
+
+   
+
+
+
+
+
+  btmMeun(rootChild[7]);
   function userInfoUpdate(){
     let infoWrap = tagCreate('div');
     styleCreate(infoWrap,{

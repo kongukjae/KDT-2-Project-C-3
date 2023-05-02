@@ -1,3 +1,4 @@
+let addFlag = false;
 let markers = [];
 let markersObject = {
   userid : "",
@@ -170,41 +171,46 @@ function map() {
   // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
   let textCount;
   // console.log(textCount);
+  
+
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-    resultCount = 1;
-    let wrap = [];
-    // console.log("클릭 시 : " + overlayChecker);
-    // 오버레이 창이 비활성화 되있을 경우에 동작
-    if (overlayChecker === false) {
-      // 클릭한 위치에 마커를 표시합니다
-      let latlng = mouseEvent.latLng;
-      const httpRequest = new XMLHttpRequest();
+    if(addFlag){
+      resultCount = 1;
+      let wrap = [];
+      // console.log("클릭 시 : " + overlayChecker);
+      // 오버레이 창이 비활성화 되있을 경우에 동작
+      if (overlayChecker === false) {
+        // 클릭한 위치에 마커를 표시합니다
+        let latlng = mouseEvent.latLng;
 
-      //result.push(wrap);
-      // console.log(wrap);
-      //console.log("result: " + result);
-      // resultObject[cnt] = wrap;
-      // countResult = markersObject.markers[markersObject.userid][1].length;
-      console.log(textCount);
-      textCount -= resultCount;
-      countFootprintCount.innerText = textCount;
-      if(textCount < 10 && textCount >= 0) {
-        addMarker(latlng);
-        wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
-        resultObject[0] = wrap;
+        const httpRequest = new XMLHttpRequest();
+        console.log("여기 되는거냐??");
 
+        //result.push(wrap);
+        // console.log(wrap);
+        //console.log("result: " + result);
+        // resultObject[cnt] = wrap;
+        // countResult = markersObject.markers[markersObject.userid][1].length;
+        console.log(textCount);
+        textCount -= resultCount;
         countFootprintCount.innerText = textCount;
-        httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
-        httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
-      } else if(textCount < 0) {
-        alert(`오늘은 더 이상 마커를 찍을 수 없습니다.`);
-        countFootprintCount.innerText = 0;
-      }
-      
-      //cnt++;
-      //console.log("cnt = " + cnt);
-      // httpRequest.send(`re1=${result[0]}`);
-    }
+        if(textCount < 10 && textCount >= 0) {
+          addMarker(latlng);
+          wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
+          resultObject[0] = wrap;
+        
+          countFootprintCount.innerText = textCount;
+          httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+          httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
+        } else if(textCount < 0) {
+          alert(`오늘은 더 이상 마커를 찍을 수 없습니다.`);
+          countFootprintCount.innerText = 0;
+        }
+        
+        //cnt++;
+        //console.log("cnt = " + cnt);
+        // httpRequest.send(`re1=${result[0]}`);
+      }}
   });
 
   // 마커를 생성하고 지도위에 표시하는 함수입니다
@@ -471,58 +477,16 @@ searchBar.addEventListener("keydown", (e) => {
     //     lineHeight: '54px'
     // }]
   });
-
-
   
-    console.log('// --------------------여기확인용----------------------')
- //!for문을 돌려서 나 삭제하기 - 나를 삭제할때 필요하다.
 
   console.log(markersObject.markers[markersObject.userid][1]);
     console.log(markersObject.markers[markersObject.userid][1][0][0]);
 
  console.log(markersObject)
-//  console.log(markersObject.markersArray[0])
-//  for (let i = 0; i < 10; i++) {
-//   console.log(markersObject.markersArray[i]);
-// }
- console.log(markersObject.markers['asdasd123'][0])
 
- // 모든 마커에 해당하는 키값을 조회할수있다.
-//  const markerIds = Object.keys(markersObject.markers);
-// markerIds.forEach((markerId) => {
-//   const marker = markersObject.markers[markerId];
-  
-//   if (marker && marker.value && Array.isArray(marker.value) && marker.value.length > 0) {
-//     const value0 = marker.value[0];
-//     if (value0 === 0 || value0 === 1 || value0 === 2) {
-//       marker.setMap(null);
-//     }
-//   }
-// });
  console.log(markersObject.markers['asdasd1234'][1][0][0])
-// markersObject.markers['asdasd1234'][1][0][0].setMap(null);
-
-// markersObject.markers[markersObject.userid][1][0][0].setMap(null);
-
-
-// const userMarkers = markersObject.markers[markersObject.userid];
-
-// if (userMarkers && Array.isArray(userMarkers[1])) {
-//   for (let i = 0; i < userMarkers[1].length; i++) {
-//     const markerObject = userMarkers[1][i];
-//     if (markerObject && Array.isArray(markerObject) && markerObject.length > 0) {
-//       const marker = markerObject[0];
-//       marker.setMap(null);
-//     }
-//   }
-// }
 
 console.log(markersObject.markers);
-
-// console.log(markersObject.markers[Object.keys]);
-
-
-
 
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][0]]); // 나
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
@@ -531,7 +495,6 @@ console.log(markersObject.markers);
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[4]]); // 다른넘
 // console.log(markersObject.markers[Object.keys(markersObject.markers)[5]]); // 다른넘
 
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][1][0]])
 
 // for (let i = 0; i < 5; i++) {
 //   const key = Object.keys(markersObject.markers)[i];
@@ -547,6 +510,7 @@ console.log(markersObject.markers);
 // const addButton = document.getElementById("addButton");
 // 1. 추가버튼을 클릭했을때, 
 makeControlBtnsArr[1].addEventListener("click", () => {
+  alert("작동되는거 맞다");
   let target = [];
   for (let i in markersObject.markers) {
     if (markersObject.markers[i][0] === 3) {
@@ -560,21 +524,14 @@ makeControlBtnsArr[1].addEventListener("click", () => {
   for (let i of target) {
     i.setMap(map);
   }
+  addFlag = true;
+  
 
-  const rootChilds = rootChild[1]
-
-  for (let i = 0; i < rootChilds.length; i++) {
-    if (rootChilds[i].id === "slide") {
-      rootChilds[i].style.display = "none";
-    }
-  }
 
 });
-
-
+//2. 삭제버튼을 클릭했을때,
 makeControlBtnsArr[0].addEventListener("click", () => {
   let target = [];
-
 
   for (let i in markersObject.markers) {
     if (markersObject.markers[i][0] === 3) {
@@ -611,56 +568,19 @@ makeControlBtnsArr[0].addEventListener("click", () => {
   console.log('클릭 이벤트 발생');
 });
 
-
-
-
-
-
-
-console.log(markersObject.markers[markersObject.userid][1])
-
-
-
-
-
-console.log(markersObject.markers[markersObject.userid][1][0][0])
-
 // clusterer.redraw();
 //marker -> 내 발자국만 띄우고
 // 수정 끝나면 
 // let cnt = 0
 // setInterval(()=>{
-//   // for(let j of target){
-//   //   if(cnt%2===0){
-//   //     j.setMap(null);
+  // for(let j of target){
+  //   if(cnt%2===0){
+  //     j.setMap(null);
 
-//   //   }else{
-//   //     j.setMap(map);
-//   //   }
-//   // }
-//   if(cnt )
-//   cnt ++
-// },400)
-// setTimeout()
-// clusterer.clear()
-// clusterer.redraw();
-// const firstKey = Object.keys(markersObject.markers)[0];
-
-// for (let i = 0; i < 10; i++) {
-//     markersObject.markers[firstKey][1][i][0].setMap(null);
-// }
-
-
-// const thirdKey = Object.keys(markersObject.markers)[2];
-
-// for (let i = 0; i < 10; i++) {
-//     markersObject.markers[thirdKey][1][i][0].setMap(null);
-// }
-
-
-
-
-
+  //   }else{
+  //     j.setMap(map);
+  //   }
+  // }
 
 
 // let cnt = 0;

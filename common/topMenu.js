@@ -156,47 +156,6 @@ function topMenu(rootChild){
     parent.appendChild(alarmList);
     alarmList.innerText = text;
 
-<<<<<<< HEAD
- // 메뉴 슬라이드 요소
-  let menuSlide = tagCreate("div", {id: 'hamburgerSlide'});
-  targetRoot.appendChild(menuSlide);
-  styleCreate(menuSlide, {
-    width: "300px",
-    height: "100%",
-    backgroundColor: "#F7786B",
-    position: "absolute",
-    left: "-600px",
-    top: "0",
-    transition: "left 0.6s ease",
-    zIndex: 10
-  });
- // 햄버거 빵, 고기, 빵 이벤트 요소
- // bar1.addEventListener("click", () => {
- //   menuSlide.style.left = "0";
- // });
- // bar2.addEventListener("click", () => {
- //   menuSlide.style.left = "0";
- // });
- // bar3.addEventListener("click", () => {
- //   menuSlide.style.left = "0";
- // });
- 
- // X버튼 요소
-  let closeButton = tagCreate("div", {});
-  menuSlide.appendChild(closeButton);
-  styleCreate(closeButton, {
-    width: "30px",
-    height: "30px",
-    backgroundColor: stylePropertyUnion.colorTheme.peach,
-    borderRadius: "50%",
-    position: "absolute",
-    top: "20px",
-    right: "15px",
-    cursor: "pointer",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-=======
   }
 
   function createMent(type, value){
@@ -210,7 +169,6 @@ function topMenu(rootChild){
       return `${value}님이 회원님의 게시글에 댓글을 남겼습니다.`
     }
   }
->>>>>>> 46cb6b7e3acbdd80752e899fe6bd87b5cd02abcb
   
   function alarmListEvent(alarmList){
     const jwt = document.cookie.replace(
