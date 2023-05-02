@@ -28,8 +28,6 @@ dangstarInfinityScroll();
 loadDangstargram(0);
 
 function loadDangstargram(nth) {
-  // console.log(trigger)
-  trigger = false;
   const xhr = new XMLHttpRequest();
   // let result = {};
   xhr.open("GET", `http://localhost:2080/loadPostBoard?nth=${nth}`);
@@ -46,8 +44,7 @@ function loadDangstargram(nth) {
       }else{
         postCreate(postWrap, `/image/image/dangstar/${res[i].img}`, res[i].post_id, res[i].post_detail, i, res[i].post_index);
       }
-
-      // postCreate(root, "/image/resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, i, res[i].post_index);
     }
   });
+  trigger = false;
 }
