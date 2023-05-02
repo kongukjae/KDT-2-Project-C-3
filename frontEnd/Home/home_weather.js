@@ -4,7 +4,7 @@ async function getWeatherAsync() {
   let year = today.getFullYear();
   let month = today.getMonth() + 1;
   let date = today.getDate();
-  let targetDay = String(year) + String(month).padStart(2, "0") + String(date);
+  let targetDay = String(year) + String(month).padStart(2, "0") + String(date).padStart(2, "0");
   let weatherWindow = document.getElementById("root").children[1];
   styleCreate(weatherWindow, targetStyle.mainWeatherBanner)
   let weatherIcon = tagCreate("img", {id : "icon"});
@@ -58,12 +58,12 @@ async function getWeatherAsync() {
       weatherIcon.src = "/image/graphic/rainorsnow.png";
     break;
   }
-  console.log(rainOrSnow.response.body.items.item[6].fcstValue);
+  // console.log(rainOrSnow.response.body.items.item[6].fcstValue);
   console.log(rainOrSnow.response);
   console.log(temp.response);
   console.log(sky.response);
   console.log(result);
-  
+  console.log(targetDay);
   weatherInfor.innerText = `오늘의 날씨는 ${result[2]} ${result[0]}도 ${result[1]}입니다`;
 
   return result;

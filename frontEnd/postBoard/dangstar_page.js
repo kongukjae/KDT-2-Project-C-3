@@ -17,7 +17,7 @@ createHamburger(root);
 //   postCreate(root, "../resource/MainDogImg.jpg", "멍뭉이", "text", "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
 // }
 
-const postWrap = tagCreate("div", {});
+const postWrap = tagCreate("div", {id: "dangstarRoot"});
 styleCreate(postWrap, dangstarStyle.dangstarFeedListWrap);
 root.appendChild(postWrap);
 
@@ -51,28 +51,3 @@ writeBtn.addEventListener("click", () => {
   document.body.appendChild(writeForm);
   writeForm.submit();
 });
-
-loadDangstargram(0);
-
-function loadDangstargram(nth) {
-  const xhr = new XMLHttpRequest();
-  // let result = {};
-  xhr.open("GET", `http://localhost:2080/loadPostBoard?nth=${nth}`);
-  xhr.send();
-  xhr.addEventListener("load", function () {
-    let res = JSON.parse(xhr.response);
-    for (let i = 0; i < res.length; i++) {
-      console.log(res[i]);
-      console.log("resres resres");
-      // postCreate(부모요소, src_link(이미지 링크), writerNickname(작성자 이름), text(게시글 내용), index(인덱싱), postIndex(DB인덱싱))
-      // postCreate(root, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, "../resource/MainDogImg.jpg", res[i].cm_id, res[i].cm_detail, i, res[i].post_index);
-      if(res[i].img === 'null'){
-        postCreate(postWrap, "/image/image/default/null.png", res[i].post_id, res[i].post_detail, i, res[i].post_index);
-      }else{
-        postCreate(postWrap, `/image/image/dangstar/${res[i].img}`, res[i].post_id, res[i].post_detail, i, res[i].post_index);
-      }
-
-      // postCreate(root, "/image/resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, i, res[i].post_index);
-    }
-  });
-}

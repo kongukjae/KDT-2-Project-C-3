@@ -1,4 +1,4 @@
-function commentInput(parent, index, postIndex){
+function commentInput(parent, postIndex){
 // function commentInput(postWrap, index, postIndex){
   let test = document.cookie;
   console.log(test);
@@ -16,7 +16,7 @@ function commentInput(parent, index, postIndex){
 
   // 댓글 입력할 textarea
   const commentInput = tagCreate("input", {
-    id: `comment_${postIndex}_${index}`,
+    id: `comment_${postIndex}`,
     type: "text",
     name: "commentValue",
     placeholder: "내용을 입력해주세요",
@@ -25,14 +25,14 @@ function commentInput(parent, index, postIndex){
   commentForm.appendChild(commentInput);
 
   // 댓글 작성 버튼
-  const commentSubmit = tagCreate("div", {id: `commentSend_${index}`});
+  const commentSubmit = tagCreate("div", {id: `commentSend_${postIndex}`});
   styleCreate(commentSubmit, dangstarStyle.dangstarCommentWriteBtn);
   commentSubmit.innerText = "작성";
   commentForm.appendChild(commentSubmit);
-  let commentSendBtn = document.getElementById(`commentSend_${index}`);
+  let commentSendBtn = document.getElementById(`commentSend_${postIndex}`);
   commentSendBtn.addEventListener('click', () => {
-    console.log(document.getElementById(`comment_${postIndex}_${index}`).value);
-    let commentValueData = document.getElementById(`comment_${postIndex}_${index}`).value;
+    console.log(document.getElementById(`comment_${postIndex}`).value);
+    let commentValueData = document.getElementById(`comment_${postIndex}`).value;
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `http://localhost:2080/commentSubmit`, true);
     xhr.send(`commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`);
