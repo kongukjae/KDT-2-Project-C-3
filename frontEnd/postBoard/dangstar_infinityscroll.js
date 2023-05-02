@@ -1,15 +1,17 @@
 let trigger = false;
 function dangstarInfinityScroll() {
   const dangstarRoot = document.getElementById('dangstarRoot');
-  let cnt = 1;
-  console.log(trigger)
+  let cnt = 0;
   document.addEventListener('scroll', function() {
-    console.log("trigger : " + trigger)
-    let dangstarHeight = dangstarRoot.clientHeight;
+    let dangstarWindowHeight = window.innerHeight;
+    console.log("dangstarWindowHeight : " + dangstarWindowHeight)
+    let dangstarDocumentHeight = document.documentElement.scrollHeight;
+    console.log("dangstarDocumentHeight : " + dangstarDocumentHeight)
     let dangstarScrollPosition = scrollY;
-    // console.log(dangstarScrollPosition)
-    let dangstarScrollHeight = dangstarHeight - dangstarScrollPosition;
-    if(dangstarHeight/3 >= dangstarScrollHeight && trigger === false) {
+    console.log("dangstarScrollPosition : " + dangstarScrollPosition)
+    console.log(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition))
+    console.log("trigger : " + trigger)
+    if(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition) <= 100 && trigger === false) {
       trigger = true;
       console.log("inner : " + trigger)
       console.log("cnt : " + cnt)
@@ -21,6 +23,7 @@ function dangstarInfinityScroll() {
 }
 
 dangstarInfinityScroll();
+
 
 loadDangstargram(0);
 
