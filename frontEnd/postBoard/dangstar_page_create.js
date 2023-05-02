@@ -67,6 +67,14 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
   commentInputData(postIndex);
 
+  //
+  const postDetail = document.getElementById(`detail_${postIndex}`);
+  postDetail.addEventListener('click', () => {
+    console.log("더보기를 눌렀다", postIndex)
+    dangstarDetail(postIndex);
+    //window.location = "http://localhost:2080/dangstarDetail";
+    
+  });
 
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
@@ -89,18 +97,8 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     }
   });
 
-
-  //
-  const postDetail = document.getElementById(`detail_${postIndex}`);
-  postDetail.addEventListener('click', () => {
-    console.log("더보기를 눌렀다", postIndex)
-    let xhr = XMLHttpRequest;
-    xhr.open("GET", `http://localhost:2080/dangstarDetail?nth=${postIndex}`)
-    xhr.send();
-    xhr.addEventListener('load', () => {
-      console.log("skjksjdkljs       ", xhr.response)
-    })
-  });
+  
+  
 
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   function commentInputData(postIndex) {
