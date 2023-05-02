@@ -1,21 +1,21 @@
 let trigger = false;
 function dangstarInfinityScroll() {
-  const dangstarRoot = document.getElementById('dangstarRoot');
-  let cnt = 0;
+  // const dangstarRoot = document.getElementById('dangstarRoot');
+  let cnt = 1;
   document.addEventListener('scroll', function() {
     let dangstarWindowHeight = window.innerHeight;
-    console.log("dangstarWindowHeight : " + dangstarWindowHeight)
+    // console.log("dangstarWindowHeight : " + dangstarWindowHeight)
     let dangstarDocumentHeight = document.documentElement.scrollHeight;
-    console.log("dangstarDocumentHeight : " + dangstarDocumentHeight)
+    // console.log("dangstarDocumentHeight : " + dangstarDocumentHeight)
     let dangstarScrollPosition = scrollY;
-    console.log("dangstarScrollPosition : " + dangstarScrollPosition)
-    console.log(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition))
-    console.log("trigger : " + trigger)
+    // console.log("dangstarScrollPosition : " + dangstarScrollPosition)
+    // console.log(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition))
+    // console.log("trigger : " + trigger)
     if(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition) <= 100 && trigger === false) {
       trigger = true;
-      console.log("inner : " + trigger)
-      console.log("cnt : " + cnt)
-      console.log("페이지 로딩");
+      // console.log("inner : " + trigger)
+      // console.log("cnt : " + cnt)
+      // console.log("페이지 로딩");
       loadDangstargram(cnt);
       cnt ++;
     }
@@ -28,7 +28,7 @@ dangstarInfinityScroll();
 loadDangstargram(0);
 
 function loadDangstargram(nth) {
-  console.log(trigger)
+  // console.log(trigger)
   trigger = false;
   const xhr = new XMLHttpRequest();
   // let result = {};
