@@ -63,28 +63,17 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   //좋아요 표시 함수 실행
   dangstarLike(postIndex, index, writerNickname);
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
-<<<<<<< HEAD
-  commentInputData(index, postIndex);
-=======
   commentInputData(postIndex);
->>>>>>> 51d26c785cd97963fe7d72f6ef7506575a4a35dd
 
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
   let cmtModal = tagCreate("div", { id: "cmtModal" });
-<<<<<<< HEAD
-  parent.children[index].appendChild(cmtModal);
-  styleCreate(cmtModal, dangstarStyle.dangstarCommentModal);
 
-  // 댓글 버튼 클릭 시 이전 댓글 보이기 / 감추기
-  let commentBtn = document.getElementById(`index_${index}`);
-=======
   document.getElementById(`post_${postIndex}`).appendChild(cmtModal);
   styleCreate(cmtModal, dangstarStyle.dangstarCommentModal);
 
   // 댓글 버튼 클릭 시 이전 댓글 보이기 / 감추기
   let commentBtn = document.getElementById(`index_${postIndex}`);
->>>>>>> 51d26c785cd97963fe7d72f6ef7506575a4a35dd
 
   let cmBtnCount = true;
   commentBtn.addEventListener("click", function () {
@@ -104,11 +93,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     xhr.send(`postIndex=${postIndex}`);
     xhr.addEventListener('load', function() {
       // 댓글 입력창 만드는 함수
-<<<<<<< HEAD
-      commentInput(postWrap, index, postIndex);
-=======
       commentInput(postWrap, postIndex);
->>>>>>> 51d26c785cd97963fe7d72f6ef7506575a4a35dd
 
       let res = JSON.parse(xhr.response);
       console.log(res);
