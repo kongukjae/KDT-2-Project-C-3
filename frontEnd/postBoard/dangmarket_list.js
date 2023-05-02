@@ -38,11 +38,6 @@ topMenu(rootChild[0]);
 createHamburger(root);
 
 styleCreate(rootChild[1], dangMarketStyle.listContainer);
-function makeList(nth) {
-  loadSecondHandBoard(nth);
-}
-
-makeList(0);
 
 function createSecondHandList(result, count) {
   let child = tagCreate("a", { id: "index" + count });
@@ -54,10 +49,10 @@ function createSecondHandList(result, count) {
   let listImgChild = tagCreate("img", {});
   child.appendChild(listImgChild);
   styleCreate(listImgChild, dangMarketStyle.listImg);
-  if(result.img === 'null.png'){
-    listImgChild.src = "/image/image/default/null.png"
-  }else{
-    listImgChild.src = `/image/image/dangMarket/${result.img}`
+  if (result.img === "null.png") {
+    listImgChild.src = "/image/image/default/null.png";
+  } else {
+    listImgChild.src = `/image/image/dangMarket/${result.img}`;
   }
 
   let listTextChild = tagCreate("div", {});
@@ -75,6 +70,36 @@ function createSecondHandList(result, count) {
   text.innerText = result.detail;
 }
 
+// 하단 메뉴바
+btmMeun(rootChild[2]);
+
+
+
+let marketTrigger = false;
+function marketInfinityScroll() {
+  let cnt = 1;
+  document.addEventListener("scroll", function () {
+    let dangmarketWindowHeight = window.innerHeight;
+    // console.log("dangmarketWindowHeight : " + dangmarketWindowHeight);
+    let dangmarketDocumentHeight = document.documentElement.scrollHeight;
+    // console.log("dangmarketDocumentHeight : " + dangmarketDocumentHeight);
+    let dangmarketScrollPosition = scrollY;
+    // console.log("dangmarketScrollPosition : " + dangmarketScrollPosition);
+
+    if (
+      dangmarketDocumentHeight -
+        (dangmarketWindowHeight + dangmarketScrollPosition) <=
+        50 &&
+      marketTrigger === false
+    ) {
+      console.log("페이지 로딩");
+      marketTrigger = true;
+      makeList(cnt);
+      cnt++;
+    }
+  });
+}
+
 function loadSecondHandBoard(nth) {
   let nextIndex = nth * 5 - 1;
   fetch(`http://localhost:2080/loadSecondHandBoard?nth=${nth}`)
@@ -88,6 +113,13 @@ function loadSecondHandBoard(nth) {
         createSecondHandList(i, nextIndex);
       }
     });
+    marketTrigger = false;
 }
-// 하단 메뉴바
-btmMeun(rootChild[2]);
+
+marketInfinityScroll();
+
+function makeList(nth) {
+  loadSecondHandBoard(nth);
+}
+
+makeList(0);

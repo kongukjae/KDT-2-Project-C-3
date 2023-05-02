@@ -1,6 +1,7 @@
 import fs from "fs";
 import mysql from "mysql";
 import cmServer from "../commonServer.js";
+export {publicChatGenerator};
 
 const korea = {
   point :{
@@ -27,9 +28,9 @@ const korea = {
 }
 
 let chatRoomList = [];
-function publicChatGenerator(id, lat, lag, date){
+function publicChatGenerator(id, lat, lag, date, list, room){
   let PublicChatRoom = locationAverageStringInput(lat.toString()) + '&' + locationAverageStringInput(lag.toString());
-  const data = fs.readFileSync('dangmapPubilcChatListCheck.json');
+  const data = fs.readFileSync(list);
   let publlicChatList = JSON.parse(data)
   if(publlicChatList[PublicChatRoom] === undefined){
     publlicChatList[PublicChatRoom] = [id];
@@ -41,15 +42,15 @@ function publicChatGenerator(id, lat, lag, date){
       console.log('초대 알림 맴버 : ' + publlicChatList[PublicChatRoom])
       console.log('------------------------')
       chatRoomList.push(PublicChatRoom);
-      const dataResult = fs.readFileSync('dangmapPubilcChatListResult.json');
+      const dataResult = fs.readFileSync(room);
       let publlicChatListResult = JSON.parse(dataResult);
       publlicChatListResult.push(PublicChatRoom)
-      fs.writeFileSync('dangmapPubilcChatListResult.json', JSON.stringify(publlicChatListResult));
+      fs.writeFileSync(room, JSON.stringify(publlicChatListResult));
 
     }
  
   }
-  fs.writeFileSync('dangmapPubilcChatListCheck.json', JSON.stringify(publlicChatList));
+  fs.writeFileSync(list, JSON.stringify(publlicChatList));
 }
 
 
@@ -81,15 +82,15 @@ function locationAverageStringInput(value){
 
 }
 
-console.log(locationAverageStringInput('127.38'));
-let connection = mysql.createConnection(cmServer.mysqlInfo);
-connection.connect();
-connection.query(`SELECT * FROM map_tables WHERE addData >= '2023-4-25 00:00:00'`, (error, rows, fields) => {
-  if (error) throw error;
-  else{
-    for(let i of rows){
-      publicChatGenerator(i.id, i.latitude, i.longitude, i.addData)
-    }
-    console.log(chatRoomList)
-}})
-connection.end();
+// console.log(locationAverageStringInput('127.38'));
+// let connection = mysql.createConnection(cmServer.mysqlInfo);
+// connection.connect();
+// connection.query(`SELECT * FROM map_tables WHERE addData >= '2023-4-25 00:00:00'`, (error, rows, fields) => {
+//   if (error) throw error;
+//   else{
+//     for(let i of rows){
+//       publicChatGenerator(i.id, i.latitude, i.longitude, i.addData,'dangmapPubilcChatListCheck.json','dangmapPubilcChatListResult.json')
+//     }
+//     console.log(chatRoomList)
+// }})
+// connection.end();

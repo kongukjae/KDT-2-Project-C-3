@@ -5,6 +5,7 @@ let markersObject = {
   position :[],
   markersArray : [],
   usersArray :[],
+  publicChat : {detail:{},overlay:[]},
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
@@ -19,6 +20,9 @@ let markersObject = {
   },
   set appendPosition(value){
     this.position.push(value);
+  },
+  set appendPublicChat(value){
+    this.publicChat.detail[value[0]] = {overlay:value[1],name:value[2]};
   }
 };
 let overlayChecker = false;
@@ -399,8 +403,6 @@ searchBar.addEventListener("keydown", (e) => {
           markersObject.appendMarker = [result[key][2],type,markerNow,new Date(result[key][3])]
           markersObject.appendPosition = {lat:result[key][0],lng:result[key][1]}
           createOverlay(result[key][2],map,markerNow,result[key][0],result[key][1],changeDate(result[key][3]));
-          console.log("result 값");
-          console.log(result[key][2]);
           
         }
       //console.log(markersObject);
@@ -476,6 +478,7 @@ searchBar.addEventListener("keydown", (e) => {
       .then((res)=>{return res.json()})
       .then((result)=>{
         let publicTalkIconArr = []
+        let geocoder = new kakao.maps.services.Geocoder();
         for(let i of result){
           const positionNow = new kakao.maps.LatLng(i.split('&')[0], i.split('&')[1]); //인포윈도우 표시 위치입니다
           let publicTalkIcon = tagCreate('img')
@@ -490,8 +493,25 @@ searchBar.addEventListener("keydown", (e) => {
           xAnchor: 0.3,
           yAnchor: 0.91,
           });
+          
+          
           publicTalkIconArr.push(customOverlay)
+
+          let callback = function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+              let roomNameArr = result[0].address.address_name.split(' ')
+              markersObject['appendPublicChat'] = ['!public!'+i,customOverlay,roomNameArr[roomNameArr.length - 2] +" "+roomNameArr[roomNameArr.length - 1]]
+              let publicChatRoomList = createUserOrgchat(positionNow, roomNameArr[roomNameArr.length - 2] +" "+roomNameArr[roomNameArr.length - 1], '!public!'+i)
+
+              publicTalkIcon.addEventListener('click',()=>{
+                publicChatRoomList.setMap(map);
+
+              })
+            }
+          };
+          geocoder.coord2Address(positionNow.getLng(), positionNow.getLat(), callback);
         }
+        markersObject.publicChat['array'] = publicTalkIconArr;
         return publicTalkIconArr;
       })
       let publicTalkFlag = false;
@@ -731,3 +751,4 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   });
   return customOverlay;
 }
+
