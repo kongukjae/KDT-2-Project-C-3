@@ -1,6 +1,5 @@
 let trigger = false;
 function dangstarInfinityScroll() {
-  // const dangstarRoot = document.getElementById('dangstarRoot');
   let cnt = 1;
   document.addEventListener('scroll', function() {
     let dangstarWindowHeight = window.innerHeight;
