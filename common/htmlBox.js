@@ -133,7 +133,12 @@ const html = {
   <script src="/script/frontEnd/postBoard/dangstar_page.js"></script>
   <script src="/script/frontEnd/postBoard/dangstar_infinityscroll.js"></script>`,
 
-
+  postDetail: `
+  <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
+  <script src="/script/common/topMenu.js"></script>
+  <script src="/script/common/bottomMenu.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_detail_page.js"></script>`,
   dangTalkMain:`
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
