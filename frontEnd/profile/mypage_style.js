@@ -155,10 +155,14 @@ function myPage(){
 
   // rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리" //캘린더
 
+  // 지금이 몇 월인지 판단하기 위한 변수
+  let currentMonth = new Date().getMonth() + 1;
+  
   function calendar(now) {
     let nowYear = now.getFullYear();
     let nowMonth = now.getMonth() + 1;
     let nowDate = now.getDate();
+    console.log(currentMonth)
   
     const monthArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   
@@ -170,7 +174,7 @@ function myPage(){
       monthArray[1] = 28;
     }
   
-    let lastDate = monthArray[now.getMonth()];
+    // let lastDate = monthArray[now.getMonth()];
   
     let monthOfLastDate = new Date(nowYear, nowMonth, 0);
     let nowMonthOfLastDate = monthOfLastDate.getDate();
@@ -255,7 +259,8 @@ function myPage(){
         if (monthOfFirstDay <= countOfWeek && countOfDay < nowMonthOfLastDate) {
           countOfDay++;
           dayIndex[j].innerText = countOfDay;
-          if (countOfDay === nowDate) {
+          // ! if(countOfDay === nowDate)에서 캘린더에 표시되는 Month와 현재 Month가 일치할 때만 오늘 날짜를 표기하도록 변경
+          if ((countOfDay === nowDate) && (currentMonth === nowMonth)) {
             styleCreate(dayIndex[j], mypageStyle.mypageCalendarNowDayIndex);
           }
         }
@@ -268,6 +273,7 @@ function myPage(){
     
     beforeMonthBtn.addEventListener("click", function () {
       console.log("이전 달")
+      console.log(currentMonth)
       beforeMonth = new Date(now.setMonth(now.getMonth() - 1));
       rootChild[5].innerHTML = '';
       calendar(beforeMonth);
@@ -275,6 +281,7 @@ function myPage(){
     
     nextMonthBtn.addEventListener("click", function () {
       console.log("다음 달")
+      console.log(currentMonth)
       nextMonth = new Date(now.setMonth(now.getMonth() + 1));
       rootChild[5].innerHTML = '';
       calendar(nextMonth);

@@ -130,7 +130,8 @@ const html = {
   <script src="/script/frontEnd/postBoard/dangstar_page_comment_update_delete_btn.js"></script>
   <script src="/script/frontEnd/postBoard/dangstar_page_like.js"></script>
   <script src="/script/frontEnd/postBoard/dangstar_page_create.js"></script>
-  <script src="/script/frontEnd/postBoard/dangstar_page.js"></script>`,
+  <script src="/script/frontEnd/postBoard/dangstar_page.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_infinityscroll.js"></script>`,
 
 
   dangTalkMain:`

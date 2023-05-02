@@ -13,10 +13,28 @@ export default function dangstarCommentEdit(request, response) {
       let firstSpilt = body.split('&');
       let userID = jwtFunc.jwtCheck(firstSpilt[0].split("=")[1]).id;
       let commentIndex = firstSpilt[1].split('=')[1];
+      let postIndex;
+
       console.log(commentIndex);
       console.log("userID : " + userID)
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
+      conn.query(`select post_index from cm_post where cm_index = '${commentIndex}'`,
+      (err, data) => {
+        if(err) throw err;
+        else{
+          postIndex = data[0].post_index;
+          console.log("asdjlaksjdladjl: :::: ", postIndex)
+          conn.query(`select post_id from dangstar where post_index = ${postIndex}`,
+          (err, data) => {
+            if(err) throw err;
+            else{
+              // console.log("indexsskssskksks: ", data[0].post_id)
+              conn.query(`delete from alarm where id = '${data[0].post_id}' and comment = '${userID}' and comment_index = '${commentIndex}'`);
+            }
+          });
+        }
+      })
       conn.query(
         `delete from cm_post where cm_id = '${userID}' and cm_index = '${commentIndex}'`
       )

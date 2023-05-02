@@ -25,7 +25,7 @@ export default function callPostDangMap(request, response) {
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(
-          `insert into map_tables(latitude, longitude, id, addData) values(${cooData[key][0].toFixed(13)}, ${cooData[key][1].toFixed(13)}, '${cooData[key][2].split(";")[0]}', now())`,
+          `insert into map_tables(latitude, longitude, id, addData) values(${cooData[0][0].toFixed(13)}, ${cooData[0][1].toFixed(13)}, '${cooData[0][2].split(";")[0]}', now())`,
           function (err) {
             if (err) throw err;
             else {
