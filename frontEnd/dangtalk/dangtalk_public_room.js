@@ -182,6 +182,27 @@ function main(){
       chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`;
       console.log("이미지 가져오기 완료");
     });
+    styleCreate(box,{cursor:'pointer'});
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    let mypageForm = document.createElement('form');
+    
+    mypageForm.method = "POST";
+    mypageForm.action = "/mypage";
+    let params = {jwt:jwt, targetId:userID}
+    for(let key in params){
+      let hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type","hidden");
+      hiddenField.setAttribute("name",key);
+      hiddenField.setAttribute("value",params[key]);
+      mypageForm.appendChild(hiddenField);
+    }
+    window.document.body.appendChild(mypageForm);
+    box.addEventListener('click',()=>{
+      mypageForm.submit();
+    })
   }
 
 
