@@ -17,7 +17,7 @@ export default function postMapChatList(request, response) {
     const conn = mysql.createConnection(cmServer.mysqlInfo)
     conn.connect();
     conn.query(`
-      select userinfo.id, dogName from userinfo join orgchat_room on orgchat_room.id = userinfo.id where room = '${roomName}'`,
+      select userinfo.id, dogName from userinfo join chat_room on chat_room.id = userinfo.id where room = '${roomName}'`,
       (err, data) => {
         if(err) throw err;
         else{

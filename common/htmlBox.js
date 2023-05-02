@@ -139,6 +139,13 @@ const html = {
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/dangtalk/dangtalk_room.js"></script>`,
+  
+  dangTalkPublicMain:`
+  <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
+  <script src="/script/common/topMenu.js"></script>
+  <script src="/script/common/bottomMenu.js"></script>
+  <script src="/script/frontEnd/dangtalk/dangtalk_public_room.js"></script>`,
 
   dangTalkList:`
   <script src="/script/common/commonFunc.js"></script>

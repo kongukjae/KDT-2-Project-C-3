@@ -499,8 +499,9 @@ searchBar.addEventListener("keydown", (e) => {
 
           let callback = function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
-              markersObject['appendPublicChat'] = ['!public!'+i,customOverlay,result[0].address.address_name]
-              let publicChatRoomList = createUserOrgchat(positionNow, result[0].address.address_name)
+              let roomNameArr = result[0].address.address_name.split(' ')
+              markersObject['appendPublicChat'] = ['!public!'+i,customOverlay,roomNameArr[roomNameArr.length - 2] +" "+roomNameArr[roomNameArr.length - 1]]
+              let publicChatRoomList = createUserOrgchat(positionNow, roomNameArr[roomNameArr.length - 2] +" "+roomNameArr[roomNameArr.length - 1], '!public!'+i)
 
               publicTalkIcon.addEventListener('click',()=>{
                 publicChatRoomList.setMap(map);
