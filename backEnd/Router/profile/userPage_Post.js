@@ -85,6 +85,7 @@ export default function dangMap(request, response) {
           }
         }
       );
+      connection.query(`insert into alarm(id, follow) values ('${followTarget}', '${myId}')`)
       connection.end();
     })
     
@@ -109,6 +110,7 @@ export default function dangMap(request, response) {
           }
         }
       );
+      connection.query(`delete from alarm where id = '${followTarget}' and follow = '${myId}'`);
       connection.end();
     })
     
