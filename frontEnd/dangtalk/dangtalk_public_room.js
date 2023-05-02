@@ -131,10 +131,18 @@ function main(){
       boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
       cursor : 'pointer'
     });
-
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
     exitChatRoom.innerText = "방 나가기";
     exitChatRoom.addEventListener('click',()=>{
-      alert('나가기')
+      fetch('http://localhost:2080/getOutOfPublicRoom',{
+        method:'POST',
+        body : JSON.stringify({jwt:jwt,room:roomCode})
+      }).then((res)=>{
+        window.location = "http://localhost:2080/dangTalkChatList";
+      })
     })
 
 
