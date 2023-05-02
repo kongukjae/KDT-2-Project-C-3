@@ -207,7 +207,7 @@ const targetStyle = {
   },
   alarmWindStyle: {
     width: stylePropertyUnion.width.width450,
-    // height: stylePropertyUnion.height.height500,
+    height: stylePropertyUnion.height.height500,
     minHeight: "calc(100vh - 750px)",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     border: `3px outset ${stylePropertyUnion.colorTheme.gray}`,
@@ -241,6 +241,21 @@ const targetStyle = {
     cursor: "pointer",
     transition: "0.5s",
     fontWeight: stylePropertyUnion.fontWeightSet.bold
+  },
+  alarmCount: {
+    width:"22px",
+    height: "22px",
+    ...stylePropertyUnion.flexRowCenter,
+    position: "absolute",
+    borderRadius: "50%",
+    paddingTop: "1px",
+    backgroundColor: "#2353FF",
+    color: "white",
+    fontSize: "12px",
+    fontWeight: "300",
+    textAlign: "center",
+    right: "-6px",
+    top: "-3px",
   },
   mainRoot: {
     width: stylePropertyUnion.width.width500,

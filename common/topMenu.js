@@ -36,6 +36,38 @@ function topMenu(rootChild){
   let alarmWind = tagCreate('div', {});
   styleCreate(alarmWind, targetStyle.alarmWindStyle);
 
+  //알림 온 개수 표시 영역
+  let alarmCount = tagCreate('div', {});
+  styleCreate(alarmCount, targetStyle.alarmCount)
+  alarmWrap.appendChild(alarmCount);
+  alarmCount.style.display = "none";
+
+  const jwt = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  fetch("http://localhost:2080/alarmMark", {
+    method: "POST",
+    body: jwt,
+  })
+  .then((response) => response.json())
+  .then((result) => {
+    console.log("count: ", result)
+
+    if(result > 0){
+      alarmCount.style.display = "";
+
+      if(result > 99){
+        alarmCount.style.fontSize = "10px";
+        alarmCount.style.paddingTop = "2px";
+        alarmCount.innerText = "99+";
+      }
+      else{
+        alarmCount.innerText = result;
+      }
+    }
+  })
+
   // let scrollBar = tagCreate('div', {});
   // styleCreate(scrollBar, {
   //   width: stylePropertyUnion.width.width15,
@@ -43,17 +75,14 @@ function topMenu(rootChild){
   // });
   // alarmWind.appendChild(scrollBar);
 
+  //알림 내용 불러오는 곳
   let tg = true;
   alarmImg.addEventListener('click', () => {
     if(tg){
       rootChild.appendChild(alarmWind);
       createClose(alarmWind);
   
-      const jwt = document.cookie.replace(
-        /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
-        "$1"
-      );
-      fetch("http://localhost:2080/alarmMark", {
+      fetch("http://localhost:2080/alarmConent", {
         method: "POST",
         body: jwt,
       })
@@ -62,7 +91,7 @@ function topMenu(rootChild){
   
         let msg;
         for(key in result){
-          console.log(result[key], key);
+          //console.log(result[key], key);
   
           result[key].forEach((value) => {
             if(value !== null && key !== 'commentIdx'){
@@ -80,7 +109,11 @@ function topMenu(rootChild){
       rootChild.removeChild(alarmWind);
       tg = true;
     }
-  })
+
+    let alarmList = document.getElementById('alarmList');
+    let cnt = alarmList.childElementCount
+    console.log(cnt);
+  });
 
   function createClose(parent){
     //닫기 버튼 영역
@@ -96,10 +129,10 @@ function topMenu(rootChild){
     styleCreate(closeBtn, targetStyle.alarmClose);
     closeBtn.innerText = "X";
 
-    let listArea = tagCreate('div', {});
+    let listArea = tagCreate('div', {id: "alarmList"});
     styleCreate(listArea, {
       width: "440px",
-      height: stylePropertyUnion.height.height450,
+      height: "440px",
       overflowY : "scroll",
       marginTop: "10px"
     });
