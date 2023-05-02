@@ -1469,7 +1469,7 @@ const dangMarketStyle = {
     position: "relative",
     marginBottom: "90px",
     zIndex: "1",
-    ...stylePropertyUnion.flexColCenter,
+    ...stylePropertyUnion.flexColumnTopCenter,
   },
   listBox: {
     width: stylePropertyUnion.width.widthP80,
@@ -1488,8 +1488,14 @@ const dangMarketStyle = {
   },
   listText: {
     width: stylePropertyUnion.width.width300,
-    height: stylePropertyUnion.height.height100,
+    // height: stylePropertyUnion.height.height100,
     ...stylePropertyUnion.flexColCenter,
+    display: "-webkit-box",
+    webkitBoxOrient: "vertical",
+    webkitLineClamp: "3",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "pre-wrap",
   },
   listTitle: {
     width: stylePropertyUnion.width.widthP90,
@@ -2083,7 +2089,7 @@ const dangfriendsStyle = {
     position: "relative",
   },
   friendsWrapArea: {
-    ...stylePropertyUnion.flexColCenter,
+    ...stylePropertyUnion.flexColumnTopCenter,
     width: stylePropertyUnion.width.widthP100,
     minHeight: "calc(100vh - 216px)",
     marginBottom: "90px",
