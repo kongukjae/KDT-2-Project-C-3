@@ -26,6 +26,8 @@ function changeDate(date) {
   let nowDate = new Date(date);
   let formatDate = nowDate.toLocaleString();
 
+  console.log(formatDate);
+
   return formatDate;
 }
 
@@ -606,6 +608,7 @@ makeControlBtnsArr[0].addEventListener("click", () => {
       xhr.open("POST", `http://localhost:2080/mapDelete`);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(JSON.stringify({ id: id, date: dateTime }));
+      // xhr.send('hi');
     });
   }
   
