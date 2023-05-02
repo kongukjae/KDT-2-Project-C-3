@@ -229,5 +229,26 @@ export default function dangTalkPost(request, response) {
 
       })
   }
+  if (request.url === "/getOutOfPublicRoom") {
+    let body = "";
+      request.on("data", function (data) {
+        body = body + data.toString();
+      });
+      request.on("end", function () {
+        let result = JSON.parse(body)
+        const userId = JWT.jwtCheck(result.jwt).id;
+        const room = result.room;
+        let connection = mysql.createConnection(cmServer.mysqlInfo);
+        connection.connect();
+        connection.query(`DELETE FROM chat_room
+        WHERE id = '${userId}' AND room = '${room}';`, (error, rows, fields) => {
+          if (error) throw error;
+          else{
+              response.writeHead(200);
+              response.end();
+          }
+        })
 
+      })
+  }
 }
