@@ -1,8 +1,53 @@
-// 게시글 생성 함수
-// function postCreate(parent, src_link, writerNickname, text, src_comment_link, textName, cmText, index, postIndex) {
-function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
-  console.log(index);
-  console.log(postIndex);
+
+function dangstarDetail(postIndex){
+
+  
+
+  // fetch(`http://localhost:2080/dangstarDetail`, {
+  //   method: "POST",
+  //   body: jwt,
+  // })
+  // .then((response) => {
+  //   return response.json();
+  // })
+  // .then((result) => {
+  //   // 게시글 영역
+  //   // if(res[i].img === 'null'){
+  //   //   createPage2(postWrap, "/image/image/default/null.png", res[i].post_id, res[i].post_detail, i, res[i].post_index);
+  //   // }else{
+  //   //   createPage2(postWrap, `/image/image/dangstar/${res[i].img}`, res[i].post_id, res[i].post_detail, i, res[i].post_index);
+  //   // }
+    
+  // })
+}
+
+createPost();
+function createPost(){
+  
+  const root = tagCreate("div", { id: "root" });
+  styleCreate(root, dangstarStyle.dangstarRoot);
+  document.body.appendChild(root);
+  
+  // 탑 메뉴
+  const topMenuWrap = tagCreate("div", {});
+  root.appendChild(topMenuWrap);
+  topMenu(topMenuWrap);
+  createHamburger(root);
+
+  root.appendChild(postWrap);
+  const postWrap = tagCreate("div", {id: "dangstarRoot"});
+  styleCreate(postWrap, dangstarStyle.dangstarFeedListWrap);
+
+  // 바텀 메뉴
+  const btmMeunWrap = tagCreate("div", {});
+  root.appendChild(btmMeunWrap);
+  btmMeun(btmMeunWrap);
+  
+
+  
+}
+
+function createPage2(parent, src_link, writerNickname, text, postIndex){
   // 게시글 전체를 감싸는 div
   const postWrap = tagCreate("div", {id: `post_${postIndex}`});
   styleCreate(postWrap, dangstarStyle.dangstarFeedWrap);
@@ -41,29 +86,32 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   postWrap.appendChild(postBtnWrap);
 
   // 각각의 버튼을 만드는 반복문
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     const postBtn = tagCreate("button", {});
     if (i === 0) {
       const heartImage = tagCreate("img", {id: 'heartImage'})
       postBtn.appendChild(heartImage);
       styleCreate(heartImage, dangstarStyle.dangstarLikeImg)
       //postBtn.innerText = "좋아요";
-      postBtn.id = `like_${postIndex}_${index}`;
-    } else if (i === 1) {
+      postBtn.id = `like_${postIndex}`;
+    } 
+    else if (i === 1) {
       postBtn.innerText = "댓글"; 
-      postBtn.id = `index_${postIndex}_${index}`
-    } else {
-      postBtn.innerText = "➤";
-      postBtn.id = `detail_${postIndex}`
-
+      postBtn.id = `index_${postIndex}`
     }
+    //else {
+    //   postBtn.innerText = "➤";
+    //   postBtn.id = `detail_${postIndex}`
+
+    // }
     styleCreate(postBtn, dangstarStyle.dangstarFeedBtns);
     postBtnWrap.appendChild(postBtn);
 
   }
   
   //좋아요 표시 함수 실행
-  dangstarLike(postIndex, index, writerNickname);
+  // dangstarLike(postIndex, writerNickname);
+
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
   commentInputData(postIndex);
 
@@ -87,19 +135,6 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       cmtModal.style.display = "none";
       cmBtnCount = true;
     }
-  });
-
-
-  //
-  const postDetail = document.getElementById(`detail_${postIndex}`);
-  postDetail.addEventListener('click', () => {
-    console.log("더보기를 눌렀다", postIndex)
-    let xhr = XMLHttpRequest;
-    xhr.open("GET", `http://localhost:2080/dangstarDetail?nth=${postIndex}`)
-    xhr.send();
-    xhr.addEventListener('load', () => {
-      console.log("skjksjdkljs       ", xhr.response)
-    })
   });
 
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
@@ -166,10 +201,4 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     })
     console.log("commentData를 받아오기 위한 함수 실행 테스트");
   }
-  
-  // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
-  // function commentModal(index, cmtNumber, parent) {
-  //   commentWindow(index, cmtNumber, parent);
-  // }
-  // commentModal()
 }
