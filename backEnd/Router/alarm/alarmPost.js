@@ -72,5 +72,23 @@ export default function alarmMark(request, response){
 
     });
   };
+  if(request.url.startsWith('/deleteAlarm')){
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+    });
+    request.on("end", function () {
+      
+      let bodySplit = body.split('&');
+      const targetId = JWT.jwtCheck(bodySplit[0].split('=')[1]).id;
+      const num = bodySplit[1].split('=')[1];
+      console.log("사용자가 알림 확인 ", targetId, num);
 
+      // let conn = mysql.createConnection(cmServer.mysqlInfo);
+      // conn.connect();
+      // conn.query(`delete from alarm where id = ${targetId} and rownum = ${num}`);
+
+    });
+  };
 }
+

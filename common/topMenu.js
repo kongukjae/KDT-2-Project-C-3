@@ -81,6 +81,8 @@ function topMenu(rootChild){
     if(tg){
       rootChild.appendChild(alarmWind);
       createClose(alarmWind);
+
+      let alarmList = document.getElementById('alarmList');
   
       fetch("http://localhost:2080/alarmConent", {
         method: "POST",
@@ -96,24 +98,25 @@ function topMenu(rootChild){
           result[key].forEach((value) => {
             if(value !== null && key !== 'commentIdx'){
               msg = createMent(key, value);
-              createList(rootChild.children[3].children[1], msg);
+              createList(alarmList, msg);
               
             }
           });
         }
+
+        alarmListEvent(alarmList);
+
       });
       tg = false;
+      
     }
     else if(!tg){
       alarmWind.innerHTML = '';
       rootChild.removeChild(alarmWind);
       tg = true;
     }
-
-    let alarmList = document.getElementById('alarmList');
-    let cnt = alarmList.childElementCount
-    console.log(cnt);
   });
+  
 
   function createClose(parent){
     //닫기 버튼 영역
@@ -167,6 +170,26 @@ function topMenu(rootChild){
     }
   }
   
+  function alarmListEvent(alarmList){
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    console.log("알림 리스트 개수: ", alarmList.childElementCount);
+
+    let cnt = alarmList.childElementCount;
+    let xhr = new XMLHttpRequest();
+    let url = "http://localhost:2080/deleteAlarm";
+
+    for(let i = 0; i < cnt; i++){
+      alarmList.children[i].addEventListener('click', () => {
+        console.log(`${i}번째 자식을 클릭했습니다.`)
+        
+        xhr.open('POST', url, true);
+        xhr.send(`id=${jwt}&num=${i}`)
+      })
+    }
+  };
   
 }
 
