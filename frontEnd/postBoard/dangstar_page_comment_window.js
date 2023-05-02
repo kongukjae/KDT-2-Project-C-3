@@ -1,6 +1,11 @@
 //댓글 창 만드는 함수
 function commentWindow(parent, cmText, cmName, profileImg, i) {
+<<<<<<< HEAD
   console.log(i);
+=======
+  // console.log(i);
+  console.dir(parent);
+>>>>>>> 51d26c785cd97963fe7d72f6ef7506575a4a35dd
   // 댓글 하나가 보여질 영역
   let cmt = tagCreate("div", {});
   parent.appendChild(cmt);
