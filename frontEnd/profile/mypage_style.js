@@ -222,7 +222,7 @@ function myPage(){
       // * Set 집합을 배열로 변환
       const dateListArr = Array.from(dateListSet);
       console.log(dateListArr); // * ex) ['2023-04-12', '2023-04-13', '2023-04-21', '2023-04-24', '2023-04-25', '2023-04-26']
-      // * 집합의 길이만큼 반복문 실행
+      // * 배열의 길이만큼 반복문 실행
       for(let i = 0; i < dateListArr.length; i++) {
         // * 캘린더의 년도, 달이 발자국 찍힌 년도, 달과 일치 할 때
         if((Number(dateListArr[i].split('-')[0]) === nowYear) && (Number(dateListArr[i].split('-')[1]) === nowMonth)) {
