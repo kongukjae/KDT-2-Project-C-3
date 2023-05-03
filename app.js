@@ -140,9 +140,6 @@ const server = http.createServer(function (request, response) {
     //댕스타그램 페이지
     dangstar(request, response);
 
-    //댕스타그램 상세페이지
-    dangstarDetail(request, response)
-
     //댕톡
     dangTalkChatRoom(request, response)
 
@@ -186,6 +183,8 @@ const server = http.createServer(function (request, response) {
     dangstarCommentEdit(request, response);
     dangstarLike(request, response);
     dangstarUserCheck(request, response);
+    //댕스타그램 상세페이지
+    dangstarDetail(request, response)
 
     //댕프렌드
     dangfriendPost(request, response)

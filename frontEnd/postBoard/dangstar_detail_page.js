@@ -17,25 +17,23 @@ const btmMeunWrap = tagCreate("div", {});
 root.appendChild(btmMeunWrap);
 btmMeun(btmMeunWrap);
 
-dangstarDetail();
+console.log("dldkfkdkkd:: ", datas)
+console.log("dldkfkdkkd:: ")
+
+// dangstarDetail();
 
 function dangstarDetail(){
 
-  let xhr = new XMLHttpRequest();
-    xhr.open("GET", `http://localhost:2080//postDetailDangstar`)
-    xhr.send();
-    xhr.addEventListener('load', ()=>{
-      //postCreate(postWrap, "/image/image/default/null.png", "asdasd123", "hello", 1, 7)
-      console.log("잘 왔다아아아앙아아아아ㅏㅏ")
-    })
+  // console.log("dldkfkdkkd:: ", link, id, text, idx, postIdx)
+
+  // let xhr = new XMLHttpRequest();
+  //   xhr.open("GET", `http://localhost:2080//postDetailDangstar`)
+  //   xhr.send();
+  //   xhr.addEventListener('load', ()=>{
+  //     //postCreate(postWrap, "/image/image/default/null.png", "asdasd123", "hello", 1, 7)
+  //     console.log("잘 왔다아아아앙아아아아ㅏㅏ")
+  //   })
   
 }
 
 
-function createPost(){
-  
-  
-  
-
-  
-}

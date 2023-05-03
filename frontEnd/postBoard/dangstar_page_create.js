@@ -51,7 +51,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       postBtn.id = `like_${postIndex}_${index}`;
     } else if (i === 1) {
       postBtn.innerText = "댓글"; 
-      postBtn.id = `index_${postIndex}_${index}`
+      postBtn.id = `index_${postIndex}`
     } else {
       postBtn.innerText = "➤";
       postBtn.id = `detail_${postIndex}`;
@@ -70,13 +70,41 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
   commentInputData(postIndex);
 
-  let detailBtn = document.getElementById(`detail_${postIndex}`);
+  
+  const detailBtn = document.getElementById(`detail_${postIndex}`);
   detailBtn.addEventListener('click', () => {
-    let xhr = new XMLHttpRequest();
-      xhr.open("POST", `http://localhost:2080//postDetailDangstar`)
-      xhr.send(`{src_link=${src_link}&writerNickname=${writerNickname}&text=${text}index=${index}&postIndex=${postIndex}}`);
+    console.log("정상적으로 상세페이지 클릭함: ", postIndex)
+    let detailForm = document.createElement("form");
+    detailForm.method = "POST";
+    detailForm.action = "/detailPostDangstar";
+    let params = {src_link:src_link,
+      writerNickname:writerNickname,
+      text:text,
+      index:index,
+      postIndex:postIndex};
+    for (let key in params) {
+      let hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+      hiddenField.setAttribute("value", params[key]);
+      detailForm.appendChild(hiddenField);
+    }
+    document.body.appendChild(detailForm);
+
+    detailForm.submit();
+
+    //window.location = "http://localhost:2080/detailPostDangstar";
+    // const xhr = new XMLHttpRequest();
+    // xhr.open("POST", `http://localhost:2080/detailPostDangstar`, true)
+    // xhr.send(`{src_link=${src_link}&writerNickname=${writerNickname}&text=${text}&index=${index}&postIndex=${postIndex}}`);
+    // xhr.addEventListener('load', ()=>{
+    //   console.log("응답받음~!!")
+    //   window.location = "http://localhost:2080/detailPostDangstar";
+      
+    // })
   })
 
+  
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
   let cmtModal = tagCreate("div", { id: "cmtModal" });
