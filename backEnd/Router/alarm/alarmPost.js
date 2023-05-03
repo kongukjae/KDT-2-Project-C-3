@@ -83,19 +83,21 @@ export default function alarmMark(request, response){
     request.on("end", function () {
       
       let bodySplit = body.split('&');
+      const targetId = JWT.jwtCheck(bodySplit[0].split('=')[1]).id;
+      let disc = bodySplit[1].split('=')[0];
+      const target = bodySplit[1].split('=')[1];
+      const type = bodySplit[2].split('=')[1];
+      console.log("사용자가 알림 확인 ", targetId, disc, target, type);
 
-      if(bodySplit.length === 2){
-
-      }
-      else{
-        const targetId = JWT.jwtCheck(bodySplit[0].split('=')[1]).id;
-        const num = bodySplit[1].split('=')[1];
-        const type = bodySplit[2].split('=')[1];
-        console.log("사용자가 알림 확인 ", targetId, num, type);
-  
+      if(disc === "follow"){
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
-        conn.query(`delete from alarm where id = '${targetId}' and comment_index = '${num}' and alarm_type = '${type}'`);
+        conn.query(`delete from alarm where id = '${targetId}' and follow = '${target}' and alarm_type = '${type}'`);
+      }
+      else{
+        let conn = mysql.createConnection(cmServer.mysqlInfo);
+        conn.connect();
+        conn.query(`delete from alarm where id = '${targetId}' and comment_index = '${target}' and alarm_type = '${type}'`);
 
       }
       response.writeHead(200);

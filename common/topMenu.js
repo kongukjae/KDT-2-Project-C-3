@@ -91,9 +91,11 @@ function topMenu(rootChild){
       .then((response) => response.json())
       .then((result) => {
   
+        console.log("akjaksjdk:::::" , result)
         let msg;
         let type = [];
         let num = [];
+        let follower = [];
 
         for(key in result){
           //console.log(result[key], key);
@@ -104,12 +106,17 @@ function topMenu(rootChild){
                 createList(alarmList, msg);
                 type.push(key);
                 num.push(result['commentIdx'][index]);
+                
+                if(key === 'follow'){
+                  follower.push(value)
+
+                }
               }
             });
           }
         }
         
-        alarmListEvent(alarmList, type, num);
+        alarmListEvent(alarmList, type, num, follower);
 
       });
       tg = false;
@@ -176,7 +183,7 @@ function topMenu(rootChild){
     }
   }
   
-  function alarmListEvent(alarmList, type, num){
+  function alarmListEvent(alarmList, type, num, follower){
     console.log("ljdasdkjdkjaskdjkjkjkdj, ", type, num);
     const jwt = document.cookie.replace(
       /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
@@ -215,10 +222,47 @@ function topMenu(rootChild){
 
         }
         else if(type[i] === 'follow'){
+          console.log(follower)
 
+          xhr.open('POST', url, true);
+          xhr.send(`id=${jwt}&follow=${follower[i]}&type=${type[i]}`)
+          xhr.addEventListener('load', ()=>{
+            let mypageForm = document.createElement('form');
+      
+            mypageForm.method = "POST";
+            mypageForm.action = "/mypage";
+            let params = {jwt:jwt, targetId:follower[i]}
+            for(let key in params){
+              let hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type","hidden");
+              hiddenField.setAttribute("name",key);
+              hiddenField.setAttribute("value",params[key]);
+              mypageForm.appendChild(hiddenField);
+            }
+            mypageForm.submit();
+
+          });
         }
         else if(type[i] === 'comment'){
+          xhr.open('POST', url, true);
+          xhr.send(`id=${jwt}&num=${num[i]}&type=${type[i]}`)
+          xhr.addEventListener('load', ()=>{
 
+            let dataForm = document.createElement("form");
+            dataForm.method = "POST";
+            dataForm.action = "/detailPostDangstar";
+            let params = {postIndex:num[i]}
+            for (let key in params) {
+              let hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type", "hidden");
+              hiddenField.setAttribute("name", key);
+              hiddenField.setAttribute("value", params[key]);
+              dataForm.appendChild(hiddenField);
+            }
+            document.body.appendChild(dataForm);
+            dataForm.submit();
+  
+          })
         }
 
       })

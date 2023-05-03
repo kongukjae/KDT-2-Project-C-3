@@ -40,7 +40,7 @@ export default function postCommentInput(request, response) {
             if(err) throw err;
             else{
               // console.log("kjdaksjdjasdklaj::::::::::", data[0].cm_index)
-              conn.query(`insert into alarm(id, comment, comment_index, alarm_type) values ('${postID}', '${cm_id}', '${data[0].cm_index}', 'comment')`)
+              conn.query(`insert into alarm(id, comment, comment_index, alarm_type) values ('${postID}', '${cm_id}', '${post_index}', 'comment')`)
               conn.end();
             }
           });
