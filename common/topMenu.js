@@ -92,19 +92,24 @@ function topMenu(rootChild){
       .then((result) => {
   
         let msg;
+        let type = [];
+        let num = [];
+
         for(key in result){
           //console.log(result[key], key);
-  
-          result[key].forEach((value) => {
-            if(value !== null && key !== 'commentIdx'){
-              msg = createMent(key, value);
-              createList(alarmList, msg);
-              
-            }
-          });
+          if(key !== 'type'){
+            result[key].forEach((value, index) => {
+              if(value !== null && key !== 'commentIdx'){
+                msg = createMent(key, value);
+                createList(alarmList, msg);
+                type.push(key);
+                num.push(result['commentIdx'][index]);
+              }
+            });
+          }
         }
-
-        alarmListEvent(alarmList);
+        
+        alarmListEvent(alarmList, type, num);
 
       });
       tg = false;
@@ -150,6 +155,7 @@ function topMenu(rootChild){
 
   }
   function createList(parent, text){
+
     //모달창에 알림 리스트 영역
     let alarmList = tagCreate('div', {});
     styleCreate(alarmList, targetStyle.alarmListStyle);
@@ -170,7 +176,8 @@ function topMenu(rootChild){
     }
   }
   
-  function alarmListEvent(alarmList){
+  function alarmListEvent(alarmList, type, num){
+    console.log("ljdasdkjdkjaskdjkjkjkdj, ", type, num);
     const jwt = document.cookie.replace(
       /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
       "$1"
@@ -183,10 +190,37 @@ function topMenu(rootChild){
 
     for(let i = 0; i < cnt; i++){
       alarmList.children[i].addEventListener('click', () => {
-        console.log(`${i}번째 자식을 클릭했습니다.`)
-        
-        xhr.open('POST', url, true);
-        xhr.send(`id=${jwt}&num=${i}`)
+        console.log(`${i}번째 자식을 클릭했습니다. `)
+
+        if(type[i] === 'like'){
+          xhr.open('POST', url, true);
+          xhr.send(`id=${jwt}&num=${num[i]}&type=${type[i]}`)
+          xhr.addEventListener('load', ()=>{
+
+            let dataForm = document.createElement("form");
+            dataForm.method = "POST";
+            dataForm.action = "/detailPostDangstar";
+            let params = {postIndex:num[i]}
+            for (let key in params) {
+              let hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type", "hidden");
+              hiddenField.setAttribute("name", key);
+              hiddenField.setAttribute("value", params[key]);
+              dataForm.appendChild(hiddenField);
+            }
+            document.body.appendChild(dataForm);
+            dataForm.submit();
+  
+          })
+
+        }
+        else if(type[i] === 'follow'){
+
+        }
+        else if(type[i] === 'comment'){
+
+        }
+
       })
     }
   };

@@ -15,6 +15,7 @@ export default function alarmMark(request, response){
         let follow = [];
         let comment = [];
         let commentIdx = [];
+        let type = [];
         let alarmData = {};
 
         let conn = mysql.createConnection(cmServer.mysqlInfo);
@@ -29,6 +30,7 @@ export default function alarmMark(request, response){
               follow.push(value.follow);
               comment.push(value.comment);
               commentIdx.push(value.comment_index);
+              type.push(value.alarm_type);
               
               
             })
@@ -36,6 +38,7 @@ export default function alarmMark(request, response){
             alarmData['follow'] = follow;
             alarmData['comment'] = comment;
             alarmData['commentIdx'] = commentIdx;
+            alarmData['type'] = type;
             console.log("value: ", alarmData)
 
             response.writeHead(200);
@@ -80,13 +83,23 @@ export default function alarmMark(request, response){
     request.on("end", function () {
       
       let bodySplit = body.split('&');
-      const targetId = JWT.jwtCheck(bodySplit[0].split('=')[1]).id;
-      const num = bodySplit[1].split('=')[1];
-      console.log("사용자가 알림 확인 ", targetId, num);
 
-      // let conn = mysql.createConnection(cmServer.mysqlInfo);
-      // conn.connect();
-      // conn.query(`delete from alarm where id = ${targetId} and rownum = ${num}`);
+      if(bodySplit.length === 2){
+
+      }
+      else{
+        const targetId = JWT.jwtCheck(bodySplit[0].split('=')[1]).id;
+        const num = bodySplit[1].split('=')[1];
+        const type = bodySplit[2].split('=')[1];
+        console.log("사용자가 알림 확인 ", targetId, num, type);
+  
+        let conn = mysql.createConnection(cmServer.mysqlInfo);
+        conn.connect();
+        conn.query(`delete from alarm where id = '${targetId}' and comment_index = '${num}' and alarm_type = '${type}'`);
+
+      }
+      response.writeHead(200);
+      response.end();
 
     });
   };
