@@ -289,58 +289,134 @@ function myPage(){
 
   calendar(new Date());
 
-  const tabButtons = ['Tab 1', 'Tab 2'];
-  const tabContents = ['Content 1', 'Content 2', 'Content 3', 'Content 4', 'Content 5'];
+  // 마이페이지 내거 조회
   
-  // 지정된 위치에 탭 메뉴를 추가합니다.
   let tabMenuContainer = tagCreate("div", { id: "tabMenuContainer" });
   rootChild[6].appendChild(tabMenuContainer);
   
-  const tabContainer = tagCreate('div', { id: 'tab-container' });
-  styleCreate(tabContainer, mypageStyle.tabContainer);
-  tabMenuContainer.appendChild(tabContainer);
+  styleCreate(tabMenuContainer, {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+    height: "50px",
+    backgroundColor: "#f0f0f0",
+    borderBottom: "1px solid #ccc"
+  });
   
-  const tabContentContainer = tagCreate('div', { id: 'tab-content-container' });
-  styleCreate(tabContentContainer, mypageStyle.tabContentContainer);
-  tabMenuContainer.appendChild(tabContentContainer);
+  const tabNames = ["댕스타글", "댕마켓글", "내댓글"];
   
-  tabButtons.forEach((tab, index) => {
-    const button = tagCreate('button', { id: `tab-button-${index}` });
-    button.textContent = tab;
-    button.addEventListener('click', () => {
-      showContent(index);
+  // 탭 컨텐츠 생성
+  const tabContents = [
+    "댕스타글 컨텐츠",
+    "댕마켓글 컨텐츠",
+    "내댓글 컨텐츠"
+  ].map((content, index) => {
+    let tabContent = tagCreate("div", { id: `tabContent-${index}` });
+    tabContent.textContent = content;
+    rootChild[6].appendChild(tabContent);
+  
+    styleCreate(tabContent, {
+      display: "none", // 기본적으로 탭 컨텐츠 숨김
+      width: "100%",
+      height: "400px",
+      backgroundColor: "#fff",
+      padding: "20px",
+      boxSizing: "border-box"
     });
-    styleCreate(button, mypageStyle.tabButton);
-    tabContainer.appendChild(button);
+  
+    return tabContent;
   });
   
-  tabContents.forEach((content, index) => {
-    const contentDiv = tagCreate('div', { id: `tab-content-${index}` });
-    
-    // 데이터베이스 값을 사용하여 내용을 채우려면 이 부분을 수정하세요.
-    const innerContentDiv = document.createElement('div');
-    innerContentDiv.innerHTML = content;
-    contentDiv.appendChild(innerContentDiv);
-    
-    styleCreate(contentDiv, mypageStyle.tabContent(index));
-    tabContentContainer.appendChild(contentDiv);
-  });
+  const tabClickHandler = (selectedIndex) => {
+    tabMenuContainer.childNodes.forEach((child) => {
+      child.style.borderBottomColor = "transparent";
+    });
   
-  function showContent(index) {
-    const contents = Array.from({ length: tabContents.length }, (_, i) => document.getElementById(`tab-content-${i}`));
-    contents.forEach((content, contentIndex) => {
-      if (contentIndex === index) {
-        content.style.display = 'block';
-      } else {
-        content.style.display = 'none';
+    tabContents.forEach((content) => {
+      content.style.display = "none";
+    });
+  
+    tabMenuContainer.childNodes[selectedIndex].style.borderBottomColor = "#007BFF";
+    tabContents[selectedIndex].style.display = "block";
+  };
+  let userID = document.cookie.split("jwt=")[1];
+  console.log(userID);
+  
+  tabNames.forEach((tabName, index) => {
+    let tab = tagCreate("button", {});
+    tab.textContent = tabName;
+    tabMenuContainer.appendChild(tab);
+  
+    styleCreate(tab, {
+      backgroundColor: "transparent",
+      border: "none",
+      fontSize: "16px",
+      cursor: "pointer",
+      outline: "none",
+      padding: "10px 20px",
+      color: "#333",
+      fontWeight: "bold",
+      borderBottom: "2px solid transparent"
+    });
+  
+    tab.addEventListener("click", () => {
+      tabClickHandler(index);
+  
+      // 댕스타글 탭 클릭 이벤트
+      if (index === 0) {
+        const xhrr = new XMLHttpRequest();
+        xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
+        xhrr.setRequestHeader("Content-Type", "application/json");
+        xhrr.send(`userID=${userID}`);
+        xhrr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+              tabContents[index].innerHTML += `댕스타글: ${data[i].id}, 내가쓴글: ${data[i].detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            }
+          }
+        };
+      } else if (index ===1){
+        const xhrr = new XMLHttpRequest();
+        xhrr.open("post", `http://localhost:2080/secondmyWrite`);
+        xhrr.setRequestHeader("Content-Type", "application/json");
+        xhrr.send(`userID=${userID}`);
+        xhrr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+              tabContents[index].innerHTML += `야무진: ${data[i].id}, 내가쓴글: ${data[i].detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            }
+          }
+        };
+      } else if (index ===2){
+        const xhrr = new XMLHttpRequest();
+        xhrr.open("post", `http://localhost:2080/firstmyWrite`);
+        xhrr.setRequestHeader("Content-Type", "application/json");
+        xhrr.send(`userID=${userID}`);
+        xhrr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+              tabContents[index].innerHTML += ` 내가쓴글: ${data[i].detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            }
+          }
+        };
+
+
+
+
+
+
       }
+
     });
-  }
-
+  });
   
-
-
-
 
 
 

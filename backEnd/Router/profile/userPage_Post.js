@@ -183,6 +183,118 @@ export default function dangMap(request, response) {
       );
       connection.end();
     })
-    
-  }
+}if (request.url === "/thirdmyWrite") { 
+  let body = "";
+  request.on("data", function (data) {
+    body = body + data;
+    console.log('cute') //확인용
+  });
+  request.on("end", function () {
+    console.log('cute') //확인용
+
+    let result = body
+    console.log(result)
+    let myId = JWT.jwtCheck(result.split('=')[1]).id;
+    console.log(myId)
+
+    let conn = mysql.createConnection(cmServer.mysqlInfo);
+    conn.connect();
+    conn.query(
+      `select cm_detail from cm_post where cm_id='${myId}' `,
+      function (err, data) {
+        if (err) throw err;
+        else {
+          console.log(data);
+          response.writeHead(200, { 'content-Type': 'application/json' });
+          response.write(JSON.stringify(data));
+          response.end(); 
+        }
+      }
+    );
+  });
 }
+
+
+
+
+
+if (request.url === "/firstmyWrite") { 
+  let body = "";
+  request.on("data", function (data) {
+    body = body + data;
+    console.log('cute') //확인용
+  });
+  request.on("end", function () {
+    console.log('cute') //확인용
+
+    let result = body
+    console.log(result)
+    let myId = JWT.jwtCheck(result.split('=')[1]).id;
+    console.log(myId)
+
+    let conn = mysql.createConnection(cmServer.mysqlInfo);
+    conn.connect();
+    conn.query(
+      `select cm_detail from cm_post where cm_id='${myId}' `,
+      function (err, data) {
+        if (err) throw err;
+        else {
+          console.log(data);
+          response.writeHead(200, { 'content-Type': 'application/json' });
+          response.write(JSON.stringify(data));
+          response.end(); 
+        }
+      }
+    );
+  });
+} if (request.url === "/secondmyWrite") { 
+  let body = "";
+  request.on("data", function (data) {
+    body = body + data;
+    console.log('cute') //확인용
+  });
+  request.on("end", function () {
+    console.log('cute') //확인용
+
+    let result = body
+    console.log(result)
+    let myId = JWT.jwtCheck(result.split('=')[1]).id;
+    console.log(myId)
+
+    let conn = mysql.createConnection(cmServer.mysqlInfo);
+    conn.connect();
+    conn.query(
+      ` SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
+      function (err, data) {
+        if (err) throw err;
+        else {
+          console.log(data);
+          response.writeHead(200, { 'content-Type': 'application/json' });
+          response.write(JSON.stringify(data));
+          response.end(); 
+        }
+      }
+    );
+  });
+} 
+
+
+
+
+
+
+
+
+
+
+  } 
+
+
+
+
+
+
+
+
+
+

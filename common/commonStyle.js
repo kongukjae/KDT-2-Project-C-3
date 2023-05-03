@@ -984,7 +984,7 @@ const signupPageStyle = {
 const mypageStyle = {
   mypageRoot: {
     width: stylePropertyUnion.width.width500,
-    height: stylePropertyUnion.height.height1700,
+    height: stylePropertyUnion.height.height2000,
     margin: "auto",
     position: "relative",
     backgroundColor: stylePropertyUnion.colorTheme.beige,
