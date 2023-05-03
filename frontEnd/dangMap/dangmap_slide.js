@@ -189,7 +189,7 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 }
 
 
-makeControlBtns();
+let makeControlBtnsArr = makeControlBtns();
 // 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
 // 버튼들을 토글시키기 위한 변수
 let controlToggle = false;
@@ -210,7 +210,7 @@ function makeControlBtns() {
       testFunc();
     }
   });
-
+  let buttonArr = [];
   // 3개의 버튼을 만들기 위한 반복문
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
@@ -230,6 +230,8 @@ function makeControlBtns() {
     });
     controlbtnsWrap.appendChild(controlbtns);
   }
+
+  return buttonArr
 }
 
 function testFunc(){
