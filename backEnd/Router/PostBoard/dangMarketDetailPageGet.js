@@ -21,7 +21,8 @@ export default function secondHandPost(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select second_hand.*, dogName, image from second_hand inner join userinfo on second_hand.id = userinfo.id inner join userimage on second_hand.id = userimage.id order by second_hand.date desc limit ${nth},1;`,
+      `select second_hand.*, dogName from second_hand inner join userinfo on second_hand.id = userinfo.id order by second_hand.date desc limit ${nth},1;`,
+      // `select second_hand.*, dogName, image from second_hand inner join userinfo on second_hand.id = userinfo.id inner join userimage on second_hand.id = userimage.id order by second_hand.date desc limit ${nth},1;`,
       function (err, rows) {
         if (err) throw err;
         else {
