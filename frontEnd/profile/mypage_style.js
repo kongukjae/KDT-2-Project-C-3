@@ -227,7 +227,11 @@ function myPage(){
         // * 캘린더의 년도, 달이 발자국 찍힌 년도, 달과 일치 할 때
         if((Number(dateListArr[i].split('-')[0]) === nowYear) && (Number(dateListArr[i].split('-')[1]) === nowMonth)) {
           // * 발자국 찍힌 날짜에 표시
-          document.getElementById(`day${Number(dateListArr[i].split('-')[2])}`).style.color = 'lightSalmon';
+          // document.getElementById(`day${Number(dateListArr[i].split('-')[2])}`).style.color = 'lightSalmon';
+          const calendarStamp = tagCreate('img')
+          styleCreate(calendarStamp, mypageStyle.mypageCalendarStamp);
+          calendarStamp.src = '/image/resource/stamp.png';
+          document.getElementById(`day${Number(dateListArr[i].split('-')[2])}`).appendChild(calendarStamp);
         }
       }
     });
