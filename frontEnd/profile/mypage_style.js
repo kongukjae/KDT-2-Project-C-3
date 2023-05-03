@@ -347,8 +347,144 @@ function myPage(){
   }
 
   calendar(new Date());
+
+  // 마이페이지 내거 조회
   
-  btmMeun(rootChild[6]);
+  let tabMenuContainer = tagCreate("div", { id: "tabMenuContainer" });
+  rootChild[6].appendChild(tabMenuContainer);
+  
+  styleCreate(tabMenuContainer, {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+    height: "50px",
+    backgroundColor: "#f0f0f0",
+    borderBottom: "1px solid #ccc"
+  });
+  
+  const tabNames = ["댕스타글", "댕마켓글", "내댓글"];
+  
+  // 탭 컨텐츠 생성
+  const tabContents = [
+    "",
+    "",
+    ""
+  ].map((content, index) => {
+    let tabContent = tagCreate("div", { id: `tabContent-${index}` });
+    tabContent.textContent = content;
+    rootChild[6].appendChild(tabContent);
+  
+    styleCreate(tabContent, {
+      display: "none", // 기본적으로 탭 컨텐츠 숨김
+      width: "100%",
+      height: "400px",
+      backgroundColor: "#fff",
+      padding: "20px",
+      boxSizing: "border-box"
+    });
+  
+    return tabContent;
+  });
+  
+  const tabClickHandler = (selectedIndex) => {
+    tabMenuContainer.childNodes.forEach((child) => {
+      child.style.borderBottomColor = "transparent";
+    });
+  
+    tabContents.forEach((content) => {
+      content.style.display = "none";
+    });
+  
+    tabMenuContainer.childNodes[selectedIndex].style.borderBottomColor = "#007BFF";
+    tabContents[selectedIndex].style.display = "block";
+  };
+  let userID = document.cookie.split("jwt=")[1];
+  console.log(userID);
+  
+  tabNames.forEach((tabName, index) => {
+    let tab = tagCreate("button", {});
+    tab.textContent = tabName;
+    tabMenuContainer.appendChild(tab);
+  
+    styleCreate(tab, {
+      backgroundColor: "transparent",
+      border: "none",
+      fontSize: "16px",
+      cursor: "pointer",
+      outline: "none",
+      padding: "10px 20px",
+      color: "#333",
+      fontWeight: "bold",
+      borderBottom: "2px solid transparent"
+    });
+  
+    tab.addEventListener("click", () => {
+      tabClickHandler(index);
+  
+      // 댕스타글 탭 클릭 이벤트
+      if (index === 0) {
+        const xhrr = new XMLHttpRequest();
+        xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
+        xhrr.setRequestHeader("Content-Type", "application/json");
+        xhrr.send(`userID=${userID}`);
+        xhrr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+              tabContents[index].innerHTML += `댕스타글: ${data[i].post_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            }
+          }
+        };
+      } else if (index ===1){
+        const xhrr = new XMLHttpRequest();
+        xhrr.open("post", `http://localhost:2080/secondmyWrite`);
+        xhrr.setRequestHeader("Content-Type", "application/json");
+        xhrr.send(`userID=${userID}`);
+        xhrr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const data = JSON.parse(this.responseText);
+            if (data.length === 0) {
+              tabContents[index].innerHTML = "작성한 글이 없습니다."; // 작성한 글이 없을 경우 처리
+            } else {
+              for (let i = 0; i < data.length; i++) {
+                tabContents[index].innerHTML += `내가쓴글: ${data[i].detail}<br>`; // 댕마켓글 컨텐츠에 데이터 추가
+              }
+            }
+          }
+        };} else if (index ===2){
+        const xhrr = new XMLHttpRequest();
+        xhrr.open("post", `http://localhost:2080/firstmyWrite`);
+        xhrr.setRequestHeader("Content-Type", "application/json");
+        xhrr.send(`userID=${userID}`);
+        xhrr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            const dataa = JSON.parse(this.responseText);
+            console.log(dataa);
+            for (let i = 0; i < dataa.length; i++) {
+              tabContents[index].innerHTML += `내가쓴댓글: ${dataa[i].cm_detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            }
+          }
+        };
+
+
+
+
+
+
+      }
+
+    });
+  });
+  
+
+
+
+
+
+
+  btmMeun(rootChild[7]);
   function userInfoUpdate(){
     let infoWrap = tagCreate('div');
     styleCreate(infoWrap,{
