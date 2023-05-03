@@ -1924,7 +1924,8 @@ const dangstarStyle = {
     width: stylePropertyUnion.width.widthP80,
   },
   dangstarCommentWrap: {
-    padding: "15px",
+    padding: "25px 15px",
+    width: stylePropertyUnion.width.widthP100,
   },
   dangstarCommentForm: {
     ...stylePropertyUnion.flexRowBetweenCenter,

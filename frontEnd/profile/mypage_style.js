@@ -167,7 +167,6 @@ function myPage(){
 
     let dateres;
     let dateData = [];
-    let monthData = [];;
   
     const monthArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   
@@ -183,6 +182,8 @@ function myPage(){
   
     let monthOfLastDate = new Date(nowYear, nowMonth, 0);
     let nowMonthOfLastDate = monthOfLastDate.getDate();
+    // * 이번 달의 마지막 날의 23:59:59를 찍기 어려워서 다음 달 1일의 00:00:00을 사용
+    let lastDay = new Date(nowYear, nowMonth, 1)
   
     let firstDay = new Date(nowYear, now.getMonth(), 1); //! 지금 현재 날짜의 첫번째 날짜
     // console.log("firstDay");
@@ -199,7 +200,9 @@ function myPage(){
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
     const firstDayOfMonth = changeDateUTC(firstDay);
-    const lastDayOfMonth = changeDateUTC(monthOfLastDate);
+    const lastDayOfMonth = changeDateUTC(lastDay);
+    console.log(lastDayOfMonth)
+    console.log("마지막 날")
     xhr.open("GET", `http://localhost:2080/allloadMap?id=${cookieId}?first=${firstDayOfMonth}?last=${lastDayOfMonth}`);
     xhr.send();
     xhr.addEventListener("load", function () {
