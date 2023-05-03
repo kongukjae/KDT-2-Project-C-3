@@ -1,4 +1,5 @@
-function createUserOrgchat(positionNow, roomName){
+
+function createUserOrgchat(positionNow, roomName, roomCode){
   let chatList = tagCreate("div", {id: 'chatList'});
   // document.body.appendChild(chatList);
   styleCreate(chatList, dangMapStyle.userList);
@@ -23,8 +24,41 @@ function createUserOrgchat(positionNow, roomName){
   chatChild[0].appendChild(attend);
   styleCreate(attend, dangMapStyle.chatJoinBtn);
   attend.innerText = "참가"
+  attend.addEventListener('click',moveToPublicChat);
+  async function moveToPublicChat(){
+    const token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    await fetch(`http://localhost:2080/createPublicChatRoomRequest`,{
+      method: "POST",
+      body: JSON.stringify({jwt:token,roomCode:roomCode,roomName:roomName})
+    }).then((res)=>{return res.text()})
+    .then((result)=>{
+      let publicChatForm = document.createElement("form");
+      publicChatForm.method = "POST";
+      publicChatForm.action = "/dangTalkPublicChatRoom";
+      let params = {jwt: token,roomCode:roomCode,roomName:roomName,firsttime:result};
+      for (let key in params) {
+        let hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", encodeURI(params[key]));
+        publicChatForm.appendChild(hiddenField);
+      }
+      document.body.appendChild(publicChatForm)
+      publicChatForm.submit();
+    })
+  };
+  //나가기 버튼
+  let exit = tagCreate("button", {});
+  chatChild[0].appendChild(exit);
+  styleCreate(exit, dangMapStyle.chatJoinBtn);
+  exit.innerText = "X";
+  exit.addEventListener('click',()=>{
+    chatList.remove();
+  })
 
-  
   //채팅 참여자 리스트 영역
   //chatChild[1].id = "chatList";
   styleCreate(chatChild[1], dangMapStyle.chatPeopleListContainer);
@@ -34,10 +68,9 @@ function createUserOrgchat(positionNow, roomName){
 
 
   http.open("POST", url);
-  http.send(`roomName=${roomName}`);
+  http.send(`roomName=${roomCode}`);
   http.addEventListener('load', () => {
     let roomList = JSON.parse(http.response);
-
     for (const key in roomList) {
       createUserOrgchatList(chatChild[1], roomList[key][0], roomList[key][1]);        
     }

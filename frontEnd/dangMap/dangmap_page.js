@@ -1,4 +1,5 @@
 let addFlag = false;
+let addNewMarkerArr = []
 let markers = [];
 let markersObject = {
   userid : "",
@@ -37,30 +38,32 @@ function changeDate(date) {
 }
 
 
-map();
+let kakaoMap = map();
 
 //지도 사이드 버튼: 검색, 단톡 표시 버튼
-let sideArr = sideButton();
+let sideArr = sideButton(kakaoMap);
 
 
-//단체방 리스트 생성 함수
-const roomName = 'test1';
-createUserOrgchat(test, roomName);
 
-let ggg = document.getElementById('chatList')
-// ggg.style.display = 'none'
-let tg = true;
 
-test.addEventListener('click', function(test){
-  if(tg){
-    ggg.style.display = 'flex'
-    tg = false;
-  }
-  else if(!tg){
-    ggg.style.display = 'none'
-    tg = true;
-  }
-})
+// //단체방 리스트 생성 함수
+// const roomName = 'test1';
+// createUserOrgchat(test, roomName);
+
+// let ggg = document.getElementById('chatList')
+// // ggg.style.display = 'none'
+// let tg = true;
+
+// test.addEventListener('click', function(test){
+//   if(tg){
+//     ggg.style.display = 'flex'
+//     tg = false;
+//   }
+//   else if(!tg){
+//     ggg.style.display = 'none'
+//     tg = true;
+//   }
+// })
 
 
 
@@ -171,7 +174,6 @@ function map() {
         let latlng = mouseEvent.latLng;
 
         const httpRequest = new XMLHttpRequest();
-        console.log("여기 되는거냐??");
 
         //result.push(wrap);
         // console.log(wrap);
@@ -185,7 +187,7 @@ function map() {
           addMarker(latlng);
           wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
           resultObject[0] = wrap;
-        
+          addNewMarkerArr.push(resultObject);
           countFootprintCount.innerText = textCount;
           httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
           httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
@@ -219,77 +221,6 @@ function map() {
     markers.push(marker);
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
-
-//==============================================================================================
-  
-
-// 검색창
-function clearMarkers(arr) {
-  for (let i of arr) {
-    i.setMap(null);
-  }
-}
-
-//키워드 검색 완료 시 호출되는 콜백함수 입니다
-function placesSearchCB(data, status, pagination) {
-  if (status === kakao.maps.services.Status.OK) {
-    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-    // LatLngBounds 객체에 좌표를 추가합니다
-    let bounds = new kakao.maps.LatLngBounds();
-    clearMarkers(searchMarkers);
-    for (let i = 0; i < data.length; i++) {
-      displayMarker(data[i]);
-      bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-    }
-
-    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-    map.setBounds(bounds);
-  }
-}
-let searchMarkers = [];
-
-// 지도에 마커를 표시하는 함수입니다
-function displayMarker(place) {
-  // 마커를 생성하고 지도에 표시합니다
-  let marker = new kakao.maps.Marker({
-    map: map,
-    position: new kakao.maps.LatLng(place.y, place.x),
-  });
-  searchMarkers.push(marker);
-  // 마커에 클릭이벤트를 등록합니다
-  kakao.maps.event.addListener(marker, "click", function () {
-    // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-    infowindow.setContent(
-      '<div style="padding:5px;font-size:12px;">' +
-        place.place_name +
-        "</div>"
-    );
-    infowindow.open(map, marker);
-  });
-}
-
-let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-let ps = new kakao.maps.services.Places();
-const searchBar = document.getElementById('searchBar');
-const searchButton = document.getElementById('searchButton');
-
-
-searchButton.addEventListener("click", () => {
-  // 키워드로 장소를 검색합니다
-  ps.keywordSearch(searchBar.value, placesSearchCB);
-
-});
-searchBar.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    ps.keywordSearch(searchBar.value, placesSearchCB);
-
-  }
-});
-    
-
-
-
-    //=============================================================================================
 
     let dragStartLat;
     let dragStartLng;
@@ -331,6 +262,9 @@ searchBar.addEventListener("keydown", (e) => {
     });
     return marker;
   }
+
+  
+
 
   // 하단 메뉴
   let menuChild2 = [];
@@ -461,14 +395,16 @@ searchBar.addEventListener("keydown", (e) => {
   
 // 1. 추가버튼을 클릭했을때, 
 makeControlBtnsArr[1].addEventListener("click", () => {
-  alert("작동되는거 맞다");
+  let controlbtnsWrap = document.getElementById('controlbtnsWrap');
+  controlbtnsWrap.style.display='none'
+
   let target = [];
-  for (let i in markersObject.markers) {
-    if (markersObject.markers[i][0] === 3) {
-      console.log(markersObject.markers[i][1]);
-      for (let j of markersObject.markers[i][1]) {
-        target.push(j[0]);
-      }
+  for(let i = 0; i< markersObject.usersArray
+    .length;i++){
+    if(markersObject.usersArray[i]===markersObject.userid){
+      target.push(markersObject.markersArray[i]);
+    }else{
+      break;
     }
   }
   clusterer.clear(); //사라짐
@@ -476,68 +412,185 @@ makeControlBtnsArr[1].addEventListener("click", () => {
     i.setMap(map);
   }
   addFlag = true;
-  // 추가버튼
-let test = tagCreate("div", {})
-document.body.appendChild(test);
-styleCreate(test, {
-  width: "50px",
-  height: "50px",
-  position: 'relative',
-  backgroundColor: "black",
-  bottom: '500px',
-  borderRadius: '50%', 
-  display: 'flex',
-  justifyContent: 'center', 
-  alignItems: 'center',
-  color: 'white',
-  cursor: 'pointer',
-});
-test.textContent = "추가";
-test.addEventListener("click",() =>{
-alert("추가완료");
-})
+  let sideBtn = document.getElementById('sideBtn');
+  sideBtn.style.display = 'none';
+  let buttonWrap = tagCreate('div')
+  let finishBtn = tagCreate('div')
+  let btnStyle = {width:'50px',height:'50px',backgroundColor:'white',borderRadius:'5px',marginTop:'10px',cursor:'pointer',display:'flex',justifyContent:'center',alignItems:"center",fontSize:'15px'}
+
+  buttonWrap.id = 'buttonWrap'
+  styleCreate(buttonWrap,{position:'absolute',zIndex :'2',right:'20px',top:'20px'})
+  styleCreate(finishBtn,btnStyle)
+  let mapdiv = document.getElementById('map');
+  mapdiv.appendChild(buttonWrap);
+  buttonWrap.appendChild(finishBtn);
+
+  finishBtn.innerText='완료'
+
+
+  finishBtn.addEventListener('click',()=>{
+    location.reload();
+  })
 });
 //2. 삭제버튼을 클릭했을때,
 makeControlBtnsArr[0].addEventListener("click", () => {
+  overlayChecker = true;
+  let controlbtnsWrap = document.getElementById('controlbtnsWrap');
+  controlbtnsWrap.style.display='none'
+  let target = [];
+  for(let i = 0; i< markersObject.usersArray
+    .length;i++){
+    if(markersObject.usersArray[i]===markersObject.userid){
+      target.push(markersObject.markersArray[i]);
+    }else{
+      break;
+    }
+  }
+  clusterer.clear(); //사라짐
+  let deleteTarget = []
+  for (let i of target) {
+    i.setMap(map);
+    kakao.maps.event.addListener(i, 'click', function() {
+      const id = markersObject.userid;
+      const dateTime = markersObject.markers[markersObject.userid][1][target.indexOf(i)][1];
+      i.setMap(null);
+      deleteTarget.push({ id: id, date: dateTime })
+    });
+  }
+  
+  let sideBtn = document.getElementById('sideBtn');
+  sideBtn.style.display = 'none';
+  let buttonWrap = tagCreate('div')
+  let finishBtn = tagCreate('div')
+  let cancelBtn = tagCreate('div')
+  let btnStyle = {width:'50px',height:'50px',backgroundColor:'white',borderRadius:'5px',marginTop:'10px',cursor:'pointer',display:'flex',justifyContent:'center',alignItems:"center",fontSize:'15px'}
+
+  buttonWrap.id = 'buttonWrap'
+  styleCreate(buttonWrap,{position:'absolute',zIndex :'2',right:'20px',top:'20px'})
+  styleCreate(finishBtn,btnStyle)
+  styleCreate(cancelBtn,btnStyle)
+  let mapdiv = document.getElementById('map');
+  mapdiv.appendChild(buttonWrap);
+  buttonWrap.appendChild(finishBtn);
+  buttonWrap.appendChild(cancelBtn);
+
+  finishBtn.innerText='완료'
+  cancelBtn.innerText='취소'
+
+  cancelBtn.addEventListener('click',()=>{
+    location.reload();
+  })
+  finishBtn.addEventListener('click',()=>{
+    for(let i of deleteTarget){
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", `http://localhost:2080/mapDelete`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify(i));
+    }
+    location.reload();
+  })
+
+});
+makeControlBtnsArr[2].addEventListener("click", () => {
+  let controlbtnsWrap = document.getElementById('controlbtnsWrap');
+  controlbtnsWrap.style.display='none'
+  let dragTarget = [];
   let target = [];
 
-  for (let i in markersObject.markers) {
-    if (markersObject.markers[i][0] === 3) {
-      console.log(markersObject.markers[i][1]);
-      for (let j of markersObject.markers[i][1]) {
-        target.push(j[0]);
-      }
+  for(let i = 0; i< markersObject.usersArray
+    .length;i++){
+    if(markersObject.usersArray[i]===markersObject.userid){
+      target.push(markersObject.markersArray[i]);
+    }else{
+      break;
     }
   }
   clusterer.clear(); //사라짐
   for (let i of target) {
     i.setMap(map);
-    console.log(i)
-    kakao.maps.event.addListener(i, 'click', function() {
-      const id = markersObject.userid;
-      console.log(id);
-     
+    i.setDraggable(true);
 
-     
-      const dateTime = markersObject.markers[markersObject.userid][1][target.indexOf(i)][1];
-      console.log(dateTime); 
-      alert(dateTime);
-      i.setMap(null);
-      
-      let xhr = new XMLHttpRequest();
-      
-      xhr.open("POST", `http://localhost:2080/mapDelete`);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(JSON.stringify({ id: id, date: dateTime }));
-      // xhr.send('hi');
+    let dragStartLat;
+    let dragStartLng;
+    // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
+    // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
+    // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update
+    kakao.maps.event.addListener(i, "dragstart", function () {
+      // 드래그가 시작되는 시점에 동작
+      // 마커의 현재 좌표를 저장
+      let latlng = i.getPosition();
+      dragStartLat = latlng.getLat().toFixed(13);
+      dragStartLng = latlng.getLng().toFixed(13);
+      //console.log("이동 전 lat " + dragStartLat);
+      //console.log("이동 전 lng " + dragStartLng);
+    });
+
+    kakao.maps.event.addListener(i, "dragend", function () {
+      // 드래그가 끝나는 시점에 동작
+      // 드래그가 끝난 지점의 좌표를 불러옴
+      let latlng = i.getPosition();
+      //console.log("이동 후 lat " + latlng.getLat());
+      //console.log("이동 후 lng " + latlng.getLng());
+      let wrap = [];
+      // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
+      wrap.push(
+        latlng.getLat().toFixed(13),
+        latlng.getLng().toFixed(13),
+        cookieId,
+        dragStartLat,
+        dragStartLng
+      );
+      // 배열을 객체에 담음
+      resultObject[0] = wrap;
+      dragTarget.push({0:wrap});
+      // const httpRequest = new XMLHttpRequest();
+      // httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      // // 객체를 JSON 형식으로 바꿔서 서버로 전송
+      // console.log(resultObject);
+      // httpRequest.send(JSON.stringify(resultObject));
     });
   }
+
+  let sideBtn = document.getElementById('sideBtn');
+  sideBtn.style.display = 'none';
+  let buttonWrap = tagCreate('div')
+  let finishBtn = tagCreate('div')
+  let cancelBtn = tagCreate('div')
+  let btnStyle = {width:'50px',height:'50px',backgroundColor:'white',borderRadius:'5px',marginTop:'10px',cursor:'pointer',display:'flex',justifyContent:'center',alignItems:"center",fontSize:'15px'}
+
+  buttonWrap.id = 'buttonWrap'
+  styleCreate(buttonWrap,{position:'absolute',zIndex :'2',right:'20px',top:'20px'})
+  styleCreate(finishBtn,btnStyle)
+  styleCreate(cancelBtn,btnStyle)
+  let mapdiv = document.getElementById('map');
+  mapdiv.appendChild(buttonWrap);
+  buttonWrap.appendChild(finishBtn);
+  buttonWrap.appendChild(cancelBtn);
+
+  finishBtn.innerText='완료'
+  cancelBtn.innerText='취소'
+
+  cancelBtn.addEventListener('click',()=>{
+    location.reload();
+  })
   
-  console.log('클릭 이벤트 발생');
+  finishBtn.addEventListener('click',()=>{
+    console.log(dragTarget);
+    for(let i of dragTarget){
+      const httpRequest = new XMLHttpRequest();
+      httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      // 객체를 JSON 형식으로 바꿔서 서버로 전송
+      console.log(i);
+      httpRequest.send(JSON.stringify(i));
+    }
+    location.reload();
+  })
+
 });
 
-
     markersObject['clusterer'] = clusterer;
+
+    
   }
     
   getMarkersObject();
@@ -568,8 +621,9 @@ makeControlBtnsArr[0].addEventListener("click", () => {
 
           let callback = function(result, status) {
             if (status === kakao.maps.services.Status.OK) {
-              markersObject['appendPublicChat'] = ['!public!'+i,customOverlay,result[0].address.address_name]
-              let publicChatRoomList = createUserOrgchat(positionNow, result[0].address.address_name)
+              let roomNameArr = result[0].address.address_name.split(' ')
+              markersObject['appendPublicChat'] = ['!public!'+i,customOverlay,roomNameArr[roomNameArr.length - 2] +" "+roomNameArr[roomNameArr.length - 1]]
+              let publicChatRoomList = createUserOrgchat(positionNow, roomNameArr[roomNameArr.length - 2] +" "+roomNameArr[roomNameArr.length - 1], '!public!'+i)
 
               publicTalkIcon.addEventListener('click',()=>{
                 publicChatRoomList.setMap(map);
@@ -599,7 +653,7 @@ makeControlBtnsArr[0].addEventListener("click", () => {
         }
       })
     };  
-
+    return map;
   }
   
   
@@ -686,6 +740,9 @@ function putUserProfile(object){
       });
     }
   }
+
+
+
 }
 function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   // 오버레이 내부 구성 요소들

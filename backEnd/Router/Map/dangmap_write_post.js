@@ -89,12 +89,12 @@ export default function callPostDangMap(request, response) {
 let result = target.split(' ');
 let answer = result[0].replace('.','-') + result[1].replace('.','-').padStart(3, '0') + result[2].replace('.',' ').padStart(3, '0')
 let noon = 0
-if(result[3] === '오후'){
+let time = result[4].split(':');
+if(result[3] === '오후' && time[0] !== '12'){
   noon = 12;
 }else if(result[3] ==='오전'){
   noon = 0;
 }
-let time = result[4].split(':');
 answer += (Number(time[0]) + noon).toString().padStart(2, '0') + ':' + time[1].padStart(2, '0') + ':' + time[2].padStart(2, '0')
 
 console.log(answer)

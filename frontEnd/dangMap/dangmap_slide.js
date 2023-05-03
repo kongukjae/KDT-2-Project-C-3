@@ -196,6 +196,8 @@ let controlToggle = false;
 
 function makeControlBtns() {
   let controlbtnsWrap = tagCreate("div", {});
+
+  controlbtnsWrap.id='controlbtnsWrap';
   // 버튼들의 wrap의 스타일 값
   styleCreate(controlbtnsWrap, dangMapStyle.controlbtnsWrap);
 
@@ -210,12 +212,11 @@ function makeControlBtns() {
       testFunc();
     }
   });
-
+  let buttonArr = [];
   // 3개의 버튼을 만들기 위한 반복문
 
   
 // 배열을 먼저 준다.
-  let buttonArr = [];
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
     if (i === 1) {

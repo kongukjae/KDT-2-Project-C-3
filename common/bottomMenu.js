@@ -64,6 +64,8 @@ function btmMeun(rootChild) {
   menuChild[4].innerText = "댕프랜드";
   menuChild[5].innerText = "⇧";
 
+  menuChild[3].id='dangtalkButton'
+
   const jwt = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
