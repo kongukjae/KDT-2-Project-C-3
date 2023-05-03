@@ -189,13 +189,15 @@ function calculateMoveSlideValue(before, after, maxWidth) {
 }
 
 
-makeControlBtns();
+let makeControlBtnsArr = makeControlBtns();
 // 내 프로필을 눌렀을 때 버튼이 나오도록 하는 함수
 // 버튼들을 토글시키기 위한 변수
 let controlToggle = false;
 
 function makeControlBtns() {
   let controlbtnsWrap = tagCreate("div", {});
+
+  controlbtnsWrap.id='controlbtnsWrap';
   // 버튼들의 wrap의 스타일 값
   styleCreate(controlbtnsWrap, dangMapStyle.controlbtnsWrap);
 
@@ -210,17 +212,32 @@ function makeControlBtns() {
       testFunc();
     }
   });
-
+  let buttonArr = [];
   // 3개의 버튼을 만들기 위한 반복문
+
+  
+// 배열을 먼저 준다.
   for (let i = 0; i < 3; i++) {
     let controlbtns = tagCreate("button", {});
     if (i === 1) {
       controlbtns.innerText = "추가";
+      controlbtns.addEventListener("click", () => {
+        console.log("추가 버튼이 클릭되었습니다.");
+      });
     } else if (i === 2) {
       controlbtns.innerText = "수정";
+      controlbtns.addEventListener("click", () => {
+        console.log("수정 버튼이 클릭되었습니다.");
+      });
     } else {
       controlbtns.innerText = "삭제";
+      controlbtns.addEventListener("click", () => {
+        console.log("삭제 버튼이 클릭되었습니다.");
+      });
     }
+    buttonArr.push(controlbtns)
+    
+  
     // 버튼들의 스타일 값
     styleCreate(controlbtns, {
       width: "50px",
@@ -230,7 +247,10 @@ function makeControlBtns() {
     });
     controlbtnsWrap.appendChild(controlbtns);
   }
+  // 리턴을 해준다. 그렇다면 0번째 삭제, 첫번째 추가..
+  return buttonArr
 }
+
 
 function testFunc(){
   console.log("test함수 진입함");

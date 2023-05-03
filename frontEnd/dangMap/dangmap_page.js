@@ -1,3 +1,5 @@
+let addFlag = false;
+let addNewMarkerArr = []
 let markers = [];
 let markersObject = {
   userid : "",
@@ -30,6 +32,8 @@ function changeDate(date) {
   let nowDate = new Date(date);
   let formatDate = nowDate.toLocaleString();
 
+  console.log(formatDate);
+
   return formatDate;
 }
 
@@ -39,106 +43,27 @@ let kakaoMap = map();
 //지도 사이드 버튼: 검색, 단톡 표시 버튼
 let sideArr = sideButton(kakaoMap);
 
-// sideArr[0].addEventListener('click',()=>{
-//     alert('click')
-//   // 검색창
-// function clearMarkers(arr) {
-//   for (let i of arr) {
-//     i.setMap(null);
+
+
+
+// //단체방 리스트 생성 함수
+// const roomName = 'test1';
+// createUserOrgchat(test, roomName);
+
+// let ggg = document.getElementById('chatList')
+// // ggg.style.display = 'none'
+// let tg = true;
+
+// test.addEventListener('click', function(test){
+//   if(tg){
+//     ggg.style.display = 'flex'
+//     tg = false;
 //   }
-// }
-
-// //키워드 검색 완료 시 호출되는 콜백함수 입니다
-// function placesSearchCB(data, status, pagination) {
-//   if (status === kakao.maps.services.Status.OK) {
-//     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-//     // LatLngBounds 객체에 좌표를 추가합니다
-//     let bounds = new kakao.maps.LatLngBounds();
-//     clearMarkers(searchMarkers);
-//     for (let i = 0; i < data.length; i++) {
-//       displayMarker(data[i]);
-//       bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-//     }
-
-//     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-//     map.setBounds(bounds);
+//   else if(!tg){
+//     ggg.style.display = 'none'
+//     tg = true;
 //   }
-// }
-// let searchMarkers = [];
-
-// // 지도에 마커를 표시하는 함수입니다
-// function displayMarker(place) {
-//   // 마커를 생성하고 지도에 표시합니다
-//   let marker = new kakao.maps.Marker({
-//     map: map,
-//     position: new kakao.maps.LatLng(place.y, place.x),
-//   });
-//   searchMarkers.push(marker);
-//   // 마커에 클릭이벤트를 등록합니다
-//   kakao.maps.event.addListener(marker, "click", function () {
-//     // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-//     infowindow.setContent(
-//       '<div style="padding:5px;font-size:12px;">' +
-//         place.place_name +
-//         "</div>"
-//     );
-//     infowindow.open(map, marker);
-//   });
-// }
-
-// let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-// let ps = new kakao.maps.services.Places();
-// const targetSearchBar = document.getElementById('searchBar');
-// const targetSearchButton = document.getElementById('searchButton');
-
-
-// targetSearchButton.addEventListener("click", () => {
-//   // 키워드로 장소를 검색합니다
-//   ps.keywordSearch(searchBar.value, placesSearchCB);
-
-// });
-// targetSearchBar.addEventListener("keydown", (e) => {
-//   if (e.key === "Enter") {
-//     ps.keywordSearch(searchBar.value, placesSearchCB);
-
-//   }
-// });
-// ps.keywordSearch('대전시청', placesSearchCB);
-
 // })
-
-
-//대표 발자국 대신할 임시 버튼
-let test = tagCreate("div", {})
-document.body.appendChild(test);
-styleCreate(test, {
-  width: "50px",
-  height: "50px",
-  zindex: '3',
-  position: 'relative',
-  backgroundColor: "black",
-  bottom: '1000px'
-})
-
-
-//단체방 리스트 생성 함수
-const roomName = 'test1';
-createUserOrgchat(test, roomName);
-
-let ggg = document.getElementById('chatList')
-// ggg.style.display = 'none'
-let tg = true;
-
-test.addEventListener('click', function(test){
-  if(tg){
-    ggg.style.display = 'flex'
-    tg = false;
-  }
-  else if(!tg){
-    ggg.style.display = 'none'
-    tg = true;
-  }
-})
 
 
 
@@ -157,9 +82,10 @@ function map() {
 
   styleCreate(rootChild[0], dangMapStyle.menuMap);
   rootChild[0].id = "map";
-  styleCreate(rootChild[1], dangMapStyle.menuMapSlide);
 
+  styleCreate(rootChild[1], dangMapStyle.menuMapSlide);
   rootChild[1].id = "slide";
+
   styleCreate(rootChild[2], dangMapStyle.bottomMenu);
 
 
@@ -197,7 +123,7 @@ function map() {
  map.setZoomable(false);
 
   //  이미지 링크 생성을 해서 넣으니까 되었다.
-  let imageSrc = "https://i.ibb.co/zR5p1G9/dogpaw.png";
+  let imageSrc = "/image/graphic/dogpaw.png";
   (imageSize = new kakao.maps.Size(30, 30)), // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다.
     (imageOption = { offset: new kakao.maps.Point(15, 15) }); // 마커이미지의 옵션입니다.
@@ -235,41 +161,45 @@ function map() {
   // map에 클릭 시 마커를 추가하고 데이터를 서버로 전송하는 함수
   let textCount;
   // console.log(textCount);
+  
+
   kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-    resultCount = 1;
-    let wrap = [];
-    // console.log("클릭 시 : " + overlayChecker);
-    // 오버레이 창이 비활성화 되있을 경우에 동작
-    if (overlayChecker === false) {
-      // 클릭한 위치에 마커를 표시합니다
-      let latlng = mouseEvent.latLng;
-      const httpRequest = new XMLHttpRequest();
+    if(addFlag){
+      resultCount = 1;
+      let wrap = [];
+      // console.log("클릭 시 : " + overlayChecker);
+      // 오버레이 창이 비활성화 되있을 경우에 동작
+      if (overlayChecker === false) {
+        // 클릭한 위치에 마커를 표시합니다
+        let latlng = mouseEvent.latLng;
 
-      //result.push(wrap);
-      // console.log(wrap);
-      //console.log("result: " + result);
-      // resultObject[cnt] = wrap;
-      // countResult = markersObject.markers[markersObject.userid][1].length;
-      console.log(textCount);
-      textCount -= resultCount;
-      countFootprintCount.innerText = textCount;
-      if(textCount < 10 && textCount >= 0) {
-        addMarker(latlng);
-        wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
-        resultObject[0] = wrap;
+        const httpRequest = new XMLHttpRequest();
 
+        //result.push(wrap);
+        // console.log(wrap);
+        //console.log("result: " + result);
+        // resultObject[cnt] = wrap;
+        // countResult = markersObject.markers[markersObject.userid][1].length;
+        console.log(textCount);
+        textCount -= resultCount;
         countFootprintCount.innerText = textCount;
-        httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
-        httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
-      } else if(textCount < 0) {
-        alert(`오늘은 더 이상 마커를 찍을 수 없습니다.`);
-        countFootprintCount.innerText = 0;
-      }
-      
-      //cnt++;
-      //console.log("cnt = " + cnt);
-      // httpRequest.send(`re1=${result[0]}`);
-    }
+        if(textCount < 10 && textCount >= 0) {
+          addMarker(latlng);
+          wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
+          resultObject[0] = wrap;
+          addNewMarkerArr.push(resultObject);
+          countFootprintCount.innerText = textCount;
+          httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+          httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
+        } else if(textCount < 0) {
+          alert(`오늘은 더 이상 마커를 찍을 수 없습니다.`);
+          countFootprintCount.innerText = 0;
+        }
+        
+        //cnt++;
+        //console.log("cnt = " + cnt);
+        // httpRequest.send(`re1=${result[0]}`);
+      }}
   });
 
   // 마커를 생성하고 지도위에 표시하는 함수입니다
@@ -291,77 +221,6 @@ function map() {
     markers.push(marker);
     // 마커가 드래그 가능하도록 설정
     marker.setDraggable(true);
-
-//==============================================================================================
-  
-
-// // 검색창
-// function clearMarkers(arr) {
-//   for (let i of arr) {
-//     i.setMap(null);
-//   }
-// }
-
-// //키워드 검색 완료 시 호출되는 콜백함수 입니다
-// function placesSearchCB(data, status, pagination) {
-//   if (status === kakao.maps.services.Status.OK) {
-//     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-//     // LatLngBounds 객체에 좌표를 추가합니다
-//     let bounds = new kakao.maps.LatLngBounds();
-//     clearMarkers(searchMarkers);
-//     for (let i = 0; i < data.length; i++) {
-//       displayMarker(data[i]);
-//       bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-//     }
-
-//     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-//     map.setBounds(bounds);
-//   }
-// }
-// let searchMarkers = [];
-
-// // 지도에 마커를 표시하는 함수입니다
-// function displayMarker(place) {
-//   // 마커를 생성하고 지도에 표시합니다
-//   let marker = new kakao.maps.Marker({
-//     map: map,
-//     position: new kakao.maps.LatLng(place.y, place.x),
-//   });
-//   searchMarkers.push(marker);
-//   // 마커에 클릭이벤트를 등록합니다
-//   kakao.maps.event.addListener(marker, "click", function () {
-//     // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-//     infowindow.setContent(
-//       '<div style="padding:5px;font-size:12px;">' +
-//         place.place_name +
-//         "</div>"
-//     );
-//     infowindow.open(map, marker);
-//   });
-// }
-
-// let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-// let ps = new kakao.maps.services.Places();
-// const searchBar = document.getElementById('searchBar');
-// const searchButton = document.getElementById('searchButton');
-
-
-// searchButton.addEventListener("click", () => {
-//   // 키워드로 장소를 검색합니다
-//   ps.keywordSearch(searchBar.value, placesSearchCB);
-
-// });
-// searchBar.addEventListener("keydown", (e) => {
-//   if (e.key === "Enter") {
-//     ps.keywordSearch(searchBar.value, placesSearchCB);
-
-//   }
-// });
-    
-
-
-
-    //=============================================================================================
 
     let dragStartLat;
     let dragStartLng;
@@ -405,57 +264,6 @@ function map() {
   }
 
   
-  
-// // 검색창
-// function clearMarkers(arr) {
-//   for (let i of arr) {
-//     i.setMap(null);
-//   }
-// }
-
-// //키워드 검색 완료 시 호출되는 콜백함수 입니다
-// function placesSearchCB(data, status, pagination) {
-//   if (status === kakao.maps.services.Status.OK) {
-//     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-//     // LatLngBounds 객체에 좌표를 추가합니다
-//     let bounds = new kakao.maps.LatLngBounds();
-//     clearMarkers(searchMarkers);
-//     for (let i = 0; i < data.length; i++) {
-//       displayMarker(data[i]);
-//       bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-//     }
-
-//     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-//     map.setBounds(bounds);
-//   }
-// }
-// let searchMarkers = [];
-
-// // 지도에 마커를 표시하는 함수입니다
-// function displayMarker(place) {
-//   // 마커를 생성하고 지도에 표시합니다
-//   let marker = new kakao.maps.Marker({
-//     map: map,
-//     position: new kakao.maps.LatLng(place.y, place.x),
-//   });
-//   searchMarkers.push(marker);
-//   // 마커에 클릭이벤트를 등록합니다
-//   kakao.maps.event.addListener(marker, "click", function () {
-//     // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-//     infowindow.setContent(
-//       '<div style="padding:5px;font-size:12px;">' +
-//         place.place_name +
-//         "</div>"
-//     );
-//     infowindow.open(map, marker);
-//   });
-// }
-
-// let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-// let ps = new kakao.maps.services.Places();
-
-// ps.keywordSearch('대전시청', placesSearchCB);
-
 
 
   // 하단 메뉴
@@ -532,7 +340,7 @@ function map() {
       })
     })
   };
-  
+  // 추가zz
   function countMarkersDate() {
     let markersDateCount = 10; // 전날보다 이전 - 이후 +
     let markersTodayData = markersObject.markers[markersObject.userid][1];
@@ -549,23 +357,22 @@ function map() {
 
     countFootprintCount.innerText = markersDateCount;
 
-    // console.log(markersObject.markers[markersObject.userid][1]);
-    // console.log(beforeDate);
-    // console.log(markersTodayData[0][1]);
   }
 
-  async function getMarkersObject(){
+  async function getMarkersObject(){ 
     await allMarker(allAddMarker,3)
     await allMarker(allAddMarker,1)
-    await allMarker(allAddMarker,0)
     await allMarker(allAddMarker,2)
+    await allMarker(allAddMarker,0)
     console.log("await 발자국 확인 중");
     console.log(markersObject);
     if(markersObject.markers.hasOwnProperty(markersObject.userid) === false) {
       countFootprintCount.innerText = 10;
     } else {
       countMarkersDate();
+    
     }
+
     textCount = Number(countFootprintCount.innerText);
     // console.log(parseInt(countFootprintCount.innerText));
     console.log(markersObject)
@@ -577,7 +384,6 @@ function map() {
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
       minLevel: 5, // 클러스터 할 최소 지도 레벨
       disableClickZoom: true, // 클러스터 클릭 시 줌인 방지
-      
       //   styles: [{
         //     width : '53px', height : '52px',
         //     background: 'url(cluster.png) no-repeat',
@@ -586,7 +392,205 @@ function map() {
     //     lineHeight: '54px'
     // }]
   });
+  
+// 1. 추가버튼을 클릭했을때, 
+makeControlBtnsArr[1].addEventListener("click", () => {
+  let controlbtnsWrap = document.getElementById('controlbtnsWrap');
+  controlbtnsWrap.style.display='none'
+
+  let target = [];
+  for(let i = 0; i< markersObject.usersArray
+    .length;i++){
+    if(markersObject.usersArray[i]===markersObject.userid){
+      target.push(markersObject.markersArray[i]);
+    }else{
+      break;
+    }
+  }
+  clusterer.clear(); //사라짐
+  for (let i of target) {
+    i.setMap(map);
+  }
+  addFlag = true;
+  let sideBtn = document.getElementById('sideBtn');
+  sideBtn.style.display = 'none';
+  let buttonWrap = tagCreate('div')
+  let finishBtn = tagCreate('div')
+  let btnStyle = {width:'50px',height:'50px',backgroundColor:'white',borderRadius:'5px',marginTop:'10px',cursor:'pointer',display:'flex',justifyContent:'center',alignItems:"center",fontSize:'15px'}
+
+  buttonWrap.id = 'buttonWrap'
+  styleCreate(buttonWrap,{position:'absolute',zIndex :'2',right:'20px',top:'20px'})
+  styleCreate(finishBtn,btnStyle)
+  let mapdiv = document.getElementById('map');
+  mapdiv.appendChild(buttonWrap);
+  buttonWrap.appendChild(finishBtn);
+
+  finishBtn.innerText='완료'
+
+
+  finishBtn.addEventListener('click',()=>{
+    location.reload();
+  })
+});
+//2. 삭제버튼을 클릭했을때,
+makeControlBtnsArr[0].addEventListener("click", () => {
+  overlayChecker = true;
+  let controlbtnsWrap = document.getElementById('controlbtnsWrap');
+  controlbtnsWrap.style.display='none'
+  let target = [];
+  for(let i = 0; i< markersObject.usersArray
+    .length;i++){
+    if(markersObject.usersArray[i]===markersObject.userid){
+      target.push(markersObject.markersArray[i]);
+    }else{
+      break;
+    }
+  }
+  clusterer.clear(); //사라짐
+  let deleteTarget = []
+  for (let i of target) {
+    i.setMap(map);
+    kakao.maps.event.addListener(i, 'click', function() {
+      const id = markersObject.userid;
+      const dateTime = markersObject.markers[markersObject.userid][1][target.indexOf(i)][1];
+      i.setMap(null);
+      deleteTarget.push({ id: id, date: dateTime })
+    });
+  }
+  
+  let sideBtn = document.getElementById('sideBtn');
+  sideBtn.style.display = 'none';
+  let buttonWrap = tagCreate('div')
+  let finishBtn = tagCreate('div')
+  let cancelBtn = tagCreate('div')
+  let btnStyle = {width:'50px',height:'50px',backgroundColor:'white',borderRadius:'5px',marginTop:'10px',cursor:'pointer',display:'flex',justifyContent:'center',alignItems:"center",fontSize:'15px'}
+
+  buttonWrap.id = 'buttonWrap'
+  styleCreate(buttonWrap,{position:'absolute',zIndex :'2',right:'20px',top:'20px'})
+  styleCreate(finishBtn,btnStyle)
+  styleCreate(cancelBtn,btnStyle)
+  let mapdiv = document.getElementById('map');
+  mapdiv.appendChild(buttonWrap);
+  buttonWrap.appendChild(finishBtn);
+  buttonWrap.appendChild(cancelBtn);
+
+  finishBtn.innerText='완료'
+  cancelBtn.innerText='취소'
+
+  cancelBtn.addEventListener('click',()=>{
+    location.reload();
+  })
+  finishBtn.addEventListener('click',()=>{
+    for(let i of deleteTarget){
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", `http://localhost:2080/mapDelete`);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify(i));
+    }
+    location.reload();
+  })
+
+});
+makeControlBtnsArr[2].addEventListener("click", () => {
+  let controlbtnsWrap = document.getElementById('controlbtnsWrap');
+  controlbtnsWrap.style.display='none'
+  let dragTarget = [];
+  let target = [];
+
+  for(let i = 0; i< markersObject.usersArray
+    .length;i++){
+    if(markersObject.usersArray[i]===markersObject.userid){
+      target.push(markersObject.markersArray[i]);
+    }else{
+      break;
+    }
+  }
+  clusterer.clear(); //사라짐
+  for (let i of target) {
+    i.setMap(map);
+    i.setDraggable(true);
+
+    let dragStartLat;
+    let dragStartLng;
+    // 마커를 이동시켰을 때 마커의 좌표가 변경 되도록 설정
+    // 1. 마커를 드래그 시킬 때 드래그 되는 마커가 어떤 마커인지 식별 필요
+    // 2. 마커를 드래그해서 mouseup 되는 순간 식별된 마커의 좌표값을 update
+    kakao.maps.event.addListener(i, "dragstart", function () {
+      // 드래그가 시작되는 시점에 동작
+      // 마커의 현재 좌표를 저장
+      let latlng = i.getPosition();
+      dragStartLat = latlng.getLat().toFixed(13);
+      dragStartLng = latlng.getLng().toFixed(13);
+      //console.log("이동 전 lat " + dragStartLat);
+      //console.log("이동 전 lng " + dragStartLng);
+    });
+
+    kakao.maps.event.addListener(i, "dragend", function () {
+      // 드래그가 끝나는 시점에 동작
+      // 드래그가 끝난 지점의 좌표를 불러옴
+      let latlng = i.getPosition();
+      //console.log("이동 후 lat " + latlng.getLat());
+      //console.log("이동 후 lng " + latlng.getLng());
+      let wrap = [];
+      // 배열에 [이동된 위도 좌표, 이동된 경도 좌표, 사용자id, 이동하기 전 위도 좌표, 이동하기 전 경도 좌표] 를 저장
+      wrap.push(
+        latlng.getLat().toFixed(13),
+        latlng.getLng().toFixed(13),
+        cookieId,
+        dragStartLat,
+        dragStartLng
+      );
+      // 배열을 객체에 담음
+      resultObject[0] = wrap;
+      dragTarget.push({0:wrap});
+      // const httpRequest = new XMLHttpRequest();
+      // httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      // // 객체를 JSON 형식으로 바꿔서 서버로 전송
+      // console.log(resultObject);
+      // httpRequest.send(JSON.stringify(resultObject));
+    });
+  }
+
+  let sideBtn = document.getElementById('sideBtn');
+  sideBtn.style.display = 'none';
+  let buttonWrap = tagCreate('div')
+  let finishBtn = tagCreate('div')
+  let cancelBtn = tagCreate('div')
+  let btnStyle = {width:'50px',height:'50px',backgroundColor:'white',borderRadius:'5px',marginTop:'10px',cursor:'pointer',display:'flex',justifyContent:'center',alignItems:"center",fontSize:'15px'}
+
+  buttonWrap.id = 'buttonWrap'
+  styleCreate(buttonWrap,{position:'absolute',zIndex :'2',right:'20px',top:'20px'})
+  styleCreate(finishBtn,btnStyle)
+  styleCreate(cancelBtn,btnStyle)
+  let mapdiv = document.getElementById('map');
+  mapdiv.appendChild(buttonWrap);
+  buttonWrap.appendChild(finishBtn);
+  buttonWrap.appendChild(cancelBtn);
+
+  finishBtn.innerText='완료'
+  cancelBtn.innerText='취소'
+
+  cancelBtn.addEventListener('click',()=>{
+    location.reload();
+  })
+  
+  finishBtn.addEventListener('click',()=>{
+    console.log(dragTarget);
+    for(let i of dragTarget){
+      const httpRequest = new XMLHttpRequest();
+      httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      // 객체를 JSON 형식으로 바꿔서 서버로 전송
+      console.log(i);
+      httpRequest.send(JSON.stringify(i));
+    }
+    location.reload();
+  })
+
+});
+
     markersObject['clusterer'] = clusterer;
+
+    
   }
     
   getMarkersObject();
@@ -612,7 +616,6 @@ function map() {
           xAnchor: 0.3,
           yAnchor: 0.91,
           });
-          
           
           publicTalkIconArr.push(customOverlay)
 
