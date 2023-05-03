@@ -85,7 +85,7 @@ export default function dangMap(request, response) {
           }
         }
       );
-      connection.query(`insert into alarm(id, follow) values ('${followTarget}', '${myId}')`)
+      connection.query(`insert into alarm(id, follow, alarm_type) values ('${followTarget}', '${myId}', 'follow')`)
       connection.end();
     })
     

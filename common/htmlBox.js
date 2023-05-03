@@ -133,7 +133,19 @@ const html = {
   <script src="/script/frontEnd/postBoard/dangstar_page.js"></script>
   <script src="/script/frontEnd/postBoard/dangstar_infinityscroll.js"></script>`,
 
-
+  postDetail: `
+  <script src="/script/common/commonFunc.js"></script>
+  <script src="/script/common/commonStyle.js"></script>
+  <script src="/script/common/topMenu.js"></script>
+  <script src="/script/common/bottomMenu.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_recent.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_input.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_window.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_comment_update_delete_btn.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_like.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_page_create.js"></script>
+  <script src="/script/frontEnd/postBoard/dangstar_detail_page.js"></script>`,
+  
   dangTalkMain:`
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
