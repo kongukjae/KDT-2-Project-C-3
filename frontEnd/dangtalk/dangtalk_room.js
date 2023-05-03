@@ -101,6 +101,36 @@ function main(){
       createChatMsg(rootChild[2],msgFrom,'You', msgFrom+':'+msgtext)
     }
   });
+
+ window.addEventListener('load',()=>{
+  const jwt = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  setTimeout(()=>{
+    fetch("http://localhost:2080/bottomMenuUnreadCircle", {
+      method: "POST",
+      body: jwt,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        let cnt = 0;
+        for (let i of result) {
+          cnt += i.unread;
+        }
+        if (cnt > 0) {
+          let unread = tagCreate("div");
+          let dangtalkButton = document.getElementById('dangtalkButton')
+          styleCreate(unread, targetStyle.unreadCircle);
+          dangtalkButton.appendChild(unread);
+          unread.innerText = cnt;
+        }else if (cnt === 0 && dangtalkButton.children.length === 1){
+          let dangtalkButton = document.getElementById('dangtalkButton')
+          dangtalkButton.children[0].style.display ='none'
+        }
+      });
+  },1000)
+ }) 
 }
 main()
 

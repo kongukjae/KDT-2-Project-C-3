@@ -1733,9 +1733,10 @@ const dangtalkChattingRoomStyle = {
     height: stylePropertyUnion.height.height70,
     padding: "10px",
     borderRadius: "10px",
-    ...stylePropertyUnion.flexColCenter,
+    ...stylePropertyUnion.flexRowCenter,
     backgroundColor: stylePropertyUnion.colorTheme.beige,
     boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
+    position:'relative'
   },
   chattingWrap: {
     width: stylePropertyUnion.width.width400,

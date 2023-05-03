@@ -23,6 +23,13 @@ export default function chatWithSocketIo(server){
       conn.end();
     });
     
+    socket.on('firstEnter', function(data){
+      console.log(data);
+      let name = data.name;
+      let room = data.room;
+      chat.to(room).emit('firstEnter', name +" 님이 채팅방에 참여하셨습니다");
+    })
+
     socket.on('chat message', function(data){
       console.log(data);
       let name = data.name;
@@ -43,7 +50,7 @@ export default function chatWithSocketIo(server){
         
       );
       conn.query(
-        `UPDATE chat_room SET unread = chat_room.unread + 1 WHERE room = '${room}' AND id ='${talkto}'`,
+        `UPDATE chat_room SET unread = chat_room.unread + 1 WHERE room = '${room}'`,
         function (err, rows) {
           if (err) throw err;
         }
@@ -56,6 +63,8 @@ export default function chatWithSocketIo(server){
       );
       conn.end();
     });
+
+
     socket.on('disconnect', function () {
       console.log('disconnect')
     });
