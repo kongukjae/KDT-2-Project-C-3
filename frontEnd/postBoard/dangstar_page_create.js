@@ -108,6 +108,8 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       // 댓글 데이터가 있을 경우에만
       if(res.length !== 0) {
         console.log("조건문 안쪽")
+        console.log(res);
+        console.log("조건문 안쪽")
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
         commentIndex = res[0].cm_index;
@@ -128,6 +130,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
           for(let i = 1; i < cnt + 1; i++) {
             let text = res[i].cm_detail;
             let name = res[i].cm_id;
+            let cmIndex = res[i].cm_index;
             let profileImg;
             const xhr = new XMLHttpRequest();
             xhr.open("POST", `http://localhost:2080/sendImage`);
@@ -135,7 +138,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
             xhr.send(`type=proFile&id=${res[i].cm_id}`);
             xhr.addEventListener("load", function () {
               profileImg = URL.createObjectURL(xhr.response);
-              commentWindow(cmtModal, text, name, profileImg, i);
+              commentWindow(cmtModal, text, name, profileImg, i, cmIndex);
             })
           }
         });
