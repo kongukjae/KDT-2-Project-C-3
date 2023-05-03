@@ -10,13 +10,6 @@ export default function postBoard(request, response) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.postBoard));
   }
-  if (request.url.startsWith("/dangstarDetail")) {
-    console.log(request.url);
-    let nth = request.url.split("=")[1];
-    response.writeHead(200, { "Content-Type": "text/html" });   
-    response.write(`<script>const idx = ${nth}</script>`);
-    response.end(htmlBox.htmlFunc(htmlBox.postDetail));
-  }
   if (request.url.startsWith("/loadPostBoard")) {
     console.log(request.url);
     let nth = request.url.split("=")[1];

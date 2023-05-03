@@ -54,7 +54,10 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       postBtn.id = `index_${postIndex}_${index}`
     } else {
       postBtn.innerText = "➤";
-      postBtn.id = `detail_${postIndex}`
+      postBtn.id = `detail_${postIndex}`;
+      //const de = tagCreate('a', {});
+      //de.href = `/dangstarDetail?nth=${postIndex}`;
+      //postBtn.appendChild(de);
 
     }
     styleCreate(postBtn, dangstarStyle.dangstarFeedBtns);
@@ -67,14 +70,12 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
   commentInputData(postIndex);
 
-  //
-  const postDetail = document.getElementById(`detail_${postIndex}`);
-  postDetail.addEventListener('click', () => {
-    console.log("더보기를 눌렀다", postIndex)
-    dangstarDetail(postIndex);
-    //window.location = "http://localhost:2080/dangstarDetail";
-    
-  });
+  let detailBtn = document.getElementById(`detail_${postIndex}`);
+  detailBtn.addEventListener('click', () => {
+    let xhr = new XMLHttpRequest();
+      xhr.open("POST", `http://localhost:2080//postDetailDangstar`)
+      xhr.send(`{src_link=${src_link}&writerNickname=${writerNickname}&text=${text}index=${index}&postIndex=${postIndex}}`);
+  })
 
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
