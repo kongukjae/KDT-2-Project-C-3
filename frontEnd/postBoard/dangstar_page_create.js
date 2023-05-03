@@ -50,10 +50,15 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       //postBtn.innerText = "좋아요";
       postBtn.id = `like_${postIndex}_${index}`;
     } else if (i === 1) {
-      postBtn.innerText = "댓글";
+      postBtn.innerText = "댓글"; 
       postBtn.id = `index_${postIndex}`
     } else {
-      postBtn.innerText = "구독";
+      postBtn.innerText = "➤";
+      postBtn.id = `detail_${postIndex}`;
+      //const de = tagCreate('a', {});
+      //de.href = `/dangstarDetail?nth=${postIndex}`;
+      //postBtn.appendChild(de);
+
     }
     styleCreate(postBtn, dangstarStyle.dangstarFeedBtns);
     postBtnWrap.appendChild(postBtn);
@@ -65,6 +70,31 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
   commentInputData(postIndex);
 
+  
+  const detailBtn = document.getElementById(`detail_${postIndex}`);
+  detailBtn.addEventListener('click', () => {
+    console.log("정상적으로 상세페이지 클릭함: ", postIndex)
+    let detailForm = document.createElement("form");
+    detailForm.method = "POST";
+    detailForm.action = "/detailPostDangstar";
+    // let params = {src_link:src_link,
+    //   writerNickname:writerNickname,
+    //   text:text,
+    //   index:index,
+    //   postIndex:postIndex};
+    let params = {postIndex:postIndex}
+    for (let key in params) {
+      let hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+      hiddenField.setAttribute("value", params[key]);
+      detailForm.appendChild(hiddenField);
+    }
+    document.body.appendChild(detailForm);
+    detailForm.submit();
+  })
+
+  
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
   let cmtModal = tagCreate("div", { id: "cmtModal" });
@@ -85,6 +115,9 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       cmBtnCount = true;
     }
   });
+
+  
+  
 
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   function commentInputData(postIndex) {
