@@ -213,11 +213,6 @@ export default function dangMap(request, response) {
     );
   });
 }
-
-
-
-
-
 if (request.url === "/firstmyWrite") { 
   let body = "";
   request.on("data", function (data) {
