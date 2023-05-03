@@ -153,16 +153,34 @@ function myPage(){
     })
   }
 
-  // rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리" //캘린더
+  //! 마이페이지 캘린더 부분
 
   // 지금이 몇 월인지 판단하기 위한 변수
   let currentMonth = new Date().getMonth() + 1;
-  
+
   function calendar(now) {
+
     let nowYear = now.getFullYear();
     let nowMonth = now.getMonth() + 1;
     let nowDate = now.getDate();
-    console.log(currentMonth)
+
+    let dateres;
+    let dateData = [];
+    let monthData = [];
+    const xhr = new XMLHttpRequest();
+    const cookieId = document.cookie.split("=")[1].split(";")[0];
+    xhr.open("GET", `http://localhost:2080/allloadMap?id=${cookieId}`);
+    xhr.send();
+    xhr.addEventListener("load", function () {
+      dateres = JSON.parse(xhr.response);
+      // console.log(dateData[0]);
+    });
+    for (const key in dateres) {
+      dateData.push([new Date(dateres[key][1]).getMonth() + 1, new Date(dateres[key][1]).getDate()]);
+      // dateData.push(new Date(dateres[key][1]).getMonth() + 1);
+    }
+    console.log(dateData);
+    // console.log(changeDateData);
   
     const monthArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   
@@ -286,6 +304,7 @@ function myPage(){
       rootChild[5].innerHTML = '';
       calendar(nextMonth);
     });
+
   }
 
   calendar(new Date());
