@@ -200,7 +200,7 @@ export default function dangMap(request, response) {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      `select cm_detail from cm_post where cm_id='${myId}' `,
+      `SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
       function (err, data) {
         if (err) throw err;
         else {
@@ -259,7 +259,7 @@ if (request.url === "/firstmyWrite") {
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
     conn.query(
-      ` SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
+      `SELECT detail FROM second_hand WHERE id='${myId}' `,
       function (err, data) {
         if (err) throw err;
         else {
@@ -282,7 +282,7 @@ if (request.url === "/firstmyWrite") {
 
 
 
-  } 
+} 
 
 
 

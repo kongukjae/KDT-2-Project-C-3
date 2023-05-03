@@ -364,9 +364,9 @@ function myPage(){
   
   // 탭 컨텐츠 생성
   const tabContents = [
-    "댕스타글 컨텐츠",
-    "댕마켓글 컨텐츠",
-    "내댓글 컨텐츠"
+    "",
+    "",
+    ""
   ].map((content, index) => {
     let tabContent = tagCreate("div", { id: `tabContent-${index}` });
     tabContent.textContent = content;
@@ -430,7 +430,7 @@ function myPage(){
             const data = JSON.parse(this.responseText);
             console.log(data);
             for (let i = 0; i < data.length; i++) {
-              tabContents[index].innerHTML += `댕스타글: ${data[i].id}, 내가쓴글: ${data[i].detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+              tabContents[index].innerHTML += `댕스타글: ${data[i].post_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
             }
           }
         };
@@ -442,23 +442,25 @@ function myPage(){
         xhrr.onreadystatechange = function () {
           if (this.readyState === 4 && this.status === 200) {
             const data = JSON.parse(this.responseText);
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-              tabContents[index].innerHTML += `야무진: ${data[i].id}, 내가쓴글: ${data[i].detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            if (data.length === 0) {
+              tabContents[index].innerHTML = "작성한 글이 없습니다."; // 작성한 글이 없을 경우 처리
+            } else {
+              for (let i = 0; i < data.length; i++) {
+                tabContents[index].innerHTML += `내가쓴글: ${data[i].detail}<br>`; // 댕마켓글 컨텐츠에 데이터 추가
+              }
             }
           }
-        };
-      } else if (index ===2){
+        };} else if (index ===2){
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/firstmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
           if (this.readyState === 4 && this.status === 200) {
-            const data = JSON.parse(this.responseText);
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-              tabContents[index].innerHTML += ` 내가쓴글: ${data[i].detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            const dataa = JSON.parse(this.responseText);
+            console.log(dataa);
+            for (let i = 0; i < dataa.length; i++) {
+              tabContents[index].innerHTML += `내가쓴댓글: ${dataa[i].cm_detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
             }
           }
         };
