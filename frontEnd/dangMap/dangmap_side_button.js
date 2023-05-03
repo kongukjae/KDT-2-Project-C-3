@@ -4,7 +4,7 @@ function sideButton(map){
   const sideBtn = tagCreate("div", {});
   root.appendChild(sideBtn);
   styleCreate(sideBtn, dangMapStyle.sideBtnStyle);
-
+  sideBtn.id = 'sideBtn'
   const serch = tagCreate("div", {});
   const orgChat = tagCreate("div", {id:'SideButtonforPublicTalk'});
 

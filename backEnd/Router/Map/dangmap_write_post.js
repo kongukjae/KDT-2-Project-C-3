@@ -64,4 +64,58 @@ export default function callPostDangMap(request, response) {
       }
     })
   }
+  else if (request.url.startsWith("/mapDelete")) {
+    let connection = mysql.createConnection(cmServer.mysqlInfo);
+    connection.connect();
+    let body = "";
+    request.on('data', chunk => {
+      body += chunk.toString();
+    });
+    request.on("end", function(){
+      function changeDate(date) {
+  let nowDate = new Date(date);
+  let formatDate = nowDate.toLocaleString();
+
+  return formatDate;
+}
+      console.log(JSON.parse(body));
+      const { id, date } = JSON.parse(body);
+      // 문자열을 Date 객체로 변환
+      const parsedDate = new Date(date);
+      console.log(parsedDate);
+      let target = changeDate(parsedDate);
+     
+
+let result = target.split(' ');
+let answer = result[0].replace('.','-') + result[1].replace('.','-').padStart(3, '0') + result[2].replace('.',' ').padStart(3, '0')
+let noon = 0
+let time = result[4].split(':');
+if(result[3] === '오후' && time[0] !== '12'){
+  noon = 12;
+}else if(result[3] ==='오전'){
+  noon = 0;
+}
+answer += (Number(time[0]) + noon).toString().padStart(2, '0') + ':' + time[1].padStart(2, '0') + ':' + time[2].padStart(2, '0')
+
+console.log(answer)
+     
+
+
+
+
+      connection.query(`DELETE FROM map_tables WHERE id = '${id}' AND addData = '${answer}'`, (error, results, fields) => {
+        if (error) {
+          console.log(error);
+          console.log(dateTime);
+          response.statusCode = 500;
+          response.end();
+          return;
+        }
+  
+        console.log('Deleted rows:', results.affectedRows);
+        response.statusCode = 200;
+        response.end();
+      });
+    });
+  }
 }

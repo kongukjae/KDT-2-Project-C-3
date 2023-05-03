@@ -3,6 +3,7 @@ styleCreate(root, dangstarStyle.dangstarRoot);
 document.body.appendChild(root);
 
 // 탑 메뉴
+
 const topMenuWrap = tagCreate("div", {});
 root.appendChild(topMenuWrap);
 topMenu(topMenuWrap);
