@@ -5,7 +5,7 @@ function myPage(){
   
 
   let rootChild = [];
-  for(let i = 0;i<7;i++){
+  for(let i = 0;i<8;i++){
     let child = tagCreate("div",{});
     root.appendChild(child);
     rootChild.push(child);
