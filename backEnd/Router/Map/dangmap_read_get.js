@@ -54,13 +54,21 @@ export default function dangMap(request, response) {
     conn.end();
   }
   else if (request.url.startsWith("/allloadMap")) {
-    let targetId = request.url.split("=")[1];
+    let targetId = request.url.split("=")[1].split("?")[0];
+    let first = request.url.split("=")[2].split("?")[0];
+    let last = request.url.split("=")[3];
+    console.log(request.url);
+    console.log(targetId);
+    console.log(first);
+    console.log(last);
+
     let connection = mysql.createConnection(cmServer.mysqlInfo);
     let markerMyAllArr = {};
     connection.connect();
 
     connection.query(
-      `select * from map_tables where id = '${targetId}' order by addData desc;`,
+      // * 쿼리문 변경 -> 발자국 찍은 날짜를 전부 가져오는 것이 아니라 캘린더가 표시한 달에 찍힌 발자국만 가져오도록 변경, 오름차순으로 변경
+      `select * from map_tables where id = '${targetId}' and addData between '${first}' and '${last}' order by addData ASC;`,
       function (err, rows) {
         if (err) throw err;
         else {
