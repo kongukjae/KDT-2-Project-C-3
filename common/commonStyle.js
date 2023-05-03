@@ -1182,6 +1182,21 @@ const mypageStyle = {
 };
 
 const keepStyle = {
+  addImageButton:{
+    width:'50px',
+    height:'50px',
+    borderRadius : '50%',
+    position : 'absolute',
+    backgroundColor : stylePropertyUnion.colorTheme.peach,
+    right : '10px',
+    bottom : '10px',
+    ...stylePropertyUnion.flexColCenter,
+    color:'white',
+    fontSize : '30px',
+    cursor : 'pointer',
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
+  },
+
   pageRoot: {
     width: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height1700,
@@ -1220,6 +1235,8 @@ const keepStyle = {
     ...stylePropertyUnion.flexRowCenter,
     border: `1px solid ${stylePropertyUnion.colorTheme.peach}`,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
 
   // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
@@ -1263,8 +1280,8 @@ const keepStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.whiteTypeD,
     boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
     position: "absolute",
-    top: "1200px",
-    left: "30%",
+    top: "520px",
+    right: "10px",
     gap: "10px",
     marginLeft: "-150px",
   },
@@ -1554,6 +1571,8 @@ const dangMarketStyle = {
     ...stylePropertyUnion.flexColCenter,
     border: "1px solid gray",
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   marketPostnameAddStyle: {
     width: stylePropertyUnion.width.width250,
