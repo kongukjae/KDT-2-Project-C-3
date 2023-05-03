@@ -1141,11 +1141,11 @@ const mypageStyle = {
     boxShadow: "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.21)",
   },
   mypageCalendarStamp: {
-    width : '15px',
+    width : "110%",
     position : 'absolute',
-    top : '0px',
+    top : '53%',
     left : '50%',
-    transform : 'translateX(-50%)'
+    transform : 'translate(-50%, -50%)'
   },
   mypageUploadModal: {
     width: stylePropertyUnion.width.width300,
