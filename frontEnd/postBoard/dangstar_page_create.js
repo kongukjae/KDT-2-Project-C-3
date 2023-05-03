@@ -90,18 +90,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       detailForm.appendChild(hiddenField);
     }
     document.body.appendChild(detailForm);
-
     detailForm.submit();
-
-    //window.location = "http://localhost:2080/detailPostDangstar";
-    // const xhr = new XMLHttpRequest();
-    // xhr.open("POST", `http://localhost:2080/detailPostDangstar`, true)
-    // xhr.send(`{src_link=${src_link}&writerNickname=${writerNickname}&text=${text}&index=${index}&postIndex=${postIndex}}`);
-    // xhr.addEventListener('load', ()=>{
-    //   console.log("응답받음~!!")
-    //   window.location = "http://localhost:2080/detailPostDangstar";
-      
-    // })
   })
 
   
