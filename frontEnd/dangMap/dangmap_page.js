@@ -43,19 +43,6 @@ map();
 let sideArr = sideButton();
 
 
-//대표 발자국 대신할 임시 버튼
-let test = tagCreate("div", {})
-document.body.appendChild(test);
-styleCreate(test, {
-  width: "50px",
-  height: "50px",
-  zindex: '3',
-  position: 'relative',
-  backgroundColor: "black",
-  bottom: '1000px'
-})
-
-
 //단체방 리스트 생성 함수
 const roomName = 'test1';
 createUserOrgchat(test, roomName);
@@ -133,7 +120,7 @@ function map() {
  map.setZoomable(false);
 
   //  이미지 링크 생성을 해서 넣으니까 되었다.
-  let imageSrc = "https://i.ibb.co/zR5p1G9/dogpaw.png";
+  let imageSrc = "/image/graphic/dogpaw.png";
   (imageSize = new kakao.maps.Size(30, 30)), // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다.
     (imageOption = { offset: new kakao.maps.Point(15, 15) }); // 마커이미지의 옵션입니다.
@@ -345,9 +332,6 @@ searchBar.addEventListener("keydown", (e) => {
     return marker;
   }
 
-  
-  
-
   // 하단 메뉴
   let menuChild2 = [];
   btmMeun(rootChild[2], menuChild2);
@@ -422,7 +406,7 @@ searchBar.addEventListener("keydown", (e) => {
       })
     })
   };
-  // 추가
+  // 추가zz
   function countMarkersDate() {
     let markersDateCount = 10; // 전날보다 이전 - 이후 +
     let markersTodayData = markersObject.markers[markersObject.userid][1];
@@ -439,9 +423,6 @@ searchBar.addEventListener("keydown", (e) => {
 
     countFootprintCount.innerText = markersDateCount;
 
-    // console.log(markersObject.markers[markersObject.userid][1]);
-    // console.log(beforeDate);
-    // console.log(markersTodayData[0][1]);
   }
 
   async function getMarkersObject(){ 
@@ -478,36 +459,6 @@ searchBar.addEventListener("keydown", (e) => {
     // }]
   });
   
-
-  console.log(markersObject.markers[markersObject.userid][1]);
-    console.log(markersObject.markers[markersObject.userid][1][0][0]);
-
- console.log(markersObject)
-
- console.log(markersObject.markers['asdasd1234'][1][0][0])
-
-console.log(markersObject.markers);
-
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[0][1][0]]); // 나
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[1]]); // 다른넘
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[2]]); // 다른넘
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[3]]); // 다른넘
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[4]]); // 다른넘
-// console.log(markersObject.markers[Object.keys(markersObject.markers)[5]]); // 다른넘
-
-
-// for (let i = 0; i < 5; i++) {
-//   const key = Object.keys(markersObject.markers)[i];
-//   for (let j = 0; j < 10; j++) {
-//       markersObject.markers[key][1][j][0].setMap(null);
-//   }
-// }
-
-// makeControlBtnsArr[0].addEventListener('click',()=>{
-//   alert('hi')
-// })
-
-// const addButton = document.getElementById("addButton");
 // 1. 추가버튼을 클릭했을때, 
 makeControlBtnsArr[1].addEventListener("click", () => {
   alert("작동되는거 맞다");
@@ -525,9 +476,26 @@ makeControlBtnsArr[1].addEventListener("click", () => {
     i.setMap(map);
   }
   addFlag = true;
-  
-
-
+  // 추가버튼
+let test = tagCreate("div", {})
+document.body.appendChild(test);
+styleCreate(test, {
+  width: "50px",
+  height: "50px",
+  position: 'relative',
+  backgroundColor: "black",
+  bottom: '500px',
+  borderRadius: '50%', 
+  display: 'flex',
+  justifyContent: 'center', 
+  alignItems: 'center',
+  color: 'white',
+  cursor: 'pointer',
+});
+test.textContent = "추가";
+test.addEventListener("click",() =>{
+alert("추가완료");
+})
 });
 //2. 삭제버튼을 클릭했을때,
 makeControlBtnsArr[0].addEventListener("click", () => {
@@ -568,42 +536,6 @@ makeControlBtnsArr[0].addEventListener("click", () => {
   console.log('클릭 이벤트 발생');
 });
 
-// clusterer.redraw();
-//marker -> 내 발자국만 띄우고
-// 수정 끝나면 
-// let cnt = 0
-// setInterval(()=>{
-  // for(let j of target){
-  //   if(cnt%2===0){
-  //     j.setMap(null);
-
-  //   }else{
-  //     j.setMap(map);
-  //   }
-  // }
-
-
-// let cnt = 0;
-// setInterval(() => {
-//   const userMarkers = markersObject.markers[markersObject.userid];
-
-//   if (userMarkers && Array.isArray(userMarkers[1])) {
-//     userMarkers[1].forEach((markerObject) => {
-//       if (markerObject && Array.isArray(markerObject) && markerObject.length > 0) {
-//         const marker = markerObject[0];
-
-//         if (cnt % 2 === 0) {
-//           marker.setMap(null);
-//         } else {
-//           marker.setMap(map);
-//         }
-//       }
-//     });
-//   }
-//   cnt++;
-// }, 1000);
-
-
 
     markersObject['clusterer'] = clusterer;
   }
@@ -631,7 +563,6 @@ makeControlBtnsArr[0].addEventListener("click", () => {
           xAnchor: 0.3,
           yAnchor: 0.91,
           });
-          
           
           publicTalkIconArr.push(customOverlay)
 

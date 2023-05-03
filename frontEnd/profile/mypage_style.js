@@ -289,41 +289,59 @@ function myPage(){
 
   calendar(new Date());
 
+  const tabButtons = ['Tab 1', 'Tab 2'];
+  const tabContents = ['Content 1', 'Content 2', 'Content 3', 'Content 4', 'Content 5'];
+  
+  // 지정된 위치에 탭 메뉴를 추가합니다.
   let tabMenuContainer = tagCreate("div", { id: "tabMenuContainer" });
   rootChild[6].appendChild(tabMenuContainer);
   
-  let tabButtons = [
-    {
-      id: "tabButton1",
-      text: "Menu 1",
-    },
-    {
-      id: "tabButton2",
-      text: "Menu 2",
-    },
-  ];
+  const tabContainer = tagCreate('div', { id: 'tab-container' });
+  styleCreate(tabContainer, mypageStyle.tabContainer);
+  tabMenuContainer.appendChild(tabContainer);
+  
+  const tabContentContainer = tagCreate('div', { id: 'tab-content-container' });
+  styleCreate(tabContentContainer, mypageStyle.tabContentContainer);
+  tabMenuContainer.appendChild(tabContentContainer);
+  
+  tabButtons.forEach((tab, index) => {
+    const button = tagCreate('button', { id: `tab-button-${index}` });
+    button.textContent = tab;
+    button.addEventListener('click', () => {
+      showContent(index);
+    });
+    styleCreate(button, mypageStyle.tabButton);
+    tabContainer.appendChild(button);
+  });
+  
+  tabContents.forEach((content, index) => {
+    const contentDiv = tagCreate('div', { id: `tab-content-${index}` });
+    
+    // 데이터베이스 값을 사용하여 내용을 채우려면 이 부분을 수정하세요.
+    const innerContentDiv = document.createElement('div');
+    innerContentDiv.innerHTML = content;
+    contentDiv.appendChild(innerContentDiv);
+    
+    styleCreate(contentDiv, mypageStyle.tabContent(index));
+    tabContentContainer.appendChild(contentDiv);
+  });
+  
+  function showContent(index) {
+    const contents = Array.from({ length: tabContents.length }, (_, i) => document.getElementById(`tab-content-${i}`));
+    contents.forEach((content, contentIndex) => {
+      if (contentIndex === index) {
+        content.style.display = 'block';
+      } else {
+        content.style.display = 'none';
+      }
+    });
+  }
+
   
 
 
-  let tapMenuWrap = tagCreate("div", { id: "root" });
-  rootChild[6].appendChild(tapMenuWrap);
-  styleCreate(tapMenuWrap, mypageStyle.mypageCalendarRoot);
-   
-  let tabMenu = tagCreate("div",{});
-  rootChild[6].appendChild(tabMenu);
-  styleCreate(tabMenu, mypageStyle.mypageCalendarMonthOfNameBox);
-  
-   let tabLeft= tagCreate("div",{});
-   tabMenu.appendChild(tabLeft);
-   stylecreate(tabLeft,mypageStyle.mypageCalendarMonthOfNameBox);
-
-  let tabRight= tagCreate("div",{});
-   tabMenu.appendChild(tabRight);
-   stylecreate(tabRight,mypageStyle.mypageCalendarMonthOfNameBox);
 
 
-
-   
 
 
 
