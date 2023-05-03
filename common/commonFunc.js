@@ -11,10 +11,16 @@ function styleCreate(obj, styleOb) {
     obj.style[i] = styleOb[i];
   }
 }
-// 날짜 변환
+// 로컬 날짜 변환
 function changeDate(date) {
   let nowDate = new Date(date);
-  // let formatDate = nowDate.toLocaleString();
-
-  return nowDate ;
+  let formatDate = nowDate.toLocaleString();
+  return formatDate;
 }
+
+// UTC 날짜 변환
+function changeDateUTC(date) {
+  const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())).toISOString();
+  return utcDate;
+}
+

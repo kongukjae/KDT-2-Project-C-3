@@ -1120,6 +1120,7 @@ const mypageStyle = {
   mypageCalendarTable: {
       width: "400px",
       height: "360px",
+      padding: "5px",
       backgroundColor: "#F7786B",
       borderRadius: "15px",
       boxShadow: "0 5px 20px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)",
@@ -1131,12 +1132,20 @@ const mypageStyle = {
     textAlign: "center",
     fontSize: "24px",
     fontWeight: "700",
+    position: "relative",
   },
   mypageCalendarNowDayIndex: {
     color: "black",
     backgroundColor: "#F3EDE8",
     borderRadius: "50%",
     boxShadow: "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.21)",
+  },
+  mypageCalendarStamp: {
+    width : "110%",
+    position : 'absolute',
+    top : '53%',
+    left : '50%',
+    transform : 'translate(-50%, -50%)'
   },
   mypageUploadModal: {
     width: stylePropertyUnion.width.width300,
