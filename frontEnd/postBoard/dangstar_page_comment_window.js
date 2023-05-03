@@ -1,5 +1,5 @@
 //댓글 창 만드는 함수
-function commentWindow(parent, cmText, cmName, profileImg, i) {
+function commentWindow(parent, cmText, cmName, profileImg, i, commentIndex) {
   console.log(i);
   // console.log(i);
   console.dir(parent);
@@ -36,4 +36,11 @@ function commentWindow(parent, cmText, cmName, profileImg, i) {
   textChild.appendChild(comment);
   styleCreate(comment, dangstarStyle.dangstarCommentModalTextBox);
   comment.innerText = cmText;
+
+  userCheck().then((userID) => {
+    // 접속한 유저의 ID와 작성자의 ID가 일치한다면 수정/삭제 버튼 표시
+    if (cmName === userID) {
+      commentUpdateDelete(cmt, commentIndex);
+    }
+  });
 }
