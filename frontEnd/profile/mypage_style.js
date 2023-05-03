@@ -153,16 +153,21 @@ function myPage(){
     })
   }
 
-  // rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리" //캘린더
+  //! 마이페이지 캘린더 부분
 
-  // 지금이 몇 월인지 판단하기 위한 변수
+  // * 지금이 몇 년도 몇 월인지 판단하기 위한 전역 변수
+  let currentYear = new Date().getFullYear();
   let currentMonth = new Date().getMonth() + 1;
-  
+
   function calendar(now) {
+
     let nowYear = now.getFullYear();
     let nowMonth = now.getMonth() + 1;
     let nowDate = now.getDate();
-    console.log(currentMonth)
+
+    let dateres;
+    let dateData = [];
+    let monthData = [];;
   
     const monthArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   
@@ -180,10 +185,58 @@ function myPage(){
     let nowMonthOfLastDate = monthOfLastDate.getDate();
   
     let firstDay = new Date(nowYear, now.getMonth(), 1); //! 지금 현재 날짜의 첫번째 날짜
+    // console.log("firstDay");
+    // console.log(firstDay);
+    // console.log(changeDateUTC(firstDay));
+    // console.log(monthOfLastDate);
+    // console.log(changeDateUTC(monthOfLastDate));
     let monthOfFirstDay = firstDay.getDay(); //! 월의 첫번째 날짜의 요일
-  
     let weekCount = Math.ceil((monthOfFirstDay + nowMonthOfLastDate) / 7); //!(주의 수) 월의 시작 요일과 마지막 날짜를 더해서 7로 나눠준다.
-  
+    
+    // * 발자국 찍힌 날짜를 중복 제거하고 담기 위해 dateList 집합 생성
+    const dateListSet = new Set();
+    // * 서버에 날짜 데이터 요청 보내기 -> firsDay와 monthOfLastDate 변수를 사용하고자 위치 변경, 요청할때 서버로 이번 달의 1일과 마지막날을 같이 보냄
+    const xhr = new XMLHttpRequest();
+    const cookieId = document.cookie.split("=")[1].split(";")[0];
+    const firstDayOfMonth = changeDateUTC(firstDay);
+    const lastDayOfMonth = changeDateUTC(monthOfLastDate);
+    xhr.open("GET", `http://localhost:2080/allloadMap?id=${cookieId}?first=${firstDayOfMonth}?last=${lastDayOfMonth}`);
+    xhr.send();
+    xhr.addEventListener("load", function () {
+      console.log("캘린더 요청 보냄")
+      dateres = JSON.parse(xhr.response);
+      console.log(dateres);
+      for (const key in dateres) {
+        dateData.push(dateres[key][1]);
+        // dateData.push([new Date(dateres[key][1]).getMonth() + 1, new Date(dateres[key][1]).getDate()]);
+        // dateData.push(new Date(dateres[key][1]).getMonth() + 1);
+      }
+      console.log(dateData);
+      for(let i = 0; i < dateData.length; i++) {
+        if(dateListSet.has(dateData[i].split('T')[0]) === false) {
+          dateListSet.add(dateData[i].split('T')[0])
+        }
+      }
+      // * 발자국 찍힌 날짜만 출력 성공
+      console.log(dateListSet);
+      // * Set 집합을 배열로 변환
+      const dateListArr = Array.from(dateListSet);
+      console.log(dateListArr); // * ex) ['2023-04-12', '2023-04-13', '2023-04-21', '2023-04-24', '2023-04-25', '2023-04-26']
+      // * 집합의 길이만큼 반복문 실행
+      for(let i = 0; i < dateListArr.length; i++) {
+        // * 캘린더의 년도, 달이 발자국 찍힌 년도, 달과 일치 할 때
+        if((Number(dateListArr[i].split('-')[0]) === nowYear) && (Number(dateListArr[i].split('-')[1]) === nowMonth)) {
+          // * 발자국 찍힌 날짜에 표시
+          // document.getElementById(`day${Number(dateListArr[i].split('-')[2])}`).style.color = 'lightSalmon';
+          const calendarStamp = tagCreate('img')
+          styleCreate(calendarStamp, mypageStyle.mypageCalendarStamp);
+          calendarStamp.src = '/image/resource/stamp.png';
+          document.getElementById(`day${Number(dateListArr[i].split('-')[2])}`).appendChild(calendarStamp);
+        }
+      }
+    });
+    // console.log(dateListArr)
+
     let monthOfName = [
       "January",
       "February",
@@ -259,8 +312,9 @@ function myPage(){
         if (monthOfFirstDay <= countOfWeek && countOfDay < nowMonthOfLastDate) {
           countOfDay++;
           dayIndex[j].innerText = countOfDay;
-          // ! if(countOfDay === nowDate)에서 캘린더에 표시되는 Month와 현재 Month가 일치할 때만 오늘 날짜를 표기하도록 변경
-          if ((countOfDay === nowDate) && (currentMonth === nowMonth)) {
+          dayIndex[j].id = "day" + countOfDay;
+          // * if(countOfDay === nowDate)에서 캘린더에 표시되는 Year, Month와 현재 시각 Year, Month가 일치할 때만 오늘이라는 표시를 하도록 변경
+          if ((countOfDay === nowDate) && (currentMonth === nowMonth) && (currentYear === nowYear)) {
             styleCreate(dayIndex[j], mypageStyle.mypageCalendarNowDayIndex);
           }
         }
@@ -286,6 +340,7 @@ function myPage(){
       rootChild[5].innerHTML = '';
       calendar(nextMonth);
     });
+
   }
 
   calendar(new Date());
