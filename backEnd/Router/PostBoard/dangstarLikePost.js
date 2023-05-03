@@ -45,7 +45,7 @@ export default function postPostBoardLike(request, response) {
                   WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' AND post_like IS NULL
                 `);
                 likeResult = true;
-                conn.query(`insert into alarm(id, postlike) values ('${writeUser}', '${likeUser}')`)
+                conn.query(`insert into alarm(id, postlike, comment_index, alarm_type) values ('${writeUser}', '${likeUser}', '${postNumber}', 'like')`)
               } 
               else {
                 const likeUserArr = JSON.parse(postLike).likeUser;
@@ -63,7 +63,7 @@ export default function postPostBoardLike(request, response) {
                   likeResult = false;
 
                   //console.log("likeUser:::::: ", likeUser)
-                  conn.query(`delete from alarm where id = '${writeUser}' and postlike = '${likeUser}'`);
+                  conn.query(`delete from alarm where id = '${writeUser}' and postlike = '${likeUser}' and comment_index = '${postNumber}'`);
 
 
                 } 
@@ -75,7 +75,7 @@ export default function postPostBoardLike(request, response) {
                     WHERE post_index = '${postNumber}' AND post_id = '${writeUser}' AND post_like IS NOT NULL
                   `);
                   likeResult = true;
-                  conn.query(`insert into alarm(id, postlike) values ('${writeUser}', '${likeUser}')`)
+                  conn.query(`insert into alarm(id, postlike, comment_index, alarm_type) values ('${writeUser}', '${likeUser}', '${postNumber}', 'like')`)
 
 
                 }

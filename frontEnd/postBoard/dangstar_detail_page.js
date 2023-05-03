@@ -23,11 +23,19 @@ btmMeun(btmMeunWrap);
 
 console.log("디테일 값: ", link, id, text, idx, postIdx)
 
-let decLink = decodeURIComponent(link);
-let decText = decodeURIComponent(text);
-console.log(decLink, "/", decText)
+// let decLink = decodeURIComponent(link);
+// let decText = decodeURIComponent(text);
+// console.log(decLink, "/", decText)
 
-dangstarDetail(postWrap, decLink, id, decText, idx, postIdx);
+if(link === 'null'){
+  dangstarDetail(postWrap, "/image/image/default/null.png", id, text, idx, postIdx);
+  //postCreate(postWrap, "/image/image/default/null.png", res[i].post_id, res[i].post_detail, i, res[i].post_index);
+}
+else{
+  dangstarDetail(postWrap, `/image/image/dangstar/${link}`, id, text, idx, postIdx);
+  //postCreate(postWrap, `/image/image/dangstar/${res[i].img}`, res[i].post_id, res[i].post_detail, i, res[i].post_index);
+}
+// dangstarDetail(postWrap, decLink, id, decText, idx, postIdx);
 
 function dangstarDetail(postWrap, src_link, writerNickname, text, index, postIndex){
   

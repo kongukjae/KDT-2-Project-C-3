@@ -1,5 +1,6 @@
 import htmlBox from "../../../common/htmlBox.js";
-
+import cmServer from "../../commonServer.js";
+import mysql from "mysql";
 
 export default function dangstarPageDetail(request, response) {
   if (request.url.startsWith("/detailPostDangstar")) {
@@ -9,23 +10,34 @@ export default function dangstarPageDetail(request, response) {
     });
     request.on("end", function () {
       console.log("댕스타 상세 페이지 진입이이이이이ㅣ이잉", body);
-      let splitData = body.split('&');
-      let parm = [];
+      let index = body.split('=')[1];
+      console.log(index)
 
-      splitData.forEach((value) => {
-        parm.push(value.split('=')[1]);
-      });
-      console.log(parm)
-      
-      response.writeHead(200, { "Content-Type": "text/html" });  
-      response.write(`<script>
-        const link = '${parm[0]}';
-        const id = '${parm[1]}';
-        const text = '${parm[2]}';
-        const idx = '${parm[3]}';
-        const postIdx = '${parm[4]}';</script>`);
-      response.write(htmlBox.htmlFunc(htmlBox.postDetail));
-      response.end();
+      let conn = mysql.createConnection(cmServer.mysqlInfo);
+      conn.connect();
+      conn.query(`select * from dangstar where post_index = ${index}`,
+      (err, data) => {
+        if(err) throw err;
+        else{
+          console.log(data)
+          // splitData.forEach((value) => {
+          //   parm.push(value.split('=')[1]);
+          // });
+          // console.log(parm)
+          
+          response.writeHead(200, { "Content-Type": "text/html" });  
+          response.write(`<script>
+            const link = '${data[0].img}';
+            const id = '${data[0].post_id}';
+            const text = '${data[0].post_detail}';
+            const idx = '${0}';
+            const postIdx = '${data[0].post_index}';</script>`);
+          response.write(htmlBox.htmlFunc(htmlBox.postDetail));
+          response.end();
+
+        }
+        conn.end();
+      })
 
     });
   }

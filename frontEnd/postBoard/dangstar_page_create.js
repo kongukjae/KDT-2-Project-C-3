@@ -77,11 +77,12 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     let detailForm = document.createElement("form");
     detailForm.method = "POST";
     detailForm.action = "/detailPostDangstar";
-    let params = {src_link:src_link,
-      writerNickname:writerNickname,
-      text:text,
-      index:index,
-      postIndex:postIndex};
+    // let params = {src_link:src_link,
+    //   writerNickname:writerNickname,
+    //   text:text,
+    //   index:index,
+    //   postIndex:postIndex};
+    let params = {postIndex:postIndex}
     for (let key in params) {
       let hiddenField = document.createElement("input");
       hiddenField.setAttribute("type", "hidden");
