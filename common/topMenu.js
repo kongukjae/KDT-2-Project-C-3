@@ -222,16 +222,22 @@ function topMenu(rootChild){
 
         }
         else if(type[i] === 'follow'){
-          console.log(follower[i])
-
+          console.log(follower)
+          let flw;
+          for(let i=0; i < follower.length; i++){
+            if(follower[i] !== 'null'){
+              flw = follower[i];
+            }
+          }
+          console.log("ddddd: ", flw)
           xhr.open('POST', url, true);
-          xhr.send(`id=${jwt}&follow=${follower[i]}&type=${type[i]}`)
+          xhr.send(`id=${jwt}&follow=${flw}&type=${type[i]}`)
           xhr.addEventListener('load', ()=>{
             let mypageForm = document.createElement('form');
             document.body.appendChild(mypageForm);
             mypageForm.method = "POST";
             mypageForm.action = "/mypage";
-            let params = {jwt:jwt, targetId:follower[i]}
+            let params = {jwt:jwt, targetId:flw}
             for(let key in params){
               let hiddenField = document.createElement("input");
               hiddenField.setAttribute("type","hidden");
