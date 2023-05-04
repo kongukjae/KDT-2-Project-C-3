@@ -349,10 +349,8 @@ function myPage(){
   calendar(new Date());
 
   // 마이페이지 내거 조회
-  
   let tabMenuContainer = tagCreate("div", { id: "tabMenuContainer" });
   rootChild[6].appendChild(tabMenuContainer);
-  
   styleCreate(tabMenuContainer, {
     display: "flex",
     justifyContent: "space-around",
