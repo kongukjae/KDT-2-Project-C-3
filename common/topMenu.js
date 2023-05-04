@@ -107,10 +107,10 @@ function topMenu(rootChild){
                 type.push(key);
                 num.push(result['commentIdx'][index]);
                 
-                if(key === 'follow'){
-                  follower.push(value)
+              }
+              if(key === 'follow'){
+                follower.push(value)
 
-                }
               }
             });
           }
@@ -222,13 +222,13 @@ function topMenu(rootChild){
 
         }
         else if(type[i] === 'follow'){
-          console.log(follower)
+          console.log(follower[i])
 
           xhr.open('POST', url, true);
           xhr.send(`id=${jwt}&follow=${follower[i]}&type=${type[i]}`)
           xhr.addEventListener('load', ()=>{
             let mypageForm = document.createElement('form');
-      
+            document.body.appendChild(mypageForm);
             mypageForm.method = "POST";
             mypageForm.action = "/mypage";
             let params = {jwt:jwt, targetId:follower[i]}
