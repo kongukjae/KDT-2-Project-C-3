@@ -2,8 +2,7 @@
 팀장 : 류은이  
 팀원 : 김종윤, 김지섭, 김형진, 노수민
 ---
-프로젝트 명 : 멍타
-프로젝트 소개
+## 프로젝트 명 : 멍타
 
 <div>
   <img src = 'https://user-images.githubusercontent.com/117888227/227817898-a9a53503-9931-4b02-bd13-4b594eed3315.png' height = '350'>
