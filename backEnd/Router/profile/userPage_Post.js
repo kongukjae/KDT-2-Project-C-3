@@ -272,16 +272,6 @@ if (request.url === "/firstmyWrite") {
     );
   });
 } 
-
-
-
-
-
-
-
-
-
-
 } 
 
 

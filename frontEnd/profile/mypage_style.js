@@ -393,7 +393,7 @@ function myPage(){
     tabContents.forEach((content) => {
       content.style.display = "none";
     });
-  
+
     tabMenuContainer.childNodes[selectedIndex].style.borderBottomColor = "#007BFF";
     tabContents[selectedIndex].style.display = "block";
   };
