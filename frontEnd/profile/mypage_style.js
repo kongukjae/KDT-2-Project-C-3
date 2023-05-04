@@ -440,6 +440,8 @@ function myPage(){
           }
         };
       } else if (index ===1){
+        // * 탭을 클릭할 때 내용물 초기화
+        tabContents[index].innerHTML = '';
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/secondmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
@@ -455,7 +457,10 @@ function myPage(){
               }
             }
           }
-        };} else if (index ===2){
+        };
+      } else if (index ===2){
+          // * 탭을 클릭할 때 내용물 초기화
+        tabContents[index].innerHTML = '';
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/firstmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
