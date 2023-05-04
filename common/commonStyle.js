@@ -1952,6 +1952,7 @@ const dangstarStyle = {
   dangstarCommentWrap: {
     padding: "25px 15px",
     width: stylePropertyUnion.width.widthP100,
+    order: "1",
   },
   dangstarCommentForm: {
     ...stylePropertyUnion.flexRowBetweenCenter,
@@ -1997,6 +1998,7 @@ const dangstarStyle = {
     height: stylePropertyUnion.height.height100,
     padding: "10px",
     borderTop: "1px solid #333",
+    borderBottom: "1px solid #333",
   },
   dangstarRecentCommentContentWrap: {
     width: stylePropertyUnion.width.widthP100,
@@ -2062,7 +2064,7 @@ const dangstarStyle = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    order: "1",
+    // order: "1",
     // position: "absolute",
     // bottom: "170px",
   },
@@ -2087,11 +2089,14 @@ const dangstarStyle = {
     fontWeight: stylePropertyUnion.fontWeightSet.bold,
   },
   dangstarCommentModalWrap: {
+    boxSizing: "border-box",
     position: "relative",
+    left: "-1px",
     width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height100,
     padding: "10px",
     borderTop: "1px solid #333",
+    borderRight: "1px solid #333",
   },
   dangstarCommentModalImg: {
     width: stylePropertyUnion.width.width60,
