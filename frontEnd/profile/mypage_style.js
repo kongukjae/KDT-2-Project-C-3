@@ -422,6 +422,8 @@ function myPage(){
       
       // 댕스타글 탭 이벤트 시작
       if (index === 0) {
+        // * 탭을 클릭할 때 내용물 초기화
+        tabContents[index].innerHTML = '';
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
