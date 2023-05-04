@@ -272,6 +272,12 @@ function myPage(){
     monthOfNameBox.appendChild(monthBox);
     monthBox.innerText = monthOfName[now.getMonth()];
     styleCreate(monthBox, mypageStyle.myPageCalendarMonthBox);
+
+    // * 년도 표시용 div 추가
+    let yearBox = tagCreate("div");
+    monthBox.appendChild(yearBox);
+    yearBox.innerText = nowYear;
+    styleCreate(yearBox, mypageStyle.myPageCalendarYearBox);
   
     let nextMonthBtn = tagCreate("div", { id: "next" });
     monthOfNameBox.appendChild(nextMonthBtn);
