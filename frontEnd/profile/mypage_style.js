@@ -419,8 +419,8 @@ function myPage(){
   
     tab.addEventListener("click", () => {
     tabClickHandler(index);
-  
-      // 댕스타글 탭 클릭 이벤트
+      
+      // 댕스타글 탭 이벤트 시작
       if (index === 0) {
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
@@ -475,10 +475,6 @@ function myPage(){
     });
   });
   
-
-
-
-
 
 
   btmMeun(rootChild[7]);
