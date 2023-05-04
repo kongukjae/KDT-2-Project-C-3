@@ -420,7 +420,7 @@ function myPage(){
     });
   
     tab.addEventListener("click", () => {
-      tabClickHandler(index);
+    tabClickHandler(index);
   
       // 댕스타글 탭 클릭 이벤트
       if (index === 0) {
@@ -432,7 +432,9 @@ function myPage(){
           if (this.readyState === 4 && this.status === 200) {
             const data = JSON.parse(this.responseText);
             console.log(data);
-            for (let i = 0; i < data.length; i++) {
+            if (data.length === 0) {
+              tabContents[index].innerHTML = "작성한 글이 없습니다."; // 
+            }  for (let i = 0; i < data.length; i++) {
               tabContents[index].innerHTML += `댕스타글: ${data[i].post_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
             }
           }
@@ -462,19 +464,16 @@ function myPage(){
           if (this.readyState === 4 && this.status === 200) {
             const dataa = JSON.parse(this.responseText);
             console.log(dataa);
+            if (dataa.length === 0) {
+              tabContents[index].innerHTML = "작성한 댓글이 없습니다."; // 작성한 글이 없을 경우 처리
+            } else{
             for (let i = 0; i < dataa.length; i++) {
-              tabContents[index].innerHTML += `내가쓴댓글: ${dataa[i].cm_detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
+            tabContents[index].innerHTML += `내가쓴댓글: ${dataa[i].cm_detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
             }
           }
+        }
         };
-
-
-
-
-
-
       }
-
     });
   });
   
