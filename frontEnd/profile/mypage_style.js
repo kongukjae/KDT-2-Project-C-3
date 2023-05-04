@@ -422,6 +422,7 @@ function myPage(){
       
       // 댕스타글 탭 이벤트 시작
       if (index === 0) {
+        tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
@@ -438,6 +439,7 @@ function myPage(){
           }
         };
       } else if (index ===1){
+        tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/secondmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
@@ -454,6 +456,7 @@ function myPage(){
             }
           }
         };} else if (index ===2){
+          tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
         xhrr.open("post", `http://localhost:2080/firstmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
