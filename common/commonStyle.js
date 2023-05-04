@@ -1075,7 +1075,7 @@ const mypageStyle = {
     width: stylePropertyUnion.width.width450,
     height: stylePropertyUnion.height.height450,
     backgroundColor: stylePropertyUnion.colorTheme.beigeTypeB,
-    border: '1px solid red',
+    border: "1px solid red",
     position: "relative",
   },
   mypageCalendarRoot: {
@@ -1109,6 +1109,14 @@ const mypageStyle = {
     alignItems: "center",
     fontSize: "40px",
     fontWeight: "700",
+    position: "relative",
+  },
+  myPageCalendarYearBox: {
+    fontSize: "12px",
+    position: "absolute",
+    top: "0px",
+    left: "50%",
+    transform: "translate(-50%, -100%)",
   },
   mypageCalendarWeekNameBox: {
     width: "400px",
@@ -1118,12 +1126,12 @@ const mypageStyle = {
     justifyContent: "space-evenly",
   },
   mypageCalendarTable: {
-      width: "400px",
-      height: "360px",
-      padding: "5px",
-      backgroundColor: "#F7786B",
-      borderRadius: "15px",
-      boxShadow: "0 5px 20px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)",
+    width: "400px",
+    height: "360px",
+    padding: "5px",
+    backgroundColor: "#F7786B",
+    borderRadius: "15px",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)",
   },
   mypageCalendarDayIndex: {
     color: "white",
@@ -1141,11 +1149,11 @@ const mypageStyle = {
     boxShadow: "0 5px 20px rgba(0,0,0,0.21), 0 5px 5px rgba(0,0,0,0.21)",
   },
   mypageCalendarStamp: {
-    width : "110%",
-    position : 'absolute',
-    top : '53%',
-    left : '50%',
-    transform : 'translate(-50%, -50%)'
+    width: "110%",
+    position: "absolute",
+    top: "53%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
   },
   mypageUploadModal: {
     width: stylePropertyUnion.width.width300,
@@ -1178,7 +1186,6 @@ const mypageStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
   },
-  
 };
 
 const keepStyle = {
