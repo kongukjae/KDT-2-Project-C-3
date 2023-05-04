@@ -841,7 +841,11 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
         location.reload();
       })
   })
-
+  if(id===markersObject.userid){
+    overlayfollowBtn.remove()
+    overlayProfileBtn.innerText = "마이페이지 보기";
+    overlayProfileBtn.style.width = '130px'
+  }
 
 
   // 오버레이 창 닫기 버튼
