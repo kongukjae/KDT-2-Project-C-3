@@ -30,7 +30,7 @@ rootLoginPage.appendChild(formLoginPageWrapper);
 formLoginPageWrapper.innerHTML += `
 <form action="/login" method="post">
   <input id = "loginId" type="text" name="user_id" autofocus></input>
-  <input id = "loginPw" type="text" name="user_pw"></input>
+  <input id = "loginPw" type="password" name="user_pw"></input>
   <div>
     <input id = "login" type="submit" value="로그인">
     <a href='/signUp'>회원가입</a>
