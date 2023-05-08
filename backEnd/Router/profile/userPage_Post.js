@@ -13,13 +13,13 @@ export default function dangMap(request, response) {
       let result = body.split("&");
       let jwtfromClient = result[0].split("=")[1];
       let target = result[1].split("=")[1];
-      console.log(jwtfromClient)
-      console.log(target)
+      console.log(jwtfromClient);
+      console.log(target);
 
       let requestId = JWT.jwtCheck(jwtfromClient).id;
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
-      if(target === "mine" || target === requestId){
+      if (target === "mine" || target === requestId) {
         console.log("마이페이지");
         connection.query(
           `SELECT * FROM userinfo where id='${requestId}'`,
@@ -36,12 +36,12 @@ export default function dangMap(request, response) {
               const dogageFromServer = '${rows[0].dogage}';
 
             </script>`);
-            response.write(htmlBox.htmlFunc(htmlBox.mypage));
-            response.end();
+              response.write(htmlBox.htmlFunc(htmlBox.mypage));
+              response.end();
+            }
           }
-        }
         );
-      }else{
+      } else {
         connection.query(
           `SELECT * FROM userinfo where id='${target}'`,
           (error, rows, fields) => {
@@ -56,22 +56,22 @@ export default function dangMap(request, response) {
               const dogsizeFromServer = '${rows[0].dogsize}';
               const dogageFromServer = '${rows[0].dogage}';
             </script>`);
-            response.write(htmlBox.htmlFunc(htmlBox.yourpage));
-            response.end();
+              response.write(htmlBox.htmlFunc(htmlBox.yourpage));
+              response.end();
+            }
           }
-        }
         );
       }
       connection.end();
-    })
-  } 
-  if (request.url === "/followRequest"){
+    });
+  }
+  if (request.url === "/followRequest") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
     });
     request.on("end", function () {
-      let followTarget = JSON.parse(body).you
+      let followTarget = JSON.parse(body).you;
       let myId = JWT.jwtCheck(JSON.parse(body).jwt).id;
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
@@ -85,18 +85,19 @@ export default function dangMap(request, response) {
           }
         }
       );
-      connection.query(`insert into alarm(id, follow, alarm_type) values ('${followTarget}', '${myId}', 'follow')`)
+      connection.query(
+        `insert into alarm(id, follow, alarm_type) values ('${followTarget}', '${myId}', 'follow')`
+      );
       connection.end();
-    })
-    
+    });
   }
-  if (request.url === "/unFollowRequest"){
+  if (request.url === "/unFollowRequest") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
     });
     request.on("end", function () {
-      let followTarget = JSON.parse(body).you
+      let followTarget = JSON.parse(body).you;
       let myId = JWT.jwtCheck(JSON.parse(body).jwt).id;
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
@@ -110,18 +111,19 @@ export default function dangMap(request, response) {
           }
         }
       );
-      connection.query(`delete from alarm where id = '${followTarget}' and follow = '${myId}'`);
+      connection.query(
+        `delete from alarm where id = '${followTarget}' and follow = '${myId}'`
+      );
       connection.end();
-    })
-    
+    });
   }
-  if (request.url === "/followCheck"){
+  if (request.url === "/followCheck") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
     });
     request.on("end", function () {
-      let followTarget = JSON.parse(body).you
+      let followTarget = JSON.parse(body).you;
       let myId = JWT.jwtCheck(JSON.parse(body).jwt).id;
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
@@ -130,45 +132,45 @@ export default function dangMap(request, response) {
         (error, rows, fields) => {
           if (error) throw error;
           else {
-            let checkFlag = false
-            for(let i of rows){
-              if(i.fr_id === followTarget){
+            let checkFlag = false;
+            for (let i of rows) {
+              if (i.fr_id === followTarget) {
                 checkFlag = true;
-                break
+                break;
               }
             }
             response.writeHead(200);
-            if(checkFlag){
-              response.end('yes');
-            }else{
-              response.end('no');
+            if (checkFlag) {
+              response.end("yes");
+            } else {
+              response.end("no");
             }
-        }}
+          }
+        }
       );
       connection.end();
-    })
-    
+    });
   }
-  if (request.url === "/userinfoUpdate"){
+  if (request.url === "/userinfoUpdate") {
     let body = "";
     request.on("data", function (data) {
       body = body + data;
     });
     request.on("end", function () {
-      let result = JSON.parse(body)
-      console.log(result)
+      let result = JSON.parse(body);
+      console.log(result);
       let myId = JWT.jwtCheck(result.jwt).id;
-      console.log(myId)
-      if(result.dogName === ''){
-        result.dogName = result.originDogName
+      console.log(myId);
+      if (result.dogName === "") {
+        result.dogName = result.originDogName;
       }
-      if(result.intro === ''){
-        result.intro = 'null';
+      if (result.intro === "") {
+        result.intro = "null";
       }
-      if(result.dogage === ''){
-        result.dogage='null';
+      if (result.dogage === "") {
+        result.dogage = "null";
       }
-      console.log(result)
+      console.log(result);
       let connection = mysql.createConnection(cmServer.mysqlInfo);
       connection.connect();
       connection.query(
@@ -182,104 +184,96 @@ export default function dangMap(request, response) {
         }
       );
       connection.end();
-    })
-}if (request.url === "/thirdmyWrite") { 
-  let body = "";
-  request.on("data", function (data) {
-    body = body + data;
-    console.log('cute') //확인용
-  });
-  request.on("end", function () {
-    console.log('cute') //확인용
+    });
+  }
+  if (request.url === "/thirdmyWrite") {
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+      console.log("cute"); //확인용
+    });
+    request.on("end", function () {
+      console.log("cute"); //확인용
 
-    let result = body
-    console.log(result)
-    let myId = JWT.jwtCheck(result.split('=')[1]).id;
-    console.log(myId)
+      let result = body;
+      console.log(result);
+      let myId = JWT.jwtCheck(result.split("=")[1]).id;
+      console.log(myId);
 
-    let conn = mysql.createConnection(cmServer.mysqlInfo);
-    conn.connect();
-    conn.query(
-      `SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
-      function (err, data) {
-        if (err) throw err;
-        else {
-          console.log(data);
-          response.writeHead(200, { 'content-Type': 'application/json' });
-          response.write(JSON.stringify(data));
-          response.end(); 
+      let conn = mysql.createConnection(cmServer.mysqlInfo);
+      conn.connect();
+      conn.query(
+        `SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
+        function (err, data) {
+          if (err) throw err;
+          else {
+            console.log(data);
+            response.writeHead(200, { "content-Type": "application/json" });
+            response.write(JSON.stringify(data));
+            response.end();
+          }
         }
-      }
-    );
-  });
+      );
+    });
+  }
+  if (request.url === "/firstmyWrite") {
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+      console.log("cute"); //확인용
+    });
+    request.on("end", function () {
+      console.log("cute"); //확인용
+
+      let result = body;
+      console.log(result);
+      let myId = JWT.jwtCheck(result.split("=")[1]).id;
+      console.log(myId);
+
+      let conn = mysql.createConnection(cmServer.mysqlInfo);
+      conn.connect();
+      conn.query(
+        `select cm_detail from cm_post where cm_id='${myId}' `,
+        function (err, data) {
+          if (err) throw err;
+          else {
+            console.log(data);
+            response.writeHead(200, { "content-Type": "application/json" });
+            response.write(JSON.stringify(data));
+            response.end();
+          }
+        }
+      );
+    });
+  }
+  if (request.url === "/secondmyWrite") {
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data;
+      console.log("cute"); //확인용
+    });
+    request.on("end", function () {
+      console.log("cute"); //확인용
+
+      let result = body;
+      console.log(result);
+      let myId = JWT.jwtCheck(result.split("=")[1]).id;
+      console.log(myId);
+
+      let conn = mysql.createConnection(cmServer.mysqlInfo);
+      conn.connect();
+      conn.query(
+        `SELECT detail FROM second_hand WHERE id='${myId}' `,
+        function (err, data) {
+          if (err) throw err;
+          else {
+            console.log(data);
+            response.writeHead(200, { "content-Type": "application/json" });
+            response.write(JSON.stringify(data));
+            response.end();
+          }
+        }
+      );
+    });
+  }
 }
-if (request.url === "/firstmyWrite") { 
-  let body = "";
-  request.on("data", function (data) {
-    body = body + data;
-    console.log('cute') //확인용
-  });
-  request.on("end", function () {
-    console.log('cute') //확인용
-
-    let result = body
-    console.log(result)
-    let myId = JWT.jwtCheck(result.split('=')[1]).id;
-    console.log(myId)
-
-    let conn = mysql.createConnection(cmServer.mysqlInfo);
-    conn.connect();
-    conn.query(
-      `select cm_detail from cm_post where cm_id='${myId}' `,
-      function (err, data) {
-        if (err) throw err;
-        else {
-          console.log(data);
-          response.writeHead(200, { 'content-Type': 'application/json' });
-          response.write(JSON.stringify(data));
-          response.end(); 
-        }
-      }
-    );
-  });
-} if (request.url === "/secondmyWrite") { 
-  let body = "";
-  request.on("data", function (data) {
-    body = body + data;
-    console.log('cute') //확인용
-  });
-  request.on("end", function () {
-    console.log('cute') //확인용
-
-    let result = body
-    console.log(result)
-    let myId = JWT.jwtCheck(result.split('=')[1]).id;
-    console.log(myId)
-
-    let conn = mysql.createConnection(cmServer.mysqlInfo);
-    conn.connect();
-    conn.query(
-      `SELECT detail FROM second_hand WHERE id='${myId}' `,
-      function (err, data) {
-        if (err) throw err;
-        else {
-          console.log(data);
-          response.writeHead(200, { 'content-Type': 'application/json' });
-          response.write(JSON.stringify(data));
-          response.end(); 
-        }
-      }
-    );
-  });
-} 
-} 
-
-
-
-
-
-
-
-
-
-

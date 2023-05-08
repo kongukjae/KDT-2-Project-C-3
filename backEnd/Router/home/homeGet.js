@@ -1,6 +1,6 @@
-import htmlBox from "../../../common/htmlBox.js"
+import htmlBox from "../../../common/htmlBox.js";
 import mysql from "mysql";
-import cmServer from "../../commonServer.js"
+import cmServer from "../../commonServer.js";
 
 export default function homeGet(request, response) {
   // const mysqlInfo = {
@@ -13,9 +13,7 @@ export default function homeGet(request, response) {
   if (request.url === "/main") {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.mapBody));
-  } 
-
-  else if (request.url.startsWith("/loadMap")) {
+  } else if (request.url.startsWith("/loadMap")) {
     let targetId = request.url.split("=")[1];
     let myRowCnt;
     let markerMyArr = {};
@@ -39,21 +37,30 @@ export default function homeGet(request, response) {
         if (err) throw err;
         else {
           // console.log(rows)
-          if(myRowCnt <= 10) {
+          if (myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
+              myArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].id,
+                rows[i].addData
+              );
               markerMyArr[i] = myArr;
             }
-          }
-          else {
-            for(let i = 0; i < 10; i++) {
+          } else {
+            for (let i = 0; i < 10; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
+              myArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].id,
+                rows[i].addData
+              );
               markerMyArr[i] = myArr;
             }
           }
-          
+
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();

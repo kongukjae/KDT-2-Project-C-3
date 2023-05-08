@@ -1,5 +1,5 @@
 import cmServer from "../../commonServer.js";
-import * as jwtFunc from "../../module/jsonWebToken.js"
+import * as jwtFunc from "../../module/jsonWebToken.js";
 import mysql from "mysql";
 
 export default function FollowStarCheck(request, response) {
@@ -35,7 +35,7 @@ export default function FollowStarCheck(request, response) {
                 if (err) throw err;
                 else console.log("정상적으로 1 업데이트");
                 conn.end();
-                response.end('true');
+                response.end("true");
               }
             );
           } else {
@@ -46,7 +46,7 @@ export default function FollowStarCheck(request, response) {
                 if (err) throw err;
                 else console.log("정상적으로 0 업데이트");
                 conn.end();
-                response.end('false');
+                response.end("false");
               }
             );
           }
