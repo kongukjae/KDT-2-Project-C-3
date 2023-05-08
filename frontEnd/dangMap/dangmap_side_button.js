@@ -5,10 +5,18 @@ function sideButton(map){
   root.appendChild(sideBtn);
   styleCreate(sideBtn, dangMapStyle.sideBtnStyle);
   sideBtn.id = 'sideBtn'
+  const addBtn = tagCreate("img", {});
+  sideBtn.appendChild(addBtn);
+  addBtn.src = "/image/graphic/plus.png";
+  styleCreate(addBtn, {
+    width: "40px",
+    height: "40px",
+    objectFit: "cover"
+  })
   const serch = tagCreate("div", {});
   const orgChat = tagCreate("div", {id:'SideButtonforPublicTalk'});
 
-  styleCreate(serch, dangMapStyle.serchBtnStyle)
+  styleCreate(serch, dangMapStyle.searchBtnStyle)
   serch.innerText = "검색"
   styleCreate(orgChat, dangMapStyle.orgChatBtnStyle)
   orgChat.innerText = "단톡"
@@ -136,6 +144,3 @@ function sideButton(map){
 
   return [serch,orgChat];
 }
-
-
- 

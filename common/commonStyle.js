@@ -770,18 +770,19 @@ const dangMapStyle = {
     top : "47px",
     left: "87%",
     zIndex : "3",
-    cursor: "pointer"
+    cursor: "pointer",
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
-  serchBtnStyle: {
+  searchBtnStyle: {
     width: stylePropertyUnion.width.width40,
     height: stylePropertyUnion.height.height40,
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     position : "relative",
-    top : "42px",
+    top : "5px",
     zIndex : "3",
-    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
-
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
   orgChatBtnStyle: {
     width: stylePropertyUnion.width.width40,
@@ -789,9 +790,10 @@ const dangMapStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     position : "relative",
-    top : "44px",
+    top : "12px",
     zIndex : "3",
-    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
 
 };
@@ -1531,26 +1533,28 @@ const dangMarketStyle = {
   listContainer: {
     width: stylePropertyUnion.width.widthP100,
     minHeight: "calc(100vh - 216px)",
-    border: "1px solid red",
     position: "relative",
     marginBottom: "90px",
     zIndex: "1",
     ...stylePropertyUnion.flexColumnTopCenter,
   },
   listBox: {
-    width: stylePropertyUnion.width.widthP80,
+    width: stylePropertyUnion.width.widthP90,
     height: stylePropertyUnion.height.height200,
-    border: "1px solid black",
     margin: "10px 0 10px 0",
     ...stylePropertyUnion.flexRowCenter,
     textDecoration: "none",
     color: stylePropertyUnion.colorTheme.black,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
   },
   listImg: {
     width: stylePropertyUnion.width.width100,
     height: stylePropertyUnion.height.height100,
-    border: "1px solid black",
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
     margin: "5px",
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
   },
   listText: {
     width: stylePropertyUnion.width.width300,
@@ -1934,13 +1938,14 @@ const dangstarStyle = {
     transform: "rotate(135deg)",
   },
   dangstarFeedWrap: {
-    border: "1px solid black",
     width: stylePropertyUnion.width.widthP100,
     maxWidth: stylePropertyUnion.width.width500,
     // marginBottom: stylePropertyUnion.marginBottom.marginBottom20,
     position: "relative",
     display: "flex",
     flexDirection: "column",
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15
   },
   dangstarFeedImgWrap: {
     width: stylePropertyUnion.width.widthP100,
@@ -1961,7 +1966,6 @@ const dangstarStyle = {
     fontWeight: stylePropertyUnion.fontWeightSet.bold,
   },
   dangstarFeedTextBox: {
-    border: "1px solid green",
     width: stylePropertyUnion.width.widthP95, // 500px - 부모의 좌우 패딩 값
     display: "-webkit-box",
     webkitBoxOrient: "vertical",
@@ -1981,6 +1985,9 @@ const dangstarStyle = {
   dangstarFeedBtns: {
     width: stylePropertyUnion.width.width60,
     height: stylePropertyUnion.height.height60,
+    backgroundColor: "white",
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    border: "1px solid white",
   },
   dangstarLikeImg: {
     width: stylePropertyUnion.width.widthP80,
@@ -1996,13 +2003,15 @@ const dangstarStyle = {
   dangstarCommentInput: {
     width: stylePropertyUnion.width.widthP85,
     height: stylePropertyUnion.height.height38,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
     outline: "none",
+    border: "none",
+    borderBottom: "1px solid black",
   },
   dangstarCommentWriteBtn: {
     width: stylePropertyUnion.width.width60,
     height: stylePropertyUnion.height.height38,
-    backgroundColor: stylePropertyUnion.colorTheme.lightGray,
-    border: "1px solid #999",
+    backgroundColor: stylePropertyUnion.colorTheme.white,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius5,
     ...stylePropertyUnion.flexRowCenter,
     cursor: "pointer",
@@ -2033,8 +2042,8 @@ const dangstarStyle = {
     width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height100,
     padding: "10px",
-    borderTop: "1px solid #333",
-    borderBottom: "1px solid #333",
+    borderTop: "3px solid white",
+    borderBottom: "3px solid white",
   },
   dangstarRecentCommentContentWrap: {
     width: stylePropertyUnion.width.widthP100,
