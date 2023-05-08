@@ -20,7 +20,7 @@ export default function homePost(request, response) {
     request.on("end", function () {
       console.log("cute");
 
-      let targeNumber = [4, 5, 6, 7, 8];
+      // let targeNumber = [4, 5, 6, 7, 8];
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
