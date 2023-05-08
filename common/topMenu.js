@@ -101,7 +101,7 @@ function topMenu(rootChild){
           //console.log(result[key], key);
           if(key !== 'type'){
             result[key].forEach((value, index) => {
-              if(value !== null && key !== 'commentIdx'){
+              if(value !== null && key !== 'commentIdx' && key !== 'public_chat'){
                 msg = createMent(key, value);
                 createList(alarmList, msg);
                 type.push(key);
@@ -111,6 +111,83 @@ function topMenu(rootChild){
               if(key === 'follow'){
                 follower.push(value)
 
+              }
+              if(value !== null && key === 'public_chat'){
+                console.log(value)
+
+                let targetLocation = value.split('&')
+                let geocoder = new kakao.maps.services.Geocoder();
+                console.log(targetLocation[0].split('!')[2],targetLocation[1])
+                let coord = new kakao.maps.LatLng(targetLocation[0].split('!')[2], targetLocation[1]);
+                let callback = function(result, status) {
+                  if (status === kakao.maps.services.Status.OK) {
+                    let resultSplit = result[0].address.address_name.split(' ')
+                    let roomName = resultSplit[resultSplit.length - 2] +' '+ resultSplit[resultSplit.length - 1]
+                    let msgofPublicChat =  roomName + '동네에 단톡이 생성되었습니다'
+                    let publicChat = createList(alarmList, msgofPublicChat);
+                    let join = tagCreate('div');
+                    let dismiss = tagCreate('div');
+                    let buttonStyle = {width:'40px',height:'40px',backgroundColor:'antiquewhite',borderRadius:'5px',justifySelf:'end',marginTop:'-7px',cursor:'pointer',display:'flex',justifyContent:"center",alignItems:'center'}
+                    styleCreate(join,buttonStyle)
+                    styleCreate(dismiss,buttonStyle)
+                    join.innerText = '참가';
+                    dismiss.innerText = '무시';
+
+                    publicChat.appendChild(join);
+                    publicChat.appendChild(dismiss);
+                    dismiss.addEventListener('click',()=>{
+                      const jwt = document.cookie.replace(
+                        /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+                        "$1"
+                      );
+                      let xhr = new XMLHttpRequest();
+                      let url = "http://localhost:2080/deleteAlarm";
+                      xhr.open('POST', url, true);
+                      xhr.send(`id=${jwt}&public_chat=${value}&type=public_chat`)
+                      xhr.addEventListener('load',()=>{
+                        location.reload()
+                      })
+                    })
+
+                    join.addEventListener('click',()=>{
+                      const jwt = document.cookie.replace(
+                        /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+                        "$1"
+                      );
+                      let xhr = new XMLHttpRequest();
+                      let url = "http://localhost:2080/deleteAlarm";
+                      xhr.open('POST', url, true);
+                      xhr.send(`id=${jwt}&public_chat=${value}&type=public_chat`)
+                      xhr.addEventListener('load', moveToPublicChat)
+                      async function moveToPublicChat(){
+                        const token = document.cookie.replace(
+                          /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+                          "$1"
+                        );
+                        await fetch(`http://localhost:2080/createPublicChatRoomRequest`,{
+                          method: "POST",
+                          body: JSON.stringify({jwt:token,roomCode:value,roomName:roomName})
+                        }).then((res)=>{return res.text()})
+                        .then((result)=>{
+                          let publicChatForm = document.createElement("form");
+                          publicChatForm.method = "POST";
+                          publicChatForm.action = "/dangTalkPublicChatRoom";
+                          let params = {jwt: token,roomCode:value,roomName:roomName,firsttime:result};
+                          for (let key in params) {
+                            let hiddenField = document.createElement("input");
+                            hiddenField.setAttribute("type", "hidden");
+                            hiddenField.setAttribute("name", key);
+                            hiddenField.setAttribute("value", encodeURI(params[key]));
+                            publicChatForm.appendChild(hiddenField);
+                          }
+                          document.body.appendChild(publicChatForm)
+                          publicChatForm.submit();
+                        })
+                      };
+                    })
+                  }
+                };
+                geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
               }
             });
           }
@@ -168,7 +245,7 @@ function topMenu(rootChild){
     styleCreate(alarmList, targetStyle.alarmListStyle);
     parent.appendChild(alarmList);
     alarmList.innerText = text;
-
+    return alarmList
   }
 
   function createMent(type, value){
@@ -180,6 +257,10 @@ function topMenu(rootChild){
     }
     else if(type === 'comment'){
       return `${value}님이 회원님의 게시글에 댓글을 남겼습니다.`
+    }
+    else if(type === 'public_chat'){
+      return '로딩 중'
+
     }
   }
   
