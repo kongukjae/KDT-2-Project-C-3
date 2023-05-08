@@ -36,7 +36,7 @@ function main() {
         callback(JSON.parse(xhr.responseText));
       }
     };
-    let targeNumber = [10];
+    let targeNumber = [];
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(targeNumber));
@@ -49,8 +49,6 @@ function main() {
       sendRequest(
         "http://localhost:2080/sendImageSlide",
         (imageResponseData) => {
-          console.log("cute2");
-
           console.log(responseData);
           console.log(imageResponseData);
 

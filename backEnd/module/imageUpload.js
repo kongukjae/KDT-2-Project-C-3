@@ -106,9 +106,6 @@ export default function callPostImage(request, response) {
     });
     request.on("end", function () {
       console.log("cute");
-      console.log("cute");
-      console.log("cute");
-      console.log("cute");
 
       console.log(body);
       let targeNumber = [10];

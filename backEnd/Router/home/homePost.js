@@ -19,19 +19,18 @@ export default function homePost(request, response) {
     });
     request.on("end", function () {
       console.log("cute");
-      console.log("cute");
-      console.log("cute");
-      console.log("cute");
-
-      console.log(body);
 
       let targeNumber = [4, 5, 6, 7, 8];
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
-        `select * from dangstar where post_index IN (${targeNumber.join(
-          ", "
-        )})`,
+        `SELECT ds.* FROM dangstar ds
+        JOIN (
+            SELECT post_index
+            FROM dangstar
+            ORDER BY LENGTH(post_like) DESC
+            LIMIT 5
+        ) AS top_posts ON ds.post_index = top_posts.post_index;`,
         function (err, data) {
           if (err) throw err;
           else {
