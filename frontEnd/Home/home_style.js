@@ -26,16 +26,17 @@ function main() {
   gotop.style.display = "none";
 
   // 슬라이드 시작부분
-  // 콜백함수로 사용했다. sendRequest라는 서버요청용 함수
+
   function sendRequest(url, callback) {
     const xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log("hi");
         callback(JSON.parse(xhr.responseText));
       }
     };
-    let targeNumber = [4, 5, 6, 7, 8];
+    let targeNumber = [10];
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(targeNumber));
@@ -44,16 +45,31 @@ function main() {
 
   // 2. 슬라이드 생성함수이다. 여기서 함수를 가져와서 해당 URL에 요청한다.
   function createSlide(rootChild) {
-    console.log("cute");
-    // 서버에 요청을 보내기 위해 sendRequest 함수를 호출합니다.
     sendRequest("http://localhost:2080/slidePlease", (responseData) => {
-      // 서버에서 받은 데이터를 사용하여 슬라이드를 만드는 로직을 추가합니다.
+      sendRequest(
+        "http://localhost:2080/sendImageSlide",
+        (imageResponseData) => {
+          console.log("cute2");
 
-      console.log(responseData);
+          console.log(responseData);
+          console.log(imageResponseData);
 
-      for (let i = 0; i < responseData.length; i++) {
-        slideChild[i].children[0].innerText = responseData[i].post_detail;
-      }
+          for (let i = 0; i < responseData.length; i++) {
+            console.log(responseData[i].img);
+            slideChild[i].children[0].innerText = responseData[i].post_detail;
+
+            if (responseData[i].img === "null") {
+              slideChild[
+                i
+              ].children[1].style.backgroundImage = `url(/image/image/default/null.png)`;
+            } else {
+              slideChild[
+                i
+              ].children[1].style.backgroundImage = `url(/image/image/dangstar/${responseData[i].img})`;
+            }
+          }
+        }
+      );
     });
 
     let slideCover = tagCreate("div", {});
@@ -80,10 +96,9 @@ function main() {
         transition: "0.6s ease",
       });
 
-      // Add left side text container
       let leftTextContainer = tagCreate("div", {});
       styleCreate(leftTextContainer, {
-        width: "50%",
+        width: "40%",
         height: "100%",
         display: "flex",
         justifyContent: "center",
@@ -91,18 +106,17 @@ function main() {
       });
       child.appendChild(leftTextContainer);
 
-      // Add right side image container
       let rightImageContainer = tagCreate("div", {});
       styleCreate(rightImageContainer, {
-        width: "50%",
-        height: "100%",
+        width: "40%",
+        height: "90%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         backgroundSize: "cover",
         backgroundPosition: "center",
       });
-      rightImageContainer.style.backgroundImage = `url('이미지_URL_${i}')`; // 이미지 URL을 여기에 추가하면 된다.
+      rightImageContainer.style.backgroundImage = `url('이미지_URL_${i}')`;
       child.appendChild(rightImageContainer);
 
       slideChild.push(child);
