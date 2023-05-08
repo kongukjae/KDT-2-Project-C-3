@@ -765,18 +765,19 @@ const dangMapStyle = {
     top : "47px",
     left: "87%",
     zIndex : "3",
-    cursor: "pointer"
+    cursor: "pointer",
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
-  serchBtnStyle: {
+  searchBtnStyle: {
     width: stylePropertyUnion.width.width40,
     height: stylePropertyUnion.height.height40,
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     position : "relative",
-    top : "42px",
+    top : "5px",
     zIndex : "3",
-    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
-
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
   orgChatBtnStyle: {
     width: stylePropertyUnion.width.width40,
@@ -784,9 +785,10 @@ const dangMapStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     position : "relative",
-    top : "44px",
+    top : "12px",
     zIndex : "3",
-    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
 
 };
