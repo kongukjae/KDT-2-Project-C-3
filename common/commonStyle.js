@@ -1504,26 +1504,28 @@ const dangMarketStyle = {
   listContainer: {
     width: stylePropertyUnion.width.widthP100,
     minHeight: "calc(100vh - 216px)",
-    border: "1px solid red",
     position: "relative",
     marginBottom: "90px",
     zIndex: "1",
     ...stylePropertyUnion.flexColumnTopCenter,
   },
   listBox: {
-    width: stylePropertyUnion.width.widthP80,
+    width: stylePropertyUnion.width.widthP90,
     height: stylePropertyUnion.height.height200,
-    border: "1px solid black",
     margin: "10px 0 10px 0",
     ...stylePropertyUnion.flexRowCenter,
     textDecoration: "none",
     color: stylePropertyUnion.colorTheme.black,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
   },
   listImg: {
     width: stylePropertyUnion.width.width100,
     height: stylePropertyUnion.height.height100,
-    border: "1px solid black",
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
     margin: "5px",
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
   },
   listText: {
     width: stylePropertyUnion.width.width300,
