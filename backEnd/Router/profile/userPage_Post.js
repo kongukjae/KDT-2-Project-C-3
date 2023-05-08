@@ -86,6 +86,7 @@ export default function dangMap(request, response) {
         }
       );
       connection.query(`insert into alarm(id, follow, alarm_type) values ('${followTarget}', '${myId}', 'follow')`)
+      connection.query(`insert into temperature(id, fr_id) values ('${myId}', '${followTarget}')`)
       connection.end();
     })
     
@@ -111,6 +112,7 @@ export default function dangMap(request, response) {
         }
       );
       connection.query(`delete from alarm where id = '${followTarget}' and follow = '${myId}'`);
+      connection.query(`delete from temperature where id = '${myId}' and fr_id = '${followTarget}'`)
       connection.end();
     })
     
