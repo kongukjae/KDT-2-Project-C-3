@@ -128,13 +128,13 @@ function yourPage(){
       styleCreate(rootChild[4].children[0], {
         width: stylePropertyUnion.width.widthP70,
         height: stylePropertyUnion.width.widthP90,
-        backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
+        // backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
         ...stylePropertyUnion.flexRowCenter,
       })
       styleCreate(rootChild[4].children[1], {
         width: stylePropertyUnion.width.widthP30,
         height: stylePropertyUnion.width.widthP90,
-        backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
+        // backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
         // cursor: "pointer",
         ...stylePropertyUnion.flexRowAroundCenter,
       })
@@ -167,7 +167,6 @@ function yourPage(){
         textAlign: "center"
     
       });
-      rootChild[4].children[0].children[0].innerText = `🙂`
     
       styleCreate(rootChild[4].children[0].children[1], {
         width: stylePropertyUnion.width.widthP50,
@@ -180,7 +179,8 @@ function yourPage(){
       rootChild[4].children[0].children[1].innerText = `${result.val.toFixed(1)} ℃`
       rootChild[4].children[1].children[0].innerText = `👍🏻`
       rootChild[4].children[1].children[1].innerText = `👎🏻`
-    
+      Tempemoji();
+
       goodTg = false;
       badTg = false;
       rootChild[4].children[1].children[0].addEventListener('click', () => {
@@ -210,6 +210,24 @@ function yourPage(){
     }
     else{
       console.log("값 없으으으으므ㅡㄷㅇㅁ: ", result.re)
+    }
+    function Tempemoji(){
+      if(result.val.toFixed(1) > 42 && result.val.toFixed(1) <= 60){
+        rootChild[4].children[0].children[0].innerText = `😃`
+      }
+      else if(result.val.toFixed(1) > 25 && result.val.toFixed(1) <= 35){
+        rootChild[4].children[0].children[0].innerText = `😐`
+      }
+      else if(result.val.toFixed(1) > 60){
+        rootChild[4].children[0].children[0].innerText = `😄`
+      }
+      else if(result.val.toFixed(1) <= 25){
+        rootChild[4].children[0].children[0].innerText = `😓`
+      }
+      else{
+        rootChild[4].children[0].children[0].innerText = `🙂`
+      }
+  
     }
   })
 
