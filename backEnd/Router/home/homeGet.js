@@ -38,7 +38,7 @@ export default function homeGet(request, response) {
       function (err, rows) {
         if (err) throw err;
         else {
-          console.log(rows)
+          // console.log(rows)
           if(myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];

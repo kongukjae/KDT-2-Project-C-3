@@ -10,6 +10,8 @@ export default function dangstarUserCheck(request, response) {
       body = body + data;
     });
     request.on("end", function () {
+      console.log("전체 데이터")
+      console.log(body);
       let userID = jwtFunc.jwtCheck(body.split('=')[1]).id;
       console.log(userID);
       response.writeHead(200);
