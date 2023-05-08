@@ -1944,6 +1944,8 @@ const dangstarStyle = {
     position: "relative",
     display: "flex",
     flexDirection: "column",
+    border: "1px solid #D9D9D9",
+    marginBottom: "10px",
     backgroundColor: stylePropertyUnion.colorTheme.beige,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius15
   },
@@ -1952,6 +1954,7 @@ const dangstarStyle = {
     maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height400,
     overflow: "hidden",
+    padding: "10px",
     ...stylePropertyUnion.flexRowCenter,
   },
   dangstarFeedImg: {
