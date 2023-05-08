@@ -2,7 +2,7 @@ let trigger = false;
 function dangstarInfinityScroll() {
   let cnt = 1;
   function dangstarScroll() {
-    console.log("스크롤 함수 진입")
+    console.log("스크롤 함수 진입");
     let dangstarWindowHeight = window.innerHeight;
     // console.log("dangstarWindowHeight : " + dangstarWindowHeight)
     let dangstarDocumentHeight = document.documentElement.scrollHeight;
@@ -20,20 +20,7 @@ function dangstarInfinityScroll() {
       cnt ++;
     }
   }
-  document.addEventListener('scroll', throttle(dangstarScroll, 500))
-}
-
-function throttle(func, delay) {
-  let throttleCheck;
-  return function(...args) {
-    if(!throttleCheck) {
-      throttleCheck = true;
-      setTimeout(() => {
-        func.apply(this, args)
-        throttleCheck = false;
-      }, delay)
-    }
-  }
+  document.addEventListener('scroll', throttle(dangstarScroll, 500));
 }
 
 dangstarInfinityScroll();
