@@ -43,6 +43,7 @@ const stylePropertyUnion = {
     width100: "100px",
     width90: "90px",
     width80: "80px",
+    width70: "70px",
     width60: "60px",
     width50: "50px",
     width40: "40px",
@@ -117,6 +118,12 @@ const stylePropertyUnion = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+  },
+  flexRowAroundCenter: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   flexColumnTopCenter: {
@@ -1055,7 +1062,7 @@ const mypageStyle = {
   mypageUserinfoBox: {
     width: stylePropertyUnion.width.widthP90,
     height: stylePropertyUnion.height.height300,
-    marginTop: "40px",
+    marginTop: "20px",
     position: "relative",
     borderRadius: "10px",
     ...stylePropertyUnion.flexColCenter,
