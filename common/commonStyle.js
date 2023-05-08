@@ -26,6 +26,7 @@ const stylePropertyUnion = {
     widthP60: "60%",
     widthP40: "40%",
     widthP30: "30%",
+    widthP20: "20%",
     widthP15: "15%",
     width500: "500px",
     width450: "450px",
@@ -61,6 +62,7 @@ const stylePropertyUnion = {
     heightP70: "70%",
     heightP50: "50%",
     heightP30: "30%",
+    heightP20: "20%",
     height2000: "2000px",
     height1700: "1700px",
     height1300: "1300px",
@@ -171,13 +173,15 @@ const stylePropertyUnion = {
 const targetStyle = {
   topMenu: {
     width: stylePropertyUnion.width.widthP100,
+    maxWidth:stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height126,
     position: "relative",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     ...stylePropertyUnion.flexRowCenter,
   },
   bottomMenu: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height90,
     position: "fixed",
     bottom: "0px",
@@ -258,7 +262,8 @@ const targetStyle = {
     top: "-3px",
   },
   mainRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height2000,
     margin: "auto",
     display: "flex",
@@ -765,18 +770,19 @@ const dangMapStyle = {
     top : "47px",
     left: "87%",
     zIndex : "3",
-    cursor: "pointer"
+    cursor: "pointer",
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
-  serchBtnStyle: {
+  searchBtnStyle: {
     width: stylePropertyUnion.width.width40,
     height: stylePropertyUnion.height.height40,
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     position : "relative",
-    top : "42px",
+    top : "5px",
     zIndex : "3",
-    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
-
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
   orgChatBtnStyle: {
     width: stylePropertyUnion.width.width40,
@@ -784,9 +790,10 @@ const dangMapStyle = {
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     position : "relative",
-    top : "44px",
+    top : "12px",
     zIndex : "3",
-    transition: "cubic-bezier(0, 0.02, 0.62, 0.26) 2.0s",
+    ...stylePropertyUnion.flexRowCenter,
+    color: stylePropertyUnion.colorTheme.whiteTypeA,
   },
 
 };
@@ -794,7 +801,8 @@ const dangMapStyle = {
 const signupPageStyle = {
   //회원가입 결과창
   signupResultRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height1000,
     margin: "auto",
     ...stylePropertyUnion.flexColCenter,
@@ -831,7 +839,8 @@ const signupPageStyle = {
   },
   // signUp
   signUpMain: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height1000,
     margin: "auto",
     flexDirection: "column",
@@ -840,7 +849,7 @@ const signupPageStyle = {
     ...stylePropertyUnion.flexRowCenter,
   },
   signUpContainer: {
-    width: stylePropertyUnion.width.width450,
+    width: stylePropertyUnion.width.widthP90,
     padding: "30px",
     borderRadius: "10px",
     display: "flex",
@@ -853,7 +862,7 @@ const signupPageStyle = {
     boxShadow: stylePropertyUnion.defaultBoxShadow.ConBoxSdw,
   },
   signUpListBox: {
-    width: stylePropertyUnion.width.width300,
+    width: stylePropertyUnion.width.widthP85,
     height: stylePropertyUnion.height.height70,
     position: "relative",
     ...stylePropertyUnion.flexRowCenter,
@@ -865,7 +874,7 @@ const signupPageStyle = {
     fontWeight: stylePropertyUnion.fontWeightSet.bold,
   },
   signUpListWithoutID: {
-    width: stylePropertyUnion.width.width300,
+    width: stylePropertyUnion.width.widthP83,
     height: stylePropertyUnion.height.height40,
     cursor: "pointer",
     borderRadius: "10px",
@@ -876,7 +885,7 @@ const signupPageStyle = {
     boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
   },
   signUpListID: {
-    width: stylePropertyUnion.width.width200,
+    width: stylePropertyUnion.width.widthP60,
     height: stylePropertyUnion.height.height40,
     cursor: "pointer",
     borderRadius: "10px",
@@ -887,10 +896,10 @@ const signupPageStyle = {
     boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw,
   },
   signUpDupCheck: {
-    width: stylePropertyUnion.width.width90,
+    width: stylePropertyUnion.width.widthP20,
     height: stylePropertyUnion.height.height40,
     marginLeft: "10px",
-    fontSize: stylePropertyUnion.fontSizeSet.small,
+    fontSize: stylePropertyUnion.fontSizeSet.smaller,
     cursor: "pointer",
     ...stylePropertyUnion.flexRowCenter,
     borderRadius: "10px",
@@ -929,7 +938,8 @@ const signupPageStyle = {
   },
 
   findUserInfoRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height1000,
     margin: "auto",
     ...stylePropertyUnion.flexColCenter,
@@ -983,7 +993,8 @@ const signupPageStyle = {
 
 const mypageStyle = {
   mypageRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height2000,
     margin: "auto",
     position: "relative",
@@ -1057,6 +1068,16 @@ const mypageStyle = {
     borderRadius: "5px",
     paddingLeft: "10px",
     paddingRight: "10px",
+  },
+  mypageUserEdit: {
+    width : stylePropertyUnion.width.widthP40,
+    height : stylePropertyUnion.height.height30,
+    position : 'absolute',
+    right : '5px',
+    top: '10px',
+    backgroundColor : 'white',
+    cursor : 'pointer',
+    ...stylePropertyUnion.flexRowCenter
   },
   mypageUserinfoBoxSelfIntroduce: {
     height: stylePropertyUnion.height.height130,
@@ -1205,7 +1226,8 @@ const keepStyle = {
   },
 
   pageRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height1700,
     margin: "auto",
     position: "relative",
@@ -1222,7 +1244,8 @@ const keepStyle = {
   },
   //root1 제목부분 '산돌이를 찾아주세요'
   pageTitleBox: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height40,
     position: "relative",
     backgroundColor: stylePropertyUnion.colorTheme.lightGray,
@@ -1231,13 +1254,15 @@ const keepStyle = {
     fontWeight: stylePropertyUnion.fontWeightSet.bold,
   },
   pageTitle: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height40,
     resize: "none",
   },
   // root2 이미지부분
   pageuploadImg: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height500,
     ...stylePropertyUnion.flexRowCenter,
     border: `1px solid ${stylePropertyUnion.colorTheme.peach}`,
@@ -1248,7 +1273,8 @@ const keepStyle = {
 
   // root3 본문부분, '산돌이는 대전에서 잃어버렸어요'
   pagemainTextBox: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height400,
     backgroundColor: stylePropertyUnion.colorTheme.lightGray,
     position: "relative",
@@ -1260,7 +1286,8 @@ const keepStyle = {
     backgroundPosition: "center",
   },
   pageButtonWrap: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height100,
     // marginTop : "20px",
     position: "relative",
@@ -1358,7 +1385,8 @@ const keepStyle = {
   },
   // 4. 페이지 서브밋
   pageSubmit: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height154,
     backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
     cursor: "pointer",
@@ -1369,7 +1397,8 @@ const keepStyle = {
   },
 
   bottomMenu: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height126,
     // position : "relative",
     backgroundColor: stylePropertyUnion.colorTheme.peach,
@@ -1384,14 +1413,15 @@ const keepStyle = {
 //! 로그인 페이지 스타일
 const loginStyle = {
   loginPageRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height100vh,
     ...stylePropertyUnion.flexColumnTopCenter,
     backgroundColor: stylePropertyUnion.colorTheme.peach,
     margin: "auto",
   },
   loginPageLogoWrap: {
-    width: stylePropertyUnion.width.width250,
+    width: stylePropertyUnion.width.widthP40,
     height: stylePropertyUnion.height.height100,
     marginTop: stylePropertyUnion.marginTop.marginTop156,
   },
@@ -1399,8 +1429,8 @@ const loginStyle = {
     width: stylePropertyUnion.width.widthP100,
   },
   loginPageImgWarp: {
-    width: stylePropertyUnion.width.width150,
-    height: stylePropertyUnion.height.height150,
+    width: stylePropertyUnion.width.widthP40,
+    height: stylePropertyUnion.height.heightP20,
     marginTop: stylePropertyUnion.marginTop.marginTop60,
     borderRadius: stylePropertyUnion.borderRadius.borderRadiusP50,
     backgroundColor: stylePropertyUnion.colorTheme.lightGray,
@@ -1411,7 +1441,7 @@ const loginStyle = {
     height: stylePropertyUnion.height.heightP100,
   },
   loginPageFormWrap: {
-    width: stylePropertyUnion.width.width390,
+    width: stylePropertyUnion.width.widthP70,
     height: stylePropertyUnion.height.height154,
   },
   loginPageForm: {
@@ -1465,7 +1495,7 @@ const loginStyle = {
     backgroundColor: "#D9D9D9",
     color: stylePropertyUnion.colorTheme.black,
     textDecoration: "none",
-    width: stylePropertyUnion.width.width390,
+    width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height24,
     ...stylePropertyUnion.flexRowCenter,
     fontSize: stylePropertyUnion.fontSizeSet.smaller,
@@ -1477,7 +1507,8 @@ const loginStyle = {
 const dangMarketStyle = {
   //게시글 목록 part
   root: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     // height: stylePropertyUnion.height.height2000,
     margin: "auto",
     display: "flex",
@@ -1502,26 +1533,28 @@ const dangMarketStyle = {
   listContainer: {
     width: stylePropertyUnion.width.widthP100,
     minHeight: "calc(100vh - 216px)",
-    border: "1px solid red",
     position: "relative",
     marginBottom: "90px",
     zIndex: "1",
     ...stylePropertyUnion.flexColumnTopCenter,
   },
   listBox: {
-    width: stylePropertyUnion.width.widthP80,
+    width: stylePropertyUnion.width.widthP90,
     height: stylePropertyUnion.height.height200,
-    border: "1px solid black",
     margin: "10px 0 10px 0",
     ...stylePropertyUnion.flexRowCenter,
     textDecoration: "none",
     color: stylePropertyUnion.colorTheme.black,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
   },
   listImg: {
     width: stylePropertyUnion.width.width100,
     height: stylePropertyUnion.height.height100,
-    border: "1px solid black",
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
     margin: "5px",
+    boxShadow: stylePropertyUnion.defaultBoxShadow.defBoxSdw
   },
   listText: {
     width: stylePropertyUnion.width.width300,
@@ -1549,7 +1582,8 @@ const dangMarketStyle = {
 
   //게시글 part
   marketPost: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height100vh,
     ...stylePropertyUnion.flexColumnTopCenter,
     backgroundColor: stylePropertyUnion.colorTheme.peach,
@@ -1671,7 +1705,8 @@ const dangMarketStyle = {
 
 const dangtalkStyle = {
   chatRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     margin: "auto",
     display: "flex",
     flexDirection: "column",
@@ -1739,7 +1774,8 @@ const dangtalkStyle = {
 
 const dangtalkChattingRoomStyle = {
   mainRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height1000,
     margin: "auto",
     position: "relative",
@@ -1873,7 +1909,8 @@ const dangtalkChattingRoomStyle = {
 //! 댕스타그램 부분
 const dangstarStyle = {
   dangstarRoot: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     margin: stylePropertyUnion.margin.marginAuto,
     position: "relative",
   },
@@ -1901,15 +1938,18 @@ const dangstarStyle = {
     transform: "rotate(135deg)",
   },
   dangstarFeedWrap: {
-    border: "1px solid black",
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     // marginBottom: stylePropertyUnion.marginBottom.marginBottom20,
     position: "relative",
     display: "flex",
     flexDirection: "column",
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15
   },
   dangstarFeedImgWrap: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height400,
     overflow: "hidden",
     ...stylePropertyUnion.flexRowCenter,
@@ -1926,8 +1966,7 @@ const dangstarStyle = {
     fontWeight: stylePropertyUnion.fontWeightSet.bold,
   },
   dangstarFeedTextBox: {
-    border: "1px solid green",
-    width: stylePropertyUnion.width.width450, // 500px - 부모의 좌우 패딩 값
+    width: stylePropertyUnion.width.widthP95, // 500px - 부모의 좌우 패딩 값
     display: "-webkit-box",
     webkitBoxOrient: "vertical",
     webkitLineClamp: "5",
@@ -1936,7 +1975,8 @@ const dangstarStyle = {
     whiteSpace: "pre-wrap",
   },
   dangstarFeedBtnsWrap: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height100,
     display: "flex",
     justifyContent: "space-evenly",
@@ -1945,6 +1985,9 @@ const dangstarStyle = {
   dangstarFeedBtns: {
     width: stylePropertyUnion.width.width60,
     height: stylePropertyUnion.height.height60,
+    backgroundColor: "white",
+    borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
+    border: "1px solid white",
   },
   dangstarLikeImg: {
     width: stylePropertyUnion.width.widthP80,
@@ -1960,13 +2003,15 @@ const dangstarStyle = {
   dangstarCommentInput: {
     width: stylePropertyUnion.width.widthP85,
     height: stylePropertyUnion.height.height38,
+    backgroundColor: stylePropertyUnion.colorTheme.beige,
     outline: "none",
+    border: "none",
+    borderBottom: "1px solid black",
   },
   dangstarCommentWriteBtn: {
     width: stylePropertyUnion.width.width60,
     height: stylePropertyUnion.height.height38,
-    backgroundColor: stylePropertyUnion.colorTheme.lightGray,
-    border: "1px solid #999",
+    backgroundColor: stylePropertyUnion.colorTheme.white,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius5,
     ...stylePropertyUnion.flexRowCenter,
     cursor: "pointer",
@@ -1997,8 +2042,8 @@ const dangstarStyle = {
     width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height100,
     padding: "10px",
-    borderTop: "1px solid #333",
-    borderBottom: "1px solid #333",
+    borderTop: "3px solid white",
+    borderBottom: "3px solid white",
   },
   dangstarRecentCommentContentWrap: {
     width: stylePropertyUnion.width.widthP100,
@@ -2058,7 +2103,8 @@ const dangstarStyle = {
     cursor: "pointer",
   },
   dangstarCommentModal: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     backgroundColor: stylePropertyUnion.colorTheme.lightGray,
     display: "none",
     flexDirection: "column",
@@ -2128,7 +2174,8 @@ const dangstarStyle = {
 //! 댕프렌즈 스타일 부분
 const dangfriendsStyle = {
   rootStyle: {
-    width: stylePropertyUnion.width.width500,
+    width: stylePropertyUnion.width.widthP100,
+    maxWidth: stylePropertyUnion.width.width500,
     margin: "auto",
     display: "flex",
     flexDirection: "column",

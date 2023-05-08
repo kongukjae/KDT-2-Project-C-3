@@ -63,18 +63,7 @@ function myPage() {
 
   rootChild[4].children[3].innerText = `산책온도 :`;
   rootChild[4].children[4].innerText = `개인정보 수정/추가`;
-  styleCreate(rootChild[4].children[4], {
-    position: "absolute",
-    right: "5px",
-    top: "10px",
-    backgroundColor: "white",
-    width: "180px",
-    height: "30px",
-    cursor: "pointer",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  });
+  styleCreate(rootChild[4].children[4], mypageStyle.mypageUserEdit);
   if (dogGenderFromServer === "1") {
     rootChild[4].children[5].innerText = "성별 : 남자";
   } else {

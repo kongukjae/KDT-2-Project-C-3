@@ -24,3 +24,16 @@ function changeDateUTC(date) {
   return utcDate;
 }
 
+// 쓰로틀링 함수
+function throttle(func, delay) {
+  let throttleCheck;
+  return function(...args) {
+    if(!throttleCheck) {
+      throttleCheck = true;
+      setTimeout(() => {
+        func.apply(this, args)
+        throttleCheck = false;
+      }, delay)
+    }
+  }
+}

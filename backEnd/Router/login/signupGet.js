@@ -1,14 +1,10 @@
-import htmlBox from "../../../common/htmlBox.js";
 import cmServer from "../../commonServer.js";
 import dupCheck from "./signupDupcheckGet.js";
-
+import tokenCheck from "../login/loginTokenCheck.js";
 
 export default function signupGet(request, response) {
-
   if (request.url === "/signUp") {
-    response.writeHead(200);
-    response.write(htmlBox.htmlFunc(htmlBox.signupPage));
-    response.end();
+    tokenCheck(request, response, 'signupPage');
   }   
   if (request.url === "/init_user/signupstyle.js") {
     cmServer.fileDirectory(`init_user/signup.js`, response);
