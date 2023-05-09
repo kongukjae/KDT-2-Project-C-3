@@ -17,7 +17,8 @@ export default function tempeCheck(request, response) {
       console.log("넘어 온 값은???????? ", myId, yourId);
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
-      conn.query(`select temp, goodTemp, badTemp from temperature where id = '${yourId}'`,
+      conn.query(
+        `select temp, goodTemp, badTemp from temperature where id = '${yourId}'`,
         (err, data) => {
           if (err) throw err;
           else {
@@ -60,51 +61,25 @@ export default function tempeCheck(request, response) {
 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
-      conn.query(`select temp, goodTemp, badTemp from temperature where id = '${youreId}'`, (err, data) => {
-        if(err) throw err;
-        else {
-          console.log(data);
-          let temp = data[0].temp;
-          let resultTemp;
-          const good = JSON.parse(data[0].goodTemp);
-          const bad = JSON.parse(data[0].badTemp);
-          if(good === null && bad === null) {
-            console.log("null값입니다 null값입니다 null값입니다 ")
-            conn.query(`UPDATE temperature SET goodTemp = JSON_OBJECT('goodUser', JSON_ARRAY('${myId}')), temp = '${temp + 0.5}' WHERE id = '${youreId}'`);
-            conn.query(`SELECT temp FROM temperature`, (err, row) => {
-              if(err) throw err;
-              else {
-                console.log(row);
-                console.log(row[0].temp);
-                resultTemp = row[0].temp;
-                response.writeHead(200);
-                response.end(JSON.stringify(resultTemp));
-                conn.end();
-              }
-            })
-          } else {
-            let goodArr = [];
-            let badArr = [];
-            if(good !== null) {
-              goodArr = JSON.parse(data[0].goodTemp).goodUser;
-              console.log(goodArr);
-            }
-            if(bad !== null) {
-              badArr = JSON.parse(data[0].badTemp).badUser;
-              console.log(badArr);
-            }
-            console.log("test ? ", goodArr)
-            console.log("test ! ", badArr)
-            if(goodArr.includes(myId)) {
-              console.log("이미 추천 함!");
-              response.writeHead(200);
-              response.end("false");
-              conn.end();
-            }
-            if(!goodArr.includes(myId) && (!badArr.includes(myId) || bad === null)) {
-              conn.query(`UPDATE temperature SET goodTemp = JSON_ARRAY_APPEND(goodTemp, '$.goodUser', '${myId}'), temp = '${temp + 0.5}' WHERE id = '${youreId}'`)
+      conn.query(
+        `select temp, goodTemp, badTemp from temperature where id = '${youreId}'`,
+        (err, data) => {
+          if (err) throw err;
+          else {
+            console.log(data);
+            let temp = data[0].temp;
+            let resultTemp;
+            const good = JSON.parse(data[0].goodTemp);
+            const bad = JSON.parse(data[0].badTemp);
+            if (good === null && bad === null) {
+              console.log("null값입니다 null값입니다 null값입니다 ");
+              conn.query(
+                `UPDATE temperature SET goodTemp = JSON_OBJECT('goodUser', JSON_ARRAY('${myId}')), temp = '${
+                  temp + 0.5
+                }' WHERE id = '${youreId}'`
+              );
               conn.query(`SELECT temp FROM temperature`, (err, row) => {
-                if(err) throw err;
+                if (err) throw err;
                 else {
                   console.log(row);
                   console.log(row[0].temp);
@@ -113,19 +88,46 @@ export default function tempeCheck(request, response) {
                   response.end(JSON.stringify(resultTemp));
                   conn.end();
                 }
-              })
-            }
-            console.log("length test ", badArr.length)
-            console.log(typeof(badArr.length));
-            if(badArr.length !== 0) {
-              if(badArr.includes(myId)) {
-                console.log(badArr);
-                let cnt = badArr.indexOf(myId)
-                console.log(cnt);
-                conn.query(`UPDATE temperature SET badTemp = JSON_REMOVE(badTemp, '$.badUser[${cnt}]') WHERE id = '${youreId}'`);
-                conn.query(`UPDATE temperature SET goodTemp = JSON_ARRAY_APPEND(goodTemp, '$.goodUser', '${myId}'), temp = '${temp + 1}' WHERE id = '${youreId}'`)
+              });
+            } else {
+              let goodArr = [];
+              let badArr = [];
+              if (good !== null) {
+                goodArr = JSON.parse(data[0].goodTemp).goodUser;
+                console.log(goodArr);
+              } else {
+                if(badArr.includes(myId)) {
+                  console.log(badArr);
+                  let cnt = badArr.indexOf(myId);
+                  console.log(cnt);
+                  conn.query(
+                    `UPDATE temperature SET badTemp = JSON_REMOVE(badTemp, '$.badUser[${cnt}]') WHERE id = '${youreId}'`
+                  );
+                  conn.query(
+                    `UPDATE temperature SET goodTemp = JSON_ARRAY_APPEND(goodTemp, '$.goodUser', '${myId}'), temp = '${
+                      temp + 1
+                    }' WHERE id = '${youreId}'`
+                  );
+                  conn.query(`SELECT temp FROM temperature`, (err, row) => {
+                    if (err) throw err;
+                    else {
+                      console.log(row);
+                      console.log(row[0].temp);
+                      resultTemp = row[0].temp;
+                      response.writeHead(200);
+                      response.end(JSON.stringify(resultTemp));
+                      conn.end();
+                    }
+                  });
+                } else {
+                  console.log("null값입니다 null값입니다 null값입니다 ");
+                conn.query(
+                  `UPDATE temperature SET goodTemp = JSON_OBJECT('goodUser', JSON_ARRAY('${myId}')), temp = '${
+                    temp + 0.5
+                  }' WHERE id = '${youreId}'`
+                );
                 conn.query(`SELECT temp FROM temperature`, (err, row) => {
-                  if(err) throw err;
+                  if (err) throw err;
                   else {
                     console.log(row);
                     console.log(row[0].temp);
@@ -134,12 +136,46 @@ export default function tempeCheck(request, response) {
                     response.end(JSON.stringify(resultTemp));
                     conn.end();
                   }
-                })
+                });
+                }
+              }
+              if (bad !== null) {
+                badArr = JSON.parse(data[0].badTemp).badUser;
+                console.log(badArr);
+              }
+              console.log("test ? ", goodArr);
+              console.log("test ! ", badArr);
+              if (goodArr.includes(myId)) {
+                console.log("이미 추천 함!");
+                response.writeHead(200);
+                response.end("false");
+                conn.end();
+              }
+              if (
+                !goodArr.includes(myId) &&
+                (!badArr.includes(myId) || bad === null)
+              ) {
+                conn.query(
+                  `UPDATE temperature SET goodTemp = JSON_ARRAY_APPEND(goodTemp, '$.goodUser', '${myId}'), temp = '${
+                    temp + 0.5
+                  }' WHERE id = '${youreId}'`
+                );
+                conn.query(`SELECT temp FROM temperature`, (err, row) => {
+                  if (err) throw err;
+                  else {
+                    console.log(row);
+                    console.log(row[0].temp);
+                    resultTemp = row[0].temp;
+                    response.writeHead(200);
+                    response.end(JSON.stringify(resultTemp));
+                    conn.end();
+                  }
+                });
               }
             }
           }
         }
-      })
+      );
     });
   }
   if (request.url === "/DownTemp") {
@@ -158,7 +194,9 @@ export default function tempeCheck(request, response) {
 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
-      conn.query(`select temp, goodTemp, badTemp from temperature where id = '${youreId}'`, (err, data) => {
+      conn.query(
+        `select temp, goodTemp, badTemp from temperature where id = '${youreId}'`,
+        (err, data) => {
           if (err) throw err;
           else {
             console.log(data);
@@ -168,7 +206,11 @@ export default function tempeCheck(request, response) {
             const bad = JSON.parse(data[0].badTemp);
             if (good === null && bad === null) {
               console.log("null값입니다 null값입니다 null값입니다 ");
-              conn.query(`UPDATE temperature SET badTemp = JSON_OBJECT('badUser', JSON_ARRAY('${myId}')), temp = '${temp - 0.5}' WHERE id = '${youreId}'`);
+              conn.query(
+                `UPDATE temperature SET badTemp = JSON_OBJECT('badUser', JSON_ARRAY('${myId}')), temp = '${
+                  temp - 0.5
+                }' WHERE id = '${youreId}'`
+              );
               conn.query(`SELECT temp FROM temperature`, (err, row) => {
                 if (err) throw err;
                 else {
@@ -190,7 +232,50 @@ export default function tempeCheck(request, response) {
               if (bad !== null) {
                 badArr = JSON.parse(data[0].badTemp).badUser;
                 console.log(badArr);
+              } else {
+                if (goodArr.includes(myId)) {
+                  let cnt = goodArr.indexOf(myId);
+                  console.log(cnt);
+                  conn.query(
+                    `UPDATE temperature SET goodTemp = JSON_REMOVE(goodTemp, '$.goodUser[${cnt}]') WHERE id = '${youreId}'`
+                  );
+                  conn.query(
+                    `UPDATE temperature SET badTemp = JSON_ARRAY_APPEND(badTemp, '$.badUser', '${myId}'), temp = '${
+                      temp - 1
+                    }' WHERE id = '${youreId}'`
+                  );
+                  conn.query(`SELECT temp FROM temperature`, (err, row) => {
+                    if (err) throw err;
+                    else {
+                      console.log(row);
+                      console.log(row[0].temp);
+                      resultTemp = row[0].temp;
+                      response.writeHead(200);
+                      response.end(JSON.stringify(resultTemp));
+                      conn.end();
+                    }
+                  });
+                } else {
+                  console.log("null값입니다 null값입니다 null값입니다 ");
+                  conn.query(
+                    `UPDATE temperature SET badTemp = JSON_OBJECT('badUser', JSON_ARRAY('${myId}')), temp = '${
+                      temp - 0.5
+                    }' WHERE id = '${youreId}'`
+                  );
+                  conn.query(`SELECT temp FROM temperature`, (err, row) => {
+                    if (err) throw err;
+                    else {
+                      console.log(row);
+                      console.log(row[0].temp);
+                      resultTemp = row[0].temp;
+                      response.writeHead(200);
+                      response.end(JSON.stringify(resultTemp));
+                      conn.end();
+                    }
+                  });
+                }
               }
+
               if (badArr.includes(myId)) {
                 console.log("이미 비추천 함!");
                 response.writeHead(200);
@@ -201,9 +286,13 @@ export default function tempeCheck(request, response) {
                 !badArr.includes(myId) &&
                 (!goodArr.includes(myId) || good === null)
               ) {
-                conn.query(`UPDATE temperature SET badTemp = JSON_ARRAY_APPEND(badTemp, '$.badUser', '${myId}'), temp = '${temp - 0.5}' WHERE id = '${youreId}'`);
+                conn.query(
+                  `UPDATE temperature SET badTemp = JSON_ARRAY_APPEND(badTemp, '$.badUser', '${myId}'), temp = '${
+                    temp - 0.5
+                  }' WHERE id = '${youreId}'`
+                );
                 conn.query(`SELECT temp FROM temperature`, (err, row) => {
-                  if(err) throw err;
+                  if (err) throw err;
                   else {
                     console.log(row);
                     console.log(row[0].temp);
@@ -212,29 +301,7 @@ export default function tempeCheck(request, response) {
                     response.end(JSON.stringify(resultTemp));
                     conn.end();
                   }
-                })
-              }
-            console.log("length test ", goodArr.length)
-            console.log(typeof(goodArr.length));
-              if(goodArr.length !== 0) {
-                if (goodArr.includes(myId)) {
-                  console.log(badArr);
-                  let cnt = badArr.indexOf(myId);
-                  console.log(cnt);
-                  conn.query(`UPDATE temperature SET goodTemp = JSON_REMOVE(goodTemp, '$.goodUser[${cnt}]') WHERE id = '${youreId}'`);
-                  conn.query(`UPDATE temperature SET badTemp = JSON_ARRAY_APPEND(badTemp, '$.badUser', '${myId}), temp = '${temp - 1}' WHERE id = '${youreId}'`);
-                  conn.query(`SELECT temp FROM temperature`, (err, row) => {
-                    if(err) throw err;
-                    else {
-                      console.log(row);
-                      console.log(row[0].temp);
-                      resultTemp = row[0].temp;
-                      response.writeHead(200);
-                      response.end(JSON.stringify(resultTemp));
-                      conn.end();
-                    }
-                  })
-                }
+                });
               }
             }
           }
@@ -242,49 +309,6 @@ export default function tempeCheck(request, response) {
       );
     });
   }
-  //     conn.query(`select temp, UpTemp, DownTemp from temperature where id = '${myId}' and fr_id = '${youreId}'`,
-  //       (err, data) => {
-  //         if (err) throw err;
-  //         else {
-  //           console.log(data);
-  //           let temp = data[0].temp;
-  //           let UpTemp = data[0].UpTemp;
-  //           let DownTemp = data[0].DownTemp;
-  //           let resultTemp;
-  //           if (DownTemp === 0 && UpTemp === 0) {
-  //             conn.query(`update temperature SET temp = '${temp - 0.5}', DownTemp = '1' where id = '${myId}' and fr_id = '${youreId}'`);
-  //             conn.query(`select temp from temperature where id = '${myId}' and fr_id = '${youreId}'`,
-  //               (err, row) => {
-  //                 if (err) throw err;
-  //                 console.log(row);
-  //                 resultTemp = row[0].temp;
-  //                 response.writeHead(200);
-  //                 response.end(JSON.stringify(resultTemp));
-  //                 conn.end();
-  //               }
-  //             );
-  //           } else if (DownTemp === 0 && UpTemp === 1) {
-  //             conn.query(`update temperature SET temp = '${temp - 1}', UpTemp = '0', DownTemp = '1' where id = '${myId}' and fr_id = '${youreId}'`);
-  //             conn.query(`select temp from temperature where id = '${myId}' and fr_id = '${youreId}'`,
-  //               (err, row) => {
-  //                 if (err) throw err;
-  //                 console.log(row);
-  //                 resultTemp = row[0].temp;
-  //                 response.writeHead(200);
-  //                 response.end(JSON.stringify(resultTemp));
-  //                 conn.end();
-  //               }
-  //             );
-  //           } else if (DownTemp === 1) {
-  //             console.log("이미 비추천 함!");
-  //             response.writeHead(200);
-  //             response.end("false");
-  //           }
-  //         }
-  //       }
-  //     );
-  //   });
-  // }
 
   if (request.url === "/checkTemperature") {
     let body = "";
@@ -303,7 +327,8 @@ export default function tempeCheck(request, response) {
 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
-      conn.query(`select temp from temperature where id = '${myId}' and fr_id = '${yourId}'`,
+      conn.query(
+        `select temp from temperature where id = '${myId}' and fr_id = '${yourId}'`,
         (err, data) => {
           if (err) throw err;
           else {
@@ -317,7 +342,9 @@ export default function tempeCheck(request, response) {
                 temp += 0.5;
                 // temp = 38.5;
                 console.log("temp값은 ? 3", temp);
-                conn.query(`update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`);
+                conn.query(
+                  `update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`
+                );
 
                 response.writeHead(200);
                 response.end(JSON.stringify(temp));
@@ -326,7 +353,9 @@ export default function tempeCheck(request, response) {
                 //추천 버튼을 한번 더 클릭했을 때
                 temp -= 0.5;
                 console.log("temp값은 ? 4", temp);
-                conn.query(`update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`);
+                conn.query(
+                  `update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`
+                );
 
                 response.writeHead(200);
                 response.end(JSON.stringify(temp));
@@ -337,7 +366,9 @@ export default function tempeCheck(request, response) {
                 //비추천 버튼을 처음 클릭했을 때
                 temp -= 0.5;
                 console.log("temp값은 ? ? ?5", temp);
-                conn.query(`update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`);
+                conn.query(
+                  `update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`
+                );
 
                 response.writeHead(200);
                 response.end(JSON.stringify(temp));
@@ -346,7 +377,9 @@ export default function tempeCheck(request, response) {
                 //비추천 버튼을 한번 더 클릭했을 때
                 temp += 0.5;
                 console.log("temp값은 ? ? 6", temp);
-                conn.query(`update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`);
+                conn.query(
+                  `update temperature set temp = ${temp} where id = '${myId}' and fr_id = '${yourId}'`
+                );
 
                 response.writeHead(200);
                 response.end(JSON.stringify(temp));
