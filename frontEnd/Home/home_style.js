@@ -46,28 +46,22 @@ function main() {
   // 2. 슬라이드 생성함수이다. 여기서 함수를 가져와서 해당 URL에 요청한다.
   function createSlide(rootChild) {
     sendRequest("http://localhost:2080/slidePlease", (responseData) => {
-      sendRequest(
-        "http://localhost:2080/sendImageSlide",
-        (imageResponseData) => {
-          console.log(responseData);
-          console.log(imageResponseData);
+      console.log(responseData);
+      console.log(responseData);
+      for (let i = 0; i < responseData.length; i++) {
+        console.log(responseData[i].img);
+        slideChild[i].children[0].innerText = responseData[i].post_detail;
 
-          for (let i = 0; i < responseData.length; i++) {
-            console.log(responseData[i].img);
-            slideChild[i].children[0].innerText = responseData[i].post_detail;
-
-            if (responseData[i].img === "null") {
-              slideChild[
-                i
-              ].children[1].style.backgroundImage = `url(/image/image/default/null.png)`;
-            } else {
-              slideChild[
-                i
-              ].children[1].style.backgroundImage = `url(/image/image/dangstar/${responseData[i].img})`;
-            }
-          }
+        if (responseData[i].img === "null") {
+          slideChild[
+            i
+          ].children[1].style.backgroundImage = `url(/image/image/default/null.png)`;
+        } else {
+          slideChild[
+            i
+          ].children[1].style.backgroundImage = `url(/image/image/dangstar/${responseData[i].img})`;
         }
-      );
+      }
     });
 
     let slideCover = tagCreate("div", {});
