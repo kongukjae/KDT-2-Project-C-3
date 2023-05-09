@@ -17,7 +17,7 @@ export default function tempeCheck(request, response) {
       console.log("넘어 온 값은???????? ", myId, yourId);
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
-      conn.query(`select temp, temp_list, UpTemp, DownTemp from temperature where id = '${yourId}'`,
+      conn.query(`select temp, goodTemp, badTemp from temperature where id = '${yourId}'`,
         (err, data) => {
           if (err) throw err;
           else {
@@ -60,13 +60,19 @@ export default function tempeCheck(request, response) {
 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
-      conn.query(`select temp_list from temperature where id = '${youreId}'`, (err, data) => {
+      conn.query(`select temp, goodTemp, badTemp from temperature where id = '${youreId}'`, (err, data) => {
         if(err) throw err;
         else {
           console.log(data);
-          if(data.temp_list === null) {
-            console.log("데이터 없음!");
+          const good = JSON.parse(data[0].goodTemp);
+          const bad = JSON.parse(data[0].badTemp);
+          if(good === null && bad === null) {
+            console.log("null값입니다 null값입니다 null값입니다 ")
+            conn.query(`UPDATE temperature SET goodTemp = JSON_OBJECT('goodUser', JSON_ARRAY('${myId}')), temp = '${temp + 0.5}' WHERE id = '${youreId}'`)
           }
+          // if(data.temp_list === null) {
+          //   console.log("데이터 없음!");
+          // }
         }
       })
       // conn.query(`select temp, UpTemp, DownTemp from temperature where id = '${myId}' and fr_id = '${youreId}'`,

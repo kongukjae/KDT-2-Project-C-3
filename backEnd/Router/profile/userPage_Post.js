@@ -94,15 +94,16 @@ export default function dangMap(request, response) {
         if(data.length === 0) {
           console.log("null 진입 null 진입 null 진입 null 진입 null 진입 ")
           connection.query(`insert into temperature(id) values ('${followTarget}')`)
-          connection.query(`UPDATE temperature SET temp_list = JSON_OBJECT('tempUser', JSON_ARRAY('${myId}')) WHERE id = '${followTarget}'`)
-        } else {
-          const tempUserArr = JSON.parse(data[0].temp_list).tempUser;
-          console.log(tempUserArr);
-          console.log("tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr");
-          if(!tempUserArr.includes(myId)) {
-            connection.query(`UPDATE temperature SET temp_list = JSON_ARRAY_APPEND(temp_list, '$.tempUser', '${myId}')`)
-          }
+          // connection.query(`UPDATE temperature SET temp_list = JSON_OBJECT('tempUser', JSON_ARRAY('${myId}')) WHERE id = '${followTarget}'`)
         }
+        // else {
+        //   const tempUserArr = JSON.parse(data[0].temp_list).tempUser;
+        //   console.log(tempUserArr);
+        //   console.log("tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr");
+        //   if(!tempUserArr.includes(myId)) {
+        //     connection.query(`UPDATE temperature SET temp_list = JSON_ARRAY_APPEND(temp_list, '$.tempUser', '${myId})`)
+        //   }
+        // }
       })
       // connection.query(`UPDATE temperature SET temp_list = JSON_OBJECT('tempUser', JSON_ARRAY('${myId}')) WHERE id = '${followTarget}'`)
       // connection.end();
