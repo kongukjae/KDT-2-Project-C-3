@@ -75,9 +75,7 @@ function publicChatGenerator(id, lat, lag, date){
         console.log('단톡방이 생성되었습니다.')
         console.log('초대 알림 맴버 : ' + publlicChatList[PublicChatRoom])
         console.log('------------------------')
-        connection.query(`insert into alarm(id,public_chat,alarm_type) values('${id}','${PublicChatRoom}','public_chat');`, (error, rows, fields) => {
-          if (error) throw error;
-          else{
+        
           connection.query(`SELECT value FROM public_chat_list where type='chatList'`, (error, rows, fields) => {
             if (error) throw error;
             else{
@@ -88,11 +86,26 @@ function publicChatGenerator(id, lat, lag, date){
                 else{
                   connection.query(`UPDATE public_chat_list SET value = '${JSON.stringify(publlicChatList)}' where type='targetMarker'`, (error, rows, fields) => {
                     if (error) throw error;
-                    else{console.log('추가완료')}})
-                    connection.end();
+                    else{console.log('추가완료')
+                    let stack = [];
+                    for(let i=0; i<publlicChatList[PublicChatRoom].length;i++){
+                    if(!stack.includes(publlicChatList[PublicChatRoom][i])){
+                        stack.push(publlicChatList[PublicChatRoom][i]);
+                        if(i===publlicChatList[PublicChatRoom].length - 1){
+                        connection.query(`insert into alarm(id,public_chat,alarm_type) values('${publlicChatList[PublicChatRoom][i]}','${PublicChatRoom}','public_chat');`,(error, rows, fields) => {
+                          if (error) throw error;
+                          else{
+                            connection.end();
+                          }
+                        })
+                      }else{
+                        connection.query(`insert into alarm(id,public_chat,alarm_type) values('${publlicChatList[PublicChatRoom][i]}','${PublicChatRoom}','public_chat');`)
+                      }}
+                    }
+                  }})
                 }})
             }})
-          }}) 
+           
             // chatRoomList.push(PublicChatRoom);
             // const dataResult = fs.readFileSync(room);
             // let publlicChatListResult = JSON.parse(dataResult);

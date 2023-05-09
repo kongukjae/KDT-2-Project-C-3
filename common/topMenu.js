@@ -113,14 +113,14 @@ function topMenu(rootChild){
 
               }
               if(value !== null && key === 'public_chat'){
-                console.log(value)
 
                 let targetLocation = value.split('&')
                 let geocoder = new kakao.maps.services.Geocoder();
-                console.log(targetLocation[0].split('!')[2],targetLocation[1])
-                let coord = new kakao.maps.LatLng(targetLocation[0].split('!')[2], targetLocation[1]);
+                console.log(targetLocation[0],targetLocation[1])
+                let coord = new kakao.maps.LatLng(targetLocation[0], targetLocation[1]);
                 let callback = function(result, status) {
                   if (status === kakao.maps.services.Status.OK) {
+
                     let resultSplit = result[0].address.address_name.split(' ')
                     let roomName = resultSplit[resultSplit.length - 2] +' '+ resultSplit[resultSplit.length - 1]
                     let msgofPublicChat =  roomName + '동네에 단톡이 생성되었습니다'
@@ -166,13 +166,13 @@ function topMenu(rootChild){
                         );
                         await fetch(`http://localhost:2080/createPublicChatRoomRequest`,{
                           method: "POST",
-                          body: JSON.stringify({jwt:token,roomCode:value,roomName:roomName})
+                          body: JSON.stringify({jwt:token,roomCode:"!public!"+value,roomName:roomName})
                         }).then((res)=>{return res.text()})
                         .then((result)=>{
                           let publicChatForm = document.createElement("form");
                           publicChatForm.method = "POST";
                           publicChatForm.action = "/dangTalkPublicChatRoom";
-                          let params = {jwt: token,roomCode:value,roomName:roomName,firsttime:result};
+                          let params = {jwt: token,roomCode:"!public!"+value,roomName:roomName,firsttime:result};
                           for (let key in params) {
                             let hiddenField = document.createElement("input");
                             hiddenField.setAttribute("type", "hidden");
