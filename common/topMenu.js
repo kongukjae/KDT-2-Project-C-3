@@ -15,7 +15,7 @@ function topMenu(rootChild){
   rootChild.appendChild(logoLoginPage);
 
   logoLoginPage.addEventListener('click',()=>{
-    window.location = "http://localhost:2080/main"
+    window.location = "/main"
   })
 
   //알림 기능 영역
