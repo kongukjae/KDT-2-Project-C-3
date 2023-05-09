@@ -49,7 +49,6 @@ export default function postPostBoardLike(request, response) {
               } 
               else {
                 const likeUserArr = JSON.parse(postLike).likeUser;
-
                 console.log(likeUserArr)
 
                 // 2. likeUser 배열에 이미 존재하는 경우 해당 값을 삭제
