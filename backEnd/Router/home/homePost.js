@@ -11,16 +11,11 @@ export default function homePost(request, response) {
   // }
 
   if (request.url.startsWith("/slidePlease")) {
-    console.log("really");
     let body = "";
     request.on("data", function (data) {
       body = body + data;
-      console.log("black");
     });
     request.on("end", function () {
-      console.log("cute");
-
-      // let targeNumber = [4, 5, 6, 7, 8];
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
@@ -34,10 +29,8 @@ export default function homePost(request, response) {
         function (err, data) {
           if (err) throw err;
           else {
-            console.log(data);
             response.writeHead(200, { "content-Type": "application/json" });
             response.write(JSON.stringify(data));
-            console.log("response end");
             response.end();
           }
         }
