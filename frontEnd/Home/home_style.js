@@ -46,28 +46,36 @@ function main() {
   // 2. 슬라이드 생성함수이다. 여기서 함수를 가져와서 해당 URL에 요청한다.
   function createSlide(rootChild) {
     sendRequest("http://localhost:2080/slidePlease", (responseData) => {
-      sendRequest(
-        "http://localhost:2080/sendImageSlide",
-        (imageResponseData) => {
-          console.log(responseData);
-          console.log(imageResponseData);
-
-          for (let i = 0; i < responseData.length; i++) {
-            console.log(responseData[i].img);
-            slideChild[i].children[0].innerText = responseData[i].post_detail;
-
-            if (responseData[i].img === "null") {
-              slideChild[
-                i
-              ].children[1].style.backgroundImage = `url(/image/image/default/null.png)`;
-            } else {
-              slideChild[
-                i
-              ].children[1].style.backgroundImage = `url(/image/image/dangstar/${responseData[i].img})`;
-            }
+      for (let i = 0; i < responseData.length; i++) {
+        console.log(responseData[i].img);
+        slideChild[i].children[0].innerText = responseData[i].post_detail;
+        slideChild[i].style.cursor = "pointer";
+        slideChild[i].addEventListener("click", () => {
+          let detailForm = document.createElement("form");
+          detailForm.method = "POST";
+          detailForm.action = "/detailPostDangstar";
+          let params = { postIndex: responseData[i].post_index };
+          for (let key in params) {
+            let hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+            detailForm.appendChild(hiddenField);
           }
+          document.body.appendChild(detailForm);
+          detailForm.submit();
+        });
+
+        if (responseData[i].img === "null") {
+          slideChild[
+            i
+          ].children[1].style.backgroundImage = `url(/image/image/default/null.png)`;
+        } else {
+          slideChild[
+            i
+          ].children[1].style.backgroundImage = `url(/image/image/dangstar/${responseData[i].img})`;
         }
-      );
+      }
     });
 
     let slideCover = tagCreate("div", {});

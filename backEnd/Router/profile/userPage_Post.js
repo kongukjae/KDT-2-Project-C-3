@@ -203,7 +203,13 @@ export default function dangMap(request, response) {
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
-        `SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
+        ` SELECT ds.* FROM dangstar ds
+        JOIN (
+            SELECT post_index
+            FROM dangstar
+            ORDER BY LENGTH(post_like) DESC
+            LIMIT 5
+        ) AS top_posts ON ds.post_index = top_posts.post_index; `,
         function (err, data) {
           if (err) throw err;
           else {
