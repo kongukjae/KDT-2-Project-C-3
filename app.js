@@ -50,6 +50,7 @@ import dangWritePost from "./backEnd/router/postBoard/dangWritePost.js";
 import followSearch from "./backEnd/module/followSearch.js";
 import starCheckPost from "./backEnd/router/profile/userPage_starCheck_post.js";
 import starLoadPost from "./backEnd/router/profile/userPage_starLoad_Post.js";
+import tempeCheck from "./backEnd/router/profile/userPage_temperature_post.js";
 
 //import social
 import dangfriendGet from "./backEnd/router/social/dangfriendGet.js";
@@ -153,6 +154,9 @@ const server = http.createServer(function (request, response) {
 
     //마이페이지
     userPagePost(request, response);
+    
+    //산책온도 식별
+    tempeCheck(request, response);
 
     //게시글 작성
     dangWritePost(request, response);

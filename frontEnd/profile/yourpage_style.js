@@ -4,7 +4,7 @@ function yourPage(){
   styleCreate(root, mypageStyle.mypageRoot)
 
   let rootChild = [];
-  for(let i = 0;i<7;i++){
+  for(let i = 0;i<8;i++){
     let child = tagCreate("div",{});
     root.appendChild(child);
     rootChild.push(child);
@@ -94,51 +94,211 @@ function yourPage(){
     })
   })
 
+  //산책 온도 만드는 곳
+  const tempJwt = document.cookie.replace(
+    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
 
-  styleCreate(rootChild[4], mypageStyle.mypageUserinfoBox)
-  for(let i = 0; i < 7;i++){
+  let tempXhr = new XMLHttpRequest();
+  tempXhr.open("POST", "http://localhost:2080/temperature");
+  tempXhr.send(`jwt=${tempJwt}&you=${targetIdFromServer}`);
+  tempXhr.addEventListener('load', () => {
+    
+    let result = JSON.parse(tempXhr.response);
+    console.log("산책 온도 반환 받음: ", result)
+
+    if(result.re){
+        styleCreate(rootChild[4], {
+          width: stylePropertyUnion.width.widthP90,
+          height: stylePropertyUnion.height.height50,
+          marginTop: "20px",
+          position: "relative",
+          borderRadius: "10px",
+        ...stylePropertyUnion.flexRowAroundCenter,
+        gap: "10px",
+        backgroundColor: stylePropertyUnion.colorTheme.whiteTypeB,
+        padding: "0 10px 0 10px"
+      })
+      
+      for(let i = 0; i < 2; i++){
+        let child = tagCreate("div");
+        rootChild[4].appendChild(child)
+      }
+      styleCreate(rootChild[4].children[0], {
+        width: stylePropertyUnion.width.widthP70,
+        height: stylePropertyUnion.width.widthP90,
+        // backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
+        ...stylePropertyUnion.flexRowCenter,
+      })
+      styleCreate(rootChild[4].children[1], {
+        width: stylePropertyUnion.width.widthP30,
+        height: stylePropertyUnion.width.widthP90,
+        // backgroundColor: stylePropertyUnion.colorTheme.whiteTypeA,
+        // cursor: "pointer",
+        ...stylePropertyUnion.flexRowAroundCenter,
+      })
+      
+      for(let i = 0; i < 2; i++){
+        let child = tagCreate("div");
+        let childBtn = tagCreate("div");
+        rootChild[4].children[0].appendChild(child)
+        rootChild[4].children[1].appendChild(childBtn)
+        styleCreate(childBtn, {
+          width: stylePropertyUnion.width.width40,
+          height: stylePropertyUnion.width.width40,
+          cursor: "pointer",
+          borderRadius: "5px",
+          ...stylePropertyUnion.flexRowCenter,
+          fontSize: "35px",
+          margin: "0 20px 5px 0",
+        textAlign: "center"
+    
+        });
+      }
+    
+      styleCreate(rootChild[4].children[0].children[0], {
+        width: stylePropertyUnion.width.width50,
+        height: stylePropertyUnion.width.widthP100,
+        margin: "0 20px 5px 0",
+        borderRadius: "50%",
+        ...stylePropertyUnion.flexRowAroundCenter,
+        fontSize: "35px",
+        textAlign: "center"
+      });
+    
+      styleCreate(rootChild[4].children[0].children[1], {
+        width: stylePropertyUnion.width.widthP50,
+        height: stylePropertyUnion.width.widthP60,
+        paddingRight: "30px",
+        ...stylePropertyUnion.flexRowAroundCenter,
+        fontSize: stylePropertyUnion.fontSizeSet.mediumLarge,
+        fontWeight: stylePropertyUnion.fontWeightSet.bold
+      });
+
+      if(result.up === 0 && result.down === 1) {
+        rootChild[4].children[1].children[0].style.opacity = '0.7';
+      } else if(result.up === 1 && result.down === 0) {
+        rootChild[4].children[1].children[1].style.opacity = '0.7';
+      }
+
+      rootChild[4].children[0].children[1].innerText = `${result.temp.toFixed(1)} ℃`
+      rootChild[4].children[1].children[0].innerText = `👍🏻`
+      rootChild[4].children[1].children[1].innerText = `👎🏻`
+      Tempemoji();
+
+      goodTg = false;
+      badTg = false;
+      rootChild[4].children[1].children[0].addEventListener('click', () => {
+        console.log("추천함")
+        temperatureCheck(rootChild[4].children[1].children[0], rootChild[4].children[1].children[1])
+      });
+      rootChild[4].children[1].children[1].addEventListener('click', () => {
+        console.log("비추천함")
+        temperatureCheck(rootChild[4].children[1].children[1], rootChild[4].children[1].children[0])      
+      });
+    }
+    else{
+      console.log("값 없으으으으므ㅡㄷㅇㅁ: ", result.re)
+    }
+    function Tempemoji(){
+      if(result.temp.toFixed(1) > 42 && result.temp.toFixed(1) <= 60){
+        rootChild[4].children[0].children[0].innerText = `😃`
+      }
+      else if(result.temp.toFixed(1) > 25 && result.temp.toFixed(1) <= 35){
+        rootChild[4].children[0].children[0].innerText = `😐`
+      }
+      else if(result.temp.toFixed(1) > 60){
+        rootChild[4].children[0].children[0].innerText = `😄`
+      }
+      else if(result.temp.toFixed(1) <= 25){
+        rootChild[4].children[0].children[0].innerText = `😓`
+      }
+      else{
+        rootChild[4].children[0].children[0].innerText = `🙂`
+      }
+    }
+  })
+
+  function temperatureCheck(target, sibling) {
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    let _URL;
+    let _comment;
+
+    if(target === rootChild[4].children[1].children[0]) {
+      _URL = `http://localhost:2080/UpTemp`;
+      _comment = '추천';
+      target.style.opacity = '1';
+      sibling.style.opacity = '0.7';
+    } else {
+      _URL = `http://localhost:2080/DownTemp`;
+      _comment = '비추천';
+      target.style.opacity = '1';
+      sibling.style.opacity = '0.7';
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', _URL);
+    xhr.send(`jwt=${jwt}&you=${targetIdFromServer}`)
+    xhr.addEventListener('load', () => {
+      let result = JSON.parse(xhr.response);
+      console.log(result);
+      console.log('산책 온도 응답 받음')
+      if(!result) {
+        alert(`이미 ${_comment}하셨습니다`);
+      } else {
+        rootChild[4].children[0].children[1].innerText = `${result.toFixed(1)} ℃`;
+      }
+    })
+  }
+
+  styleCreate(rootChild[5], mypageStyle.mypageUserinfoBox)
+  for(let i = 0; i < 6;i++){
     let infoTag = tagCreate("div");
     styleCreate(infoTag, mypageStyle.mypageUserinfoBoxInnerStyle)
-    rootChild[4].appendChild(infoTag)
+    rootChild[5].appendChild(infoTag)
   }
-  rootChild[4].children[0].innerText = `강아지 이름 : ${dogNameFromServer}`
+  rootChild[5].children[0].innerText = `강아지 이름 : ${dogNameFromServer}`
   if(dogageFromServer === 'null'){
-    rootChild[4].children[1].innerText = `나이 : 나이 정보가 없습니다`
+    rootChild[5].children[1].innerText = `나이 : 나이 정보가 없습니다`
   }else{
-    rootChild[4].children[1].innerText = `나이 : ${dogageFromServer}`
+    rootChild[5].children[1].innerText = `나이 : ${dogageFromServer}`
   }
   if(dogsizeFromServer === 'null'){
-    rootChild[4].children[2].innerText = `강아지 크기 : 강아지 크기정보가 없습니다`
+    rootChild[5].children[2].innerText = `강아지 크기 : 강아지 크기정보가 없습니다`
   }else if(dogsizeFromServer === '1'){
-    rootChild[4].children[2].innerText = `강아지 크기 : 소형견`
+    rootChild[5].children[2].innerText = `강아지 크기 : 소형견`
   }else if(dogsizeFromServer === '2'){
-    rootChild[4].children[2].innerText = `강아지 크기 : 중형견`
+    rootChild[5].children[2].innerText = `강아지 크기 : 중형견`
   }else if(dogsizeFromServer === '3'){
-    rootChild[4].children[2].innerText = `강아지 크기 : 대형견`
+    rootChild[5].children[2].innerText = `강아지 크기 : 대형견`
   }
   
 
-  rootChild[4].children[3].innerText = `산책온도 :`
+  // rootChild[5].children[3].innerText = `산책온도 :`
   if(dogGenderFromServer === '1'){
-    rootChild[4].children[4].innerText = "성별 : 남자"
+    rootChild[5].children[3].innerText = "성별 : 남자"
   }else{
-    rootChild[4].children[4].innerText = "성별 : 여자"
+    rootChild[5].children[3].innerText = "성별 : 여자"
   }
   if(introFromServer === 'null'){
-    rootChild[4].children[6].innerText = '소개글이 없습니다'
+    rootChild[5].children[5].innerText = '소개글이 없습니다'
   }else{
-    rootChild[4].children[6].innerText = introFromServer;
+    rootChild[5].children[5].innerText = introFromServer;
   }
-  rootChild[4].children[5].innerText = `소개글`
+  rootChild[5].children[4].innerText = `소개글`
 
-  rootChild[4].style.height = '400px'
-  styleCreate(rootChild[4].lastChild, mypageStyle.mypageUserinfoBoxSelfIntroduce)
+  rootChild[5].style.height = '400px'
+  styleCreate(rootChild[5].lastChild, mypageStyle.mypageUserinfoBoxSelfIntroduce)
 
-  styleCreate(rootChild[5], mypageStyle.mypageCalender)
-  rootChild[5].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리"
+  styleCreate(rootChild[6], mypageStyle.mypageCalender)
+  rootChild[6].innerText = "종윤씨가 좌표에 날짜 새기는 거 완료하면 만들어질 캘린더 자리"
 
   
-  btmMeun(rootChild[6]);
+  btmMeun(rootChild[7]);
 
   // for(let i = 0;i<5;i++){
   //   let child = tagCreate("div",{});
