@@ -228,7 +228,10 @@ const targetStyle = {
     borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
     margin: "0 0 10px 10px",
     // textAlign: "center",
-    padding: "12px 0 0 15px"
+    padding: "12px 0 0 15px",
+    display : 'flex',
+    position :'relative',
+    gap:'5px'
   },
   alarmClose: {
     width: stylePropertyUnion.width.width20,

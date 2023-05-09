@@ -35,7 +35,7 @@ const html = {
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/Home/home_weather.js"></script>
   <script src="/script/frontEnd/Home/home_style.js"></script>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/frontEnd/Home/home_map.js"></script>`,
 
   loginBody : `
@@ -67,12 +67,14 @@ const html = {
   <script src="/script/frontEnd/dangMap/dangmap_slide.js"></script>`,
 
   mypage : `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
   <script src="/script/common/bottomMenu.js"></script>
   <script src="/script/frontEnd/profile/mypage_style.js"></script>`,
   yourpage : `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -80,6 +82,7 @@ const html = {
   <script src="/script/frontEnd/profile/userprofile_star_check.js"></script>
   <script src="/script/frontEnd/profile/yourpage_style.js"></script>`,
   findUserInfo : `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/frontEnd/login/find_password.js"></script>
@@ -87,6 +90,7 @@ const html = {
 
   // 게시글 작성 페이지
   dangWrite : `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -95,6 +99,7 @@ const html = {
 
   //댕프렌드
   friendsList: `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -104,6 +109,7 @@ const html = {
 
   //댕댕마켓
   dangMarket:`
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -112,6 +118,7 @@ const html = {
 
 
   marketpost:`
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -120,6 +127,7 @@ const html = {
 
   //댕스타그램
   postBoard: `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -134,6 +142,7 @@ const html = {
   <script src="/script/frontEnd/postBoard/dangstar_infinityscroll.js"></script>`,
 
   postDetail: `
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -147,6 +156,7 @@ const html = {
   <script src="/script/frontEnd/postBoard/dangstar_detail_page.js"></script>`,
   
   dangTalkMain:`
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -154,6 +164,7 @@ const html = {
   <script src="/script/frontEnd/dangtalk/dangtalk_room.js"></script>`,
   
   dangTalkPublicMain:`
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>
@@ -161,6 +172,7 @@ const html = {
   <script src="/script/frontEnd/dangtalk/dangtalk_public_room.js"></script>`,
 
   dangTalkList:`
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac&libraries=services"></script>
   <script src="/script/common/commonFunc.js"></script>
   <script src="/script/common/commonStyle.js"></script>
   <script src="/script/common/topMenu.js"></script>

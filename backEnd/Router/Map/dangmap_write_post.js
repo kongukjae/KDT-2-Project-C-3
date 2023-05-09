@@ -21,7 +21,7 @@ export default function callPostDangMap(request, response) {
 
       for (const key in cooData) {
         console.log(cooData[key]);
-        publicChatGenerator(cooData[key][2], cooData[key][0].toFixed(13), cooData[key][1].toFixed(13), 'none', './backEnd/module/dangmapPubilcChatListCheck.json','./backEnd/module/dangmapPubilcChatListResult.json')
+        publicChatGenerator(cooData[key][2], cooData[key][0].toFixed(13), cooData[key][1].toFixed(13))
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(

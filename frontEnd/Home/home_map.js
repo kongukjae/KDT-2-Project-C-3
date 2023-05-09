@@ -54,25 +54,25 @@ let markers = [];
 let resultObject = {};
 let cnt = 0;
 const cookieId = document.cookie.split("=")[1].split(";")[0];
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-  // 클릭한 위치에 마커를 표시합니다
-  let latlng = mouseEvent.latLng;
-  let wrap = [];
-  addMarker(latlng);
-  wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
-  //result.push(wrap);
-  //console.log("result: " + result);
-  // resultObject[cnt] = wrap;
-  resultObject[0] = wrap;
-  //console.log(resultObject);
-  //cnt++;
-  //console.log("cnt = " + cnt);
+// kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+//   // 클릭한 위치에 마커를 표시합니다
+//   let latlng = mouseEvent.latLng;
+//   let wrap = [];
+//   addMarker(latlng);
+//   wrap.push(latlng.getLat(), latlng.getLng(), cookieId);
+//   //result.push(wrap);
+//   //console.log("result: " + result);
+//   // resultObject[cnt] = wrap;
+//   resultObject[0] = wrap;
+//   //console.log(resultObject);
+//   //cnt++;
+//   //console.log("cnt = " + cnt);
 
-  const httpRequest = new XMLHttpRequest();
-  httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
-  // httpRequest.send(`re1=${result[0]}`);
-  httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
-});
+//   const httpRequest = new XMLHttpRequest();
+//   httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+//   // httpRequest.send(`re1=${result[0]}`);
+//   httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
+// });
 
 loadMarker(addMarker);
 wholeMarker(wholeAddMarker);
