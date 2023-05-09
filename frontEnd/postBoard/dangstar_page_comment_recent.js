@@ -44,6 +44,8 @@ function commentRecent(postWrap, src_comment_link, textName, cmText, commentInde
 // 접속한 유저가 작성한 댓글인지 판단하는 함수
 function userCheck() {
   return new Promise((resolve, reject) => {
+    console.log("cookie 데이터");
+    console.log(document.cookie);
     let userIDSend = document.cookie.split("jwt=")[1];
     console.log("comment userID: " + userIDSend);
     const xhr = new XMLHttpRequest();

@@ -1,7 +1,8 @@
 let trigger = false;
 function dangstarInfinityScroll() {
   let cnt = 1;
-  document.addEventListener('scroll', function() {
+  function dangstarScroll() {
+    console.log("스크롤 함수 진입");
     let dangstarWindowHeight = window.innerHeight;
     // console.log("dangstarWindowHeight : " + dangstarWindowHeight)
     let dangstarDocumentHeight = document.documentElement.scrollHeight;
@@ -18,7 +19,8 @@ function dangstarInfinityScroll() {
       loadDangstargram(cnt);
       cnt ++;
     }
-  })
+  }
+  document.addEventListener('scroll', throttle(dangstarScroll, 500));
 }
 
 dangstarInfinityScroll();
@@ -48,3 +50,4 @@ function loadDangstargram(nth) {
   });
   trigger = false;
 }
+

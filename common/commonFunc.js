@@ -24,3 +24,18 @@ function changeDateUTC(date) {
   return utcDate;
 }
 
+// 쓰로틀링 함수
+function throttle(func, delay) {
+  let throttleCheck;
+  return function() {
+    if(!throttleCheck) {
+      throttleCheck = true;
+      setTimeout(() => {
+        // func.apply(this)에서 this는 func의 상위 객체를 가리키고, func는 인자로 받아 실행 할 함수를 가리킨다.
+        // 즉, 상위 객체에서 func라는 함수를 실행한다는 뜻으로 그냥 func 함수를 실행한다는 것과 같다.
+        func.apply(this)
+        throttleCheck = false;
+      }, delay)
+    }
+  }
+}

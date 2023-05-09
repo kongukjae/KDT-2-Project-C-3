@@ -78,7 +78,8 @@ btmMeun(rootChild[2]);
 let marketTrigger = false;
 function marketInfinityScroll() {
   let cnt = 1;
-  document.addEventListener("scroll", function () {
+  function marketScroll() {
+    console.log("스크롤 함수 진입");
     let dangmarketWindowHeight = window.innerHeight;
     // console.log("dangmarketWindowHeight : " + dangmarketWindowHeight);
     let dangmarketDocumentHeight = document.documentElement.scrollHeight;
@@ -97,7 +98,8 @@ function marketInfinityScroll() {
       makeList(cnt);
       cnt++;
     }
-  });
+  }
+  document.addEventListener("scroll", throttle(marketScroll, 500));
 }
 
 function loadSecondHandBoard(nth) {
