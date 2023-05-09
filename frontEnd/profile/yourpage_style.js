@@ -165,7 +165,6 @@ function yourPage(){
         ...stylePropertyUnion.flexRowAroundCenter,
         fontSize: "35px",
         textAlign: "center"
-    
       });
     
       styleCreate(rootChild[4].children[0].children[1], {
@@ -176,7 +175,14 @@ function yourPage(){
         fontSize: stylePropertyUnion.fontSizeSet.mediumLarge,
         fontWeight: stylePropertyUnion.fontWeightSet.bold
       });
-      rootChild[4].children[0].children[1].innerText = `${result.val.toFixed(1)} ℃`
+
+      if(result.up === 0 && result.down === 1) {
+        rootChild[4].children[1].children[0].style.opacity = '0.7';
+      } else if(result.up === 1 && result.down === 0) {
+        rootChild[4].children[1].children[1].style.opacity = '0.7';
+      }
+
+      rootChild[4].children[0].children[1].innerText = `${result.temp.toFixed(1)} ℃`
       rootChild[4].children[1].children[0].innerText = `👍🏻`
       rootChild[4].children[1].children[1].innerText = `👎🏻`
       Tempemoji();
@@ -185,113 +191,69 @@ function yourPage(){
       badTg = false;
       rootChild[4].children[1].children[0].addEventListener('click', () => {
         console.log("추천함")
-        if(!goodTg){
-          temperatureCheck(true,goodTg, rootChild[4].children[0].children[1])
-          goodTg = true;
-        }
-        else{
-          temperatureCheck(true,goodTg, rootChild[4].children[0].children[1])
-          goodTg = false;
-        }
-    
+        temperatureCheck(rootChild[4].children[1].children[0], rootChild[4].children[1].children[1])
       });
       rootChild[4].children[1].children[1].addEventListener('click', () => {
         console.log("비추천함")
-        if(!badTg){
-          temperatureCheck(false, badTg, rootChild[4].children[0].children[1])
-          badTg = true;
-        }
-        else{
-          temperatureCheck(false, badTg, rootChild[4].children[0].children[1])
-          badTg = false;
-        }
-      
+        temperatureCheck(rootChild[4].children[1].children[1], rootChild[4].children[1].children[0])      
       });
     }
     else{
       console.log("값 없으으으으므ㅡㄷㅇㅁ: ", result.re)
     }
     function Tempemoji(){
-      if(result.val.toFixed(1) > 42 && result.val.toFixed(1) <= 60){
+      if(result.temp.toFixed(1) > 42 && result.temp.toFixed(1) <= 60){
         rootChild[4].children[0].children[0].innerText = `😃`
       }
-      else if(result.val.toFixed(1) > 25 && result.val.toFixed(1) <= 35){
+      else if(result.temp.toFixed(1) > 25 && result.temp.toFixed(1) <= 35){
         rootChild[4].children[0].children[0].innerText = `😐`
       }
-      else if(result.val.toFixed(1) > 60){
+      else if(result.temp.toFixed(1) > 60){
         rootChild[4].children[0].children[0].innerText = `😄`
       }
-      else if(result.val.toFixed(1) <= 25){
+      else if(result.temp.toFixed(1) <= 25){
         rootChild[4].children[0].children[0].innerText = `😓`
       }
       else{
         rootChild[4].children[0].children[0].innerText = `🙂`
       }
-  
     }
   })
 
+  function temperatureCheck(target, sibling) {
+    const jwt = document.cookie.replace(
+      /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    let _URL;
+    let _comment;
 
-function temperatureCheck(std, tg, target){
-  const jwt = document.cookie.replace(
-    /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-
-  let xhr = new XMLHttpRequest();
-  let _URL = `http://localhost:2080/checkTemperature`;
-  xhr.open("POST",_URL);
-
-  if(std){
-    console.log("추천함", std, tg)
-    console.log(targetIdFromServer)
-
-    if(tg){
-      xhr.send(`jwt=${jwt}&you=${targetIdFromServer}&type=${std}&val=${1}`);
-      xhr.addEventListener('load', () => {
-        let result = JSON.parse(xhr.response);
-        console.log("산책 온도 반환 받음22: ", result)
-        target.innerText = `${result.toFixed(1)} ℃`
-
-      });
-    }
-    else{
-      xhr.send(`jwt=${jwt}&you=${targetIdFromServer}&type=${std}&val=${0}`);
-      xhr.addEventListener('load', () => {
-        let result = JSON.parse(xhr.response);
-        console.log("산책 온도 반환 받음22: ", result)
-        target.innerText = `${result.toFixed(1)} ℃`
-
-      });
+    if(target === rootChild[4].children[1].children[0]) {
+      _URL = `http://localhost:2080/UpTemp`;
+      _comment = '추천';
+      target.style.opacity = '1';
+      sibling.style.opacity = '0.7';
+    } else {
+      _URL = `http://localhost:2080/DownTemp`;
+      _comment = '비추천';
+      target.style.opacity = '1';
+      sibling.style.opacity = '0.7';
     }
 
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', _URL);
+    xhr.send(`jwt=${jwt}&you=${targetIdFromServer}`)
+    xhr.addEventListener('load', () => {
+      let result = JSON.parse(xhr.response);
+      console.log(result);
+      console.log('산책 온도 응답 받음')
+      if(!result) {
+        alert(`이미 ${_comment}하셨습니다`);
+      } else {
+        rootChild[4].children[0].children[1].innerText = `${result.toFixed(1)} ℃`;
+      }
+    })
   }
-  else{
-    console.log("비추천함", std, tg)
-    console.log(targetIdFromServer)
-
-    if(tg){
-      xhr.send(`jwt=${jwt}&you=${targetIdFromServer}&type=${std}&val=${1}`);
-      xhr.addEventListener('load', () => {
-        let result = JSON.parse(xhr.response);
-        console.log("산책 온도 반환 받음22: ", result)
-        target.innerText = `${result.toFixed(1)} ℃`
-
-      });
-    }
-    else{
-      xhr.send(`jwt=${jwt}&you=${targetIdFromServer}&type=${std}&val=${0}`);
-      xhr.addEventListener('load', () => {
-        let result = JSON.parse(xhr.response);
-        console.log("산책 온도 반환 받음22: ", result)
-        target.innerText = `${result.toFixed(1)} ℃`
-
-      });
-    }
-
-  }
-}
-
 
   styleCreate(rootChild[5], mypageStyle.mypageUserinfoBox)
   for(let i = 0; i < 6;i++){
