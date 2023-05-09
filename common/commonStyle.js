@@ -228,7 +228,10 @@ const targetStyle = {
     borderRadius: stylePropertyUnion.borderRadius.borderRadius9,
     margin: "0 0 10px 10px",
     // textAlign: "center",
-    padding: "12px 0 0 15px"
+    padding: "12px 0 0 15px",
+    display : 'flex',
+    position :'relative',
+    gap:'5px'
   },
   alarmClose: {
     width: stylePropertyUnion.width.width20,
@@ -1944,6 +1947,8 @@ const dangstarStyle = {
     position: "relative",
     display: "flex",
     flexDirection: "column",
+    border: "1px solid #D9D9D9",
+    marginBottom: "10px",
     backgroundColor: stylePropertyUnion.colorTheme.beige,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius15
   },
@@ -1952,6 +1957,7 @@ const dangstarStyle = {
     maxWidth: stylePropertyUnion.width.width500,
     height: stylePropertyUnion.height.height400,
     overflow: "hidden",
+    padding: "10px",
     ...stylePropertyUnion.flexRowCenter,
   },
   dangstarFeedImg: {

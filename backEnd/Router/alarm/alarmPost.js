@@ -15,6 +15,8 @@ export default function alarmMark(request, response){
         let follow = [];
         let comment = [];
         let commentIdx = [];
+        let public_chat = [];
+        let public_chat_code = [];
         let type = [];
         let alarmData = {};
 
@@ -26,18 +28,22 @@ export default function alarmMark(request, response){
           else{
             // console.log("gkgkgkgkgk: ", data);
             data.forEach((value, index) => {
+
               like.push(value.postlike);
               follow.push(value.follow);
               comment.push(value.comment);
               commentIdx.push(value.comment_index);
+              public_chat.push(value.public_chat);
+              public_chat_code.push(value.public_chat_code);
               type.push(value.alarm_type);
-              
               
             })
             alarmData['like'] = like;
             alarmData['follow'] = follow;
             alarmData['comment'] = comment;
             alarmData['commentIdx'] = commentIdx;
+            alarmData['public_chat'] = public_chat;
+            alarmData['public_chat_code'] = public_chat_code;
             alarmData['type'] = type;
             console.log("value: ", alarmData)
 
@@ -93,6 +99,10 @@ export default function alarmMark(request, response){
         let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
         conn.query(`delete from alarm where id = '${targetId}' and follow = '${target}' and alarm_type = '${type}'`);
+      }else if(disc === 'public_chat'){
+        let conn = mysql.createConnection(cmServer.mysqlInfo);
+        conn.connect();
+        conn.query(`delete from alarm where id = '${targetId}' and public_chat = '${target+'&'+bodySplit[2]}' and alarm_type = '${disc}'`);
       }
       else{
         let conn = mysql.createConnection(cmServer.mysqlInfo);
