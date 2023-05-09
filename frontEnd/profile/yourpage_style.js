@@ -245,8 +245,8 @@ function yourPage(){
     xhr.send(`jwt=${jwt}&you=${targetIdFromServer}`)
     xhr.addEventListener('load', () => {
       let result = JSON.parse(xhr.response);
-      console.log(result);
       console.log('산책 온도 응답 받음')
+      console.log(result);
       if(!result) {
         alert(`이미 ${_comment}하셨습니다`);
       } else {
