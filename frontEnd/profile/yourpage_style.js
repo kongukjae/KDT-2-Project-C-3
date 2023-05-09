@@ -24,7 +24,7 @@ function yourPage(){
   styleCreate(rootChild[2], mypageStyle.mypageImageStyle);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.open('POST', `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
   xhr.responseType = 'blob';
   xhr.send(`type=proFile&id=${targetIdFromServer}`); 
   xhr.addEventListener('load', function(){
@@ -44,15 +44,15 @@ function yourPage(){
   rootChild[3].children[1].innerText = "채팅";
   const JWT = document.cookie.split("=")[2]
   let followCheckXhr = new XMLHttpRequest();
-  let _URL = `http://localhost:2080/followCheck`;
-  let followRequestURL = 'http://localhost:2080/followRequest'
+  let _URL = `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/followCheck`;
+  let followRequestURL = 'http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/followRequest'
   let followRequestMessage = '팔로우'
   followCheckXhr.open("POST",_URL);
   followCheckXhr.send(JSON.stringify({jwt:JWT,you:targetIdFromServer}));
   followCheckXhr.addEventListener("load",()=>{
     if(followCheckXhr.response === 'yes'){
       starCheck(rootChild[2]);
-      followRequestURL = 'http://localhost:2080/unFollowRequest'
+      followRequestURL = 'http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/unFollowRequest'
       followRequestMessage = '팔로우 취소'
       rootChild[3].children[0].innerText = "팔로우 취소";
     }
@@ -73,7 +73,7 @@ function yourPage(){
       "$1"
     );
     
-    fetch('http://localhost:2080/createChatRoomRequest', {
+    fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/createChatRoomRequest', {
       method: 'POST',
       body: JSON.stringify({jwt:jwt,targetId:targetIdFromServer})
     }).then((result)=>{
@@ -173,7 +173,7 @@ function yourPage(){
   // menuChild[3].innerText = "댕톡";
   // menuChild[4].innerText = "댕프랜드";
   // menuChild[2].addEventListener("click",()=>{
-  //   window.location = "http://localhost:2080/map"
+  //   window.location = "http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/map"
   // })
 }
 yourPage()

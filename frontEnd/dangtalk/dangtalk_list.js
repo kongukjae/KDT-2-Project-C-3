@@ -49,7 +49,7 @@ function createchatList(id, text, unread, type) {
     chatlistUserImg.style.backgroundImage = `url(/image/resource/publicTalk.png)`
   }else{
     const xhr = new XMLHttpRequest();
-      xhr.open('POST', `http://localhost:2080/sendImage`);
+      xhr.open('POST', `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
       xhr.responseType = 'blob';
       xhr.send(`type=proFile&id=${id}`); 
       xhr.addEventListener('load', function(){
@@ -68,7 +68,7 @@ async function getRoomListAsync() {
     "$1"
   );
   
-  let chatRoomList = await fetch('http://localhost:2080/chatRoomRequest', {
+  let chatRoomList = await fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/chatRoomRequest', {
     method: 'POST',
     body: jwt
   }).then(response => response.json())
@@ -78,7 +78,7 @@ async function getRoomListAsync() {
     targetRoomObject[i.room_name].putBasicData(i);
   }
   for(let i = 0;i<Object.keys(targetRoomObject).length;i++){
-    let recentText = await fetch('http://localhost:2080/chatRecentTextRequest', {
+    let recentText = await fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/chatRecentTextRequest', {
       method: 'POST',
       body: targetRoomObject[Object.keys(targetRoomObject)[i]].room
     }).then(response => response.json());

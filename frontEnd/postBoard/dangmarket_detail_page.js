@@ -68,7 +68,7 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
   //게시자 프로필이미지
   styleCreate(imgNameAdd[0], dangMarketStyle.marketPostImgStyle);
   const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/sendImage`);
+    xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
     xhr.responseType = "blob";
     xhr.send(`type=proFile&id=${id}`);
     xhr.addEventListener("load", function () {
@@ -125,7 +125,7 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
       "$1"
     );
     
-    fetch('http://localhost:2080/createChatRoomRequest', {
+    fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/createChatRoomRequest', {
       method: 'POST',
       body: JSON.stringify({jwt:jwt,targetId:id})
     }).then((result)=>{
@@ -180,7 +180,7 @@ function marketPostPage(id ,postImg, img, dogName, title, detail, date) {
 }
 // id ,postImg, img, dogName, title, detail, date
 function secondHandPost(nth) {
-  fetch(`http://localhost:2080/postSecondHand?nth=${nth}`)
+  fetch(`http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/postSecondHand?nth=${nth}`)
   .then((response) => {
     return response.json();
   })

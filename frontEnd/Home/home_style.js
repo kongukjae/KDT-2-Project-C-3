@@ -45,7 +45,7 @@ function main() {
 
   // 2. 슬라이드 생성함수이다. 여기서 함수를 가져와서 해당 URL에 요청한다.
   function createSlide(rootChild) {
-    sendRequest("http://localhost:2080/slidePlease", (responseData) => {
+    sendRequest("http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/slidePlease", (responseData) => {
       for (let i = 0; i < responseData.length; i++) {
         console.log(responseData[i].img);
         slideChild[i].children[0].innerText = responseData[i].post_detail;
