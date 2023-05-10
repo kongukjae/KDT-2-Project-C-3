@@ -15,7 +15,7 @@ function topMenu(rootChild){
   rootChild.appendChild(logoLoginPage);
 
   logoLoginPage.addEventListener('click',()=>{
-    window.location = "http://localhost:2080/main"
+    window.location = "/main"
   })
 
   //알림 기능 영역
@@ -46,7 +46,7 @@ function topMenu(rootChild){
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  fetch("http://localhost:2080/alarmMark", {
+  fetch("http://192.168.100.63:2080/alarmMark", {
     method: "POST",
     body: jwt,
   })
@@ -84,7 +84,7 @@ function topMenu(rootChild){
 
       let alarmList = document.getElementById('alarmList');
   
-      fetch("http://localhost:2080/alarmConent", {
+      fetch("http://192.168.100.63:2080/alarmConent", {
         method: "POST",
         body: jwt,
       })
@@ -141,7 +141,7 @@ function topMenu(rootChild){
                         "$1"
                       );
                       let xhr = new XMLHttpRequest();
-                      let url = "http://localhost:2080/deleteAlarm";
+                      let url = "http://192.168.100.63:2080/deleteAlarm";
                       xhr.open('POST', url, true);
                       xhr.send(`id=${jwt}&public_chat=${value}&type=public_chat`)
                       xhr.addEventListener('load',()=>{
@@ -155,7 +155,7 @@ function topMenu(rootChild){
                         "$1"
                       );
                       let xhr = new XMLHttpRequest();
-                      let url = "http://localhost:2080/deleteAlarm";
+                      let url = "http://192.168.100.63:2080/deleteAlarm";
                       xhr.open('POST', url, true);
                       xhr.send(`id=${jwt}&public_chat=${value}&type=public_chat`)
                       xhr.addEventListener('load', moveToPublicChat)
@@ -164,7 +164,7 @@ function topMenu(rootChild){
                           /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
                           "$1"
                         );
-                        await fetch(`http://localhost:2080/createPublicChatRoomRequest`,{
+                        await fetch(`http://192.168.100.63:2080/createPublicChatRoomRequest`,{
                           method: "POST",
                           body: JSON.stringify({jwt:token,roomCode:"!public!"+value,roomName:roomName})
                         }).then((res)=>{return res.text()})
@@ -274,7 +274,7 @@ function topMenu(rootChild){
 
     let cnt = alarmList.childElementCount;
     let xhr = new XMLHttpRequest();
-    let url = "http://localhost:2080/deleteAlarm";
+    let url = "http://192.168.100.63:2080/deleteAlarm";
 
     for(let i = 0; i < cnt; i++){
       alarmList.children[i].addEventListener('click', () => {

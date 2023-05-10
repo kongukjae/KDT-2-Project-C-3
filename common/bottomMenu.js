@@ -70,7 +70,7 @@ function btmMeun(rootChild) {
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  fetch("http://localhost:2080/bottomMenuUnreadCircle", {
+  fetch("http://192.168.100.63:2080/bottomMenuUnreadCircle", {
     method: "POST",
     body: jwt,
   })
@@ -89,18 +89,18 @@ function btmMeun(rootChild) {
     });
 
   menuChild[0].addEventListener("click", () => {
-    window.location = "http://localhost:2080/secondHand";
+    window.location = "/secondHand";
   });
   menuChild[1].addEventListener("click", () => {
-    window.location = "http://localhost:2080/dangstar";
+    window.location = "/dangstar";
   });
   menuChild[2].addEventListener("click", () => {
-    window.location = "http://localhost:2080/map";
+    window.location = "/map";
   });
   menuChild[3].addEventListener("click", () => {
-    window.location = "http://localhost:2080/dangTalkChatList";
+    window.location = "/dangTalkChatList";
   });
   menuChild[4].addEventListener("click", () => {
-    window.location = "http://localhost:2080/friendsList";
+    window.location = "/friendsList";
   });
 }

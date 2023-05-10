@@ -187,13 +187,13 @@ const jwt = document.cookie.split("=")[2];
     
     
     if(type === 'dangStar'){
-      moveToURL = 'http://localhost:2080/dangstar';
+      moveToURL = '/dangstar';
       body = {jwt:token,mainText:postContentInput.value,imageType:imageType};
     }else{
-      moveToURL = 'http://localhost:2080/secondHand'
+      moveToURL = '/secondHand'
       body = {jwt:token,titleText:yastContentInput.value,mainText:postContentInput.value,imageType:imageType};
     }
-    await fetch(`http://localhost:2080/${type}WriteSubmit`, {
+    await fetch(`http://192.168.100.63:2080/${type}WriteSubmit`, {
       method: 'POST',
       body: JSON.stringify(body)
     }).then(res => res.text())
@@ -206,7 +206,7 @@ const jwt = document.cookie.split("=")[2];
         imageFormData.append("attachedImage", 'null')
       }
       })
-    await fetch(`http://localhost:2080/${type}ImageSubmit`, {
+    await fetch(`http://192.168.100.63:2080/${type}ImageSubmit`, {
       method: 'POST',
       body: imageFormData
     }).then(res => res)
