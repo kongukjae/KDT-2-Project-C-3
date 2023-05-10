@@ -43,6 +43,7 @@ const stylePropertyUnion = {
     width100: "100px",
     width90: "90px",
     width80: "80px",
+    width70: "70px",
     width60: "60px",
     width50: "50px",
     width40: "40px",
@@ -67,6 +68,7 @@ const stylePropertyUnion = {
     height1700: "1700px",
     height1300: "1300px",
     height1000: "1000px",
+    height750: "750px",
     height730: "730px",
     height690: "690px",
     height500: "500px",
@@ -117,6 +119,12 @@ const stylePropertyUnion = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+  },
+  flexRowAroundCenter: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   flexColumnTopCenter: {
@@ -267,7 +275,7 @@ const targetStyle = {
   mainRoot: {
     width: stylePropertyUnion.width.widthP100,
     maxWidth: stylePropertyUnion.width.width500,
-    // height: stylePropertyUnion.height.height2000,
+    // // height: stylePropertyUnion.height.height2000,
     margin: "auto",
     display: "flex",
     flexDirection: "column",
@@ -1055,8 +1063,8 @@ const mypageStyle = {
   },
   mypageUserinfoBox: {
     width: stylePropertyUnion.width.widthP90,
-    height: stylePropertyUnion.height.height300,
-    marginTop: "40px",
+    height: stylePropertyUnion.height.height750,
+    marginTop: "20px",
     position: "relative",
     borderRadius: "10px",
     ...stylePropertyUnion.flexColCenter,
@@ -1138,7 +1146,7 @@ const mypageStyle = {
     position: "absolute",
     top: "0px",
     left: "50%",
-    transform: "translate(-50%, -100%)",
+    transform: "translate(-50%, -30%)",
   },
   mypageCalendarWeekNameBox: {
     width: "400px",
@@ -2110,7 +2118,7 @@ const dangstarStyle = {
   dangstarCommentModal: {
     width: stylePropertyUnion.width.widthP100,
     maxWidth: stylePropertyUnion.width.width500,
-    backgroundColor: stylePropertyUnion.colorTheme.lightGray,
+    backgroundColor: "rgb(243, 237, 232)",
     display: "none",
     flexDirection: "column",
     justifyContent: "center",
@@ -2142,12 +2150,12 @@ const dangstarStyle = {
   dangstarCommentModalWrap: {
     boxSizing: "border-box",
     position: "relative",
-    left: "-1px",
+    // right: "-1px",
     width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height100,
     padding: "10px",
-    borderTop: "1px solid #333",
-    borderRight: "1px solid #333",
+    borderTop: "3px solid #fff",
+    // borderRight: "1px solid #333",
   },
   dangstarCommentModalImg: {
     width: stylePropertyUnion.width.width60,
