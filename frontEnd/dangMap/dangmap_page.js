@@ -740,9 +740,18 @@ function putUserProfile(object){
       });
     }
   }
-
-
-
+  console.log("프로필 개수 체크")
+  console.log(Object.keys(markersObject.markers).length);
+  let userCount = Object.keys(markersObject.markers).length;
+  if(userCount % 2 === 1) {
+    userCount = (userCount / 2) + 0.5;
+    console.log("홀수", userCount);
+    slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+  } else {
+    userCount = userCount / 2;
+    console.log("짝수", userCount);
+    slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+  }
 }
 function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   // 오버레이 내부 구성 요소들

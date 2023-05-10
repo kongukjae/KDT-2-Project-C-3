@@ -424,7 +424,7 @@ const dangMapStyle = {
     display: "grid",
     gridAutoFlow: "column",
     // position: "absolute",
-    gridTemplateColumns: "repeat(16, 160px)",
+    // gridTemplateColumns: "repeat(16, 160px)",
     gridTemplateRows: "repeat(2, 110px)",
   },
   menuMapSlideItems: {
