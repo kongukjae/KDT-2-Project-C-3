@@ -48,7 +48,10 @@ function main() {
     sendRequest("http://localhost:2080/slidePlease", (responseData) => {
       for (let i = 0; i < responseData.length; i++) {
         console.log(responseData[i].img);
-        slideChild[i].children[0].innerText = responseData[i].post_detail;
+        slideChild[i].children[0].style.flexDirection = "column";
+        slideChild[i].children[0].style.fontSize = "15px";
+        slideChild[i].children[0].innerHTML = `<p>인기 게시글</p>
+        <h2>${responseData[i].post_detail}</h2>`;
         slideChild[i].style.cursor = "pointer";
         slideChild[i].addEventListener("click", () => {
           let detailForm = document.createElement("form");
