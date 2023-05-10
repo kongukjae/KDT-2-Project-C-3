@@ -15,5 +15,5 @@ httpRequest.onreadystatechange = function(event) {
     };
   };
 }
-httpRequest.open("POST", `http://localhost:2080/test`, true);
+httpRequest.open("POST", `http://192.168.100.63:2080/test`, true);
 httpRequest.send(re[0][0],re[0][1]);

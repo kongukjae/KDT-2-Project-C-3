@@ -471,7 +471,7 @@ function myPage() {
               for (let i = 0; i < data.length; i++) {
                 const postDetail = document.createElement("a");
 
-                postDetail.href = `http://localhost:2080/secondHandPost?nth=${i}`;
+                postDetail.href = `http://192.168.100.63/secondHandPost?nth=${i}`;
                 postDetail.style.color = "inherit"; // 링크의 색상을 부모 요소의 색상으로 설정
                 postDetail.style.textDecoration = "none"; // 밑줄 제거
                 postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
