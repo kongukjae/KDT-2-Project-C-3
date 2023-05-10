@@ -251,6 +251,7 @@ function yourPage(){
         alert(`이미 ${_comment}하셨습니다`);
       } else {
         rootChild[4].children[0].children[1].innerText = `${result.toFixed(1)} ℃`;
+        location.reload();
       }
     })
   }
