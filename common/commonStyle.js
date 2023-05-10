@@ -2119,7 +2119,7 @@ const dangstarStyle = {
   dangstarCommentModal: {
     width: stylePropertyUnion.width.widthP100,
     maxWidth: stylePropertyUnion.width.width500,
-    backgroundColor: stylePropertyUnion.colorTheme.lightGray,
+    backgroundColor: "rgb(243, 237, 232)",
     display: "none",
     flexDirection: "column",
     justifyContent: "center",
@@ -2151,12 +2151,12 @@ const dangstarStyle = {
   dangstarCommentModalWrap: {
     boxSizing: "border-box",
     position: "relative",
-    left: "-1px",
+    // right: "-1px",
     width: stylePropertyUnion.width.widthP100,
     height: stylePropertyUnion.height.height100,
     padding: "10px",
-    borderTop: "1px solid #333",
-    borderRight: "1px solid #333",
+    borderTop: "3px solid #fff",
+    // borderRight: "1px solid #333",
   },
   dangstarCommentModalImg: {
     width: stylePropertyUnion.width.width60,
