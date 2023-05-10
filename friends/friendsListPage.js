@@ -60,7 +60,7 @@ loadFriendsList(starFriends, friends);
 function loadFriendsList(starFriends, friends) {
   const xhr = new XMLHttpRequest();
   const cookie = document.cookie.split("=")[2];
-  const _URL = `http://192.168.100.63:2080/loadFriendsList`;
+  const _URL = `http://3.37.160.130:2080/loadFriendsList`;
   // let result = {};
   xhr.open("POST", _URL, true);
   xhr.send(`{id=${cookie}}`);

@@ -12,7 +12,7 @@ function commentUpdateDelete(parent, commentIndex) {
   commentViewEdit.innerText = "수정";
   commentViewEdit.onclick = function () {
     console.log("수정 요청 보냄");
-    fetch(`http://192.168.100.63:2080/commentUpdateBtn`, {
+    fetch(`http://3.37.160.130:2080/commentUpdateBtn`, {
       method: "POST",
       body: JSON.stringify({
         userID: userIdSend,
@@ -71,7 +71,7 @@ function commentUpdateDelete(parent, commentIndex) {
       console.log("수정 버튼 눌림 수정 버튼 눌림 수정 버튼 눌림");
       let commentValueData = document.getElementById(`comment_${commentIndex}`).value;
       console.log(commentValueData);
-      fetch(`http://192.168.100.63:2080/commentUpdateSubmit`, {
+      fetch(`http://3.37.160.130:2080/commentUpdateSubmit`, {
         method: "POST",
         body: JSON.stringify({
           userID: userIdSend,
@@ -94,7 +94,7 @@ function commentUpdateDelete(parent, commentIndex) {
   commentViewDelet.onclick = function () {
     console.log("삭제 요청 보냄");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://192.168.100.63:2080/commentDelete`);
+    xhr.open("POST", `http://3.37.160.130:2080/commentDelete`);
     xhr.send(`userID=${userIdSend}&commentIndex=${commentIndex}`);
     xhr.addEventListener("load", () => {
       console.log("삭제 응답 받음");
