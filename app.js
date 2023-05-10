@@ -12,54 +12,54 @@ import fileReaderScriptRouter from "./backEnd/fileReader/script.js";
 // import fileReaderImageRouter from "./httpServer/fileReader/image.js";
 
 //import Main
-import homeGet from "./backEnd/router/home/homeGet.js";
-import homePost from "./backEnd/router/home/homePost.js";
+import homeGet from "./backEnd/Router/home/homeGet.js";
+import homePost from "./backEnd/Router/home/homePost.js";
 
 //import alarm
 import alarm from "./backEnd/Router/alarm/alarmPost.js";
 
 //import Login
-import loginGet from "./backEnd/router/login/loginGet.js";
-import loginPost from "./backEnd/router/login/loginPost.js";
+import loginGet from "./backEnd/Router/login/loginGet.js";
+import loginPost from "./backEnd/Router/login/loginPost.js";
 
 //import singup
-import signupGet from "./backEnd/router/login/signupGet.js";
-import signupResultPost from "./backEnd/router/login/signupResultPost.js";
+import signupGet from "./backEnd/Router/login/signupGet.js";
+import signupResultPost from "./backEnd/Router/login/signupResultPost.js";
 
 //import map
-import dangmapReadGet from "./backEnd/router/Map/dangmap_read_get.js"; // 전 dangmapServer
-import dangmapWritePost from "./backEnd/router/Map/dangmap_write_post.js"; // 전 callpostdangmap
-import dangmapChatList from "./backEnd/router/Map/dangmap_chatList_post.js";
+import dangmapReadGet from "./backEnd/Router/Map/dangmap_read_get.js"; // 전 dangmapServer
+import dangmapWritePost from "./backEnd/Router/Map/dangmap_write_post.js"; // 전 callpostdangmap
+import dangmapChatList from "./backEnd/Router/Map/dangmap_chatList_post.js";
 
 //import dangstar
-import dangstar from "./backEnd/router/postBoard/dangstarGet.js";
-import dangstarLike from "./backEnd/router/postBoard/dangstarLikePost.js";
-import dangstarCommentInputPost from "./backEnd/router/postBoard/dangstarCommentInputPost.js";
-import dangstarCommentLoadPost from "./backEnd/router/postBoard/dangstarCommentLoadPost.js";
-import dangstarCommentEdit from "./backEnd/router/postBoard/dangstarCommentEdit.js";
-import dangstarUserCheck from "./backEnd/router/postBoard/dangstarUserCheck.js";
+import dangstar from "./backEnd/Router/PostBoard/dangstarGet.js";
+import dangstarLike from "./backEnd/Router/PostBoard/dangstarLikePost.js";
+import dangstarCommentInputPost from "./backEnd/Router/PostBoard/dangstarCommentInputPost.js";
+import dangstarCommentLoadPost from "./backEnd/Router/PostBoard/dangstarCommentLoadPost.js";
+import dangstarCommentEdit from "./backEnd/Router/PostBoard/dangstarCommentEdit.js";
+import dangstarUserCheck from "./backEnd/Router/PostBoard/dangstarUserCheck.js";
 import dangstarDetail from "./backEnd/Router/PostBoard/dangstarDetailPagePost.js";
 
 // import dangMarket
-import dangMarket from "./backEnd/router/postBoard/dangMarketGet.js";
-import dangMarketDetailPage from "./backEnd/router/postBoard/dangMarketDetailPageGet.js";
+import dangMarket from "./backEnd/Router/PostBoard/dangMarketGet.js";
+import dangMarketDetailPage from "./backEnd/Router/PostBoard/dangMarketDetailPageGet.js";
 
 //import profile
-import userPagePost from "./backEnd/router/profile/userPage_Post.js";
-import dangWritePost from "./backEnd/router/postBoard/dangWritePost.js";
+import userPagePost from "./backEnd/Router/profile/userPage_Post.js";
+import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
 import followSearch from "./backEnd/module/followSearch.js";
-import starCheckPost from "./backEnd/router/profile/userPage_starCheck_post.js";
-import starLoadPost from "./backEnd/router/profile/userPage_starLoad_Post.js";
+import starCheckPost from "./backEnd/Router/profile/userPage_starCheck_post.js";
+import starLoadPost from "./backEnd/Router/profile/userPage_starLoad_Post.js";
 import tempeCheck from "./backEnd/router/profile/userPage_temperature_post.js";
 
 //import social
-import dangfriendGet from "./backEnd/router/social/dangfriendGet.js";
-import dangfriendPost from "./backEnd/router/social/dangfriendPost.js";
+import dangfriendGet from "./backEnd/Router/social/dangfriendGet.js";
+import dangfriendPost from "./backEnd/Router/social/dangfriendPost.js";
 
 // import chatimport chatWithSocketIo from "./backEnd/backend_module_bottommenu_dangtalk_socketIo.js"
 import chatWithSocketIo from "./backEnd/module/dangtalkSocketIo.js";
-import dangTalkChatRoom from "./backEnd/router/chat/dangtalkGet.js";
-import dangTalkChatRoomPost from "./backEnd/router/chat/dangtalkPost.js";
+import dangTalkChatRoom from "./backEnd/Router/chat/dangtalkGet.js";
+import dangTalkChatRoomPost from "./backEnd/Router/chat/dangtalkPost.js";
 
 // import mapMerker from "./mapMerker.js";
 // import markerJson from "./markerJson.json" assert { type: "json" };

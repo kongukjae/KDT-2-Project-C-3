@@ -274,7 +274,7 @@ const targetStyle = {
   mainRoot: {
     width: stylePropertyUnion.width.widthP100,
     maxWidth: stylePropertyUnion.width.width500,
-    height: stylePropertyUnion.height.height2000,
+    // height: stylePropertyUnion.height.height2000,
     margin: "auto",
     display: "flex",
     flexDirection: "column",
@@ -315,7 +315,7 @@ const targetStyle = {
   },
   mainFindingDogs: {
     width: stylePropertyUnion.width.widthP100,
-    height: stylePropertyUnion.height.height690,
+    height: '90px',
     position: "relative",
   },
   mainSlideCover: {
