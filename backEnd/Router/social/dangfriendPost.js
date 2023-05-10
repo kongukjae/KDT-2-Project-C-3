@@ -49,14 +49,9 @@ export default function postPostBoardLike(request, response) {
                 starFriendsIntro.push(element.intro);
               }
             });
-            // for(let i = 0; i < data.length; i++){
-              // console.log(data[i].id)
-              friend['starId'] = starFriendsID;
-              friend['starDogName'] = starFriendsDogName;
-              friend['starIntro'] = starFriendsIntro;
-
-            // }
-            // console.log("즐찾친구: ", starFriends);
+            friend['starId'] = starFriendsID;
+            friend['starDogName'] = starFriendsDogName;
+            friend['starIntro'] = starFriendsIntro;
           }
         });
         conn.query(`select id, dogName, intro from userinfo join fr_list on fr_list.fr_id = userinfo.id where user_id = '${userID}' and star = '0'`, 
@@ -74,35 +69,15 @@ export default function postPostBoardLike(request, response) {
                 stdFriendsIntro.push(element.intro);
               }
             });
-            // for(let i = 0; i < data.length; i++){
-              // console.log(data[i].id)
-              friend['stdId'] = stdFriendsID;
-              friend['stdDogName'] = stdFriendsDogName;
-              friend['stdIntro'] = stdFriendsIntro;
-
-
+            friend['stdId'] = stdFriendsID;
+            friend['stdDogName'] = stdFriendsDogName;
+            friend['stdIntro'] = stdFriendsIntro;
           }
           console.log("친구목록: ", friend);
-
-
           response.writeHead(200)
           response.end(JSON.stringify(friend))
         });
-        // conn.query(
-        //   `select id, dogName, intro from userinfo join fr_list on fr_list.fr_id = userinfo.id where user_id = '${userID}' and star = '1'`,
-        //   (err, data) => {
-        //     if(err) throw err;
-        //     else{
-        //       console.log("join Data: ", data)
-        //     }
-        // })
-        
-        
-
-
+        conn.end();
       })
-    // let nth = request.url.split("=")[1];
-    // console.log(nth)
-
   }
 }

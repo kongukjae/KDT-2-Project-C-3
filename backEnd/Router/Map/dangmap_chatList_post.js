@@ -30,7 +30,8 @@ export default function postMapChatList(request, response) {
           response.writeHead(200);
           response.end(JSON.stringify(roomList));
         }
-      })
+      });
+      conn.end();
     })
   }
 }
