@@ -1,3 +1,10 @@
+class RoomMember{
+  appendNumberOfMember(value){
+    this.numberOfMember = value;
+  }
+}
+let roomMember = new RoomMember;
+
 function main(){
 
   let root = tagCreate("div",{id:"root"});
@@ -61,7 +68,7 @@ function main(){
   createUserOrgchat(rootChild[1],roomCode)
 
   function createUserOrgchat(mother,roomCode){
-    let chatListButton = tagCreate('div');
+    let chatListButton = tagCreate('div',{id:'chatListButton'});
     styleCreate(chatListButton, {
       width : '100px',
       height : '40px',
@@ -159,6 +166,7 @@ function main(){
     http.addEventListener('load', () => {
       let roomList = JSON.parse(http.response);
       chatListButton.innerText += " "+ Object.keys(roomList).length +'명';
+      roomMember.appendNumberOfMember(Object.keys(roomList).length);
       for (const key in roomList) {
         createUserOrgchatList(chatChild[1], roomList[key][0], roomList[key][1]);        
       }
@@ -296,8 +304,18 @@ function main(){
       justifyContent:'center',
       alignItems:'center'
     })
-    firstEnterText.innerText = data;
+    firstEnterText.innerText = data + '님이 채팅방에 참여하셨습니다';
     rootChild[2].appendChild(firstEnterText);
+
+    roomMember.numberOfMember ++;
+    // let chatListButton = document.getElementById('chatListButton');
+    // chatListButton.innerText = '참여자 목록 '+roomMember.numberOfMember+'명';
+    // fetch('/getDogName',{method:'POST', body:data})
+    // .then((res)=>{return res.json()})
+    // .then((result)=>{
+    //   console.log(result[0].dogName);
+    // })
+
   });
 
   window.addEventListener('load',()=>{

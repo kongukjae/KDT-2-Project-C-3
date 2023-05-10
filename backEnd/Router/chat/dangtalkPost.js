@@ -250,5 +250,28 @@ export default function dangTalkPost(request, response) {
         })
 
       })
+  }  
+  if (request.url === "/getDogName"){
+    let body = "";
+    request.on("data", function (data) {
+      body = body + data.toString();
+    });
+    request.on("end", function () {
+      let conn = mysql.createConnection(cmServer.mysqlInfo);
+      conn.connect();
+      conn.query(
+        `select dogName from userinfo where id='${body}'`,
+        function (err, rows) {
+          if (err) throw err;
+          else {
+            response.writeHead(200);
+            response.write(JSON.stringify(rows));
+            response.end();
+          }
+        }
+      );
+      conn.end();
+    })
+
   }
 }
