@@ -291,7 +291,7 @@ function yourPage(){
   }
   rootChild[5].children[4].innerText = `소개글`
 
-  rootChild[5].style.height = '750px'
+  rootChild[5].style.height = '350px'
   styleCreate(rootChild[5].lastChild, mypageStyle.mypageUserinfoBoxSelfIntroduce)
 
   // styleCreate(rootChild[5], mypageStyle.mypageCalender)
@@ -411,9 +411,9 @@ function yourPage(){
     let weekOfName = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 
     let root = tagCreate("div", { id: "root" });
-    rootChild[5].appendChild(root);
+    rootChild[6].appendChild(root);
     styleCreate(root, mypageStyle.mypageCalendarRoot);
-    rootChild[5].style.marginTop = '50px'
+    rootChild[6].style.marginTop = '50px'
     let monthOfNameBox = tagCreate("div", { id: "month" });
     root.appendChild(monthOfNameBox);
     styleCreate(monthOfNameBox, mypageStyle.mypageCalendarMonthOfNameBox);
@@ -496,7 +496,7 @@ function yourPage(){
       console.log("이전 달");
       console.log(currentMonth);
       beforeMonth = new Date(now.setMonth(now.getMonth() - 1));
-      rootChild[5].innerHTML = "";
+      rootChild[6].innerHTML = "";
       calendar(beforeMonth);
     });
 
@@ -504,7 +504,7 @@ function yourPage(){
       console.log("다음 달");
       console.log(currentMonth);
       nextMonth = new Date(now.setMonth(now.getMonth() + 1));
-      rootChild[5].innerHTML = "";
+      rootChild[6].innerHTML = "";
       calendar(nextMonth);
     });
   }
