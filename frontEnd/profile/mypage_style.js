@@ -466,12 +466,16 @@ function myPage() {
           if (this.readyState === 4 && this.status === 200) {
             const data = JSON.parse(this.responseText);
             if (data.length === 0) {
-              tabContents[index].innerHTML = "작성한 글이 없습니다."; // 작성한 글이 없을 경우 처리
+              tabContents[index].innerHTML = "작성한 글이 없습니다.";
             } else {
               for (let i = 0; i < data.length; i++) {
-                tabContents[
-                  index
-                ].innerHTML += `내가쓴글: ${data[i].detail}<br>`; // 댕마켓글 컨텐츠에 데이터 추가
+                const postDetail = document.createElement("a");
+
+                postDetail.href = `http://localhost:2080/secondHandPost?nth=${i}`;
+                postDetail.style.color = "inherit"; // 링크의 색상을 부모 요소의 색상으로 설정
+                postDetail.style.textDecoration = "none"; // 밑줄 제거
+                postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
+                tabContents[index].appendChild(postDetail);
               }
             }
           }
