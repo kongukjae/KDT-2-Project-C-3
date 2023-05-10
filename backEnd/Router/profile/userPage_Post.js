@@ -86,8 +86,27 @@ export default function dangMap(request, response) {
         }
       );
       connection.query(`insert into alarm(id, follow, alarm_type) values ('${followTarget}', '${myId}', 'follow')`)
-      connection.query(`insert into temperature(id, fr_id) values ('${myId}', '${followTarget}')`)
-      connection.end();
+      connection.query(`SELECT * FROM temperature where id = '${followTarget}'`, (err, data) => {
+        console.log(data);
+        console.log(data.length);
+        // console.log(data[0].temp_list);
+        console.log("실험 중 실험 중 실험 중 실험 중 실험 중 실험 중 실험 중")
+        if(data.length === 0) {
+          console.log("null 진입 null 진입 null 진입 null 진입 null 진입 ")
+          connection.query(`insert into temperature(id) values ('${followTarget}')`)
+          // connection.query(`UPDATE temperature SET temp_list = JSON_OBJECT('tempUser', JSON_ARRAY('${myId}')) WHERE id = '${followTarget}'`)
+        }
+        // else {
+        //   const tempUserArr = JSON.parse(data[0].temp_list).tempUser;
+        //   console.log(tempUserArr);
+        //   console.log("tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr tempUserArr");
+        //   if(!tempUserArr.includes(myId)) {
+        //     connection.query(`UPDATE temperature SET temp_list = JSON_ARRAY_APPEND(temp_list, '$.tempUser', '${myId})`)
+        //   }
+        // }
+      })
+      // connection.query(`UPDATE temperature SET temp_list = JSON_OBJECT('tempUser', JSON_ARRAY('${myId}')) WHERE id = '${followTarget}'`)
+      // connection.end();
     });
   }
   if (request.url === "/unFollowRequest") {
@@ -111,7 +130,7 @@ export default function dangMap(request, response) {
         }
       );
       connection.query(`delete from alarm where id = '${followTarget}' and follow = '${myId}'`);
-      connection.query(`delete from temperature where id = '${myId}' and fr_id = '${followTarget}'`)
+      // connection.query(`delete from temperature where id = '${myId}' and fr_id = '${followTarget}'`)
       connection.end();
     });
   }
