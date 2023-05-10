@@ -5,8 +5,8 @@ function dangstarLike(postIndex, index, writerNickname){
   let heartImage;
 
   const likeXhr = new XMLHttpRequest();
-  const _URL = `http://192.168.100.63:2080/likeCheck`;
-  const likeURL = 'http://192.168.100.63:2080/dangstarLike';
+  const _URL = `http://3.37.160.130:2080/likeCheck`;
+  const likeURL = 'http://3.37.160.130:2080/dangstarLike';
 
   likeXhr.open("POST", _URL, true);
   likeXhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
@@ -29,7 +29,7 @@ function dangstarLike(postIndex, index, writerNickname){
     console.log(writerNickname, postIndex, document.cookie)
     //console.log(cookie)
     const xhr = new XMLHttpRequest();
-    // xhr.open("POST", `http://192.168.100.63:2080/postBoard/postBoardLike`, true);
+    // xhr.open("POST", `http://3.37.160.130:2080/postBoard/postBoardLike`, true);
     xhr.open("POST", likeURL, true);
     xhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
     xhr.addEventListener("load", function () {
