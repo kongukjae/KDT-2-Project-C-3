@@ -291,7 +291,7 @@ function yourPage(){
   }
   rootChild[5].children[4].innerText = `소개글`
 
-  rootChild[5].style.height = '400px'
+  rootChild[5].style.height = '750px'
   styleCreate(rootChild[5].lastChild, mypageStyle.mypageUserinfoBoxSelfIntroduce)
 
   // styleCreate(rootChild[5], mypageStyle.mypageCalender)

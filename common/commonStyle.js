@@ -68,6 +68,7 @@ const stylePropertyUnion = {
     height1700: "1700px",
     height1300: "1300px",
     height1000: "1000px",
+    height750: "750px",
     height730: "730px",
     height690: "690px",
     height500: "500px",
@@ -1064,7 +1065,7 @@ const mypageStyle = {
   },
   mypageUserinfoBox: {
     width: stylePropertyUnion.width.widthP90,
-    height: stylePropertyUnion.height.height300,
+    height: stylePropertyUnion.height.height750,
     marginTop: "20px",
     position: "relative",
     borderRadius: "10px",
@@ -1147,7 +1148,7 @@ const mypageStyle = {
     position: "absolute",
     top: "0px",
     left: "50%",
-    transform: "translate(-50%, -100%)",
+    transform: "translate(-50%, -30%)",
   },
   mypageCalendarWeekNameBox: {
     width: "400px",
