@@ -220,7 +220,13 @@ export default function dangMap(request, response) {
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
-        `SELECT post_detail FROM dangstar  WHERE post_id='${myId}' `,
+        ` SELECT ds.* FROM dangstar ds
+        JOIN (
+            SELECT post_index
+            FROM dangstar
+            ORDER BY LENGTH(post_like) DESC
+            LIMIT 5
+        ) AS top_posts ON ds.post_index = top_posts.post_index; `,
         function (err, data) {
           if (err) throw err;
           else {
@@ -250,7 +256,7 @@ export default function dangMap(request, response) {
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
-        `select cm_detail from cm_post where cm_id='${myId}' `,
+        `SELECT * FROM cm_post WHERE cm_id='${myId}' `,
         function (err, data) {
           if (err) throw err;
           else {
@@ -280,7 +286,7 @@ export default function dangMap(request, response) {
       let conn = mysql.createConnection(cmServer.mysqlInfo);
       conn.connect();
       conn.query(
-        `SELECT detail FROM second_hand WHERE id='${myId}' `,
+        `SELECT * FROM second_hand WHERE id='${myId}' `,
         function (err, data) {
           if (err) throw err;
           else {
