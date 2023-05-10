@@ -83,6 +83,7 @@ export default function dangMap(request, response) {
         }
       }
     );
+    connection.end();
   }
   else if (request.url.startsWith("/starFootprint")) {
     // console.log("url == " + request.url);
@@ -229,20 +230,4 @@ export default function dangMap(request, response) {
     );
     connection.end();
   }
- 
 }
-
-
-
-
-
-
-  
-
-
-
-
-
-  // else if(splitURL === "dangMapSlide.js"){
-  //   cmServer.fileDirectory(`mapp/${splitURL}`, response);
-  // }

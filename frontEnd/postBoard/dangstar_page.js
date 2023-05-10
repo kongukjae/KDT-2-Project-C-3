@@ -17,7 +17,7 @@ createHamburger(root);
 //   postCreate(root, "../resource/MainDogImg.jpg", "멍뭉이", "text", "../resource/MainDogImg.jpg", "name", i); // 두번째 파라미터는 DB 혹은 ftp에서 주소를 가져와서 적용, 지금은 임시 값
 // }
 
-const postWrap = tagCreate("div", {id: "dangstarRoot"});
+const postWrap = tagCreate("div", { id: "dangstarRoot" });
 styleCreate(postWrap, dangstarStyle.dangstarFeedListWrap);
 root.appendChild(postWrap);
 

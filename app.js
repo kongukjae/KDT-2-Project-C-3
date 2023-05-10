@@ -154,7 +154,7 @@ const server = http.createServer(function (request, response) {
 
     //마이페이지
     userPagePost(request, response);
-    
+
     //산책온도 식별
     tempeCheck(request, response);
 
