@@ -48,7 +48,7 @@ import dangMarketDetailPage from "./backEnd/Router/PostBoard/dangMarketDetailPag
 import userPagePost from "./backEnd/Router/profile/userPage_Post.js";
 import dangWritePost from "./backEnd/Router/PostBoard/dangWritePost.js";
 import followSearch from "./backEnd/module/followSearch.js";
-import starCheckPost from "./backEnd/Router/profile/userPage_starCheck_post.js";
+import starCheckPost from "./backEnd/Router/profile/userPage_starCheck_Post.js";
 import starLoadPost from "./backEnd/Router/profile/userPage_starLoad_Post.js";
 import tempeCheck from "./backEnd/router/profile/userPage_temperature_post.js";
 
