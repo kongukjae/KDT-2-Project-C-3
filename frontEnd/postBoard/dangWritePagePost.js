@@ -193,7 +193,7 @@ const jwt = document.cookie.split("=")[2];
       moveToURL = '/secondHand'
       body = {jwt:token,titleText:yastContentInput.value,mainText:postContentInput.value,imageType:imageType};
     }
-    await fetch(`http://3.37.160.130:2080/${type}WriteSubmit`, {
+    await fetch(`http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/${type}WriteSubmit`, {
       method: 'POST',
       body: JSON.stringify(body)
     }).then(res => res.text())
@@ -206,7 +206,7 @@ const jwt = document.cookie.split("=")[2];
         imageFormData.append("attachedImage", 'null')
       }
       })
-    await fetch(`http://3.37.160.130:2080/${type}ImageSubmit`, {
+    await fetch(`http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/${type}ImageSubmit`, {
       method: 'POST',
       body: imageFormData
     }).then(res => res)
