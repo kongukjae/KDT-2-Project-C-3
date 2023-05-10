@@ -70,7 +70,7 @@ function btmMeun(rootChild) {
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  fetch("http://3.37.160.130:2080/bottomMenuUnreadCircle", {
+  fetch("http://192.168.100.63:2080/bottomMenuUnreadCircle", {
     method: "POST",
     body: jwt,
   })

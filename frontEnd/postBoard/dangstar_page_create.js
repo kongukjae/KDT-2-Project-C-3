@@ -122,7 +122,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   function commentInputData(postIndex) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://3.37.160.130:2080/postBoardCommentData`, true);
+    xhr.open("POST", `http://192.168.100.63:2080/postBoardCommentData`, true);
     xhr.send(`postIndex=${postIndex}`);
     xhr.addEventListener('load', function() {
       // 댓글 입력창 만드는 함수
@@ -147,7 +147,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
         cmText = res[0].cm_detail;
         commentIndex = res[0].cm_index;
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `http://3.37.160.130:2080/sendImage`);
+        xhr.open("POST", `http://192.168.100.63:2080/sendImage`);
         xhr.responseType = "blob";
         xhr.send(`type=proFile&id=${res[0].cm_id}`);
         xhr.addEventListener("load", function () {
@@ -166,7 +166,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
             let cmIndex = res[i].cm_index;
             let profileImg;
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", `http://3.37.160.130:2080/sendImage`);
+            xhr.open("POST", `http://192.168.100.63:2080/sendImage`);
             xhr.responseType = "blob";
             xhr.send(`type=proFile&id=${res[i].cm_id}`);
             xhr.addEventListener("load", function () {
