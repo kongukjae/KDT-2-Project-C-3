@@ -108,7 +108,7 @@ function topMenu(rootChild){
                 num.push(result['commentIdx'][index]);
                 
               }
-              if(key === 'follow'){
+              if(value !== null && key === 'follow'){
                 follower.push(value)
 
               }
@@ -304,9 +304,13 @@ function topMenu(rootChild){
         }
         else if(type[i] === 'follow'){
           console.log(follower)
+          let test = alarmList.children[i].innerText;
+          test = test.split("님이 ")[0];
+          console.log("testdkdkdkdk: ", test);
+
           let flw;
           for(let i=0; i < follower.length; i++){
-            if(follower[i] !== 'null'){
+            if(follower[i] === test){
               flw = follower[i];
             }
           }
