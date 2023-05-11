@@ -49,7 +49,7 @@ function createchatList(id, text, unread, type) {
     chatlistUserImg.style.backgroundImage = `url(/image/resource/publicTalk.png)`
   }else{
     const xhr = new XMLHttpRequest();
-      xhr.open('POST', `http://localhost:2080/sendImage`);
+      xhr.open('POST', `http://192.168.100.63:2080/sendImage`);
       xhr.responseType = 'blob';
       xhr.send(`type=proFile&id=${id}`); 
       xhr.addEventListener('load', function(){
@@ -68,7 +68,7 @@ async function getRoomListAsync() {
     "$1"
   );
   
-  let chatRoomList = await fetch('http://localhost:2080/chatRoomRequest', {
+  let chatRoomList = await fetch('http://192.168.100.63:2080/chatRoomRequest', {
     method: 'POST',
     body: jwt
   }).then(response => response.json())
@@ -78,7 +78,7 @@ async function getRoomListAsync() {
     targetRoomObject[i.room_name].putBasicData(i);
   }
   for(let i = 0;i<Object.keys(targetRoomObject).length;i++){
-    let recentText = await fetch('http://localhost:2080/chatRecentTextRequest', {
+    let recentText = await fetch('http://192.168.100.63:2080/chatRecentTextRequest', {
       method: 'POST',
       body: targetRoomObject[Object.keys(targetRoomObject)[i]].room
     }).then(response => response.json());

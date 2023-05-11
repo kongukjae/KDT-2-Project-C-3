@@ -10,7 +10,11 @@ export default function dangMap(request, response) {
       body = body + data;
     });
     request.on("end", function () {
+      console.log("body 값 test")
+      console.log(body)
       let result = body.split("&");
+      console.log("result test");
+      console.log(result);
       let jwtfromClient = result[0].split("=")[1];
       let target = result[1].split("=")[1];
       console.log(jwtfromClient);
@@ -42,11 +46,15 @@ export default function dangMap(request, response) {
           }
         );
       } else {
+        console.log("target")
+        console.log(target)
         connection.query(
           `SELECT * FROM userinfo where id='${target}'`,
           (error, rows, fields) => {
             if (error) throw error;
             else {
+              console.log("test")
+              console.log(rows);
               response.writeHead(200);
               response.write(`<script>
               const targetIdFromServer = '${target}';

@@ -56,7 +56,7 @@ const stylePropertyUnion = {
   },
   height: {
     height100vh: "100vh",
-    height85vh: "85vh",
+    height86vh: "86vh",
     heightP100: "100%",
     heightP95: "95%",
     heightP90: "90%",
@@ -390,7 +390,7 @@ const dangMapStyle = {
   },
   menuMap: {
     width: stylePropertyUnion.width.widthP100,
-    height: stylePropertyUnion.height.height85vh,
+    height: stylePropertyUnion.height.height86vh,
     position: "relative",
   },
   // !댕맵 하단 슬라이드 바

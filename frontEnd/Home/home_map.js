@@ -34,8 +34,8 @@ let map = new kakao.maps.Map(mapContainer, mapOption);
 map.setZoomable(false);
 
 //  이미지 링크 생성을 해서 넣으니까 되었다.
-let imageSrc = 'https://i.ibb.co/zR5p1G9/dogpaw.png';
-let otImageSrc = 'https://i.ibb.co/7KX3D8w/ot-dogpaw.png';
+let imageSrc = '/image/graphic/dogpaw.png';
+let otImageSrc = '/image/graphic/ot_dogpaw.png';
 
 // 마커이미지의 주소입니다    
 imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
@@ -69,7 +69,7 @@ const cookieId = document.cookie.split("=")[1].split(";")[0];
 //   //console.log("cnt = " + cnt);
 
 //   const httpRequest = new XMLHttpRequest();
-//   httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+//   httpRequest.open("POST", `http://192.168.100.63:2080/menuMap`, true);
 //   // httpRequest.send(`re1=${result[0]}`);
 //   httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
 // });
@@ -131,7 +131,7 @@ function loadMarker(callback) {
   let res;
   const xhr = new XMLHttpRequest();
   const cookieId = document.cookie.split("=")[1].split(";")[0];
-  xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
+  xhr.open("GET", `http://192.168.100.63:2080/loadMap?id=${cookieId}`);
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send();
   xhr.addEventListener("load", function () {
@@ -153,7 +153,7 @@ function loadMarker(callback) {
     let wres;
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
-    xhr.open("GET", `http://localhost:2080/wholeFootprint?id=${cookieId}`);
+    xhr.open("GET", `http://192.168.100.63:2080/wholeFootprint?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send(); 
     xhr.addEventListener('load', function(){
