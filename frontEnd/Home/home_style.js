@@ -69,7 +69,7 @@ function main() {
         if (responseData[i].img === "null") {
           slideChild[
             i
-          ].children[1].style.backgroundImage = `url(/image/image/default/null.png)`;
+          ].children[1].style.backgroundImage = `url(https://i.ibb.co/0rk6fbp/null.png)`;
         } else {
           slideChild[
             i

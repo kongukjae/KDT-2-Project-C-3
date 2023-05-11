@@ -29,13 +29,13 @@ async function getWeatherAsync() {
   result.push(temp.response.body.items.item[4].fcstValue);
   if (sky.response.body.items.item[8].fcstValue < 6) {
     result.push("맑음");
-    weatherIcon.src = "/image/graphic/clear.png";
+    weatherIcon.src = "https://i.ibb.co/NZ6Sy84/clear.png";
   } else if (sky.response.body.items.item[8].fcstValue < 9) {
     result.push("구름많음");
-    weatherIcon.src = "/image/graphic/cloud.png";
+    weatherIcon.src = "https://i.ibb.co/8rF73M3/cloud.png";
   } else {
     result.push("흐림");
-    weatherIcon.src = "/image/graphic/lotsofcloud.png";
+    weatherIcon.src = "https://i.ibb.co/LSrNz0H/lotsofcloud.png";
   }
 
   switch (rainOrSnow.response.body.items.item[6].fcstValue) {
