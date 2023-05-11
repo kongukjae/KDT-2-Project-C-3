@@ -456,6 +456,9 @@ function myPage() {
             }
           }
         };
+
+        // postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
+        // tabContents[index].appendChild(postDetail);
       } else if (index === 1) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
@@ -467,16 +470,14 @@ function myPage() {
             const data = JSON.parse(this.responseText);
             if (data.length === 0) {
               tabContents[index].innerHTML = "작성한 글이 없습니다.";
-            } else {
-              for (let i = 0; i < data.length; i++) {
-                const postDetail = document.createElement("a");
-
-                postDetail.href = `http://192.168.100.63/secondHandPost?nth=${i}`;
-                postDetail.style.color = "inherit"; // 링크의 색상을 부모 요소의 색상으로 설정
-                postDetail.style.textDecoration = "none"; // 밑줄 제거
-                postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
-                tabContents[index].appendChild(postDetail);
-              }
+            }
+            for (let i = 0; i < data.length; i++) {
+              const postDetail = document.createElement("div");
+              postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
+              postDetail.addEventListener("click", function () {
+                window.location.href = `/withIndexSecondHandPost?nth=${data[i].idx}`;
+              });
+              tabContents[index].appendChild(postDetail);
             }
           }
         };

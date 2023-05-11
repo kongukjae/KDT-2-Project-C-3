@@ -21,7 +21,7 @@ export default function dangMap(request, response) {
         if (err) throw err;
         else {
           myRowCnt = data[0].count;
-          console.log("a "+ myRowCnt);
+          console.log("a " + myRowCnt);
         }
       }
     );
@@ -30,17 +30,26 @@ export default function dangMap(request, response) {
       function (err, rows) {
         if (err) throw err;
         else {
-          if(myRowCnt <= 10) {
+          if (myRowCnt <= 10) {
             for (let i = 0; i < myRowCnt; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
+              myArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].id,
+                rows[i].addData
+              );
               markerMyArr[i] = myArr;
             }
-          }
-          else {
-            for(let i = 0; i < 10; i++) {
+          } else {
+            for (let i = 0; i < 10; i++) {
               let myArr = [];
-              myArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
+              myArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].id,
+                rows[i].addData
+              );
               markerMyArr[i] = myArr;
             }
           }
@@ -52,8 +61,7 @@ export default function dangMap(request, response) {
       }
     );
     conn.end();
-  }
-  else if (request.url.startsWith("/allloadMap")) {
+  } else if (request.url.startsWith("/allloadMap")) {
     let targetId = request.url.split("=")[1].split("?")[0];
     let first = request.url.split("=")[2].split("?")[0];
     let last = request.url.split("=")[3];
@@ -72,7 +80,7 @@ export default function dangMap(request, response) {
       function (err, rows) {
         if (err) throw err;
         else {
-          for(let i = 0; i < rows.length; i++) {
+          for (let i = 0; i < rows.length; i++) {
             let myArr = [];
             myArr.push(rows[i].id, rows[i].addData);
             markerMyAllArr[i] = myArr;
@@ -84,8 +92,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.end();
-  }
-  else if (request.url.startsWith("/starFootprint")) {
+  } else if (request.url.startsWith("/starFootprint")) {
     // console.log("url == " + request.url);
     let targetId = request.url.split("=")[1];
     let connection = mysql.createConnection(cmServer.mysqlInfo);
@@ -115,13 +122,23 @@ export default function dangMap(request, response) {
           if (starCnt <= 10) {
             for (let i = 0; i < starCnt; i++) {
               let starArr = [];
-              starArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id, rows[i].addData);
+              starArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].fr_id,
+                rows[i].addData
+              );
               markerStarArr[i] = starArr;
             }
           } else {
             for (let i = 0; i < 10; i++) {
               let starArr = [];
-              starArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id, rows[i].addData);
+              starArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].fr_id,
+                rows[i].addData
+              );
               markerStarArr[i] = starArr;
             }
           }
@@ -132,8 +149,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.end();
-  }
-  else if (request.url.startsWith("/frFootprint")) {
+  } else if (request.url.startsWith("/frFootprint")) {
     // console.log("url == " + request.url);
     let targetId = request.url.split("=")[1];
     let connection = mysql.createConnection(cmServer.mysqlInfo);
@@ -163,13 +179,23 @@ export default function dangMap(request, response) {
           if (friendCnt <= 10) {
             for (let i = 0; i < friendCnt; i++) {
               let friendArr = [];
-              friendArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id, rows[i].addData);
+              friendArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].fr_id,
+                rows[i].addData
+              );
               markerFriendsArr[i] = friendArr;
             }
           } else {
             for (let i = 0; i < 10; i++) {
               let friendArr = [];
-              friendArr.push(rows[i].latitude, rows[i].longitude, rows[i].fr_id, rows[i].addData);
+              friendArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].fr_id,
+                rows[i].addData
+              );
               markerFriendsArr[i] = friendArr;
             }
           }
@@ -180,8 +206,7 @@ export default function dangMap(request, response) {
       }
     );
     connection.end();
-  }
-  else if (request.url.startsWith("/otFootprint")) {
+  } else if (request.url.startsWith("/otFootprint")) {
     // console.log("url == " + request.url);
     let targetId = request.url.split("=")[1];
     let connection = mysql.createConnection(cmServer.mysqlInfo);
@@ -211,14 +236,24 @@ export default function dangMap(request, response) {
           if (otherCnt <= 10) {
             for (let i = 0; i < otherCnt; i++) {
               let otherArr = [];
-              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
+              otherArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].id,
+                rows[i].addData
+              );
               markerOtherArr[i] = otherArr;
             }
           } else {
             //console.log(rows);
             for (let i = 0; i < 10; i++) {
               let otherArr = [];
-              otherArr.push(rows[i].latitude, rows[i].longitude, rows[i].id, rows[i].addData);
+              otherArr.push(
+                rows[i].latitude,
+                rows[i].longitude,
+                rows[i].id,
+                rows[i].addData
+              );
               markerOtherArr[i] = otherArr;
             }
           }
