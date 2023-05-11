@@ -15,7 +15,7 @@ async function getWeatherAsync() {
   weatherWindow.appendChild(weatherInfor);
   styleCreate(weatherInfor, targetStyle.mainWeatherInfor);
 
-  let hours = today.getHours() - 1; // 시간에 1 뺀 수 예보이기때문에 1을 빼야함
+  let hours = String(today.getHours() - 1).padStart(2, "0"); // 시간에 1 뺀 수 예보이기때문에 1을 빼야함
 
   let rainOrSnow = await fetch(
     `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=a71YfWfLciBMXYG2e5zc9D1hNlQM29N7TICbhuOzOXtUnxJIGZjs0FWWuENqX%2FGdMEvpH%2B7eH1AZ2mhnfQmmiA%3D%3D&base_date=${targetDay}&pageNo=1&base_time=${hours}30&nx=67&ny=100&dataType=JSON`
@@ -58,7 +58,7 @@ async function getWeatherAsync() {
       weatherIcon.src = "/image/graphic/rainorsnow.png";
     break;
   }
-  // console.log(rainOrSnow.response.body.items.item[6].fcstValue);
+  console.log(rainOrSnow.response.body.items.item[6].fcstValue);
   console.log(rainOrSnow.response);
   console.log(temp.response);
   console.log(sky.response);
