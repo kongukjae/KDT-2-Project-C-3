@@ -122,7 +122,6 @@ function main() {
         backgroundSize: "cover",
         backgroundPosition: "center",
       });
-      rightImageContainer.style.backgroundImage = `url('이미지_URL_${i}')`;
       child.appendChild(rightImageContainer);
 
       slideChild.push(child);
@@ -212,7 +211,6 @@ function main() {
   createSlide(rootChild[3]);
   console.log(rootChild[3]);
 }
-
 main();
 
 getWeatherAsync();
