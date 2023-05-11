@@ -50,6 +50,10 @@ function main() {
         console.log(responseData[i].img);
         slideChild[i].children[0].innerText = responseData[i].post_detail;
         slideChild[i].style.cursor = "pointer";
+        slideChild[i].children[0].style.fontSize = "25px";
+        slideChild[i].children[0].style.fontWeight = "bold";
+        slideChild[i].children[0].style.color = "black";
+
         slideChild[i].addEventListener("click", () => {
           let detailForm = document.createElement("form");
           detailForm.method = "POST";
@@ -81,7 +85,6 @@ function main() {
     let slideCover = tagCreate("div", {});
     rootChild.appendChild(slideCover);
     styleCreate(slideCover, targetStyle.mainSlideCover);
-
     let slideChild = [];
     let slideColor = ["#245953", "#408E91", "#E49393", "#D8D8D8", "#867070"];
     let slidePosition = [-1, 0, 1, 1, 1];
