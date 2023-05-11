@@ -122,7 +122,7 @@ function main() {
         backgroundSize: "cover",
         backgroundPosition: "center",
       });
-      rightImageContainer.style.backgroundImage = `url('이미지_URL_${i}')`;
+      // rightImageContainer.style.backgroundImage = `url('이미지_URL_${i}')`;
       child.appendChild(rightImageContainer);
 
       slideChild.push(child);

@@ -15,5 +15,5 @@ httpRequest.onreadystatechange = function(event) {
     };
   };
 }
-httpRequest.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com:2080/test`, true);
+httpRequest.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/test`, true);
 httpRequest.send(re[0][0],re[0][1]);
