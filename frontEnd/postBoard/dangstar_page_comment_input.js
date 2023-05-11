@@ -34,7 +34,7 @@ function commentInput(parent, postIndex){
     console.log(document.getElementById(`comment_${postIndex}`).value);
     let commentValueData = document.getElementById(`comment_${postIndex}`).value;
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://192.168.100.63:2080/commentSubmit`, true);
+    xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/commentSubmit`, true);
     xhr.send(`commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`);
     xhr.addEventListener('load', () => {
       location.reload();

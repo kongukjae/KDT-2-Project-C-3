@@ -31,7 +31,7 @@ loadDangstargram(0);
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
   // let result = {};
-  xhr.open("GET", `http://192.168.100.63:2080/loadPostBoard?nth=${nth}`);
+  xhr.open("GET", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/loadPostBoard?nth=${nth}`);
   xhr.send();
   xhr.addEventListener("load", function () {
     let res = JSON.parse(xhr.response);

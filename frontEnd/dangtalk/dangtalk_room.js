@@ -42,7 +42,7 @@ function main(){
   // 하단 메뉴바
   btmMeun(rootChild[5])
   // 이전채팅 불러오기
-  fetch('http://192.168.100.63:2080/loadBeforeChatRequest', {
+  fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/loadBeforeChatRequest', {
     method: 'POST',
     body:  roomName
   }).then(response => response.json())
@@ -61,7 +61,7 @@ function main(){
 
 
   //채팅
-  let chat = io('http://192.168.100.63:2080/chat')
+  let chat = io('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/chat')
   chat.emit("login", {
       name: `${userId}`,
       room: `${roomName}`})
@@ -108,7 +108,7 @@ function main(){
     "$1"
   );
   setTimeout(()=>{
-    fetch("http://192.168.100.63:2080/bottomMenuUnreadCircle", {
+    fetch("http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/bottomMenuUnreadCircle", {
       method: "POST",
       body: jwt,
     })
@@ -157,7 +157,7 @@ function createChatMsg(mother,targetId,fromMeorYou, msg){
   mother.appendChild(chatBox);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://192.168.100.63:2080/sendImage`);
+  xhr.open('POST', `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
   xhr.responseType = 'blob';
   xhr.send(`type=proFile&id=${targetId}`); 
   xhr.addEventListener('load', function(){
