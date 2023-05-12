@@ -119,8 +119,8 @@ function map() {
   });
   //console.log(mapOption.level);
  // 지도를 생성한다
- let map = new kakao.maps.Map(mapContainer, mapOption);
- map.setZoomable(false);
+  let map = new kakao.maps.Map(mapContainer, mapOption);
+  map.setZoomable(false);
 
   //  이미지 링크 생성을 해서 넣으니까 되었다.
   let imageSrc = "/image/graphic/dogpaw.png";
