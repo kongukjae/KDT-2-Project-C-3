@@ -743,14 +743,29 @@ function putUserProfile(object){
   console.log("프로필 개수 체크")
   console.log(Object.keys(markersObject.markers).length);
   let userCount = Object.keys(markersObject.markers).length;
-  if(userCount % 2 === 1) {
-    userCount = (userCount / 2) + 0.5;
-    console.log("홀수", userCount);
-    slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+  let arrUserCount = Object.keys(markersObject.markers);
+  console.log(arrUserCount)
+  console.log(markersObject.userid)
+  if(arrUserCount.includes(markersObject.userid)) {
+    if(userCount % 2 === 1) {
+      userCount = (userCount / 2) + 0.5;
+      console.log("홀수", userCount);
+      slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+    } else {
+      userCount = userCount / 2;
+      console.log("짝수", userCount);
+      slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+    }
   } else {
-    userCount = userCount / 2;
-    console.log("짝수", userCount);
-    slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+    if(userCount % 2 === 1) {
+      userCount = (userCount / 2) + 1.5;
+      console.log("홀수", userCount);
+      slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+    } else {
+      userCount = (userCount / 2) + 1;
+      console.log("짝수", userCount);
+      slideWrapInnerDiv.style.gridTemplateColumns =  `repeat(${userCount}, 160px)`;
+    }
   }
 }
 function createOverlay(id, mapNow, markerNow, lat, lng, time) {

@@ -141,7 +141,7 @@ function main(){
         method:'POST',
         body : JSON.stringify({jwt:jwt,room:roomCode})
       }).then((res)=>{
-        window.location = "http://localhost:2080/dangTalkChatList";
+        window.location = "/dangTalkChatList";
       })
     })
 

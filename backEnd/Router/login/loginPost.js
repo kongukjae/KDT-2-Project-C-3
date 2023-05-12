@@ -72,7 +72,7 @@ export default function callPostLogin(request, response) {
                   `<script>window.alert('비밀번호가 틀렸습니다')</script>`
                 );
                 const back = htmlBox.htmlFunc(
-                  `<script>window.location = 'http://localhost:2080'</script>`
+                  `<script>window.location = '/'</script>`
                 );
                 response.writeHead(200);
                 response.write(msg);
@@ -88,7 +88,7 @@ export default function callPostLogin(request, response) {
               `<script>window.alert('가입되지 않은 회원입니다')</script>`
             );
             const back = htmlBox.htmlFunc(
-              `<script>window.location = 'http://localhost:2080'</script>`
+              `<script>window.location = '/'</script>`
             );
             response.writeHead(200);
             response.write(msg);

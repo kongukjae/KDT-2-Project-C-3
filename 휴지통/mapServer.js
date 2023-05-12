@@ -45,7 +45,7 @@ const server = http.createServer(function(request, response){
         console.log(cooData[key]);
         
         let conn = mysql.createConnection({
-          host: 'localhost',
+          host: '192.168.100.63',
           user: 'root',
           password: '0000',
           database: 'map_db'
@@ -72,7 +72,7 @@ const server = http.createServer(function(request, response){
 /*
   let coo = [36.35, 127.385];
   let conn = mysql.createConnection({
-    host: 'localhost',
+    host: '192.168.100.63',
     user: 'root',
     password: '0000',
     database: 'map_DB'

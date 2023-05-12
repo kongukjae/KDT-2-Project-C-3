@@ -2,9 +2,14 @@ import fs from "fs";
 
 function fileReadAndSend(directory, request, response) {
   fs.readFile(`${directory}`, function (err, data) {
-    response.writeHead(200);
-    response.write(data);
-    response.end();
+    if(err){
+      console.log(err)
+    }
+    else{
+      response.writeHead(200);
+      response.write(data);
+      response.end();
+    }
   });
 }
 

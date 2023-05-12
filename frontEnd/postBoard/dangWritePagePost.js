@@ -187,10 +187,10 @@ const jwt = document.cookie.split("=")[2];
     
     
     if(type === 'dangStar'){
-      moveToURL = 'http://localhost:2080/dangstar';
+      moveToURL = '/dangstar';
       body = {jwt:token,mainText:postContentInput.value,imageType:imageType};
     }else{
-      moveToURL = 'http://localhost:2080/secondHand'
+      moveToURL = '/secondHand'
       body = {jwt:token,titleText:yastContentInput.value,mainText:postContentInput.value,imageType:imageType};
     }
     await fetch(`http://localhost:2080/${type}WriteSubmit`, {

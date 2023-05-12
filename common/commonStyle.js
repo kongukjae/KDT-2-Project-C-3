@@ -56,7 +56,7 @@ const stylePropertyUnion = {
   },
   height: {
     height100vh: "100vh",
-    height85vh: "85vh",
+    height86vh: "86vh",
     heightP100: "100%",
     heightP95: "95%",
     heightP90: "90%",
@@ -390,7 +390,7 @@ const dangMapStyle = {
   },
   menuMap: {
     width: stylePropertyUnion.width.widthP100,
-    height: stylePropertyUnion.height.height85vh,
+    height: stylePropertyUnion.height.height86vh,
     position: "relative",
   },
   // !댕맵 하단 슬라이드 바
@@ -1971,6 +1971,7 @@ const dangstarStyle = {
     height: stylePropertyUnion.height.heightP100,
   },
   dangstarFeedTextWrap: {
+    width: stylePropertyUnion.width.widthP100,
     padding: "25px",
     display: "flex",
     flexDirection: "column",
@@ -2008,7 +2009,7 @@ const dangstarStyle = {
   dangstarCommentWrap: {
     padding: "25px 15px",
     width: stylePropertyUnion.width.widthP100,
-    order: "1",
+    order: "999",
   },
   dangstarCommentForm: {
     ...stylePropertyUnion.flexRowBetweenCenter,
@@ -2057,6 +2058,7 @@ const dangstarStyle = {
     padding: "10px",
     borderTop: "3px solid white",
     borderBottom: "3px solid white",
+    order: "500",
   },
   dangstarRecentCommentContentWrap: {
     width: stylePropertyUnion.width.widthP100,
