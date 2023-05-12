@@ -69,7 +69,7 @@ const cookieId = document.cookie.split("=")[1].split(";")[0];
 //   //console.log("cnt = " + cnt);
 
 //   const httpRequest = new XMLHttpRequest();
-//   httpRequest.open("POST", `http://192.168.100.63:2080/menuMap`, true);
+//   httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
 //   // httpRequest.send(`re1=${result[0]}`);
 //   httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
 // });
@@ -131,7 +131,7 @@ function loadMarker(callback) {
   let res;
   const xhr = new XMLHttpRequest();
   const cookieId = document.cookie.split("=")[1].split(";")[0];
-  xhr.open("GET", `http://192.168.100.63:2080/loadMap?id=${cookieId}`);
+  xhr.open("GET", `http://localhost:2080/loadMap?id=${cookieId}`);
   // httpRequest.send(`re1=${result[0]}`);
   xhr.send();
   xhr.addEventListener("load", function () {
@@ -153,7 +153,7 @@ function loadMarker(callback) {
     let wres;
     const xhr = new XMLHttpRequest();
     const cookieId = document.cookie.split("=")[1].split(";")[0];
-    xhr.open("GET", `http://192.168.100.63:2080/wholeFootprint?id=${cookieId}`);
+    xhr.open("GET", `http://localhost:2080/wholeFootprint?id=${cookieId}`);
     // httpRequest.send(`re1=${result[0]}`);
     xhr.send(); 
     xhr.addEventListener('load', function(){

@@ -30,7 +30,7 @@ function createUserOrgchat(positionNow, roomName, roomCode){
       /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
-    await fetch(`http://192.168.100.63:2080/createPublicChatRoomRequest`,{
+    await fetch(`http://localhost:2080/createPublicChatRoomRequest`,{
       method: "POST",
       body: JSON.stringify({jwt:token,roomCode:roomCode,roomName:roomName})
     }).then((res)=>{return res.text()})
@@ -64,7 +64,7 @@ function createUserOrgchat(positionNow, roomName, roomCode){
   styleCreate(chatChild[1], dangMapStyle.chatPeopleListContainer);
 
   const http = new XMLHttpRequest();
-  const url = `http://192.168.100.63:2080/mapChatList`;
+  const url = `http://localhost:2080/mapChatList`;
 
 
   http.open("POST", url);
@@ -121,7 +121,7 @@ function createUserOrgchatList(parent, userID, dogName){
   console.log("cookie: ", target);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://192.168.100.63:2080/sendImage`);
+  xhr.open('POST', `http://localhost:2080/sendImage`);
   xhr.responseType = 'blob';
   xhr.send(`type=proFile&id=${target}`); 
   xhr.addEventListener('load', function(){

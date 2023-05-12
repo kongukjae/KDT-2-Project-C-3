@@ -80,7 +80,7 @@ slide.children[2].children[1].addEventListener('click', function(){
 
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://192.168.100.63:2080/followSearch`, true);
+  xhr.open("POST", `http://localhost:2080/followSearch`, true);
   // httpRequest.send(`re1=${result[0]}`);
   //console.log(cookieId)
   xhr.send(`searchValue=${findVal}&id=${cookieId}`); 
