@@ -19,7 +19,7 @@ function myPage() {
   const cookieId = document.cookie.split("=")[1].split(";")[0];
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
+  xhr.open("POST", `http://localhost:2080/sendImage`);
   xhr.responseType = "blob";
   xhr.send(`type=proFile&id=${cookieId}`);
   xhr.addEventListener("load", function () {
@@ -124,7 +124,7 @@ function myPage() {
       reader.readAsDataURL(myImage.files[0]);
       imageFormData.append("id", cookieId);
       imageFormData.append("attachedImage", myImage.files[0]);
-      fetch("http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/uploadImage", {
+      fetch("http://localhost:2080/uploadImage", {
         method: "POST",
         body: imageFormData,
       })
@@ -192,7 +192,7 @@ function myPage() {
     console.log("마지막 날");
     xhr.open(
       "GET",
-      `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/allloadMap?id=${cookieId}?first=${firstDayOfMonth}?last=${lastDayOfMonth}`
+      `http://localhost:2080/allloadMap?id=${cookieId}?first=${firstDayOfMonth}?last=${lastDayOfMonth}`
     );
     xhr.send();
     xhr.addEventListener("load", function () {
@@ -425,7 +425,7 @@ function myPage() {
       if (index === 0) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
-        xhrr.open("post", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/thirdmyWrite`);
+        xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
@@ -463,7 +463,7 @@ function myPage() {
       } else if (index === 1) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
-        xhrr.open("post", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/secondmyWrite`);
+        xhrr.open("post", `http://localhost:2080/secondmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
@@ -475,7 +475,7 @@ function myPage() {
               for (let i = 0; i < data.length; i++) {
                 const postDetail = document.createElement("a");
 
-                postDetail.href = `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/secondHandPost?nth=${i}`;
+                postDetail.href = `http://localhost:2080/secondHandPost?nth=${i}`;
                 postDetail.style.color = "inherit"; // 링크의 색상을 부모 요소의 색상으로 설정
                 postDetail.style.textDecoration = "none"; // 밑줄 제거
                 postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
@@ -487,7 +487,7 @@ function myPage() {
       } else if (index === 2) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
-        xhrr.open("post", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/firstmyWrite`);
+        xhrr.open("post", `http://localhost:2080/firstmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
@@ -608,7 +608,7 @@ function myPage() {
       "$1"
     );
     infoChild[5].children[0].addEventListener("click", () => {
-      fetch(`http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/userinfoUpdate`, {
+      fetch(`http://localhost:2080/userinfoUpdate`, {
         method: "POST",
         body: JSON.stringify({
           jwt: token,

@@ -107,7 +107,7 @@ function dangstarDetail(
   //댓글 정보를 받아오는 함수
   function commentInputData(postIndex) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/postBoardCommentData`, true);
+    xhr.open("POST", `http://localhost:2080/postBoardCommentData`, true);
     xhr.send(`postIndex=${postIndex}`);
     xhr.addEventListener("load", function () {
       // 댓글 입력창 만드는 함수
@@ -132,7 +132,7 @@ function dangstarDetail(
         cmText = res[0].cm_detail;
         commentIndex = res[0].cm_index;
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
+        xhr.open("POST", `http://localhost:2080/sendImage`);
         xhr.responseType = "blob";
         xhr.send(`type=proFile&id=${res[0].cm_id}`);
         xhr.addEventListener("load", function () {
@@ -157,7 +157,7 @@ function dangstarDetail(
             let cmIndex = res[i].cm_index;
             let profileImg;
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
+            xhr.open("POST", `http://localhost:2080/sendImage`);
             xhr.responseType = "blob";
             xhr.send(`type=proFile&id=${res[i].cm_id}`);
             xhr.addEventListener("load", function () {

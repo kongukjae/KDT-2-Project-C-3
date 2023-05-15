@@ -43,7 +43,7 @@ function main(){
   // 하단 메뉴바
   btmMeun(rootChild[5])
   // 이전채팅 불러오기
-  fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/loadBeforeChatRequest', {
+  fetch('http://localhost:2080/loadBeforeChatRequest', {
     method: 'POST',
     body:  roomCode
   }).then(response => response.json())
@@ -137,7 +137,7 @@ function main(){
     );
     exitChatRoom.innerText = "방 나가기";
     exitChatRoom.addEventListener('click',()=>{
-      fetch('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/getOutOfPublicRoom',{
+      fetch('http://localhost:2080/getOutOfPublicRoom',{
         method:'POST',
         body : JSON.stringify({jwt:jwt,room:roomCode})
       }).then((res)=>{
@@ -151,7 +151,7 @@ function main(){
     styleCreate(chatChild[1], dangMapStyle.chatPeopleListContainer);
   
     const http = new XMLHttpRequest();
-    const url = `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/mapChatList`;
+    const url = `http://localhost:2080/mapChatList`;
   
   
     http.open("POST", url);
@@ -201,7 +201,7 @@ function main(){
     console.log("cookie: ", target);
   
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
+    xhr.open('POST', `http://localhost:2080/sendImage`);
     xhr.responseType = 'blob';
     xhr.send(`type=proFile&id=${target}`); 
     xhr.addEventListener('load', function(){
@@ -236,7 +236,7 @@ function main(){
 
 
   //채팅
-  let chat = io('http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/chat')
+  let chat = io('http://localhost:2080/chat')
   if(firsttime==='true'){
     chat.emit("firstEnter", {
       name: `${userId}`,
@@ -306,7 +306,7 @@ function main(){
       "$1"
     );
     setTimeout(()=>{
-      fetch("http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/bottomMenuUnreadCircle", {
+      fetch("http://localhost:2080/bottomMenuUnreadCircle", {
         method: "POST",
         body: jwt,
       })
@@ -355,7 +355,7 @@ function createChatMsg(mother,targetId,fromMeorYou, msg){
   mother.appendChild(chatBox);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/sendImage`);
+  xhr.open('POST', `http://localhost:2080/sendImage`);
   xhr.responseType = 'blob';
   xhr.send(`type=proFile&id=${targetId}`); 
   xhr.addEventListener('load', function(){

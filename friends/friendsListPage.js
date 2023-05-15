@@ -60,7 +60,7 @@ loadFriendsList(starFriends, friends);
 function loadFriendsList(starFriends, friends) {
   const xhr = new XMLHttpRequest();
   const cookie = document.cookie.split("=")[2];
-  const _URL = `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/loadFriendsList`;
+  const _URL = `http://localhost:2080/loadFriendsList`;
   // let result = {};
   xhr.open("POST", _URL, true);
   xhr.send(`{id=${cookie}}`);

@@ -46,7 +46,7 @@ function findWindow(){
     data.append("id",rootChild[1].firstChild.value);
     data.append("question",rootChild[2].firstChild.value);
     data.append("answer",rootChild[3].firstChild.value);
-    fetch("http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/findUserInfoCheck",{
+    fetch("http://localhost:2080/findUserInfoCheck",{
       method : "POST",
       body : data
     })
@@ -77,7 +77,7 @@ function updatePW(token){
   dupCheckResultModal.appendChild(okaybutton);
   okaybutton.innerText = "완료";
   okaybutton.addEventListener("click",()=>{
-    fetch("http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/updatepassword",{
+    fetch("http://localhost:2080/updatepassword",{
       method : "POST",
       body : JSON.stringify({token, newpassword : newPW.value})
     })

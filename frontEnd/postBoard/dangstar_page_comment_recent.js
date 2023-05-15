@@ -49,7 +49,7 @@ function userCheck() {
     let userIDSend = document.cookie.split("jwt=")[1];
     console.log("comment userID: " + userIDSend);
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://ec2-3-37-160-130.ap-northeast-2.compute.amazonaws.com/userCheck`);
+    xhr.open("POST", `http://localhost:2080/userCheck`);
     xhr.send(`userID=${userIDSend}`);
     xhr.addEventListener('load', () => {
       let userID = JSON.parse(xhr.response);
