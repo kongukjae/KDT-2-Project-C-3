@@ -8,7 +8,7 @@ export default function secondHandPost(request, response) {
     console.log(request.url);
     response.writeHead(200, { "Content-Type": "text/html" });
     response.write(`<script>const nthfromserver = ${nth}</script>`);
-    
+
     response.write(htmlBox.htmlFunc(htmlBox.marketpost));
     response.end();
   }
@@ -34,4 +34,29 @@ export default function secondHandPost(request, response) {
     );
     conn.end();
   }
+  if (request.url.startsWith("/withIndexSecondHandPost")) {
+    let nth = request.url.split("=")[1];
+    console.log(request.url);
+    let conn = mysql.createConnection(cmServer.mysqlInfo);
+    conn.connect();
+    conn.query(
+      `select idx from second_hand order by idx desc limit 1;`, // 19
+      function (err, rows) {
+        if (err) throw err;
+        else {
+          // console.log(rows[0].idx);
+          response.writeHead(200, { "Content-Type": "text/html" });
+          response.write(
+            `<script>const nthfromserver = ${rows[0].idx - nth}</script>`
+          );
+          response.write(htmlBox.htmlFunc(htmlBox.marketpost));
+          response.end();
+        }
+      }
+    );
+    conn.end();
+  }
+  // if (request.url === "/market/market-post-page.js") {
+  //   cmServer.fileDirectory(`market/market-post-page.js`, response);
+  // }
 }

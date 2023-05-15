@@ -30,13 +30,14 @@ function myPage() {
     console.log("이미지 가져오기 완료");
   });
   styleCreate(rootChild[3], mypageStyle.mypageButtonWrap);
-  for (let i = 0; i < 2; i++) {
-    let button = tagCreate("div");
-    styleCreate(button, mypageStyle.mypageButton);
-    rootChild[3].appendChild(button);
-  }
+  // for (let i = 0; i < 2; i++) {
+  let button = tagCreate("div");
+  styleCreate(button, mypageStyle.mypageButton);
+  button.style.width = '240px'
+  rootChild[3].appendChild(button);
+  // }
   rootChild[3].children[0].innerText = "사진 업로드";
-  rootChild[3].children[1].innerText = "개인정보 수정";
+  // rootChild[3].children[1].innerText = "개인정보 수정";
 
   styleCreate(rootChild[4], mypageStyle.mypageUserinfoBox);
   rootChild[4].style.height = "400px";
@@ -456,6 +457,9 @@ function myPage() {
             }
           }
         };
+
+        // postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
+        // tabContents[index].appendChild(postDetail);
       } else if (index === 1) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
