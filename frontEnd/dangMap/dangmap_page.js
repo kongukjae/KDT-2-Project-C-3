@@ -8,11 +8,17 @@ let markersObject = {
   markersArray : [],
   usersArray :[],
   publicChat : {detail:{},overlay:[]},
+  todayCount : 0,
   //필요한 입력값 = [id, 4, marker];
   // arr[0] 값은 나와의 관계, 0 : 그냥친구, 1 : 즐찾친구, 2: 익명, 3: 본인
   set appendMarker(value){
     this.markersArray.push(value[2])
     this.usersArray.push(value[0])
+    let todayNow = new Date();
+    if(value[1]===3&&value[3].getFullYear()===todayNow.getFullYear()&&value[3].getMonth()===todayNow.getMonth()&&value[3].getDate()===todayNow.getDate()){
+      this.todayCount ++;
+    }
+    
 
     if(markersObject.markers[value[0]] === undefined){
       markersObject.markers[value[0]] = [value[1],[[value[2],value[3]]]];
