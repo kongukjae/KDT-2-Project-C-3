@@ -30,13 +30,14 @@ function myPage() {
     console.log("이미지 가져오기 완료");
   });
   styleCreate(rootChild[3], mypageStyle.mypageButtonWrap);
-  for (let i = 0; i < 2; i++) {
-    let button = tagCreate("div");
-    styleCreate(button, mypageStyle.mypageButton);
-    rootChild[3].appendChild(button);
-  }
+  // for (let i = 0; i < 2; i++) {
+  let button = tagCreate("div");
+  styleCreate(button, mypageStyle.mypageButton);
+  button.style.width = '240px'
+  rootChild[3].appendChild(button);
+  // }
   rootChild[3].children[0].innerText = "사진 업로드";
-  rootChild[3].children[1].innerText = "개인정보 수정";
+  // rootChild[3].children[1].innerText = "개인정보 수정";
 
   styleCreate(rootChild[4], mypageStyle.mypageUserinfoBox);
   rootChild[4].style.height = "400px";
@@ -470,14 +471,16 @@ function myPage() {
             const data = JSON.parse(this.responseText);
             if (data.length === 0) {
               tabContents[index].innerHTML = "작성한 글이 없습니다.";
-            }
-            for (let i = 0; i < data.length; i++) {
-              const postDetail = document.createElement("div");
-              postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
-              postDetail.addEventListener("click", function () {
-                window.location.href = `/withIndexSecondHandPost?nth=${data[i].idx}`;
-              });
-              tabContents[index].appendChild(postDetail);
+            } else {
+              for (let i = 0; i < data.length; i++) {
+                const postDetail = document.createElement("a");
+
+                postDetail.href = `http://localhost:2080/secondHandPost?nth=${i}`;
+                postDetail.style.color = "inherit"; // 링크의 색상을 부모 요소의 색상으로 설정
+                postDetail.style.textDecoration = "none"; // 밑줄 제거
+                postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
+                tabContents[index].appendChild(postDetail);
+              }
             }
           }
         };

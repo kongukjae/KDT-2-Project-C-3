@@ -3,6 +3,7 @@ function dangstarLike(postIndex, index, writerNickname){
   const like = document.getElementById(`like_${postIndex}_${index}`);
   const cookie = document.cookie.split("=")[2];
   let heartImage;
+  let likeCount;
 
   const likeXhr = new XMLHttpRequest();
   const _URL = `http://localhost:2080/likeCheck`;
@@ -11,7 +12,21 @@ function dangstarLike(postIndex, index, writerNickname){
   likeXhr.open("POST", _URL, true);
   likeXhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
   likeXhr.addEventListener("load", function () {
-    heartImage = JSON.parse(likeXhr.response);
+    res = JSON.parse(likeXhr.response);
+    // heartImage = JSON.parse(likeXhr.response);
+    likeCount = res["cnt"]
+    heartImage = res["type"];
+
+    const likeCnt = tagCreate("div", {})
+    like.appendChild(likeCnt);
+    styleCreate(likeCnt, {
+      position: "relative",
+      bottom: "10px",
+      right: "1px",
+      fontWeight: stylePropertyUnion.fontWeightSet.bold
+
+    })
+    likeCnt.innerText = likeCount;
 
     if(!heartImage){
       like.children[0].src = '/image/resource/emptyHeart.png';
@@ -19,7 +34,9 @@ function dangstarLike(postIndex, index, writerNickname){
     }
     if(heartImage){
       like.children[0].src = '/image/resource/fullHeart.png';
-
+      // styleCreate(likeCnt, {
+      //   color: "white"
+      // })
     }
   })
 
@@ -33,9 +50,13 @@ function dangstarLike(postIndex, index, writerNickname){
     xhr.open("POST", likeURL, true);
     xhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
     xhr.addEventListener("load", function () {
-      let likeVal = JSON.parse(xhr.response);
-      
-      console.log("like: ", likeVal)
+      let res = JSON.parse(xhr.response);
+      // heartImage = JSON.parse(likeXhr.response);
+      likeCount = res["cnt"]
+      likeVal = res["type"];
+
+      like.children[1].innerText = likeCount;
+      console.log("like: ", likeVal, likeCount)
       if(likeVal){
         like.children[0].src = '/image/resource/fullHeart.png';
       }
