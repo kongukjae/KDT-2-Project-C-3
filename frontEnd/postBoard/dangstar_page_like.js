@@ -13,7 +13,6 @@ function dangstarLike(postIndex, index, writerNickname){
   likeXhr.send(`writerNickname=${writerNickname}&postLikeIdx=${postIndex}&cookie=${cookie}`);
   likeXhr.addEventListener("load", function () {
     res = JSON.parse(likeXhr.response);
-    console.log("ajlsjdakldjkajjjjjjjjjj ", res)
     // heartImage = JSON.parse(likeXhr.response);
     likeCount = res["cnt"]
     heartImage = res["type"];
@@ -35,7 +34,9 @@ function dangstarLike(postIndex, index, writerNickname){
     }
     if(heartImage){
       like.children[0].src = '/image/resource/fullHeart.png';
-
+      // styleCreate(likeCnt, {
+      //   color: "white"
+      // })
     }
   })
 

@@ -2007,6 +2007,8 @@ const dangstarStyle = {
   },
   dangstarLikeImg: {
     width: stylePropertyUnion.width.widthP80,
+    // position: "relative",
+    // top: "5px"
   },
   dangstarCommentWrap: {
     padding: "25px 15px",
