@@ -13,10 +13,11 @@
   <img src = 'https://user-images.githubusercontent.com/117888227/236104240-ffdcbfd5-22f3-45fc-a3c5-3ec3935f7892.png' height = '350'>
   <img src = 'https://user-images.githubusercontent.com/117888227/236104253-bbe71c4b-aca8-44ac-b097-be212b1f0e03.png' height = '350'>
   <br>
-  <img src = 'https://user-images.githubusercontent.com/117888227/236104330-846b4e0d-c64d-4bc8-ba37-08f9de947e6a.png' height = '350'>
-  <img src = 'https://user-images.githubusercontent.com/117888227/236104331-e356c388-b0b3-4269-977f-7ff554364004.png' height = '350'>
+  <img src = 'https://github.com/kongukjae/KDT-2-Project-C-3/assets/117888227/e41b2a51-8333-4b38-9b6a-e714a057b220.png' height = '350'>
+  <img src = 'https://github.com/kongukjae/KDT-2-Project-C-3/assets/117888227/e07a2b2f-3ed0-45d3-9709-4b2f65f3ee07.png' height = '350'>
   <img src = 'https://user-images.githubusercontent.com/117888227/236104335-5118876f-c60d-407c-acbd-7657f633a570.png' height = '350'>
   <img src = 'https://user-images.githubusercontent.com/117888227/236104339-03391004-cba5-4298-9ecd-2bcac74ffb04.png' height = '350'>
+  
 </div>
 
 

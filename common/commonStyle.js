@@ -2002,9 +2002,13 @@ const dangstarStyle = {
     backgroundColor: "white",
     borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
     border: "1px solid white",
+    textAlign: "center"
+
   },
   dangstarLikeImg: {
     width: stylePropertyUnion.width.widthP80,
+    // position: "relative",
+    // top: "5px"
   },
   dangstarCommentWrap: {
     padding: "25px 15px",
