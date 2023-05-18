@@ -350,17 +350,19 @@ function map() {
   function countMarkersDate() {
     let markersDateCount = 10; // 전날보다 이전 - 이후 +
     let markersTodayData = markersObject.markers[markersObject.userid][1];
-    let todayDate = new Date();
-    let beforeDate = new Date(todayDate.setDate(todayDate.getDate() - 1));
+    const startToday = new Date(new Date().setHours(0, 0, 0, 0));
 
     for (i in markersTodayData) {
-      if(new Date(markersTodayData[i][1]) <= beforeDate) {
+      if(new Date(markersTodayData[i][1]).getDate() !== startToday.getDate()) {
         markersDateCount += 0;
-      } else if(new Date(markersTodayData[i][1]) > beforeDate){
+        console.log(markersDateCount);
+      } else if(new Date(markersTodayData[i][1]).getDate() === startToday.getDate()){
         markersDateCount -= 1;
+        console.log(markersDateCount);
       }
     }
-
+    console.log(startToday.getDate());
+    console.log(new Date(markersTodayData[0][1]).getDate());
     countFootprintCount.innerText = markersDateCount;
 
   }
