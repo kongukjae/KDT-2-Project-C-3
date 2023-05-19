@@ -49,7 +49,7 @@ logininputId.setAttribute('placeholder', ' 아이디를 입력하세요');
 logininputId.setAttribute('autofocus', '');
 loginFormTag.appendChild(logininputId);
 
-const logininputPw = tagCreate('input', {id: 'loginPw', type: 'text', name: 'user_pw'});
+const logininputPw = tagCreate('input', {id: 'loginPw', type: 'password', name: 'user_pw'});
 styleCreate(logininputPw, loginStyle.loginPageFormPw)
 logininputPw.setAttribute('placeholder', ' 비밀번호를 입력하세요');
 loginFormTag.appendChild(logininputPw);
@@ -70,7 +70,37 @@ const findUser = tagCreate('a', {id: 'findUserInfo',href: '/findUserInfo', inner
 styleCreate(findUser, loginStyle.loginPageFormBtnFindUserInfo);
 loginFormTag.appendChild(findUser);
 
-
+document.getElementById('loginBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  let idValue = document.getElementById('loginId').value;
+  let pwValue = document.getElementById('loginPw').value;
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", `http://localhost:2080/login`, true);
+  xhr.send(`user_id=${idValue}&user_pw=${pwValue}`);
+  xhr.addEventListener('load', () => {
+    let res = xhr.response;
+    let resSplit = res.split('&')[0];
+    console.log(resSplit);
+    console.log(res);
+    if(resSplit === 'success') {
+      let cookie = res.split('&')[1].split('cookie=')[1];
+      let token = res.split('&')[1].split(';')[1]
+      console.log(cookie);
+      console.log(token);
+      document.cookie = cookie;
+      document.cookie = token;
+      window.location='/main';
+    } else {
+      if(res === 'pw') {
+        alert('비밀번호가 틀렸습니다');
+        location.reload();
+      } else if(res === 'id') {
+        alert('가입되지 않은 회원입니다');
+        location.reload();
+      }
+    }
+  })
+})
 
 // form 태그 스타일
 // styleCreate(formLoginPageWrapper.children[0], loginStyle.loginPageForm)
