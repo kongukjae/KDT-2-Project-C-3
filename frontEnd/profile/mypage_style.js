@@ -504,7 +504,7 @@ function myPage() {
                 let detailForm = document.createElement("form");
                 detailForm.method = "POST";
                 detailForm.action = "/detailPostDangstar";
-                let params = { postIndex: data[i].post_index };
+                let params = { cmIndex: data[i].cm_index };
                 for (let key in params) {
                   let hiddenField = document.createElement("input");
                   hiddenField.setAttribute("type", "hidden");
