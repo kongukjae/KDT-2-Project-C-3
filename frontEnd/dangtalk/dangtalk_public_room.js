@@ -296,8 +296,10 @@ function main(){
       justifyContent:'center',
       alignItems:'center'
     })
-    firstEnterText.innerText = data;
+    firstEnterText.innerText = data + " 님이 채팅방에 참여하셨습니다";
     rootChild[2].appendChild(firstEnterText);
+    rootChild[1].innerHTML = ''
+    createUserOrgchat(rootChild[1],roomCode)
   });
 
   window.addEventListener('load',()=>{
