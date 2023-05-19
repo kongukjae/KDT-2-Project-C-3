@@ -492,7 +492,7 @@ function myPage() {
             const dataa = JSON.parse(this.responseText);
             console.log(dataa);
             if (dataa.length === 0) {
-              tabContents[index].innerHTML = "작성한 댓글이 없습니다."; // 작성한 글이 없을 경우 처리
+              tabContents[index].innerHTML = "작성한 댓글이 없습니다.";
             } else {
               for (let i = 0; i < dataa.length; i++) {
                 tabContents[

@@ -1,5 +1,5 @@
-function commentInput(parent, postIndex){
-// function commentInput(postWrap, index, postIndex){
+function commentInput(parent, postIndex) {
+  // function commentInput(postWrap, index, postIndex){
   let test = document.cookie;
   console.log(test);
   let userID = test.split("jwt=")[1];
@@ -22,23 +22,27 @@ function commentInput(parent, postIndex){
     placeholder: "내용을 입력해주세요",
   });
   styleCreate(commentInput, dangstarStyle.dangstarCommentInput);
+
   commentForm.appendChild(commentInput);
 
   // 댓글 작성 버튼
-  const commentSubmit = tagCreate("div", {id: `commentSend_${postIndex}`});
+  const commentSubmit = tagCreate("div", { id: `commentSend_${postIndex}` });
   styleCreate(commentSubmit, dangstarStyle.dangstarCommentWriteBtn);
   commentSubmit.innerText = "작성";
   commentForm.appendChild(commentSubmit);
   let commentSendBtn = document.getElementById(`commentSend_${postIndex}`);
-  commentSendBtn.addEventListener('click', () => {
+  commentSendBtn.addEventListener("click", () => {
     console.log(document.getElementById(`comment_${postIndex}`).value);
-    let commentValueData = document.getElementById(`comment_${postIndex}`).value;
+    let commentValueData = document.getElementById(
+      `comment_${postIndex}`
+    ).value;
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `http://192.168.100.63:2080/commentSubmit`, true);
-    xhr.send(`commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`);
-    xhr.addEventListener('load', () => {
+    xhr.send(
+      `commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`
+    );
+    xhr.addEventListener("load", () => {
       location.reload();
-    })
-  })
-
+    });
+  });
 }
