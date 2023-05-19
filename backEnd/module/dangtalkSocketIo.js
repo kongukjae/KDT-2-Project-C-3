@@ -27,7 +27,7 @@ export default function chatWithSocketIo(server){
       console.log(data);
       let name = data.name;
       let room = data.room;
-      chat.to(room).emit('firstEnter', name +" 님이 채팅방에 참여하셨습니다");
+      chat.to(room).emit('firstEnter', name);
     })
 
     socket.on('chat message', function(data){
