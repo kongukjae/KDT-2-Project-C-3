@@ -2,8 +2,8 @@ import fs from "fs";
 
 const cmServer = {
   mysqlInfo: {
-    host: "localhost",
-    user: "root",
+    host: "192.168.100.63",
+    user: "guest",
     password: "0000",
     database: "mungta",
   },
