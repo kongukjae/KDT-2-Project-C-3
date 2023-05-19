@@ -46,6 +46,7 @@ formLoginPageWrapper.appendChild(loginFormTag);
 const logininputId = tagCreate('input', {id: 'loginId', type: 'text', name: 'user_id'});
 styleCreate(logininputId, loginStyle.loginPageFormId)
 logininputId.setAttribute('placeholder', ' 아이디를 입력하세요');
+logininputId.setAttribute('autofocus', '');
 loginFormTag.appendChild(logininputId);
 
 const logininputPw = tagCreate('input', {id: 'loginPw', type: 'text', name: 'user_pw'});
@@ -68,6 +69,7 @@ formInnerDiv.appendChild(signUpBtn);
 const findUser = tagCreate('a', {id: 'findUserInfo',href: '/findUserInfo', innerText: '아이디 / 비밀번호 찾기'})
 styleCreate(findUser, loginStyle.loginPageFormBtnFindUserInfo);
 loginFormTag.appendChild(findUser);
+
 
 
 // form 태그 스타일
