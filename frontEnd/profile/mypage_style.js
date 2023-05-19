@@ -33,7 +33,7 @@ function myPage() {
   // for (let i = 0; i < 2; i++) {
   let button = tagCreate("div");
   styleCreate(button, mypageStyle.mypageButton);
-  button.style.width = '240px'
+  button.style.width = "240px";
   rootChild[3].appendChild(button);
   // }
   rootChild[3].children[0].innerText = "사진 업로드";
@@ -496,12 +496,26 @@ function myPage() {
             console.log(dataa);
             if (dataa.length === 0) {
               tabContents[index].innerHTML = "작성한 댓글이 없습니다."; // 작성한 글이 없을 경우 처리
-            } else {
-              for (let i = 0; i < dataa.length; i++) {
-                tabContents[
-                  index
-                ].innerHTML += `내가쓴댓글: ${dataa[i].cm_detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
-              }
+            }
+            for (let i = 0; i < dataa.length; i++) {
+              const postDetail = document.createElement("div");
+              postDetail.innerHTML = `내가쓴글: ${dataa[i].cm_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
+              postDetail.addEventListener("click", function () {
+                let detailForm = document.createElement("form");
+                detailForm.method = "POST";
+                detailForm.action = "/detailPostDangstar";
+                let params = { postIndex: dataa[i].post_index };
+                for (let key in params) {
+                  let hiddenField = document.createElement("input");
+                  hiddenField.setAttribute("type", "hidden");
+                  hiddenField.setAttribute("name", key);
+                  hiddenField.setAttribute("value", params[key]);
+                  detailForm.appendChild(hiddenField);
+                }
+                document.body.appendChild(detailForm);
+                detailForm.submit();
+              });
+              tabContents[index].appendChild(postDetail);
             }
           }
         };
