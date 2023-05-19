@@ -7,7 +7,7 @@ function starCheck(parent) {
   // 즐겨찾기 버튼을 만들기 전 상대방을 즐겨찾기 등록을 했는지 안했는지 판단
   let starValue;
   const starXhr = new XMLHttpRequest();
-  starXhr.open('POST', `http://192.168.100.63:2080/starLoad`)
+  starXhr.open('POST', `http://localhost:2080/starLoad`)
   starXhr.send(`userID=${userID}&fr_id=${fr_id}`);
   starXhr.addEventListener('load', function() {
     console.log("star load 응답");
@@ -54,7 +54,7 @@ function starBtnCreate(parent, starValue, userID, fr_id) {
   star.addEventListener("click", () => {
     console.log("click");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://192.168.100.63:2080/starCheck`);
+    xhr.open("POST", `http://localhost:2080/starCheck`);
     xhr.send(`userID=${userID}&fr_id=${fr_id}`);
     xhr.addEventListener("load", function () {
       let starRes = JSON.parse(xhr.response);

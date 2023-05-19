@@ -37,11 +37,17 @@ function commentInput(parent, postIndex) {
       `comment_${postIndex}`
     ).value;
     const xhr = new XMLHttpRequest();
+<<<<<<< HEAD
     xhr.open("POST", `http://192.168.100.63:2080/commentSubmit`, true);
     xhr.send(
       `commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`
     );
     xhr.addEventListener("load", () => {
+=======
+    xhr.open("POST", `http://localhost:2080/commentSubmit`, true);
+    xhr.send(`commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`);
+    xhr.addEventListener('load', () => {
+>>>>>>> 78f414d41e17bf7a4b149d375da59ba6a79abf5d
       location.reload();
     });
   });

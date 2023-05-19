@@ -79,13 +79,28 @@ export default function postPostBoardLike(request, response) {
 
                 }
               }
-              response.writeHead(200);
-              if(likeResult){
-                response.end('true');
-              }
-              else{
-                response.end('false');
-              }
+
+              conn.query(`SELECT JSON_LENGTH(JSON_EXTRACT(post_like, '$.likeUser')) AS like_count FROM dangstar WHERE post_index = '${postNumber}'`,
+              (err, data) => {
+                if(err) throw err;
+                else{
+                  console.log("dangstar like count: ", data[0].like_count)
+                  let postLikeCount = data[0].like_count;
+                  let likeRes = {};
+
+                  response.writeHead(200);
+                  if(likeResult){
+                    likeRes['type'] = true;
+                    likeRes['cnt'] = postLikeCount;
+                    response.end(JSON.stringify(likeRes));
+                  }
+                  else{
+                    likeRes['type'] = false;
+                    likeRes['cnt'] = postLikeCount;
+                    response.end(JSON.stringify(likeRes));
+                  }
+                }
+              });
             }
             conn.end();
           }
@@ -105,7 +120,7 @@ export default function postPostBoardLike(request, response) {
       let likeUser = splitBody[2].split("=")[1]; //게시글에 하트 누른 사용자 ID
       likeUser = jwtFunc.jwtCheck(likeUser).id;
 
-      console.log("likeeeee: ", writeUser, postNumber, likeUser);
+      // console.log("likeeeee: ", writeUser, postNumber, likeUser);
 
       let conn = mysql.createConnection(cmServer.mysqlInfo);
         conn.connect();
@@ -115,29 +130,50 @@ export default function postPostBoardLike(request, response) {
             if(err) throw err;
             else{
               const postLike = data[0].post_like;
+              let postLikeCount;
+              let likeRe = {};
 
-              if(postLike === null || postLike.length === 0){
-                console.log("값이 없거나 null입니다", postLike)
-                response.writeHead(200);
-                response.end('false');
-              }
-              else{
-                const likeUserArr = JSON.parse(postLike).likeUser;
-                console.log(likeUserArr)
-                if (likeUserArr.includes(likeUser)) {
-                  //let cnt = likeUserArr.indexOf(likeUser);
-                  //console.log("cnt: ", cnt)
-                  response.writeHead(200);
-                  response.end('true');
-                }
+              conn.query(`SELECT JSON_LENGTH(JSON_EXTRACT(post_like, '$.likeUser')) AS like_count FROM dangstar WHERE post_index = '${postNumber}'`,
+              (err, data) => {
+                if(err) throw err;
                 else{
-                  response.writeHead(200);
-                  response.end('false');
+                  console.log("dangstar like count: ", data[0].like_count)
+                  postLikeCount = data[0].like_count;
+
+                  if(postLike === null || postLike.length === 0){
+                    console.log("값이 없거나 null입니다", postLike)
+
+                    likeRe['type'] = false;
+                    likeRe['cnt'] = postLikeCount;
+                    response.writeHead(200);
+                    response.end(JSON.stringify(likeRe));
+                  }
+                  else{
+                    const likeUserArr = JSON.parse(postLike).likeUser;
+                    console.log(likeUserArr)
+                    if (likeUserArr.includes(likeUser)) {
+                      
+                      likeRe['type'] = true;
+                      likeRe['cnt'] = postLikeCount;
+                      // console.log("cnt: ", likeRe)
+
+                      response.writeHead(200);
+                      response.end(JSON.stringify(likeRe));
+                    }
+                    else{
+                      likeRe['type'] = false;
+                      likeRe['cnt'] = postLikeCount;
+
+                      response.writeHead(200);
+                      response.end(JSON.stringify(likeRe));
+                    }
+                  }
                 }
               }
+              )
             }
         });
-        conn.end();
+        //conn.end();
     });
   }
 }

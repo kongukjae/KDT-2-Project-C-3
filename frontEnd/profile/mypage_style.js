@@ -19,7 +19,7 @@ function myPage() {
   const cookieId = document.cookie.split("=")[1].split(";")[0];
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://192.168.100.63:2080/sendImage`);
+  xhr.open("POST", `http://localhost:2080/sendImage`);
   xhr.responseType = "blob";
   xhr.send(`type=proFile&id=${cookieId}`);
   xhr.addEventListener("load", function () {
@@ -30,13 +30,14 @@ function myPage() {
     console.log("이미지 가져오기 완료");
   });
   styleCreate(rootChild[3], mypageStyle.mypageButtonWrap);
-  for (let i = 0; i < 2; i++) {
-    let button = tagCreate("div");
-    styleCreate(button, mypageStyle.mypageButton);
-    rootChild[3].appendChild(button);
-  }
+  // for (let i = 0; i < 2; i++) {
+  let button = tagCreate("div");
+  styleCreate(button, mypageStyle.mypageButton);
+  button.style.width = "240px";
+  rootChild[3].appendChild(button);
+  // }
   rootChild[3].children[0].innerText = "사진 업로드";
-  rootChild[3].children[1].innerText = "개인정보 수정";
+  // rootChild[3].children[1].innerText = "개인정보 수정";
 
   styleCreate(rootChild[4], mypageStyle.mypageUserinfoBox);
   rootChild[4].style.height = "400px";
@@ -123,7 +124,7 @@ function myPage() {
       reader.readAsDataURL(myImage.files[0]);
       imageFormData.append("id", cookieId);
       imageFormData.append("attachedImage", myImage.files[0]);
-      fetch("http://192.168.100.63:2080/uploadImage", {
+      fetch("http://localhost:2080/uploadImage", {
         method: "POST",
         body: imageFormData,
       })
@@ -191,7 +192,7 @@ function myPage() {
     console.log("마지막 날");
     xhr.open(
       "GET",
-      `http://192.168.100.63:2080/allloadMap?id=${cookieId}?first=${firstDayOfMonth}?last=${lastDayOfMonth}`
+      `http://localhost:2080/allloadMap?id=${cookieId}?first=${firstDayOfMonth}?last=${lastDayOfMonth}`
     );
     xhr.send();
     xhr.addEventListener("load", function () {
@@ -424,7 +425,7 @@ function myPage() {
       if (index === 0) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
-        xhrr.open("post", `http://192.168.100.63:2080/thirdmyWrite`);
+        xhrr.open("post", `http://localhost:2080/thirdmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
@@ -462,7 +463,7 @@ function myPage() {
       } else if (index === 1) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
-        xhrr.open("post", `http://192.168.100.63:2080/secondmyWrite`);
+        xhrr.open("post", `http://localhost:2080/secondmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
@@ -470,21 +471,23 @@ function myPage() {
             const data = JSON.parse(this.responseText);
             if (data.length === 0) {
               tabContents[index].innerHTML = "작성한 글이 없습니다.";
-            }
-            for (let i = 0; i < data.length; i++) {
-              const postDetail = document.createElement("div");
-              postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
-              postDetail.addEventListener("click", function () {
-                window.location.href = `/withIndexSecondHandPost?nth=${data[i].idx}`;
-              });
-              tabContents[index].appendChild(postDetail);
+            } else {
+              for (let i = 0; i < data.length; i++) {
+                const postDetail = document.createElement("a");
+
+                postDetail.href = `http://localhost:2080/secondHandPost?nth=${i}`;
+                postDetail.style.color = "inherit"; // 링크의 색상을 부모 요소의 색상으로 설정
+                postDetail.style.textDecoration = "none"; // 밑줄 제거
+                postDetail.innerHTML = `내가쓴글: ${data[i].detail}<br>`;
+                tabContents[index].appendChild(postDetail);
+              }
             }
           }
         };
       } else if (index === 2) {
         tabContents[index].innerHTML = "";
         const xhrr = new XMLHttpRequest();
-        xhrr.open("post", `http://192.168.100.63:2080/firstmyWrite`);
+        xhrr.open("post", `http://localhost:2080/firstmyWrite`);
         xhrr.setRequestHeader("Content-Type", "application/json");
         xhrr.send(`userID=${userID}`);
         xhrr.onreadystatechange = function () {
@@ -493,12 +496,26 @@ function myPage() {
             console.log(dataa);
             if (dataa.length === 0) {
               tabContents[index].innerHTML = "작성한 댓글이 없습니다.";
-            } else {
-              for (let i = 0; i < dataa.length; i++) {
-                tabContents[
-                  index
-                ].innerHTML += `내가쓴댓글: ${dataa[i].cm_detail}<br>`; // 댕스타글 컨텐츠에 데이터 추가
-              }
+            }
+            for (let i = 0; i < dataa.length; i++) {
+              const postDetail = document.createElement("div");
+              postDetail.innerHTML = `내가쓴글: ${dataa[i].post_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
+              postDetail.addEventListener("click", function () {
+                let detailForm = document.createElement("form");
+                detailForm.method = "POST";
+                detailForm.action = "/detailPostDangstar";
+                let params = { postIndex: data[i].post_index };
+                for (let key in params) {
+                  let hiddenField = document.createElement("input");
+                  hiddenField.setAttribute("type", "hidden");
+                  hiddenField.setAttribute("name", key);
+                  hiddenField.setAttribute("value", params[key]);
+                  detailForm.appendChild(hiddenField);
+                }
+                document.body.appendChild(detailForm);
+                detailForm.submit();
+              });
+              tabContents[index].appendChild(postDetail);
             }
           }
         };
@@ -605,7 +622,7 @@ function myPage() {
       "$1"
     );
     infoChild[5].children[0].addEventListener("click", () => {
-      fetch(`http://192.168.100.63:2080/userinfoUpdate`, {
+      fetch(`http://localhost:2080/userinfoUpdate`, {
         method: "POST",
         body: JSON.stringify({
           jwt: token,

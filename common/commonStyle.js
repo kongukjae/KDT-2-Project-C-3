@@ -1971,6 +1971,7 @@ const dangstarStyle = {
     height: stylePropertyUnion.height.heightP100,
   },
   dangstarFeedTextWrap: {
+    width: stylePropertyUnion.width.widthP100,
     padding: "25px",
     display: "flex",
     flexDirection: "column",
@@ -2001,14 +2002,18 @@ const dangstarStyle = {
     backgroundColor: "white",
     borderRadius: stylePropertyUnion.borderRadius.borderRadius15,
     border: "1px solid white",
+    textAlign: "center"
+
   },
   dangstarLikeImg: {
     width: stylePropertyUnion.width.widthP80,
+    // position: "relative",
+    // top: "5px"
   },
   dangstarCommentWrap: {
     padding: "25px 15px",
     width: stylePropertyUnion.width.widthP100,
-    order: "1",
+    order: "999",
   },
   dangstarCommentForm: {
     ...stylePropertyUnion.flexRowBetweenCenter,
@@ -2057,6 +2062,7 @@ const dangstarStyle = {
     padding: "10px",
     borderTop: "3px solid white",
     borderBottom: "3px solid white",
+    order: "500",
   },
   dangstarRecentCommentContentWrap: {
     width: stylePropertyUnion.width.widthP100,
