@@ -499,7 +499,7 @@ function myPage() {
             }
             for (let i = 0; i < dataa.length; i++) {
               const postDetail = document.createElement("div");
-              postDetail.innerHTML = `내가쓴글: ${dataa[i].post_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
+              postDetail.innerHTML = `내가쓴글: ${dataa[i].cm_detail},<br>`; // 댕스타글 컨텐츠에 데이터 추가
               postDetail.addEventListener("click", function () {
                 let detailForm = document.createElement("form");
                 detailForm.method = "POST";
