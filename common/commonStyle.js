@@ -1465,7 +1465,7 @@ const loginStyle = {
     fontSize: stylePropertyUnion.fontSizeSet.medium,
   },
   loginPageFormPw: {
-    marginBottom: stylePropertyUnion.marginBottom.marginBottom80,
+    marginBottom: "50px",
     height: stylePropertyUnion.height.height52,
     borderRadius: stylePropertyUnion.borderRadius.borderRadius52,
     border: "none",
