@@ -195,7 +195,7 @@ function map() {
           resultObject[0] = wrap;
           addNewMarkerArr.push(resultObject);
           countFootprintCount.innerText = textCount;
-          httpRequest.open("POST", `http://localhost:2080/menuMap`, true);
+          httpRequest.open("POST", `http://15.164.63.222:2080/menuMap`, true);
           httpRequest.send(JSON.stringify(resultObject)); //객체를 json으로 변환해서 서버로 전송
         } else if(textCount < 0) {
           alert(`오늘은 더 이상 마커를 찍을 수 없습니다.`);
@@ -262,7 +262,7 @@ function map() {
       resultObject[0] = wrap;
 
       const httpRequest = new XMLHttpRequest();
-      httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      httpRequest.open("POST", `http://15.164.63.222:2080/dragMarker`, true);
       // 객체를 JSON 형식으로 바꿔서 서버로 전송
       httpRequest.send(JSON.stringify(resultObject));
     });
@@ -320,7 +320,7 @@ function map() {
   }
   function allMarker(callback, type) {
     return new Promise(function (resolve, reject) {
-      fetch(`http://localhost:2080/${getURL[type]}?id=${targetId}`)
+      fetch(`http://15.164.63.222:2080/${getURL[type]}?id=${targetId}`)
       .then((response) => response.json())
       .then((result) =>{
         //console.log(result)
@@ -491,7 +491,7 @@ makeControlBtnsArr[0].addEventListener("click", () => {
   finishBtn.addEventListener('click',()=>{
     for(let i of deleteTarget){
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", `http://localhost:2080/mapDelete`);
+      xhr.open("POST", `http://15.164.63.222:2080/mapDelete`);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(JSON.stringify(i));
     }
@@ -552,7 +552,7 @@ makeControlBtnsArr[2].addEventListener("click", () => {
       resultObject[0] = wrap;
       dragTarget.push({0:wrap});
       // const httpRequest = new XMLHttpRequest();
-      // httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      // httpRequest.open("POST", `http://15.164.63.222:2080/dragMarker`, true);
       // // 객체를 JSON 형식으로 바꿔서 서버로 전송
       // console.log(resultObject);
       // httpRequest.send(JSON.stringify(resultObject));
@@ -586,7 +586,7 @@ makeControlBtnsArr[2].addEventListener("click", () => {
     console.log(dragTarget);
     for(let i of dragTarget){
       const httpRequest = new XMLHttpRequest();
-      httpRequest.open("POST", `http://localhost:2080/dragMarker`, true);
+      httpRequest.open("POST", `http://15.164.63.222:2080/dragMarker`, true);
       // 객체를 JSON 형식으로 바꿔서 서버로 전송
       console.log(i);
       httpRequest.send(JSON.stringify(i));
@@ -605,7 +605,7 @@ makeControlBtnsArr[2].addEventListener("click", () => {
   publicTalkAsync()
 
   async function publicTalkAsync(){
-    let publicTalkList = await fetch('http://localhost:2080/publicChatLocation')
+    let publicTalkList = await fetch('http://15.164.63.222:2080/publicChatLocation')
       .then((res)=>{return res.json()})
       .then((result)=>{
         let publicTalkIconArr = []
@@ -717,7 +717,7 @@ function putUserProfile(object){
 
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/sendImage`);
+    xhr.open("POST", `http://15.164.63.222:2080/sendImage`);
     xhr.responseType = "blob";
     xhr.send(`type=proFile&id=${targetArr[i]}`);
     xhr.addEventListener("load", function () {
@@ -799,7 +799,7 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   styleCreate(overlayImg, dangMapStyle.overlayImage);
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://localhost:2080/sendImage`);
+  xhr.open("POST", `http://15.164.63.222:2080/sendImage`);
   xhr.responseType = "blob";
   xhr.send(`type=proFile&id=${id}`);
   xhr.addEventListener("load", function () {
@@ -855,11 +855,11 @@ function createOverlay(id, mapNow, markerNow, lat, lng, time) {
   overlayfollowBtn.innerText = "팔로우";
 
   const JWT = document.cookie.split("=")[2]
-  let followRequestURL = 'http://localhost:2080/followRequest'
+  let followRequestURL = 'http://15.164.63.222:2080/followRequest'
   let followRequestMessage = '팔로우'
   
   if(markersObject.markers[id][0] === 0 || markersObject.markers[id][0] === 1){
-      followRequestURL = 'http://localhost:2080/unFollowRequest'
+      followRequestURL = 'http://15.164.63.222:2080/unFollowRequest'
       followRequestMessage = '팔로우 취소'
       overlayfollowBtn.innerText = "팔로우 취소";
   }

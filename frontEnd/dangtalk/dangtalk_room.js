@@ -42,7 +42,7 @@ function main(){
   // 하단 메뉴바
   btmMeun(rootChild[5])
   // 이전채팅 불러오기
-  fetch('http://localhost:2080/loadBeforeChatRequest', {
+  fetch('http://15.164.63.222:2080/loadBeforeChatRequest', {
     method: 'POST',
     body:  roomName
   }).then(response => response.json())
@@ -61,7 +61,7 @@ function main(){
 
 
   //채팅
-  let chat = io('http://localhost:2080/chat')
+  let chat = io('http://15.164.63.222:2080/chat')
   chat.emit("login", {
       name: `${userId}`,
       room: `${roomName}`})
@@ -108,7 +108,7 @@ function main(){
     "$1"
   );
   setTimeout(()=>{
-    fetch("http://localhost:2080/bottomMenuUnreadCircle", {
+    fetch("http://15.164.63.222:2080/bottomMenuUnreadCircle", {
       method: "POST",
       body: jwt,
     })
@@ -157,7 +157,7 @@ function createChatMsg(mother,targetId,fromMeorYou, msg){
   mother.appendChild(chatBox);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://localhost:2080/sendImage`);
+  xhr.open('POST', `http://15.164.63.222:2080/sendImage`);
   xhr.responseType = 'blob';
   xhr.send(`type=proFile&id=${targetId}`); 
   xhr.addEventListener('load', function(){

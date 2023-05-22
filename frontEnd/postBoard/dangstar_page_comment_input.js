@@ -34,7 +34,7 @@ function commentInput(parent, postIndex){
     console.log(document.getElementById(`comment_${postIndex}`).value);
     let commentValueData = document.getElementById(`comment_${postIndex}`).value;
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://localhost:2080/commentSubmit`, true);
+    xhr.open("POST", `http://15.164.63.222:2080/commentSubmit`, true);
     xhr.send(`commentValue=${commentValueData}&userID=${userID}&post_index=${postIndex}`);
     xhr.addEventListener('load', () => {
       location.reload();

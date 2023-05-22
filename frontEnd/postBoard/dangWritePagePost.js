@@ -193,7 +193,7 @@ const jwt = document.cookie.split("=")[2];
       moveToURL = '/secondHand'
       body = {jwt:token,titleText:yastContentInput.value,mainText:postContentInput.value,imageType:imageType};
     }
-    await fetch(`http://localhost:2080/${type}WriteSubmit`, {
+    await fetch(`http://15.164.63.222:2080/${type}WriteSubmit`, {
       method: 'POST',
       body: JSON.stringify(body)
     }).then(res => res.text())
@@ -206,7 +206,7 @@ const jwt = document.cookie.split("=")[2];
         imageFormData.append("attachedImage", 'null')
       }
       })
-    await fetch(`http://localhost:2080/${type}ImageSubmit`, {
+    await fetch(`http://15.164.63.222:2080/${type}ImageSubmit`, {
       method: 'POST',
       body: imageFormData
     }).then(res => res)
