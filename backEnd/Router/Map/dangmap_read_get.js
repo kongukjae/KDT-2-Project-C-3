@@ -22,45 +22,46 @@ export default function dangMap(request, response) {
         else {
           myRowCnt = data[0].count;
           console.log("a " + myRowCnt);
+          conn.query(
+            `select * from map_tables where id = '${targetId}' order by addData desc;`,
+            function (err, rows) {
+              if (err) throw err;
+              else {
+                if (myRowCnt <= 10) {
+                  for (let i = 0; i < myRowCnt; i++) {
+                    let myArr = [];
+                    myArr.push(
+                      rows[i].latitude,
+                      rows[i].longitude,
+                      rows[i].id,
+                      rows[i].addData
+                    );
+                    markerMyArr[i] = myArr;
+                  }
+                } else {
+                  for (let i = 0; i < 10; i++) {
+                    let myArr = [];
+                    myArr.push(
+                      rows[i].latitude,
+                      rows[i].longitude,
+                      rows[i].id,
+                      rows[i].addData
+                    );
+                    markerMyArr[i] = myArr;
+                  }
+                }
+                // console.log(markerMyArr)
+                response.writeHead(200);
+                response.write(JSON.stringify(markerMyArr));
+                response.end();
+                conn.end();
+              }
+            }
+          );
         }
       }
     );
-    conn.query(
-      `select * from map_tables where id = '${targetId}' order by addData desc;`,
-      function (err, rows) {
-        if (err) throw err;
-        else {
-          if (myRowCnt <= 10) {
-            for (let i = 0; i < myRowCnt; i++) {
-              let myArr = [];
-              myArr.push(
-                rows[i].latitude,
-                rows[i].longitude,
-                rows[i].id,
-                rows[i].addData
-              );
-              markerMyArr[i] = myArr;
-            }
-          } else {
-            for (let i = 0; i < 10; i++) {
-              let myArr = [];
-              myArr.push(
-                rows[i].latitude,
-                rows[i].longitude,
-                rows[i].id,
-                rows[i].addData
-              );
-              markerMyArr[i] = myArr;
-            }
-          }
-          // console.log(markerMyArr)
-          response.writeHead(200);
-          response.write(JSON.stringify(markerMyArr));
-          response.end();
-          conn.end();
-        }
-      }
-    );
+    
   } else if (request.url.startsWith("/allloadMap")) {
     let targetId = request.url.split("=")[1].split("?")[0];
     let first = request.url.split("=")[2].split("?")[0];
