@@ -129,7 +129,7 @@ function map() {
   map.setZoomable(false);
 
   //  이미지 링크 생성을 해서 넣으니까 되었다.
-  let imageSrc = "/image/graphic/dogpaw.png";
+  let imageSrc = "https://i.ibb.co/r3LdZHX/dogpaw.png";
   (imageSize = new kakao.maps.Size(30, 30)), // 마커이미지의 크기입니다
     // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다.
     (imageOption = { offset: new kakao.maps.Point(15, 15) }); // 마커이미지의 옵션입니다.
@@ -292,10 +292,10 @@ function map() {
     }
   }
   const markersImage = {
-    0: "/image/graphic/fr_dogpaw.png",
-    1: "/image/graphic/star_dogpaw.png",
-    2: "/image/graphic/ot_dogpaw.png",
-    3 : "/image/graphic/dogpaw.png"}
+    0: "https://i.ibb.co/K0rMQBg/fr-dogpaw.png",
+    1: "https://i.ibb.co/B3Ynt89/star-dogpaw.png",
+    2: "https://i.ibb.co/H7Dfx8v/ot-dogpaw.png",
+    3 : "https://i.ibb.co/r3LdZHX/dogpaw.png"}
   const getURL = {
     0: "frFootprint",
     1: "starFootprint",

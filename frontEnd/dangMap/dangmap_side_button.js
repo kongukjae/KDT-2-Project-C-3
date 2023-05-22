@@ -7,7 +7,7 @@ function sideButton(map){
   sideBtn.id = 'sideBtn'
   const addBtn = tagCreate("img", {});
   sideBtn.appendChild(addBtn);
-  addBtn.src = "/image/graphic/plus.png";
+  addBtn.src = "https://i.ibb.co/B2y79xJ/plus.png";
   styleCreate(addBtn, {
     width: "40px",
     height: "40px",

@@ -29,13 +29,13 @@ async function getWeatherAsync() {
   result.push(temp.response.body.items.item[4].fcstValue);
   if (sky.response.body.items.item[8].fcstValue < 6) {
     result.push("맑음");
-    weatherIcon.src = "/image/graphic/clear.png";
+    weatherIcon.src = "https://i.ibb.co/Stfvkfn/clear.png";
   } else if (sky.response.body.items.item[8].fcstValue < 9) {
     result.push("구름많음");
-    weatherIcon.src = "/image/graphic/cloud.png";
+    weatherIcon.src = "https://i.ibb.co/x2rVDZC/cloud.png";
   } else {
     result.push("흐림");
-    weatherIcon.src = "/image/graphic/lotsofcloud.png";
+    weatherIcon.src = "https://i.ibb.co/QpxCvky/lotsofcloud.png";
   }
 
   switch (rainOrSnow.response.body.items.item[6].fcstValue) {
@@ -45,17 +45,17 @@ async function getWeatherAsync() {
     case "1":
     case "5": 
       result.push("비")
-      weatherIcon.src = "/image/graphic/rain.png";
+      weatherIcon.src = "https://i.ibb.co/Y230gfR/rain.png";
     break;
     case "3":
     case "7": 
       result.push("눈")
-      weatherIcon.src = "/image/graphic/snow.png";
+      weatherIcon.src = "https://i.ibb.co/GHhbwPM/snow.png";
     break;
     case "2": 
     case "6": 
       result.push("비 또는 눈");
-      weatherIcon.src = "/image/graphic/rainorsnow.png";
+      weatherIcon.src = "https://i.ibb.co/nM2K2wb/rainorsnow.png";
     break;
   }
   console.log(rainOrSnow.response.body.items.item[6].fcstValue);

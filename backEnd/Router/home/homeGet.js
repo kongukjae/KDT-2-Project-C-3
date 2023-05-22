@@ -64,11 +64,11 @@ export default function homeGet(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
+          conn.end();
         }
       }
     );
 
-    conn.end();
   } else if (request.url.startsWith("/wholeFootprint")) {
     let targetId = request.url.split("=")[1];
     let otRowCnt;
@@ -106,9 +106,9 @@ export default function homeGet(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerOtArr));
           response.end();
+          conn.end();
         }
       }
     );
-    conn.end();
   }
 }

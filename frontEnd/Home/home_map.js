@@ -34,8 +34,8 @@ let map = new kakao.maps.Map(mapContainer, mapOption);
 map.setZoomable(false);
 
 //  이미지 링크 생성을 해서 넣으니까 되었다.
-let imageSrc = '/image/graphic/dogpaw.png';
-let otImageSrc = '/image/graphic/ot_dogpaw.png';
+let imageSrc = 'https://i.ibb.co/r3LdZHX/dogpaw.png';
+let otImageSrc = 'https://i.ibb.co/H7Dfx8v/ot-dogpaw.png';
 
 // 마커이미지의 주소입니다    
 imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
