@@ -57,10 +57,10 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
+          conn.end();
         }
       }
     );
-    conn.end();
   } else if (request.url.startsWith("/allloadMap")) {
     let targetId = request.url.split("=")[1].split("?")[0];
     let first = request.url.split("=")[2].split("?")[0];
@@ -145,10 +145,10 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerStarArr));
           response.end();
+          connection.end();
         }
       }
     );
-    connection.end();
   } else if (request.url.startsWith("/frFootprint")) {
     // console.log("url == " + request.url);
     let targetId = request.url.split("=")[1];
@@ -202,10 +202,10 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerFriendsArr));
           response.end();
+          connection.end();
         }
       }
     );
-    connection.end();
   } else if (request.url.startsWith("/otFootprint")) {
     // console.log("url == " + request.url);
     let targetId = request.url.split("=")[1];
@@ -260,9 +260,9 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerOtherArr));
           response.end();
+          connection.end();
         }
       }
     );
-    connection.end();
   }
 }
