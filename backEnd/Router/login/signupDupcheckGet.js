@@ -6,7 +6,7 @@ export default function dupCheck(request, response) {
   let connection = mysql.createConnection(cmServer.mysqlInfo);
   connection.connect();
   connection.query(
-    `SELECT * FROM userInfo WHERE id = "${checkID}"`,
+    `SELECT * FROM userinfo WHERE id = "${checkID}"`,
     (error, rows, fields) => {
       if (error) throw error;
       else {

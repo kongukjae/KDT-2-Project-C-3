@@ -30,14 +30,14 @@ export default function signupResult(request, response) {
     let connection = mysql.createConnection(cmServer.mysqlInfo);
     connection.connect();
     connection.query(
-      `INSERT INTO userInfo(id,PW,question,answer,dogName,dogGender) values("${userInfoCheck._id}","${userInfoCheck.pw}",${userInfoCheck.qe},"${userInfoCheck._as}","${userInfoCheck._dogName}",${userInfoCheck.dogGender})`,
+      `INSERT INTO userinfo(id,PW,question,answer,dogName,dogGender) values("${userInfoCheck._id}","${userInfoCheck.pw}",${userInfoCheck.qe},"${userInfoCheck._as}","${userInfoCheck._dogName}",${userInfoCheck.dogGender})`,
       (error) => {
         if (error) throw error;
         console.log("정상작동");
       }
     );
 
-    connection.query("SELECT * FROM userInfo", (error, rows, fields) => {
+    connection.query("SELECT * FROM userinfo", (error, rows, fields) => {
       if (error) throw error;
       else {
         console.log(rows);
