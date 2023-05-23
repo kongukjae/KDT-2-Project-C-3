@@ -86,8 +86,7 @@ export default function dangMap(request, response) {
             markerMyAllArr[i] = myArr;
           }
           response.writeHead(200);
-          response.write(JSON.stringify(markerMyAllArr));
-          response.end();
+          response.end(JSON.stringify(markerMyAllArr));
         }
       }
     );
@@ -143,8 +142,7 @@ export default function dangMap(request, response) {
             }
           }
           response.writeHead(200);
-          response.write(JSON.stringify(markerStarArr));
-          response.end();
+          response.end(JSON.stringify(markerStarArr));
           connection.end();
         }
       }
@@ -200,8 +198,7 @@ export default function dangMap(request, response) {
             }
           }
           response.writeHead(200);
-          response.write(JSON.stringify(markerFriendsArr));
-          response.end();
+          response.end(JSON.stringify(markerFriendsArr));
           connection.end();
         }
       }
@@ -258,8 +255,7 @@ export default function dangMap(request, response) {
             }
           }
           response.writeHead(200);
-          response.write(JSON.stringify(markerOtherArr));
-          response.end();
+          response.end(JSON.stringify(markerOtherArr));
           connection.end();
         }
       }
