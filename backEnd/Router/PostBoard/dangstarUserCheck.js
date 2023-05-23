@@ -15,8 +15,7 @@ export default function dangstarUserCheck(request, response) {
       let userID = jwtFunc.jwtCheck(body.split('=')[1]).id;
       console.log(userID);
       response.writeHead(200);
-      response.write(JSON.stringify(userID));
-      response.end();
+      response.end(JSON.stringify(userID));
     });
   }
 }
