@@ -62,8 +62,7 @@ export default function homeGet(request, response) {
           }
 
           response.writeHead(200);
-          response.write(JSON.stringify(markerMyArr));
-          response.end();
+          response.end(JSON.stringify(markerMyArr));
           conn.end();
         }
       }
@@ -104,8 +103,7 @@ export default function homeGet(request, response) {
             }
           }
           response.writeHead(200);
-          response.write(JSON.stringify(markerOtArr));
-          response.end();
+          response.end(JSON.stringify(markerOtArr));
           conn.end();
         }
       }
