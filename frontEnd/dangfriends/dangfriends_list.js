@@ -37,7 +37,7 @@ loadFriendsList(starFriends, friends);
 function loadFriendsList(starFriends, friends) {
   const xhr = new XMLHttpRequest();
   const cookie = document.cookie.split("=")[2];
-  const _URL = `http://15.164.63.222:2080/loadFriendsList`;
+  const _URL = `http://43.201.52.54:2080/loadFriendsList`;
   // let result = {};
   xhr.open("POST", _URL, true);
   xhr.send(`{id=${cookie}}`);
@@ -93,7 +93,7 @@ function createfriendsList(parent, userID, dogName, intro){
   friendsMore.innerText = '. . .';
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://15.164.63.222:2080/sendImage`);
+  xhr.open('POST', `http://43.201.52.54:2080/sendImage`);
   xhr.responseType = 'blob';
   xhr.send(`type=proFile&id=${userID}`); 
   xhr.addEventListener('load', function(){
@@ -141,7 +141,7 @@ function createfriendsList(parent, userID, dogName, intro){
 
   chatBtn.addEventListener('click',()=>{
     
-    fetch('http://15.164.63.222:2080/createChatRoomRequest', {
+    fetch('http://43.201.52.54:2080/createChatRoomRequest', {
       method: 'POST',
       body: JSON.stringify({jwt:jwt,targetId:userID})
     }).then((result)=>{

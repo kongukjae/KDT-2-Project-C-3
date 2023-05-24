@@ -104,7 +104,7 @@ function marketInfinityScroll() {
 
 function loadSecondHandBoard(nth) {
   let nextIndex = nth * 5 - 1;
-  fetch(`http://15.164.63.222:2080/loadSecondHandBoard?nth=${nth}`)
+  fetch(`http://43.201.52.54:2080/loadSecondHandBoard?nth=${nth}`)
     .then((response) => {
       return response.json();
     })

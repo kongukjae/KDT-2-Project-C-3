@@ -75,7 +75,7 @@ document.getElementById('loginBtn').addEventListener('click', (e) => {
   let idValue = document.getElementById('loginId').value;
   let pwValue = document.getElementById('loginPw').value;
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://15.164.63.222:2080/login`, true);
+  xhr.open("POST", `http://43.201.52.54:2080/login`, true);
   xhr.send(`user_id=${idValue}&user_pw=${pwValue}`);
   xhr.addEventListener('load', () => {
     let res = xhr.response;
