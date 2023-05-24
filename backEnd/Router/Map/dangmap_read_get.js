@@ -57,10 +57,10 @@ export default function dangMap(request, response) {
           response.writeHead(200);
           response.write(JSON.stringify(markerMyArr));
           response.end();
+          conn.end();
         }
       }
     );
-    conn.end();
   } else if (request.url.startsWith("/allloadMap")) {
     let targetId = request.url.split("=")[1].split("?")[0];
     let first = request.url.split("=")[2].split("?")[0];

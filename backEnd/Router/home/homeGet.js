@@ -62,6 +62,7 @@ export default function homeGet(request, response) {
           }
 
           response.writeHead(200);
+          response.setHeader("Content-Type", "application/json");
           response.write(JSON.stringify(markerMyArr));
           response.end();
         }

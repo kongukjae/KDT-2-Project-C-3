@@ -2,10 +2,7 @@ import htmlBox from "../../../common/htmlBox.js";
 import cmServer from "../../commonServer.js";
 import mysql from "mysql";
 
-
-
 export default function postBoard(request, response) {
-
   if (request.url.startsWith("/dangstar")) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(htmlBox.htmlFunc(htmlBox.postBoard));
@@ -15,7 +12,8 @@ export default function postBoard(request, response) {
     let nth = request.url.split("=")[1];
     let conn = mysql.createConnection(cmServer.mysqlInfo);
     conn.connect();
-    conn.query(`select * from dangstar order by post_date desc limit ${nth * 3},3`,
+    conn.query(
+      `select * from dangstar order by post_date desc limit ${nth * 3},3`,
       function (err, data) {
         if (err) throw err;
         else {
