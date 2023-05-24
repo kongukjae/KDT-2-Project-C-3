@@ -37,67 +37,83 @@ function createchatList(id, text, unread, type) {
   chatlistBoxComponent.appendChild(chatlastMsg);
   styleCreate(chatlastMsg, dangtalkStyle.chatlistlastMsg);
   chatlastMsg.innerText = text;
-  
+
   let chatlistCount = tagCreate("div", {});
   chatBox.appendChild(chatlistCount);
   styleCreate(chatlistCount, dangtalkStyle.chatlistCount);
   chatlistCount.innerText = unread;
-  if(unread === 0){
-    chatlistCount.style.display = 'none'
+  if (unread === 0) {
+    chatlistCount.style.display = "none";
   }
-  if(type==='public'){
-    chatlistUserImg.style.backgroundImage = `url(/image/resource/publicTalk.png)`
-  }else{
+  if (type === "public") {
+    chatlistUserImg.style.backgroundImage = `url(/image/resource/publicTalk.png)`;
+  } else {
     const xhr = new XMLHttpRequest();
-      xhr.open('POST', `http://15.164.63.222:2080/sendImage`);
-      xhr.responseType = 'blob';
-      xhr.send(`type=proFile&id=${id}`); 
-      xhr.addEventListener('load', function(){
-          let imageFromServer = URL.createObjectURL(xhr.response);
-          chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`
-          console.log("이미지 가져오기 완료");
-      });
+    xhr.open("POST", `http://13.124.220.4:2080/sendImage`);
+    xhr.responseType = "blob";
+    xhr.send(`type=proFile&id=${id}`);
+    xhr.addEventListener("load", function () {
+      let imageFromServer = URL.createObjectURL(xhr.response);
+      chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`;
+      console.log("이미지 가져오기 완료");
+    });
   }
   return chatBox;
 }
 
 async function getRoomListAsync() {
-  
   const jwt = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  
-  let chatRoomList = await fetch('http://15.164.63.222:2080/chatRoomRequest', {
-    method: 'POST',
-    body: jwt
-  }).then(response => response.json())
+
+  let chatRoomList = await fetch("http://13.124.220.4:2080/chatRoomRequest", {
+    method: "POST",
+    body: jwt,
+  }).then((response) => response.json());
   let targetRoomObject = {};
-  for(let i of chatRoomList){
+  for (let i of chatRoomList) {
     targetRoomObject[i.room_name] = new Roomdata();
     targetRoomObject[i.room_name].putBasicData(i);
   }
-  for(let i = 0;i<Object.keys(targetRoomObject).length;i++){
-    let recentText = await fetch('http://15.164.63.222:2080/chatRecentTextRequest', {
-      method: 'POST',
-      body: targetRoomObject[Object.keys(targetRoomObject)[i]].room
-    }).then(response => response.json());
+  for (let i = 0; i < Object.keys(targetRoomObject).length; i++) {
+    let recentText = await fetch(
+      "http://13.124.220.4:2080/chatRecentTextRequest",
+      {
+        method: "POST",
+        body: targetRoomObject[Object.keys(targetRoomObject)[i]].room,
+      }
+    ).then((response) => response.json());
 
-    if(recentText.length===0){
-      targetRoomObject[Object.keys(targetRoomObject)[i]].putRecentText('채팅 이력이 없습니다')
-    }else{
-      targetRoomObject[Object.keys(targetRoomObject)[i]].putRecentText(recentText[0].text)
+    if (recentText.length === 0) {
+      targetRoomObject[Object.keys(targetRoomObject)[i]].putRecentText(
+        "채팅 이력이 없습니다"
+      );
+    } else {
+      targetRoomObject[Object.keys(targetRoomObject)[i]].putRecentText(
+        recentText[0].text
+      );
     }
   }
-  
-  for(let i in targetRoomObject){
-    if(targetRoomObject[i].room.startsWith('!')){
-      let chatBoxForLink = createchatList(i,targetRoomObject[i].recentText,targetRoomObject[i].unread, 'public');
-      
+
+  for (let i in targetRoomObject) {
+    if (targetRoomObject[i].room.startsWith("!")) {
+      let chatBoxForLink = createchatList(
+        i,
+        targetRoomObject[i].recentText,
+        targetRoomObject[i].unread,
+        "public"
+      );
+
       let publicChatForm = document.createElement("form");
       publicChatForm.method = "POST";
       publicChatForm.action = "/dangTalkPublicChatRoom";
-      let params = {jwt: jwt,roomCode:targetRoomObject[i].room,roomName:i,firsttime:'false'};
+      let params = {
+        jwt: jwt,
+        roomCode: targetRoomObject[i].room,
+        roomName: i,
+        firsttime: "false",
+      };
       for (let key in params) {
         let hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
@@ -106,44 +122,48 @@ async function getRoomListAsync() {
         publicChatForm.appendChild(hiddenField);
       }
       document.body.appendChild(publicChatForm);
-      chatBoxForLink.addEventListener('click',()=>{
+      chatBoxForLink.addEventListener("click", () => {
         publicChatForm.submit();
-      })
-    }else{
-      let chatBoxForLink = createchatList(i,targetRoomObject[i].recentText,targetRoomObject[i].unread, 'private');
-      let chatBoxForm = document.createElement('form');
-      chatBoxForm.method = "POST"
+      });
+    } else {
+      let chatBoxForLink = createchatList(
+        i,
+        targetRoomObject[i].recentText,
+        targetRoomObject[i].unread,
+        "private"
+      );
+      let chatBoxForm = document.createElement("form");
+      chatBoxForm.method = "POST";
       chatBoxForm.action = "/dangTalkChatRoom";
-      let params = {jwt:jwt, targetId:i}
-      for(let key in params){
+      let params = { jwt: jwt, targetId: i };
+      for (let key in params) {
         let hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type","hidden");
-        hiddenField.setAttribute("name",key);
-        hiddenField.setAttribute("value",params[key]);
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", params[key]);
         chatBoxForm.appendChild(hiddenField);
       }
       document.body.appendChild(chatBoxForm);
-      chatBoxForLink.addEventListener('click',()=>{
+      chatBoxForLink.addEventListener("click", () => {
         chatBoxForm.submit();
       });
     }
   }
-  console.log(targetRoomObject)
+  console.log(targetRoomObject);
 }
-getRoomListAsync()
+getRoomListAsync();
 
 btmMeun(rootChild[2]);
 
-class Roomdata{
-  constructor(){
-  }
+class Roomdata {
+  constructor() {}
   //id, room, unread, unreadtime
   putBasicData(object) {
     this.room = object.room;
     this.unread = object.unread;
     this.unreadTime = changeDate(object.unread_time);
   }
-  putRecentText(value){
+  putRecentText(value) {
     this.recentText = value;
   }
 }

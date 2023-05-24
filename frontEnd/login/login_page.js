@@ -1,30 +1,30 @@
 // root 식별
-const rootLoginPage = document.getElementById('root');
+const rootLoginPage = document.getElementById("root");
 styleCreate(rootLoginPage, loginStyle.loginPageRoot);
 
 // 로고 영역 생성
-const logoLoginPageWaper = tagCreate('div', '');
+const logoLoginPageWaper = tagCreate("div", "");
 styleCreate(logoLoginPageWaper, loginStyle.loginPageLogoWrap);
 rootLoginPage.appendChild(logoLoginPageWaper);
 
-const logoLoginPage = tagCreate('img', '');
+const logoLoginPage = tagCreate("img", "");
 styleCreate(logoLoginPage, loginStyle.loginPageLogo);
-logoLoginPage.src = '/image/resource/MainLogo.png';
+logoLoginPage.src = "/image/resource/MainLogo.png";
 logoLoginPageWaper.appendChild(logoLoginPage);
 
 // 로그인 페이지 이미지 요소 생성
-const imgLoginPageWrapper = tagCreate('div', '');
+const imgLoginPageWrapper = tagCreate("div", "");
 styleCreate(imgLoginPageWrapper, loginStyle.loginPageImgWarp);
 
 rootLoginPage.appendChild(imgLoginPageWrapper);
-const imgLoginPage = tagCreate('img', '');
+const imgLoginPage = tagCreate("img", "");
 styleCreate(imgLoginPage, loginStyle.loginPageImg);
-imgLoginPage.src = '/image/resource/MainDogImg.jpg';
-imgLoginPage.alt = '로그인 페이지 이미지';
+imgLoginPage.src = "/image/resource/MainDogImg.jpg";
+imgLoginPage.alt = "로그인 페이지 이미지";
 imgLoginPageWrapper.appendChild(imgLoginPage);
 
 // 로그인 페이지 ID/PW 입력
-const formLoginPageWrapper = tagCreate('div', '');
+const formLoginPageWrapper = tagCreate("div", "");
 styleCreate(formLoginPageWrapper, loginStyle.loginPageFormWrap);
 rootLoginPage.appendChild(formLoginPageWrapper);
 // formLoginPageWrapper.innerHTML += `
@@ -39,68 +39,80 @@ rootLoginPage.appendChild(formLoginPageWrapper);
 // </form>
 // `;
 
-const loginFormTag = tagCreate('form', '');
-styleCreate(loginFormTag, loginStyle.loginPageForm)
+const loginFormTag = tagCreate("form", "");
+styleCreate(loginFormTag, loginStyle.loginPageForm);
 formLoginPageWrapper.appendChild(loginFormTag);
 
-const logininputId = tagCreate('input', {id: 'loginId', type: 'text', name: 'user_id'});
-styleCreate(logininputId, loginStyle.loginPageFormId)
-logininputId.setAttribute('placeholder', ' 아이디를 입력하세요');
-logininputId.setAttribute('autofocus', '');
+const logininputId = tagCreate("input", {
+  id: "loginId",
+  type: "text",
+  name: "user_id",
+});
+styleCreate(logininputId, loginStyle.loginPageFormId);
+logininputId.setAttribute("placeholder", " 아이디를 입력하세요");
+logininputId.setAttribute("autofocus", "");
 loginFormTag.appendChild(logininputId);
 
-const logininputPw = tagCreate('input', {id: 'loginPw', type: 'password', name: 'user_pw'});
-styleCreate(logininputPw, loginStyle.loginPageFormPw)
-logininputPw.setAttribute('placeholder', ' 비밀번호를 입력하세요');
+const logininputPw = tagCreate("input", {
+  id: "loginPw",
+  type: "password",
+  name: "user_pw",
+});
+styleCreate(logininputPw, loginStyle.loginPageFormPw);
+logininputPw.setAttribute("placeholder", " 비밀번호를 입력하세요");
 loginFormTag.appendChild(logininputPw);
 
-const formInnerDiv = tagCreate('div', '');
+const formInnerDiv = tagCreate("div", "");
 styleCreate(formInnerDiv, loginStyle.loginPageFormBtnWrap);
 loginFormTag.appendChild(formInnerDiv);
 
-const loginBtn = tagCreate('button', {id: 'loginBtn', innerText: '로그인'});
+const loginBtn = tagCreate("button", { id: "loginBtn", innerText: "로그인" });
 styleCreate(loginBtn, loginStyle.loginPageFormBtnLogin);
 formInnerDiv.appendChild(loginBtn);
 
-const signUpBtn = tagCreate('a', {href: '/signUp', innerText: '회원가입'});
+const signUpBtn = tagCreate("a", { href: "/signUp", innerText: "회원가입" });
 styleCreate(signUpBtn, loginStyle.loginPageFormBtnSignup);
 formInnerDiv.appendChild(signUpBtn);
 
-const findUser = tagCreate('a', {id: 'findUserInfo',href: '/findUserInfo', innerText: '아이디 / 비밀번호 찾기'})
+const findUser = tagCreate("a", {
+  id: "findUserInfo",
+  href: "/findUserInfo",
+  innerText: "아이디 / 비밀번호 찾기",
+});
 styleCreate(findUser, loginStyle.loginPageFormBtnFindUserInfo);
 loginFormTag.appendChild(findUser);
 
-document.getElementById('loginBtn').addEventListener('click', (e) => {
+document.getElementById("loginBtn").addEventListener("click", (e) => {
   e.preventDefault();
-  let idValue = document.getElementById('loginId').value;
-  let pwValue = document.getElementById('loginPw').value;
+  let idValue = document.getElementById("loginId").value;
+  let pwValue = document.getElementById("loginPw").value;
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", `http://15.164.63.222:2080/login`, true);
+  xhr.open("POST", `http://13.124.220.4:2080/login`, true);
   xhr.send(`user_id=${idValue}&user_pw=${pwValue}`);
-  xhr.addEventListener('load', () => {
+  xhr.addEventListener("load", () => {
     let res = xhr.response;
-    let resSplit = res.split('&')[0];
+    let resSplit = res.split("&")[0];
     console.log(resSplit);
     console.log(res);
-    if(resSplit === 'success') {
-      let cookie = res.split('&')[1].split('cookie=')[1];
-      let token = res.split('&')[1].split(';')[1]
+    if (resSplit === "success") {
+      let cookie = res.split("&")[1].split("cookie=")[1];
+      let token = res.split("&")[1].split(";")[1];
       console.log(cookie);
       console.log(token);
       document.cookie = cookie;
       document.cookie = token;
-      window.location='/main';
+      window.location = "/main";
     } else {
-      if(res === 'pw') {
-        alert('비밀번호가 틀렸습니다');
+      if (res === "pw") {
+        alert("비밀번호가 틀렸습니다");
         location.reload();
-      } else if(res === 'id') {
-        alert('가입되지 않은 회원입니다');
+      } else if (res === "id") {
+        alert("가입되지 않은 회원입니다");
         location.reload();
       }
     }
-  })
-})
+  });
+});
 
 // form 태그 스타일
 // styleCreate(formLoginPageWrapper.children[0], loginStyle.loginPageForm)

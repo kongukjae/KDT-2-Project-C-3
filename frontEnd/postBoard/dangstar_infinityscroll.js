@@ -11,27 +11,31 @@ function dangstarInfinityScroll() {
     // console.log("dangstarScrollPosition : " + dangstarScrollPosition)
     // console.log(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition))
     // console.log("trigger : " + trigger)
-    if(dangstarDocumentHeight - (dangstarWindowHeight + dangstarScrollPosition) <= 100 && trigger === false) {
+    if (
+      dangstarDocumentHeight -
+        (dangstarWindowHeight + dangstarScrollPosition) <=
+        100 &&
+      trigger === false
+    ) {
       trigger = true;
       // console.log("inner : " + trigger)
       // console.log("cnt : " + cnt)
       // console.log("페이지 로딩");
       loadDangstargram(cnt);
-      cnt ++;
+      cnt++;
     }
   }
-  document.addEventListener('scroll', throttle(dangstarScroll, 500));
+  document.addEventListener("scroll", throttle(dangstarScroll, 500));
 }
 
 dangstarInfinityScroll();
-
 
 loadDangstargram(0);
 
 function loadDangstargram(nth) {
   const xhr = new XMLHttpRequest();
   // let result = {};
-  xhr.open("GET", `http://15.164.63.222:2080/loadPostBoard?nth=${nth}`);
+  xhr.open("GET", `http://13.124.220.4:2080/loadPostBoard?nth=${nth}`);
   xhr.send();
   xhr.addEventListener("load", function () {
     let res = JSON.parse(xhr.response);
@@ -40,14 +44,26 @@ function loadDangstargram(nth) {
       console.log("resres resres");
       // postCreate(부모요소, src_link(이미지 링크), writerNickname(작성자 이름), text(게시글 내용), index(인덱싱), postIndex(DB인덱싱))
       // postCreate(root, "../resource/MainDogImg.jpg", res[i].post_id, res[i].post_detail, "../resource/MainDogImg.jpg", res[i].cm_id, res[i].cm_detail, i, res[i].post_index);
-      if(res[i].img === 'null'){
-        postCreate(postWrap, "/image/image/default/null.png", res[i].post_id, res[i].post_detail, i, res[i].post_index);
-      }
-      else{
-        postCreate(postWrap, `/image/image/dangstar/${res[i].img}`, res[i].post_id, res[i].post_detail, i, res[i].post_index);
+      if (res[i].img === "null") {
+        postCreate(
+          postWrap,
+          "/image/image/default/null.png",
+          res[i].post_id,
+          res[i].post_detail,
+          i,
+          res[i].post_index
+        );
+      } else {
+        postCreate(
+          postWrap,
+          `/image/image/dangstar/${res[i].img}`,
+          res[i].post_id,
+          res[i].post_detail,
+          i,
+          res[i].post_index
+        );
       }
     }
   });
   trigger = false;
 }
-

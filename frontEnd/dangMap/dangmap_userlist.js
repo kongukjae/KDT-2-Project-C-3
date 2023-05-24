@@ -1,6 +1,5 @@
-
-function createUserOrgchat(positionNow, roomName, roomCode){
-  let chatList = tagCreate("div", {id: 'chatList'});
+function createUserOrgchat(positionNow, roomName, roomCode) {
+  let chatList = tagCreate("div", { id: "chatList" });
   // document.body.appendChild(chatList);
   styleCreate(chatList, dangMapStyle.userList);
 
@@ -12,67 +11,78 @@ function createUserOrgchat(positionNow, roomName, roomCode){
   }
   //채팅방 제목 영억
   styleCreate(chatChild[0], dangMapStyle.chatRoomTitleBox);
-  
+
   //채팅방 이름
   let chatTitle = tagCreate("div", {});
   chatChild[0].appendChild(chatTitle);
   styleCreate(chatTitle, dangMapStyle.chatRoomTitle);
-  chatTitle.innerText = roomName + "방 입니다"
+  chatTitle.innerText = roomName + "방 입니다";
 
   //채팅 참가 버튼
   let attend = tagCreate("button", {});
   chatChild[0].appendChild(attend);
   styleCreate(attend, dangMapStyle.chatJoinBtn);
-  attend.innerText = "참가"
-  attend.addEventListener('click',moveToPublicChat);
-  async function moveToPublicChat(){
+  attend.innerText = "참가";
+  attend.addEventListener("click", moveToPublicChat);
+  async function moveToPublicChat() {
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
-    await fetch(`http://15.164.63.222:2080/createPublicChatRoomRequest`,{
+    await fetch(`http://13.124.220.4:2080/createPublicChatRoomRequest`, {
       method: "POST",
-      body: JSON.stringify({jwt:token,roomCode:roomCode,roomName:roomName})
-    }).then((res)=>{return res.text()})
-    .then((result)=>{
-      let publicChatForm = document.createElement("form");
-      publicChatForm.method = "POST";
-      publicChatForm.action = "/dangTalkPublicChatRoom";
-      let params = {jwt: token,roomCode:roomCode,roomName:roomName,firsttime:result};
-      for (let key in params) {
-        let hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("value", encodeURI(params[key]));
-        publicChatForm.appendChild(hiddenField);
-      }
-      document.body.appendChild(publicChatForm)
-      publicChatForm.submit();
+      body: JSON.stringify({
+        jwt: token,
+        roomCode: roomCode,
+        roomName: roomName,
+      }),
     })
-  };
+      .then((res) => {
+        return res.text();
+      })
+      .then((result) => {
+        let publicChatForm = document.createElement("form");
+        publicChatForm.method = "POST";
+        publicChatForm.action = "/dangTalkPublicChatRoom";
+        let params = {
+          jwt: token,
+          roomCode: roomCode,
+          roomName: roomName,
+          firsttime: result,
+        };
+        for (let key in params) {
+          let hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", encodeURI(params[key]));
+          publicChatForm.appendChild(hiddenField);
+        }
+        document.body.appendChild(publicChatForm);
+        publicChatForm.submit();
+      });
+  }
   //나가기 버튼
   let exit = tagCreate("button", {});
   chatChild[0].appendChild(exit);
   styleCreate(exit, dangMapStyle.chatJoinBtn);
   exit.innerText = "X";
-  exit.addEventListener('click',()=>{
+  exit.addEventListener("click", () => {
     chatList.remove();
-  })
+  });
 
   //채팅 참여자 리스트 영역
   //chatChild[1].id = "chatList";
   styleCreate(chatChild[1], dangMapStyle.chatPeopleListContainer);
 
   const http = new XMLHttpRequest();
-  const url = `http://15.164.63.222:2080/mapChatList`;
-
+  const url = `http://13.124.220.4:2080/mapChatList`;
 
   http.open("POST", url);
   http.send(`roomName=${roomCode}`);
-  http.addEventListener('load', () => {
+  http.addEventListener("load", () => {
     let roomList = JSON.parse(http.response);
     for (const key in roomList) {
-      createUserOrgchatList(chatChild[1], roomList[key][0], roomList[key][1]);        
+      createUserOrgchatList(chatChild[1], roomList[key][0], roomList[key][1]);
     }
   });
 
@@ -85,9 +95,7 @@ function createUserOrgchat(positionNow, roomName, roomCode){
   return customOverlay;
 }
 
-
-function createUserOrgchatList(parent, userID, dogName){
-
+function createUserOrgchatList(parent, userID, dogName) {
   let box = tagCreate("div", {});
   parent.appendChild(box);
   styleCreate(box, dangMapStyle.chatPeopleListBox);
@@ -121,10 +129,10 @@ function createUserOrgchatList(parent, userID, dogName){
   console.log("cookie: ", target);
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://15.164.63.222:2080/sendImage`);
-  xhr.responseType = 'blob';
-  xhr.send(`type=proFile&id=${target}`); 
-  xhr.addEventListener('load', function(){
+  xhr.open("POST", `http://13.124.220.4:2080/sendImage`);
+  xhr.responseType = "blob";
+  xhr.send(`type=proFile&id=${target}`);
+  xhr.addEventListener("load", function () {
     let imageFromServer = URL.createObjectURL(xhr.response);
     chatlistUserImg.style.backgroundImage = `url(${imageFromServer})`;
     console.log("이미지 가져오기 완료");

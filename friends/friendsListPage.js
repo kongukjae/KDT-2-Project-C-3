@@ -2,12 +2,11 @@ let root = tagCreate("div", { id: "root" });
 document.body.appendChild(root);
 styleCreate(root, {
   width: pageStyle.width.width500,
-    // height: pageStyle.height.height2000,
-    margin: "auto",
-    display: "flex",
-    flexDirection: "column",
-    position: "relative",
-
+  // height: pageStyle.height.height2000,
+  margin: "auto",
+  display: "flex",
+  flexDirection: "column",
+  position: "relative",
 });
 
 let rootChild = [];
@@ -21,65 +20,70 @@ for (let i = 0; i < 3; i++) {
 styleCreate(rootChild[1], {
   ...pageStyle.flexColCenter,
   width: pageStyle.width.widthP100,
-})
+});
 
 //즐겨찾기한 팔로우 자리
-let starFriends = tagCreate("div", {id:"star"});
+let starFriends = tagCreate("div", { id: "star" });
 rootChild[1].appendChild(starFriends);
 styleCreate(starFriends, {
   ...pageStyle.flexColCenter,
-width: pageStyle.width.widthP100,
-marginTop: "10px"
+  width: pageStyle.width.widthP100,
+  marginTop: "10px",
 });
 
 //구분선
 let grid = tagCreate("div", {});
 rootChild[1].appendChild(grid);
 styleCreate(grid, {
-width: pageStyle.width.widthP95,
-height: pageStyle.height.height3,
-border: `2px solid ${pageStyle.colorTheme.lightGray}`,
-margin: '10px 0 10px 0'
+  width: pageStyle.width.widthP95,
+  height: pageStyle.height.height3,
+  border: `2px solid ${pageStyle.colorTheme.lightGray}`,
+  margin: "10px 0 10px 0",
 });
 
 //일반 팔로우 자리
-let friends = tagCreate("div", {id:"friends"});
+let friends = tagCreate("div", { id: "friends" });
 rootChild[1].appendChild(friends);
 styleCreate(friends, {
   ...pageStyle.flexColCenter,
-width: pageStyle.width.widthP100,
+  width: pageStyle.width.widthP100,
 });
 
 //상단 메뉴바
 topMenu(rootChild[0]);
 createHamburger(root);
 
-
 loadFriendsList(starFriends, friends);
 
 function loadFriendsList(starFriends, friends) {
   const xhr = new XMLHttpRequest();
   const cookie = document.cookie.split("=")[2];
-  const _URL = `http://15.164.63.222:2080/loadFriendsList`;
+  const _URL = `http://13.124.220.4:2080/loadFriendsList`;
   // let result = {};
   xhr.open("POST", _URL, true);
   xhr.send(`{id=${cookie}}`);
   xhr.addEventListener("load", function () {
-    const friendsList = JSON.parse(this.response)
+    const friendsList = JSON.parse(this.response);
 
-    for(let i = 0; i < friendsList.starId.length; i++){
-      createfriendsList(starFriends, friendsList.starDogName[i], friendsList.starIntro[i]);
+    for (let i = 0; i < friendsList.starId.length; i++) {
+      createfriendsList(
+        starFriends,
+        friendsList.starDogName[i],
+        friendsList.starIntro[i]
+      );
     }
 
-    for(let i = 0; i < friendsList.stdId.length; i++){
-      createfriendsList(friends, friendsList.stdDogName[i], friendsList.stdIntro[i]);
+    for (let i = 0; i < friendsList.stdId.length; i++) {
+      createfriendsList(
+        friends,
+        friendsList.stdDogName[i],
+        friendsList.stdIntro[i]
+      );
     }
-    
   });
 }
 
-function createfriendsList(parent, dogName, intro){
-
+function createfriendsList(parent, dogName, intro) {
   let box = tagCreate("div", {});
   parent.appendChild(box);
   styleCreate(box, {
@@ -88,7 +92,7 @@ function createfriendsList(parent, dogName, intro){
     borderRadius: pageStyle.borderRadius.borderRadius15,
     margin: "10px 0 10px 0",
     ...pageStyle.flexRowCenter,
-    textDecoration: 'none',
+    textDecoration: "none",
     color: pageStyle.colorTheme.black,
     backgroundColor: pageStyle.colorTheme.beige,
     boxShadow: pageStyle.defaultBoxShadow.defBoxSdw,
@@ -113,7 +117,7 @@ function createfriendsList(parent, dogName, intro){
     flexDirection: "column",
     // justifyContent: "center",
     alignItems: "center",
-    margin: "20px 0 0 10px"
+    margin: "20px 0 0 10px",
   });
 
   // let userSapce = tagCreate("div", {})
@@ -129,7 +133,7 @@ function createfriendsList(parent, dogName, intro){
     height: pageStyle.height.heightP30,
     fontSize: pageStyle.fontSizeSet.small,
     fontWeight: "700",
-    marginBottom: "5px"
+    marginBottom: "5px",
     // ...pageStyle.flexColCenter,
   });
   chatlistUserName.innerText = dogName;
@@ -149,18 +153,18 @@ function createfriendsList(parent, dogName, intro){
     width: pageStyle.width.width30,
     height: pageStyle.height.height30,
     ...pageStyle.flexRowCenter,
-    margin: '5px',
+    margin: "5px",
     fontSize: pageStyle.fontSizeSet.small,
     fontWeight: "800",
-    textAlign: 'center',
-    cursor: "pointer"
+    textAlign: "center",
+    cursor: "pointer",
   });
-  chatlistCount.innerText = '. . .';
+  chatlistCount.innerText = ". . .";
 
   // chatlistCount.addEventListener('click', createModalWindow)
 }
 
-function createModalWindow(){
+function createModalWindow() {
   // 모달창 생성
   const modal = document.createElement("div");
   modal.classList.add("modal");
@@ -206,12 +210,10 @@ function createModalWindow(){
     modal.remove();
   });
 
-  profileBtn.addEventListener("click",()=>{
+  profileBtn.addEventListener("click", () => {
     mypageForm.submit();
-  })
-
+  });
 }
 
-
 // 하단 메뉴바
-btmMeun(rootChild[2])
+btmMeun(rootChild[2]);

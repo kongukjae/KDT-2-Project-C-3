@@ -10,10 +10,10 @@ for (let i = 0; i < 3; i++) {
 }
 
 //댕프렌드 리스트 자리
-styleCreate(rootChild[1], dangfriendsStyle.friendsWrapArea)
+styleCreate(rootChild[1], dangfriendsStyle.friendsWrapArea);
 
 //즐겨찾기한 팔로우 자리
-let starFriends = tagCreate("div", {id:"star"});
+let starFriends = tagCreate("div", { id: "star" });
 rootChild[1].appendChild(starFriends);
 styleCreate(starFriends, dangfriendsStyle.starFriendsArea);
 
@@ -23,7 +23,7 @@ rootChild[1].appendChild(grid);
 styleCreate(grid, dangfriendsStyle.divisLine);
 
 //일반 팔로우 자리
-let friends = tagCreate("div", {id:"friends"});
+let friends = tagCreate("div", { id: "friends" });
 rootChild[1].appendChild(friends);
 styleCreate(friends, dangfriendsStyle.stdFriendsArea);
 
@@ -31,35 +31,43 @@ styleCreate(friends, dangfriendsStyle.stdFriendsArea);
 topMenu(rootChild[0]);
 createHamburger(root);
 
-
 loadFriendsList(starFriends, friends);
 
 function loadFriendsList(starFriends, friends) {
   const xhr = new XMLHttpRequest();
   const cookie = document.cookie.split("=")[2];
-  const _URL = `http://15.164.63.222:2080/loadFriendsList`;
+  const _URL = `http://13.124.220.4:2080/loadFriendsList`;
   // let result = {};
   xhr.open("POST", _URL, true);
   xhr.send(`{id=${cookie}}`);
   xhr.addEventListener("load", function () {
-    const friendsList = JSON.parse(this.response)
+    const friendsList = JSON.parse(this.response);
 
-    for(let i = 0; i < friendsList.starId.length; i++){
-      createfriendsList(starFriends, friendsList.starId[i], friendsList.starDogName[i], friendsList.starIntro[i]);
+    for (let i = 0; i < friendsList.starId.length; i++) {
+      createfriendsList(
+        starFriends,
+        friendsList.starId[i],
+        friendsList.starDogName[i],
+        friendsList.starIntro[i]
+      );
     }
 
-    for(let i = 0; i < friendsList.stdId.length; i++){
-      createfriendsList(friends, friendsList.stdId[i], friendsList.stdDogName[i], friendsList.stdIntro[i]);
+    for (let i = 0; i < friendsList.stdId.length; i++) {
+      createfriendsList(
+        friends,
+        friendsList.stdId[i],
+        friendsList.stdDogName[i],
+        friendsList.stdIntro[i]
+      );
     }
   });
 }
 
-function createfriendsList(parent, userID, dogName, intro){
-
+function createfriendsList(parent, userID, dogName, intro) {
   let box = tagCreate("div", {});
   parent.appendChild(box);
   styleCreate(box, dangfriendsStyle.friendsProfile);
-  box.style.position = 'relative'
+  box.style.position = "relative";
   let profileimg = tagCreate("div", {});
   box.appendChild(profileimg);
   styleCreate(profileimg, dangfriendsStyle.profileImage);
@@ -68,9 +76,9 @@ function createfriendsList(parent, userID, dogName, intro){
   box.appendChild(profileText);
   styleCreate(profileText, dangfriendsStyle.profileTextArea);
 
-  let userSapce = tagCreate("div", {})
+  let userSapce = tagCreate("div", {});
   profileText.appendChild(userSapce);
-  styleCreate(userSapce, dangfriendsStyle.profileNameArea)
+  styleCreate(userSapce, dangfriendsStyle.profileNameArea);
 
   let friendListDogName = tagCreate("div", {});
   userSapce.appendChild(friendListDogName);
@@ -90,16 +98,16 @@ function createfriendsList(parent, userID, dogName, intro){
   let friendsMore = tagCreate("div", {});
   box.appendChild(friendsMore);
   styleCreate(friendsMore, dangfriendsStyle.profileMore);
-  friendsMore.innerText = '. . .';
+  friendsMore.innerText = ". . .";
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', `http://15.164.63.222:2080/sendImage`);
-  xhr.responseType = 'blob';
-  xhr.send(`type=proFile&id=${userID}`); 
-  xhr.addEventListener('load', function(){
+  xhr.open("POST", `http://13.124.220.4:2080/sendImage`);
+  xhr.responseType = "blob";
+  xhr.send(`type=proFile&id=${userID}`);
+  xhr.addEventListener("load", function () {
     let imageFromServer = URL.createObjectURL(xhr.response);
-    console.log(imageFromServer)
-    console.log("imageFromServer")
+    console.log(imageFromServer);
+    console.log("imageFromServer");
     profileimg.style.backgroundImage = `url(${imageFromServer})`;
     console.log("이미지 가져오기 완료");
   });
@@ -107,7 +115,7 @@ function createfriendsList(parent, userID, dogName, intro){
   // 모달창 생성
   const modal = document.createElement("div");
   modal.classList.add("modal");
-  styleCreate(modal, {    
+  styleCreate(modal, {
     width: stylePropertyUnion.width.width120,
     height: stylePropertyUnion.height.height126,
     backgroundColor: stylePropertyUnion.colorTheme.white,
@@ -118,9 +126,9 @@ function createfriendsList(parent, userID, dogName, intro){
     right: "0px",
     display: "none",
     zIndex: "5",
-    ...stylePropertyUnion.flexColCenter
+    ...stylePropertyUnion.flexColCenter,
   });
- 
+
   // 버튼 생성
   const profileBtn = document.createElement("div");
   profileBtn.textContent = "프로필 보기";
@@ -139,29 +147,27 @@ function createfriendsList(parent, userID, dogName, intro){
     "$1"
   );
 
-  chatBtn.addEventListener('click',()=>{
-    
-    fetch('http://15.164.63.222:2080/createChatRoomRequest', {
-      method: 'POST',
-      body: JSON.stringify({jwt:jwt,targetId:userID})
-    }).then((result)=>{
+  chatBtn.addEventListener("click", () => {
+    fetch("http://13.124.220.4:2080/createChatRoomRequest", {
+      method: "POST",
+      body: JSON.stringify({ jwt: jwt, targetId: userID }),
+    }).then((result) => {
       console.log(result);
-      let chatBoxForm = document.createElement('form');
-      chatBoxForm.method = "POST"
+      let chatBoxForm = document.createElement("form");
+      chatBoxForm.method = "POST";
       chatBoxForm.action = "/dangTalkChatRoom";
-      let params = {jwt:jwt, targetId:userID};
-      for(let key in params){
+      let params = { jwt: jwt, targetId: userID };
+      for (let key in params) {
         let hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type","hidden");
-        hiddenField.setAttribute("name",key);
-        hiddenField.setAttribute("value",params[key]);
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", params[key]);
         chatBoxForm.appendChild(hiddenField);
       }
       document.body.appendChild(chatBoxForm);
       chatBoxForm.submit();
-    })
-  })
-
+    });
+  });
 
   // 버튼을 모달창에 추가
   const modalContent = document.createElement("div");
@@ -171,19 +177,19 @@ function createfriendsList(parent, userID, dogName, intro){
   modalContent.appendChild(chatBtn);
   modalContent.appendChild(reportBtn);
 
-  let mypageForm = document.createElement('form');
-    
+  let mypageForm = document.createElement("form");
+
   mypageForm.method = "POST";
   mypageForm.action = "/mypage";
-  let params = {jwt:jwt, targetId:userID}
-  for(let key in params){
+  let params = { jwt: jwt, targetId: userID };
+  for (let key in params) {
     let hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type","hidden");
-    hiddenField.setAttribute("name",key);
-    hiddenField.setAttribute("value",params[key]);
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", key);
+    hiddenField.setAttribute("value", params[key]);
     mypageForm.appendChild(hiddenField);
   }
-  friendsMore.style.cursor = 'pointer'
+  friendsMore.style.cursor = "pointer";
 
   modalContent.appendChild(mypageForm);
 
@@ -203,9 +209,9 @@ function createfriendsList(parent, userID, dogName, intro){
   exitBtn.addEventListener("click", function () {
     modal.remove();
   });
-  profileBtn.addEventListener("click",()=>{
+  profileBtn.addEventListener("click", () => {
     mypageForm.submit();
-  })
+  });
 }
 
 // function createModalWindow(friendsMore){
@@ -260,4 +266,4 @@ function createfriendsList(parent, userID, dogName, intro){
 
 // }
 // 하단 메뉴바
-btmMeun(rootChild[2])
+btmMeun(rootChild[2]);

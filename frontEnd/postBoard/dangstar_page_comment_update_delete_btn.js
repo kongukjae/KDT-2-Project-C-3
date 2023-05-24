@@ -12,7 +12,7 @@ function commentUpdateDelete(parent, commentIndex) {
   commentViewEdit.innerText = "수정";
   commentViewEdit.onclick = function () {
     console.log("수정 요청 보냄");
-    fetch(`http://15.164.63.222:2080/commentUpdateBtn`, {
+    fetch(`http://13.124.220.4:2080/commentUpdateBtn`, {
       method: "POST",
       body: JSON.stringify({
         userID: userIdSend,
@@ -61,28 +61,33 @@ function commentUpdateDelete(parent, commentIndex) {
     commentForm.appendChild(commentInput);
 
     // 댓글 수정 입력 버튼
-    const commentSubmit = tagCreate("div", { id: `commentSend_${commentIndex}` });
+    const commentSubmit = tagCreate("div", {
+      id: `commentSend_${commentIndex}`,
+    });
     styleCreate(commentSubmit, dangstarStyle.dangstarCommentUpdateBtn);
     commentSubmit.innerText = "수정";
     commentForm.appendChild(commentSubmit);
 
-    let commentUpdateSendBtn = document.getElementById(`commentSend_${commentIndex}`);
+    let commentUpdateSendBtn = document.getElementById(
+      `commentSend_${commentIndex}`
+    );
     commentUpdateSendBtn.addEventListener("click", () => {
       console.log("수정 버튼 눌림 수정 버튼 눌림 수정 버튼 눌림");
-      let commentValueData = document.getElementById(`comment_${commentIndex}`).value;
+      let commentValueData = document.getElementById(
+        `comment_${commentIndex}`
+      ).value;
       console.log(commentValueData);
-      fetch(`http://15.164.63.222:2080/commentUpdateSubmit`, {
+      fetch(`http://13.124.220.4:2080/commentUpdateSubmit`, {
         method: "POST",
         body: JSON.stringify({
           userID: userIdSend,
           cm_index: commentIndex,
           cm_detail: commentValueData,
-        })
-      })
-      .then(response => {
-        console.log("댓글 수정 응답 받음")
+        }),
+      }).then((response) => {
+        console.log("댓글 수정 응답 받음");
         location.reload();
-      })
+      });
     });
   }
 
@@ -94,7 +99,7 @@ function commentUpdateDelete(parent, commentIndex) {
   commentViewDelet.onclick = function () {
     console.log("삭제 요청 보냄");
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://15.164.63.222:2080/commentDelete`);
+    xhr.open("POST", `http://13.124.220.4:2080/commentDelete`);
     xhr.send(`userID=${userIdSend}&commentIndex=${commentIndex}`);
     xhr.addEventListener("load", () => {
       console.log("삭제 응답 받음");

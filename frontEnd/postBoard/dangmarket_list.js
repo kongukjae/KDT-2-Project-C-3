@@ -73,8 +73,6 @@ function createSecondHandList(result, count) {
 // 하단 메뉴바
 btmMeun(rootChild[2]);
 
-
-
 let marketTrigger = false;
 function marketInfinityScroll() {
   let cnt = 1;
@@ -104,7 +102,7 @@ function marketInfinityScroll() {
 
 function loadSecondHandBoard(nth) {
   let nextIndex = nth * 5 - 1;
-  fetch(`http://15.164.63.222:2080/loadSecondHandBoard?nth=${nth}`)
+  fetch(`http://13.124.220.4:2080/loadSecondHandBoard?nth=${nth}`)
     .then((response) => {
       return response.json();
     })
@@ -115,7 +113,7 @@ function loadSecondHandBoard(nth) {
         createSecondHandList(i, nextIndex);
       }
     });
-    marketTrigger = false;
+  marketTrigger = false;
 }
 
 marketInfinityScroll();

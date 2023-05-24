@@ -1,4 +1,10 @@
-function commentRecent(postWrap, src_comment_link, textName, cmText, commentIndex){
+function commentRecent(
+  postWrap,
+  src_comment_link,
+  textName,
+  cmText,
+  commentIndex
+) {
   // 최신 댓글 하나가 보여질 영역
   const commentViewWrap = tagCreate("div", {});
   styleCreate(commentViewWrap, dangstarStyle.dangstarRecentComment);
@@ -6,18 +12,24 @@ function commentRecent(postWrap, src_comment_link, textName, cmText, commentInde
 
   // 최신 댓글 프로필 이미지와 내용을 한줄로 넣기 위한 wrap
   const commentImgContentWrap = tagCreate("div", {});
-  styleCreate(commentImgContentWrap, dangstarStyle.dangstarRecentCommentContentWrap);
+  styleCreate(
+    commentImgContentWrap,
+    dangstarStyle.dangstarRecentCommentContentWrap
+  );
   commentViewWrap.appendChild(commentImgContentWrap);
 
   // 최신 댓글의 프로필 이미지 영역
   const commentViewImgWrap = tagCreate("div", {});
-  styleCreate(commentViewImgWrap, dangstarStyle.dangstarRecentCommentProfileWrap);
+  styleCreate(
+    commentViewImgWrap,
+    dangstarStyle.dangstarRecentCommentProfileWrap
+  );
   commentViewImgWrap.style.backgroundImage = `url(${src_comment_link})`;
   commentImgContentWrap.appendChild(commentViewImgWrap);
 
   // 최신 댓글 내용을 표시할 영역
   const commentViewContentWrap = tagCreate("div", {});
-  styleCreate(commentViewContentWrap, dangstarStyle.dangstarRecentCommentWrap)
+  styleCreate(commentViewContentWrap, dangstarStyle.dangstarRecentCommentWrap);
   commentImgContentWrap.appendChild(commentViewContentWrap);
 
   // 최신 댓글 닉네임 표시
@@ -49,9 +61,9 @@ function userCheck() {
     let userIDSend = document.cookie.split("jwt=")[1];
     console.log("comment userID: " + userIDSend);
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://15.164.63.222:2080/userCheck`);
+    xhr.open("POST", `http://13.124.220.4:2080/userCheck`);
     xhr.send(`userID=${userIDSend}`);
-    xhr.addEventListener('load', () => {
+    xhr.addEventListener("load", () => {
       let userID = JSON.parse(xhr.response);
       resolve(userID);
     });

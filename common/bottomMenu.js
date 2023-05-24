@@ -7,7 +7,7 @@ function btmMeun(rootChild) {
   for (let i = 0; i < 6; i++) {
     let child = tagCreate("div", {});
     rootChild.appendChild(child);
-    if(i === 5) {
+    if (i === 5) {
       styleCreate(child, {
         width: "50px",
         height: "50px",
@@ -28,7 +28,7 @@ function btmMeun(rootChild) {
       });
       child.onclick = () => {
         window.scrollTo(0, 0);
-      }
+      };
     } else {
       styleCreate(child, {
         width: "59px",
@@ -64,13 +64,13 @@ function btmMeun(rootChild) {
   menuChild[4].innerText = "댕프랜드";
   menuChild[5].innerText = "⇧";
 
-  menuChild[3].id='dangtalkButton'
+  menuChild[3].id = "dangtalkButton";
 
   const jwt = document.cookie.replace(
     /(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  fetch("http://15.164.63.222:2080/bottomMenuUnreadCircle", {
+  fetch("http://13.124.220.4:2080/bottomMenuUnreadCircle", {
     method: "POST",
     body: jwt,
   })

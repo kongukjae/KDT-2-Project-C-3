@@ -4,7 +4,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   console.log(index);
   console.log(postIndex);
   // 게시글 전체를 감싸는 div
-  const postWrap = tagCreate("div", {id: `post_${postIndex}`});
+  const postWrap = tagCreate("div", { id: `post_${postIndex}` });
   styleCreate(postWrap, dangstarStyle.dangstarFeedWrap);
   parent.appendChild(postWrap);
 
@@ -25,7 +25,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
 
   // 작성자 닉네임 영역
   const writerName = tagCreate("p", {});
-  styleCreate(writerName, dangstarStyle.dangstarFeedWriterName)
+  styleCreate(writerName, dangstarStyle.dangstarFeedWriterName);
   writerName.innerText = writerNickname;
   textWrap.appendChild(writerName);
 
@@ -44,36 +44,33 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
   for (let i = 0; i < 3; i++) {
     const postBtn = tagCreate("button", {});
     if (i === 0) {
-      const heartImage = tagCreate("img", {id: 'heartImage'})
+      const heartImage = tagCreate("img", { id: "heartImage" });
       postBtn.appendChild(heartImage);
-      styleCreate(heartImage, dangstarStyle.dangstarLikeImg)
+      styleCreate(heartImage, dangstarStyle.dangstarLikeImg);
       //postBtn.innerText = "좋아요";
       postBtn.id = `like_${postIndex}_${index}`;
     } else if (i === 1) {
-      postBtn.innerText = "댓글"; 
-      postBtn.id = `index_${postIndex}`
+      postBtn.innerText = "댓글";
+      postBtn.id = `index_${postIndex}`;
     } else {
       postBtn.innerText = "➤";
       postBtn.id = `detail_${postIndex}`;
       //const de = tagCreate('a', {});
       //de.href = `/dangstarDetail?nth=${postIndex}`;
       //postBtn.appendChild(de);
-
     }
     styleCreate(postBtn, dangstarStyle.dangstarFeedBtns);
     postBtnWrap.appendChild(postBtn);
-
   }
-  
+
   //좋아요 표시 함수 실행
   dangstarLike(postIndex, index, writerNickname);
   // 댓글 입력 창 및 최신 댓글 표시 함수 실행
   commentInputData(postIndex);
 
-  
   const detailBtn = document.getElementById(`detail_${postIndex}`);
-  detailBtn.addEventListener('click', () => {
-    console.log("정상적으로 상세페이지 클릭함: ", postIndex)
+  detailBtn.addEventListener("click", () => {
+    console.log("정상적으로 상세페이지 클릭함: ", postIndex);
     let detailForm = document.createElement("form");
     detailForm.method = "POST";
     detailForm.action = "/detailPostDangstar";
@@ -82,7 +79,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     //   text:text,
     //   index:index,
     //   postIndex:postIndex};
-    let params = {postIndex:postIndex}
+    let params = { postIndex: postIndex };
     for (let key in params) {
       let hiddenField = document.createElement("input");
       hiddenField.setAttribute("type", "hidden");
@@ -92,9 +89,8 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     }
     document.body.appendChild(detailForm);
     detailForm.submit();
-  })
+  });
 
-  
   //댓글 정보를 받아오는 함수
   // 숨김 / 표시를 컨트롤 할 영역
   let cmtModal = tagCreate("div", { id: "cmtModal" });
@@ -107,7 +103,7 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
 
   let cmBtnCount = true;
   commentBtn.addEventListener("click", function () {
-    if(cmBtnCount) {
+    if (cmBtnCount) {
       cmtModal.style.display = "flex";
       cmBtnCount = false;
     } else {
@@ -116,15 +112,12 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
     }
   });
 
-  
-  
-
   // commentInput(postWrap, src_comment_link, textName, cmText, index, postIndex);
   function commentInputData(postIndex) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `http://15.164.63.222:2080/postBoardCommentData`, true);
+    xhr.open("POST", `http://13.124.220.4:2080/postBoardCommentData`, true);
     xhr.send(`postIndex=${postIndex}`);
-    xhr.addEventListener('load', function() {
+    xhr.addEventListener("load", function () {
       // 댓글 입력창 만드는 함수
       commentInput(postWrap, postIndex);
 
@@ -139,40 +132,46 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       let commentIndex;
       let cnt = res.length - 1;
       // 댓글 데이터가 있을 경우에만
-      if(res.length !== 0) {
-        console.log("조건문 안쪽")
+      if (res.length !== 0) {
+        console.log("조건문 안쪽");
         console.log(res);
-        console.log("조건문 안쪽")
+        console.log("조건문 안쪽");
         textName = res[0].cm_id;
         cmText = res[0].cm_detail;
         commentIndex = res[0].cm_index;
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `http://15.164.63.222:2080/sendImage`);
+        xhr.open("POST", `http://13.124.220.4:2080/sendImage`);
         xhr.responseType = "blob";
         xhr.send(`type=proFile&id=${res[0].cm_id}`);
         xhr.addEventListener("load", function () {
-          console.log("이미지 응답 받음")
+          console.log("이미지 응답 받음");
           let imageFromServer = URL.createObjectURL(xhr.response);
           console.log(imageFromServer);
           console.log("imageFromServer");
           src_comment_link = imageFromServer;
           //최신 댓글 1개 보여주는 함수 실행
-          commentRecent(postWrap, src_comment_link, textName, cmText, commentIndex);
+          commentRecent(
+            postWrap,
+            src_comment_link,
+            textName,
+            cmText,
+            commentIndex
+          );
 
           // 이전 댓글 목록 불러오기
-          for(let i = 1; i < cnt + 1; i++) {
+          for (let i = 1; i < cnt + 1; i++) {
             let text = res[i].cm_detail;
             let name = res[i].cm_id;
             let cmIndex = res[i].cm_index;
             let profileImg;
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", `http://15.164.63.222:2080/sendImage`);
+            xhr.open("POST", `http://13.124.220.4:2080/sendImage`);
             xhr.responseType = "blob";
             xhr.send(`type=proFile&id=${res[i].cm_id}`);
             xhr.addEventListener("load", function () {
               profileImg = URL.createObjectURL(xhr.response);
               commentWindow(cmtModal, text, name, profileImg, i, cmIndex);
-            })
+            });
           }
         });
         // console.log(src_comment_link);
@@ -182,11 +181,10 @@ function postCreate(parent, src_link, writerNickname, text, index, postIndex) {
       //   cmText = res[0].cm_detail;
       // }
       // commentWindow(index, cnt, parent);
-
-    })
+    });
     console.log("commentData를 받아오기 위한 함수 실행 테스트");
   }
-  
+
   // 모달창 함수 실행, index = 게시글 작성 함수를 돌리는 for문의 i값
   // function commentModal(index, cmtNumber, parent) {
   //   commentWindow(index, cmtNumber, parent);
