@@ -101,7 +101,7 @@ function main(){
   dupCheck.addEventListener("click",()=>{
     let checkName = document.getElementById("idValueCheck")
     let xhr = new XMLHttpRequest();
-      let _URL = `http://15.164.63.222:2080/dupCheck?id=${checkName.value}`;
+      let _URL = `http://15.165.220.45:2080/dupCheck?id=${checkName.value}`;
       xhr.open("GET",_URL);
       xhr.send();
       xhr.addEventListener("load",()=>{

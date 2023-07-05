@@ -46,7 +46,7 @@ function findWindow(){
     data.append("id",rootChild[1].firstChild.value);
     data.append("question",rootChild[2].firstChild.value);
     data.append("answer",rootChild[3].firstChild.value);
-    fetch("http://15.164.63.222:2080/findUserInfoCheck",{
+    fetch("http://15.165.220.45:2080/findUserInfoCheck",{
       method : "POST",
       body : data
     })
@@ -77,7 +77,7 @@ function updatePW(token){
   dupCheckResultModal.appendChild(okaybutton);
   okaybutton.innerText = "완료";
   okaybutton.addEventListener("click",()=>{
-    fetch("http://15.164.63.222:2080/updatepassword",{
+    fetch("http://15.165.220.45:2080/updatepassword",{
       method : "POST",
       body : JSON.stringify({token, newpassword : newPW.value})
     })

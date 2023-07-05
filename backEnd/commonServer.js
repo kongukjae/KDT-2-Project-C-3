@@ -2,9 +2,9 @@ import fs from "fs";
 
 const cmServer = {
   mysqlInfo: {
-    host: "ls-c563867ad0aab9958d5e4cd2ec6442cff7d907e6.cmk3l6gajyrb.ap-northeast-2.rds.amazonaws.com",
+    host: "ls-6bea7511e7ffc979da579d43bcfde558eabe8cb3.cmk3l6gajyrb.ap-northeast-2.rds.amazonaws.com",
     user: "dbmasteruser",
-    password: "HDb$_A92aHV7PF9&P)N6Iu%t*G.4ebg7",
+    password: "}3lMm%E<%SwwKq21<tWC~o0]Iacd?q$H",
     database: "mungta",
   },
   fileDirectory: function (request, response) {
