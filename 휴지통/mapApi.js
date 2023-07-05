@@ -34,7 +34,7 @@ const server = http.createServer(function (request, response) {
       </head>
       <body>
         <div id="map" style="width:750px;height:600px;"></div>
-        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0be9eb1239670903ce4fd764c73b8c86"></script>
+        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cc6e89c717085e748e17665afaa2c5ac"></script>
         <script>
           var mapContainer = document.getElementById('map'), // 지도를 표시할 div
               mapOption = {
